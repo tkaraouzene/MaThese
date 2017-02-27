@@ -17,7 +17,9 @@ output:
   template = "template.tex",
   highlight = "pygments",
   keep_tex = TRUE,
-  pandoc_args = "--top-level-division=chapter")}
+  pandoc_args = "--chapters")}
+  #pandoc_args = "--top-level-division=chapter")}
+  
 #  thesis_pdf_updt: default
 #  thesisdown::thesis_gitbook: default
 #  thesisdown::thesis_word: default
