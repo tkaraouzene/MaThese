@@ -287,62 +287,55 @@
   \fontsize{12}{14}\selectfont
   \begin{titlepage}
   \newpage
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[line width = 1pt] ($(current page.north west) + (0.5in,-0.5in)$) rectangle ($(current page.south east) + (-0.5in,0.5in)$);
+  \end{tikzpicture}
   \let\footnotesize\small
   \let\footnoterule\relax
   \let \footnote \thanks
-
   \baselineskip = 1.4\baselineskip
   \setbox0=\hbox{of the Requirements for the Degree}
-
-  \begin{center}
+  \begin{minipage}{1\linewidth}   
+    %\AddToShipoutPictureBG*{\AtPageLowerLeft{\color{black!10}\rule{.2\paperwidth}{\paperheight}}}
+    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{figure/grey.jpg}%
+  \end{minipage}
+  \begin{minipage}{1\linewidth}
     \setcounter{page}{1}
     \null\vfil
     {\fontsize{12}{14}\selectfont\bf \@title}
+    \bigskip
     \vfil
     Pour obtenir le grade de \\
-    {\fontsize{12}{14}\selectfont\bf DOCTEUR DE L'UNIVERSITÉ DE GRENOBLE} \\
-    Spécialité : \textbf{Modèles, méthodes et algorithmes en biologie, santé et environnement}\\
     \vfil
-    {\fontsize{10}{12}\selectfont Arrêté ministériel : ?}
-    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
+    {\fontsize{12}{14}\selectfont\bf DOCTEUR DE L'UNIVERSITÉ DE GRENOBLE} \\
+    \vfil
+    Spécialité : \textbf{Modèles, méthodes et algorithmes en biologie, santé et environnement}\\
+    \bigskip
+    {\fontsize{8}{10}\selectfont Arrêté ministériel : ?}
+    %\centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
+    \vfil
     \vfil
     Présentée par \\
+    \vfil
     {\fontsize{12}{14}\selectfont\bf \@author} \\
     \vfil
-    Thèse dirigée par \\
-    {\fontsize{12}{14}\selectfont\bf \@advisor} 
-    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
+    Thèse dirigée par {\fontsize{12}{14}\selectfont\bf \@advisor} \\
     \vfil
-    préparée au sein du laboratoire \\
-    {\fontsize{12}{14}\selectfont\bf \@labo} \\
-    et de l'école doctorale \\
-    {\fontsize{12}{14}\selectfont\bf "Ingénierie de la Santé, de la Cognition et Environnement" (EDISCE)}
+    %\centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
+    {\fontsize{12}{14}\selectfont préparée au sein du laboratoire} {\fontsize{12}{14}\selectfont\bf \@labo} \\
+    {\fontsize{12}{14}\selectfont et de l'école doctorale} {\fontsize{12}{14}\selectfont\bf "Ingénierie de la Santé, de la Cognition et Environnement" (EDISCE)}
     \vfil
-    \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
+    %\centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
     \bigskip
-    {\fontsize{18}{20}\selectfont\bf Méthodes statistiques en grande dimension pour l'étude de l'adaptation biologique à l'aide de larges bases de données génomiques} 
+    \bigskip
+    {\fontsize{18}{20}\selectfont\bf Méthodes statistiques en grande dimension pour l'étude de l'adaptation biologique à        l'aide de larges bases de données génomiques} 
     \centerline{}
     \vskip 1.5em
-    {\fontsize{12}{14}\selectfont \@date \par}
-  \end{center}\par
+    {\fontsize{12}{14}\selectfont Thèse soutenue publiquement le \@date, \par
+    devant le jury composé de :} 
+  
+  \end{minipage}\par
   \end{titlepage}
-
-%% Approved for the division page
-  \cleardoublepage
-  {\fontsize{12}{14}
-  \setbox0=\hbox{Approved for the \@approvedforthe}
-  \thispagestyle{empty}
-  \null\vfil		% just below center of page
-  \par\vskip 6cm	% below center, not center
-  \centerline{\copy0}	% approved
-  \centerline{(\@department)} %major
-  \vskip 1cm		%space to sign
-  \centerline{\makebox[\wd0][c]{\hrulefill}
-	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\hrulefill} \fi}
-  \centerline{\makebox[\wd0][c]{\@advisor}
-	\if@altadvisor \makebox[.5in]{} \makebox[\wd0][c]{\@altadvisor} \fi}
-  \par\vfil\null}
-  \cleardoublepage
   }
 }
 

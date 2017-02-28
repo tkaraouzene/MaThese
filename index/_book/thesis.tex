@@ -34,9 +34,14 @@
 \usepackage[french]{babel} 
 \usepackage{amsmath}
 \usepackage{amssymb,amsthm}
+\usepackage{xcolor}
+\usepackage{eso-pic}
 \usepackage{longtable,booktabs,setspace}
 \usepackage{chemarr} %% Useful for one reaction arrow, useless if you're not a chem major
 \usepackage[hyphens]{url}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newcommand\HRule{\rule{\textwidth}{1pt}}
 % Added by CII
 \usepackage{hyperref}
 \usepackage{lmodern}
@@ -76,7 +81,7 @@
 \labo{Techniques de l'Ingénierie Médicale et de la Complexité - Informatique,
 Mathématiques et Applications de Grenoble (TIMC-IMAG)}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
-\date{2017}
+\date{31 octobre 2017}
 \division{Mathematics and Natural Sciences}
 \advisor{Michael BLUM}
 %If you have two advisors for some reason, you can use the following
@@ -118,11 +123,13 @@ Mathématiques et Applications de Grenoble (TIMC-IMAG)}
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \Acknowledgements{
-Je tiens à remercier
+Je tiens à remercier mes collègues Kevin Caye, Thomas Dias-Alves, Thomas
+Karaouzène et Florian Privé, avec qui j'ai partagé ces trois années de
+thèse et de qui j'ai beaucoup appris.
 }
 
 \Dedication{
-You can have a dedication here if you wish.
+
 }
 
 \Preface{
@@ -161,7 +168,9 @@ starts here.
   \pagestyle{empty} % this removes page numbers from the frontmatter
 
       \begin{acknowledgements}
-      Je tiens à remercier
+      Je tiens à remercier mes collègues Kevin Caye, Thomas Dias-Alves, Thomas
+      Karaouzène et Florian Privé, avec qui j'ai partagé ces trois années de
+      thèse et de qui j'ai beaucoup appris.
     \end{acknowledgements}
   
       \begin{preface}
@@ -182,9 +191,6 @@ starts here.
       starts here.
     \end{abstract}
   
-      \begin{dedication}
-      You can have a dedication here if you wish.
-    \end{dedication}
   
   \mainmatter % here the regular arabic numbering starts
   \pagestyle{fancyplain} % turns page numbering back on

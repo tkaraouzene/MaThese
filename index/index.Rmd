@@ -1,6 +1,6 @@
 ---
 author: 'Keurcien LUU'
-date: '2017'
+date: ' 31 octobre 2017'
 division: 'Mathematics and Natural Sciences'
 advisor: 'Michael BLUM'
 labo: "Techniques de l'Ingénierie Médicale et de la Complexité - Informatique, Mathématiques et Applications de Grenoble (TIMC-IMAG)"
@@ -33,9 +33,7 @@ abstract: >
 # like below, use a command like that for the abstract above.  Note that a tab is 
 # needed on the line after the >.
 acknowledgements: >
-  Je tiens à remercier
-dedication: >
-  You can have a dedication here if you wish. 
+  Je tiens à remercier mes collègues Kevin Caye, Thomas Dias-Alves, Thomas Karaouzène et Florian Privé, avec qui j'ai partagé ces trois années de thèse et de qui j'ai beaucoup appris.
 preface: >
   This is an example of a thesis setup to use the reed thesis document class
   (for LaTeX) and the R bookdown package, in general.
