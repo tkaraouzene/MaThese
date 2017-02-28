@@ -287,23 +287,24 @@
   \fontsize{12}{14}\selectfont
   \begin{titlepage}
   \newpage
-  \begin{tikzpicture}[remember picture, overlay]
-    \draw[line width = 1pt] ($(current page.north west) + (0.5in,-0.5in)$) rectangle ($(current page.south east) + (-0.5in,0.5in)$);
-  \end{tikzpicture}
+
   \let\footnotesize\small
   \let\footnoterule\relax
   \let \footnote \thanks
   \baselineskip = 1.4\baselineskip
   \setbox0=\hbox{of the Requirements for the Degree}
-  \begin{minipage}{1\linewidth}   
-    %\AddToShipoutPictureBG*{\AtPageLowerLeft{\color{black!10}\rule{.2\paperwidth}{\paperheight}}}
-    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{figure/grey.jpg}%
+  \begin{minipage}{0.1\linewidth} 
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[line width = 1pt] ($(current page.north west) + (0.5cm,-0.5cm)$) rectangle ($(current page.south east) + (-0.5cm,0.5cm)$);
+    \node[anchor=north west, xshift=0.5cm, yshift=-0.5cm] at (current page.north west) {\includegraphics[width=5cm, height=26.65cm]{figure/grey.jpg}};
+  \end{tikzpicture}
   \end{minipage}
-  \begin{minipage}{1\linewidth}
+  \begin{minipage}{0.9\linewidth}
     \setcounter{page}{1}
     \null\vfil
     {\fontsize{12}{14}\selectfont\bf \@title}
     \bigskip
+    \vfil
     \vfil
     Pour obtenir le grade de \\
     \vfil
@@ -312,7 +313,6 @@
     Spécialité : \textbf{Modèles, méthodes et algorithmes en biologie, santé et environnement}\\
     \bigskip
     {\fontsize{8}{10}\selectfont Arrêté ministériel : ?}
-    %\centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
     \vfil
     \vfil
     Présentée par \\
@@ -321,11 +321,9 @@
     \vfil
     Thèse dirigée par {\fontsize{12}{14}\selectfont\bf \@advisor} \\
     \vfil
-    %\centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
     {\fontsize{12}{14}\selectfont préparée au sein du laboratoire} {\fontsize{12}{14}\selectfont\bf \@labo} \\
     {\fontsize{12}{14}\selectfont et de l'école doctorale} {\fontsize{12}{14}\selectfont\bf "Ingénierie de la Santé, de la Cognition et Environnement" (EDISCE)}
     \vfil
-    %\centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
     \bigskip
     \bigskip
     {\fontsize{18}{20}\selectfont\bf Méthodes statistiques en grande dimension pour l'étude de l'adaptation biologique à        l'aide de larges bases de données génomiques} 
