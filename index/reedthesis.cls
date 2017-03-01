@@ -301,6 +301,9 @@
   \end{minipage}
   \begin{minipage}{0.9\linewidth}
     \setcounter{page}{1}
+    \begin{flushright}
+    {\fontfamily{ppl}\fontsize{16}{18}\selectfont\color{black!30}\bf UNIVERSITÉ GRENOBLE-ALPES }
+    \end{flushright}
     \null\vfil
     {\fontsize{12}{14}\selectfont\bf \@title}
     \bigskip
@@ -308,7 +311,7 @@
     \vfil
     Pour obtenir le grade de \\
     \vfil
-    {\fontsize{12}{14}\selectfont\bf DOCTEUR DE L'UNIVERSITÉ DE GRENOBLE} \\
+    {\fontsize{12}{14}\selectfont\bf DOCTEUR DE L'UNIVERSITÉ DE GRENOBLE-ALPES} \\
     \vfil
     Spécialité : \textbf{Modèles, méthodes et algorithmes en biologie, santé et environnement}\\
     \bigskip
@@ -326,7 +329,7 @@
     \vfil
     \bigskip
     \bigskip
-    {\fontsize{18}{20}\selectfont\bf Méthodes statistiques en grande dimension pour l'étude de l'adaptation biologique à        l'aide de larges bases de données génomiques} 
+    {\fontsize{18}{20}\fontfamily{ppl}\selectfont\bf Méthodes statistiques en grande dimension pour l'étude de l'adaptation biologique à l'aide de larges bases de données génomiques} 
     \centerline{}
     \vskip 1.5em
     {\fontsize{12}{14}\selectfont Thèse soutenue publiquement le \@date, \par
