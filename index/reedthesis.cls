@@ -324,12 +324,15 @@
     \vfil
     Thèse dirigée par {\fontsize{12}{14}\selectfont\bf \@advisor} \\
     \vfil
+    \vfil
+    Thèse co-dirigée par {\fontsize{12}{14}\selectfont\bf \@altadvisor} \\
+    \vfil
     {\fontsize{12}{14}\selectfont préparée au sein du laboratoire} {\fontsize{12}{14}\selectfont\bf \@labo} \\
     {\fontsize{12}{14}\selectfont et de l'école doctorale} {\fontsize{12}{14}\selectfont\bf "Ingénierie de la Santé, de la Cognition et Environnement" (EDISCE)}
     \vfil
     \bigskip
     \bigskip
-    {\fontsize{18}{20}\fontfamily{ppl}\selectfont\bf Méthodes statistiques en grande dimension pour l'étude de l'adaptation biologique à l'aide de larges bases de données génomiques} 
+    {\fontsize{18}{20}\fontfamily{ppl}\selectfont\bf Écrire le titre de la thèse ici} 
     \centerline{}
     \vskip 1.5em
     {\fontsize{12}{14}\selectfont Thèse soutenue publiquement le \@date, \par
