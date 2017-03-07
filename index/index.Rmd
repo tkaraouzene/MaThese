@@ -37,7 +37,7 @@ output:
 preface: >
   This is an example of a thesis setup to use the reed thesis document class
   (for LaTeX) and the R bookdown package, in general.
-bibliography: bib/thesis.bib
+bibliography: bib/MaThese_bib.bib
 # Download your specific bibliography database file and refer to it in the line above.
 csl: csl/apa.csl
 # Download your specific csl file and refer to it in the line above.
@@ -72,7 +72,7 @@ if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
 library(thesisdown)
 
-opts_knit$set(eval.after = "fig.cap")
+opts_knit$set(eval.after = "fig.cap",echo=FALSE)
 
 ```
 
