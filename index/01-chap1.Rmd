@@ -8,14 +8,14 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ### La spermatogénèse  
 
-La spermatogenèse des mamifères est un processus long et complexe controllé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994],**Sharpe1994 à trouver!!!**).C'est au cours de celle-ci que, à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces tapes se déroulent en continue dans la paroi des tubes séminifères du testicules depuis la pubertés jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est d'environs 30 à 40 jours [@Clermont1972] et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980].  
+La spermatogenèse des mamifères est un processus long et complexe controllé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994],**Sharpe1994 à trouver!!!**). C'est au cours de celle-ci que, à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces tapes se déroulent en continue dans la paroi des tubes séminifères du testicules depuis la pubertés jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours  et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980].  
 
 #### Rappels sur le testicule  
 
 Les testicules sont les organes sexuels masculins. Ils possèdes deux fonctions principales plus ou moins exprimés selon les période de la vie de l'individu : une fonction endocrine caractérisé par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, celui-ci présente une forme ovoïde ayant un volume moyen de 18 cm^^3^^ par testicule. Comme chez la plupart des mammifères terrestres, ils sont sous le pénis dans dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (Figure : \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps nécessaire à la spermatogenèse.  
 L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (Figure : \@ref(fig:testicule)).  C'est le long des parois du tube séminifère que se dérouleront l'ensemble des étapes de la spermatogenèse.  
 
-```{r testicule, fig.cap=fig.info,fig.align='center'}
+```{r testicule, fig.cap=fig.info,fig.align='center',out.extra="scale=0.65"}
 
 fig.name <- "Schéma anatomique du testicule humain"
 fig.description <- ""
@@ -24,7 +24,7 @@ fig.ratio <- 2
 fig.width <- 558 / fig.ratio
 fig.height <- 483 / fig.ratio
 
-# include_graphics(path = "figure/coupe_testicule2.jpg")
+include_graphics(path = "figure/coupe_testicule2.jpg")
 
 ```
 
@@ -40,31 +40,45 @@ spermatogonies en fonction de leur contenu en heterochromatine ([@Clermont1963, 
 Dans le modèle le plus communément accepté, les spermatogonies Ad vont au cours d'une première mitose former un spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenese)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad
 permettant d’assurer la production permanente de spermatozoïdes. Les spermatogonies Ap ainsi formés se diviseront ensuite par mitose pour former deux spermatogonies B qui elles-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenese)).  
 
-```{r spermatogenese, fig.cap=fig.info,fig.align='center'}
+```{r spermatogenese,fig.cap=fig.info,fig.align='center', out.extra="scale=0.75"}
 
-fig.name <- "Les différentes phases de la spermatogénèse. "
+fig.name <- "Les différentes phases de la spermatogénèse"
 fig.description <- ""
 fig.info <- paste0(fig.name,fig.description)
-fig.ratio <- 2
-fig.width <- 558 / fig.ratio
-fig.height <- 483 / fig.ratio
 
 include_graphics(path = "figure/spermatogenese.jpg")
 
 ```
 
-
 #### La méïose  
+
+La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaire (spermatocytes II).  
+Ce résultat est le fruit de deux divisions succesives (**Figure : **\@ref(fig:meiose)) appellée respectivement méïose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et résuisant la ploïdie de diploïde à haploïde (d'où son non *réductionelle*). 
+
+
+
+```{r meiose,fig.cap=fig.info,fig.align='center', out.extra="scale=0.35"}
+
+fig.name <- "Les différentes étapes de la méiose gamétique masculine"
+fig.description <- "D’après Sasaki et Matsui,
+2008"
+fig.info <- paste(fig.name,fig.description,sep = ". ")
+
+include_graphics(path = "figure/Meiosis_Stages.png")
+
+```
+
+
+
 #### La spermiogénèse  
 
 
 
 ### Anatomie du spermatozoïde  
 
-```{r spermatozoïde, fig.cap="Anatomie du spermatozoïde",fig.align='center',echo=FALSE}
+```{r spermatozoïde, fig.cap="Anatomie du spermatozoïde",fig.align='center',out.extra="scale=0.7"}
 
-  # include_graphics(path = "figure/spermatozoide.png")
-
+include_graphics(path = "figure/spermatozoide.png")
 
 ```
 
