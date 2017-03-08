@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2016.9.28)  7 MAR 2017 23:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2016.9.28)  8 MAR 2017 21:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -998,7 +998,7 @@ LaTeX Info: Redefining \nameref on input line 159.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<figure/grey.jpg, id=143, 783.92876pt x 441.65pt>
+<figure/grey.jpg, id=111, 783.92876pt x 441.65pt>
 File: figure/grey.jpg Graphic file (type jpg)
 <use figure/grey.jpg>
 Package pdftex.def Info: figure/grey.jpg used on input line 163.
@@ -1103,17 +1103,17 @@ g>] [2
 ] [2
 
 
-] (./thesis.toc [3])
+] (./thesis.toc)
 \tf@toc=\write6
 \openout6 = `thesis.toc'.
 
-[4] (./thesis.lot)
+[3] [4
+
+] (./thesis.lot)
 \tf@lot=\write7
 \openout7 = `thesis.lot'.
 
-[5
-
-] [6
+[5] [6
 
 ] (./thesis.lof)
 \tf@lof=\write8
@@ -1121,204 +1121,196 @@ g>] [2
 
 [7] [8
 
+]pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.191   \newpage
+                 [1
+
 ]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 279.
+
+(/usr/share/texlive/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.188   \chapter
-                *{Remerciements}\label{remerciements} [1]pdfTeX warning (ext4):
- destination with the same identifier (name{page.2}) has been already used, dup
-licate ignored
-<to be read again> 
-                   \relax 
-l.188   \chapter
-                *{Remerciements}\label{remerciements} [2
+l.283   \chapter
+                *{RÃ©sumÃ©}\label{resume} [2] [3
 
-] [3]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 281.
+] [4
 
-(/usr/share/texlive/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [4] [5
-
-] [6
-
-] [7] [8
+] [5] [6
 
 ]
 Chapitre 1.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 330.
-<figure/coupe_testicule2.jpg, id=282, 560.0925pt x 484.81125pt>
+(Font)              <5> on input line 325.
+<figure/coupe_testicule2.jpg, id=239, 560.0925pt x 484.81125pt>
 File: figure/coupe_testicule2.jpg Graphic file (type jpg)
 <use figure/coupe_testicule2.jpg>
-Package pdftex.def Info: figure/coupe_testicule2.jpg used on input line 345.
+Package pdftex.def Info: figure/coupe_testicule2.jpg used on input line 340.
 (pdftex.def)             Requested size: 364.0558pt x 315.12357pt.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/12'.
 (microtype)             Ignoring protrusion settings for this character.
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 373--375
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 368--370
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--377
+Underfull \hbox (badness 10000) in paragraph at lines 370--372
 
  []
 
-[10 <./figure/coupe_testicule2.jpg>] <figure/spermatogenese.jpg, id=303, 401.5p
-t x 462.72874pt>
+[8 <./figure/coupe_testicule2.jpg>] <figure/spermatogenese.jpg, id=257, 401.5pt
+ x 462.72874pt>
 File: figure/spermatogenese.jpg Graphic file (type jpg)
 <use figure/spermatogenese.jpg>
-Package pdftex.def Info: figure/spermatogenese.jpg used on input line 392.
+Package pdftex.def Info: figure/spermatogenese.jpg used on input line 394.
 (pdftex.def)             Requested size: 301.12425pt x 347.0457pt.
-<figure/Meiosis_Stages.png, id=305, 1373.13pt x 470.75874pt>
+[9 <./figure/spermatogenese.jpg>] <figure/Meiosis_Stages.png, id=265, 1373.13pt
+ x 470.75874pt>
 File: figure/Meiosis_Stages.png Graphic file (type png)
 <use figure/Meiosis_Stages.png>
-Package pdftex.def Info: figure/Meiosis_Stages.png used on input line 413.
+Package pdftex.def Info: figure/Meiosis_Stages.png used on input line 420.
 (pdftex.def)             Requested size: 480.6027pt x 164.76802pt.
 
-Overfull \hbox (46.98271pt too wide) in paragraph at lines 413--414
+Overfull \hbox (46.98271pt too wide) in paragraph at lines 420--421
  [][] 
  []
 
-[11 <./figure/spermatogenese.jpg>] <figure/spermatozoide.png, id=312, 599.23875
-pt x 587.19376pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 446--449
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 449--453
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 453--457
+
+ []
+
+<figure/phases_mitose.jpg, id=268, 602.25pt x 200.75pt>
+File: figure/phases_mitose.jpg Graphic file (type jpg)
+<use figure/phases_mitose.jpg>
+Package pdftex.def Info: figure/phases_mitose.jpg used on input line 464.
+(pdftex.def)             Requested size: 301.12425pt x 100.37474pt.
+[10 <./figure/Meiosis_Stages.png>] <figure/crossingover.jpg, id=278, 722.7pt x 
+387.4475pt>
+File: figure/crossingover.jpg Graphic file (type jpg)
+<use figure/crossingover.jpg>
+Package pdftex.def Info: figure/crossingover.jpg used on input line 489.
+(pdftex.def)             Requested size: 252.94878pt x 135.60864pt.
+
+Underfull \hbox (badness 1102) in paragraph at lines 498--512
+\T1/lmr/m/n/12 (+20) (^^Bref(fig :spermiogé-nese))). La spermiogénèse définie l
+a cy-tod-iféren-ti-a-tion des
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 498--512
+
+ []
+
+[11 <./figure/phases_mitose.jpg> <./figure/crossingover.jpg>] <figure/spermioge
+nese.png, id=283, 1019.81pt x 848.16875pt>
+File: figure/spermiogenese.png Graphic file (type png)
+<use figure/spermiogenese.png>
+Package pdftex.def Info: figure/spermiogenese.png used on input line 515.
+(pdftex.def)             Requested size: 305.94536pt x 254.45258pt.
+<figure/spermatozoide.png, id=284, 599.23875pt x 587.19376pt>
 File: figure/spermatozoide.png Graphic file (type png)
 <use figure/spermatozoide.png>
-Package pdftex.def Info: figure/spermatozoide.png used on input line 427.
+Package pdftex.def Info: figure/spermatozoide.png used on input line 536.
 (pdftex.def)             Requested size: 419.46426pt x 411.03282pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[12 <./figure/Meiosis_Stages.png>] [13 <./figure/spermatozoide.png>]
+[12 <./figure/spermiogenese.png>] [13 <./figure/spermatozoide.png>]
 Underfull \vbox (badness 1158) has occurred while \output is active []
 
 [14] [15] [16
 
 ]
 Chapitre 2.
-[17]
-Underfull \hbox (badness 1708) in paragraph at lines 565--569
-[]\T1/lmr/m/n/12 (+20) Many of the sym-bols you will need can be found on the m
-ath page
- []
+[17] [18
 
-[18]
-Chapitre 3.
-
-LaTeX Warning: Reference `tab:maxdelays' on page 19 undefined on input line 657
-.
-
-[19
-
-] <figure/reed.jpg, id=384, 250.9375pt x 251.94125pt>
-File: figure/reed.jpg Graphic file (type jpg)
-<use figure/reed.jpg>
-Package pdftex.def Info: figure/reed.jpg used on input line 686.
-(pdftex.def)             Requested size: 250.93687pt x 251.94063pt.
-[20
-
- <./figure/reed.jpg>] <thesis_files/figure-latex/delaysboxplot-1.pdf, id=390, 4
-33.62pt x 325.215pt>
-File: thesis_files/figure-latex/delaysboxplot-1.pdf Graphic file (type pdf)
-<use thesis_files/figure-latex/delaysboxplot-1.pdf>
-Package pdftex.def Info: thesis_files/figure-latex/delaysboxplot-1.pdf used on 
-input line 708.
-(pdftex.def)             Requested size: 433.61894pt x 325.2142pt.
-[21
-
- <./thesis_files/figure-latex/delaysboxplot-1.pdf>] <figure/subdivision.pdf, id
-=404, 220.825pt x 89.33376pt>
-File: figure/subdivision.pdf Graphic file (type pdf)
-<use figure/subdivision.pdf>
-Package pdftex.def Info: figure/subdivision.pdf used on input line 725.
-(pdftex.def)             Requested size: 165.61833pt x 67.00014pt.
-File: figure/subdivision.pdf Graphic file (type pdf)
-<use figure/subdivision.pdf>
-Package pdftex.def Info: figure/subdivision.pdf used on input line 739.
-(pdftex.def)             Requested size: 220.82445pt x 89.33353pt.
-[22
-
- <./figure/subdivision.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[23] [24] [25
-
-] [26
+] [19] [20
 
 ]
 Annexe A.
 
-Package xcolor Warning: Incompatible color definition on input line 859.
+LaTeX Warning: Reference `ref-labels' on page 21 undefined on input line 639.
+
+
+Package xcolor Warning: Incompatible color definition on input line 641.
 
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 865.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 647.
 
-Package xcolor Warning: Incompatible color definition on input line 880.
+Package xcolor Warning: Incompatible color definition on input line 662.
 
 
-Package xcolor Warning: Incompatible color definition on input line 880.
+Package xcolor Warning: Incompatible color definition on input line 662.
 
-[27] [28
+[21] [22
 
 ]
 Annexe B.
-[29] [30
+[23] [24
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 934.
-[31
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 729.
+[25
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 934.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 729.
 (./thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 934.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 934.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 729.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 729.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 5F58D88513FE5D05C178068FE6441E36;2386.
+(rerunfilecheck)             Checksum: 29428B11639A9BA3193A1A88607A7483;1912.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 934.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 729.
  ) 
 Here is how much of TeX's memory you used:
- 19639 strings out of 495063
- 338789 string characters out of 3182201
- 445475 words of memory out of 3000000
- 22144 multiletter control sequences out of 15000+200000
- 87131 words of font info for 114 fonts, out of 3000000 for 9000
+ 19584 strings out of 495063
+ 338057 string characters out of 3182201
+ 442493 words of memory out of 3000000
+ 22112 multiletter control sequences out of 15000+200000
+ 81005 words of font info for 111 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,12n,55p,417b,678s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texli
-ve/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texlive/texmf-dist/f
-onts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
-lm/lm-rm.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/lm/lmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/lm/lmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr12.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/lm/lmri12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/lm/lmro12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/lm/lmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/lm/lmtti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
-ymbols/msam10.pfb>
-Output written on thesis.pdf (41 pages, 1115687 bytes).
+ 56i,11n,55p,990b,678s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texli
+ve/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/lm/lmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/lm/lmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr6.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/lm/lmro12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/lm/lmtk10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmtt12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on thesis.pdf (35 pages, 1902780 bytes).
 PDF statistics:
- 603 PDF objects out of 1000 (max. 8388607)
- 522 compressed objects within 6 object streams
- 119 named destinations out of 1000 (max. 500000)
- 14661 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 439 PDF objects out of 1000 (max. 8388607)
+ 378 compressed objects within 4 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 12549 words of extra memory for PDF output out of 14400 (max. 10000000)
 

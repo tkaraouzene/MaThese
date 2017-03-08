@@ -183,8 +183,6 @@ class (for LaTeX) and the R bookdown package, in general.
   \mainmatter % here the regular arabic numbering starts
   \pagestyle{fancyplain} % turns page numbering back on
 
-  --\textgreater{}
-  
   \chapter*{Remerciements}\label{remerciements}
   \addcontentsline{toc}{chapter}{Remerciements}
   
@@ -298,10 +296,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \chapter{Introduction}\label{introInf}
   
-  \section{Structure et fonction du
-  spermatozoïde}\label{structure-et-fonction-du-spermatozoide}
-  
-  \subsection{La spermatogénèse}\label{la-spermatogenese}
+  \section{La spermatogénèse}\label{la-spermatogenese}
   
   La spermatogenèse des mamifères est un processus long et complexe
   controllé par plusieurs mécanismes étroitement liés ((Gnessi, Fabbri, \&
@@ -318,7 +313,7 @@ class (for LaTeX) and the R bookdown package, in general.
   quotidienne de spermatozoïde est d'environ 45 million par testicules
   (Johnson, Petty, \& Neaves, 1980).
   
-  \subsubsection{Rappels sur le testicule}\label{rappels-sur-le-testicule}
+  \subsection{Rappels sur le testicule}\label{rappels-sur-le-testicule}
   
   Les testicules sont les organes sexuels masculins. Ils possèdes deux
   fonctions principales plus ou moins exprimés selon les période de la vie
@@ -330,15 +325,15 @@ class (for LaTeX) and the R bookdown package, in general.
   cm\textsuperscript{\textsuperscript{3}} par testicule. Comme chez la
   plupart des mammifères terrestres, ils sont sous le pénis dans dans une
   poche de peau appelée scrotum et reliés à l'abdomen par le cordon
-  spermatique (Figure : \ref{fig:testicule}). Cette externalisation des
-  testicules permet leur maintien à une température plus basse que celle
-  du reste du corps nécessaire à la spermatogenèse.\\
+  spermatique (\textbf{Figure :} \ref{fig:testicule}). Cette
+  externalisation des testicules permet leur maintien à une température
+  plus basse que celle du reste du corps nécessaire à la spermatogenèse.\\
   L'intérieur du testicule contient des tubes séminifères enroulés ainsi
   que du tissu entre les tubules appelé espace interstitiel. Les tubes
   séminifères sont de longs tubes compactés sous forme de boucles et dont
-  les deux extrémités débouchent sur le \emph{rete testis} (Figure :
-  \ref{fig:testicule}). C'est le long des parois du tube séminifère que se
-  dérouleront l'ensemble des étapes de la spermatogenèse.
+  les deux extrémités débouchent sur le \emph{rete testis} (\textbf{Figure
+  :} \ref{fig:testicule}). C'est le long des parois du tube séminifère que
+  se dérouleront l'ensemble des étapes de la spermatogenèse.
   
   \begin{figure}
   
@@ -349,7 +344,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption{Schéma anatomique du testicule humain : }\label{fig:testicule}
   \end{figure}
   
-  \subsubsection{La phase de
+  \subsection{La phase de
   multiplication}\label{la-phase-de-multiplication}
   
   La phase de multiplication est la phase au cours de laquelle les
@@ -377,14 +372,21 @@ class (for LaTeX) and the R bookdown package, in general.
     Les spermatogonies de type B
   \end{enumerate}
   
-  Dans le modèle le plus communément accepté, les spermatogonies Ad vont
-  au cours d'une première mitose former un spermatogonie Ad et un
-  spermatogonie Ap (\textbf{Figure :} \ref{fig:spermatogenese}). Cette
-  propriété permet à la fois de se différencier en spermatocytes tout en
-  constituant un compartiment de réserve de spermatogonies Ad permettant
-  d'assurer la production permanente de spermatozoïdes. Les spermatogonies
-  Ap ainsi formés se diviseront ensuite par mitose pour former deux
-  spermatogonies B qui elles-mêmes se diviseront en deux spermatocytes
+  Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours
+  de la spermatogénès et servent de résèrve. Elles vont au cours d'une
+  première mitose former un spermatogonie Ad et un spermatogonie Ap
+  (\textbf{Figure :} \ref{fig:spermatogenese}). Cette propriété permet à
+  la fois de se différencier en spermatocytes tout en constituant un
+  compartiment de réserve de spermatogonies Ad pour la regénération de la
+  population de cellules germinales au sein de l'épithelium séminifère.
+  L'entrée en division des spermatogonies Ap se fait par groupes
+  cellulaire tout les 16 jours. Les Cellules d'une même génération
+  maintiennent entre elles des ponts cytoplasmiques jusqu'à la
+  spermiogénèse ce qui permet la synchronisation parfaite du développement
+  gamétique de toutes les cellules filles issues d'un groupe de
+  spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique.
+  Chaque spermatogonies Ap va, lorsqu'ils se divise par mitose, former
+  deux spermatogonies B qui eux-mêmes se diviseront en deux spermatocytes
   primaires diploïdes (\textbf{Figure :} \ref{fig:spermatogenese}).
   
   \begin{figure}
@@ -396,17 +398,22 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption{Les différentes phases de la spermatogénèse}\label{fig:spermatogenese}
   \end{figure}
   
-  \subsubsection{La méïose}\label{la-meiose}
+  \subsection{La méïose}\label{la-meiose}
   
   La méiose, ou phase de maturation, est l'étape au cours de laquelle, à
   partir de cellules diploïdes (les spermatogonies B) vont se former des
-  cellules haploïdes, les spermatocytes secondaire (spermatocytes II).\\
-  Ce résultat est le fruit de deux divisions succesives (\textbf{Figure :
+  cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce
+  résultat est le fruit de deux divisions succesives (\textbf{Figure :
   }\ref{fig:meiose}) appellée respectivement méïose réductionnelle ou
   méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va
   séparer les chromosomes homologues, produisant deux cellules et
   résuisant la ploïdie de diploïde à haploïde (d'où son non
-  \emph{réductionelle}).
+  \emph{réductionelle}). En plus de son rôle de division vu précédement,
+  la méiose joue un rôle clef dans le brassage génétique (mélange des
+  gènes) et ce, grâce à deux mécanismes de brassage : le brassage
+  interchromosomique, lorsque les chromosomes sont séparés et le brassage
+  intrachromosomique inpliquant nottament des enjambements chromosomiques
+  (crossing-over) (\textbf{Figure : }\ref{fig:crossingover}).
   
   \begin{figure}
   
@@ -418,7 +425,109 @@ class (for LaTeX) and the R bookdown package, in general.
   2008}\label{fig:meiose}
   \end{figure}
   
-  \subsubsection{La spermiogénèse}\label{la-spermiogenese}
+  La méiose est initié dès la fin de la phase de multiplication à partir
+  des spermatocytes primaires issus de la division des spermatogonies de
+  type B. Ces cellules nouvellement formées se situent dans le
+  compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord
+  subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au
+  cours de cette phase a lieu la réplication de l'ADN. Cette réplication
+  se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S
+  (pour syntèse) de l'interphase. À l'issus de cette phase, chaque
+  chromosome sera composé de deux chromatides reliées entres elles par le
+  centomère, le materiel génétique de chaque cellules ayant donc été
+  multiplié par 2. Par la suite, ces cellules vont subir deux divisions
+  méiotiques, chacune composées de 4 étapes distincte (\textbf{Figure :
+  }(\ref{fig:mitose})) :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    La prophase, caractérisée par la condentation de la chromatine formant
+    ainsi les chromosome\\
+  \item
+    La métaphase, phase au cours de laquelle les chromosomes vont
+    s'aligner à l'equateur de la cellule pour former la plaque
+    équatoriale\\
+  \item
+    L'anaphase, les chromatides soeurs (ou les chromosomes homologues en
+    fonction de la phase méiotique) vont se séparer et migrer aux pôles
+    opposés de la cellule\\
+  \item
+    La télophase, qui est l'étape finale, les chromosomes se décondensent
+    et l'enveloppe nucléaire se reforme autours des chromosomes. La
+    cellule mère se sépare alors en deux cellules filles
+  \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.5]{figure/phases_mitose} 
+  
+  }
+  
+  \caption{Les différentes phases de la division cellulaire : De la prophase (à gauche) à la télophase (à droite) }\label{fig:mitose}
+  \end{figure}
+  
+  La première division méiotique abouti à la formation des spermatocytes
+  secondaires (spermatocytes II). À ce states, les cellules sont haploïdes
+  et chaque chromosome est composé de deux chromatides soeurs. Après,
+  cette brèves étape (environ 1 jour) ainsi qu'une très courte interphase
+  sans réplication de l'ADN, les spermatocytes II vont entrer en deuxième
+  division méiotique. Cette deuxième division est très semblable à une
+  division mitotique. La prophaseII, à la différence de la prophase I, est
+  très courte. Lors de cette étape, les chromosomes constitués de
+  chromatides sœurs se dirigent vers la plaque équatoriale. En métaphase
+  II, les chromosomes s'alignent au niveau de leurs centromères. En
+  anaphase II, le centromère de chaque chromosome se rompt séparant les
+  chromatides sœurs l'une de l'autre et permettant leur déplacement vers
+  les pôles opposés des spermatocytes II. Lors de la télophase II, on
+  observe la formation de cellules filles haploïdes appelées spermatides,
+  contenant chacune n chromosomes.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.35]{figure/crossingover} 
+  
+  }
+  
+  \caption{Schéma simplifé d'un enjambement chromosomique}\label{fig:crossingover}
+  \end{figure}
+  
+  \subsection{La spermiogénèse}\label{la-spermiogenese}
+  
+  La spermiogénèse est la phase finale de la spermatogénèse. Elle dure
+  environs 23 jours chez l'humain et peut être subdivisée en plusieurs
+  étapes (\textbf{Figure : }(\^{}ref(fig:spermiogénese))). La
+  spermiogénèse définie la cytodiférentiation des spermatides en
+  spermatozoïdes. C'est au cours de cette phase que les caractéristiques
+  morphologique et fonctionelles du spermatozoïdes seront déterminées
+  (Clermont \& Oko 1993 à trouver !!!). Elle est caractérisée par 3
+  évènements majeurs : la formation de l'acrosome, la compaction de l'ADN
+  nucléaire, la formation de l'acrosome et la formation du flagelle. Le
+  développement de l'acrosome et la formation du flagelle commence au
+  niveau des spermatides rondes (Escalier et al., 1991) pendant
+  l'élongation du spermatide, le noyau se condense et devient hautement
+  polarisé (Hamilton, Waites, Special Programme of Research, Family Health
+  International (Organization), \& World Health Organization., 1987).\\
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.3]{figure/spermiogenese} 
+  
+  }
+  
+  \caption{Principales étapes et modifications structurales lors de la spermiogénèse.
+  1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée
+  au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté
+  de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-
+  7. Formation de l’acrosome, condensation du noyau et développement des structures
+  flagellaires. Ac, acrosome; Ax, axonème; CC, corps chromatoïdes; CR, corps résiduel; FD,
+  fibres denses; GF, gaine fibreuse; M, mitochondrie; Ma, manchette. D’après Touré et al.,
+  2011}\label{fig:spermiogénese}
+  \end{figure}
+  
+  \section{Structure et fonction du
+  spermatozoïde}\label{structure-et-fonction-du-spermatozoide}
   
   \subsection{Anatomie du spermatozoïde}\label{anatomie-du-spermatozoide}
   
@@ -506,343 +615,16 @@ class (for LaTeX) and the R bookdown package, in general.
   \chapter{Investigation génétique et physiologique de la
   globozoospermie}\label{globo}
   
-  \section{Math}\label{math}
+  --\textgreater{}
   
-  \section{Chemistry 101: Symbols}\label{chemistry-101-symbols}
+  --\textgreater{}
   
-  Chemical formulas will look best if they are not italicized. Get around
-  math mode's automatic italicizing in LaTeX by using the argument
-  \texttt{\$\textbackslash{}mathrm\{formula\ here\}\$}, with your formula
-  inside the curly brackets. (Notice the use of the backticks here which
-  enclose text that acts as code.)
+  --\textgreater{}
   
-  So, \(\mathrm{Fe_2^{2+}Cr_2O_4}\) is written
-  \texttt{\$\textbackslash{}mathrm\{Fe\_2\^{}\{2+\}Cr\_2O\_4\}\$}.
-  
-  \noindent Exponent or Superscript: \(\mathrm{O^-}\)
-  
-  \noindent Subscript: \(\mathrm{CH_4}\)
-  
-  To stack numbers or letters as in \(\mathrm{Fe_2^{2+}}\), the subscript
-  is defined first, and then the superscript is defined.
-  
-  \noindent Bullet: CuCl \(\bullet\) \(\mathrm{7H_{2}O}\)
-  
-  \noindent Delta: \(\Delta\)
-  
-  \noindent Reaction Arrows: \(\longrightarrow\) or
-  \(\xrightarrow{solution}\)
-  
-  \noindent Resonance Arrows: \(\leftrightarrow\)
-  
-  \noindent Reversible Reaction Arrows: \(\rightleftharpoons\)
-  
-  \subsection{Typesetting reactions}\label{typesetting-reactions}
-  
-  You may wish to put your reaction in an equation environment, which
-  means that LaTeX will place the reaction where it fits and will number
-  the equations for you.
-  
-  \begin{equation}
-    \mathrm{C_6H_{12}O_6  + 6O_2} \longrightarrow \mathrm{6CO_2 + 6H_2O}
-    \label{eq:reaction}
-  \end{equation}
-  
-  We can reference this combustion of glucose reaction via Equation
-  \eqref{eq:reaction}.
-  
-  \subsection{Other examples of
-  reactions}\label{other-examples-of-reactions}
-  
-  \(\mathrm{NH_4Cl_{(s)}}\) \(\rightleftharpoons\)
-  \(\mathrm{NH_{3(g)}+HCl_{(g)}}\)
-  
-  \noindent \(\mathrm{MeCH_2Br + Mg}\) \(\xrightarrow[below]{above}\)
-  \(\mathrm{MeCH_2\bullet Mg \bullet Br}\)
-  
-  \section{Physics}\label{physics}
-  
-  Many of the symbols you will need can be found on the math page
-  \url{http://web.reed.edu/cis/help/latex/math.html} and the Comprehensive
-  LaTeX Symbol Guide
-  (\url{http://mirror.utexas.edu/ctan/info/symbols/comprehensive/symbols-letter.pdf}).
-  
-  \section{Biology}\label{biology}
-  
-  You will probably find the resources at
-  \url{http://www.lecb.ncifcrf.gov/~toms/latex.html} helpful, particularly
-  the links to bsts for various journals. You may also be interested in
-  TeXShade for nucleotide typesetting
-  (\url{http://homepages.uni-tuebingen.de/beitz/txe.html}). Be sure to
-  read the proceeding chapter on graphics and tables.
-  
-  \chapter{Tables, Graphics, References, and Labels}\label{ref-labels}
-  
-  \section{Tables}\label{tables}
-  
-  In addition to the tables that can be automatically generated from a
-  data frame in \textbf{R} that you saw in {[}R Markdown Basics{]} using
-  the \texttt{kable} function, you can also create tables using
-  \emph{pandoc}. (More information is available at
-  \url{http://pandoc.org/README.html\#tables}.) This might be useful if
-  you don't have values specifically stored in \textbf{R}, but you'd like
-  to display them in table form. Below is an example. Pay careful
-  attention to the alignment in the table and hyphens to create the rows
-  and columns.
-  
-  \begin{longtable}[]{@{}ccc@{}}
-  \caption{\label{tab:inher} Correlation of Inheritance Factors for Parents
-  and Child}\tabularnewline
-  \toprule
-  \begin{minipage}[b]{0.29\columnwidth}\centering\strut
-  Factors\strut
-  \end{minipage} & \begin{minipage}[b]{0.47\columnwidth}\centering\strut
-  Correlation between Parents \& Child\strut
-  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\centering\strut
-  Inherited\strut
-  \end{minipage}\tabularnewline
-  \midrule
-  \endfirsthead
-  \toprule
-  \begin{minipage}[b]{0.29\columnwidth}\centering\strut
-  Factors\strut
-  \end{minipage} & \begin{minipage}[b]{0.47\columnwidth}\centering\strut
-  Correlation between Parents \& Child\strut
-  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\centering\strut
-  Inherited\strut
-  \end{minipage}\tabularnewline
-  \midrule
-  \endhead
-  \begin{minipage}[t]{0.29\columnwidth}\centering\strut
-  Education\strut
-  \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\centering\strut
-  -0.49\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  Yes\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.29\columnwidth}\centering\strut
-  Socio-Economic Status\strut
-  \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\centering\strut
-  0.28\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  Slight\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.29\columnwidth}\centering\strut
-  Income\strut
-  \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\centering\strut
-  0.08\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  No\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.29\columnwidth}\centering\strut
-  Family Size\strut
-  \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\centering\strut
-  0.18\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  Slight\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.29\columnwidth}\centering\strut
-  Occupational Prestige\strut
-  \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\centering\strut
-  0.21\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  Slight\strut
-  \end{minipage}\tabularnewline
-  \bottomrule
-  \end{longtable}
-  
-  We can also create a link to the table by doing the following: Table
-  \ref{tab:inher}. If you go back to {[}Loading and exploring data{]} and
-  look at the \texttt{kable} table, we can create a reference to this max
-  delays table too: Table \ref{tab:maxdelays}. The addition of the
-  \texttt{(\textbackslash{}\#tab:inher)} option to the end of the table
-  caption allows us to then make a reference to Table
-  \texttt{\textbackslash{}@ref(tab:label)}. Note that this reference could
-  appear anywhere throughout the document after the table has appeared.
-  
-  \clearpage
-  
-  \section{Figures}\label{figures}
-  
-  If your thesis has a lot of figures, \emph{R Markdown} might behave
-  better for you than that other word processor. One perk is that it will
-  automatically number the figures accordingly in each chapter. You'll
-  also be able to create a label for each figure, add a caption, and then
-  reference the figure in a way similar to what we saw with tables
-  earlier. If you label your figures, you can move the figures around and
-  \emph{R Markdown} will automatically adjust the numbering for you. No
-  need for you to remember! So that you don't have to get too far into
-  LaTeX to do this, a couple \textbf{R} functions have been created for
-  you to assist. You'll see their use below.
-  
-  In the \textbf{R} chunk below, we will load in a picture stored as
-  \texttt{reed.jpg} in our main directory. We then give it the caption of
-  ``Reed logo'', the label of ``reedlogo'', and specify that this is a
-  figure. Make note of the different \textbf{R} chunk options that are
-  given in the R Markdown file (not shown in the knitted document).
-  
-  \begin{figure}[htbp]
-  \centering
-  \includegraphics{figure/reed.jpg}
-  \caption{\label{fig:reedlogo}Reed logo}
-  \end{figure}
-  
-  Here is a reference to the Reed logo: Figure \ref{fig:reedlogo}. Note
-  the use of the \texttt{fig:} code here. By naming the \textbf{R} chunk
-  that contains the figure, we can then reference that figure later as
-  done in the first sentence here. We can also specify the caption for the
-  figure via the R chunk option \texttt{fig.cap}.
-  
-  \clearpage 
-  
-  Below we will investigate how to save the output of an \textbf{R} plot
-  and label it in a way similar to that done above. Recall the
-  \texttt{flights} dataset from Chapter. (Note that we've shown a
-  different way to reference a section or chapter here.) We will next
-  explore a bar graph with the mean flight departure delays by airline
-  from Portland for 2014. Note also the use of the \texttt{scale}
-  parameter which is discussed on the next page.
-  
-  \begin{figure}[htbp]
-  \centering
-  \includegraphics{thesis_files/figure-latex/delaysboxplot-1.pdf}
-  \caption{\label{fig:delaysboxplot}Mean Delays by Airline}
-  \end{figure}
-  
-  Here is a reference to this image: Figure \ref{fig:delaysboxplot}.
-  
-  A table linking these carrier codes to airline names is available at
-  \url{https://github.com/ismayc/pnwflights14/blob/master/data/airlines.csv}.
-  
-  \clearpage
-  
-  Next, we will explore the use of the \texttt{out.extra} chunk option,
-  which can be used to shrink or expand an image loaded from a file by
-  specifying \texttt{"scale=\ "}. Here we use the mathematical graph
-  stored in the ``subdivision.pdf'' file.
-  
-  \begin{figure}
-  \includegraphics[scale=0.75]{figure/subdivision} \caption{Subdiv. graph}\label{fig:subd}
-  \end{figure}
-  
-  Here is a reference to this image: Figure \ref{fig:subd}. Note that
-  \texttt{echo=FALSE} is specified so that the \textbf{R} code is hidden
-  in the document.
-  
-  \textbf{More Figure Stuff}
-  
-  Lastly, we will explore how to rotate and enlarge figures using the
-  \texttt{out.extra} chunk option. (Currently this only works in the PDF
-  version of the book.)
-  
-  \begin{figure}
-  \includegraphics[angle=180, scale=1.1]{figure/subdivision} \caption{A Larger Figure, Flipped Upside Down}\label{fig:subd2}
-  \end{figure}
-  
-  As another example, here is a reference: Figure \ref{fig:subd2}.
-  
-  \section{Footnotes and Endnotes}\label{footnotes-and-endnotes}
-  
-  You might want to footnote something.\footnote{footnote text} The
-  footnote will be in a smaller font and placed appropriately. Endnotes
-  work in much the same way. More information can be found about both on
-  the CUS site or feel free to reach out to
-  \href{mailto:data@reed.edu}{\nolinkurl{data@reed.edu}}.
-  
-  \section{Bibliographies}\label{bibliographies}
-  
-  Of course you will need to cite things, and you will probably accumulate
-  an armful of sources. There are a variety of tools available for
-  creating a bibliography database (stored with the .bib extension). In
-  addition to BibTeX suggested below, you may want to consider using the
-  free and easy-to-use tool called Zotero. The Reed librarians have
-  created Zotero documentation at
-  \url{http://libguides.reed.edu/citation/zotero}. In addition, a tutorial
-  is available from Middlebury College at
-  \url{http://sites.middlebury.edu/zoteromiddlebury/}.
-  
-  \emph{R Markdown} uses \emph{pandoc} (\url{http://pandoc.org/}) to build
-  its bibliographies. One nice caveat of this is that you won't have to do
-  a second compile to load in references as standard LaTeX requires. To
-  cite references in your thesis (after creating your bibliography
-  database), place the reference name inside square brackets and precede
-  it by the ``at'' symbol. For example, here's a reference to a book about
-  worrying: ({\textbf{???}}). This \texttt{Molina1994} entry appears in a
-  file called \texttt{thesis.bib} in the \texttt{bib} folder. This
-  bibliography database file was created by a program called BibTeX. You
-  can call this file something else if you like (look at the YAML header
-  in the main .Rmd file) and, by default, is to placed in the \texttt{bib}
-  folder.
-  
-  For more information about BibTeX and bibliographies, see our CUS site
-  (\url{http://web.reed.edu/cis/help/latex/index.html})\footnote{({\textbf{???}})}.
-  There are three pages on this topic: \emph{bibtex} (which talks about
-  using BibTeX, at \url{http://web.reed.edu/cis/help/latex/bibtex.html}),
-  \emph{bibtexstyles} (about how to find and use the bibliography style
-  that best suits your needs, at
-  \url{http://web.reed.edu/cis/help/latex/bibtexstyles.html}) and
-  \emph{bibman} (which covers how to make and maintain a bibliography by
-  hand, without BibTeX, at
-  \url{http://web.reed.edu/cis/help/latex/bibman.html}). The last page
-  will not be useful unless you have only a few sources.
-  
-  If you look at the YAML header at the top of the main .Rmd file you can
-  see that we can specify the style of the bibliography by referencing the
-  appropriate csl file. You can download a variety of different style
-  files at \url{https://www.zotero.org/styles}. Make sure to download the
-  file into the csl folder.
-  
-  \textbf{Tips for Bibliographies}
-  
-  \begin{itemize}
-  \tightlist
-  \item
-    Like with thesis formatting, the sooner you start compiling your
-    bibliography for something as large as thesis, the better. Typing in
-    source after source is mind-numbing enough; do you really want to do
-    it for hours on end in late April? Think of it as procrastination.
-  \item
-    The cite key (a citation's label) needs to be unique from the other
-    entries.
-  \item
-    When you have more than one author or editor, you need to separate
-    each author's name by the word ``and'' e.g.
-    \texttt{Author\ =\ \{Noble,\ Sam\ and\ Youngberg,\ Jessica\},}.
-  \item
-    Bibliographies made using BibTeX (whether manually or using a manager)
-    accept LaTeX markup, so you can italicize and add symbols as
-    necessary.
-  \item
-    To force capitalization in an article title or where all lowercase is
-    generally used, bracket the capital letter in curly braces.
-  \item
-    You can add a Reed Thesis citation\footnote{({\textbf{???}})} option.
-    The best way to do this is to use the phdthesis type of citation, and
-    use the optional ``type'' field to enter ``Reed thesis'' or
-    ``Undergraduate thesis.''
-  \end{itemize}
-  
-  \section{Anything else?}\label{anything-else}
-  
-  If you'd like to see examples of other things in this template, please
-  contact the Data @ Reed team (email
-  \href{mailto:data@reed.edu}{\nolinkurl{data@reed.edu}}) with your
-  suggestions. We love to see people using \emph{R Markdown} for their
-  theses, and are happy to help.
+  --\textgreater{}
   
   \chapter*{Conclusion}\label{conclusion}
   \addcontentsline{toc}{chapter}{Conclusion}
-  
-  If we don't want Conclusion to have a chapter number next to it, we can
-  add the \texttt{\{-\}} attribute.
-  
-  \textbf{More info}
-  
-  And here's some other random info: the first paragraph after a chapter
-  title or section head \emph{shouldn't be} indented, because indents are
-  to tell the reader that you're starting a new paragraph. Since that's
-  obvious after a chapter or section title, proper typesetting doesn't add
-  an indent there.
   
   \appendix
   
@@ -903,6 +685,13 @@ class (for LaTeX) and the R bookdown package, in general.
   Journal of Anatomy}, \emph{118}(2), 509--524.
   \url{http://doi.org/10.1002/aja.1001180211}
   
+  \hypertarget{ref-Escalier1991}{}
+  Escalier, D., Gallo, J.-M., Albert, M., Meduri, G., Bermudez, D., David,
+  G., \& Schrevel, J. (1991). Human acrosome biogenesis: immunodetection
+  of proacrosin in primary spermatocytes and of its partitioning pattern
+  during meiosis. \emph{Development}, \emph{113}, 779--788. Retrieved from
+  \url{http://dev.biologists.org/content/develop/113/3/779.full.pdf}
+  
   \hypertarget{ref-Gnessi1997}{}
   Gnessi, L., Fabbri, A., \& Spera, G. (1997). Gonadal Peptides as
   Mediators of Development and Functional Control of the Testis: An
@@ -915,6 +704,12 @@ class (for LaTeX) and the R bookdown package, in general.
   Goossens, E., \& Tournaye, H. (2013). Adult Stem Cells in the Human
   Testis. \emph{Seminars in Reproductive Medicine}, \emph{31}(01),
   039--048. \url{http://doi.org/10.1055/s-0032-1331796}
+  
+  \hypertarget{ref-Hamilton1987}{}
+  Hamilton, D., Waites, G. M. H., Special Programme of Research, D.,
+  Family Health International (Organization), \& World Health
+  Organization. (1987). \emph{Cellular and molecular events in
+  spermiogenesis} (p. 334). Cambridge University Press.
   
   \hypertarget{ref-Johnson1980}{}
   Johnson, L., Petty, C. S., \& Neaves, W. B. (1980). A comparative study
