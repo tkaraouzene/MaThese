@@ -224,7 +224,6 @@ One thing that may be annoying is the way _R Markdown_ handles "floats" like tab
 If you need a graphic or tabular material to be part of the text, you can just put it inline. If you need it to appear in the list of figures or tables, it should be placed in a code chunk.
 -->
 <p>In the <strong>R</strong> chunk below, we will load in a picture stored as <code>reed.jpg</code> in our main directory. We then give it the caption of “Reed logo”, the label of “reedlogo”, and specify that this is a figure. Make note of the different <strong>R</strong> chunk options that are given in the R Markdown file (not shown in the knitted document).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">include_graphics</span>(<span class="dt">path =</span> <span class="st">&quot;figure/reed.jpg&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:reedlogo"></span>
 <img src="figure/reed.jpg" alt="Reed logo"  />
 <p class="caption">
@@ -235,10 +234,6 @@ Figure 3.1: Reed logo
 <p></p>
 <!-- starts a new page and stops trying to place floats such as tables and figures -->
 <p>Below we will investigate how to save the output of an <strong>R</strong> plot and label it in a way similar to that done above. Recall the <code>flights</code> dataset from Chapter. (Note that we’ve shown a different way to reference a section or chapter here.) We will next explore a bar graph with the mean flight departure delays by airline from Portland for 2014. Note also the use of the <code>scale</code> parameter which is discussed on the next page.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights %&gt;%<span class="st"> </span><span class="kw">group_by</span>(carrier) %&gt;%
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_dep_delay =</span> <span class="kw">mean</span>(dep_delay)) %&gt;%
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> carrier, <span class="dt">y =</span> mean_dep_delay)) +
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:delaysboxplot"></span>
 <img src="thesis_files/figure-html/delaysboxplot-1.png" alt="Mean Delays by Airline" width="576" />
 <p class="caption">
@@ -273,7 +268,7 @@ Figure 3.4: A Larger Figure, Flipped Upside Down
 <div id="bibliographies" class="section level2">
 <h2><span class="header-section-number">3.4</span> Bibliographies</h2>
 <p>Of course you will need to cite things, and you will probably accumulate an armful of sources. There are a variety of tools available for creating a bibliography database (stored with the .bib extension). In addition to BibTeX suggested below, you may want to consider using the free and easy-to-use tool called Zotero. The Reed librarians have created Zotero documentation at <a href="http://libguides.reed.edu/citation/zotero" class="uri">http://libguides.reed.edu/citation/zotero</a>. In addition, a tutorial is available from Middlebury College at <a href="http://sites.middlebury.edu/zoteromiddlebury/" class="uri">http://sites.middlebury.edu/zoteromiddlebury/</a>.</p>
-<p><em>R Markdown</em> uses <em>pandoc</em> (<a href="http://pandoc.org/" class="uri">http://pandoc.org/</a>) to build its bibliographies. One nice caveat of this is that you won’t have to do a second compile to load in references as standard LaTeX requires. To cite references in your thesis (after creating your bibliography database), place the reference name inside square brackets and precede it by the “at” symbol. For example, here’s a reference to a book about worrying: <span class="citation">(Molina &amp; Borkovec, 1994)</span>. This <code>Molina1994</code> entry appears in a file called <code>thesis.bib</code> in the <code>bib</code> folder. This bibliography database file was created by a program called BibTeX. You can call this file something else if you like (look at the YAML header in the main .Rmd file) and, by default, is to placed in the <code>bib</code> folder.</p>
+<p><em>R Markdown</em> uses <em>pandoc</em> (<a href="http://pandoc.org/" class="uri">http://pandoc.org/</a>) to build its bibliographies. One nice caveat of this is that you won’t have to do a second compile to load in references as standard LaTeX requires. To cite references in your thesis (after creating your bibliography database), place the reference name inside square brackets and precede it by the “at” symbol. For example, here’s a reference to a book about worrying: <span class="citation">(<span class="citeproc-not-found" data-reference-id="Molina1994"><strong>???</strong></span>)</span>. This <code>Molina1994</code> entry appears in a file called <code>thesis.bib</code> in the <code>bib</code> folder. This bibliography database file was created by a program called BibTeX. You can call this file something else if you like (look at the YAML header in the main .Rmd file) and, by default, is to placed in the <code>bib</code> folder.</p>
 <p>For more information about BibTeX and bibliographies, see our CUS site (<a href="http://web.reed.edu/cis/help/latex/index.html" class="uri">http://web.reed.edu/cis/help/latex/index.html</a>)<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. There are three pages on this topic: <em>bibtex</em> (which talks about using BibTeX, at <a href="http://web.reed.edu/cis/help/latex/bibtex.html" class="uri">http://web.reed.edu/cis/help/latex/bibtex.html</a>), <em>bibtexstyles</em> (about how to find and use the bibliography style that best suits your needs, at <a href="http://web.reed.edu/cis/help/latex/bibtexstyles.html" class="uri">http://web.reed.edu/cis/help/latex/bibtexstyles.html</a>) and <em>bibman</em> (which covers how to make and maintain a bibliography by hand, without BibTeX, at <a href="http://web.reed.edu/cis/help/latex/bibman.html" class="uri">http://web.reed.edu/cis/help/latex/bibman.html</a>). The last page will not be useful unless you have only a few sources.</p>
 <p>If you look at the YAML header at the top of the main .Rmd file you can see that we can specify the style of the bibliography by referencing the appropriate csl file. You can download a variety of different style files at <a href="https://www.zotero.org/styles" class="uri">https://www.zotero.org/styles</a>. Make sure to download the file into the csl folder.</p>
 <p><strong>Tips for Bibliographies</strong></p>
@@ -296,8 +291,8 @@ Figure 3.4: A Larger Figure, Flipped Upside Down
 <hr />
 <ol start="1">
 <li id="fn1"><p>footnote text<a href="3-ref-labels.html#fnref1">↩</a></p></li>
-<li id="fn2"><p><span class="citation">Reed College (2007)</span><a href="3-ref-labels.html#fnref2">↩</a></p></li>
-<li id="fn3"><p><span class="citation">Noble (2002)</span><a href="3-ref-labels.html#fnref3">↩</a></p></li>
+<li id="fn2"><p><span class="citation">(<span class="citeproc-not-found" data-reference-id="reedweb2007"><strong>???</strong></span>)</span><a href="3-ref-labels.html#fnref2">↩</a></p></li>
+<li id="fn3"><p><span class="citation">(<span class="citeproc-not-found" data-reference-id="noble2002"><strong>???</strong></span>)</span><a href="3-ref-labels.html#fnref3">↩</a></p></li>
 </ol>
 </div>
             </section>
