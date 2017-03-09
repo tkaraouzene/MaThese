@@ -50,6 +50,8 @@
 % End of CII addition
 \usepackage{rotating}
 
+\usepackage{upgreek} % tk : pour pouvoir utiliser le symbole µ droit (pas en itallic)
+
 % Next line commented out by CII
 %%% \usepackage{natbib}
 % Comment out the natbib line above and uncomment the following two lines to use the new
@@ -298,9 +300,9 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \section{La spermatogénèse}\label{la-spermatogenese}
   
-  La spermatogenèse des mamifères est un processus long et complexe
-  controllé par plusieurs mécanismes étroitement liés ((Gnessi, Fabbri, \&
-  Spera, 1997, Kierszenbaum (1994)),\textbf{Sharpe1994 à trouver!!!}).
+  La spermatogenèse des mammifères est un processus long et complexe
+  contrôlé par plusieurs mécanismes étroitement liés ((Gnessi, Fabbri, \&
+  Spera, 1997, KIERSZENBAUM (1994)),\textbf{Sharpe1994 à trouver!!!}).
   C'est au cours de celle-ci que, à partir de cellules germinales, seront
   produits les spermatozoïdes matures. Ce processus est divisé en trois
   phases principales : La phase de multiplication, la phase de division
@@ -311,7 +313,7 @@ class (for LaTeX) and the R bookdown package, in general.
   spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à
   partir de cellules germinales est de 74 jours et la production
   quotidienne de spermatozoïde est d'environ 45 million par testicules
-  (Johnson, Petty, \& Neaves, 1980).
+  (JOHNSON, PETTY, \& NEAVES, 1980).
   
   \subsection{Rappels sur le testicule}\label{rappels-sur-le-testicule}
   
@@ -349,14 +351,14 @@ class (for LaTeX) and the R bookdown package, in general.
   
   La phase de multiplication est la phase au cours de laquelle les
   spermatogonies se divisent par mitoses pour aboutir au stade de
-  spermatocytes primaires. Les spermatogonies sont des cellules dploïdes à
-  l'origine de k'ensemble des autres cellules germinales humaines. Pour
-  cela, elle vont s'auto-renouveller par mitose successive afin de
+  spermatocytes primaires. Les spermatogonies sont des cellules diploïdes
+  à l'origine de l'ensemble des autres cellules germinales humaines. Pour
+  cela, elle vont s'auto-renouveler par mitose successive afin de
   maintenir une production continue de spermatozoïdes tout au long de la
   vie de l'individu. Ces cellules sont localisées dans le compartiment
   basal des tubes séminifères. Elles présentent un noyau ovoïde ainsi
   qu'un cytoplasme dense contenant un petit appareil de Golgi, quelques
-  mitochondrie ainsqi que plusieurs ribosomes libres. Les analyses
+  mitochondrie ainsi que plusieurs ribosomes libres. Les analyses
   histologiques ont permis de distinguer trois types de spermatogonies en
   fonction de leur contenu en heterochromatine ((Clermont, 1963, Clermont
   (1966), Goossens \& Tournaye (2013))) :
@@ -373,21 +375,21 @@ class (for LaTeX) and the R bookdown package, in general.
   \end{enumerate}
   
   Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours
-  de la spermatogénès et servent de résèrve. Elles vont au cours d'une
+  de la spermatogenèse et servent de réserve. Elles vont au cours d'une
   première mitose former un spermatogonie Ad et un spermatogonie Ap
-  (\textbf{Figure :} \ref{fig:spermatogenese}). Cette propriété permet à
+  (\textbf{Figure :} @ref(fig:spermatogenèse)). Cette propriété permet à
   la fois de se différencier en spermatocytes tout en constituant un
-  compartiment de réserve de spermatogonies Ad pour la regénération de la
-  population de cellules germinales au sein de l'épithelium séminifère.
+  compartiment de réserve de spermatogonies Ad pour la régénération de la
+  population de cellules germinales au sein de l'épithélium séminifère.
   L'entrée en division des spermatogonies Ap se fait par groupes
   cellulaire tout les 16 jours. Les Cellules d'une même génération
   maintiennent entre elles des ponts cytoplasmiques jusqu'à la
-  spermiogénèse ce qui permet la synchronisation parfaite du développement
-  gamétique de toutes les cellules filles issues d'un groupe de
-  spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique.
+  spermatogenèse ce qui permet la synchronisation parfaite du
+  développement gamétique de toutes les cellules filles issues d'un groupe
+  de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique.
   Chaque spermatogonies Ap va, lorsqu'ils se divise par mitose, former
   deux spermatogonies B qui eux-mêmes se diviseront en deux spermatocytes
-  primaires diploïdes (\textbf{Figure :} \ref{fig:spermatogenese}).
+  primaires diploïdes (\textbf{Figure :} @ref(fig:spermatogenèse)).
   
   \begin{figure}
   
@@ -403,16 +405,16 @@ class (for LaTeX) and the R bookdown package, in general.
   La méiose, ou phase de maturation, est l'étape au cours de laquelle, à
   partir de cellules diploïdes (les spermatogonies B) vont se former des
   cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce
-  résultat est le fruit de deux divisions succesives (\textbf{Figure :
-  }\ref{fig:meiose}) appellée respectivement méïose réductionnelle ou
+  résultat est le fruit de deux divisions successives (\textbf{Figure :
+  }@ref(fig:méiose)) appelée respectivement méiose réductionnelle ou
   méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va
   séparer les chromosomes homologues, produisant deux cellules et
-  résuisant la ploïdie de diploïde à haploïde (d'où son non
-  \emph{réductionelle}). En plus de son rôle de division vu précédement,
+  réduisant la ploïdie de diploïde à haploïde (d'où son non
+  \emph{réductionelle}). En plus de son rôle de division vu précédemment,
   la méiose joue un rôle clef dans le brassage génétique (mélange des
   gènes) et ce, grâce à deux mécanismes de brassage : le brassage
-  interchromosomique, lorsque les chromosomes sont séparés et le brassage
-  intrachromosomique inpliquant nottament des enjambements chromosomiques
+  inter-chromosomique, lorsque les chromosomes sont séparés et le brassage
+  intra-chromosomique impliquant notamment des enjambements chromosomiques
   (crossing-over) (\textbf{Figure : }\ref{fig:crossingover}).
   
   \begin{figure}
@@ -421,8 +423,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption{Les différentes étapes de la méiose gamétique masculine. D’après Sasaki et Matsui,
-  2008}\label{fig:meiose}
+  \caption[Les différentes étapes de la méiose gamétique masculine]{Les différentes étapes de la méiose gamétique masculine : D’après Sasaki et Matsui,2008}\label{fig:meiose}
   \end{figure}
   
   La méiose est initié dès la fin de la phase de multiplication à partir
@@ -432,9 +433,9 @@ class (for LaTeX) and the R bookdown package, in general.
   subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au
   cours de cette phase a lieu la réplication de l'ADN. Cette réplication
   se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S
-  (pour syntèse) de l'interphase. À l'issus de cette phase, chaque
+  (pour synthèse) de l'interphase. À l'issue de cette phase, chaque
   chromosome sera composé de deux chromatides reliées entres elles par le
-  centomère, le materiel génétique de chaque cellules ayant donc été
+  centromère, le matériel génétique de chaque cellules ayant donc été
   multiplié par 2. Par la suite, ces cellules vont subir deux divisions
   méiotiques, chacune composées de 4 étapes distincte (\textbf{Figure :
   }(\ref{fig:mitose})) :
@@ -443,14 +444,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    La prophase, caractérisée par la condentation de la chromatine formant
+    La prophase, caractérisée par la condensation de la chromatine formant
     ainsi les chromosome\\
   \item
     La métaphase, phase au cours de laquelle les chromosomes vont
-    s'aligner à l'equateur de la cellule pour former la plaque
+    s'aligner à l'équateur de la cellule pour former la plaque
     équatoriale\\
   \item
-    L'anaphase, les chromatides soeurs (ou les chromosomes homologues en
+    L'anaphase, les chromatides sœurs (ou les chromosomes homologues en
     fonction de la phase méiotique) vont se séparer et migrer aux pôles
     opposés de la cellule\\
   \item
@@ -465,17 +466,17 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption{Les différentes phases de la division cellulaire : De la prophase (à gauche) à la télophase (à droite) }\label{fig:mitose}
+  \caption[Les différentes phases de la division cellulaire]{Les différentes phases de la division cellulaire : De la prophase (à gauche) à la télophase (à droite)}\label{fig:mitose}
   \end{figure}
   
   La première division méiotique abouti à la formation des spermatocytes
   secondaires (spermatocytes II). À ce states, les cellules sont haploïdes
-  et chaque chromosome est composé de deux chromatides soeurs. Après,
-  cette brèves étape (environ 1 jour) ainsi qu'une très courte interphase
-  sans réplication de l'ADN, les spermatocytes II vont entrer en deuxième
+  et chaque chromosome est composé de deux chromatides sœurs. Après, cette
+  brèves étape (environ 1 jour) ainsi qu'une très courte interphase sans
+  réplication de l'ADN, les spermatocytes II vont entrer en deuxième
   division méiotique. Cette deuxième division est très semblable à une
-  division mitotique. La prophaseII, à la différence de la prophase I, est
-  très courte. Lors de cette étape, les chromosomes constitués de
+  division mitotique. La prophase II, à la différence de la prophase I,
+  est très courte. Lors de cette étape, les chromosomes constitués de
   chromatides sœurs se dirigent vers la plaque équatoriale. En métaphase
   II, les chromosomes s'alignent au niveau de leurs centromères. En
   anaphase II, le centromère de chaque chromosome se rompt séparant les
@@ -495,20 +496,65 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsection{La spermiogénèse}\label{la-spermiogenese}
   
-  La spermiogénèse est la phase finale de la spermatogénèse. Elle dure
+  La spermiogénèse est la phase finale de la spermatogenèse. Elle dure
   environs 23 jours chez l'humain et peut être subdivisée en plusieurs
-  étapes (\textbf{Figure : }(\^{}ref(fig:spermiogénese))). La
-  spermiogénèse définie la cytodiférentiation des spermatides en
-  spermatozoïdes. C'est au cours de cette phase que les caractéristiques
-  morphologique et fonctionelles du spermatozoïdes seront déterminées
-  (Clermont \& Oko 1993 à trouver !!!). Elle est caractérisée par 3
-  évènements majeurs : la formation de l'acrosome, la compaction de l'ADN
-  nucléaire, la formation de l'acrosome et la formation du flagelle. Le
-  développement de l'acrosome et la formation du flagelle commence au
-  niveau des spermatides rondes (Escalier et al., 1991) pendant
-  l'élongation du spermatide, le noyau se condense et devient hautement
-  polarisé (Hamilton, Waites, Special Programme of Research, Family Health
-  International (Organization), \& World Health Organization., 1987).\\
+  étapes (\textbf{Figure : }(\ref{fig:spermiogenese})). La spermiogénèse
+  définie la cytodiférentiation des spermatides en spermatozoïdes. C'est
+  au cours de cette phase que les caractéristiques morphologique et
+  fonctionnelles du spermatozoïdes seront déterminées (Clermont \& Oko
+  1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la
+  formation de l'acrosome, la compaction de l'ADN nucléaire, la formation
+  de l'acrosome et la formation du flagelle. Le développement de
+  l'acrosome et la formation du flagelle commence au niveau des
+  spermatides rondes (Escalier et al., 1991). Pendant l'élongation du
+  spermatide, le noyau se condense et devient hautement polarisé
+  (Hamilton, D. W., Waites, 1990).\\
+  Les spermatides sont situées dans le compartiment adluminal, à proximité
+  de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10
+  \(\upmu\)m) que l'on peut schématiquement diviser en trois classes :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    les spermatides rondes (\textbf{Figure : }(\ref{fig:spermiogenese})
+    1-2) : L'identification de ces ces cellules représente un difficulté
+    technique. Elles ont cependant pu être décrites en détaille par
+    différentes techniques de coloration sous microscope optique
+    ((Clermont, 1963), (Papic, Katona, \& Skrabalo, 1988), (Schenck \&
+    Schill, n.d.), (Adelman \& Cahill, 1989), (World Health Organization,
+    1992)). Plusieurs études animales on pu démontrées le potentiel des
+    spermatides rondes à donner la vie à des individus sains et fertiles,
+    ((a Ogura, Matsuda, \& Yanagimachi, 1994), (A. Ogura, Matsuda, Asano,
+    Suzuki, \& Yanagimachi, 1996), (Sasagawa \& Yanagimachi, 1997)), la
+    même chose ayant été également observée plus récemment chez l'homme
+    ((A. Tanaka et al., 2015)) bien que le taux de fécondation et
+    d'implantation soit extrêmement faible((Asimakopoulos, 2003)). Ils
+    possèdent un noyau rond avec une chromatine pâle et homogène. C'est à
+    partir de ces étapes que démarre la biogenèse de l'acrosome avec la
+    production par l'appareil de Golgi des vésicules pro-acrosomales
+    (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont
+    se déplacer au futur pôle caudal. Le centriole proximal est inactif
+    alors que le centriole distal donne naissance à un ensemble de
+    microtubules à l'origine de l'axonème du futur flagelle.\\
+  \item
+    Les spermatides en élongation (\textbf{Figure :
+    }(\ref{fig:spermiogenese}) 3-4) :\\
+    peuvent aussi donner naissance avec un meilleur taux que les
+    spermatides rondes et engendrerai théoriquement moins de risques
+    d'anomalies génétiques ((Asimakopoulos, 2003)). \textbf{A completer}\\
+  \item
+    Les spermatides en condensation (\textbf{Figure :
+    }(\ref{fig:spermiogenese}) 5-7) : C'est le stade final de la
+    différentiation du spermatide en spermatozoïde. À ce stade le noyau
+    est très allongé, avec une partie caudale globulaire et une partie
+    antérieure saillante. La chromatine est sombre et condensée. L'axonème
+    va continuer à s'allonger pour former le flagelle mature. Les
+    différentes organelles inutiles pour la physiologique spermatique et
+    l'excès de cytoplasme vont former la gouttelette cytoplasmique qui va
+    se détacher et donner le corps résiduel qui va ensuite être phagocyté
+    par les cellules de Sertoli ((Hermo, Pelletier, Cyr, \& Smith, 2010)).
+  \end{enumerate}
   
   \begin{figure}
   
@@ -516,14 +562,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption{Principales étapes et modifications structurales lors de la spermiogénèse.
-  1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée
-  au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté
-  de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-
-  7. Formation de l’acrosome, condensation du noyau et développement des structures
-  flagellaires. Ac, acrosome; Ax, axonème; CC, corps chromatoïdes; CR, corps résiduel; FD,
-  fibres denses; GF, gaine fibreuse; M, mitochondrie; Ma, manchette. D’après Touré et al.,
-  2011}\label{fig:spermiogénese}
+  \caption[Principales étapes et modifications structurales lors de la spermiogénèse]{Principales étapes et modifications structurales lors de la spermiogénèse : 1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-7. Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome; Ax, axonème; CC, corps chromatoïdes; CR, corps résiduel; FD, fibres denses; GF, gaine fibreuse; M, mitochondrie; Ma, manchette. D’après Touré et al., 2011}\label{fig:spermiogenese}
   \end{figure}
   
   \section{Structure et fonction du
@@ -531,18 +570,33 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsection{Anatomie du spermatozoïde}\label{anatomie-du-spermatozoide}
   
-  \begin{figure}
-  
-  {\centering \includegraphics[scale=0.7]{figure/spermatozoide} 
-  
-  }
-  
-  \caption{Anatomie du spermatozoïde}\label{fig:spermatozoïde}
-  \end{figure}
+  \begin{center}\includegraphics[scale=0.7]{figure/spermatozoide} \end{center}
   
   \subsubsection{La tête}\label{la-tete}
   
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    L'acrosome\\
+  \item
+    L'acroplaxome\\
+  \item
+    Le noyau
+  \end{enumerate}
+  
   \subsubsection{Le flagelle}\label{le-flagelle}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    La pièce intermédiaire\\
+  \item
+    La pièce principale\\
+  \item
+    La pièce terminale
+  \end{enumerate}
   
   \subsection{Fonction du spermatozoïde}\label{fonction-du-spermatozoide}
   
@@ -563,10 +617,84 @@ class (for LaTeX) and the R bookdown package, in general.
   également à l'infertilité masculine. Cependant, aucune cause n'est
   identifiée dans 10-20\% des cas.
   
+  The entire process (of spermatogenesis) is tightly synchronized and
+  integrated, so that pathological conditions which produce even very
+  small deviations are likely to lead to infertility (Barratt, 1995)\\
+  Barratt, C.L.R. (1995) Spermatogenesis. In Grudzinsky, J.G. and Yovich,
+  J.L. (eds) Gametes: the spermatozoon. Cambridge University Press,
+  Cambridge
+  
   \subsection{Les différents phénotypes d'infertilité
   masculine}\label{les-differents-phenotypes-dinfertilite-masculine}
   
   \subsubsection{Liée à la quantité}\label{liee-a-la-quantite}
+  
+  Immature germ cells are present in ejaculates of subjects with a normal
+  sperm count (Michael and Joel, 1937; Tomlinson et al., 1992),
+  oligozoospermia (Mac Leod, 1970; Tomlinson et al., 1993), or azoospermia
+  (Kurilo et al., 1993) and the presence of immature germ cells increases
+  as the sperm count decreases (Sperling and Kaden, 1971) Michael, M. and
+  Joel, K. (1937) Zellformen in normalen und pathologischen Ejakulaten und
+  ihre klinische Bedeutung. Schweiz. Med. Wsch., 33, 757.\\
+  Tomlinson, M.J., Barratt, C.L.R., Bolton, A.E. et al. (1992) Round cells
+  and sperm fertilizing capacity: the presence of immature germ cells but
+  not seminal leukocytes are associated with reduced success of in vitro
+  fertilization. Fertil. Steril., 58, 1257--1259.\\
+  MacLeod, J. (1970) The significance of deviations in human sperm
+  morphology. In: Rosemberg, E. and Paulsen, C.A. (eds) The human testis.
+  Plenum, New York, pp.~481--494.\\
+  Tomlinson, M.J., Barratt, C.L.R. and Cook, I.D. (1993) Prospective study
+  of leukocytes and leukocyte populations in semen suggests they are not a
+  cause of male infertility. Fertil. Steril., 60, 1069--1075\\
+  Kurilo, L.F., Liubashevskaia, I.A., Dubinskaia, V.P. and Gaeva, T.N.
+  (1993) Karyological analysis of the count of immature germ cells in the
+  ejaculate. Urol. Nefrol. (Mosk.), 2, 45--47.\\
+  Sperling, K. and Kaden, R. (1971) Meiotic studies of the ejaculated
+  seminal fluids of humans with normal sperm count and oligospermia.
+  Nature, 232, 481
+  
+  In humans, spermatogenic arrest was considered a hopeless condition for
+  couples desiring to conceive. However, the documented success of
+  intracytoplasmic sperm injection (ICSI; Palermo et al., 1992) has
+  pointed to using this technique to inject spermatids into oocytes
+  (Edwards et al. 1994; Ogura et al., 1994) Palermo, G., Joris, H.,
+  Devroey, P. and Van Steirteghem, A.C. (1992) Pregnancies after
+  intracytoplasmic sperm injection of a single spermatozoon into an
+  oocyte. Lancet, 340, 17--18.\\
+  Edwards, R.G., Tarin, J.J., Dean, N. et al. (1994) Are spermatids
+  injections into human oocytes now mandatory? Hum. Reprod., 9,
+  2217--2219.\\
+  Ogura, A., Matsuda, J. and Yanagimachi, R. (1994) Birth of normal young
+  after electrofusion of mouse oocytes with round spermatids. Proc. Natl.
+  Acad. Sci. USA, 91, 7460--7462
+  
+  Spermatogenic arrest, the inability of spermatogenetic cells to develop
+  into male gametes within the gonads, has been reported in 4--30\% of
+  testicular biopsies of patients with severe oligospermia or azoospermia
+  (Wong et al., 1973; Levin, 1979; Colgan et al., 1980; Soderstrom and
+  Suominen, 1980; Nomen et al., 1984) Wong, T.W., Strauss, F.H. and Worne,
+  N.E. (1973) Testicular biopsy in male infertility: I. Testicular causes
+  of infertility. Arch. Pathol. Lab. Med., 95, 151--159.\\
+  Levin, H.S. (1979) Testicular biopsy in the study of male infertility.
+  Hum. Pathol., 10, 569--579\\
+  Colgan, T.J., Bedar, Y.C., Strawbridge, H.T.G. et al. (1980) Reappraisal
+  of the value of the testicular biopsy in the investigation of
+  infertility. Fertil. Steril., 33, 56--60.\\
+  Soderstro¨m, K.O. and Suominen, J. (1980) Histopathology and
+  ultrastructure of meiotic arrest in human spermatogenesis. Arch. Pathol.
+  Lab. Med., 104, 476--482.\\
+  Soderstro¨m, K.O. and Suominen, J. (1980) Histopathology and
+  ultrastructure of meiotic arrest in human spermatogenesis. Arch. Pathol.
+  Lab. Med., 104, 476--482.
+  
+  Spermatogenic arrest can occur at any stage of germ cell formation;
+  primary spermatocyte arrest is most prominent, followed by spermatid
+  arrest, and least commonly, spermatogonial arrest. Arrest at primary
+  spermatocyte stage can be incomplete, so that a few secondary
+  spermatocytes or spermatids are observed (Girgis et al., 1969)\\
+  Girgis, S.M., Etriby, A., Ibrahim, A.A. and Kahil, A. (1969) Testicular
+  biopsy in azoospermia. A review of the last ten years' experience of
+  over 800 cases. Fertil. Steril., 20, 467--477.
   
   \subsubsection{liée à la forme}\label{liee-a-la-forme}
   
@@ -630,10 +758,6 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \chapter{The First Appendix}\label{the-first-appendix}
   
-  This first appendix includes all of the R chunks of code that were
-  hidden throughout the document (using the \texttt{include\ =\ FALSE}
-  chunk tag) to help with readibility and/or setup.
-  
   \textbf{In the main Rmd file}
   
   \textbf{In Chapter \ref{ref-labels}:}
@@ -644,18 +768,18 @@ class (for LaTeX) and the R bookdown package, in general.
   \CommentTok{# installed and loaded. This thesisdown package includes}
   \CommentTok{# the template files for the thesis and also two functions}
   \CommentTok{# used for labeling and referencing}
-  \NormalTok{if(!}\KeywordTok{require}\NormalTok{(devtools))}
+  \ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(devtools))}
     \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-  \NormalTok{if(!}\KeywordTok{require}\NormalTok{(dplyr))}
+  \ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(dplyr))}
       \KeywordTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-  \NormalTok{if(!}\KeywordTok{require}\NormalTok{(ggplot2))}
+  \ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(ggplot2))}
       \KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-  \NormalTok{if(!}\KeywordTok{require}\NormalTok{(ggplot2))}
+  \ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(ggplot2))}
       \KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-  \NormalTok{if(!}\KeywordTok{require}\NormalTok{(thesisdown))\{}
+  \ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(thesisdown))\{}
     \KeywordTok{library}\NormalTok{(devtools)}
-    \NormalTok{devtools::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"ismayc/thesisdown"}\NormalTok{)}
-    \NormalTok{\}}
+  \NormalTok{  devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"ismayc/thesisdown"}\NormalTok{)}
+  \NormalTok{  \}}
   \KeywordTok{library}\NormalTok{(thesisdown)}
   \NormalTok{flights <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/flights.csv"}\NormalTok{)}
   \end{Highlighting}
@@ -675,6 +799,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \setlength{\parskip}{8pt}
   
   \hypertarget{refs}{}
+  \hypertarget{ref-Adelman1989}{}
+  Adelman, M. M., \& Cahill, E. M. (1989). \emph{Atlas of sperm
+  morphology} (p. 123). ASCP Press.
+  
+  \hypertarget{ref-Asimakopoulos2003}{}
+  Asimakopoulos, B. (2003). Is There a Place for Round and Elongated
+  Spermatids Injection in, \emph{1}(1), 1--6.
+  
   \hypertarget{ref-Clermont1963}{}
   Clermont, Y. (1963). The cycle of the seminiferous epithelium in man.
   \emph{American Journal of Anatomy}, \emph{112}(1), 35--51.
@@ -686,42 +818,97 @@ class (for LaTeX) and the R bookdown package, in general.
   \url{http://doi.org/10.1002/aja.1001180211}
   
   \hypertarget{ref-Escalier1991}{}
-  Escalier, D., Gallo, J.-M., Albert, M., Meduri, G., Bermudez, D., David,
+  Escalier, D., Gallo, J. M., Albert, M., Meduri, G., Bermudez, D., David,
   G., \& Schrevel, J. (1991). Human acrosome biogenesis: immunodetection
   of proacrosin in primary spermatocytes and of its partitioning pattern
-  during meiosis. \emph{Development}, \emph{113}, 779--788. Retrieved from
+  during meiosis. \emph{Development (Cambridge, England)}, \emph{113}(3),
+  779--788. Retrieved from
   \url{http://dev.biologists.org/content/develop/113/3/779.full.pdf}
   
   \hypertarget{ref-Gnessi1997}{}
-  Gnessi, L., Fabbri, A., \& Spera, G. (1997). Gonadal Peptides as
-  Mediators of Development and Functional Control of the Testis: An
-  Integrated System with Hormones and Local Environment
-  \textless{}sup\textgreater{}1\textless{}/sup\textgreater{}.
-  \emph{Endocrine Reviews}, \emph{18}(4), 541--609.
-  \url{http://doi.org/10.1210/edrv.18.4.0310}
+  Gnessi, L., Fabbri, A., \& Spera, G. (1997). Gonadal peptides as
+  mediators of development and functional control of the testis: An
+  integrated system with hormones and local environment. \emph{Endocrine
+  Reviews}, \emph{18}(4), 541--609.
+  \url{http://doi.org/10.1210/er.18.4.541}
   
   \hypertarget{ref-Goossens2013}{}
-  Goossens, E., \& Tournaye, H. (2013). Adult Stem Cells in the Human
-  Testis. \emph{Seminars in Reproductive Medicine}, \emph{31}(01),
-  039--048. \url{http://doi.org/10.1055/s-0032-1331796}
+  Goossens, E., \& Tournaye, H. (2013). Adult stem cells in the human
+  testis. \emph{Seminars in Reproductive Medicine}, \emph{31}(1), 39--48.
+  \url{http://doi.org/10.1055/s-0032-1331796}
   
   \hypertarget{ref-Hamilton1987}{}
-  Hamilton, D., Waites, G. M. H., Special Programme of Research, D.,
-  Family Health International (Organization), \& World Health
-  Organization. (1987). \emph{Cellular and molecular events in
-  spermiogenesis} (p. 334). Cambridge University Press.
+  Hamilton, D. W., Waites, G. M. H. (1990). \emph{Cellular and Molecular
+  Events in Spermiogenesis} (p. 334). Cambridge University Press.
+  Retrieved from
+  \url{http://www.cambridge.org/us/academic/subjects/medicine/obstetrics-and-gynecology-reproductive-medicine/cellular-and-molecular-events-spermiogenesis}
+  
+  \hypertarget{ref-Hermo2010}{}
+  Hermo, L., Pelletier, R. M., Cyr, D. G., \& Smith, C. E. (2010). Surfing
+  the wave, cycle, life history, and genes/proteins expressed by
+  testicular germ cells. Part 3: Developmental changes in spermatid
+  flagellum and cytoplasmic droplet and interaction of sperm with the zona
+  pellucida and egg plasma membrane. \emph{Microscopy Research and
+  Technique}, \emph{73}(4), 320--363.
+  \url{http://doi.org/10.1002/jemt.20784}
   
   \hypertarget{ref-Johnson1980}{}
-  Johnson, L., Petty, C. S., \& Neaves, W. B. (1980). A comparative study
-  of daily sperm production and testicular composition in humans and rats.
-  \emph{Biology of Reproduction}, \emph{22}(5), 1233--43. Retrieved from
-  \url{http://www.ncbi.nlm.nih.gov/pubmed/7417656}
+  JOHNSON, L., PETTY, C. S., \& NEAVES, W. B. (1980). A Comparative Study
+  of Daily Sperm Production and Testicular Composition in Humans and Rats.
+  \emph{Biol Reprod}, \emph{22}(5), 1233--1243. Retrieved from
+  \url{http://www.biolreprod.org/content/22/5/1233.short}
   
   \hypertarget{ref-KIERSZENBAUM1994}{}
-  Kierszenbaum, A. L. (1994). Mammalian Spermatogenesis in Vivo and in
-  Vitro : A Partnership of Spermatogenic and Somatic Cell Lineages*.
-  \emph{Endocrine Reviews}, \emph{15}(1), 116--134.
+  KIERSZENBAUM, A. L. (1994). Mammalian Spermatogenesis
+  \textless{}i\textgreater{}in Vivo\textless{}/i\textgreater{} and
+  \textless{}i\textgreater{}in Vitro\textless{}/i\textgreater{} : A
+  Partnership of Spermatogenic and Somatic Cell Lineages*. \emph{Endocrine
+  Reviews}, \emph{15}(1), 116--134.
   \url{http://doi.org/10.1210/edrv-15-1-116}
+  
+  \hypertarget{ref-Ogura1994}{}
+  Ogura, a, Matsuda, J., \& Yanagimachi, R. (1994). Birth of normal young
+  after electrofusion of mouse oocytes with round spermatids.
+  \emph{Proceedings of the National Academy of Sciences of the United
+  States of America}, \emph{91}(16), 7460--7462.
+  \url{http://doi.org/10.1073/pnas.91.16.7460}
+  
+  \hypertarget{ref-Kimura1995}{}
+  Ogura, A., Matsuda, J., Asano, T., Suzuki, O., \& Yanagimachi, R.
+  (1996). Mouse oocytes injected with cryopreserved round spermatids can
+  develop into normal offspring. \emph{Journal of Assisted Reproduction
+  and Genetics}, \emph{13}(5), 431--434.
+  \url{http://doi.org/10.1007/BF02066177}
+  
+  \hypertarget{ref-Papic}{}
+  Papic, Z., Katona, G., \& Skrabalo, Z. (1988). The cytologic
+  identification and quantification of testicular cell subtypes.
+  Reproducibility and relation to histologic findings in the diagnosis of
+  male infertility. \emph{Acta Cytologica}, \emph{32}(5), 697--706.
+  Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/3421018}
+  
+  \hypertarget{ref-Sasagawa}{}
+  Sasagawa, I., \& Yanagimachi, R. (1997). Spermatids from mice after
+  cryptorchid and reversal operations can initiate normal embryo
+  development. \emph{Journal of Andrology}, \emph{18}(2), 203--209.
+  Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/9154515}
+  
+  \hypertarget{ref-Schenck}{}
+  Schenck, U., \& Schill, W. B. (n.d.). Cytology of the human seminiferous
+  epithelium. \emph{Acta Cytologica}, \emph{32}(5), 689--96. Retrieved
+  from \url{http://www.ncbi.nlm.nih.gov/pubmed/3421017}
+  
+  \hypertarget{ref-Tanaka2015}{}
+  Tanaka, A., Nagayoshi, M., Takemoto, Y., Tanaka, I., Kusunoki, H.,
+  Watanabe, S., \ldots{} Yanagimachi, R. (2015). Fourteen babies born
+  after round spermatid injection into human oocytes. \emph{Proceedings of
+  the National Academy of Sciences}, \emph{112}(March 2014), 201517466.
+  \url{http://doi.org/10.1073/pnas.1517466112}
+  
+  \hypertarget{ref-WorldHealthOrganization1992}{}
+  World Health Organization. (1992). \emph{WHO laboratory manual for the
+  examination of human semen and sperm-cervical mucus interaction.} (3th
+  ed, p. 128). Cambridge University Press.
 
 
   % Index?

@@ -11,19 +11,19 @@ title: 'THÈSE'
 knit: "bookdown::render_book"
 site: bookdown::bookdown_site
 output: 
-  # function(){bookdown::pdf_book(
-  # toc = TRUE,
-  # toc_depth = 3,
-  # template = "template.tex",
-  # highlight = "pygments",
-  # keep_tex = TRUE,
-  # pandoc_args = "--chapters")}
-  
-  # pandoc_args = "--top-level-division=chapter")}
+  function(){bookdown::pdf_book(
+  toc = TRUE,
+  toc_depth = 3,
+  template = "template.tex",
+  highlight = "pygments",
+  keep_tex = TRUE,
+  pandoc_args = "--top-level-division=chapter")}
+    # pandoc_args = "--chapters")}
+
   # thesisdown::thesis_gitbook: default
   #  thesis_pdf_updt: default
   #  thesisdown::thesis_gitbook: default
-  thesisdown::thesis_word: default
+  # thesisdown::thesis_word: default
   #  thesisdown::thesis_epub: default
   # If you are creating a PDF you'll need to write your preliminary content here or
   # use code similar to line 20 for the files.  If you are producing in a different
@@ -73,6 +73,6 @@ if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
 library(thesisdown)
 
-opts_knit$set(eval.after = c("fig.cap","fig.subcap"),echo=FALSE)
+opts_knit$set(eval.after = c("fig.cap","fig.scap"),echo=FALSE)
 
 ```

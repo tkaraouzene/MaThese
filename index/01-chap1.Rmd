@@ -6,7 +6,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## La spermatogénèse  
 
-La spermatogenèse des mamifères est un processus long et complexe controllé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994],**Sharpe1994 à trouver!!!**). C'est au cours de celle-ci que, à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces tapes se déroulent en continue dans la paroi des tubes séminifères du testicules depuis la pubertés jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours  et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980].  
+La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994],**Sharpe1994 à trouver!!!**). C'est au cours de celle-ci que, à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces tapes se déroulent en continue dans la paroi des tubes séminifères du testicules depuis la pubertés jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours  et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980].  
 
 ### Rappels sur le testicule  
 
@@ -28,14 +28,14 @@ include_graphics(path = "figure/coupe_testicule2.jpg")
 
 ### La phase de multiplication  
 
-La phase de multiplication est la phase au cours de laquelle les spermatogonies se divisent par mitoses pour aboutir au stade de spermatocytes primaires. Les spermatogonies sont des cellules dploïdes à l'origine de k'ensemble des autres cellules germinales humaines. Pour cela, elle vont s'auto-renouveller par mitose successive afin de maintenir une production continue de spermatozoïdes tout au long de la vie de l'individu. Ces cellules sont localisées dans le compartiment basal des tubes séminifères. Elles présentent un noyau ovoïde ainsi qu'un cytoplasme dense contenant un petit appareil de Golgi, quelques mitochondrie ainsqi que plusieurs ribosomes libres. Les analyses histologiques ont permis de distinguer trois types de
+La phase de multiplication est la phase au cours de laquelle les spermatogonies se divisent par mitoses pour aboutir au stade de spermatocytes primaires. Les spermatogonies sont des cellules diploïdes à l'origine de l’ensemble des autres cellules germinales humaines. Pour cela, elle vont s'auto-renouveler par mitose successive afin de maintenir une production continue de spermatozoïdes tout au long de la vie de l'individu. Ces cellules sont localisées dans le compartiment basal des tubes séminifères. Elles présentent un noyau ovoïde ainsi qu'un cytoplasme dense contenant un petit appareil de Golgi, quelques mitochondrie ainsi que plusieurs ribosomes libres. Les analyses histologiques ont permis de distinguer trois types de
 spermatogonies en fonction de leur contenu en heterochromatine ([@Clermont1963, @Clermont1966, @Goossens2013]) :  
 
   1. Les spermatogonies de type A dark (ou Ad)  
   2. Les spermatogonies de type A pale (ou Ap)  
   3. Les spermatogonies de type B  
   
-Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogénès et servent de résèrve. Elles vont au cours d'une première mitose former un spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenese)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la regénération de la population de cellules germinales au sein de l'épithelium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tout les 16 jours. Les Cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la spermiogénèse ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonies Ap va, lorsqu'ils se divise par mitose, former deux spermatogonies B qui eux-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenese)).  
+Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogenèse et servent de réserve. Elles vont au cours d'une première mitose former un spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenèse)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la régénération de la population de cellules germinales au sein de l’épithélium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tout les 16 jours. Les Cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la spermatogenèse ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonies Ap va, lorsqu'ils se divise par mitose, former deux spermatogonies B qui eux-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenèse)).  
 
 ```{r spermatogenese,fig.cap=fig.info,fig.align='center', out.extra="scale=0.75"}
 
@@ -49,40 +49,39 @@ include_graphics(path = "figure/spermatogenese.jpg")
 
 ### La méïose  
 
-La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce résultat est le fruit de deux divisions succesives (**Figure : **\@ref(fig:meiose)) appellée respectivement méïose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et résuisant la ploïdie de diploïde à haploïde (d'où son non *réductionelle*). En plus de son rôle de division vu précédement, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage interchromosomique, lorsque les chromosomes sont séparés et le brassage intrachromosomique inpliquant nottament des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:crossingover)).
+La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:méiose)) appelée respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son non *réductionelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:crossingover)).
 
-```{r meiose,fig.cap=fig.info,fig.align='center', out.extra="scale=0.35"}
+```{r meiose,fig.cap=fig.info,fig.scap=fig.name,fig.align='center', out.extra="scale=0.35"}
 
 fig.name <- "Les différentes étapes de la méiose gamétique masculine"
-fig.description <- "D’après Sasaki et Matsui,
-2008"
-fig.info <- paste(fig.name,fig.description,sep = ". ")
+fig.description <- "D’après Sasaki et Matsui,2008"
+fig.info <- paste(fig.name,fig.description,sep = " : ")
 
 include_graphics(path = "figure/Meiosis_Stages.png")
 
 ```
 
-La méiose est initié dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au cours de cette phase a lieu la réplication de l'ADN.  Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour syntèse) de l’interphase. À l'issus de cette phase, chaque chromosome sera composé de deux chromatides reliées entres elles par le centomère, le materiel génétique de chaque cellules ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distincte (**Figure : **(\@ref(fig:mitose))) : 
+La méiose est initié dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au cours de cette phase a lieu la réplication de l'ADN.  Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliées entres elles par le centromère, le matériel génétique de chaque cellules ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distincte (**Figure : **(\@ref(fig:mitose))) : 
 
-1. La prophase, caractérisée par la condentation de la chromatine formant ainsi les chromosome  
-2. La métaphase, phase au cours de laquelle les chromosomes vont s'aligner à l'equateur de la cellule pour former la plaque équatoriale  
-3. L'anaphase, les chromatides soeurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule    
+1. La prophase, caractérisée par la condensation de la chromatine formant ainsi les chromosome  
+2. La métaphase, phase au cours de laquelle les chromosomes vont s'aligner à l’équateur de la cellule pour former la plaque équatoriale  
+3. L'anaphase, les chromatides sœurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule    
 4. La télophase, qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme autours des chromosomes. La cellule mère se sépare alors en deux cellules filles     
 
-```{r mitose,fig.cap=fig.info,fig.align='center', out.extra="scale=.5"}
+```{r mitose,fig.cap=fig.info,fig.scap=fig.name,fig.align='center', out.extra="scale=.5"}
 
-
-
+# link <- '[larousse](http://www.larousse.fr/encyclopedie/images/Phases_de_la_mitose/1009782)'
 fig.name <- "Les différentes phases de la division cellulaire"
-
-fig.description <- "De la prophase (à gauche) à la télophase (à droite) "
+fig.description <- "De la prophase (à gauche) à la télophase (à droite)"
 fig.info <- paste(fig.name,fig.description,sep = " : ")
 
-include_graphics(path = "figure/phases_mitose.jpg") # http://www.larousse.fr/encyclopedie/images/Phases_de_la_mitose/1009782
+include_graphics(path = "figure/phases_mitose.jpg") 
 
 ```
+
+
   
-La première division méiotique abouti à la formation des spermatocytes secondaires (spermatocytes II). À ce states, les cellules sont haploïdes et chaque chromosome est composé de deux chromatides soeurs. Après, cette brèves étape (environ 1 jour) ainsi qu'une très courte interphase sans réplication de l'ADN, les spermatocytes II vont entrer en deuxième division méiotique. Cette deuxième division est très semblable à une division mitotique. La prophaseII, à la différence de la prophase I, est très courte. Lors de cette étape, les chromosomes constitués de chromatides sœurs se dirigent vers la plaque équatoriale. En métaphase II, les
+La première division méiotique abouti à la formation des spermatocytes secondaires (spermatocytes II). À ce states, les cellules sont haploïdes et chaque chromosome est composé de deux chromatides sœurs. Après, cette brèves étape (environ 1 jour) ainsi qu'une très courte interphase sans réplication de l'ADN, les spermatocytes II vont entrer en deuxième division méiotique. Cette deuxième division est très semblable à une division mitotique. La prophase II, à la différence de la prophase I, est très courte. Lors de cette étape, les chromosomes constitués de chromatides sœurs se dirigent vers la plaque équatoriale. En métaphase II, les
 chromosomes s’alignent au niveau de leurs centromères. En anaphase II, le centromère de chaque chromosome se rompt séparant les chromatides sœurs l’une de l’autre et permettant leur déplacement vers les pôles opposés des spermatocytes II. Lors de la télophase II, on observe la formation de cellules filles haploïdes appelées spermatides, contenant chacune n chromosomes.  
 
 ```{r crossingover,fig.cap=fig.info,fig.align='center', out.extra="scale=0.35"}
@@ -97,19 +96,19 @@ include_graphics(path = "figure/crossingover.jpg")
 
 ### La spermiogénèse  
 
-La spermiogénèse est la phase finale de la spermatogénèse. Elle dure environs 23 jours chez l'humain et peut être subdivisée en plusieurs étapes (**Figure : **(\^ref(fig:spermiogénese))). La spermiogénèse définie la cytodiférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologique et fonctionelles du spermatozoïdes seront déterminées  (Clermont & Oko 1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire, la formation de l’acrosome et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commence au niveau des spermatides rondes [@Escalier1991] pendant l'élongation du spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
-```{r spermiogénese,fig.cap=fig.info,fig.align='center', out.extra="scale=0.3"}
+La spermiogénèse est la phase finale de la spermatogenèse. Elle dure environs 23 jours chez l'humain et peut être subdivisée en plusieurs étapes (**Figure : **(\@ref(fig:spermiogenese))). La spermiogénèse définie la cytodiférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologique et fonctionnelles du spermatozoïdes seront déterminées  (Clermont & Oko 1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire, la formation de l’acrosome et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commence au niveau des spermatides rondes [@Escalier1991]. Pendant l'élongation du spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
+Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10 $\upmu$m) que l’on peut schématiquement diviser en trois classes :  
 
-fig.name <- "Principales étapes et modifications structurales lors de la spermiogénèse.
-1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée
-au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté
-de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-
-7. Formation de l’acrosome, condensation du noyau et développement des structures
-flagellaires. Ac, acrosome; Ax, axonème; CC, corps chromatoïdes; CR, corps résiduel; FD,
-fibres denses; GF, gaine fibreuse; M, mitochondrie; Ma, manchette. D’après Touré et al.,
-2011"
-fig.description <- ""
-fig.info <- paste(fig.name)
+1. les spermatides rondes (**Figure : **(\@ref(fig:spermiogenese)) 1-2) : L'identification de ces ces cellules représente un difficulté technique. Elles ont cependant pu être décrites en détaille par différentes techniques de coloration sous microscope optique ([@Clermont1963], [@Papic], [@Schenck], [@Adelman1989], [@WorldHealthOrganization1992]). Plusieurs études animales on pu démontrées le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, ([@Ogura1994], [@Kimura1995], [@Sasagawa]), la même chose ayant été également observée plus récemment chez l'homme ([@Tanaka2015]) bien que le taux de fécondation et d'implantation soit extrêmement faible([@Asimakopoulos2003]). Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
+2. Les spermatides en élongation (**Figure : **(\@ref(fig:spermiogenese)) 3-4) :  
+peuvent aussi donner naissance avec un meilleur taux que les spermatides rondes et engendrerai théoriquement moins de risques d'anomalies génétiques ([@Asimakopoulos2003]). **A completer**  
+3. Les spermatides en condensation (**Figure : **(\@ref(fig:spermiogenese)) 5-7) : C'est le stade final de la différentiation du spermatide en spermatozoïde. À ce stade le noyau est très allongé, avec une partie caudale globulaire et une partie antérieure saillante. La chromatine est sombre et condensée. L’axonème va continuer à s’allonger pour former le flagelle mature. Les différentes organelles inutiles pour la physiologique spermatique et l’excès de cytoplasme vont former la gouttelette cytoplasmique qui va se détacher et donner le corps résiduel qui va ensuite être phagocyté par les cellules de Sertoli ([@Hermo2010]).  
+
+```{r spermiogenese,fig.cap=fig.info,fig.scap=fig.name,fig.align='center', out.extra="scale=0.3"}
+
+fig.name <- "Principales étapes et modifications structurales lors de la spermiogénèse"
+fig.description <- "1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-7. Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome; Ax, axonème; CC, corps chromatoïdes; CR, corps résiduel; FD, fibres denses; GF, gaine fibreuse; M, mitochondrie; Ma, manchette. D’après Touré et al., 2011"
+fig.info = paste(fig.name,fig.description,sep = " : ")
 
 include_graphics(path = "figure/spermiogenese.png")
 
@@ -117,10 +116,11 @@ include_graphics(path = "figure/spermiogenese.png")
 
 ## Structure et fonction du spermatozoïde 
 
-
 ### Anatomie du spermatozoïde  
 
-```{r spermatozoïde, fig.cap="Anatomie du spermatozoïde",fig.align='center',out.extra="scale=0.7"}
+```{r spermatozoïde, fig.scap=fig.name,fig.align='center',out.extra="scale=0.7"}
+
+fig.name <- "Anatomie du spermatozoïde"
 
 include_graphics(path = "figure/spermatozoide.png")
 
@@ -129,17 +129,68 @@ include_graphics(path = "figure/spermatozoide.png")
 <!-- Electron microscopy studies have described emergence of the annulus from the early stages of sperm flagellum development (Holstein and Roosen Runge, 1981). -->
 
 #### La tête  
+
+1. L'acrosome  
+2.  L'acroplaxome  
+3.  Le noyau  
+
 #### Le flagelle  
 
+1. La pièce intermédiaire  
+2. La pièce principale  
+3. La pièce terminale  
+
+
 ### Fonction du spermatozoïde  
+
+
+En plus d're unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène.  
+
 
 ## L'infertilité masculine  
 
 L'organisation mondiale de la santé définie l'infertilité comme étant : "_une pathologie du système reproductif définie par l’échec d'une grossesse clinique après 12 mois ou plus de rapports sexuels réguliers non protégés_" ([```Who.int. 2013-03-19. Retrieved 2013-06-17```](http://www.who.int/reproductivehealth/topics/infertility/definitions/en/)). Environ 10-15% des couples humains sont considérés infertiles. On estime que dans la moitié des cas, la cause sous-jacente est masculine. Les facteurs causaux sous-jacents de l'infertilité masculine peuvent être attribués à des toxines environnementales, des troubles systémiques tels que la maladie hypothalamo-hypophysaire, les cancers testiculaires et l'aplasie des cellules germinales. Les facteurs génétiques, y compris les aneuploïdies et les mutations de gènes uniques, contribuent également à l'infertilité masculine. Cependant, aucune cause n'est identifiée dans 10-20% des cas.  
 
+
+The entire process (of spermatogenesis) is tightly synchronized and integrated, so that pathological conditions which produce even very small deviations are likely to lead to infertility (Barratt, 1995)  
+Barratt, C.L.R. (1995) Spermatogenesis. In Grudzinsky, J.G. and Yovich, J.L. (eds) Gametes: the spermatozoon. Cambridge University Press, Cambridge  
+
 ### Les différents phénotypes d'infertilité masculine  
 
 #### Liée à la quantité  
+
+Immature germ cells are present in ejaculates of subjects with a normal sperm count (Michael and Joel, 1937; Tomlinson et al., 1992), oligozoospermia (Mac Leod, 1970; Tomlinson et al., 1993), or azoospermia (Kurilo et al., 1993) and the presence of immature germ cells increases as the sperm count decreases (Sperling and Kaden, 1971)
+Michael, M. and Joel, K. (1937) Zellformen in normalen und pathologischen Ejakulaten und ihre klinische Bedeutung. Schweiz. Med. Wsch., 33, 757.  
+Tomlinson, M.J., Barratt, C.L.R., Bolton, A.E. et al. (1992) Round cells and sperm fertilizing capacity: the presence of immature germ cells but not seminal leukocytes are associated with reduced success of in vitro fertilization. Fertil. Steril., 58, 1257–1259.  
+MacLeod, J. (1970) The significance of deviations in human sperm morphology. In: Rosemberg, E. and Paulsen, C.A. (eds) The human testis. Plenum, New York, pp. 481–494.  
+Tomlinson, M.J., Barratt, C.L.R. and Cook, I.D. (1993) Prospective study of leukocytes and leukocyte populations in semen suggests they are not a cause of male infertility. Fertil. Steril., 60, 1069–1075  
+Kurilo, L.F., Liubashevskaia, I.A., Dubinskaia, V.P. and Gaeva, T.N. (1993) Karyological analysis of the count of immature germ cells in the ejaculate. Urol. Nefrol. (Mosk.), 2, 45–47.  
+Sperling, K. and Kaden, R. (1971) Meiotic studies of the ejaculated seminal fluids of humans with normal sperm count and oligospermia. Nature, 232, 481  
+
+
+
+
+
+
+
+In humans, spermatogenic arrest was considered a hopeless condition for couples desiring to conceive. However, the
+documented success of intracytoplasmic sperm injection (ICSI; Palermo et al., 1992) has pointed to using this technique to
+inject spermatids into oocytes (Edwards et al. 1994; Ogura et al., 1994)
+Palermo, G., Joris, H., Devroey, P. and Van Steirteghem, A.C. (1992) Pregnancies after intracytoplasmic sperm injection of a single spermatozoon into an oocyte. Lancet, 340, 17–18.  
+Edwards, R.G., Tarin, J.J., Dean, N. et al. (1994) Are spermatids injections into human oocytes now mandatory? Hum. Reprod., 9, 2217–2219.  
+Ogura, A., Matsuda, J. and Yanagimachi, R. (1994) Birth of normal young after electrofusion of mouse oocytes with round spermatids. Proc. Natl. Acad. Sci. USA, 91, 7460–7462  
+  
+Spermatogenic arrest, the inability of spermatogenetic cells to develop into male gametes within the gonads, has been reported in 4–30% of testicular biopsies of patients with severe oligospermia or azoospermia (Wong et al., 1973; Levin, 1979;
+Colgan et al., 1980; Soderstrom and Suominen, 1980; Nomen et al., 1984)
+Wong, T.W., Strauss, F.H. and Worne, N.E. (1973) Testicular biopsy in male infertility: I. Testicular causes of infertility. Arch. Pathol. Lab. Med., 95, 151–159.  
+Levin, H.S. (1979) Testicular biopsy in the study of male infertility. Hum. Pathol., 10, 569–579  
+Colgan, T.J., Bedar, Y.C., Strawbridge, H.T.G. et al. (1980) Reappraisal of the value of the testicular biopsy in the investigation of infertility. Fertil. Steril., 33, 56–60.  
+Soderstro¨m, K.O. and Suominen, J. (1980) Histopathology and ultrastructure of meiotic arrest in human spermatogenesis. Arch. Pathol. Lab. Med., 104, 476–482.  
+Soderstro¨m, K.O. and Suominen, J. (1980) Histopathology and ultrastructure of meiotic arrest in human spermatogenesis. Arch. Pathol. Lab. Med., 104, 476–482.
+  
+Spermatogenic arrest can occur at any stage of germ cell formation; primary spermatocyte arrest is most prominent, followed by spermatid arrest, and least commonly, spermatogonial arrest. Arrest at primary spermatocyte stage can be incomplete, so that a few secondary spermatocytes or spermatids are observed (Girgis et al., 1969)  
+Girgis, S.M., Etriby, A., Ibrahim, A.A. and Kahil, A. (1969) Testicular biopsy in azoospermia. A review of the last ten years’ experience of over 800 cases. Fertil. Steril., 20, 467–477.  
+
 #### liée à la forme  
 #### liée à la mobilitée  
 

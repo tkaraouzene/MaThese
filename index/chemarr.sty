@@ -30,6 +30,7 @@
 %              2001/06/22 v1.1:
 %                * documentation fixes
 %
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{chemarr}%
   [2001/06/22 v1.1 Chemical reaction arrows (HO)]
@@ -43,6 +44,18 @@
 % In fontmath.ltx \rightleftharpoons is defined with
 % a vertical space of 2pt.
 %
+
+% Add tk to change color 
+\usepackage{titlesec}
+\titleformat{\section}
+{\color{blue}\normalfont\Large\bfseries}
+{\color{blue}\thesection}{1em}{}
+\titleformat{\subsection}
+{\color{cyan}\normalfont\Large\bfseries}
+{\color{cyan}\thesubsection}{1em}{}
+% add end
+
+
 \newcommand{\xrightleftharpoons}[2][]{%
   \ensuremath{%
     \mathrel{%
