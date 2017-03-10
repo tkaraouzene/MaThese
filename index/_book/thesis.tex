@@ -34,6 +34,7 @@
 \usepackage[french]{babel} 
 \usepackage{amsmath}
 \usepackage{amssymb,amsthm}
+\usepackage[dvipsnames]{xcolor} % tk: for more color
 \usepackage{xcolor}
 \usepackage{eso-pic}
 \usepackage{longtable,booktabs,setspace}
@@ -141,6 +142,7 @@ class (for LaTeX) and the R bookdown package, in general.
 
 }
 
+	\usepackage{tikz}
 % End of CII addition
 %%
 %% End Preamble
@@ -189,6 +191,43 @@ class (for LaTeX) and the R bookdown package, in general.
   \addcontentsline{toc}{chapter}{Remerciements}
   
   Je remercie \ldots{}
+  
+  \begin{itemize}
+  \item
+    Les rapporteurs
+  \item
+    Les membres du jury\\
+  \item
+    Pierre\\
+  \item
+    Nicolas\\
+  \item
+    L'équipe BCM\\
+  \item
+    Kevin Keurcien Thomas Florient\\
+  \item
+    Léquipe GETI\\
+  \item
+    La BGM
+  \item
+    Mes amis\\
+  \item
+    Ma famille
+  \item
+    Dadette et Marco\\
+  \item
+    Simon\\
+  \item
+    Aurélien
+  \item
+    Mes parents\\
+  \item
+    Ma soeur
+  \item
+    Estelle\\
+  \item
+    Noham
+  \end{itemize}
   
   \newpage  
   
@@ -279,22 +318,19 @@ class (for LaTeX) and the R bookdown package, in general.
   ~
   
   \begin{verbatim}
-                        Cette thèse est dédiée à ...
+                                    Cette thèse est dédiée à Fabien le québécois
   \end{verbatim}
   
   \chapter*{Résumé}\label{resume}
   \addcontentsline{toc}{chapter}{Résumé}
   
-  The preface pretty much says it all. \par
-  
+  Résumé de ma thèse \par
   Second paragraph of abstract starts here.
   
   \chapter*{Abstract}\label{abstract}
   \addcontentsline{toc}{chapter}{Abstract}
   
-  The preface pretty much says it all. \par
-  
-  Second paragraph of abstract starts here.
+  Même chose en anglais
   
   \chapter{Introduction}\label{introInf}
   
@@ -462,7 +498,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=.5]{figure/phases_mitose} 
+  {\centering \includegraphics[scale=.55]{figure/phases_mitose} 
   
   }
   
@@ -556,6 +592,10 @@ class (for LaTeX) and the R bookdown package, in general.
     par les cellules de Sertoli ((Hermo, Pelletier, Cyr, \& Smith, 2010)).
   \end{enumerate}
   
+  Une fois ces étapes de différentiation finies, les spermatides sont
+  relachées en tant que spermatozoïdes dans la lumière du tube séminifère.
+  Ce procédé est appelé spermiation.
+  
   \begin{figure}
   
   {\centering \includegraphics[scale=0.3]{figure/spermiogenese} 
@@ -570,7 +610,17 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsection{Anatomie du spermatozoïde}\label{anatomie-du-spermatozoide}
   
-  \begin{center}\includegraphics[scale=0.7]{figure/spermatozoide} \end{center}
+  Une fois Il est composé de deux parties principales : La tête et le
+  flagelle (\textbf{Figure : }(\ref{fig:spz})).
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.6]{figure/spermatozoide} 
+  
+  }
+  
+  \caption[Anatomie du spermatozoïde]{Anatomie du spermatozoïde}\label{fig:spz}
+  \end{figure}
   
   \subsubsection{La tête}\label{la-tete}
   
@@ -578,7 +628,9 @@ class (for LaTeX) and the R bookdown package, in general.
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    L'acrosome\\
+    L'acrosome : C'est un organite qui se développe dans la moitiée
+    superieure de la tête du spermatozoïde It is a cap-like structure
+    derived from the Golgi apparatus.
   \item
     L'acroplaxome\\
   \item
@@ -599,6 +651,10 @@ class (for LaTeX) and the R bookdown package, in general.
   \end{enumerate}
   
   \subsection{Fonction du spermatozoïde}\label{fonction-du-spermatozoide}
+  
+  En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi
+  dans sa fonction puisque c'est la seule cellule produite de manière
+  endogène et dont l'action est exercée de manière exogène.
   
   \section{L'infertilité masculine}\label{linfertilite-masculine}
   

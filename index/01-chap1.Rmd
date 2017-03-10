@@ -13,7 +13,7 @@ La spermatogenèse des mammifères est un processus long et complexe contrôlé 
 Les testicules sont les organes sexuels masculins. Ils possèdes deux fonctions principales plus ou moins exprimés selon les période de la vie de l'individu : une fonction endocrine caractérisé par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, celui-ci présente une forme ovoïde ayant un volume moyen de 18 cm^^3^^ par testicule. Comme chez la plupart des mammifères terrestres, ils sont sous le pénis dans dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps nécessaire à la spermatogenèse.  
 L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)).  C'est le long des parois du tube séminifère que se dérouleront l'ensemble des étapes de la spermatogenèse.  
 
-```{r testicule, fig.cap=fig.info,fig.align='center',out.extra="scale=0.65"}
+```{r testicule, fig.cap=fig.info,out.extra="scale=0.65"}
 
 fig.name <- "Schéma anatomique du testicule humain"
 fig.description <- ""
@@ -37,7 +37,7 @@ spermatogonies en fonction de leur contenu en heterochromatine ([@Clermont1963, 
   
 Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogenèse et servent de réserve. Elles vont au cours d'une première mitose former un spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenèse)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la régénération de la population de cellules germinales au sein de l’épithélium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tout les 16 jours. Les Cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la spermatogenèse ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonies Ap va, lorsqu'ils se divise par mitose, former deux spermatogonies B qui eux-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenèse)).  
 
-```{r spermatogenese,fig.cap=fig.info,fig.align='center', out.extra="scale=0.75"}
+```{r spermatogenese,fig.cap=fig.info,out.extra="scale=0.75"}
 
 fig.name <- "Les différentes phases de la spermatogénèse"
 fig.description <- ""
@@ -51,7 +51,7 @@ include_graphics(path = "figure/spermatogenese.jpg")
 
 La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:méiose)) appelée respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son non *réductionelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:crossingover)).
 
-```{r meiose,fig.cap=fig.info,fig.scap=fig.name,fig.align='center', out.extra="scale=0.35"}
+```{r meiose,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.35"}
 
 fig.name <- "Les différentes étapes de la méiose gamétique masculine"
 fig.description <- "D’après Sasaki et Matsui,2008"
@@ -66,9 +66,10 @@ La méiose est initié dès la fin de la phase de multiplication à partir des s
 1. La prophase, caractérisée par la condensation de la chromatine formant ainsi les chromosome  
 2. La métaphase, phase au cours de laquelle les chromosomes vont s'aligner à l’équateur de la cellule pour former la plaque équatoriale  
 3. L'anaphase, les chromatides sœurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule    
-4. La télophase, qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme autours des chromosomes. La cellule mère se sépare alors en deux cellules filles     
+4. La télophase, qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme 
+autours des chromosomes. La cellule mère se sépare alors en deux cellules filles     
 
-```{r mitose,fig.cap=fig.info,fig.scap=fig.name,fig.align='center', out.extra="scale=.5"}
+```{r mitose,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
 
 # link <- '[larousse](http://www.larousse.fr/encyclopedie/images/Phases_de_la_mitose/1009782)'
 fig.name <- "Les différentes phases de la division cellulaire"
@@ -84,7 +85,7 @@ include_graphics(path = "figure/phases_mitose.jpg")
 La première division méiotique abouti à la formation des spermatocytes secondaires (spermatocytes II). À ce states, les cellules sont haploïdes et chaque chromosome est composé de deux chromatides sœurs. Après, cette brèves étape (environ 1 jour) ainsi qu'une très courte interphase sans réplication de l'ADN, les spermatocytes II vont entrer en deuxième division méiotique. Cette deuxième division est très semblable à une division mitotique. La prophase II, à la différence de la prophase I, est très courte. Lors de cette étape, les chromosomes constitués de chromatides sœurs se dirigent vers la plaque équatoriale. En métaphase II, les
 chromosomes s’alignent au niveau de leurs centromères. En anaphase II, le centromère de chaque chromosome se rompt séparant les chromatides sœurs l’une de l’autre et permettant leur déplacement vers les pôles opposés des spermatocytes II. Lors de la télophase II, on observe la formation de cellules filles haploïdes appelées spermatides, contenant chacune n chromosomes.  
 
-```{r crossingover,fig.cap=fig.info,fig.align='center', out.extra="scale=0.35"}
+```{r crossingover,fig.cap=fig.info, out.extra="scale=0.35"}
 
 fig.name <- "Schéma simplifé d'un enjambement chromosomique"
 fig.description <- ""
@@ -104,7 +105,10 @@ Les spermatides sont situées dans le compartiment adluminal, à proximité de l
 peuvent aussi donner naissance avec un meilleur taux que les spermatides rondes et engendrerai théoriquement moins de risques d'anomalies génétiques ([@Asimakopoulos2003]). **A completer**  
 3. Les spermatides en condensation (**Figure : **(\@ref(fig:spermiogenese)) 5-7) : C'est le stade final de la différentiation du spermatide en spermatozoïde. À ce stade le noyau est très allongé, avec une partie caudale globulaire et une partie antérieure saillante. La chromatine est sombre et condensée. L’axonème va continuer à s’allonger pour former le flagelle mature. Les différentes organelles inutiles pour la physiologique spermatique et l’excès de cytoplasme vont former la gouttelette cytoplasmique qui va se détacher et donner le corps résiduel qui va ensuite être phagocyté par les cellules de Sertoli ([@Hermo2010]).  
 
-```{r spermiogenese,fig.cap=fig.info,fig.scap=fig.name,fig.align='center', out.extra="scale=0.3"}
+Une fois ces étapes de différentiation finies, les spermatides sont relachées en tant que spermatozoïdes dans la lumière du tube séminifère. Ce procédé est appelé spermiation.  
+
+
+```{r spermiogenese,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=0.3"}
 
 fig.name <- "Principales étapes et modifications structurales lors de la spermiogénèse"
 fig.description <- "1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-7. Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome; Ax, axonème; CC, corps chromatoïdes; CR, corps résiduel; FD, fibres denses; GF, gaine fibreuse; M, mitochondrie; Ma, manchette. D’après Touré et al., 2011"
@@ -118,7 +122,10 @@ include_graphics(path = "figure/spermiogenese.png")
 
 ### Anatomie du spermatozoïde  
 
-```{r spermatozoïde, fig.scap=fig.name,fig.align='center',out.extra="scale=0.7"}
+Une fois
+Il est composé de deux parties principales : La tête et le flagelle  (**Figure : **(\@ref(fig:spz))).  
+
+```{r spz,fig.cap=fig.name,fig.scap=fig.name,out.extra="scale=.6"}
 
 fig.name <- "Anatomie du spermatozoïde"
 
@@ -130,7 +137,7 @@ include_graphics(path = "figure/spermatozoide.png")
 
 #### La tête  
 
-1. L'acrosome  
+1. L'acrosome : C'est un organite qui se développe dans la moitiée superieure de la tête du spermatozoïde It is a cap-like structure derived from the Golgi apparatus.
 2.  L'acroplaxome  
 3.  Le noyau  
 
@@ -144,7 +151,7 @@ include_graphics(path = "figure/spermatozoide.png")
 ### Fonction du spermatozoïde  
 
 
-En plus d're unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène.  
+En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène.  
 
 
 ## L'infertilité masculine  

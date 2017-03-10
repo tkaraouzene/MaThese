@@ -297,6 +297,7 @@
   \begin{tikzpicture}[remember picture, overlay]
     \draw[line width = 1pt] ($(current page.north west) + (0.5cm,-0.5cm)$) rectangle ($(current page.south east) + (-0.5cm,0.5cm)$);
     \node[anchor=north west, xshift=0.5cm, yshift=-0.5cm] at (current page.north west) {\includegraphics[width=5cm, height=26.65cm]{figure/grey.jpg}};
+    \node[anchor=south east, xshift=-0.5cm, yshift=0.5cm] at (current page.south east) {\includegraphics[width=4cm, height=4cm]{figure/logo_uga.png}}; % tk: add uga logo
   \end{tikzpicture}
   \end{minipage}
   \begin{minipage}{0.9\linewidth}

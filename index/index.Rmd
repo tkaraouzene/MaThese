@@ -18,8 +18,7 @@ output:
   highlight = "pygments",
   keep_tex = TRUE,
   pandoc_args = "--top-level-division=chapter")}
-    # pandoc_args = "--chapters")}
-
+  # pandoc_args = "--chapters")}
   # thesisdown::thesis_gitbook: default
   #  thesis_pdf_updt: default
   #  thesisdown::thesis_gitbook: default
@@ -42,13 +41,13 @@ bibliography: bib/MaThese_bib.bib
 # Download your specific bibliography database file and refer to it in the line above.
 csl: csl/apa.csl
 # Download your specific csl file and refer to it in the line above.
-lot: true
 lof: true
-#space_between_paragraphs: true
+lot: true
+
+space_between_paragraphs: false
 # Delete the # at the beginning of the previous line if you'd like
 # to have a blank new line between each paragraph
-#header-includes:
-#- \usepackage{tikz}
+header-includes: \usepackage{tikz}
 ---
 
 <!--
@@ -74,5 +73,9 @@ if(!require(thesisdown))
 library(thesisdown)
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"),echo=FALSE)
+
+knitr::opts_chunk$set(fig.align='center')
+
+
 
 ```
