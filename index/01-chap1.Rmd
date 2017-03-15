@@ -6,12 +6,25 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## La spermatogénèse  
 
-La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994],**Sharpe1994 à trouver!!!**). C'est au cours de celle-ci que, à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces tapes se déroulent en continue dans la paroi des tubes séminifères du testicules depuis la pubertés jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours  et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980].  
+La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994],**Sharpe1994 à trouver!!!**). C'est au cours de celle-ci qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continue dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes
+35du cycle spermatogénétique a une durée fixe et constante selon les espèces 
+
+```{r}
+
+tab.name <- "Durée de vie moyenne des cellules germinales humaines"
+cellules_germinales <- c("Spermatogonies Ap","Spermatogonie B","Spermatocytes primaires","Spermatocytes secondaires","Spermatides")
+duree_de_vie <- c("16-18","7.5-9","23","1","1")
+
+t <- data.frame(cellules_germinales,duree_de_vie)
+
+kable(t, col.names = c("Cellules germinales","Durée de vie moyenne (jours)"),caption = tab.name)
+
+```
 
 ### Rappels sur le testicule  
 
-Les testicules sont les organes sexuels masculins. Ils possèdes deux fonctions principales plus ou moins exprimés selon les période de la vie de l'individu : une fonction endocrine caractérisé par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, celui-ci présente une forme ovoïde ayant un volume moyen de 18 cm^^3^^ par testicule. Comme chez la plupart des mammifères terrestres, ils sont sous le pénis dans dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps nécessaire à la spermatogenèse.  
-L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)).  C'est le long des parois du tube séminifère que se dérouleront l'ensemble des étapes de la spermatogenèse.  
+Les testicules sont les organes sexuels masculins. Ils possèdent deux fonctions principales (plus ou moins exprimés selon les périodes de la vie de l'individu) : une fonction endocrine caractérisée par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, le testicule présente une forme ovoïde ayant un volume moyen de 18 cm3. Chez l’homme, comme chez la plupart des mammifères terrestres, ils sont localisés sous le pénis dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps nécessaire à la spermatogenèse.  
+L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)). C'est le long des parois du tube séminifère que se déroulera l'ensemble des étapes de la spermatogenèse.    
 
 ```{r testicule, fig.cap=fig.info,out.extra="scale=0.65"}
 
@@ -28,18 +41,17 @@ include_graphics(path = "figure/coupe_testicule2.jpg")
 
 ### La phase de multiplication  
 
-La phase de multiplication est la phase au cours de laquelle les spermatogonies se divisent par mitoses pour aboutir au stade de spermatocytes primaires. Les spermatogonies sont des cellules diploïdes à l'origine de l’ensemble des autres cellules germinales humaines. Pour cela, elle vont s'auto-renouveler par mitose successive afin de maintenir une production continue de spermatozoïdes tout au long de la vie de l'individu. Ces cellules sont localisées dans le compartiment basal des tubes séminifères. Elles présentent un noyau ovoïde ainsi qu'un cytoplasme dense contenant un petit appareil de Golgi, quelques mitochondrie ainsi que plusieurs ribosomes libres. Les analyses histologiques ont permis de distinguer trois types de
-spermatogonies en fonction de leur contenu en heterochromatine ([@Clermont1963, @Clermont1966, @Goossens2013]) :  
+La phase de multiplication est la phase au cours de laquelle les spermatogonies se divisent par mitoses pour aboutir au stade de spermatocytes primaires. Les spermatogonies sont des cellules diploïdes à l'origine de l’ensemble des autres cellules germinales humaines. Pour cela, elles vont s'auto-renouveler par mitose successive afin de maintenir une production continue de spermatozoïdes tout au long de la vie de l'individu. Ces cellules sont localisées dans le compartiment basal des tubes séminifères. Les analyses histologiques ont permis de distinguer trois types de spermatogonies en fonction de leur contenu en hétérochromatine ([@Clermont1963, @Clermont1966, @Goossens2013]) :  
 
   1. Les spermatogonies de type A dark (ou Ad)  
   2. Les spermatogonies de type A pale (ou Ap)  
   3. Les spermatogonies de type B  
   
-Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogenèse et servent de réserve. Elles vont au cours d'une première mitose former un spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenèse)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la régénération de la population de cellules germinales au sein de l’épithélium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tout les 16 jours. Les Cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la spermatogenèse ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonies Ap va, lorsqu'ils se divise par mitose, former deux spermatogonies B qui eux-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenèse)).  
+Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogénèse et servent de réserve. Elles vont au cours d'une première mitose former une spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenese)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la régénération de la population de cellules germinales au sein de l'épithélium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tous les 16 jours. Les cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la spermiogénèse ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonie Ap va, lorsqu'elle se divise par mitose, former deux spermatogonies B qui elles-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenese)).  
 
 ```{r spermatogenese,fig.cap=fig.info,out.extra="scale=0.75"}
 
-fig.name <- "Les différentes phases de la spermatogénèse"
+fig.name <- "Les différentes phases de la spermatogénèse (À CHANGER !!!!!)"
 fig.description <- ""
 fig.info <- paste0(fig.name,fig.description)
 
@@ -63,11 +75,10 @@ include_graphics(path = "figure/Meiosis_Stages.png")
 
 La méiose est initié dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au cours de cette phase a lieu la réplication de l'ADN.  Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliées entres elles par le centromère, le matériel génétique de chaque cellules ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distincte (**Figure : **(\@ref(fig:mitose))) : 
 
-1. La prophase, caractérisée par la condensation de la chromatine formant ainsi les chromosome  
-2. La métaphase, phase au cours de laquelle les chromosomes vont s'aligner à l’équateur de la cellule pour former la plaque équatoriale  
-3. L'anaphase, les chromatides sœurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule    
-4. La télophase, qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme 
-autours des chromosomes. La cellule mère se sépare alors en deux cellules filles     
+1. La prophase, caractérisée par la condensation de la chromatine formant ainsi les chromosomes.  
+2. La métaphase, phase au cours de laquelle les chromosomes vont s'aligner à l'équateur de la cellule pour former la plaque équatoriale. 
+3. L'anaphase, les chromatides sœurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule.      
+4. La télophase, qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme autours des chromosomes. La cellule mère se sépare alors en deux cellules filles.       
 
 ```{r mitose,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
 
@@ -80,10 +91,7 @@ include_graphics(path = "figure/phases_mitose.jpg")
 
 ```
 
-
-  
-La première division méiotique abouti à la formation des spermatocytes secondaires (spermatocytes II). À ce states, les cellules sont haploïdes et chaque chromosome est composé de deux chromatides sœurs. Après, cette brèves étape (environ 1 jour) ainsi qu'une très courte interphase sans réplication de l'ADN, les spermatocytes II vont entrer en deuxième division méiotique. Cette deuxième division est très semblable à une division mitotique. La prophase II, à la différence de la prophase I, est très courte. Lors de cette étape, les chromosomes constitués de chromatides sœurs se dirigent vers la plaque équatoriale. En métaphase II, les
-chromosomes s’alignent au niveau de leurs centromères. En anaphase II, le centromère de chaque chromosome se rompt séparant les chromatides sœurs l’une de l’autre et permettant leur déplacement vers les pôles opposés des spermatocytes II. Lors de la télophase II, on observe la formation de cellules filles haploïdes appelées spermatides, contenant chacune n chromosomes.  
+La première division méiotique aboutit à la formation des spermatocytes secondaires (spermatocytes II). À ce stade, les cellules sont haploïdes et chaque chromosome est composé de deux chromatides sœurs. Après, cette brève étape (environ 1 jour) ainsi qu'une très courte interphase sans réplication de l'ADN, les spermatocytes II vont entrer en deuxième division méiotique. Cette deuxième division est très semblable à une division mitotique. La prophase II, à la différence de la prophase I, est très courte. Lors de cette étape, les chromosomes constitués de chromatides sœurs se dirigent vers la plaque équatoriale. En métaphase II, les chromosomes s’alignent au niveau de leurs centromères. En anaphase II, les chromatides sœurs se séparent l’une de l’autre et migrent vers les pôles opposés des spermatocytes II. Lors de la télophase II, on observe la formation de cellules filles haploïdes appelées spermatides, contenant chacune n chromosomes.  
 
 ```{r crossingover,fig.cap=fig.info, out.extra="scale=0.35"}
 
@@ -97,7 +105,7 @@ include_graphics(path = "figure/crossingover.jpg")
 
 ### La spermiogénèse  
 
-La spermiogénèse est la phase finale de la spermatogenèse. Elle dure environs 23 jours chez l'humain et peut être subdivisée en plusieurs étapes (**Figure : **(\@ref(fig:spermiogenese))). La spermiogénèse définie la cytodiférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologique et fonctionnelles du spermatozoïdes seront déterminées  (Clermont & Oko 1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire, la formation de l’acrosome et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commence au niveau des spermatides rondes [@Escalier1991]. Pendant l'élongation du spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
+La spermiogénèse est la phase finale de la spermatogénèse. Elle dure environs 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **(\@ref(fig:spermiogenese))). La spermiogénèse définie la cytodiférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologique et fonctionnelles du spermatozoïde seront déterminées (Clermont & Oko 1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commence au niveau des spermatides rondes[@Escalier1991]. pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
 Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10 $\upmu$m) que l’on peut schématiquement diviser en trois classes :  
 
 1. les spermatides rondes (**Figure : **(\@ref(fig:spermiogenese)) 1-2) : L'identification de ces ces cellules représente un difficulté technique. Elles ont cependant pu être décrites en détaille par différentes techniques de coloration sous microscope optique ([@Clermont1963], [@Papic], [@Schenck], [@Adelman1989], [@WorldHealthOrganization1992]). Plusieurs études animales on pu démontrées le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, ([@Ogura1994], [@Kimura1995], [@Sasagawa]), la même chose ayant été également observée plus récemment chez l'homme ([@Tanaka2015]) bien que le taux de fécondation et d'implantation soit extrêmement faible([@Asimakopoulos2003]). Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
@@ -133,31 +141,64 @@ include_graphics(path = "figure/spermatozoide.png")
 
 ```
 
-<!-- Electron microscopy studies have described emergence of the annulus from the early stages of sperm flagellum development (Holstein and Roosen Runge, 1981). -->
-
 #### La tête  
 
-1. L'acrosome : C'est un organite qui se développe dans la moitiée superieure de la tête du spermatozoïde It is a cap-like structure derived from the Golgi apparatus.
-2.  L'acroplaxome  
-3.  Le noyau  
+1. L'acrosome : C'est une vésicule de sécrétion géante située dans la moitiée superieur de la tête du spermatozoïde. Elle se développe à partir de l'appareil de Golgi lors de la spermiogénèse. Au cours de sa formation, l'acrosome forme tout d'abord un granule sphérique qui se colle sur la partie apical du noyau. En s'aplatissant contre celui-ci, l'acrosome va prendre une forme hémishpérique recouvrant la membrane nucléaire formant la coiffe céphalique... Le rôle de l'acrosome est fondamental dans le processus de fécondation puisqu'il permet d'excréter nottament l'acrosine, une enzyme de digestion permettant au spermatozoïde de pénétrer la zone pellucide qui entoure les ovocytes. Ce processus de relargage est appelé réaction acrosomal.   
+2.  L'acroplaxome : **TODO !!!**  
+3.  Le noyau : Le noyau est une structure cellulaire présente dans la majorité des cellules eucaryotes. Il contient l'essentiel du materiel génétique. Le noyau du spermatozoïde est caractérisé par une compaction extrêmement importante de l’ADN. Dans les cellules somatiques l’ADN est enroulé par unité de 146 paires de bases autour d’un octamère d’histones dit de cœur (H2A, H2B, H3 et H4) afin d’organiser les 3 milliards de paires de bases du génome humain dans un noyau de quelques microns (**Figure : **(\@ref(fig:noyau))). L’ADN des spermatides va subir une réorganisation chromatinienne plus importante au cours de la spermatogénèse afin d’augmenter sa compaction. Ainsi, les octamères d'histones présents dans les cellules somatiques sont remplacées par deux protéines riches en arginine et en cystéine PRM1 et PRMM2). Ces protéines sont appellées des protamines (**Figure : **(\@ref(fig:noyau))). L'intégrité des deux protéines composant ce dimère est nécéssaire pour la procréation [@Cho2001]. Cette compaction extrême permet de réduire la taille du noyau, mais aussi de protéger l’ADN d’agents de dégradation comme l’oxydation des bases. Parallèlement à cette condensation chromatinienne se produit un arrêt des processus de transcription cellulaire ([@Kierszenbaum1978]). Le noyau du spermatozoïde est donc un noyau au repos, transcriptionnellement inactif ([@Ward1994])
+
+```{r noyau,fig.cap=fig.description,fig.scap=fig.name,out.extra="scale=.55"}
+
+fig.name <- "Schéma de la compaction de l’ADN dans les cellules somatiques et dans les
+spermatozoïde"
+
+fig.description <- paste(fig.name,"D'après Braun (2001)",sep = " : ")
+
+include_graphics(path = "figure/noyau.png")
+
+```
 
 #### Le flagelle  
 
-1. La pièce intermédiaire  
-2. La pièce principale  
-3. La pièce terminale  
+Le flagelle représente la queue du spermatozoïde. Celui-ci permet, par mouvement d'oscilation à haute vitesse, le déplacement du spermatozoïde. Cette mobilité est générée par un cytosquelette interne extrêmement conservé durant l'évolution appelée l'axonème. Celui-ci est composé de neuf doublets de microtubules périphériques et de deux doublets internes [@Inaba2003] (**Figure : **(\@ref(fig:axoneme))), on parle alors de structure "9 + 2". Les doublets externes sont reliés entre eux par des ponts de nexine et au doublet central par des ponts radiaires. 
 
+```{r axoneme,fig.cap=fig.description,fig.scap=fig.name,out.extra="scale=.3"}
+
+fig.name <- "Structure simplifiée de l'axonème d'après Inaba (2003)"
+
+fig.description <- "L'axonème es constitué de neuf doublets de microtubules périphériques reliés entre eux par des liens de nexine d'un doublet central relié aux doublets périphériques par des ponts radiaires"
+
+fig.info <- paste(fig.name,fig.description,sep = " : ")
+
+include_graphics(path = "figure/axoneme.png")
+
+```
+
+Le flagelle su spermatozoïde peut être divisé en trois partie distinctes (**Figure : **(\@ref(fig:flagelle))) : 
+
+1. La pièce intermédiaire : Elle fait jonction avec la tête du spermatozoïde et est composée de la gaine de mitochondrie qui fournira une partie de de l'énergie nécéssaire au batement flagellairee (grâce à la phosphorylation oxydative qui produit de l’ATP), l’axonème qui se prolonge dans la pièce principale et un ensemble de neuf faisceaux de fibres denses.  
+2. La pièce principale : Ici, la gaine de mitochodrie a disparue ainsi que deux des faisceaux de fibres denses présents dans la pièce intermédiaire. On note cependant la présence d'une structure suplémentaire, la gaine fibreuse. Cette gaine entoure l'axonème et comporte deux épaississements diamétralement opposés, appelées colonnes longitudinales sur lesquelles s'insère les fibres denses 3 et 8. C'est le long de la gaine fibreuse qu'est produit la majorité de l’énergie 46nécessaire au glissement des microtubules ([@Eddy2007]).  
+3. La pièce terminale  : Elle est située au niveau'de l’extrémité distale du flagelle et ne contient que l’axonème [@Inaba2003].  
+
+```{r flagelle,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
+
+fig.name <- "Structure du flagelle d’un spermatozoïde d’après Borg et al. (2010)"
+
+fig.description <- "Coupes transversales en microscopie électronique. Le flagelle se compose de trois parties : la pièce intermédiaire, contenant les mitochondries, la pièce principale et la pièce terminale. L’axonème, en position centrale, parcours tout le flagelle. Des structures périaxonèmales sont observables : les fibres denses dans la pièce intermédiaire et principale, et la gaine fibreuse dans la pièce principale seulement."
+
+fig.info <- paste(fig.name,fig.description,sep = " : ")
+
+include_graphics(path = "figure/sperm2.png")
+
+```
 
 ### Fonction du spermatozoïde  
 
-
 En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène.  
-
 
 ## L'infertilité masculine  
 
 L'organisation mondiale de la santé définie l'infertilité comme étant : "_une pathologie du système reproductif définie par l’échec d'une grossesse clinique après 12 mois ou plus de rapports sexuels réguliers non protégés_" ([```Who.int. 2013-03-19. Retrieved 2013-06-17```](http://www.who.int/reproductivehealth/topics/infertility/definitions/en/)). Environ 10-15% des couples humains sont considérés infertiles. On estime que dans la moitié des cas, la cause sous-jacente est masculine. Les facteurs causaux sous-jacents de l'infertilité masculine peuvent être attribués à des toxines environnementales, des troubles systémiques tels que la maladie hypothalamo-hypophysaire, les cancers testiculaires et l'aplasie des cellules germinales. Les facteurs génétiques, y compris les aneuploïdies et les mutations de gènes uniques, contribuent également à l'infertilité masculine. Cependant, aucune cause n'est identifiée dans 10-20% des cas.  
-
 
 The entire process (of spermatogenesis) is tightly synchronized and integrated, so that pathological conditions which produce even very small deviations are likely to lead to infertility (Barratt, 1995)  
 Barratt, C.L.R. (1995) Spermatogenesis. In Grudzinsky, J.G. and Yovich, J.L. (eds) Gametes: the spermatozoon. Cambridge University Press, Cambridge  
@@ -173,12 +214,6 @@ MacLeod, J. (1970) The significance of deviations in human sperm morphology. In:
 Tomlinson, M.J., Barratt, C.L.R. and Cook, I.D. (1993) Prospective study of leukocytes and leukocyte populations in semen suggests they are not a cause of male infertility. Fertil. Steril., 60, 1069–1075  
 Kurilo, L.F., Liubashevskaia, I.A., Dubinskaia, V.P. and Gaeva, T.N. (1993) Karyological analysis of the count of immature germ cells in the ejaculate. Urol. Nefrol. (Mosk.), 2, 45–47.  
 Sperling, K. and Kaden, R. (1971) Meiotic studies of the ejaculated seminal fluids of humans with normal sperm count and oligospermia. Nature, 232, 481  
-
-
-
-
-
-
 
 In humans, spermatogenic arrest was considered a hopeless condition for couples desiring to conceive. However, the
 documented success of intracytoplasmic sperm injection (ICSI; Palermo et al., 1992) has pointed to using this technique to
@@ -199,7 +234,17 @@ Spermatogenic arrest can occur at any stage of germ cell formation; primary sper
 Girgis, S.M., Etriby, A., Ibrahim, A.A. and Kahil, A. (1969) Testicular biopsy in azoospermia. A review of the last ten years’ experience of over 800 cases. Fertil. Steril., 20, 467–477.  
 
 #### liée à la forme  
+
+teratozoospermia  
+
+##### La globozoospermie  
+
+La globozoospermie est une anomalies des spermatozoïdes caractérisé par une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisiée  ([@Singh], [@Pedersen1974])
+
 #### liée à la mobilitée  
+
+Sperm motility is necessary for the transport of male DNA to eggs in species with both external and internal fertilization.  
+
 
 ### La génétique de l'infertilité  
 
@@ -220,16 +265,114 @@ Girgis, S.M., Etriby, A., Ibrahim, A.A. and Kahil, A. (1969) Testicular biopsy i
 ### Les puces  
 
 ### Le séquençage  
+
 #### Le Sanger  
+
 #### Le NGS
 
 ***
 
-## L'analyse bioinformatique  
+## L'analyse bioinformatique des données de NGS  
+
+Les récentes avancées technologies dans le domaine du séquençage haut débit ont permis une augmentation considérable de la quantité de données de séquençage brutes. Cependant cette masse de données a ouvert la porte à de nouveaux défis informatiques et bio-informatique nottament dans le prétraitement des données
+
+
+n fact, in less than 10 years, these NGS technologies have moved from gene panel sequencing (100 Mb for the Roche GS FLX system) to whole genome sequencing (1,500 Gb for the Illumina HiSeq4000) and from research context only to clinical practice. The limitation is no longer the sequencing of one, many, or all genes, but rather the sequence analysis and interpretation.
+
+
+
 ### L'analyse des données brut  
+
 #### L'alignement
+
 #### L'appel des variants  
 
-### La priorisation des variants 
+### La priorisation des variants  
+
+L'annotation des variants a pour but de replacer l'ensemble des variants identifiés lors de l'étape d'appel dans leur contexte biologique. Cette phase est une des clefs de l'analyse puisqu'elle permet de prioriser des variants d'interet...  
+L'objectif principal de cette étape est de réunir l'ensemble des informations disponibles sur un variant...  
+Ces information regroupe la fréquence, sa localisation et son impact...  
+
+
+
+Unfortunately, they are now facing the daunting “all genes data deluge” [Schatz and Langmead, 2013], where the expectation is to understand and interpret the suite of genes and their network of interactions implicated in disease. 
+Schatz MC, Langmead B. 2013. The DNA data deluge: fast, efficient genome sequencing machines are spewing out more data than geneticists can analyze. 
+
+
+It is dependent on the selected annotation of the human reference genome. It is provided by Ensembl, the University of California Santa Cruz (UCSC), or the National Center for Biotechnology Information (NCBI). As demonstrated by Zhao and Zhang (2015)
+Zhao S, Zhang B. 2015. A comprehensive evaluation of ensembl, RefSeq, and UCSC annotations in the context of RNA-seq read mapping and gene quantification. BMC Genomics 16:97.
+
+
+CCDS are consistently represented by the NCBI, Ensembl, and UCSC Genome Browsers (Pruitt et al 2009)
+Pruitt KD, Harrow J, Harte RA, Wallin C, Diekhans M, Maglott DR, Searle S, Farrell CM, Loveland JE, Ruef BJ, Hart E, Suner M-M, et al. 2009. The consensus coding sequence (CCDS) project: identifying a common protein-coding gene set for the human and mouse genome  
+
+
+ the annotation step must be considered carefully, and that a conscious choice should be made to select transcript set and software for annotation [McCarthy et al., 2014].
+
+
+
+#### par la fréquence : (ExAC)  
+
+#### Par l'impact : 
+
+VEP SNPEFF...  
+
+SIFT,polyPhen CADD
+
+
+```{r vennpred,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
+
+fig.name <- "Diagramme de Venn des prédictions de pathogénicités de six logiciels d’après Salgado et al. (2016)"
+
+fig.description <- "aaaaaaaaaaaaaaaaaaaaaaaa"
+
+fig.info <- paste(fig.name,fig.description,sep = " : ")
+
+include_graphics(path = "figure/venn_Diag_patho_pred.png")
+
+```
+
+
+
+
+
+
+
+
+
+#### Au niveau du gène  
+
+
+
+Panther
+
+HPO, OMIM
+
+
+RVIS, pLI 
+
+
+
+
+
+The variant annotation process places mutations identified by the variant calling step (see Laurie et al. in this issue) into their biological context. This step is a requirement for the identification of variants of interest based upon a combined filtration of the collected data from one or multiple samples.
+
+The main objective of this process is to gather substantial information at the variant and the gene levels. This will include the variants’ data quality, their localization at the genomic, gene and transcripts levels, their genotype, their frequency in the general population, their impact at the mRNA and protein levels, the conservation among species of the affected protein residues, the variant pathogenicity prediction, and reported associations with diseases. At the gene level, they include the gene function, its spatiotemporal expression pattern, its involvement in various pathways, and its involvement in various phenotypes/diseases.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

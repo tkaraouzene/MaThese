@@ -71,11 +71,13 @@ if(!require(devtools))
 if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
 library(thesisdown)
+library(knitr)
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"),echo=FALSE)
 
 knitr::opts_chunk$set(fig.align='center')
 
+knitr::opts_knit$set(kable.force.latex = TRUE)
 
 
 ```
