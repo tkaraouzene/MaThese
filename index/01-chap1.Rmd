@@ -268,43 +268,86 @@ Sperm motility is necessary for the transport of male DNA to eggs in species wit
 
 #### Le Sanger  
 
-#### Le NGS
+#### Le NGS  
+
+Le séquençage nouvelle génération (NGS) a apporté avec lui des opportunités sans précédent dans le domaine de la recherche en génomique. Il a pu être appliqué à une grande variété de contexte avec nottament le séquençage de génome entier, ou *Whole Genome Sequencing* (WGS) ou encore le séquençage exonique, le *Whole Exome Sequencing* (WES).
+
+
+1. 454 sequencing technology: pyrosequencing
+2. Illumina  
+3. ABI/SOLiD  
+
+
+
+
+```{r}
+
+# tab.name <- "aaaaa"
+# 
+# 
+# g <- include_graphics(path = "figure/comp_seq.png")
+# 
+# 
+# knitr::kable(g, caption = tab.name)
+
+```
+
+
+
+
 
 ***
 
 ## L'analyse bioinformatique des données de NGS  
+
+Les progres techniques des dernières décénies ont rendu possible le séquençage de plusieurs millions des *reads* d'ADN en un temps reliativement court et à couts raisonable. Ainsi, l'émergence du WGS et du WES a permit de réunir une quantité jusqu'à présent inégalé d'information sur les variation génétiques, et d'une manière plus générale, sur les gènes et leurs fonctions ([@Mardis2008], [@Bentley2006]). Cependant, de part leur nature et leur quantité, l'aquisition de ces nouvelles données a engendrée de nouvelles problématiques notamment  
+  
+The number of research projects dealing with whole-genome sequencing data has been emerging in humans [3, 4, 5, 6],
+3 Goldstein DB, Allen A, Keebler J, Margulies EH, Petrou S, Petrovski S, et al. Sequencing studies in human genetics: design and interpretation  
+4 Sims D, Sudbery I, Ilott NE, Heger A, Ponting CP. Sequencing depth and coverage: key considerations in genomic analyses. Nat Rev Genet  
+5 Lam HYK, Clark MJ, Chen R, Chen R, Natsoulis G, O’Huallachain M, et al. Performance comparison of whole-genome sequencing platforms. Nat Biotechnol  
+6 Morozova O, Marra M. Applications of next-generation sequencing technologies in functional genomics. Genomics  
+
 
 Les récentes avancées technologies dans le domaine du séquençage haut débit ont permis une augmentation considérable de la quantité de données de séquençage brutes. Cependant cette masse de données a ouvert la porte à de nouveaux défis informatiques et bio-informatique nottament dans le prétraitement des données
 
 
 n fact, in less than 10 years, these NGS technologies have moved from gene panel sequencing (100 Mb for the Roche GS FLX system) to whole genome sequencing (1,500 Gb for the Illumina HiSeq4000) and from research context only to clinical practice. The limitation is no longer the sequencing of one, many, or all genes, but rather the sequence analysis and interpretation.
 
-
-
 ### L'analyse des données brut  
+
+
+
+
+
 
 #### L'alignement
 
 #### L'appel des variants  
 
-### La priorisation des variants  
+De nombreux logiciel d'appel des variants basés sur des algorithmes différents ont emmergés. Parmis les plus connus on note SAMtools [@Li2009], GATK [@McKenna2010]... De même que pour l'aligneur, le choix du logiciel d'appel est crutial car il existe de nombreuses différences dans les variants appelés par différents logiciels se basant sur les mêmes données brutes [@Baes2014, @ORawe2013] 
+
+Several variant callers based on different algorithms have emerged using single or multiple samples simultaneously, e.g. SAMtools [15] or GATK [16]. Recently, some studies have shown that there is significant difference in the set of variants called by different variant callers [7, 17, 18].  
+
+
+17 Rosenfeld J, Mason CE, Smith TM. Limitations of the human reference genome for personalized genomics  
+ 
+
+
+
+### L'annotation des variants  
+
+The main objective of this process is to gather substantial information at the variant and the gene levels. This will include the variants’ data quality, their localization at the genomic, gene and transcripts levels, their genotype, their frequency in the general population, their impact at the mRNA and protein levels, the conservation among species of the affected protein residues, the variant pathogenicity prediction, and reported associations with diseases. At the gene level, they include the gene function, its spatiotemporal expression pattern, its involvement in various pathways, and its involvement in various phenotypes/diseases.  
 
 L'annotation des variants a pour but de replacer l'ensemble des variants identifiés lors de l'étape d'appel dans leur contexte biologique. Cette phase est une des clefs de l'analyse puisqu'elle permet de prioriser des variants d'interet...  
 L'objectif principal de cette étape est de réunir l'ensemble des informations disponibles sur un variant...  
 Ces information regroupe la fréquence, sa localisation et son impact...  
 
+Cependant, cette quantité de donnée produites crées de nouvelles problématiques pour les généticiens qui se retrouvent désormais face au "déluge de données génétiques" [@Schatz2013] ce qui se retrouve être un frein dans la compréhension et l'interprétation des réseaux de gènes et leurs implication dans des pathologies.    
 
 
-Unfortunately, they are now facing the daunting “all genes data deluge” [Schatz and Langmead, 2013], where the expectation is to understand and interpret the suite of genes and their network of interactions implicated in disease. 
-Schatz MC, Langmead B. 2013. The DNA data deluge: fast, efficient genome sequencing machines are spewing out more data than geneticists can analyze. 
+ This step is a requirement for the identification of variants of interest based upon a combined filtration of the collected data from one or multiple samples.
 
-
-It is dependent on the selected annotation of the human reference genome. It is provided by Ensembl, the University of California Santa Cruz (UCSC), or the National Center for Biotechnology Information (NCBI). As demonstrated by Zhao and Zhang (2015)
-Zhao S, Zhang B. 2015. A comprehensive evaluation of ensembl, RefSeq, and UCSC annotations in the context of RNA-seq read mapping and gene quantification. BMC Genomics 16:97.
-
-
-CCDS are consistently represented by the NCBI, Ensembl, and UCSC Genome Browsers (Pruitt et al 2009)
-Pruitt KD, Harrow J, Harte RA, Wallin C, Diekhans M, Maglott DR, Searle S, Farrell CM, Loveland JE, Ruef BJ, Hart E, Suner M-M, et al. 2009. The consensus coding sequence (CCDS) project: identifying a common protein-coding gene set for the human and mouse genome  
 
 
  the annotation step must be considered carefully, and that a conscious choice should be made to select transcript set and software for annotation [McCarthy et al., 2014].
@@ -312,6 +355,11 @@ Pruitt KD, Harrow J, Harte RA, Wallin C, Diekhans M, Maglott DR, Searle S, Farre
 
 
 #### par la fréquence : (ExAC)  
+
+Large consortia (e.g the human genome project [12, 13]) have been established to accumulate available resources, detect new variants in genomes, better understand genetic architecture of different traits and find or narrow down positions of potential causal loci
+
+12 International Human Genome Sequencing Consortium. Initial sequencing and analysis of the human genome  
+13 International Human Genome Sequencing Consortium. Finishing the euchromatic sequence of the human genome
 
 #### Par l'impact : 
 
@@ -332,16 +380,10 @@ include_graphics(path = "figure/venn_Diag_patho_pred.png")
 
 ```
 
-
-
-
-
-
-
-
-
 #### Au niveau du gène  
 
+
+L'annotation au niveau du gène (ou du transcrit) consiste à récupérer l'ensemble des information disponible sur le gène (impacté par le variant) et non plus sur le variant directement. L'ensemble de ces informations est donc extrêmement dépendante du jeux de gène utilisé et peuvent donc variaer en fonction de celui-ci [@McCarthy2014,@Zhao2015] même si les gènes CCDS sont bien représentés à la fois par le NCBI, Ensembl et UCSC [@Pruitt2009]
 
 
 Panther
@@ -350,29 +392,6 @@ HPO, OMIM
 
 
 RVIS, pLI 
-
-
-
-
-
-The variant annotation process places mutations identified by the variant calling step (see Laurie et al. in this issue) into their biological context. This step is a requirement for the identification of variants of interest based upon a combined filtration of the collected data from one or multiple samples.
-
-The main objective of this process is to gather substantial information at the variant and the gene levels. This will include the variants’ data quality, their localization at the genomic, gene and transcripts levels, their genotype, their frequency in the general population, their impact at the mRNA and protein levels, the conservation among species of the affected protein residues, the variant pathogenicity prediction, and reported associations with diseases. At the gene level, they include the gene function, its spatiotemporal expression pattern, its involvement in various pathways, and its involvement in various phenotypes/diseases.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

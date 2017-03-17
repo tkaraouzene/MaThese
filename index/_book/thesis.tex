@@ -897,10 +897,49 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Le NGS}\label{le-ngs}
   
+  Le séquençage nouvelle génération (NGS) a apporté avec lui des
+  opportunités sans précédent dans le domaine de la recherche en
+  génomique. Il a pu être appliqué à une grande variété de contexte avec
+  nottament le séquençage de génome entier, ou \emph{Whole Genome
+  Sequencing} (WGS) ou encore le séquençage exonique, le \emph{Whole Exome
+  Sequencing} (WES).
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    454 sequencing technology: pyrosequencing
+  \item
+    Illumina\\
+  \item
+    ABI/SOLiD
+  \end{enumerate}
+  
   \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
   
   \section{L'analyse bioinformatique des données de
   NGS}\label{lanalyse-bioinformatique-des-donnees-de-ngs}
+  
+  Les progres techniques des dernières décénies ont rendu possible le
+  séquençage de plusieurs millions des \emph{reads} d'ADN en un temps
+  reliativement court et à couts raisonable. Ainsi, l'émergence du WGS et
+  du WES a permit de réunir une quantité jusqu'à présent inégalé
+  d'information sur les variation génétiques, et d'une manière plus
+  générale, sur les gènes et leurs fonctions ((Mardis, 2008), (Bentley,
+  2006)). Cependant, de part leur nature et leur quantité, l'aquisition de
+  ces nouvelles données a engendrée de nouvelles problématiques notamment
+  
+  The number of research projects dealing with whole-genome sequencing
+  data has been emerging in humans {[}3, 4, 5, 6{]}, 3 Goldstein DB, Allen
+  A, Keebler J, Margulies EH, Petrou S, Petrovski S, et al. Sequencing
+  studies in human genetics: design and interpretation\\
+  4 Sims D, Sudbery I, Ilott NE, Heger A, Ponting CP. Sequencing depth and
+  coverage: key considerations in genomic analyses. Nat Rev Genet\\
+  5 Lam HYK, Clark MJ, Chen R, Chen R, Natsoulis G, O'Huallachain M, et
+  al. Performance comparison of whole-genome sequencing platforms. Nat
+  Biotechnol\\
+  6 Morozova O, Marra M. Applications of next-generation sequencing
+  technologies in functional genomics. Genomics
   
   Les récentes avancées technologies dans le domaine du séquençage haut
   débit ont permis une augmentation considérable de la quantité de données
@@ -921,8 +960,34 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{L'appel des variants}\label{lappel-des-variants}
   
-  \subsection{La priorisation des
-  variants}\label{la-priorisation-des-variants}
+  De nombreux logiciel d'appel des variants basés sur des algorithmes
+  différents ont emmergés. Parmis les plus connus on note SAMtools (Li et
+  al., 2009), GATK (McKenna et al., 2010)\ldots{} De même que pour
+  l'aligneur, le choix du logiciel d'appel est crutial car il existe de
+  nombreuses différences dans les variants appelés par différents
+  logiciels se basant sur les mêmes données brutes (Baes et al., 2014,
+  O'Rawe et al. (2013))
+  
+  Several variant callers based on different algorithms have emerged using
+  single or multiple samples simultaneously, e.g.~SAMtools {[}15{]} or
+  GATK {[}16{]}. Recently, some studies have shown that there is
+  significant difference in the set of variants called by different
+  variant callers {[}7, 17, 18{]}.
+  
+  17 Rosenfeld J, Mason CE, Smith TM. Limitations of the human reference
+  genome for personalized genomics
+  
+  \subsection{L'annotation des variants}\label{lannotation-des-variants}
+  
+  The main objective of this process is to gather substantial information
+  at the variant and the gene levels. This will include the variants' data
+  quality, their localization at the genomic, gene and transcripts levels,
+  their genotype, their frequency in the general population, their impact
+  at the mRNA and protein levels, the conservation among species of the
+  affected protein residues, the variant pathogenicity prediction, and
+  reported associations with diseases. At the gene level, they include the
+  gene function, its spatiotemporal expression pattern, its involvement in
+  various pathways, and its involvement in various phenotypes/diseases.
   
   L'annotation des variants a pour but de replacer l'ensemble des variants
   identifiés lors de l'étape d'appel dans leur contexte biologique. Cette
@@ -933,26 +998,31 @@ class (for LaTeX) and the R bookdown package, in general.
   Ces information regroupe la fréquence, sa localisation et son
   impact\ldots{}
   
-  It is dependent on the selected annotation of the human reference
-  genome. It is provided by Ensembl, the University of California Santa
-  Cruz (UCSC), or the National Center for Biotechnology Information
-  (NCBI). As demonstrated by Zhao and Zhang (2015) Zhao S, Zhang B. 2015.
-  A comprehensive evaluation of ensembl, RefSeq, and UCSC annotations in
-  the context of RNA-seq read mapping and gene quantification. BMC
-  Genomics 16:97.
+  Cependant, cette quantité de donnée produites crées de nouvelles
+  problématiques pour les généticiens qui se retrouvent désormais face au
+  ``déluge de données génétiques'' (Schatz \& Langmead, 2013) ce qui se
+  retrouve être un frein dans la compréhension et l'interprétation des
+  réseaux de gènes et leurs implication dans des pathologies.
   
-  CCDS are consistently represented by the NCBI, Ensembl, and UCSC Genome
-  Browsers (Pruitt et al 2009) Pruitt KD, Harrow J, Harte RA, Wallin C,
-  Diekhans M, Maglott DR, Searle S, Farrell CM, Loveland JE, Ruef BJ, Hart
-  E, Suner M-M, et al. 2009. The consensus coding sequence (CCDS) project:
-  identifying a common protein-coding gene set for the human and mouse
-  genome
+  This step is a requirement for the identification of variants of
+  interest based upon a combined filtration of the collected data from one
+  or multiple samples.
   
   the annotation step must be considered carefully, and that a conscious
   choice should be made to select transcript set and software for
   annotation {[}McCarthy et al., 2014{]}.
   
   \subsubsection{par la fréquence : (ExAC)}\label{par-la-frequence-exac}
+  
+  Large consortia (e.g the human genome project {[}12, 13{]}) have been
+  established to accumulate available resources, detect new variants in
+  genomes, better understand genetic architecture of different traits and
+  find or narrow down positions of potential causal loci
+  
+  12 International Human Genome Sequencing Consortium. Initial sequencing
+  and analysis of the human genome\\
+  13 International Human Genome Sequencing Consortium. Finishing the
+  euchromatic sequence of the human genome
   
   \subsubsection{Par l'impact :}\label{par-limpact}
   
@@ -971,27 +1041,19 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Au niveau du gène}\label{au-niveau-du-gene}
   
+  L'annotation au niveau du gène (ou du transcrit) consiste à récupérer
+  l'ensemble des information disponible sur le gène (impacté par le
+  variant) et non plus sur le variant directement. L'ensemble de ces
+  informations est donc extrêmement dépendante du jeux de gène utilisé et
+  peuvent donc variaer en fonction de celui-ci (McCarthy et al., 2014,Zhao
+  \& Zhang (2015)) même si les gènes CCDS sont bien représentés à la fois
+  par le NCBI, Ensembl et UCSC (Pruitt et al., 2009)
+  
   Panther
   
   HPO, OMIM
   
   RVIS, pLI
-  
-  The variant annotation process places mutations identified by the
-  variant calling step (see Laurie et al. in this issue) into their
-  biological context. This step is a requirement for the identification of
-  variants of interest based upon a combined filtration of the collected
-  data from one or multiple samples.
-  
-  The main objective of this process is to gather substantial information
-  at the variant and the gene levels. This will include the variants' data
-  quality, their localization at the genomic, gene and transcripts levels,
-  their genotype, their frequency in the general population, their impact
-  at the mRNA and protein levels, the conservation among species of the
-  affected protein residues, the variant pathogenicity prediction, and
-  reported associations with diseases. At the gene level, they include the
-  gene function, its spatiotemporal expression pattern, its involvement in
-  various pathways, and its involvement in various phenotypes/diseases.
   
   \chapter{Investigation génétique et physiologique de la
   globozoospermie}\label{globo}
@@ -1059,6 +1121,18 @@ class (for LaTeX) and the R bookdown package, in general.
   \hypertarget{ref-Asimakopoulos2003}{}
   Asimakopoulos, B. (2003). Is There a Place for Round and Elongated
   Spermatids Injection in, \emph{1}(1), 1--6.
+  
+  \hypertarget{ref-Baes2014}{}
+  Baes, C. F., Dolezal, M. A., Koltes, J. E., Bapst, B., Fritz-Waters, E.,
+  Jansen, S., \ldots{} Gredler, B. (2014). Evaluation of variant
+  identification methods for whole genome sequencing data in dairy cattle.
+  \emph{BMC Genomics}, \emph{15}(1), 948.
+  \url{http://doi.org/10.1186/1471-2164-15-948}
+  
+  \hypertarget{ref-Bentley2006}{}
+  Bentley, D. R. (2006). Whole-genome re-sequencing. \emph{Current Opinion
+  in Genetics and Development}, \emph{16}(6), 545--552.
+  \url{http://doi.org/10.1016/j.gde.2006.10.009}
   
   \hypertarget{ref-Cho2001}{}
   Cho, C., Willis, W. D., Goulding, E. H., Jung-Ha, H., Choi, Y. C.,
@@ -1141,6 +1215,30 @@ class (for LaTeX) and the R bookdown package, in general.
   spermatogenesis. \emph{Federation Proceedings}, \emph{37}(11), 2512--6.
   Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/357185}
   
+  \hypertarget{ref-Li2009}{}
+  Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N.,
+  \ldots{} Durbin, R. (2009). The Sequence Alignment/Map format and
+  SAMtools. \emph{Bioinformatics}, \emph{25}(16), 2078--2079.
+  \url{http://doi.org/10.1093/bioinformatics/btp352}
+  
+  \hypertarget{ref-Mardis2008}{}
+  Mardis, E. R. (2008). The impact of next-generation sequencing
+  technology on genetics. \emph{Trends in Genetics}, \emph{24}(3),
+  133--141. \url{http://doi.org/10.1016/j.tig.2007.12.007}
+  
+  \hypertarget{ref-McCarthy2014}{}
+  McCarthy, D. J., Humburg, P., Kanapin, A., Rivas, M. a, Gaulton, K.,
+  Cazier, J.-B., \& Donnelly, P. (2014). Choice of transcripts and
+  software has a large effect on variant annotation. \emph{Genome
+  Medicine}, \emph{6}(3), 26. \url{http://doi.org/10.1186/gm543}
+  
+  \hypertarget{ref-McKenna2010}{}
+  McKenna, A., Hanna, M., Banks, E., Sivachenko, A., Cibulskis, K.,
+  Kernytsky, A., \ldots{} DePristo, M. A. (2010). The Genome Analysis
+  Toolkit: a MapReduce framework for analyzing next-generation DNA
+  sequencing data. \emph{Genome Research}, \emph{20}(9), 1297--303.
+  \url{http://doi.org/10.1101/gr.107524.110}
+  
   \hypertarget{ref-Ogura1994}{}
   Ogura, a, Matsuda, J., \& Yanagimachi, R. (1994). Birth of normal young
   after electrofusion of mouse oocytes with round spermatids.
@@ -1155,6 +1253,12 @@ class (for LaTeX) and the R bookdown package, in general.
   and Genetics}, \emph{13}(5), 431--434.
   \url{http://doi.org/10.1007/BF02066177}
   
+  \hypertarget{ref-ORawe2013}{}
+  O'Rawe, J., Jiang, T., Sun, G., Wu, Y., Wang, W., Hu, J., \ldots{} Lyon,
+  G. J. (2013). Low concordance of multiple variant-calling pipelines:
+  practical implications for exome and genome sequencing. \emph{Genome
+  Medicine}, \emph{5}(3), 28. \url{http://doi.org/10.1186/gm432}
+  
   \hypertarget{ref-Papic}{}
   Papic, Z., Katona, G., \& Skrabalo, Z. (1988). The cytologic
   identification and quantification of testicular cell subtypes.
@@ -1167,11 +1271,24 @@ class (for LaTeX) and the R bookdown package, in general.
   spermatozoa. \emph{Journal of Reproduction and Fertility}, \emph{37}(1),
   51--4. \url{http://doi.org/10.1530/JRF.0.0370051}
   
+  \hypertarget{ref-Pruitt2009}{}
+  Pruitt, K. D., Harrow, J., Harte, R. A., Wallin, C., Diekhans, M.,
+  Maglott, D. R., \ldots{} Lipman, D. (2009). The consensus coding
+  sequence (CCDS) project: Identifying a common protein-coding gene set
+  for the human and mouse genomes. \emph{Genome Research}, \emph{19}(7),
+  1316--1323. \url{http://doi.org/10.1101/gr.080531.108}
+  
   \hypertarget{ref-Sasagawa}{}
   Sasagawa, I., \& Yanagimachi, R. (1997). Spermatids from mice after
   cryptorchid and reversal operations can initiate normal embryo
   development. \emph{Journal of Andrology}, \emph{18}(2), 203--209.
   Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/9154515}
+  
+  \hypertarget{ref-Schatz2013}{}
+  Schatz, M. C., \& Langmead, B. (2013). The DNA Data Deluge: Fast,
+  efficient genome sequencing machines are spewing out more data than
+  geneticists can analyze. \emph{IEEE Spectrum}, \emph{50}(7), 26--33.
+  \url{http://doi.org/10.1109/MSPEC.2013.6545119}
   
   \hypertarget{ref-Schenck}{}
   Schenck, U., \& Schill, W. B. (n.d.). Cytology of the human seminiferous
@@ -1200,6 +1317,12 @@ class (for LaTeX) and the R bookdown package, in general.
   World Health Organization. (1992). \emph{WHO laboratory manual for the
   examination of human semen and sperm-cervical mucus interaction.} (3th
   ed, p. 128). Cambridge University Press.
+  
+  \hypertarget{ref-Zhao2015}{}
+  Zhao, S., \& Zhang, B. (2015). A comprehensive evaluation of ensembl,
+  RefSeq, and UCSC annotations in the context of RNA-seq read mapping and
+  gene quantification. \emph{BMC Genomics}, \emph{16}(1), 97.
+  \url{http://doi.org/10.1186/s12864-015-1308-8}
 
 
   % Index?
