@@ -73,7 +73,7 @@ include_graphics(path = "figure/Meiosis_Stages.png")
 
 ```
 
-La méiose est initié dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au cours de cette phase a lieu la réplication de l'ADN.  Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliées entres elles par le centromère, le matériel génétique de chaque cellules ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distincte (**Figure : **(\@ref(fig:mitose))) : 
+La méiose est initié dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au cours de cette phase a lieu la réplication de l'ADN.  Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliées entres elles par le centromère, le matériel génétique de chaque cellules ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distincte (**Figure : **\@ref(fig:mitose)) : 
 
 1. La prophase, caractérisée par la condensation de la chromatine formant ainsi les chromosomes.  
 2. La métaphase, phase au cours de laquelle les chromosomes vont s'aligner à l'équateur de la cellule pour former la plaque équatoriale. 
@@ -105,13 +105,13 @@ include_graphics(path = "figure/crossingover.jpg")
 
 ### La spermiogénèse  
 
-La spermiogénèse est la phase finale de la spermatogénèse. Elle dure environs 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **(\@ref(fig:spermiogenese))). La spermiogénèse définie la cytodiférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologique et fonctionnelles du spermatozoïde seront déterminées (Clermont & Oko 1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commence au niveau des spermatides rondes[@Escalier1991]. pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
+La spermiogénèse est la phase finale de la spermatogénèse. Elle dure environs 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **\@ref(fig:spermiogenese)). La spermiogénèse définie la cytodiférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologique et fonctionnelles du spermatozoïde seront déterminées (Clermont & Oko 1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commence au niveau des spermatides rondes[@Escalier1991]. pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
 Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10 $\upmu$m) que l’on peut schématiquement diviser en trois classes :  
 
-1. les spermatides rondes (**Figure : **(\@ref(fig:spermiogenese)) 1-2) : L'identification de ces ces cellules représente un difficulté technique. Elles ont cependant pu être décrites en détaille par différentes techniques de coloration sous microscope optique ([@Clermont1963], [@Papic], [@Schenck], [@Adelman1989], [@WorldHealthOrganization1992]). Plusieurs études animales on pu démontrées le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, ([@Ogura1994], [@Kimura1995], [@Sasagawa]), la même chose ayant été également observée plus récemment chez l'homme ([@Tanaka2015]) bien que le taux de fécondation et d'implantation soit extrêmement faible([@Asimakopoulos2003]). Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
-2. Les spermatides en élongation (**Figure : **(\@ref(fig:spermiogenese)) 3-4) :  
+1. les spermatides rondes (**Figure : **\@ref(fig:spermiogenese) 1-2) : L'identification de ces ces cellules représente un difficulté technique. Elles ont cependant pu être décrites en détaille par différentes techniques de coloration sous microscope optique ([@Clermont1963], [@Papic], [@Schenck], [@Adelman1989], [@WorldHealthOrganization1992]). Plusieurs études animales on pu démontrées le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, ([@Ogura1994], [@Kimura1995], [@Sasagawa]), la même chose ayant été également observée plus récemment chez l'homme ([@Tanaka2015]) bien que le taux de fécondation et d'implantation soit extrêmement faible([@Asimakopoulos2003]). Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
+2. Les spermatides en élongation (**Figure : **\@ref(fig:spermiogenese) 3-4) :  
 peuvent aussi donner naissance avec un meilleur taux que les spermatides rondes et engendrerai théoriquement moins de risques d'anomalies génétiques ([@Asimakopoulos2003]). **A completer**  
-3. Les spermatides en condensation (**Figure : **(\@ref(fig:spermiogenese)) 5-7) : C'est le stade final de la différentiation du spermatide en spermatozoïde. À ce stade le noyau est très allongé, avec une partie caudale globulaire et une partie antérieure saillante. La chromatine est sombre et condensée. L’axonème va continuer à s’allonger pour former le flagelle mature. Les différentes organelles inutiles pour la physiologique spermatique et l’excès de cytoplasme vont former la gouttelette cytoplasmique qui va se détacher et donner le corps résiduel qui va ensuite être phagocyté par les cellules de Sertoli ([@Hermo2010]).  
+3. Les spermatides en condensation (**Figure : **\@ref(fig:spermiogenese) 5-7) : C'est le stade final de la différentiation du spermatide en spermatozoïde. À ce stade le noyau est très allongé, avec une partie caudale globulaire et une partie antérieure saillante. La chromatine est sombre et condensée. L’axonème va continuer à s’allonger pour former le flagelle mature. Les différentes organelles inutiles pour la physiologique spermatique et l’excès de cytoplasme vont former la gouttelette cytoplasmique qui va se détacher et donner le corps résiduel qui va ensuite être phagocyté par les cellules de Sertoli ([@Hermo2010]).  
 
 Une fois ces étapes de différentiation finies, les spermatides sont relachées en tant que spermatozoïdes dans la lumière du tube séminifère. Ce procédé est appelé spermiation.  
 
@@ -131,7 +131,7 @@ include_graphics(path = "figure/spermiogenese.png")
 ### Anatomie du spermatozoïde  
 
 Une fois
-Il est composé de deux parties principales : La tête et le flagelle  (**Figure : **(\@ref(fig:spz))).  
+Il est composé de deux parties principales : La tête et le flagelle  (**Figure : **\@ref(fig:spz)).  
 
 ```{r spz,fig.cap=fig.name,fig.scap=fig.name,out.extra="scale=.6"}
 
@@ -145,7 +145,7 @@ include_graphics(path = "figure/spermatozoide.png")
 
 1. L'acrosome : C'est une vésicule de sécrétion géante située dans la moitiée superieur de la tête du spermatozoïde. Elle se développe à partir de l'appareil de Golgi lors de la spermiogénèse. Au cours de sa formation, l'acrosome forme tout d'abord un granule sphérique qui se colle sur la partie apical du noyau. En s'aplatissant contre celui-ci, l'acrosome va prendre une forme hémishpérique recouvrant la membrane nucléaire formant la coiffe céphalique... Le rôle de l'acrosome est fondamental dans le processus de fécondation puisqu'il permet d'excréter nottament l'acrosine, une enzyme de digestion permettant au spermatozoïde de pénétrer la zone pellucide qui entoure les ovocytes. Ce processus de relargage est appelé réaction acrosomal.   
 2.  L'acroplaxome : **TODO !!!**  
-3.  Le noyau : Le noyau est une structure cellulaire présente dans la majorité des cellules eucaryotes. Il contient l'essentiel du materiel génétique. Le noyau du spermatozoïde est caractérisé par une compaction extrêmement importante de l’ADN. Dans les cellules somatiques l’ADN est enroulé par unité de 146 paires de bases autour d’un octamère d’histones dit de cœur (H2A, H2B, H3 et H4) afin d’organiser les 3 milliards de paires de bases du génome humain dans un noyau de quelques microns (**Figure : **(\@ref(fig:noyau))). L’ADN des spermatides va subir une réorganisation chromatinienne plus importante au cours de la spermatogénèse afin d’augmenter sa compaction. Ainsi, les octamères d'histones présents dans les cellules somatiques sont remplacées par deux protéines riches en arginine et en cystéine PRM1 et PRMM2). Ces protéines sont appellées des protamines (**Figure : **(\@ref(fig:noyau))). L'intégrité des deux protéines composant ce dimère est nécéssaire pour la procréation [@Cho2001]. Cette compaction extrême permet de réduire la taille du noyau, mais aussi de protéger l’ADN d’agents de dégradation comme l’oxydation des bases. Parallèlement à cette condensation chromatinienne se produit un arrêt des processus de transcription cellulaire ([@Kierszenbaum1978]). Le noyau du spermatozoïde est donc un noyau au repos, transcriptionnellement inactif ([@Ward1994])
+3.  Le noyau : Le noyau est une structure cellulaire présente dans la majorité des cellules eucaryotes. Il contient l'essentiel du materiel génétique. Le noyau du spermatozoïde est caractérisé par une compaction extrêmement importante de l’ADN. Dans les cellules somatiques l’ADN est enroulé par unité de 146 paires de bases autour d’un octamère d’histones dit de cœur (H2A, H2B, H3 et H4) afin d’organiser les 3 milliards de paires de bases du génome humain dans un noyau de quelques microns (**Figure : **\@ref(fig:noyau)). L’ADN des spermatides va subir une réorganisation chromatinienne plus importante au cours de la spermatogénèse afin d’augmenter sa compaction. Ainsi, les octamères d'histones présents dans les cellules somatiques sont remplacées par deux protéines riches en arginine et en cystéine PRM1 et PRMM2). Ces protéines sont appellées des protamines (**Figure : **\@ref(fig:noyau)). L'intégrité des deux protéines composant ce dimère est nécéssaire pour la procréation [@Cho2001]. Cette compaction extrême permet de réduire la taille du noyau, mais aussi de protéger l’ADN d’agents de dégradation comme l’oxydation des bases. Parallèlement à cette condensation chromatinienne se produit un arrêt des processus de transcription cellulaire ([@Kierszenbaum1978]). Le noyau du spermatozoïde est donc un noyau au repos, transcriptionnellement inactif ([@Ward1994])
 
 ```{r noyau,fig.cap=fig.description,fig.scap=fig.name,out.extra="scale=.55"}
 
@@ -160,7 +160,7 @@ include_graphics(path = "figure/noyau.png")
 
 #### Le flagelle  
 
-Le flagelle représente la queue du spermatozoïde. Celui-ci permet, par mouvement d'oscilation à haute vitesse, le déplacement du spermatozoïde. Cette mobilité est générée par un cytosquelette interne extrêmement conservé durant l'évolution appelée l'axonème. Celui-ci est composé de neuf doublets de microtubules périphériques et de deux doublets internes [@Inaba2003] (**Figure : **(\@ref(fig:axoneme))), on parle alors de structure "9 + 2". Les doublets externes sont reliés entre eux par des ponts de nexine et au doublet central par des ponts radiaires. 
+Le flagelle représente la queue du spermatozoïde. Celui-ci permet, par mouvement d'oscilation à haute vitesse, le déplacement du spermatozoïde. Cette mobilité est générée par un cytosquelette interne extrêmement conservé durant l'évolution appelée l'axonème. Celui-ci est composé de neuf doublets de microtubules périphériques et de deux doublets internes [@Inaba2003] (**Figure : **\@ref(fig:axoneme)), on parle alors de structure "9 + 2". Les doublets externes sont reliés entre eux par des ponts de nexine et au doublet central par des ponts radiaires. 
 
 ```{r axoneme,fig.cap=fig.description,fig.scap=fig.name,out.extra="scale=.3"}
 
@@ -174,7 +174,7 @@ include_graphics(path = "figure/axoneme.png")
 
 ```
 
-Le flagelle su spermatozoïde peut être divisé en trois partie distinctes (**Figure : **(\@ref(fig:flagelle))) : 
+Le flagelle su spermatozoïde peut être divisé en trois partie distinctes (**Figure : **\@ref(fig:flagelle)) : 
 
 1. La pièce intermédiaire : Elle fait jonction avec la tête du spermatozoïde et est composée de la gaine de mitochondrie qui fournira une partie de de l'énergie nécéssaire au batement flagellairee (grâce à la phosphorylation oxydative qui produit de l’ATP), l’axonème qui se prolonge dans la pièce principale et un ensemble de neuf faisceaux de fibres denses.  
 2. La pièce principale : Ici, la gaine de mitochodrie a disparue ainsi que deux des faisceaux de fibres denses présents dans la pièce intermédiaire. On note cependant la présence d'une structure suplémentaire, la gaine fibreuse. Cette gaine entoure l'axonème et comporte deux épaississements diamétralement opposés, appelées colonnes longitudinales sur lesquelles s'insère les fibres denses 3 et 8. C'est le long de la gaine fibreuse qu'est produit la majorité de l’énergie 46nécessaire au glissement des microtubules ([@Eddy2007]).  
@@ -261,11 +261,22 @@ Sperm motility is necessary for the transport of male DNA to eggs in species wit
 ***
 
 ## Les techniques d'analyses génétiques  
-
 ### Les puces  
+### Le séquençage NGS 
 
-### Le séquençage  
+**Faire une petite Intro sur le Sanger**  
 
+Contrairement à la méthode Sanger, le NGS *lit* des fragment d'ADN, provenant d'un génome entier, de manière aléatoire. Pour cela, la molécule d'ADN est "coupée" en plusieurs fragments d'une taille donnée. Ce sont ensuite ces fragments qui seront, après une étape d'amplification spécifique au différentes plateformes, séquencés simultanément. C'est pourquoi on parle souvent de séquençage parrallèle massif pour décrire le NGS.  Le produit de ce séquençage est appelé *read*. Cette technologie est avantageuse de part la masse de *reads* qu'elle produit et par son faible cout par bases séquencées [@Metzker2010]. Ces caractéristiques ont permis au séquençage Haut-débit d'être courmment utilisé dans le domaine de la recherche clinique.  
+La taille des *reads* obtenus par séquençage NGS est nettement inferieure à celle atteinte par le séquençage Sanger. À l'heure actuelle, les *reads* aobtenus par séquençage NGS ont une taille comprise entre 50 et 500 pb pour la plupart des plateforme contre ... obtenus par Sanger (**Figure :** \@ref(fig:readPerRun)), c'est pour cela que les résultats du séquençage NGS sont appelés des *reads* courts ou *short reads*.   
+Étant donnée que le NGS produit à l'heure actuelle des *reads* courts la notion de couverture est importante et représente l'un des critère majeur à considérer dans l'analyse des données [@Sims2014]. La couverture est définie comme le nombre de *reads* qui, après l'atape d'alignement, se chevauchent les uns les autres au sein du région génomique spécifique. Par exemple, une couverture de 30x pour le gène *XXXX* signifie que chaque nucléotide de ce gène est chevauchés par au moins 30 *reads* distincts.  
+
+```{r}
+
+# Table 1 | Summary of NGS platforms
+# Coming of age: ten years of nextgeneration sequencing technologies  
+
+
+```
 
 ```{r readPerRun,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
 
@@ -277,37 +288,43 @@ include_graphics(path = "figure/read_per_run.png")
 
 ```
 
+#### L'amplification  
+  
+Dans la plupart des technologie, la phase de séquençage est précédée par une étape d'amplification de l'ADN. Cette amplification se fait dans la grande majoritée des cas sur une surface solide exepté pour la PCR en émultion qui s'effectue en phase aqueuse. Elle permet d'obtenir dans une région définie plusieurs milliers de copie du même fragment d'ADN, appelés des clones. Cette étape assure que le signal emis lors du séquençage pourra être distingué du bruit. Chacun de ces *spots* d'amplification appelés aussi centre de réaction, se retrouve donc être le représentant d'un unique fragment d'ADN et sera ensuite séquencé parrallèlement aux autres *spots*. Une platforme de séquençage pouvant gérer plusieurs millions de ces centres de réactions simultanément, séquençant ainsi plusieurs millions de mollécules d'ADN en parrallèle, donnant ainsi le nom à ces techniques qualifiées de séquençage massif en parrallèle. Cette étape d'amplification est généralement précédée d'une phase de fragmentation de l'ADN. cette fragmentation peut-être phisique, enzymatique ou bien chimique. Ce sont les résidus d'ADN résultant de cette fragmentation qui seront ensuite amplifié. Il existe plusieurs stratégie permettant ce clonage de l'ADN :  
 
-#### Le Sanger  
+1. La PCR en emulsion ou emPCR (**Figure : **\@ref(fig:ngsampli) - **a**) :  Le patron d'ADN fragmenté simple brin est lié à une séquence adaptatrice complémentaire et est capturé par une goutelette aqueuse appelée micelle contenant une bille recouverte d'adaptateur complémentaire à celui fixé sur le fragment d'ADN ainsi que tout les composant nécéssaire à la réaction de PCR. En respectant un ratio nombre de molécule d’ADN / nombre de billes, on va fixer un seul fragment d’ADN sur chaque bille. Chacune de ces billes seront donc, en fin de réaction, recouverte par plusieurs milliers de copies de la même séquence d'ADN.  
+2. L'amplification par pont sur face solide (**Figure : **\@ref(fig:ngsampli) - **b**) : Les fragments d'ADN sont liés à des séquences adaptatrices et liée par une de leurs extrémités à une amorce fixée sur un support solide. Du fait de la dilution, les molécules d'ADN se trouvent éloignées les unes des autres. L'extrémitée libre du fragment interagit avec les amorces situées à proximité formant une structure en pont, d'où le nom de PCR en pont ou *bridge-PCR*. La PCR va alors synthétizer un deuxième brin complémentaire aux fragments immobilisés sur le support. En procédant à des cycles de température comme pour une réaction PCR classique, on obtient à l'emplacement de chaque molécule initiale un massif de molécules fixées sur la plaque, toutes identiques à la molécule initiale.  
+3. Amplification par modèle mobile ou *walking-template* (**Figure : **\@ref(fig:ngsampli) - **c**) :  L'ADN fragmenté est lié à un adaptateur et lié à une amorce complémentaire fixée sur un suport solide. Le brin complémentaire du fragment sera synthétisé par PCR à partir de l'amorce fixée. La molécule double brin nouvellement formée sera ensuite partiellement dénaturée permettant à l'extrémitée libre de se fixée à une séquence amorce voisine. Des amorces *reverse* sont ensuite utilisées por resynthétiser un fragment d'ADN libre à partir des fragments fixés sur le support.  
+4. (**Figure : **\@ref(fig:ngsampli) - **d**) :  **PAS DU TOUT COMPRIS LE MECHANISME !!! **  
 
-#### Le NGS  
+```{r ngsampli,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
 
-Le séquençage nouvelle génération (NGS) 
-
-These new technologies are advantageous because of their high throughput and low cost per base with over one billion reads per run incurring significantly lower base-cost [1]
-1.  Applications of Next-Generation Sequencing Sequencing Technologies—the Next Generation
-
-Ces caractéristiques ont permis au séquençage Haut-débit d'être courmment utilisé dans le domaine de la recherche clinique
-
-
-
-Le séquençage nouvelle génération (NGS) a apporté avec lui des opportunités sans précédent dans le domaine de la recherche en génomique. Il a pu être appliqué à une grande variété de contexte avec nottament le séquençage de génome entier, ou *Whole Genome Sequencing* (WGS) ou encore le séquençage exonique, le *Whole Exome Sequencing* (WES).
-
-1. 454 sequencing technology: pyrosequencing
-2. Illumina  
-3. ABI/SOLiD  
-
-```{r}
-
-# tab.name <- "aaaaa"
-# 
-# 
-# g <- include_graphics(path = "figure/comp_seq.png")
-# 
-# 
-# knitr::kable(g, caption = tab.name)
+fig.name <- "Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS"  
+fig.from <- "Goodwin (2016)"
+fig.description <- ""
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+include_graphics(path = "figure/ngs_amplification.png")
 
 ```
+
+#### Le séquençage  
+
+<!-- ### -->
+
+pyroséquençage
+
+<!-- ### -->
+
+Il existe deux types de technologies permettant le séquençage de *reads* courts : 
+
+1. Séquençage par ligation  
+2. Séquençage par synthèse  
+
+
+
+
+
+Le séquençage nouvelle génération (NGS) a apporté avec lui des opportunités sans précédent dans le domaine de la recherche en génomique. Il a pu être appliqué à une grande variété de contexte avec nottament le séquençage de génome entier, ou *Whole Genome Sequencing* (WGS) ou encore le séquençage exonique, le *Whole Exome Sequencing* (WES). Cependant, certaines de ses caractéristiques techniques tel que la production de plusieurs milliards de ***reads* courts**, bien quelles soient en partie responsable de son succès, sont aussi à l'origine de nouvelle problématique, notamment dans l'analyse et l'interprétation des données.  
 
 ***
 
@@ -336,11 +353,9 @@ Cependant, l'étape d'alignement peut est sujette à de nombreuses erreurs dont 
 5. SHRiMP  
 6. SOAPv2  
 
-
-
 #### L'appel des variants  
 
-L'appel des variants, ou *variant calling*, fait référence à l'ensemble des méthodes permettant d'identifier des SNVs ou des indels à partir des résultats de l'alignement. On appelera variants toutes différences de séquence observées entre un individu et la séquence de référence utilisée. De nombreux logiciels d'appel des variants, ou *caller*, basés sur des algorithmes différents ont emmergés ces dernières années pour répondre à cette problématique. Parmis les plus connus on note SAMtools [@Li2009], Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) [@McKenna2010], Freebayes, SOAPindel et tvc . Les quatre premiers cités, peuvent être utilisés pour analyser des données provenant de tout type de plateforme de séquençage contrairement à TVC qui a été dévoeloppé spécifiquement pour les données provenant de Ion Proton. Les données issues de NGS peuvent présenter un taux d'erreur important. Ce taux d'erreur est multi-factorielles et inclus nottament les erreurs de l'alignement. L'un des éléments clef à prendre en compte pour pouvoir effectuer un appel de qualité est la couverture de la position appelée [@Sims2014]. Cependant, malgré la prise en compte de cet élément, l'appel de variants reste un processus dificille souvent lié à plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées à la plateforme de séquençage utilisée en amont, et les différents logiciels ne présentent pas les même performances en fonction de ces différentes plateforme  [@Hwang2015], c'est pourquoi il convient d'adapter le logiciel d'appel en fonction de la plateforme de séquençage utilisée préalablement. Les erreurs d'appel sont généralement classées en deux catégories principales et certains aligneurs auront tendance à être plus sujets à l'un de ces types d'erreur qu'à l'autre (**Figure : **(\@ref(fig:snperror))) :  
+L'appel des variants, ou *variant calling*, fait référence à l'ensemble des méthodes permettant d'identifier des SNVs ou des indels à partir des résultats de l'alignement. On appelera variants toutes différences de séquence observées entre un individu et la séquence de référence utilisée. De nombreux logiciels d'appel des variants, ou *caller*, basés sur des algorithmes différents ont emmergés ces dernières années pour répondre à cette problématique. Parmis les plus connus on note SAMtools [@Li2009], Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) [@McKenna2010], Freebayes, SOAPindel et tvc . Les quatre premiers cités, peuvent être utilisés pour analyser des données provenant de tout type de plateforme de séquençage contrairement à TVC qui a été dévoeloppé spécifiquement pour les données provenant de Ion Proton. Les données issues de NGS peuvent présenter un taux d'erreur important. Ce taux d'erreur est multi-factorielles et inclus nottament les erreurs de l'alignement. L'un des éléments clef à prendre en compte pour pouvoir effectuer un appel de qualité est la couverture de la position appelée [@Sims2014]. Cependant, malgré la prise en compte de cet élément, l'appel de variants reste un processus dificille souvent lié à plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées à la plateforme de séquençage utilisée en amont, et les différents logiciels ne présentent pas les même performances en fonction de ces différentes plateforme  [@Hwang2015], c'est pourquoi il convient d'adapter le logiciel d'appel en fonction de la plateforme de séquençage utilisée préalablement. Les erreurs d'appel sont généralement classées en deux catégories principales et certains aligneurs auront tendance à être plus sujets à l'un de ces types d'erreur qu'à l'autre (**Figure : **\@ref(fig:snperror)) :  
 
 1. Oubli de l'allele de référence (**IR**, *ignore the reference allele*) :  représente un variant appelé homozygote correspondant en réalité à un variant hétérozygote composé de l'allèle de référence et d'un allèle variant.      
 2. Ajout de l'allèle de référence (**AR**, *adding the reference allele*) : représente un variant appelé hétérozygote composé de l'allèle de référence et d'un allèle variant correspondant en réalité à un variant homozygote composé de deux allèles variants.    
@@ -382,16 +397,16 @@ Cependant, cette quantité de donnée produites crées de nouvelles problématiq
 
  the annotation step must be considered carefully, and that a conscious choice should be made to select transcript set and software for annotation [McCarthy et al., 2014].
 
+#### Au niveau du variant  
 
-
-#### par la fréquence : (ExAC)  
+##### par la fréquence : (ExAC)  
 
 Large consortia (e.g the human genome project [12, 13]) have been established to accumulate available resources, detect new variants in genomes, better understand genetic architecture of different traits and find or narrow down positions of potential causal loci
 
 12 International Human Genome Sequencing Consortium. Initial sequencing and analysis of the human genome  
 13 International Human Genome Sequencing Consortium. Finishing the euchromatic sequence of the human genome
 
-#### Par l'impact : 
+##### Par l'impact : 
 
 VEP SNPEFF...  
 
@@ -415,7 +430,10 @@ include_graphics(path = "figure/venn_Diag_patho_pred.png")
 L'annotation au niveau du gène (ou du transcrit) consiste à récupérer l'ensemble des information disponible sur le gène (impacté par le variant) et non plus sur le variant directement. L'ensemble de ces informations est donc extrêmement dépendante du jeux de gène utilisé et peuvent donc variaer en fonction de celui-ci [@McCarthy2014,@Zhao2015] même si les gènes CCDS sont bien représentés à la fois par le NCBI, Ensembl et UCSC [@Pruitt2009]
 
 
-Panther
+Expression du gene  
+Pathway impliquant le gene : Panther, 
+
+score pour le gene : RVIS, PLI, Loftool...
 
 HPO, OMIM
 
@@ -423,5 +441,15 @@ HPO, OMIM
 RVIS, pLI 
 
 
+
+
+
+
+
+
+
+### Conclusion NGS  
+
+cf Evaluation of next-generation sequencing software in mapping and assembly partie CHALLENGES AND PROSPECTS
 
 
