@@ -889,17 +889,37 @@ class (for LaTeX) and the R bookdown package, in general.
   \section{Les techniques d'analyses
   génétiques}\label{les-techniques-danalyses-genetiques}
   
+  L'acide desoxyribonucléique (ADN) a été identifié comme étant le porteur
+  de l'information génétique par Oswald Theodore Avery en 1944. Sa
+  structure en double hélice composée par quatre bases, la thymine,
+  l'adénine, la guanine et la cytosine fut caractérisée en 1953 par James
+  D. Watson et Francis Crick
+  
   \subsection{Les puces}\label{les-puces}
   
   \subsection{Le séquençage NGS}\label{le-sequencage-ngs}
   
-  \textbf{Faire une petite Intro sur le Sanger}
-  
-  Contrairement à la méthode Sanger, le NGS \emph{lit} des fragment d'ADN
-  provenant d'un génome entier de manière aléatoire. Pour cela, la
+  Avant de parler des nouvelles technologies de séquençage (NGS) faisons
+  un bref historique du séquençage de l'ADN. En 1977 Frederick Sanger
+  développe une technologie de séquençage d'ADN basée sur la méthode
+  \emph{chain-termination}. Ce procédé est desormais connu sous le nom de
+  séquençage Sanger. D'autre méthode furent développées à la même periode,
+  notamment celle de Walter Gilbert basée sur la modification chimique de
+  l'ADN, cependant sa grande efficience et sa faible utilisation de la
+  radioactivité permirent au séquençage Sanger de s'imposer comme
+  référence dans la ``première génération'' de séquençeur à application de
+  commerciale et de recherche
+  (\href{http://en.wikipedia.org/wiki/DNA_sequencing}{Wikipedia}). Apparu
+  en 1998, les instruments de séquençage automatique ainsi que les
+  logiciels associés utilisant le séquençage par capilarité et la
+  technologie Sanger furent les outils principaux qui permirent la
+  completion du \emph{human genome project} en 2001 (Collins, Morgan, \&
+  Patrinos, 2003).\\
+  Contrairement à la méthode Sanger, le NGS \emph{lit} des fragment d'ADN,
+  provenant d'un génome entier, de manière aléatoire. Pour cela, la
   molécule d'ADN est ``coupée'' en plusieurs fragments d'une taille
-  donnée. Ce sont ensuite ces fragments qui seront, après plusieurs étape
-  de préparation spécifiques au différentes plateformes, séquencés
+  donnée. Ce sont ensuite ces fragments qui seront, après une étape
+  d'amplification spécifique au différentes plateformes, séquencés
   simultanément. C'est pourquoi on parle souvent de séquençage parrallèle
   massif pour décrire le NGS. Le produit de ce séquençage est appelé
   \emph{read}. Cette technologie est avantageuse de part la masse de
@@ -935,9 +955,9 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{L'amplification}\label{lamplification}
   
-  Dans la plupart des technologie, la phase de séquençage est précédée par
-  une étape d'amplification de l'ADN. Cette amplification se fait dans la
-  grande majoritée des cas sur une surface solide exepté pour la PCR en
+  Dans la plupart des technologies, la phase de séquençage est précédée
+  par une étape d'amplification de l'ADN. Cette amplification se fait dans
+  la grande majoritée des cas sur une surface solide exepté pour la PCR en
   émultion qui s'effectue en phase aqueuse. Elle permet d'obtenir dans une
   région définie plusieurs milliers de copie du même fragment d'ADN,
   appelés des clones. Cette étape assure que le signal emis lors du
@@ -952,7 +972,8 @@ class (for LaTeX) and the R bookdown package, in general.
   généralement précédée d'une phase de fragmentation de l'ADN. cette
   fragmentation peut-être phisique, enzymatique ou bien chimique. Ce sont
   les résidus d'ADN résultant de cette fragmentation qui seront ensuite
-  amplifié. Il existe plusieurs stratégie permettant ce clonage de l'ADN :
+  amplifié. Il existe quatre stratégies utilisées pour le clonage de l'ADN
+  dans le cadre du NGS :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -999,7 +1020,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=.55]{figure/ngs_amplification} 
+  {\centering \includegraphics[scale=.551]{figure/ngs_amplification} 
   
   }
   
@@ -1353,6 +1374,11 @@ class (for LaTeX) and the R bookdown package, in general.
   Clermont, Y. (1966). Renewal of spermatogonia in man. \emph{American
   Journal of Anatomy}, \emph{118}(2), 509--524.
   \url{http://doi.org/10.1002/aja.1001180211}
+  
+  \hypertarget{ref-Collins2003}{}
+  Collins, F. S., Morgan, M., \& Patrinos, A. (2003). The Human Genome
+  Project: Lessons from Large-Scale Biology. \emph{Science},
+  \emph{300}(5617), 286--290. \url{http://doi.org/10.1126/science.1084564}
   
   \hypertarget{ref-Eddy2007}{}
   Eddy, E. M. (2007). The scaffold role of the fibrous sheath.
