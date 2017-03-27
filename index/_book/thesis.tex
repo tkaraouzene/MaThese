@@ -916,9 +916,10 @@ class (for LaTeX) and the R bookdown package, in general.
   completion du \emph{human genome project} en 2001 (Collins, Morgan, \&
   Patrinos, 2003).\\
   Contrairement à la méthode Sanger, le NGS \emph{lit} des fragment d'ADN,
-  provenant d'un génome entier, de manière aléatoire. Pour cela, la
-  molécule d'ADN est ``coupée'' en plusieurs fragments d'une taille
-  donnée. Ce sont ensuite ces fragments qui seront, après une étape
+  provenant d'un génome entier, de manière aléatoire. On parle alors de
+  séquençage de génomes entiers ou \emph{whole genome sequencing} (WGS).
+  Pour cela, la molécule d'ADN est ``coupée'' en plusieurs fragments d'une
+  taille donnée. Ce sont ensuite ces fragments qui seront, après une étape
   d'amplification spécifique au différentes plateformes, séquencés
   simultanément. C'est pourquoi on parle souvent de séquençage parrallèle
   massif pour décrire le NGS. Le produit de ce séquençage est appelé
@@ -926,11 +927,10 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{reads} qu'elle produit et par son faible cout par bases séquencées
   (Metzker, 2010). Ces caractéristiques ont permis au séquençage
   Haut-débit d'être courmment utilisé dans le domaine de la recherche
-  clinique.\\
-  La taille des \emph{reads} obtenus par séquençage NGS est nettement
-  inferieure à celle atteinte par le séquençage Sanger. À l'heure
-  actuelle, les \emph{reads} aobtenus par séquençage NGS ont une taille
-  comprise entre 50 et 500 pb pour la plupart des plateforme contre
+  clinique. La taille des \emph{reads} obtenus par séquençage NGS est
+  nettement inferieure à celle atteinte par le séquençage Sanger. À
+  l'heure actuelle, les \emph{reads} aobtenus par séquençage NGS ont une
+  taille comprise entre 50 et 500 pb pour la plupart des plateforme contre
   \ldots{} obtenus par Sanger (\textbf{Figure :} \ref{fig:readPerRun}),
   c'est pour cela que les résultats du séquençage NGS sont appelés des
   \emph{reads} courts ou \emph{short reads}.\\
@@ -938,9 +938,10 @@ class (for LaTeX) and the R bookdown package, in general.
   courts la notion de couverture est importante et représente l'un des
   critère majeur à considérer dans l'analyse des données (Sims, Sudbery,
   Ilott, Heger, \& Ponting, 2014). La couverture est définie comme le
-  nombre de \emph{reads} qui, après l'atape d'alignement, se chevauchent
-  les uns les autres au sein du région génomique spécifique. Par exemple,
-  une couverture de 30x pour le gène \emph{XXXX} signifie que chaque
+  nombre de \emph{reads} qui, après l'atape d'alignement
+  \protect\hyperlink{lalignement}{cf alignment}, se chevauchent les uns
+  les autres au sein du région génomique spécifique. Par exemple, une
+  couverture de 30x pour le gène \emph{XXXX} signifie que chaque
   nucléotide de ce gène est chevauchés par au moins 30 \emph{reads}
   distincts.
   
@@ -952,6 +953,37 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \caption[Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée, d'après Brendan et. al, (2014)]{Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée, d'après Brendan et. al, (2014) : Sequencing space based on read length (in bases) and number of reads per run. Points represent official platform/chemistry combination releases and are color-coded based on the platform family. To see this illustration in color, the reader is referred to the web version of this article at www.liebertpub.com/wound}\label{fig:readPerRun}
   \end{figure}
+  
+  \subsubsection{La capture d'exons}\label{la-capture-dexons}
+  
+  Pour de nombreuses application, il peut être intérésesant de ne
+  séquencer qu'une partie du génome et non pas son intégralité. On parle
+  alors de séquençage ciblé, et lorsque cette ``cible'' représente
+  l'ensemble des éxons on parle alors de séquençage exomique ou
+  \emph{whole exome sequencing} (WES). Les principaux avantages du WES par
+  rapport au WGS sont son cout réduits ainsi qu'une masse de données moins
+  importantes à stocker et à analyser. En effet, l'ensemble de l'exome ne
+  représente qu'environs 1\% du génome entier. Pour ces raisons, le WES
+  considéré comme le standard dans le cadre de recherche sur des
+  pathologies génétiques et se révèle être un outil puissant pour
+  l'identification de variants associés à des pathologies (Ng et al.,
+  2010). Le procédé de séquençage est identique au WGS, il est simplement
+  précédé d'une étape d'enrichissement au cours de laquelle les exons sont
+  capturés par hybridation à des sondes. De fait les exons capturés sont
+  donc dépendant du kit de capture utilisé, cette technique permet donc de
+  séquencer uniquement les exons connus et ciblés par les sondes. Il faut
+  également noté que depuis quelque années, plusieurs étude ont remis en
+  cause lk'interet du WES au profis du WGS, nottament car le WGS fournit
+  une meilleur couverture sur l'exome que le WES (Lelieveld, Spielmann,
+  Mundlos, Veltman, \& Gilissen, 2015, Meienberg, Bruggmann, Oexle, \&
+  Matyas (2016)), de plus le WES montre une plus grande sensibilité au
+  pourcentage de GC contenu dans la région à séquencer et à la séléction
+  des kit de capture utilisés (Meienberg et al., 2016). Ainsi, bien que le
+  WES soit encore à l'heure actuelle le choix privilégié dans la majorité
+  des études (citation\ldots{}), la réduction des couts de séquençage et
+  de stockage des données, il est possible que le WGS remplace totalement
+  le WES ainsi que l'ensemble des techniques impliquant la capture de
+  séquences ciblées (Meienberg et al., 2016).
   
   \subsubsection{L'amplification}\label{lamplification}
   
@@ -1059,9 +1091,12 @@ class (for LaTeX) and the R bookdown package, in general.
   \section{L'analyse bioinformatique des données de
   NGS}\label{lanalyse-bioinformatique-des-donnees-de-ngs}
   
-  Next-generation sequencing techniques are demonstrating promise in
-  transforming research in life sciences (Schuster, 2007)\\
-  Next-generation sequencing transforms today's biology\\
+  La stratégie consistant à séquencer en parrallèle plusieurs milliers de
+  \emph{reads} court a engendré plusieurs nouveaux défis bioinformatique
+  dans l'analyse et l'interprétation des données de séquençage et la
+  recherche de variants dans le génome humain (Wold \& Myers, 2007, M. Q.
+  Yang et al. (2009)). Les
+  
   Ces techniques ont été appliquées dans différents contextes, notamment
   la métagénomique (J. Qin et al., 2010), la détéction de SNPs (Van
   Tassell et al., 2008) et de variants structuraux (Alkan et al., 2010,
@@ -1097,7 +1132,11 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsection{L'analyse des données
   brutes}\label{lanalyse-des-donnees-brutes}
   
-  \subsubsection{L'alignement}\label{lalignement}
+  \hypertarget{lalignement}{\subsubsection{L'alignement}\label{lalignement}}
+  
+  Comme dit précédemment, le séquençage de \emph{reads} courts entraine de
+  nombreuses complications et restraint l'utilisation du NGS dans de
+  nombreuses applications biologiques (Wold \& Myers, 2007).
   
   L'alignement des séquences constitue probablement l'étape la plus
   importante de l'analyse des données issues du séquençage haut débit
@@ -1203,14 +1242,6 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsection{L'annotation des variants}\label{lannotation-des-variants}
   
-  En moins de 10 ans, les technologies NGS sont passées du séquençage de
-  panel de gènes (environs 100 Mb pour le Roche GS FLX system) au
-  séquençage de génome entiers (environs 1500 GB pour l'Illumina Hiseq
-  4000) et d'une utilisation exclusive à la recherche à la routine
-  clinique. La limitation de cette technologie n'étant plus le séquençage
-  d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et
-  l'inerprétation de la masse de donnée générée.
-  
   The main objective of this process is to gather substantial information
   at the variant and the gene levels. This will include the variants' data
   quality, their localization at the genomic, gene and transcripts levels,
@@ -1222,29 +1253,26 @@ class (for LaTeX) and the R bookdown package, in general.
   various pathways, and its involvement in various phenotypes/diseases.
   
   L'annotation des variants a pour but de replacer l'ensemble des variants
-  identifiés lors de l'étape d'appel dans leur contexte biologique. Cette
+  identifiés lors de l'étape d'appel dans leur contexte biologique. Elle
+  vise à réunir le maximum d'information disponible à propos d'un variant
+  et des unités génétiques (gènes ou transcrits) qu'il impacte. Cette
   phase est une des clefs de l'analyse puisqu'elle permet de prioriser des
-  variants d'interet\ldots{}\\
-  L'objectif principal de cette étape est de réunir l'ensemble des
-  informations disponibles sur un variant\ldots{}\\
-  Ces information regroupe la fréquence, sa localisation et son
-  impact\ldots{}
-  
-  Cependant, cette quantité de donnée produites crées de nouvelles
-  problématiques pour les généticiens qui se retrouvent désormais face au
-  ``déluge de données génétiques'' (Schatz \& Langmead, 2013) ce qui se
-  retrouve être un frein dans la compréhension et l'interprétation des
-  réseaux de gènes et leurs implication dans des pathologies.
-  
-  This step is a requirement for the identification of variants of
-  interest based upon a combined filtration of the collected data from one
-  or multiple samples.
-  
-  the annotation step must be considered carefully, and that a conscious
-  choice should be made to select transcript set and software for
-  annotation {[}McCarthy et al., 2014{]}.
+  variants d'interet et de filtrer d'autres variants considérés comme non
+  informatifs dans un cadre donné. Comme pour l'ensemble des étapes
+  précédantes, les logiciels et jeux de données utilisés lors de l'étape
+  d'annotation doivent être choisis consciencieusement, les résultats
+  étant grandement impactés par ceux-ci (McCarthy et al., 2014). Cette
+  annotation se fait généralement à deux niveau : 1. Au niveau du variant
+  : Regroupe l'ensemble des informations concèrnant un variant donné tel
+  que sa qualité, son génotype et sa fréquence 2. Au niveau de l'unité
+  génétique : Regroupe les information disponible sur l'unité génétique
+  impacté par le variant tel que sa fonction, son expression tissulaire,
+  les voies métaboliques dans lesquelles elle est impliquée, les
+  pathologies auxquelles elle est associées \emph{etc}\ldots{}
   
   \subsubsection{Au niveau du variant}\label{au-niveau-du-variant}
+  
+  Plusieurs informations peuvent être liées à un variant donné.
   
   \paragraph{par la fréquence : (ExAC)}\label{par-la-frequence-exac}
   
@@ -1277,11 +1305,13 @@ class (for LaTeX) and the R bookdown package, in general.
   
   L'annotation au niveau du gène (ou du transcrit) consiste à récupérer
   l'ensemble des information disponible sur le gène (impacté par le
-  variant) et non plus sur le variant directement. L'ensemble de ces
-  informations est donc extrêmement dépendante du jeux de gène utilisé et
-  peuvent donc variaer en fonction de celui-ci (McCarthy et al., 2014,Zhao
-  \& Zhang (2015)) même si les gènes CCDS sont bien représentés à la fois
-  par le NCBI, Ensembl et UCSC (Pruitt et al., 2009)
+  variant) et non plus sur le variant directement. Cette étape permet donc
+  de filtrer ou de prioriser l'ensemble des variants chevauchant un gène
+  (ou transcrit) donnée. L'ensemble de ces informations est donc
+  extrêmement dépendante du jeux de gène utilisé et peuvent donc variaer
+  en fonction de celui-ci (McCarthy et al., 2014,Zhao \& Zhang (2015))
+  même si les gènes CCDS sont bien représentés à la fois par le NCBI,
+  Ensembl et UCSC (Pruitt et al., 2009)
   
   Expression du gene\\
   Pathway impliquant le gene : Panther,
@@ -1292,10 +1322,43 @@ class (for LaTeX) and the R bookdown package, in general.
   
   RVIS, pLI
   
+  Plus récemment, favorisé par l'emmergence des bases de données de
+  variants, tel que ESP {[}cite{]} 1kg{[}cite{]} et surtout ExAC
+  {[}cite{]}, sont apparus des scores
+  
   \subsection{Conclusion NGS}\label{conclusion-ngs}
+  
+  En moins de 10 ans, les technologies NGS sont passées du séquençage de
+  panel de gènes (environs 100 Mb pour le Roche GS FLX system) au
+  séquençage de génome entiers (environs 1500 GB pour l'Illumina Hiseq
+  4000) et d'une utilisation exclusive à la recherche à la routine
+  clinique. La limitation de cette technologie n'étant plus le séquençage
+  d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et
+  l'inerprétation de la masse de donnée générée.
+  
+  De nombreux efforts sont fait pour palier la contrainte instaurée par
+  les \emph{reads} courts dans le cadre d'analyse génomique, cependant les
+  solutions informatique et bioinformatique proposée jusqu'à présent sont
+  bien en dessous des besoins créés pour l'analyse des données NGS
+  (McPherson, 2009).
+  
+  Cependant, cette quantité de donnée produites crées de nouvelles
+  problématiques pour les généticiens qui se retrouvent désormais face au
+  ``déluge de données génétiques'' (Schatz \& Langmead, 2013) ce qui se
+  retrouve être un frein dans la compréhension et l'interprétation des
+  réseaux de gènes et leurs implication dans des pathologies.
   
   cf Evaluation of next-generation sequencing software in mapping and
   assembly partie CHALLENGES AND PROSPECTS
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{figure/read_per_run} 
+  
+  }
+  
+  \caption{**qsdqsdqsd**}\label{fig:aaaaaaa}
+  \end{figure}
   
   \chapter{Investigation génétique et physiologique de la
   globozoospermie}\label{globo}
@@ -1480,6 +1543,13 @@ class (for LaTeX) and the R bookdown package, in general.
   genome. \emph{Genome Biology}, \emph{10}(3), R25.
   \url{http://doi.org/10.1186/gb-2009-10-3-r25}
   
+  \hypertarget{ref-Lelieveld2015}{}
+  Lelieveld, S. H., Spielmann, M., Mundlos, S., Veltman, J. a, \&
+  Gilissen, C. (2015). Comparison of Exome and Genome Sequencing
+  Technologies for the Complete Capture of Protein-Coding Regions.
+  \emph{Human Mutation}, \emph{36}(8), 815--22.
+  \url{http://doi.org/10.1002/humu.22813}
+  
   \hypertarget{ref-Li2009}{}
   Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N.,
   \ldots{} Durbin, R. (2009). The Sequence Alignment/Map format and
@@ -1504,16 +1574,32 @@ class (for LaTeX) and the R bookdown package, in general.
   sequencing data. \emph{Genome Research}, \emph{20}(9), 1297--303.
   \url{http://doi.org/10.1101/gr.107524.110}
   
+  \hypertarget{ref-McPherson2009}{}
+  McPherson, J. D. (2009). Next-generation gap. \emph{Nature Methods},
+  \emph{6}(11s), S2--S5. \url{http://doi.org/10.1038/nmeth.f.268}
+  
   \hypertarget{ref-Medvedev2009}{}
   Medvedev, P., Stanciu, M., \& Brudno, M. (2009). Computational methods
   for discovering structural variation with next-generation sequencing.
   \emph{Nature Methods}, \emph{6}(11s), S13--S20.
   \url{http://doi.org/10.1038/nmeth.1374}
   
+  \hypertarget{ref-Meienberg2016}{}
+  Meienberg, J., Bruggmann, R., Oexle, K., \& Matyas, G. (2016). Clinical
+  sequencing: is WGS the better WES? \emph{Human Genetics}, \emph{135}(3),
+  359--362. \url{http://doi.org/10.1007/s00439-015-1631-9}
+  
   \hypertarget{ref-Metzker2010}{}
   Metzker, M. L. (2010). Sequencing technologies - the next generation.
   \emph{Nature Reviews. Genetics}, \emph{11}(1), 31--46.
   \url{http://doi.org/10.1038/nrg2626}
+  
+  \hypertarget{ref-Ng2010}{}
+  Ng, S. B., Turner, E. H., Robertson, P. D., Flygare, S. D., Abigail, W.,
+  Lee, C., \ldots{} Shendure, J. (2010). Targeted Capture and Massicely
+  Parallel Sequencing of twelve human exomes. \emph{Nature},
+  \emph{461}(7261), 272--276.
+  \url{http://doi.org/10.1038/nature08250.Targeted}
   
   \hypertarget{ref-Nielsen2011}{}
   Nielsen, R., Paul, J. S., Albrechtsen, A., \& Song, Y. S. (2011).
@@ -1640,10 +1726,22 @@ class (for LaTeX) and the R bookdown package, in general.
   Biochemistry}, \emph{55}(1), 77--82.
   \url{http://doi.org/10.1002/jcb.240550109}
   
+  \hypertarget{ref-Wold2007}{}
+  Wold, B., \& Myers, R. M. (2007). Sequence census methods for functional
+  genomics. \emph{Nature Methods}, \emph{5}(1), 19--21.
+  \url{http://doi.org/10.1038/nmeth1157}
+  
   \hypertarget{ref-WorldHealthOrganization1992}{}
   World Health Organization. (1992). \emph{WHO laboratory manual for the
   examination of human semen and sperm-cervical mucus interaction.} (3th
   ed, p. 128). Cambridge University Press.
+  
+  \hypertarget{ref-Yang2009}{}
+  Yang, M. Q., Athey, B. D., Arabnia, H. R., Sung, A. H., Liu, Q., Yang,
+  J. Y., \ldots{} Deng, Y. (2009). High-throughput next-generation
+  sequencing technologies foster new cutting-edge computing techniques in
+  bioinformatics. \emph{BMC Genomics}, \emph{10 Suppl 1}, I1.
+  \url{http://doi.org/10.1186/1471-2164-10-S1-I1}
   
   \hypertarget{ref-Zhao2015}{}
   Zhao, S., \& Zhang, B. (2015). A comprehensive evaluation of ensembl,

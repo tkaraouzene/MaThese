@@ -264,14 +264,13 @@ Sperm motility is necessary for the transport of male DNA to eggs in species wit
 
 L'acide desoxyribonucléique (ADN) a été identifié comme étant le porteur de l'information génétique par Oswald Theodore Avery en 1944. Sa structure en double hélice composée par quatre bases, la thymine, l'adénine, la guanine et la cytosine fut caractérisée en 1953 par James D. Watson et Francis Crick 
 
-
 ### Les puces  
 ### Le séquençage NGS 
 
 Avant de parler des nouvelles technologies de séquençage (NGS) faisons un bref historique du séquençage de l'ADN. En 1977 Frederick Sanger développe une technologie de séquençage d'ADN basée sur la méthode *chain-termination*. Ce procédé est desormais connu sous le nom de séquençage Sanger. D'autre méthode furent développées à la même periode, notamment celle de Walter Gilbert basée sur la modification chimique de l'ADN, cependant sa grande efficience et sa faible utilisation de la radioactivité permirent au séquençage Sanger de s'imposer comme référence dans la "première génération" de séquençeur à application de commerciale et de recherche ([Wikipedia](http://en.wikipedia.org/wiki/DNA_sequencing)). Apparu en 1998, les instruments de séquençage automatique ainsi que les logiciels associés utilisant le séquençage par capilarité et la technologie Sanger furent les outils principaux qui permirent la completion du *human genome project* en 2001 [@Collins2003].  
-  Contrairement à la méthode Sanger, le NGS *lit* des fragment d'ADN, provenant d'un génome entier, de manière aléatoire. Pour cela, la molécule d'ADN est "coupée" en plusieurs fragments d'une taille donnée. Ce sont ensuite ces fragments qui seront, après une étape d'amplification spécifique au différentes plateformes, séquencés simultanément. C'est pourquoi on parle souvent de séquençage parrallèle massif pour décrire le NGS.  Le produit de ce séquençage est appelé *read*. Cette technologie est avantageuse de part la masse de *reads* qu'elle produit et par son faible cout par bases séquencées [@Metzker2010]. Ces caractéristiques ont permis au séquençage Haut-débit d'être courmment utilisé dans le domaine de la recherche clinique.  
+Contrairement à la méthode Sanger, le NGS *lit* des fragment d'ADN, provenant d'un génome entier, de manière aléatoire. On parle alors de séquençage de génomes entiers ou *whole genome sequencing* (WGS). Pour cela, la molécule d'ADN est "coupée" en plusieurs fragments d'une taille donnée. Ce sont ensuite ces fragments qui seront, après une étape d'amplification spécifique au différentes plateformes, séquencés simultanément. C'est pourquoi on parle souvent de séquençage parrallèle massif pour décrire le NGS.  Le produit de ce séquençage est appelé *read*. Cette technologie est avantageuse de part la masse de *reads* qu'elle produit et par son faible cout par bases séquencées [@Metzker2010]. Ces caractéristiques ont permis au séquençage Haut-débit d'être courmment utilisé dans le domaine de la recherche clinique. 
 La taille des *reads* obtenus par séquençage NGS est nettement inferieure à celle atteinte par le séquençage Sanger. À l'heure actuelle, les *reads* aobtenus par séquençage NGS ont une taille comprise entre 50 et 500 pb pour la plupart des plateforme contre ... obtenus par Sanger (**Figure :** \@ref(fig:readPerRun)), c'est pour cela que les résultats du séquençage NGS sont appelés des *reads* courts ou *short reads*.   
-Étant donnée que le NGS produit à l'heure actuelle des *reads* courts la notion de couverture est importante et représente l'un des critère majeur à considérer dans l'analyse des données [@Sims2014]. La couverture est définie comme le nombre de *reads* qui, après l'atape d'alignement, se chevauchent les uns les autres au sein du région génomique spécifique. Par exemple, une couverture de 30x pour le gène *XXXX* signifie que chaque nucléotide de ce gène est chevauchés par au moins 30 *reads* distincts.  
+Étant donnée que le NGS produit à l'heure actuelle des *reads* courts la notion de couverture est importante et représente l'un des critère majeur à considérer dans l'analyse des données [@Sims2014]. La couverture est définie comme le nombre de *reads* qui, après l'atape d'alignement [cf alignment](#lalignement), se chevauchent les uns les autres au sein du région génomique spécifique. Par exemple, une couverture de 30x pour le gène *XXXX* signifie que chaque nucléotide de ce gène est chevauchés par au moins 30 *reads* distincts.  
 
 ```{r}
 
@@ -290,6 +289,10 @@ fig.info <- paste(fig.name,fig.description,sep = " : ")
 include_graphics(path = "figure/read_per_run.png")
 
 ```
+
+#### La capture des parties à séquencer, avantage et inconvegnants  
+
+Pour de nombreuses application, il peut être intérésesant de ne séquencer qu'une partie du génome et non pas son intégralité. Dans cette sous partie de génome ciblé on peut trouver par exemple : une région génomique spécifique à laquelle une pathologie a déjà été associé, l'ensembles des exons de certains gènes candidats, ou encore l'intégralité des exons de l'ensemble des gènes codant pour une protéine.Dans ce dernier cas on parle alors de séquençage exomique ou *whole exome sequencing* (WES). Les principaux avantages du WES par rapport au WGS sont son cout réduits ainsi qu'une masse de données moins importantes à stocker et à analyser.  En effet, l'ensemble de l'exome ne représente qu'environs 1% du génome entier. Pour ces raisons, le WES considéré comme le standard dans le cadre de recherche sur des pathologies génétiques et se révèle être un outil puissant pour l'identification de variants associés à des pathologies [@Ng2010]. Le procédé de séquençage est identique au WGS, il est simplement précédé d'une étape d'enrichissement au cours de laquelle les exons sont capturés par hybridation à des sondes. De fait les exons capturés sont donc dépendant du kit de capture utilisé, cette technique permet donc de séquencer uniquement les exons connus et ciblés par les sondes. Il faut également noté que depuis quelque années, plusieurs étude ont remis en cause lk'interet du WES au profis du WGS, nottament car le WGS fournit une meilleur couverture sur l'exome que le WES [@Lelieveld2015, @Meienberg2016], de plus le WES montre une plus grande sensibilité au pourcentage de GC contenu dans la région à séquencer et à la séléction des kit de capture utilisés [@Meienberg2016]. Ainsi, bien que le WES soit encore à l'heure actuelle le choix privilégié dans la majorité des études (citation...), la réduction des couts de séquençage et de stockage des données, il est possible que le WGS remplace totalement le WES ainsi que l'ensemble des techniques impliquant la capture de séquences ciblées [@Meienberg2016].
 
 #### L'amplification  
   
@@ -310,32 +313,18 @@ include_graphics(path = "figure/ngs_amplification.png")
 
 ```
 
-#### Le séquençage  
-
-
-<!-- ### -->
-
-pyroséquençage
-
-<!-- ### -->
+#### La réaction de séquence  
 
 Il existe deux types de technologies permettant le séquençage de *reads* courts : 
 
 1. Séquençage par ligation  
 2. Séquençage par synthèse  
 
-
-
-
-
-Le séquençage nouvelle génération (NGS) a apporté avec lui des opportunités sans précédent dans le domaine de la recherche en génomique. Il a pu être appliqué à une grande variété de contexte avec nottament le séquençage de génome entier, ou *Whole Genome Sequencing* (WGS) ou encore le séquençage exonique, le *Whole Exome Sequencing* (WES). Cependant, certaines de ses caractéristiques techniques tel que la production de plusieurs milliards de ***reads* courts**, bien quelles soient en partie responsable de son succès, sont aussi à l'origine de nouvelle problématique, notamment dans l'analyse et l'interprétation des données.  
-
 ***
 
 ## L'analyse bioinformatique des données de NGS  
 
-Next-generation sequencing techniques are demonstrating promise in transforming research in life sciences (Schuster, 2007)  
-Next-generation sequencing transforms today's biology  
+La stratégie consistant à séquencer en parrallèle plusieurs milliers de *reads* court a engendré plusieurs nouveaux défis bioinformatique dans l'analyse et l'interprétation des données de séquençage et la recherche de variants dans le génome humain [@Wold2007, @Yang2009]. Les  
 Ces techniques ont été appliquées dans différents contextes, notamment la métagénomique [@Qin2010], la détéction de SNPs [@VanTassell2008] et de variants structuraux [@Alkan2010, @Medvedev2009] mais également dans des études portant sur la méthylation de l'ADN [@Taylor2007], l'analyse de l'expression des ARNs messagers [@Sultan2008], dans la génétique du cancer [@Guffanti2009] et la médecine personalisée [@Auffray2009]. Cependant, pour l'ensemble de ces applications, la grande quantité de données générées par chaque analyse pose plusieurs défis informatiques [@Horner2009]. En effet, les progres techniques des dernières décénies ont rendu possible le séquençage de plusieurs millions des *reads* d'ADN en un temps reliativement court et à couts raisonable. Ainsi, l'émergence du du WGS et du WES a permit de réunir une quantité jusqu'à présent inégalé d'information sur les variation génétiques, et d'une manière plus générale, sur les gènes et leurs fonctions ([@Mardis2008], [@Bentley2006]). Cependant, de part leur nature et leur quantité, l'aquisition de ces nouvelles données a engendrée de nouvelles problématiques notamment dans l'analyse des données et leur interprétation.  
   
 The number of research projects dealing with whole-genome sequencing data has been emerging in humans [3, 4, 5, 6],
@@ -348,8 +337,9 @@ The number of research projects dealing with whole-genome sequencing data has be
 
 #### L'alignement  
 
-L'alignement des séquences constitue probablement l'étape la plus importante de l'analyse des données issues du séquençage haut débit [@Flicek2009]. Elle est la base sur laquelle reposent l'ensemble des étapes effectuées en aval, notamment l'appel des variants [@Nielsen2011]. 
-L'objectif de l'alignement est de déterminer la position correcte de chacun des *reads* séquencés le long du génome de référence.  Cette référence est souvent construite à partir des données de séquençage de plusieurs donneurs et ne représente donc pas la séquence d'un individu en particulier mais est sensé représenter la séquence consensus d'une espèce donnée. Par exemple, la séquence de référence humaine GRCh37 (*Genome Reference Consortium human build 37*) a été crées à partir de 13 volontaires anonymes New-Yorkais. Dès lors, cette référence servira de patron aux aligneurs afin qu'ils replacent correctements les différents *reads* des l'individus séquencés.  
+Comme dit précédemment, le séquençage de *reads* courts entraine de nombreuses complications et restraint l'utilisation du NGS dans de nombreuses applications biologiques [@Wold2007].  
+
+L'alignement des séquences constitue probablement l'étape la plus importante de l'analyse des données issues du séquençage haut débit [@Flicek2009]. Elle est la base sur laquelle reposent l'ensemble des étapes effectuées en aval, notamment l'appel des variants [@Nielsen2011]. L'objectif de l'alignement est de déterminer la position correcte de chacun des *reads* séquencés le long du génome de référence.  Cette référence est souvent construite à partir des données de séquençage de plusieurs donneurs et ne représente donc pas la séquence d'un individu en particulier mais est sensé représenter la séquence consensus d'une espèce donnée. Par exemple, la séquence de référence humaine GRCh37 (*Genome Reference Consortium human build 37*) a été crées à partir de 13 volontaires anonymes New-Yorkais. Dès lors, cette référence servira de patron aux aligneurs afin qu'ils replacent correctements les différents *reads* des l'individus séquencés.  
 Cependant, l'étape d'alignement peut est sujette à de nombreuses erreurs dont certaines proviennent directement des erreurs de survenues lors de l'étape de séquençage, d'autres, sont dues aux caractéristiques des régions séquencées comme par exemple les séquence répétées [@Langmead2012] qui pourront entrainer l'alignement d'un même *read* à plusieurs région du génome [@Treangen2013]. De nombreux aligneurs ont emmergé afin de répondre au mieux à cette problématique tel que Bowtie1[@Langmead2009], Bowtie2 [@Langmead2012], BWA, NovoAlign
 2. BWA
 3. mrFAST and mrsFAST  
@@ -377,31 +367,17 @@ include_graphics(path = "figure/snp_error_type.png")
 
 De même que pour l'aligneur, le choix du logiciel d'appel est crutial car il existe de nombreuses différences dans les variants appelés par différents logiciels se basant sur les mêmes données brutes [@Baes2014, @ORawe2013, @Rosenfeld2012]. En effet, en 2013, une étude comparant les réssultats de 5 *caller* montrait que seulement 57,4% des variants étaient appelés par les 5 *caller* et que 80,7% des variants étaient appelés par au moins 3 d'entre eux. Ce taux justait drastiquement pour les indels puisque la concordance était cette fois seulement de 26,8% pour les indels non retrouvés par les 3 *caller* [@ORawe2013]. Ces résultats sont cependant à pondérés avec une étude de 2015 comparant 4 *caller* et montrant que 91,7% des SNVs séqeuencés sur une plateforme Illumina étaient appelés par 3 *caller*, cependant, pour les variants séquencés sur Ion Proton, seulement 27,3% des variants étaient appelés par au moins 3 *caller* et 57,4% des variants n'étaient appelés que par un seul des *caller* [@Hwang2015].       
 
-### L'annotation des variants  
-
-
-
-
-
-
-En moins de 10 ans, les technologies NGS sont passées du séquençage de panel de gènes (environs 100 Mb pour le Roche GS FLX system) au séquençage de génome entiers (environs 1500 GB pour l'Illumina Hiseq 4000) et d'une utilisation exclusive à la recherche à la routine clinique. La limitation de cette technologie n'étant plus le séquençage d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et l'inerprétation de la masse de donnée générée.  
+### L'annotation des variants, filtrage et priorisation    
 
 The main objective of this process is to gather substantial information at the variant and the gene levels. This will include the variants’ data quality, their localization at the genomic, gene and transcripts levels, their genotype, their frequency in the general population, their impact at the mRNA and protein levels, the conservation among species of the affected protein residues, the variant pathogenicity prediction, and reported associations with diseases. At the gene level, they include the gene function, its spatiotemporal expression pattern, its involvement in various pathways, and its involvement in various phenotypes/diseases.  
 
-L'annotation des variants a pour but de replacer l'ensemble des variants identifiés lors de l'étape d'appel dans leur contexte biologique. Cette phase est une des clefs de l'analyse puisqu'elle permet de prioriser des variants d'interet...  
-L'objectif principal de cette étape est de réunir l'ensemble des informations disponibles sur un variant...  
-Ces information regroupe la fréquence, sa localisation et son impact...  
-
-Cependant, cette quantité de donnée produites crées de nouvelles problématiques pour les généticiens qui se retrouvent désormais face au "déluge de données génétiques" [@Schatz2013] ce qui se retrouve être un frein dans la compréhension et l'interprétation des réseaux de gènes et leurs implication dans des pathologies.    
-
-
- This step is a requirement for the identification of variants of interest based upon a combined filtration of the collected data from one or multiple samples.
-
-
-
- the annotation step must be considered carefully, and that a conscious choice should be made to select transcript set and software for annotation [McCarthy et al., 2014].
+L'annotation des variants a pour but de replacer l'ensemble des variants identifiés lors de l'étape d'appel dans leur contexte biologique. Elle vise à réunir le maximum d'information disponible à propos d'un variant et des unités génétiques (gènes ou transcrits) qu'il impacte. Cette phase est une des clefs de l'analyse puisqu'elle permet de prioriser des variants d'interet et de filtrer d'autres variants considérés comme non informatifs dans un cadre donné. Comme pour l'ensemble des étapes précédantes, les logiciels et jeux de données utilisés lors de l'étape d'annotation doivent être choisis consciencieusement, les résultats étant grandement impactés par ceux-ci [@McCarthy2014]. Cette annotation se fait généralement à deux niveau : 
+1. Au niveau du variant : Regroupe l'ensemble des informations concèrnant un variant donné tel que sa qualité, son génotype et sa fréquence 
+2. Au niveau de l'unité génétique : Regroupe les information disponible sur l'unité génétique impacté par le variant tel que sa fonction, son expression tissulaire, les voies métaboliques dans lesquelles elle est impliquée, les pathologies auxquelles elle est associées *etc*...  
 
 #### Au niveau du variant  
+
+Plusieurs informations peuvent être liées à un variant donné. 
 
 ##### par la fréquence : (ExAC)  
 
@@ -429,9 +405,10 @@ include_graphics(path = "figure/venn_Diag_patho_pred.png")
 
 ```
 
+
 #### Au niveau du gène  
 
-L'annotation au niveau du gène (ou du transcrit) consiste à récupérer l'ensemble des information disponible sur le gène (impacté par le variant) et non plus sur le variant directement. L'ensemble de ces informations est donc extrêmement dépendante du jeux de gène utilisé et peuvent donc variaer en fonction de celui-ci [@McCarthy2014,@Zhao2015] même si les gènes CCDS sont bien représentés à la fois par le NCBI, Ensembl et UCSC [@Pruitt2009]
+L'annotation au niveau du gène (ou du transcrit) consiste à récupérer l'ensemble des information disponible sur le gène (impacté par le variant) et non plus sur le variant directement. Cette étape permet donc de filtrer ou de prioriser l'ensemble des variants chevauchant un gène (ou transcrit) donnée. L'ensemble de ces informations est donc extrêmement dépendante du jeux de gène utilisé et peuvent donc variaer en fonction de celui-ci [@McCarthy2014,@Zhao2015] même si les gènes CCDS sont bien représentés à la fois par le NCBI, Ensembl et UCSC [@Pruitt2009]
 
 
 Expression du gene  
@@ -444,15 +421,29 @@ HPO, OMIM
 
 RVIS, pLI 
 
-
-
-
-
-
-
-
+Plus récemment, favorisé par l'emmergence des bases de données de variants, tel que ESP [cite] 1kg[cite] et surtout ExAC [cite], sont apparus des scores 
 
 ### Conclusion NGS  
+
+En moins de 10 ans, les technologies NGS sont passées du séquençage de panel de gènes (environs 100 Mb pour le Roche GS FLX system) au séquençage de génome entiers (environs 1500 GB pour l'Illumina Hiseq 4000) et d'une utilisation exclusive à la recherche à la routine clinique. Cependant, et ce malgré son succès dans le domaine de la génomique et de la post-génomique, plusieurs problématiques découlent de cette technologies.  il reste au NGS plusieurs problématiques à résoudres 
+
+
+
+Cependant, cette quantité de donnée produites crées de nouvelles problématiques pour les généticiens qui se retrouvent désormais face au "déluge de données génétiques" [@Schatz2013] ce qui se retrouve être un frein dans la compréhension et l'interprétation des réseaux de gènes et leurs implication dans des pathologies, lLa limitation de cette technologie n'étant plus le séquençage d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et l'inerprétation de la masse de donnée générée. 
+
+De même, nous avons pu voir que le séquençage par NGS se déroulait en plusieurs étapes mellant à la fois des techniqus de biologie moléculaire pour l'amplification par exemple,  et des techniques d'informatiques et mathématiques, comme pour l'alignement. 
+
+
+
+De nombreux efforts sont fait pour palier la contrainte instaurée par les *reads* courts dans le cadre d'analyse génomique, cependant les solutions informatique et bioinformatique proposée jusqu'à présent sont bien en dessous des besoins créés pour l'analyse des données NGS [@McPherson2009].  
+
+
+
+Le séquençage nouvelle génération (NGS) a apporté avec lui des opportunités sans précédent dans le domaine de la recherche en génomique. Il a pu être appliqué à une grande variété de contexte avec nottament le séquençage de génome entier, ou *Whole Genome Sequencing* (WGS) ou encore le séquençage exonique, le *Whole Exome Sequencing* (WES). Cependant, certaines de ses caractéristiques techniques tel que la production de plusieurs milliards de ***reads* courts**, bien quelles soient en partie responsable de son succès, sont aussi à l'origine de nouvelle problématique, notamment dans l'analyse et l'interprétation des données.  
+
+
+
+
 
 cf Evaluation of next-generation sequencing software in mapping and assembly partie CHALLENGES AND PROSPECTS
 
