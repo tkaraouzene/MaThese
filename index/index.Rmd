@@ -13,7 +13,7 @@ site: bookdown::bookdown_site
 output: 
   function(){bookdown::pdf_book(
   toc = TRUE,
-  toc_depth = 3,
+  toc_depth = 4,
   template = "template.tex",
   highlight = "pygments",
   keep_tex = TRUE,

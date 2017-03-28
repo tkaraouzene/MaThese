@@ -174,7 +174,7 @@ class (for LaTeX) and the R bookdown package, in general.
     \end{preface}
   
       \hypersetup{linkcolor=black}
-    \setcounter{tocdepth}{2}
+    \setcounter{tocdepth}{3}
     \tableofcontents
   
       \listoftables
@@ -1030,50 +1030,39 @@ class (for LaTeX) and the R bookdown package, in general.
   fragmentation peut-être phisique, enzymatique ou bien chimique. Ce sont
   les résidus d'ADN résultant de cette fragmentation qui seront ensuite
   amplifié. Il existe quatre stratégies utilisées pour le clonage de l'ADN
-  dans le cadre du NGS :
-  
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    La PCR en emulsion ou emPCR (\textbf{Figure : }\ref{fig:ngsampli} -
-    \textbf{a}) : Le patron d'ADN fragmenté simple brin est lié à une
-    séquence adaptatrice complémentaire et est capturé par une goutelette
-    aqueuse appelée micelle contenant une bille recouverte d'adaptateur
-    complémentaire à celui fixé sur le fragment d'ADN ainsi que tout les
-    composant nécéssaire à la réaction de PCR. En respectant un ratio
-    nombre de molécule d'ADN / nombre de billes, on va fixer un seul
-    fragment d'ADN sur chaque bille. Chacune de ces billes seront donc, en
-    fin de réaction, recouverte par plusieurs milliers de copies de la
-    même séquence d'ADN.\\
-  \item
-    L'amplification par pont sur face solide (\textbf{Figure :
-    }\ref{fig:ngsampli} - \textbf{b}) : Les fragments d'ADN sont liés à
-    des séquences adaptatrices et liée par une de leurs extrémités à une
-    amorce fixée sur un support solide. Du fait de la dilution, les
-    molécules d'ADN se trouvent éloignées les unes des autres.
-    L'extrémitée libre du fragment interagit avec les amorces situées à
-    proximité formant une structure en pont, d'où le nom de PCR en pont ou
-    \emph{bridge-PCR}. La PCR va alors synthétizer un deuxième brin
-    complémentaire aux fragments immobilisés sur le support. En procédant
-    à des cycles de température comme pour une réaction PCR classique, on
-    obtient à l'emplacement de chaque molécule initiale un massif de
-    molécules fixées sur la plaque, toutes identiques à la molécule
-    initiale.\\
-  \item
-    Amplification par modèle mobile ou \emph{walking-template}
-    (\textbf{Figure : }\ref{fig:ngsampli} - \textbf{c}) : L'ADN fragmenté
-    est lié à un adaptateur et lié à une amorce complémentaire fixée sur
-    un suport solide. Le brin complémentaire du fragment sera synthétisé
-    par PCR à partir de l'amorce fixée. La molécule double brin
-    nouvellement formée sera ensuite partiellement dénaturée permettant à
-    l'extrémitée libre de se fixée à une séquence amorce voisine. Des
-    amorces \emph{reverse} sont ensuite utilisées por resynthétiser un
-    fragment d'ADN libre à partir des fragments fixés sur le support.\\
-  \item
-    (\textbf{Figure : }\ref{fig:ngsampli} - \textbf{d}) : \textbf{PAS DU
-    TOUT COMPRIS LE MECHANISME !!! }
-  \end{enumerate}
+  dans le cadre du NGS :\\
+  1. La PCR en emulsion ou emPCR (\textbf{Figure : }\ref{fig:ngsampli} -
+  \textbf{a}) : Le patron d'ADN fragmenté simple brin est lié à une
+  séquence adaptatrice complémentaire et est capturé par une goutelette
+  aqueuse appelée micelle contenant une bille recouverte d'adaptateur
+  complémentaire à celui fixé sur le fragment d'ADN ainsi que tout les
+  composant nécéssaire à la réaction de PCR. En respectant un ratio nombre
+  de molécule d'ADN / nombre de billes, on va fixer un seul fragment d'ADN
+  sur chaque bille. Chacune de ces billes seront donc, en fin de réaction,
+  recouverte par plusieurs milliers de copies de la même séquence d'ADN.\\
+  2. L'amplification par pont sur face solide (\textbf{Figure :
+  }\ref{fig:ngsampli} - \textbf{b}) : Les fragments d'ADN sont liés à des
+  séquences adaptatrices et liée par une de leurs extrémités à une amorce
+  fixée sur un support solide. Du fait de la dilution, les molécules d'ADN
+  se trouvent éloignées les unes des autres. L'extrémitée libre du
+  fragment interagit avec les amorces situées à proximité formant une
+  structure en pont, d'où le nom de PCR en pont ou \emph{bridge-PCR}. La
+  PCR va alors synthétizer un deuxième brin complémentaire aux fragments
+  immobilisés sur le support. En procédant à des cycles de température
+  comme pour une réaction PCR classique, on obtient à l'emplacement de
+  chaque molécule initiale un massif de molécules fixées sur la plaque,
+  toutes identiques à la molécule initiale.\\
+  3. Amplification par modèle mobile ou \emph{walking-template}
+  (\textbf{Figure : }\ref{fig:ngsampli} - \textbf{c}) : L'ADN fragmenté
+  est lié à un adaptateur et lié à une amorce complémentaire fixée sur un
+  suport solide. Le brin complémentaire du fragment sera synthétisé par
+  PCR à partir de l'amorce fixée. La molécule double brin nouvellement
+  formée sera ensuite partiellement dénaturée permettant à l'extrémitée
+  libre de se fixée à une séquence amorce voisine. Des amorces
+  \emph{reverse} sont ensuite utilisées por resynthétiser un fragment
+  d'ADN libre à partir des fragments fixés sur le support.\\
+  4. (\textbf{Figure : }\ref{fig:ngsampli} - \textbf{d}) : \textbf{PAS DU
+  TOUT COMPRIS LE MECHANISME !!! }
   
   \begin{figure}
   
@@ -1086,19 +1075,11 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{La réaction de séquence}\label{la-reaction-de-sequence}
   
-  \begin{figure}
-  
-  {\centering \includegraphics[scale=.28]{figure/sequeneur_a_travers_le_temps} 
-  
-  }
-  
-  \caption[Appercu non exostif des instruments de séquençage haut-débit présentés entre 2004 et 2015]{Appercu non exostif des instruments de séquençage haut-débit présentés entre 2004 et 2015 d'après [@Meienberg2016] : Présentation des différentes plateformes de séquençage haut débit commercialisés dans la dernière décénie. SBS : séquençage par synthèse ; SMS : séquençage de molécule unique ; SBL : séquençage par ligation}\label{fig:seqtime}
-  \end{figure}
-  
-  Il existe trois technologies principales permettant le séquençage de
-  \emph{reads} courts, ces différentes techniques on vu leur apparition à
-  travers le temps et chaque plateforme \ldots{}.. (\textbf{Figure :
-  }\ref{fig:seqtime}) :
+  La réaction de séquence est l'étape suivant l'amplification et consiste
+  à déterminer l'ordre dans lequel se succèdent les nucléotides de
+  l'ensemble des clones générés dans la phase d'amplification. Il existe
+  deux technologies principales permettant le séquençage de \emph{reads}
+  courts :\\
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1119,15 +1100,15 @@ class (for LaTeX) and the R bookdown package, in general.
       méthode est caractérisée par son utilisation de molécule dîtes
       terminatrices auxquelles le groupement \(\mathrm{3'-OH}\) est
       modifié de sorte à éviter l'élongation (J. Guo et al., 2008), on
-      parlera de groupement \(\mathrm{3'-blocqué}\). Le processus est
+      parlera de groupement \(\mathrm{3'-bloqué}\). Le processus est
       initialisé une amorce est liée au fragment d'ADN et permettra
       l'initialisation de la polymerisation. À chaque cycle, un mixe
       comprenant l'ensemble des quatres de desoxynucléotides (dNTPs),
       préalablement labelisés par uyn fluorophore et
-      \(\mathrm{3'-blocqué}\) sont mis en contact du fragment. Après
+      \(\mathrm{3'-bloqué}\) sont mis en contact du fragment. Après
       l'incorporation d'un unique dNTP au fragment, les dNATP non liés
       sont éliminée et la nature du dNTP ajouté est identifé grace à son
-      fluorophore. Le fluorophore et le groupement \(\mathrm{3'-blocqué}\)
+      fluorophore. Le fluorophore et le groupement \(\mathrm{3'-bloqué}\)
       sont retirés permettant ainsi à un nouveau cycle de commencer.
     \end{enumerate}
   \end{enumerate}
@@ -1169,7 +1150,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent]{Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent d'après [@Goodwin2016] : }\label{fig:snaSeq}
+  \caption[Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent]{Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent d'après [@Goodwin2016] : **a** : Mise en présence du patron d'ADN à séquencer avec un mix contenant un seul type de dNTP, si le dNTP est complémentaire au patron, il se fixe et libère un proton permettant d'identifier la liaison. **b** : Dans d'homopolymère, plusieurs nucléotides identiques succesifs, autant de proton sont relaché que de constituant de bases constituant l'homopolymère, le signal émmit est donc plus fort permettant d'identifier le nombre des dNTPS liés}\label{fig:snaSeq}
   \end{figure}
   
   \begin{enumerate}
@@ -1180,12 +1161,23 @@ class (for LaTeX) and the R bookdown package, in general.
     \textbf{Séquençage par ligation} (SBL) : Par définition, cette méthode
     est basée sur l'hybridation et la ligation de l'ADN (Tomkinson,
     Vijayakumar, Pascal, \& Ellenberger, 2006) d'une sonde lée à un
-    fluorophore. Cette sonde s'hybridise au brin d'ADN
-  \item
-    \textbf{Séquençage par SMS} (SMS) :
+    fluorophore. Ce processus utilise les caractéristique de la ligase,
+    une enzyme qui a pour fonction de catalyser la liaison de deux brins
+    d'ADN par des liaison phosophodiester. la sonde est constitué d'une ou
+    deux bases connues, on parle alors de \emph{one-base-encoded probes}
+    ou de \emph{two-bases-encoded probes} suivis d'une succession de bases
+    ``dégénérées'' ou universelle, c'est à dire, des bases capables de
+    s'apparier avec n'importe laquelle des quatre bases de l'ADN.
   \end{enumerate}
   
-  \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.26]{figure/SBL_seq_solid} 
+  
+  }
+  
+  \caption[Exemple de séquençage SBL tel qu'il est effectué par SOLiD]{Exemple de séquençage SBL tel qu'il est effectué par SOLiD d'après [@Goodwin2016] : }\label{fig:sblSeq}
+  \end{figure}
   
   \section{L'analyse bioinformatique des données de
   NGS}\label{lanalyse-bioinformatique-des-donnees-de-ngs}
