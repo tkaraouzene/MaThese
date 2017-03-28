@@ -897,24 +897,45 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsection{Les puces}\label{les-puces}
   
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Bref historique de la technologie\\
+  \item
+    A quoi ça sert
+  \item
+    Comment ça marche
+  \end{enumerate}
+  
+  \subsubsection{Les puces à SNP, le génotypage\ldots{} (titre à
+  revoir)}\label{les-puces-a-snp-le-genotypage-titre-a-revoir}
+  
+  \subsubsection{Du tissu au transcriptome, le différentiel
+  d'expression}\label{du-tissu-au-transcriptome-le-differentiel-dexpression}
+  
   \subsection{Le séquençage NGS}\label{le-sequencage-ngs}
   
-  Avant de parler des nouvelles technologies de séquençage (NGS) faisons
-  un bref historique du séquençage de l'ADN. En 1977 Frederick Sanger
-  développe une technologie de séquençage d'ADN basée sur la méthode
-  \emph{chain-termination}. Ce procédé est desormais connu sous le nom de
-  séquençage Sanger. D'autre méthode furent développées à la même periode,
-  notamment celle de Walter Gilbert basée sur la modification chimique de
-  l'ADN, cependant sa grande efficience et sa faible utilisation de la
-  radioactivité permirent au séquençage Sanger de s'imposer comme
-  référence dans la ``première génération'' de séquençeur à application de
-  commerciale et de recherche
+  Le terme séquençage de l'ADN fait référence à l'enssemble des technique
+  permettant de déterminer l'ordre des nucléotides adenine (A), tymine
+  (T), cytosine (C) et guanine (G) de l'integralité ou d'une partie d'une
+  molécule d'ADN. Avant de parler des nouvelles technologies de séquençage
+  (NGS) faisons un bref historique du séquençage de l'ADN. En 1977
+  Frederick Sanger développe une technologie de séquençage d'ADN basée sur
+  la méthode \emph{chain-termination}. Ce procédé est desormais connu sous
+  le nom de séquençage Sanger. D'autre méthode furent développées à la
+  même periode, notamment celle de Walter Gilbert basée sur la
+  modification chimique de l'ADN, cependant sa grande efficience et sa
+  faible utilisation de la radioactivité permirent au séquençage Sanger de
+  s'imposer comme référence dans la ``première génération'' de séquençeur
+  à application de commerciale et de recherche
   (\href{http://en.wikipedia.org/wiki/DNA_sequencing}{Wikipedia}). Apparu
   en 1998, les instruments de séquençage automatique ainsi que les
   logiciels associés utilisant le séquençage par capilarité et la
   technologie Sanger furent les outils principaux qui permirent la
   completion du \emph{human genome project} en 2001 (Collins, Morgan, \&
-  Patrinos, 2003).\\
+  Patrinos, 2003).
+  
   Contrairement à la méthode Sanger, le NGS \emph{lit} des fragment d'ADN,
   provenant d'un génome entier, de manière aléatoire. On parle alors de
   séquençage de génomes entiers ou \emph{whole genome sequencing} (WGS).
@@ -951,15 +972,19 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée, d'après Brendan et. al, (2014)]{Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée, d'après Brendan et. al, (2014) : Sequencing space based on read length (in bases) and number of reads per run. Points represent official platform/chemistry combination releases and are color-coded based on the platform family. To see this illustration in color, the reader is referred to the web version of this article at www.liebertpub.com/wound}\label{fig:readPerRun}
+  \caption[Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée]{Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée d'après Brendan et. al, (2014) : Sequencing space based on read length (in bases) and number of reads per run. Points represent official platform/chemistry combination releases and are color-coded based on the platform family. To see this illustration in color, the reader is referred to the web version of this article at www.liebertpub.com/wound}\label{fig:readPerRun}
   \end{figure}
   
-  \subsubsection{La capture d'exons}\label{la-capture-dexons}
+  \subsubsection{La capture des parties à séquencer, avantage et
+  inconvegnants}\label{la-capture-des-parties-a-sequencer-avantage-et-inconvegnants}
   
   Pour de nombreuses application, il peut être intérésesant de ne
-  séquencer qu'une partie du génome et non pas son intégralité. On parle
-  alors de séquençage ciblé, et lorsque cette ``cible'' représente
-  l'ensemble des éxons on parle alors de séquençage exomique ou
+  séquencer qu'une partie du génome et non pas son intégralité. Dans cette
+  sous partie de génome ciblé on peut trouver par exemple : une région
+  génomique spécifique à laquelle une pathologie a déjà été associé,
+  l'ensembles des exons de certains gènes candidats, ou encore
+  l'intégralité des exons de l'ensemble des gènes codant pour une
+  protéine.Dans ce dernier cas on parle alors de séquençage exomique ou
   \emph{whole exome sequencing} (WES). Les principaux avantages du WES par
   rapport au WGS sont son cout réduits ainsi qu'une masse de données moins
   importantes à stocker et à analyser. En effet, l'ensemble de l'exome ne
@@ -1052,39 +1077,113 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=.551]{figure/ngs_amplification} 
+  {\centering \includegraphics[scale=.545]{figure/ngs_amplification} 
   
   }
   
-  \caption[Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS]{Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS d'après Goodwin (2016) : }\label{fig:ngsampli}
+  \caption[Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS]{Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS d'après [@Goodwin2016] : }\label{fig:ngsampli}
   \end{figure}
   
-  \subsubsection{Le séquençage}\label{le-sequencage}
+  \subsubsection{La réaction de séquence}\label{la-reaction-de-sequence}
   
-  pyroséquençage
+  \begin{figure}
   
-  Il existe deux types de technologies permettant le séquençage de
-  \emph{reads} courts :
+  {\centering \includegraphics[scale=.28]{figure/sequeneur_a_travers_le_temps} 
+  
+  }
+  
+  \caption[Appercu non exostif des instruments de séquençage haut-débit présentés entre 2004 et 2015]{Appercu non exostif des instruments de séquençage haut-débit présentés entre 2004 et 2015 d'après [@Meienberg2016] : Présentation des différentes plateformes de séquençage haut débit commercialisés dans la dernière décénie. SBS : séquençage par synthèse ; SMS : séquençage de molécule unique ; SBL : séquençage par ligation}\label{fig:seqtime}
+  \end{figure}
+  
+  Il existe trois technologies principales permettant le séquençage de
+  \emph{reads} courts, ces différentes techniques on vu leur apparition à
+  travers le temps et chaque plateforme \ldots{}.. (\textbf{Figure :
+  }\ref{fig:seqtime}) :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    Séquençage par ligation\\
-  \item
-    Séquençage par synthèse
+    \textbf{Séquençage par synthèse} (SBS) : Ce type de séquençage
+    regroupe l'ensemble des méthodes utilisant l'ADN polymérase pour
+    synthetiser de l'ADN. En 2016, Sahra Goodwin et ses collègues ont
+    différentiés deux catégories de séquençage par synthèse (Goodwin,
+    McPherson, \& McCombie, 2016) :
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      \textbf{Terminaison par cycle reversible}, \emph{cyclic reversible
+      termination} (CRT) (\textbf{Figure : }\ref{fig:crtSeq}) : Cette
+      méthode est caractérisée par son utilisation de molécule dîtes
+      terminatrices auxquelles le groupement \(\mathrm{3'-OH}\) est
+      modifié de sorte à éviter l'élongation (J. Guo et al., 2008), on
+      parlera de groupement \(\mathrm{3'-blocqué}\). Le processus est
+      initialisé une amorce est liée au fragment d'ADN et permettra
+      l'initialisation de la polymerisation. À chaque cycle, un mixe
+      comprenant l'ensemble des quatres de desoxynucléotides (dNTPs),
+      préalablement labelisés par uyn fluorophore et
+      \(\mathrm{3'-blocqué}\) sont mis en contact du fragment. Après
+      l'incorporation d'un unique dNTP au fragment, les dNATP non liés
+      sont éliminée et la nature du dNTP ajouté est identifé grace à son
+      fluorophore. Le fluorophore et le groupement \(\mathrm{3'-blocqué}\)
+      sont retirés permettant ainsi à un nouveau cycle de commencer.
+    \end{enumerate}
   \end{enumerate}
   
-  Le séquençage nouvelle génération (NGS) a apporté avec lui des
-  opportunités sans précédent dans le domaine de la recherche en
-  génomique. Il a pu être appliqué à une grande variété de contexte avec
-  nottament le séquençage de génome entier, ou \emph{Whole Genome
-  Sequencing} (WGS) ou encore le séquençage exonique, le \emph{Whole Exome
-  Sequencing} (WES). Cependant, certaines de ses caractéristiques
-  techniques tel que la production de plusieurs milliards de
-  \textbf{\emph{reads} courts}, bien quelles soient en partie responsable
-  de son succès, sont aussi à l'origine de nouvelle problématique,
-  notamment dans l'analyse et l'interprétation des données.
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.28]{figure/CRT_seq_illumina} 
+  
+  }
+  
+  \caption[Exemple de séquençage CRT tel qu'il est effectué par Illumina]{Exemple de séquençage CRT tel qu'il est effectué par Illumina d'après [@Goodwin2016] : a: ajout d'un dNTP labellisé par un fluorophore et 3'-bloqué. b: identification du dNTP ajouté grace au fluorophore. c: le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'ellongation}\label{fig:crtSeq}
+  \end{figure}
+  
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    \textbf{Addition de nucléotide unique}, \emph{single nucleotide
+    addition} (SNA) (\textbf{Figure : }\ref{fig:snaSeq}) :
+    L'initialisation de la méthode SNA est identique à celle de la méthode
+    CRT. La différence se fait donc au moment de la phase d'élongation.
+    Contrairement à la méthode CRT, le mixe contenant les dNTPs ne
+    qu'ontient qu'un seul type de dNTP. Quatre mixes différents sont donc
+    présentés succesivement au fragment d'ADN à séquencé, ceux-ci se
+    fixeront uniquement s'ils sont complémentaires à la séquence. Ces
+    dNTPs n'ont donc pas besoin d'être \(\mathrm{3'-bloqué}\) puisque un
+    seul dNTP est ajouté à chaque iteration. Après avoir présenté un mixe,
+    vérifie si un dNTP s'est lié au fragment. Lors des séquences
+    homopolymeriques (plusieurs nucléotides identiques succesifs dans la
+    séquence), plusieurs dNTP sont donc lié simultanément, cela sera
+    détécté car le signal émis sera proportionel au nombre de nucléotides
+    ajoutés.
+  \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.26]{figure/SNA_seq_ionTorrent} 
+  
+  }
+  
+  \caption[Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent]{Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent d'après [@Goodwin2016] : }\label{fig:snaSeq}
+  \end{figure}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    \textbf{Séquençage par ligation} (SBL) : Par définition, cette méthode
+    est basée sur l'hybridation et la ligation de l'ADN (Tomkinson,
+    Vijayakumar, Pascal, \& Ellenberger, 2006) d'une sonde lée à un
+    fluorophore. Cette sonde s'hybridise au brin d'ADN
+  \item
+    \textbf{Séquençage par SMS} (SMS) :
+  \end{enumerate}
   
   \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
   
@@ -1095,8 +1194,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{reads} court a engendré plusieurs nouveaux défis bioinformatique
   dans l'analyse et l'interprétation des données de séquençage et la
   recherche de variants dans le génome humain (Wold \& Myers, 2007, M. Q.
-  Yang et al. (2009)). Les
-  
+  Yang et al. (2009)). Les\\
   Ces techniques ont été appliquées dans différents contextes, notamment
   la métagénomique (J. Qin et al., 2010), la détéction de SNPs (Van
   Tassell et al., 2008) et de variants structuraux (Alkan et al., 2010,
@@ -1240,7 +1338,8 @@ class (for LaTeX) and the R bookdown package, in general.
   variants n'étaient appelés que par un seul des \emph{caller} (Hwang et
   al., 2015).
   
-  \subsection{L'annotation des variants}\label{lannotation-des-variants}
+  \subsection{L'annotation des variants, filtrage et
+  priorisation}\label{lannotation-des-variants-filtrage-et-priorisation}
   
   The main objective of this process is to gather substantial information
   at the variant and the gene levels. This will include the variants' data
@@ -1332,38 +1431,50 @@ class (for LaTeX) and the R bookdown package, in general.
   panel de gènes (environs 100 Mb pour le Roche GS FLX system) au
   séquençage de génome entiers (environs 1500 GB pour l'Illumina Hiseq
   4000) et d'une utilisation exclusive à la recherche à la routine
-  clinique. La limitation de cette technologie n'étant plus le séquençage
-  d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et
-  l'inerprétation de la masse de donnée générée.
-  
-  De nombreux efforts sont fait pour palier la contrainte instaurée par
-  les \emph{reads} courts dans le cadre d'analyse génomique, cependant les
-  solutions informatique et bioinformatique proposée jusqu'à présent sont
-  bien en dessous des besoins créés pour l'analyse des données NGS
-  (McPherson, 2009).
+  clinique. Cependant, et ce malgré son succès dans le domaine de la
+  génomique et de la post-génomique, plusieurs problématiques découlent de
+  cette technologies. il reste au NGS plusieurs problématiques à résoudres
   
   Cependant, cette quantité de donnée produites crées de nouvelles
   problématiques pour les généticiens qui se retrouvent désormais face au
   ``déluge de données génétiques'' (Schatz \& Langmead, 2013) ce qui se
   retrouve être un frein dans la compréhension et l'interprétation des
-  réseaux de gènes et leurs implication dans des pathologies.
+  réseaux de gènes et leurs implication dans des pathologies, lLa
+  limitation de cette technologie n'étant plus le séquençage d'un, de
+  plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et
+  l'inerprétation de la masse de donnée générée.
+  
+  De même, nous avons pu voir que le séquençage par NGS se déroulait en
+  plusieurs étapes mellant à la fois des techniqus de biologie moléculaire
+  pour l'amplification par exemple, et des techniques d'informatiques et
+  mathématiques, comme pour l'alignement.
+  
+  De nombreux efforts sont fait pour palier la contrainte instaurée par
+  les \emph{reads} courts dans le cadre d'analyse génomique, cependant les
+  solutions informatique et bioinformatique proposée jusqu'à présent sont
+  bien en dessous des besoins créés pour l'analyse des données NGS (J. D.
+  McPherson, 2009).
+  
+  Le séquençage nouvelle génération (NGS) a apporté avec lui des
+  opportunités sans précédent dans le domaine de la recherche en
+  génomique. Il a pu être appliqué à une grande variété de contexte avec
+  nottament le séquençage de génome entier, ou \emph{Whole Genome
+  Sequencing} (WGS) ou encore le séquençage exonique, le \emph{Whole Exome
+  Sequencing} (WES). Cependant, certaines de ses caractéristiques
+  techniques tel que la production de plusieurs milliards de
+  \textbf{\emph{reads} courts}, bien quelles soient en partie responsable
+  de son succès, sont aussi à l'origine de nouvelle problématique,
+  notamment dans l'analyse et l'interprétation des données.
   
   cf Evaluation of next-generation sequencing software in mapping and
   assembly partie CHALLENGES AND PROSPECTS
   
-  \begin{figure}
-  
-  {\centering \includegraphics{figure/read_per_run} 
-  
-  }
-  
-  \caption{**qsdqsdqsd**}\label{fig:aaaaaaa}
-  \end{figure}
+  )
   
   \chapter{Investigation génétique et physiologique de la
   globozoospermie}\label{globo}
   
-  \chapter{AAA}\label{aaa}
+  \chapter{MutaScript}\label{mutascript}
   
   \chapter*{Conclusion}\label{conclusion}
   \addcontentsline{toc}{chapter}{Conclusion}
@@ -1468,6 +1579,11 @@ class (for LaTeX) and the R bookdown package, in general.
   Reviews}, \emph{18}(4), 541--609.
   \url{http://doi.org/10.1210/er.18.4.541}
   
+  \hypertarget{ref-Goodwin2016}{}
+  Goodwin, S., McPherson, J. D., \& McCombie, W. R. (2016). Coming of age:
+  ten years of next-generation sequencing technologies. \emph{Nat Rev
+  Genet}, \emph{17}(6), 333--351. \url{http://doi.org/10.1038/nrg.2016.49}
+  
   \hypertarget{ref-Goossens2013}{}
   Goossens, E., \& Tournaye, H. (2013). Adult stem cells in the human
   testis. \emph{Seminars in Reproductive Medicine}, \emph{31}(1), 39--48.
@@ -1478,6 +1594,14 @@ class (for LaTeX) and the R bookdown package, in general.
   J., \ldots{} De Bellis, G. (2009). A transcriptional sketch of a primary
   human breast cancer by 454 deep sequencing. \emph{BMC Genomics},
   \emph{10}(1), 163. \url{http://doi.org/10.1186/1471-2164-10-163}
+  
+  \hypertarget{ref-Guo2008}{}
+  Guo, J., Xu, N., Li, Z., Zhang, S., Wu, J., Kim, D. H., \ldots{} Ju, J.
+  (2008). Four-color DNA sequencing with 3'-O-modified nucleotide
+  reversible terminators and chemically cleavable fluorescent
+  dideoxynucleotides. \emph{Proceedings of the National Academy of
+  Sciences of the United States of America}, \emph{105}(27), 9145--9150.
+  \url{http://doi.org/10.1073/pnas.0804023105}
   
   \hypertarget{ref-Hamilton1987}{}
   Hamilton, D. W., Waites, G. M. H. (1990). \emph{Cellular and Molecular
@@ -1706,6 +1830,12 @@ class (for LaTeX) and the R bookdown package, in general.
   DNA Methylation Patterns in Multiple Gene Promoters by 454 Sequencing.
   \emph{Cancer Research}, \emph{67}(18), 8511--8518.
   \url{http://doi.org/10.1158/0008-5472.CAN-07-1016}
+  
+  \hypertarget{ref-Tomkinson2006}{}
+  Tomkinson, A. E., Vijayakumar, S., Pascal, J. M., \& Ellenberger, T.
+  (2006). DNA Ligases:~ Structure, Reaction Mechanism, and Function.
+  \emph{Chemical Reviews}, \emph{106}(2), 687--699.
+  \url{http://doi.org/10.1021/cr040498d}
   
   \hypertarget{ref-Treangen2013}{}
   Treangen, T. J., \& Salzberg, S. L. (2013). Repetitive DNA and

@@ -265,9 +265,27 @@ Sperm motility is necessary for the transport of male DNA to eggs in species wit
 L'acide desoxyribonucléique (ADN) a été identifié comme étant le porteur de l'information génétique par Oswald Theodore Avery en 1944. Sa structure en double hélice composée par quatre bases, la thymine, l'adénine, la guanine et la cytosine fut caractérisée en 1953 par James D. Watson et Francis Crick 
 
 ### Les puces  
+
+
+1. Bref historique de la technologie  
+2. A quoi ça sert 
+3. Comment ça marche  
+
+
+
+#### Les puces à SNP, le génotypage... (titre à revoir)  
+
+
+#### Du tissu au transcriptome, le différentiel d'expression  
+
+<!-- Avant l'emmergence des technologie de séquençage haut débit, les puces à ADN complémentaire (ADNc) était considérées comme étant l'outil le plus puissant pour mesurer l'expression d'un gène dans un tissus. -->
+<!-- Alors que l'être humain possède environs 25.000 gènes différents, l'ensembles de ces gènes n'est pas exprimer au  -->
+<!-- L'emmergence de cette technologie a permis pour la première fois de caractériser le profil d'exprression des -->
+
 ### Le séquençage NGS 
 
-Avant de parler des nouvelles technologies de séquençage (NGS) faisons un bref historique du séquençage de l'ADN. En 1977 Frederick Sanger développe une technologie de séquençage d'ADN basée sur la méthode *chain-termination*. Ce procédé est desormais connu sous le nom de séquençage Sanger. D'autre méthode furent développées à la même periode, notamment celle de Walter Gilbert basée sur la modification chimique de l'ADN, cependant sa grande efficience et sa faible utilisation de la radioactivité permirent au séquençage Sanger de s'imposer comme référence dans la "première génération" de séquençeur à application de commerciale et de recherche ([Wikipedia](http://en.wikipedia.org/wiki/DNA_sequencing)). Apparu en 1998, les instruments de séquençage automatique ainsi que les logiciels associés utilisant le séquençage par capilarité et la technologie Sanger furent les outils principaux qui permirent la completion du *human genome project* en 2001 [@Collins2003].  
+Le terme séquençage de l'ADN fait référence à l'enssemble des technique permettant de déterminer l'ordre des nucléotides adenine (A), tymine (T), cytosine (C) et guanine (G) de l'integralité ou d'une partie d'une molécule d'ADN. Avant de parler des nouvelles technologies de séquençage (NGS) faisons un bref historique du séquençage de l'ADN. En 1977 Frederick Sanger développe une technologie de séquençage d'ADN basée sur la méthode *chain-termination*. Ce procédé est desormais connu sous le nom de séquençage Sanger. D'autre méthode furent développées à la même periode, notamment celle de Walter Gilbert basée sur la modification chimique de l'ADN, cependant sa grande efficience et sa faible utilisation de la radioactivité permirent au séquençage Sanger de s'imposer comme référence dans la "première génération" de séquençeur à application de commerciale et de recherche ([Wikipedia](http://en.wikipedia.org/wiki/DNA_sequencing)). Apparu en 1998, les instruments de séquençage automatique ainsi que les logiciels associés utilisant le séquençage par capilarité et la technologie Sanger furent les outils principaux qui permirent la completion du *human genome project* en 2001 [@Collins2003].  
+
 Contrairement à la méthode Sanger, le NGS *lit* des fragment d'ADN, provenant d'un génome entier, de manière aléatoire. On parle alors de séquençage de génomes entiers ou *whole genome sequencing* (WGS). Pour cela, la molécule d'ADN est "coupée" en plusieurs fragments d'une taille donnée. Ce sont ensuite ces fragments qui seront, après une étape d'amplification spécifique au différentes plateformes, séquencés simultanément. C'est pourquoi on parle souvent de séquençage parrallèle massif pour décrire le NGS.  Le produit de ce séquençage est appelé *read*. Cette technologie est avantageuse de part la masse de *reads* qu'elle produit et par son faible cout par bases séquencées [@Metzker2010]. Ces caractéristiques ont permis au séquençage Haut-débit d'être courmment utilisé dans le domaine de la recherche clinique. 
 La taille des *reads* obtenus par séquençage NGS est nettement inferieure à celle atteinte par le séquençage Sanger. À l'heure actuelle, les *reads* aobtenus par séquençage NGS ont une taille comprise entre 50 et 500 pb pour la plupart des plateforme contre ... obtenus par Sanger (**Figure :** \@ref(fig:readPerRun)), c'est pour cela que les résultats du séquençage NGS sont appelés des *reads* courts ou *short reads*.   
 Étant donnée que le NGS produit à l'heure actuelle des *reads* courts la notion de couverture est importante et représente l'un des critère majeur à considérer dans l'analyse des données [@Sims2014]. La couverture est définie comme le nombre de *reads* qui, après l'atape d'alignement [cf alignment](#lalignement), se chevauchent les uns les autres au sein du région génomique spécifique. Par exemple, une couverture de 30x pour le gène *XXXX* signifie que chaque nucléotide de ce gène est chevauchés par au moins 30 *reads* distincts.  
@@ -282,9 +300,10 @@ La taille des *reads* obtenus par séquençage NGS est nettement inferieure à c
 
 ```{r readPerRun,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
 
-fig.name <- "Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée, d'après Brendan et. al, (2014)"
+fig.name <- "Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée"
+fig.from <- "Brendan et. al, (2014)"
 fig.description <- "Sequencing space based on read length (in bases) and number of reads per run. Points represent official platform/chemistry combination releases and are color-coded based on the platform family. To see this illustration in color, the reader is referred to the web version of this article at www.liebertpub.com/wound"
-fig.info <- paste(fig.name,fig.description,sep = " : ")
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
 include_graphics(path = "figure/read_per_run.png")
 
@@ -303,10 +322,10 @@ Dans la plupart des technologies, la phase de séquençage est précédée par u
 3. Amplification par modèle mobile ou *walking-template* (**Figure : **\@ref(fig:ngsampli) - **c**) :  L'ADN fragmenté est lié à un adaptateur et lié à une amorce complémentaire fixée sur un suport solide. Le brin complémentaire du fragment sera synthétisé par PCR à partir de l'amorce fixée. La molécule double brin nouvellement formée sera ensuite partiellement dénaturée permettant à l'extrémitée libre de se fixée à une séquence amorce voisine. Des amorces *reverse* sont ensuite utilisées por resynthétiser un fragment d'ADN libre à partir des fragments fixés sur le support.  
 4. (**Figure : **\@ref(fig:ngsampli) - **d**) :  **PAS DU TOUT COMPRIS LE MECHANISME !!! **  
 
-```{r ngsampli,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.551"}
+```{r ngsampli,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.545"}
 
 fig.name <- "Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS"  
-fig.from <- "Goodwin (2016)"
+fig.from <- "[@Goodwin2016]"
 fig.description <- ""
 fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 include_graphics(path = "figure/ngs_amplification.png")
@@ -315,10 +334,50 @@ include_graphics(path = "figure/ngs_amplification.png")
 
 #### La réaction de séquence  
 
-Il existe deux types de technologies permettant le séquençage de *reads* courts : 
+```{r seqtime,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.28"}
 
-1. Séquençage par ligation  
-2. Séquençage par synthèse  
+fig.name <- "Appercu non exostif des instruments de séquençage haut-débit présentés entre 2004 et 2015" 
+fig.from <- "[@Meienberg2016]"
+fig.description <- "Présentation des différentes plateformes de séquençage haut débit commercialisés dans la dernière décénie. SBS : séquençage par synthèse ; SMS : séquençage de molécule unique ; SBL : séquençage par ligation"
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+include_graphics(path = "figure/sequeneur_a_travers_le_temps.png")
+
+```
+
+Il existe trois technologies principales permettant le séquençage de *reads* courts, ces différentes techniques on vu leur apparition à travers le temps et chaque plateforme ..... (**Figure : **\@ref(fig:seqtime)) : 
+
+1. **Séquençage par synthèse** (SBS) : Ce type de séquençage regroupe l'ensemble des méthodes utilisant l'ADN polymérase pour synthetiser de l'ADN. En 2016, Sahra Goodwin et ses collègues ont différentiés deux catégories de séquençage par synthèse [@Goodwin2016] : 
+    a. **Terminaison par cycle reversible**, *cyclic reversible termination* (CRT) (**Figure : **\@ref(fig:crtSeq)) : Cette méthode est caractérisée par son utilisation de molécule dîtes terminatrices auxquelles le groupement $\mathrm{3'-OH}$ est modifié de sorte à éviter l'élongation [@Guo2008], on parlera de groupement  $\mathrm{3'-blocqué}$. Le processus est initialisé une amorce est liée au fragment d'ADN et permettra l'initialisation de la polymerisation. À chaque cycle, un mixe comprenant l'ensemble des quatres de desoxynucléotides (dNTPs), préalablement labelisés par uyn fluorophore et $\mathrm{3'-blocqué}$ sont mis en contact du fragment. Après l'incorporation d'un unique dNTP au fragment, les dNATP non liés sont éliminée et la nature du dNTP ajouté est identifé grace à son fluorophore. Le fluorophore et le groupement $\mathrm{3'-blocqué}$ sont retirés permettant ainsi à un nouveau cycle de commencer. 
+
+```{r crtSeq,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.28"}
+
+fig.name <- "Exemple de séquençage CRT tel qu'il est effectué par Illumina" 
+fig.from <- "[@Goodwin2016]"
+fig.description <- "a: ajout d'un dNTP labellisé par un fluorophore et 3'-bloqué. b: identification du dNTP ajouté grace au fluorophore. c: le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'ellongation"
+
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+
+include_graphics(path = "figure/CRT_seq_illumina.png")
+
+```
+
+
+    b. **Addition de nucléotide unique**, *single nucleotide addition* (SNA) (**Figure : **\@ref(fig:snaSeq)) :  L'initialisation de la méthode SNA est identique à celle de la méthode CRT. La différence se fait donc au moment de la phase d'élongation. Contrairement à la méthode CRT, le mixe contenant les dNTPs ne qu'ontient qu'un seul type de dNTP. Quatre mixes différents sont donc présentés succesivement au fragment d'ADN à séquencé, ceux-ci se fixeront uniquement s'ils sont complémentaires à la séquence. Ces dNTPs n'ont donc pas besoin d'être  $\mathrm{3'-bloqué}$ puisque un seul dNTP est ajouté à chaque iteration. Après avoir présenté un mixe, vérifie si un dNTP s'est lié au fragment. Lors des séquences homopolymeriques (plusieurs nucléotides identiques succesifs dans la séquence), plusieurs dNTP sont donc lié simultanément, cela sera détécté car le signal émis sera proportionel au nombre de nucléotides ajoutés.
+    
+```{r snaSeq,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.26"}
+
+fig.name <- "Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent" 
+fig.from <- "[@Goodwin2016]"
+fig.description <- ""
+
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+
+include_graphics(path = "figure/SNA_seq_ionTorrent.png")
+
+```
+    
+2. **Séquençage par ligation** (SBL) : Par définition, cette méthode est basée sur l'hybridation et la ligation de l'ADN [@Tomkinson2006] d'une sonde lée à un fluorophore. Cette sonde s'hybridise au brin d'ADN. **PAS TOUT COMPRIS**, cf file:///home/karaout/T%C3%A9l%C3%A9chargements/9781461407812-c1.pdf
+3. **Séquençage de molécule unique** (SMS) :     
 
 ***
 
@@ -448,3 +507,4 @@ Le séquençage nouvelle génération (NGS) a apporté avec lui des opportunité
 cf Evaluation of next-generation sequencing software in mapping and assembly partie CHALLENGES AND PROSPECTS
 
 
+)
