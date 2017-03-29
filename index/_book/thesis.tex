@@ -120,6 +120,8 @@
 \setlength{\parskip}{0pt}
 
 % Added by CII
+  %\setlength{\parskip}{\baselineskip}
+  \usepackage[parfill]{parskip}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -1186,63 +1188,48 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{reads} court a engendré plusieurs nouveaux défis bioinformatique
   dans l'analyse et l'interprétation des données de séquençage et la
   recherche de variants dans le génome humain (Wold \& Myers, 2007, M. Q.
-  Yang et al. (2009)). Les\\
-  Ces techniques ont été appliquées dans différents contextes, notamment
-  la métagénomique (J. Qin et al., 2010), la détéction de SNPs (Van
-  Tassell et al., 2008) et de variants structuraux (Alkan et al., 2010,
-  Medvedev, Stanciu, \& Brudno (2009)) mais également dans des études
-  portant sur la méthylation de l'ADN (K. H. Taylor et al., 2007),
-  l'analyse de l'expression des ARNs messagers (Sultan et al., 2008), dans
-  la génétique du cancer (Guffanti et al., 2009) et la médecine
-  personalisée (Auffray, Chen, \& Hood, 2009). Cependant, pour l'ensemble
-  de ces applications, la grande quantité de données générées par chaque
-  analyse pose plusieurs défis informatiques (Horner et al., 2009). En
-  effet, les progres techniques des dernières décénies ont rendu possible
-  le séquençage de plusieurs millions des \emph{reads} d'ADN en un temps
-  reliativement court et à couts raisonable. Ainsi, l'émergence du du WGS
-  et du WES a permit de réunir une quantité jusqu'à présent inégalé
-  d'information sur les variation génétiques, et d'une manière plus
-  générale, sur les gènes et leurs fonctions ((Mardis, 2008), (Bentley,
-  2006)). Cependant, de part leur nature et leur quantité, l'aquisition de
-  ces nouvelles données a engendrée de nouvelles problématiques notamment
-  dans l'analyse des données et leur interprétation.
-  
-  The number of research projects dealing with whole-genome sequencing
-  data has been emerging in humans {[}3, 4, 5, 6{]}, 3 Goldstein DB, Allen
-  A, Keebler J, Margulies EH, Petrou S, Petrovski S, et al. Sequencing
-  studies in human genetics: design and interpretation\\
-  4 Sims D, Sudbery I, Ilott NE, Heger A, Ponting CP. Sequencing depth and
-  coverage: key considerations in genomic analyses. Nat Rev Genet\\
-  5 Lam HYK, Clark MJ, Chen R, Chen R, Natsoulis G, O'Huallachain M, et
-  al. Performance comparison of whole-genome sequencing platforms. Nat
-  Biotechnol\\
-  6 Morozova O, Marra M. Applications of next-generation sequencing
-  technologies in functional genomics. Genomics
+  Yang et al. (2009)). Ces techniques ont été appliquées dans différents
+  contextes, notamment la métagénomique (J. Qin et al., 2010), la
+  détéction de SNPs (Van Tassell et al., 2008) et de variants structuraux
+  (Alkan et al., 2010, Medvedev, Stanciu, \& Brudno (2009)) mais également
+  dans des études portant sur la méthylation de l'ADN (K. H. Taylor et
+  al., 2007), l'analyse de l'expression des ARNs messagers (Sultan et al.,
+  2008), dans la génétique du cancer (Guffanti et al., 2009) et la
+  médecine personalisée (Auffray, Chen, \& Hood, 2009). Cependant, pour
+  l'ensemble de ces applications, la grande quantité de données générées
+  par chaque analyse pose plusieurs défis informatiques (Horner et al.,
+  2009). En effet, les progres techniques des dernières décénies ont rendu
+  possible le séquençage de plusieurs millions des \emph{reads} d'ADN en
+  un temps reliativement court et à couts raisonable. Ainsi, l'émergence
+  du séquençage haut débit et notamment du WGS et du WES a permit de
+  réunir une quantité jusqu'à présent inégalé d'information sur les
+  variation génétiques, et d'une manière plus générale, sur les gènes et
+  leurs fonctions (Mardis, 2008, Bentley (2006)). Cependant, de part leur
+  nature et leur quantité, l'aquisition de ces nouvelles données a
+  engendrée de nouvelles problématiques notamment dans l'analyse des
+  données et leur interprétation.
   
   \subsection{L'analyse des données
   brutes}\label{lanalyse-des-donnees-brutes}
   
   \hypertarget{lalignement}{\subsubsection{L'alignement}\label{lalignement}}
   
-  Comme dit précédemment, le séquençage de \emph{reads} courts entraine de
-  nombreuses complications et restraint l'utilisation du NGS dans de
-  nombreuses applications biologiques (Wold \& Myers, 2007).
-  
-  L'alignement des séquences constitue probablement l'étape la plus
-  importante de l'analyse des données issues du séquençage haut débit
-  (Flicek \& Birney, 2009). Elle est la base sur laquelle reposent
-  l'ensemble des étapes effectuées en aval, notamment l'appel des variants
-  (R. Nielsen, Paul, Albrechtsen, \& Song, 2011). L'objectif de
-  l'alignement est de déterminer la position correcte de chacun des
-  \emph{reads} séquencés le long du génome de référence. Cette référence
-  est souvent construite à partir des données de séquençage de plusieurs
-  donneurs et ne représente donc pas la séquence d'un individu en
-  particulier mais est sensé représenter la séquence consensus d'une
-  espèce donnée. Par exemple, la séquence de référence humaine GRCh37
-  (\emph{Genome Reference Consortium human build 37}) a été crées à partir
-  de 13 volontaires anonymes New-Yorkais. Dès lors, cette référence
-  servira de patron aux aligneurs afin qu'ils replacent correctements les
-  différents \emph{reads} des l'individus séquencés.\\
+  L'alignement constitue la première étape de l'analyse des données de NGS
+  lorsqu'un génome de référence est disponible. L'objectif de l'alignement
+  est de déterminer la position correcte de chacun des \emph{reads}
+  séquencés le long du génome de référence. Cette référence est souvent
+  construite à partir des données de séquençage de plusieurs donneurs et
+  ne représente donc pas la séquence d'un individu en particulier mais est
+  sensé représenter la séquence consensus d'une espèce donnée. Par
+  exemple, la séquence de référence humaine GRCh37 (\emph{Genome Reference
+  Consortium human build 37}) a été crées à partir de 13 volontaires
+  anonymes New-Yorkais. Dès lors, cette référence servira de patron aux
+  aligneurs afin qu'ils replacent correctements les différents
+  \emph{reads} des l'individus séquencés. Cette étape constitue
+  probablement l'étape la plus importante de l'analyse des données issues
+  du séquençage haut débit (Flicek \& Birney, 2009). Elle est la base sur
+  laquelle reposent l'ensemble des étapes effectuées en aval, notamment
+  l'appel des variants (R. Nielsen, Paul, Albrechtsen, \& Song, 2011).
   Cependant, l'étape d'alignement peut est sujette à de nombreuses erreurs
   dont certaines proviennent directement des erreurs de survenues lors de
   l'étape de séquençage, d'autres, sont dues aux caractéristiques des
@@ -1251,34 +1238,39 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{read} à plusieurs région du génome (Treangen \& Salzberg, 2013).
   De nombreux aligneurs ont emmergé afin de répondre au mieux à cette
   problématique tel que Bowtie1(B Langmead, Trapnell, Pop, \& Salzberg,
-  2009), Bowtie2 (Ben Langmead \& Salzberg, 2012), BWA, NovoAlign 2. BWA
-  3. mrFAST and mrsFAST\\
-  4. Novoalign\\
-  5. SHRiMP\\
-  6. SOAPv2
+  2009), Bowtie2 (Ben Langmead \& Salzberg, 2012), BWA, NovoAlign, MAGIC
+  (Su et al., 2014). De nombreuse études on cependant montrées de grandes
+  différences entre ces aligneurs, au niveau du temps de calcul, de leur
+  cout en mémoire et de leur taux d'erreur (Ruffalo, Laframboise, \&
+  Koyutürk, 2011, Thankaswamy-Kosalai, Sen, \& Nookaew (2017), S. Bao et
+  al. (2011)).
   
   \subsubsection{L'appel des variants}\label{lappel-des-variants}
   
   L'appel des variants, ou \emph{variant calling}, fait référence à
   l'ensemble des méthodes permettant d'identifier des SNVs ou des indels à
-  partir des résultats de l'alignement. On appelera variants toutes
-  différences de séquence observées entre un individu et la séquence de
-  référence utilisée. De nombreux logiciels d'appel des variants, ou
-  \emph{caller}, basés sur des algorithmes différents ont emmergés ces
-  dernières années pour répondre à cette problématique. Parmis les plus
-  connus on note SAMtools (H. Li et al., 2009), Genome Analysis Tool Kit -
-  HaplotypeCaller (GATK-HC) (McKenna et al., 2010), Freebayes, SOAPindel
-  et tvc . Les quatre premiers cités, peuvent être utilisés pour analyser
-  des données provenant de tout type de plateforme de séquençage
-  contrairement à TVC qui a été dévoeloppé spécifiquement pour les données
-  provenant de Ion Proton. Les données issues de NGS peuvent présenter un
-  taux d'erreur important. Ce taux d'erreur est multi-factorielles et
-  inclus nottament les erreurs de l'alignement. L'un des éléments clef à
-  prendre en compte pour pouvoir effectuer un appel de qualité est la
-  couverture de la position appelée (Sims et al., 2014). Cependant, malgré
-  la prise en compte de cet élément, l'appel de variants reste un
-  processus dificille souvent lié à plusieurs erreurs. Plusieurs de ces
-  erreurs sont même directement liées à la plateforme de séquençage
+  partir des résultats de l'alignement. Cette étape est souvent
+  différencié de l'alignement, cependant, les résultats de l'appel étant
+  extremement dé\&pendant de l'alignement, il est conseillé d'effectuer
+  son appel en tenant compte de l'aligneur choisi (R. Nielsen et al.,
+  2011, DePristo et al. (2011), Lunter \& Goodson (2011)). On appelera
+  variants toutes différences de séquence observées entre un individu et
+  la séquence de référence utilisée. De nombreux logiciels d'appel des
+  variants, ou \emph{caller}, basés sur des algorithmes différents ont
+  emmergés ces dernières années pour répondre à cette problématique.
+  Parmis les plus connus on note SAMtools (H. Li et al., 2009), Genome
+  Analysis Tool Kit - HaplotypeCaller (GATK-HC) (McKenna et al., 2010),
+  Freebayes, SOAPindel et tvc . Les quatre premiers cités, peuvent être
+  utilisés pour analyser des données provenant de tout type de plateforme
+  de séquençage contrairement à TVC qui a été dévoeloppé spécifiquement
+  pour les données provenant de Ion Proton. Les données issues de NGS
+  peuvent présenter un taux d'erreur important. Ce taux d'erreur est
+  multi-factorielles et inclus nottament les erreurs de l'alignement. L'un
+  des éléments clef à prendre en compte pour pouvoir effectuer un appel de
+  qualité est la couverture de la position appelée (Sims et al., 2014).
+  Cependant, malgré la prise en compte de cet élément, l'appel de variants
+  reste un processus dificille souvent lié à plusieurs erreurs. Plusieurs
+  de ces erreurs sont même directement liées à la plateforme de séquençage
   utilisée en amont, et les différents logiciels ne présentent pas les
   même performances en fonction de ces différentes plateforme (Hwang, Kim,
   Lee, \& Marcotte, 2015), c'est pourquoi il convient d'adapter le
@@ -1309,7 +1301,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Représentation des erreurs d'appel de type IR et AR en fonction de la platforme de séquençage et du logiciel d'appel, d'après n Hwang et al 2015]{Représentation des erreurs d'appel de type IR et AR en fonction de la platforme de séquençage et du logiciel d'appel, d'après n Hwang et al 2015 : Pour les plateforme Illumina, on peut voir que Freebayes préfère les appels variant-homozygote tandis que GATK-HC et Samtools préfèrent les appels hétérozygotes. Pour la plateforme Ion Proton, les 4 logiciels ont une préférence pour les erreurs de type IR}\label{fig:snperror}
+  \caption[Représentation des erreurs d'appel de type IR et AR en fonction de la platforme de séquençage et du logiciel d'appel]{Représentation des erreurs d'appel de type IR et AR en fonction de la platforme de séquençage et du logiciel d'appel d'après [@Hwang2015] : Pour les plateforme Illumina, on peut voir que Freebayes préfère les appels variant-homozygote tandis que GATK-HC et Samtools préfèrent les appels hétérozygotes. Pour la plateforme Ion Proton, les 4 logiciels ont une préférence pour les erreurs de type IR}\label{fig:snperror}
   \end{figure}
   
   De même que pour l'aligneur, le choix du logiciel d'appel est crutial
@@ -1319,7 +1311,7 @@ class (for LaTeX) and the R bookdown package, in general.
   Diekhans (2012)). En effet, en 2013, une étude comparant les réssultats
   de 5 \emph{caller} montrait que seulement 57,4\% des variants étaient
   appelés par les 5 \emph{caller} et que 80,7\% des variants étaient
-  appelés par au moins 3 d'entre eux. Ce taux justait drastiquement pour
+  appelés par au moins 3 d'entre eux. Ce taux chutait drastiquement pour
   les indels puisque la concordance était cette fois seulement de 26,8\%
   pour les indels non retrouvés par les 3 \emph{caller} (O'Rawe et al.,
   2013). Ces résultats sont cependant à pondérés avec une étude de 2015
@@ -1333,15 +1325,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsection{L'annotation des variants, filtrage et
   priorisation}\label{lannotation-des-variants-filtrage-et-priorisation}
   
-  The main objective of this process is to gather substantial information
-  at the variant and the gene levels. This will include the variants' data
-  quality, their localization at the genomic, gene and transcripts levels,
-  their genotype, their frequency in the general population, their impact
-  at the mRNA and protein levels, the conservation among species of the
-  affected protein residues, the variant pathogenicity prediction, and
-  reported associations with diseases. At the gene level, they include the
-  gene function, its spatiotemporal expression pattern, its involvement in
-  various pathways, and its involvement in various phenotypes/diseases.
+  This will include the variants' data quality, their localization at the
+  genomic, gene and transcripts levels, their genotype, their frequency in
+  the general population, their impact at the mRNA and protein levels, the
+  conservation among species of the affected protein residues, the variant
+  pathogenicity prediction, and reported associations with diseases. At
+  the gene level, they include the gene function, its spatiotemporal
+  expression pattern, its involvement in various pathways, and its
+  involvement in various phenotypes/diseases.
   
   L'annotation des variants a pour but de replacer l'ensemble des variants
   identifiés lors de l'étape d'appel dans leur contexte biologique. Elle
@@ -1363,25 +1354,24 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Au niveau du variant}\label{au-niveau-du-variant}
   
-  Plusieurs informations peuvent être liées à un variant donné.
+  L'annotation au niveau du variant vise à relier ce variant à l'ensemble
+  des information spécifique à celui-ci.
   
-  \paragraph{par la fréquence : (ExAC)}\label{par-la-frequence-exac}
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Information spécifiques au données de séquençag : la qualité, son
+    génotype\\
+  \item
+    La fréquence du variant dans la population générale : ESP, 1KG, ExAC\\
+  \item
+    Son impact sur l'unité génétique : stop, missense\ldots{}
+  \end{enumerate}
   
-  Large consortia (e.g the human genome project {[}12, 13{]}) have been
-  established to accumulate available resources, detect new variants in
-  genomes, better understand genetic architecture of different traits and
-  find or narrow down positions of potential causal loci
-  
-  12 International Human Genome Sequencing Consortium. Initial sequencing
-  and analysis of the human genome\\
-  13 International Human Genome Sequencing Consortium. Finishing the
-  euchromatic sequence of the human genome
-  
-  \paragraph{Par l'impact :}\label{par-limpact}
-  
-  VEP SNPEFF\ldots{}
-  
-  SIFT,polyPhen CADD
+  Il est à noter que l'impact prédite du variant sur l'unité génétique
+  peut-être êxtremement variable. (McCarthy et al., 2014) (RefSeq,
+  Ensembl, UCSC) VEP, Annovar, SNPEff
   
   \begin{figure}
   
@@ -1389,33 +1379,37 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Diagramme de Venn des prédictions de pathogénicités de six logiciels d’après Salgado et al. (2016)]{Diagramme de Venn des prédictions de pathogénicités de six logiciels d’après Salgado et al. (2016) : aaaaaaaaaaaaaaaaaaaaaaaa}\label{fig:vennpred}
+  \caption[Diagramme de Venn des prédictions de pathogénicités de six logiciels]{Diagramme de Venn des prédictions de pathogénicités de six logiciels d'après [@Salgado2016] : }\label{fig:vennpred}
   \end{figure}
   
-  \subsubsection{Au niveau du gène}\label{au-niveau-du-gene}
+  \subsubsection{Au niveau de l'unité
+  génétique}\label{au-niveau-de-lunite-genetique}
   
-  L'annotation au niveau du gène (ou du transcrit) consiste à récupérer
-  l'ensemble des information disponible sur le gène (impacté par le
+  L'annotation au niveau de l'unité génétique consiste à récupérer
+  l'ensemble des information disponible sur l'unité (impacté par le
   variant) et non plus sur le variant directement. Cette étape permet donc
   de filtrer ou de prioriser l'ensemble des variants chevauchant un gène
   (ou transcrit) donnée. L'ensemble de ces informations est donc
-  extrêmement dépendante du jeux de gène utilisé et peuvent donc variaer
-  en fonction de celui-ci (McCarthy et al., 2014,Zhao \& Zhang (2015))
+  extrêmement dépendante du jeux de gène utilisé et peuvent donc varier en
+  fonction de celui-ci (McCarthy et al., 2014,S. Zhao \& Zhang (2015))
   même si les gènes CCDS sont bien représentés à la fois par le NCBI,
   Ensembl et UCSC (Pruitt et al., 2009)
   
-  Expression du gene\\
-  Pathway impliquant le gene : Panther,
-  
-  score pour le gene : RVIS, PLI, Loftool\ldots{}
-  
-  HPO, OMIM
-  
-  RVIS, pLI
-  
-  Plus récemment, favorisé par l'emmergence des bases de données de
-  variants, tel que ESP {[}cite{]} 1kg{[}cite{]} et surtout ExAC
-  {[}cite{]}, sont apparus des scores
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Expression du gene :\\
+  \item
+    Pathway impliquant le gene : Panther,
+  \item
+    phénotype impliquant le gène : HPO, OMIM
+  \item
+    Score mutationel : Plus récemment, favorisé par l'emmergence des bases
+    de données de variants, tel que ESP {[}cite{]} 1kg{[}cite{]} et
+    surtout ExAC {[}cite{]}, sont apparus des scores (RVIS, pLI,
+    loftool\ldots{})
+  \end{enumerate}
   
   \subsection{Conclusion NGS}\label{conclusion-ngs}
   
@@ -1468,7 +1462,72 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \chapter{MutaScript}\label{mutascript}
   
-  \chapter*{Conclusion}\label{conclusion}
+  \section{Introduction}\label{introduction}
+  
+  Up to a few years, linkage analysis using genetic markers or Sanger
+  sequencing were massively used to identify genetic disorder in clinical
+  research. These technic were extremely time and money expensive and in
+  2011 the genetic cause of over 3,500 Mendelian disorders remained unknow
+  {[}1{]}. The advent of New Generation Sequencing (NGS) has immediately
+  initiate the new ere of clinical research in genomic by bringing the
+  sequencing of entire genomes (WGS) or exome (WES) economically feasible
+  for many small laboratories. This technological leap has permit a great
+  advance in the field of clinical research linking more than \ldots{}
+  genetic cause to a mendelian disorder {[}need citation here{]}. However,
+  despite all of that, NGS bring with him new problematics. Indeed, with
+  over 30,000 variants per individual exome and surrounding 10,000 of
+  which are predicted to lead to a nonsynonymous substitution, a
+  modification of a splice sites, or to a small insertion / deletion
+  (indel) {[}need citation{]}, finding the disease-causing variant became
+  to be the daily labor-intensive task of geneticists. Even more that this
+  new task regrouping among other things informatics and statistic is far
+  from traditional geneticist skills. Usually NGS data analysis is divided
+  in three principal steps. The first one is the raw data pre-processing
+  which mainly consists to mapping raw data to a reference genome (may be
+  cite some soft which do that?). Secondly, the analysis of mismatches
+  between sample data and the reference sequence draw up a list of Single
+  Nucleotide Variation (SNV) and small insertion / deletion (Indels). As
+  said previously this list can enumerate more than 30,000 variation per
+  individual (may be cite some soft which do that?). Finally, the analyze
+  of these variants, including the annotation and filtering, is often
+  weakness of genotype-phenotype analysis. Indeed, in most of case it is
+  not enough to obtain a small human interpretable list and the causal
+  variant is drowned in a multitude of non-causal variant. To improve the
+  quality of variant filtering and so the efficiency of phenotype-genotype
+  analysis we develop MutaScript. This score rank transcript considering
+  their probability of being link to a mendelian disorder. For that we
+  assumed that most mutated transcripts in general population were
+  probably not involved in any severe Mendelian disease. MutaScript score
+  of a transcript combines the allelic frequency of each variant displayed
+  on ExAC {[}2{]} database overlapping this transcript as well as their
+  impact predicted by Variant Effect Predictor (VEP) {[}36{]}. So, higher
+  is the variant impact, higher will be its MutaScript score contribution.
+  Ranking transcript (or gene) considering their variation load was
+  already done by the Residual Variation Intolerance Score (RVIS) {[}4{]}
+  and the Probability of loss-of-function (LoF) Incoherency (pLI) {[}2{]}
+  scores. However, MutaScript differs from them on several points.
+  Firstly, like pLI, MutaScript give a score to each protein-coding
+  transcript where RVIS only scored genes which leads to a loss of
+  information from RVIS. Moreover, RVIS and pLI only consider LoF
+  variants, mainly splice donor / acceptor variants, nonsense or
+  frameshift variants which represent only \ldots{}\% of ExAC variants.
+  MutaScript consider all variants whatever its consequence, and it weight
+  its score contribution considering the predicted deleteriousness of its
+  impact. Also, we noticed a strong correlation between the RVIS score of
+  a gene and the pLI score of a transcript and the CDS size of this gene
+  (or transcript). Because this correlation is mostly due to a bias of
+  their score formula and not because a biological fact, we build
+  MutaScript to avoid this correlation which can lead to interpretation
+  errors. To validate our scores we used the Human Phenotype Ontology
+  (HPO) {[}5{]} and demonstrate that MutaScript is more\ldots{}
+  
+  \section{Materiel \& Methodes}\label{materiel-methodes}
+  
+  \section{Résultats}\label{resultats}
+  
+  \section{Conclusion}\label{conclusion}
+  
+  \chapter*{Conclusion}\label{conclusion-1}
   \addcontentsline{toc}{chapter}{Conclusion}
   
   \appendix
@@ -1520,6 +1579,12 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{BMC Genomics}, \emph{15}(1), 948.
   \url{http://doi.org/10.1186/1471-2164-15-948}
   
+  \hypertarget{ref-Bao2011}{}
+  Bao, S., Jiang, R., Kwan, W., Wang, B., Ma, X., \& Song, Y.-Q. (2011).
+  Evaluation of next-generation sequencing software in mapping and
+  assembly. \emph{Journal of Human Genetics}, \emph{56}(May), 406--414.
+  \url{http://doi.org/10.1038/jhg.2011.62}
+  
   \hypertarget{ref-Bentley2006}{}
   Bentley, D. R. (2006). Whole-genome re-sequencing. \emph{Current Opinion
   in Genetics and Development}, \emph{16}(6), 545--552.
@@ -1545,6 +1610,13 @@ class (for LaTeX) and the R bookdown package, in general.
   Collins, F. S., Morgan, M., \& Patrinos, A. (2003). The Human Genome
   Project: Lessons from Large-Scale Biology. \emph{Science},
   \emph{300}(5617), 286--290. \url{http://doi.org/10.1126/science.1084564}
+  
+  \hypertarget{ref-DePristo2011}{}
+  DePristo, M. A., Banks, E., Poplin, R., Garimella, K. V., Maguire, J.
+  R., Hartl, C., \ldots{} Pritchard, E. (2011). A framework for variation
+  discovery and genotyping using next-generation DNA sequencing data.
+  \emph{Nature Genetics}, \emph{43}(5), 491--498.
+  \url{http://doi.org/10.1038/ng.806}
   
   \hypertarget{ref-Eddy2007}{}
   Eddy, E. M. (2007). The scaffold role of the fibrous sheath.
@@ -1672,6 +1744,12 @@ class (for LaTeX) and the R bookdown package, in general.
   SAMtools. \emph{Bioinformatics}, \emph{25}(16), 2078--2079.
   \url{http://doi.org/10.1093/bioinformatics/btp352}
   
+  \hypertarget{ref-Lunter2011}{}
+  Lunter, G., \& Goodson, M. (2011). Stampy: A statistical algorithm for
+  sensitive and fast mapping of Illumina sequence reads. \emph{Genome
+  Research}, \emph{21}(6), 936--939.
+  \url{http://doi.org/10.1101/gr.111120.110}
+  
   \hypertarget{ref-Mardis2008}{}
   Mardis, E. R. (2008). The impact of next-generation sequencing
   technology on genetics. \emph{Trends in Genetics}, \emph{24}(3),
@@ -1774,6 +1852,12 @@ class (for LaTeX) and the R bookdown package, in general.
   Genomics. \emph{PLoS ONE}, \emph{7}(7), e40294.
   \url{http://doi.org/10.1371/journal.pone.0040294}
   
+  \hypertarget{ref-Ruffalo2011}{}
+  Ruffalo, M., Laframboise, T., \& Koyutürk, M. (2011). Comparative
+  analysis of algorithms for next-generation sequencing read alignment.
+  \emph{Bioinformatics}, \emph{27}(20), 2790--2796.
+  \url{http://doi.org/10.1093/bioinformatics/btr477}
+  
   \hypertarget{ref-Sasagawa}{}
   Sasagawa, I., \& Yanagimachi, R. (1997). Spermatids from mice after
   cryptorchid and reversal operations can initiate normal embryo
@@ -1802,6 +1886,13 @@ class (for LaTeX) and the R bookdown package, in general.
   spermatozoa. \emph{International Journal of Fertility}, \emph{37}(2),
   99--102. Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/1349598}
   
+  \hypertarget{ref-Su2014}{}
+  Su, Z., Łabaj, P. P., Li, S. S., Thierry-Mieg, J., Thierry-Mieg, D.,
+  Shi, W., \ldots{} Shi, L. (2014). A comprehensive assessment of RNA-seq
+  accuracy, reproducibility and information content by the Sequencing
+  Quality Control Consortium. \emph{Nature Biotechnology}, \emph{32}(9),
+  903--14. \url{http://doi.org/10.1038/nbt.2957}
+  
   \hypertarget{ref-Sultan2008}{}
   Sultan, M., Schulz, M. H., Richard, H., Magen, A., Klingenhoff, A.,
   Scherf, M., \ldots{} Yaspo, M.-L. (2008). A Global View of Gene Activity
@@ -1822,6 +1913,12 @@ class (for LaTeX) and the R bookdown package, in general.
   DNA Methylation Patterns in Multiple Gene Promoters by 454 Sequencing.
   \emph{Cancer Research}, \emph{67}(18), 8511--8518.
   \url{http://doi.org/10.1158/0008-5472.CAN-07-1016}
+  
+  \hypertarget{ref-Thankaswamy-Kosalai2017}{}
+  Thankaswamy-Kosalai, S., Sen, P., \& Nookaew, I. (2017). Evaluation and
+  assessment of read-mapping by multiple next-generation sequencing
+  aligners based on genome-wide characteristics. \emph{Genomics}.
+  \url{http://doi.org/10.1016/j.ygeno.2017.03.001}
   
   \hypertarget{ref-Tomkinson2006}{}
   Tomkinson, A. E., Vijayakumar, S., Pascal, J. M., \& Ellenberger, T.

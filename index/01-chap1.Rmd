@@ -266,12 +266,9 @@ L'acide desoxyribonucléique (ADN) a été identifié comme étant le porteur de
 
 ### Les puces  
 
-
 1. Bref historique de la technologie  
 2. A quoi ça sert 
 3. Comment ça marche  
-
-
 
 #### Les puces à SNP, le génotypage... (titre à revoir)  
 
@@ -414,32 +411,23 @@ include_graphics(path = "figure/SBL_seq_solid.png")
 
 ## L'analyse bioinformatique des données de NGS  
 
-La stratégie consistant à séquencer en parrallèle plusieurs milliers de *reads* court a engendré plusieurs nouveaux défis bioinformatique dans l'analyse et l'interprétation des données de séquençage et la recherche de variants dans le génome humain [@Wold2007, @Yang2009]. Les  
-Ces techniques ont été appliquées dans différents contextes, notamment la métagénomique [@Qin2010], la détéction de SNPs [@VanTassell2008] et de variants structuraux [@Alkan2010, @Medvedev2009] mais également dans des études portant sur la méthylation de l'ADN [@Taylor2007], l'analyse de l'expression des ARNs messagers [@Sultan2008], dans la génétique du cancer [@Guffanti2009] et la médecine personalisée [@Auffray2009]. Cependant, pour l'ensemble de ces applications, la grande quantité de données générées par chaque analyse pose plusieurs défis informatiques [@Horner2009]. En effet, les progres techniques des dernières décénies ont rendu possible le séquençage de plusieurs millions des *reads* d'ADN en un temps reliativement court et à couts raisonable. Ainsi, l'émergence du du WGS et du WES a permit de réunir une quantité jusqu'à présent inégalé d'information sur les variation génétiques, et d'une manière plus générale, sur les gènes et leurs fonctions ([@Mardis2008], [@Bentley2006]). Cependant, de part leur nature et leur quantité, l'aquisition de ces nouvelles données a engendrée de nouvelles problématiques notamment dans l'analyse des données et leur interprétation.  
+La stratégie consistant à séquencer en parrallèle plusieurs milliers de *reads* court a engendré plusieurs nouveaux défis bioinformatique dans l'analyse et l'interprétation des données de séquençage et la recherche de variants dans le génome humain [@Wold2007, @Yang2009]. Ces techniques ont été appliquées dans différents contextes, notamment la métagénomique [@Qin2010], la détéction de SNPs [@VanTassell2008] et de variants structuraux [@Alkan2010, @Medvedev2009] mais également dans des études portant sur la méthylation de l'ADN [@Taylor2007], l'analyse de l'expression des ARNs messagers [@Sultan2008], dans la génétique du cancer [@Guffanti2009] et la médecine personalisée [@Auffray2009]. Cependant, pour l'ensemble de ces applications, la grande quantité de données générées par chaque analyse pose plusieurs défis informatiques [@Horner2009]. En effet, les progres techniques des dernières décénies ont rendu possible le séquençage de plusieurs millions des *reads* d'ADN en un temps reliativement court et à couts raisonable. Ainsi, l'émergence du séquençage haut débit et notamment du WGS et du WES a permit de réunir une quantité jusqu'à présent inégalé d'information sur les variation génétiques, et d'une manière plus générale, sur les gènes et leurs fonctions [@Mardis2008, @Bentley2006]. Cependant, de part leur nature et leur quantité, l'aquisition de ces nouvelles données a engendrée de nouvelles problématiques notamment dans l'analyse des données et leur interprétation.  
   
-The number of research projects dealing with whole-genome sequencing data has been emerging in humans [3, 4, 5, 6],
-3 Goldstein DB, Allen A, Keebler J, Margulies EH, Petrou S, Petrovski S, et al. Sequencing studies in human genetics: design and interpretation  
-4 Sims D, Sudbery I, Ilott NE, Heger A, Ponting CP. Sequencing depth and coverage: key considerations in genomic analyses. Nat Rev Genet  
-5 Lam HYK, Clark MJ, Chen R, Chen R, Natsoulis G, O’Huallachain M, et al. Performance comparison of whole-genome sequencing platforms. Nat Biotechnol  
-6 Morozova O, Marra M. Applications of next-generation sequencing technologies in functional genomics. Genomics  
+<!-- The number of research projects dealing with whole-genome sequencing data has been emerging in humans [3, 4, 5, 6], -->
+<!-- 3 Goldstein DB, Allen A, Keebler J, Margulies EH, Petrou S, Petrovski S, et al. Sequencing studies in human genetics: design and interpretation   -->
+<!-- 4 Sims D, Sudbery I, Ilott NE, Heger A, Ponting CP. Sequencing depth and coverage: key considerations in genomic analyses. Nat Rev Genet   -->
+<!-- 5 Lam HYK, Clark MJ, Chen R, Chen R, Natsoulis G, O’Huallachain M, et al. Performance comparison of whole-genome sequencing platforms. Nat Biotechnol   -->
+<!-- 6 Morozova O, Marra M. Applications of next-generation sequencing technologies in functional genomics. Genomics   -->
 
 ### L'analyse des données brutes  
 
 #### L'alignement  
 
-Comme dit précédemment, le séquençage de *reads* courts entraine de nombreuses complications et restraint l'utilisation du NGS dans de nombreuses applications biologiques [@Wold2007].  
-
-L'alignement des séquences constitue probablement l'étape la plus importante de l'analyse des données issues du séquençage haut débit [@Flicek2009]. Elle est la base sur laquelle reposent l'ensemble des étapes effectuées en aval, notamment l'appel des variants [@Nielsen2011]. L'objectif de l'alignement est de déterminer la position correcte de chacun des *reads* séquencés le long du génome de référence.  Cette référence est souvent construite à partir des données de séquençage de plusieurs donneurs et ne représente donc pas la séquence d'un individu en particulier mais est sensé représenter la séquence consensus d'une espèce donnée. Par exemple, la séquence de référence humaine GRCh37 (*Genome Reference Consortium human build 37*) a été crées à partir de 13 volontaires anonymes New-Yorkais. Dès lors, cette référence servira de patron aux aligneurs afin qu'ils replacent correctements les différents *reads* des l'individus séquencés.  
-Cependant, l'étape d'alignement peut est sujette à de nombreuses erreurs dont certaines proviennent directement des erreurs de survenues lors de l'étape de séquençage, d'autres, sont dues aux caractéristiques des régions séquencées comme par exemple les séquence répétées [@Langmead2012] qui pourront entrainer l'alignement d'un même *read* à plusieurs région du génome [@Treangen2013]. De nombreux aligneurs ont emmergé afin de répondre au mieux à cette problématique tel que Bowtie1[@Langmead2009], Bowtie2 [@Langmead2012], BWA, NovoAlign
-2. BWA
-3. mrFAST and mrsFAST  
-4. Novoalign  
-5. SHRiMP  
-6. SOAPv2  
+L'alignement constitue la première étape de l'analyse des données de NGS lorsqu'un génome de référence est disponible. L'objectif de l'alignement est de déterminer la position correcte de chacun des *reads* séquencés le long du génome de référence.  Cette référence est souvent construite à partir des données de séquençage de plusieurs donneurs et ne représente donc pas la séquence d'un individu en particulier mais est sensé représenter la séquence consensus d'une espèce donnée. Par exemple, la séquence de référence humaine GRCh37 (*Genome Reference Consortium human build 37*) a été crées à partir de 13 volontaires anonymes New-Yorkais. Dès lors, cette référence servira de patron aux aligneurs afin qu'ils replacent correctements les différents *reads* des l'individus séquencés. Cette étape constitue probablement l'étape la plus importante de l'analyse des données issues du séquençage haut débit [@Flicek2009]. Elle est la base sur laquelle reposent l'ensemble des étapes effectuées en aval, notamment l'appel des variants [@Nielsen2011]. Cependant, l'étape d'alignement peut est sujette à de nombreuses erreurs dont certaines proviennent directement des erreurs de survenues lors de l'étape de séquençage, d'autres, sont dues aux caractéristiques des régions séquencées comme par exemple les séquence répétées [@Langmead2012] qui pourront entrainer l'alignement d'un même *read* à plusieurs région du génome [@Treangen2013]. De nombreux aligneurs ont emmergé afin de répondre au mieux à cette problématique tel que Bowtie1[@Langmead2009], Bowtie2 [@Langmead2012], BWA, NovoAlign, MAGIC [@Su2014]. De nombreuse études on cependant montrées de grandes différences entre ces aligneurs, au niveau du temps de calcul, de leur cout en mémoire et de leur taux d'erreur [@Ruffalo2011, @Thankaswamy-Kosalai2017, @Bao2011].   
 
 #### L'appel des variants  
 
-L'appel des variants, ou *variant calling*, fait référence à l'ensemble des méthodes permettant d'identifier des SNVs ou des indels à partir des résultats de l'alignement. On appelera variants toutes différences de séquence observées entre un individu et la séquence de référence utilisée. De nombreux logiciels d'appel des variants, ou *caller*, basés sur des algorithmes différents ont emmergés ces dernières années pour répondre à cette problématique. Parmis les plus connus on note SAMtools [@Li2009], Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) [@McKenna2010], Freebayes, SOAPindel et tvc . Les quatre premiers cités, peuvent être utilisés pour analyser des données provenant de tout type de plateforme de séquençage contrairement à TVC qui a été dévoeloppé spécifiquement pour les données provenant de Ion Proton. Les données issues de NGS peuvent présenter un taux d'erreur important. Ce taux d'erreur est multi-factorielles et inclus nottament les erreurs de l'alignement. L'un des éléments clef à prendre en compte pour pouvoir effectuer un appel de qualité est la couverture de la position appelée [@Sims2014]. Cependant, malgré la prise en compte de cet élément, l'appel de variants reste un processus dificille souvent lié à plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées à la plateforme de séquençage utilisée en amont, et les différents logiciels ne présentent pas les même performances en fonction de ces différentes plateforme  [@Hwang2015], c'est pourquoi il convient d'adapter le logiciel d'appel en fonction de la plateforme de séquençage utilisée préalablement. Les erreurs d'appel sont généralement classées en deux catégories principales et certains aligneurs auront tendance à être plus sujets à l'un de ces types d'erreur qu'à l'autre (**Figure : **\@ref(fig:snperror)) :  
+L'appel des variants, ou *variant calling*, fait référence à l'ensemble des méthodes permettant d'identifier des SNVs ou des indels à partir des résultats de l'alignement. Cette étape est souvent différencié de l'alignement, cependant, les résultats de l'appel étant extremement dé&pendant de l'alignement, il est conseillé d'effectuer son appel en tenant compte de l'aligneur choisi [@Nielsen2011, @DePristo2011, @Lunter2011]. On appelera variants toutes différences de séquence observées entre un individu et la séquence de référence utilisée. De nombreux logiciels d'appel des variants, ou *caller*, basés sur des algorithmes différents ont emmergés ces dernières années pour répondre à cette problématique. Parmis les plus connus on note SAMtools [@Li2009], Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) [@McKenna2010], Freebayes, SOAPindel et tvc . Les quatre premiers cités, peuvent être utilisés pour analyser des données provenant de tout type de plateforme de séquençage contrairement à TVC qui a été dévoeloppé spécifiquement pour les données provenant de Ion Proton. Les données issues de NGS peuvent présenter un taux d'erreur important. Ce taux d'erreur est multi-factorielles et inclus nottament les erreurs de l'alignement. L'un des éléments clef à prendre en compte pour pouvoir effectuer un appel de qualité est la couverture de la position appelée [@Sims2014]. Cependant, malgré la prise en compte de cet élément, l'appel de variants reste un processus dificille souvent lié à plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées à la plateforme de séquençage utilisée en amont, et les différents logiciels ne présentent pas les même performances en fonction de ces différentes plateforme  [@Hwang2015], c'est pourquoi il convient d'adapter le logiciel d'appel en fonction de la plateforme de séquençage utilisée préalablement. Les erreurs d'appel sont généralement classées en deux catégories principales et certains aligneurs auront tendance à être plus sujets à l'un de ces types d'erreur qu'à l'autre (**Figure : **\@ref(fig:snperror)) :  
 
 1. Oubli de l'allele de référence (**IR**, *ignore the reference allele*) :  représente un variant appelé homozygote correspondant en réalité à un variant hétérozygote composé de l'allèle de référence et d'un allèle variant.      
 2. Ajout de l'allèle de référence (**AR**, *adding the reference allele*) : représente un variant appelé hétérozygote composé de l'allèle de référence et d'un allèle variant correspondant en réalité à un variant homozygote composé de deux allèles variants.    
@@ -447,19 +435,20 @@ L'appel des variants, ou *variant calling*, fait référence à l'ensemble des m
 
 ```{r snperror,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.50"}
 
-fig.name <- "Représentation des erreurs d'appel de type IR et AR en fonction de la platforme de séquençage et du logiciel d'appel, d'après n Hwang et al 2015"
+fig.name <- "Représentation des erreurs d'appel de type IR et AR en fonction de la platforme de séquençage et du logiciel d'appel"
+fig.from <- "[@Hwang2015]"
 fig.description <- "Pour les plateforme Illumina, on peut voir que Freebayes préfère les appels variant-homozygote tandis que GATK-HC et Samtools préfèrent les appels hétérozygotes. Pour la plateforme Ion Proton, les 4 logiciels ont une préférence pour les erreurs de type IR"
-fig.info <- paste(fig.name,fig.description,sep = " : ")
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
 include_graphics(path = "figure/snp_error_type.png")
 
 ```
 
-De même que pour l'aligneur, le choix du logiciel d'appel est crutial car il existe de nombreuses différences dans les variants appelés par différents logiciels se basant sur les mêmes données brutes [@Baes2014, @ORawe2013, @Rosenfeld2012]. En effet, en 2013, une étude comparant les réssultats de 5 *caller* montrait que seulement 57,4% des variants étaient appelés par les 5 *caller* et que 80,7% des variants étaient appelés par au moins 3 d'entre eux. Ce taux justait drastiquement pour les indels puisque la concordance était cette fois seulement de 26,8% pour les indels non retrouvés par les 3 *caller* [@ORawe2013]. Ces résultats sont cependant à pondérés avec une étude de 2015 comparant 4 *caller* et montrant que 91,7% des SNVs séqeuencés sur une plateforme Illumina étaient appelés par 3 *caller*, cependant, pour les variants séquencés sur Ion Proton, seulement 27,3% des variants étaient appelés par au moins 3 *caller* et 57,4% des variants n'étaient appelés que par un seul des *caller* [@Hwang2015].       
+De même que pour l'aligneur, le choix du logiciel d'appel est crutial car il existe de nombreuses différences dans les variants appelés par différents logiciels se basant sur les mêmes données brutes [@Baes2014, @ORawe2013, @Rosenfeld2012]. En effet, en 2013, une étude comparant les réssultats de 5 *caller* montrait que seulement 57,4% des variants étaient appelés par les 5 *caller* et que 80,7% des variants étaient appelés par au moins 3 d'entre eux. Ce taux chutait drastiquement pour les indels puisque la concordance était cette fois seulement de 26,8% pour les indels non retrouvés par les 3 *caller* [@ORawe2013]. Ces résultats sont cependant à pondérés avec une étude de 2015 comparant 4 *caller* et montrant que 91,7% des SNVs séqeuencés sur une plateforme Illumina étaient appelés par 3 *caller*, cependant, pour les variants séquencés sur Ion Proton, seulement 27,3% des variants étaient appelés par au moins 3 *caller* et 57,4% des variants n'étaient appelés que par un seul des *caller* [@Hwang2015].       
 
 ### L'annotation des variants, filtrage et priorisation    
 
-The main objective of this process is to gather substantial information at the variant and the gene levels. This will include the variants’ data quality, their localization at the genomic, gene and transcripts levels, their genotype, their frequency in the general population, their impact at the mRNA and protein levels, the conservation among species of the affected protein residues, the variant pathogenicity prediction, and reported associations with diseases. At the gene level, they include the gene function, its spatiotemporal expression pattern, its involvement in various pathways, and its involvement in various phenotypes/diseases.  
+This will include the variants’ data quality, their localization at the genomic, gene and transcripts levels, their genotype, their frequency in the general population, their impact at the mRNA and protein levels, the conservation among species of the affected protein residues, the variant pathogenicity prediction, and reported associations with diseases. At the gene level, they include the gene function, its spatiotemporal expression pattern, its involvement in various pathways, and its involvement in various phenotypes/diseases.  
 
 L'annotation des variants a pour but de replacer l'ensemble des variants identifiés lors de l'étape d'appel dans leur contexte biologique. Elle vise à réunir le maximum d'information disponible à propos d'un variant et des unités génétiques (gènes ou transcrits) qu'il impacte. Cette phase est une des clefs de l'analyse puisqu'elle permet de prioriser des variants d'interet et de filtrer d'autres variants considérés comme non informatifs dans un cadre donné. Comme pour l'ensemble des étapes précédantes, les logiciels et jeux de données utilisés lors de l'étape d'annotation doivent être choisis consciencieusement, les résultats étant grandement impactés par ceux-ci [@McCarthy2014]. Cette annotation se fait généralement à deux niveau : 
 1. Au niveau du variant : Regroupe l'ensemble des informations concèrnant un variant donné tel que sa qualité, son génotype et sa fréquence 
@@ -467,57 +456,42 @@ L'annotation des variants a pour but de replacer l'ensemble des variants identif
 
 #### Au niveau du variant  
 
-Plusieurs informations peuvent être liées à un variant donné. 
+L'annotation au niveau du variant vise à relier ce variant à l'ensemble des information spécifique à celui-ci. 
 
-##### par la fréquence : (ExAC)  
+<!-- Large consortia (e.g the human genome project [12, 13]) have been established to accumulate available resources, detect new variants in genomes, better understand genetic architecture of different traits and find or narrow down positions of potential causal loci -->
+<!-- 12 International Human Genome Sequencing Consortium. Initial sequencing and analysis of the human genome   -->
+<!-- 13 International Human Genome Sequencing Consortium. Finishing the euchromatic sequence of the human genome -->
 
-Large consortia (e.g the human genome project [12, 13]) have been established to accumulate available resources, detect new variants in genomes, better understand genetic architecture of different traits and find or narrow down positions of potential causal loci
+1. Information spécifiques au données de séquençag : la qualité, son génotype  
+2. La fréquence du variant dans la population générale : ESP, 1KG, ExAC  
+2. Son impact sur l'unité génétique : stop, missense...  
 
-12 International Human Genome Sequencing Consortium. Initial sequencing and analysis of the human genome  
-13 International Human Genome Sequencing Consortium. Finishing the euchromatic sequence of the human genome
-
-##### Par l'impact : 
-
-VEP SNPEFF...  
-
-SIFT,polyPhen CADD
+Il est à noter que l'impact prédite du variant sur l'unité génétique peut-être êxtremement variable. [@McCarthy2014] (RefSeq, Ensembl, UCSC) VEP, Annovar, SNPEff
 
 
 ```{r vennpred,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.7"}
 
-fig.name <- "Diagramme de Venn des prédictions de pathogénicités de six logiciels d’après Salgado et al. (2016)"
-
-fig.description <- "aaaaaaaaaaaaaaaaaaaaaaaa"
-
-fig.info <- paste(fig.name,fig.description,sep = " : ")
+fig.name <- "Diagramme de Venn des prédictions de pathogénicités de six logiciels"
+fig.from <- "[@Salgado2016]"
+fig.description <- ""
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
 include_graphics(path = "figure/venn_Diag_patho_pred.png")
 
 ```
 
+#### Au niveau de l'unité génétique  
 
-#### Au niveau du gène  
+L'annotation au niveau de l'unité génétique consiste à récupérer l'ensemble des information disponible sur l'unité (impacté par le variant) et non plus sur le variant directement. Cette étape permet donc de filtrer ou de prioriser l'ensemble des variants chevauchant un gène (ou transcrit) donnée. L'ensemble de ces informations est donc extrêmement dépendante du jeux de gène utilisé et peuvent donc varier en fonction de celui-ci [@McCarthy2014,@Zhao2015] même si les gènes CCDS sont bien représentés à la fois par le NCBI, Ensembl et UCSC [@Pruitt2009]
 
-L'annotation au niveau du gène (ou du transcrit) consiste à récupérer l'ensemble des information disponible sur le gène (impacté par le variant) et non plus sur le variant directement. Cette étape permet donc de filtrer ou de prioriser l'ensemble des variants chevauchant un gène (ou transcrit) donnée. L'ensemble de ces informations est donc extrêmement dépendante du jeux de gène utilisé et peuvent donc variaer en fonction de celui-ci [@McCarthy2014,@Zhao2015] même si les gènes CCDS sont bien représentés à la fois par le NCBI, Ensembl et UCSC [@Pruitt2009]
-
-
-Expression du gene  
-Pathway impliquant le gene : Panther, 
-
-score pour le gene : RVIS, PLI, Loftool...
-
-HPO, OMIM
-
-
-RVIS, pLI 
-
-Plus récemment, favorisé par l'emmergence des bases de données de variants, tel que ESP [cite] 1kg[cite] et surtout ExAC [cite], sont apparus des scores 
+1. Expression du gene  :  
+2. Pathway impliquant le gene : Panther, 
+3. phénotype impliquant le gène : HPO, OMIM
+4. Score mutationel : Plus récemment, favorisé par l'emmergence des bases de données de variants, tel que ESP [cite] 1kg[cite] et surtout ExAC [cite], sont apparus des scores (RVIS, pLI, loftool...)
 
 ### Conclusion NGS  
 
 En moins de 10 ans, les technologies NGS sont passées du séquençage de panel de gènes (environs 100 Mb pour le Roche GS FLX system) au séquençage de génome entiers (environs 1500 GB pour l'Illumina Hiseq 4000) et d'une utilisation exclusive à la recherche à la routine clinique. Cependant, et ce malgré son succès dans le domaine de la génomique et de la post-génomique, plusieurs problématiques découlent de cette technologies.  il reste au NGS plusieurs problématiques à résoudres 
-
-
 
 Cependant, cette quantité de donnée produites crées de nouvelles problématiques pour les généticiens qui se retrouvent désormais face au "déluge de données génétiques" [@Schatz2013] ce qui se retrouve être un frein dans la compréhension et l'interprétation des réseaux de gènes et leurs implication dans des pathologies, lLa limitation de cette technologie n'étant plus le séquençage d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et l'inerprétation de la masse de donnée générée. 
 

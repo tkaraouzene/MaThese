@@ -39,12 +39,13 @@ preface: >
   (for LaTeX) and the R bookdown package, in general.
 bibliography: bib/MaThese_bib.bib
 # Download your specific bibliography database file and refer to it in the line above.
+
 csl: csl/apa.csl
 # Download your specific csl file and refer to it in the line above.
 lof: true
 lot: true
 
-space_between_paragraphs: false
+space_between_paragraphs: true
 # Delete the # at the beginning of the previous line if you'd like
 # to have a blank new line between each paragraph
 header-includes: \usepackage{tikz}
