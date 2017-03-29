@@ -959,9 +959,9 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{reads} courts ou \emph{short reads}.\\
   Étant donnée que le NGS produit à l'heure actuelle des \emph{reads}
   courts la notion de couverture est importante et représente l'un des
-  critère majeur à considérer dans l'analyse des données (Sims, Sudbery,
-  Ilott, Heger, \& Ponting, 2014). La couverture est définie comme le
-  nombre de \emph{reads} qui, après l'atape d'alignement
+  critère majeur à considérer dans l'analyse des données (D. Sims,
+  Sudbery, Ilott, Heger, \& Ponting, 2014). La couverture est définie
+  comme le nombre de \emph{reads} qui, après l'atape d'alignement
   \protect\hyperlink{lalignement}{cf alignment}, se chevauchent les uns
   les autres au sein du région génomique spécifique. Par exemple, une
   couverture de 30x pour le gène \emph{XXXX} signifie que chaque
@@ -993,24 +993,25 @@ class (for LaTeX) and the R bookdown package, in general.
   représente qu'environs 1\% du génome entier. Pour ces raisons, le WES
   considéré comme le standard dans le cadre de recherche sur des
   pathologies génétiques et se révèle être un outil puissant pour
-  l'identification de variants associés à des pathologies (Ng et al.,
-  2010). Le procédé de séquençage est identique au WGS, il est simplement
-  précédé d'une étape d'enrichissement au cours de laquelle les exons sont
-  capturés par hybridation à des sondes. De fait les exons capturés sont
-  donc dépendant du kit de capture utilisé, cette technique permet donc de
-  séquencer uniquement les exons connus et ciblés par les sondes. Il faut
-  également noté que depuis quelque années, plusieurs étude ont remis en
-  cause lk'interet du WES au profis du WGS, nottament car le WGS fournit
-  une meilleur couverture sur l'exome que le WES (Lelieveld, Spielmann,
-  Mundlos, Veltman, \& Gilissen, 2015, Meienberg, Bruggmann, Oexle, \&
-  Matyas (2016)), de plus le WES montre une plus grande sensibilité au
-  pourcentage de GC contenu dans la région à séquencer et à la séléction
-  des kit de capture utilisés (Meienberg et al., 2016). Ainsi, bien que le
-  WES soit encore à l'heure actuelle le choix privilégié dans la majorité
-  des études (citation\ldots{}), la réduction des couts de séquençage et
-  de stockage des données, il est possible que le WGS remplace totalement
-  le WES ainsi que l'ensemble des techniques impliquant la capture de
-  séquences ciblées (Meienberg et al., 2016).
+  l'identification de variants associés à des pathologies (S. B. Ng et
+  al., 2010). Le procédé de séquençage est identique au WGS, il est
+  simplement précédé d'une étape d'enrichissement au cours de laquelle les
+  exons sont capturés par hybridation à des sondes. De fait les exons
+  capturés sont donc dépendant du kit de capture utilisé, cette technique
+  permet donc de séquencer uniquement les exons connus et ciblés par les
+  sondes. Il faut également noté que depuis quelque années, plusieurs
+  étude ont remis en cause lk'interet du WES au profis du WGS, nottament
+  car le WGS fournit une meilleur couverture sur l'exome que le WES
+  (Lelieveld, Spielmann, Mundlos, Veltman, \& Gilissen, 2015, Meienberg,
+  Bruggmann, Oexle, \& Matyas (2016)), de plus le WES montre une plus
+  grande sensibilité au pourcentage de GC contenu dans la région à
+  séquencer et à la séléction des kit de capture utilisés (Meienberg et
+  al., 2016). Ainsi, bien que le WES soit encore à l'heure actuelle le
+  choix privilégié dans la majorité des études (citation\ldots{}), la
+  réduction des couts de séquençage et de stockage des données, il est
+  possible que le WGS remplace totalement le WES ainsi que l'ensemble des
+  techniques impliquant la capture de séquences ciblées (Meienberg et al.,
+  2016).
   
   \subsubsection{L'amplification}\label{lamplification}
   
@@ -1209,10 +1210,16 @@ class (for LaTeX) and the R bookdown package, in general.
   engendrée de nouvelles problématiques notamment dans l'analyse des
   données et leur interprétation.
   
-  \subsection{L'analyse des données
-  brutes}\label{lanalyse-des-donnees-brutes}
+  Redéfinition de ce qu'est \textbf{clairement} un \emph{read}, introduire
+  la notion de \emph{paired-end} et \emph{single-end}\\
+  présentation d'un fichier fastq (ou autre format de sortie de
+  séquenceur)\\
+  parler de l'alignement = reconstruction de puzzle\\
+  appel des variants = rechercher les différences entre les données de
+  séquence et le génome de ref\\
+  Annotation des variant = ajout d'information
   
-  \hypertarget{lalignement}{\subsubsection{L'alignement}\label{lalignement}}
+  \hypertarget{lalignement}{\subsection{L'alignement}\label{lalignement}}
   
   L'alignement constitue la première étape de l'analyse des données de NGS
   lorsqu'un génome de référence est disponible. L'objectif de l'alignement
@@ -1245,7 +1252,7 @@ class (for LaTeX) and the R bookdown package, in general.
   Koyutürk, 2011, Thankaswamy-Kosalai, Sen, \& Nookaew (2017), S. Bao et
   al. (2011)).
   
-  \subsubsection{L'appel des variants}\label{lappel-des-variants}
+  \subsection{L'appel des variants}\label{lappel-des-variants}
   
   L'appel des variants, ou \emph{variant calling}, fait référence à
   l'ensemble des méthodes permettant d'identifier des SNVs ou des indels à
@@ -1253,32 +1260,32 @@ class (for LaTeX) and the R bookdown package, in general.
   différencié de l'alignement, cependant, les résultats de l'appel étant
   extremement dé\&pendant de l'alignement, il est conseillé d'effectuer
   son appel en tenant compte de l'aligneur choisi (R. Nielsen et al.,
-  2011, DePristo et al. (2011), Lunter \& Goodson (2011)). On appelera
-  variants toutes différences de séquence observées entre un individu et
-  la séquence de référence utilisée. De nombreux logiciels d'appel des
-  variants, ou \emph{caller}, basés sur des algorithmes différents ont
-  emmergés ces dernières années pour répondre à cette problématique.
-  Parmis les plus connus on note SAMtools (H. Li et al., 2009), Genome
-  Analysis Tool Kit - HaplotypeCaller (GATK-HC) (McKenna et al., 2010),
-  Freebayes, SOAPindel et tvc . Les quatre premiers cités, peuvent être
-  utilisés pour analyser des données provenant de tout type de plateforme
-  de séquençage contrairement à TVC qui a été dévoeloppé spécifiquement
-  pour les données provenant de Ion Proton. Les données issues de NGS
-  peuvent présenter un taux d'erreur important. Ce taux d'erreur est
-  multi-factorielles et inclus nottament les erreurs de l'alignement. L'un
-  des éléments clef à prendre en compte pour pouvoir effectuer un appel de
-  qualité est la couverture de la position appelée (Sims et al., 2014).
-  Cependant, malgré la prise en compte de cet élément, l'appel de variants
-  reste un processus dificille souvent lié à plusieurs erreurs. Plusieurs
-  de ces erreurs sont même directement liées à la plateforme de séquençage
-  utilisée en amont, et les différents logiciels ne présentent pas les
-  même performances en fonction de ces différentes plateforme (Hwang, Kim,
-  Lee, \& Marcotte, 2015), c'est pourquoi il convient d'adapter le
-  logiciel d'appel en fonction de la plateforme de séquençage utilisée
-  préalablement. Les erreurs d'appel sont généralement classées en deux
-  catégories principales et certains aligneurs auront tendance à être plus
-  sujets à l'un de ces types d'erreur qu'à l'autre (\textbf{Figure :
-  }\ref{fig:snperror}) :
+  2011, M. A. DePristo et al. (2011), Lunter \& Goodson (2011)). On
+  appelera variants toutes différences de séquence observées entre un
+  individu et la séquence de référence utilisée. De nombreux logiciels
+  d'appel des variants, ou \emph{caller}, basés sur des algorithmes
+  différents ont emmergés ces dernières années pour répondre à cette
+  problématique. Parmis les plus connus on note SAMtools (H. Li et al.,
+  2009), Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) (McKenna et
+  al., 2010), Freebayes, SOAPindel et tvc . Les quatre premiers cités,
+  peuvent être utilisés pour analyser des données provenant de tout type
+  de plateforme de séquençage contrairement à TVC qui a été dévoeloppé
+  spécifiquement pour les données provenant de Ion Proton. Les données
+  issues de NGS peuvent présenter un taux d'erreur important. Ce taux
+  d'erreur est multi-factorielles et inclus nottament les erreurs de
+  l'alignement. L'un des éléments clef à prendre en compte pour pouvoir
+  effectuer un appel de qualité est la couverture de la position appelée
+  (D. Sims et al., 2014). Cependant, malgré la prise en compte de cet
+  élément, l'appel de variants reste un processus dificille souvent lié à
+  plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées
+  à la plateforme de séquençage utilisée en amont, et les différents
+  logiciels ne présentent pas les même performances en fonction de ces
+  différentes plateforme (Hwang, Kim, Lee, \& Marcotte, 2015), c'est
+  pourquoi il convient d'adapter le logiciel d'appel en fonction de la
+  plateforme de séquençage utilisée préalablement. Les erreurs d'appel
+  sont généralement classées en deux catégories principales et certains
+  aligneurs auront tendance à être plus sujets à l'un de ces types
+  d'erreur qu'à l'autre (\textbf{Figure : }\ref{fig:snperror}) :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1325,53 +1332,41 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsection{L'annotation des variants, filtrage et
   priorisation}\label{lannotation-des-variants-filtrage-et-priorisation}
   
-  This will include the variants' data quality, their localization at the
-  genomic, gene and transcripts levels, their genotype, their frequency in
-  the general population, their impact at the mRNA and protein levels, the
-  conservation among species of the affected protein residues, the variant
-  pathogenicity prediction, and reported associations with diseases. At
-  the gene level, they include the gene function, its spatiotemporal
-  expression pattern, its involvement in various pathways, and its
-  involvement in various phenotypes/diseases.
-  
-  L'annotation des variants a pour but de replacer l'ensemble des variants
-  identifiés lors de l'étape d'appel dans leur contexte biologique. Elle
-  vise à réunir le maximum d'information disponible à propos d'un variant
-  et des unités génétiques (gènes ou transcrits) qu'il impacte. Cette
-  phase est une des clefs de l'analyse puisqu'elle permet de prioriser des
-  variants d'interet et de filtrer d'autres variants considérés comme non
-  informatifs dans un cadre donné. Comme pour l'ensemble des étapes
-  précédantes, les logiciels et jeux de données utilisés lors de l'étape
-  d'annotation doivent être choisis consciencieusement, les résultats
-  étant grandement impactés par ceux-ci (McCarthy et al., 2014). Cette
-  annotation se fait généralement à deux niveau : 1. Au niveau du variant
-  : Regroupe l'ensemble des informations concèrnant un variant donné tel
-  que sa qualité, son génotype et sa fréquence 2. Au niveau de l'unité
-  génétique : Regroupe les information disponible sur l'unité génétique
-  impacté par le variant tel que sa fonction, son expression tissulaire,
-  les voies métaboliques dans lesquelles elle est impliquée, les
-  pathologies auxquelles elle est associées \emph{etc}\ldots{}
-  
-  \subsubsection{Au niveau du variant}\label{au-niveau-du-variant}
-  
-  L'annotation au niveau du variant vise à relier ce variant à l'ensemble
-  des information spécifique à celui-ci.
+  Traditionellement, les scientifiques developpaient leur expertise dans
+  un nombre de pathologie et de gènes associés limité. L'emmergence du NGS
+  a totallement remis en cause cette pratique, dès lors qu'il est
+  desormais courrant de retrouver pus de 30.000 variants différents par
+  exome. Afin de pouvoir lier un variant à une pathologie, il est desormai
+  indispensable d'annoter cet ensemble de variant, c'est à dire de les
+  replacer dans leur contexte biologique. Cela consiste à ajouter pour
+  chaque variant un ensemble d'information qui le caractérise. Ces
+  information serviront ensuite d'indicateur afin filtrer ou prioriser un
+  variant. Cette dernière étape de l'analyse est elle aussi crutiale
+  puisqu'elle permet de réduire le nombre de variant à considérer
+  \ldots{}.. On peut généralement distinguer deux niveau d'annotation :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    Information spécifiques au données de séquençag : la qualité, son
-    génotype\\
-  \item
-    La fréquence du variant dans la population générale : ESP, 1KG, ExAC\\
-  \item
-    Son impact sur l'unité génétique : stop, missense\ldots{}
-  \end{enumerate}
+    Au niveau du variant : Ce niveau d'annotation regroupe l'ensemble des
+    informations spécifiques à un variant
   
-  Il est à noter que l'impact prédite du variant sur l'unité génétique
-  peut-être êxtremement variable. (McCarthy et al., 2014) (RefSeq,
-  Ensembl, UCSC) VEP, Annovar, SNPEff
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      Information issues des résultats du séquençage : la qualité, son
+      génotype\\
+    \item
+      La fréquence du variant dans la population générale : ESP, 1KG, ExAC
+      (Lek et al., 2016)
+    \item
+      Son impact sur l'unité génétique : CADD, SIFT (Kumar, Henikoff, \&
+      Ng, 2009), PROVEAN (Y. Choi, Sims, Murphy, Miller, \& Chan, 2012),
+      Polyphen2, MutationTASTER (\textbf{Figure :} \ref{fig:vennpred})
+    \end{enumerate}
+  \end{enumerate}
   
   \begin{figure}
   
@@ -1382,8 +1377,13 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption[Diagramme de Venn des prédictions de pathogénicités de six logiciels]{Diagramme de Venn des prédictions de pathogénicités de six logiciels d'après [@Salgado2016] : }\label{fig:vennpred}
   \end{figure}
   
-  \subsubsection{Au niveau de l'unité
-  génétique}\label{au-niveau-de-lunite-genetique}
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    Au niveau de l'unité génétique
+  \end{enumerate}
   
   L'annotation au niveau de l'unité génétique consiste à récupérer
   l'ensemble des information disponible sur l'unité (impacté par le
@@ -1391,25 +1391,21 @@ class (for LaTeX) and the R bookdown package, in general.
   de filtrer ou de prioriser l'ensemble des variants chevauchant un gène
   (ou transcrit) donnée. L'ensemble de ces informations est donc
   extrêmement dépendante du jeux de gène utilisé et peuvent donc varier en
-  fonction de celui-ci (McCarthy et al., 2014,S. Zhao \& Zhang (2015))
-  même si les gènes CCDS sont bien représentés à la fois par le NCBI,
-  Ensembl et UCSC (Pruitt et al., 2009)
-  
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Expression du gene :\\
-  \item
-    Pathway impliquant le gene : Panther,
-  \item
-    phénotype impliquant le gène : HPO, OMIM
-  \item
-    Score mutationel : Plus récemment, favorisé par l'emmergence des bases
-    de données de variants, tel que ESP {[}cite{]} 1kg{[}cite{]} et
-    surtout ExAC {[}cite{]}, sont apparus des scores (RVIS, pLI,
-    loftool\ldots{})
-  \end{enumerate}
+  fonction de celui-ci (D. J. McCarthy et al., 2014,S. Zhao \& Zhang
+  (2015)) bien que les gènes CCDS soient bien représentés à la fois par le
+  NCBI, Ensembl et UCSC (Pruitt et al., 2009). Malgrès les dizaine de
+  milliers d'exomes et de génomes ayant été jusqu'à présent étudiés, notre
+  compréhension des mécanismes moléculaire qui sous-tendent la variété
+  génomique huamine reste particulièrement limité, et ce particulièrement
+  dans le contexte de l'analyse de pathologies génétiques. En pratique, la
+  plupart des variants connues pour impliquer une pathologie sont des
+  variants privés, c'est à dire spécifique à une famille ou un individus
+  limitant ainsi la quantiter d'information disponible sur ce variant.
+  Élargir l'annotation au niveau des unités génétiques impactés par des
+  variants permet d'augmenter considérablement la quantité d'information
+  disponible et permet donc d'améliorer la capaciter des alogrithme à
+  filtrer et / ou prioriser les variants rendant donc les analyses plus
+  efficaces.
   
   \subsection{Conclusion NGS}\label{conclusion-ngs}
   
@@ -1523,7 +1519,17 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \section{Materiel \& Methodes}\label{materiel-methodes}
   
+  \subsection{Récuération des sonnées ExAC, filtrage et pré
+  analyse}\label{recueration-des-sonnees-exac-filtrage-et-pre-analyse}
+  
   \section{Résultats}\label{resultats}
+  
+  \subsection{Définition de la formule de
+  score}\label{definition-de-la-formule-de-score}
+  
+  \subsection{Analyse de la corrélation}\label{analyse-de-la-correlation}
+  
+  \subsection{Analyse HPO}\label{analyse-hpo}
   
   \section{Conclusion}\label{conclusion}
   
@@ -1595,6 +1601,12 @@ class (for LaTeX) and the R bookdown package, in general.
   Hecht, N. B., \& Eddy, E. M. (2001). Haploinsufficiency of protamine-1
   or -2 causes infertility in mice. \emph{Nature Genetics}, \emph{28}(1),
   82--6. \url{http://doi.org/10.1038/88313}
+  
+  \hypertarget{ref-Choi2012}{}
+  Choi, Y., Sims, G. E., Murphy, S., Miller, J. R., \& Chan, A. P. (2012).
+  Predicting the Functional Effect of Amino Acid Substitutions and Indels.
+  \emph{PLoS ONE}, \emph{7}(10).
+  \url{http://doi.org/10.1371/journal.pone.0046688}
   
   \hypertarget{ref-Clermont1963}{}
   Clermont, Y. (1963). The cycle of the seminiferous epithelium in man.
@@ -1720,6 +1732,12 @@ class (for LaTeX) and the R bookdown package, in general.
   spermatogenesis. \emph{Federation Proceedings}, \emph{37}(11), 2512--6.
   Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/357185}
   
+  \hypertarget{ref-Kumar2009}{}
+  Kumar, P., Henikoff, S., \& Ng, P. C. (2009). Predicting the effects of
+  coding non-synonymous variants on protein function using the SIFT
+  algorithm. \emph{Nature Protocols}, \emph{4}(7), 1073--1081.
+  \url{http://doi.org/10.1038/nprot.2009.86}
+  
   \hypertarget{ref-Langmead2012}{}
   Langmead, B., \& Salzberg, S. L. (2012). Fast gapped-read alignment with
   Bowtie 2. \emph{Nature Methods}, \emph{9}(4), 357--359.
@@ -1730,6 +1748,13 @@ class (for LaTeX) and the R bookdown package, in general.
   and memory-efficient alignment of short DNA sequences to the human
   genome. \emph{Genome Biology}, \emph{10}(3), R25.
   \url{http://doi.org/10.1186/gb-2009-10-3-r25}
+  
+  \hypertarget{ref-Lek2016}{}
+  Lek, M., Karczewski, K. J., Minikel, E. V., Samocha, K. E., Banks, E.,
+  Fennell, T., \ldots{} Exome Aggregation Consortium, D. G. (2016).
+  Analysis of protein-coding genetic variation in 60,706 humans.
+  \emph{Nature}, \emph{536}(7616), 285--91.
+  \url{http://doi.org/10.1038/nature19057}
   
   \hypertarget{ref-Lelieveld2015}{}
   Lelieveld, S. H., Spielmann, M., Mundlos, S., Veltman, J. a, \&

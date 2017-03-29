@@ -10,7 +10,15 @@ Ranking transcript (or gene) considering their variation load was already done b
 
 ## Materiel & Methodes  
 
+### Récuération des sonnées ExAC, filtrage et pré analyse
+
 ## Résultats  
+
+### Définition de la formule de score  
+
+### Analyse de la corrélation  
+
+### Analyse HPO  
 
 ## Conclusion  
 
