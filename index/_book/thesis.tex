@@ -211,6 +211,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     La BGM
   \item
+    Rdley Scott pour le film Gladiator
+  \item
     Mes amis\\
   \item
     Ma famille
@@ -419,8 +421,8 @@ class (for LaTeX) and the R bookdown package, in general.
   vie de l'individu. Ces cellules sont localisées dans le compartiment
   basal des tubes séminifères. Les analyses histologiques ont permis de
   distinguer trois types de spermatogonies en fonction de leur contenu en
-  hétérochromatine ((Clermont, 1963, Clermont (1966), Goossens \& Tournaye
-  (2013))) :
+  hétérochromatine (Clermont, 1963, Clermont (1966), Goossens \& Tournaye
+  (2013)) :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -761,6 +763,10 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \section{L'infertilité masculine}\label{linfertilite-masculine}
   
+  Comme nous avons pu le voir, le spermatogénèse est une succession de
+  processus complexes qui s'effectue de manière synchrone, de fait la
+  moindre altération d'une seule de ces étapes est succeptible d'entrainer
+  un phénotype d'infertilité ((Barratt, 1995 \textbf{A TROUVER}).
   L'organisation mondiale de la santé définie l'infertilité comme étant :
   ``\emph{une pathologie du système reproductif définie par l'échec d'une
   grossesse clinique après 12 mois ou plus de rapports sexuels réguliers
@@ -776,9 +782,6 @@ class (for LaTeX) and the R bookdown package, in general.
   également à l'infertilité masculine. Cependant, aucune cause n'est
   identifiée dans 10-20\% des cas.
   
-  The entire process (of spermatogenesis) is tightly synchronized and
-  integrated, so that pathological conditions which produce even very
-  small deviations are likely to lead to infertility (Barratt, 1995)\\
   Barratt, C.L.R. (1995) Spermatogenesis. In Grudzinsky, J.G. and Yovich,
   J.L. (eds) Gametes: the spermatozoon. Cambridge University Press,
   Cambridge
@@ -891,9 +894,9 @@ class (for LaTeX) and the R bookdown package, in general.
   
   L'acide désoxyribonucléique (ADN) a été identifié comme étant le porteur
   de l'information génétique par Oswald Theodore Avery en 1944. Sa
-  structure en double hélice composée par quatre bases, la thymine,
-  l'adénine, la guanine et la cytosine fut caractérisée en 1953 par James
-  D. Watson et Francis Crick
+  structure en double hélice composée par quatre bases, la thymine (T),
+  l'adénine (A), la guanine (G) et la cytosine (C) fut caractérisée en
+  1953 par James D. Watson et Francis Crick
   
   \subsection{Les puces}\label{les-puces}
   
@@ -917,18 +920,17 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsection{Le séquençage NGS}\label{le-sequencage-ngs}
   
   Le terme séquençage de l'ADN fait référence à l'ensemble des techniques
-  permettant de déterminer l'ordre des nucléotides adénine (A), thymine
-  (T), cytosine (C) et guanine (G) de l'intégralité ou d'une partie d'une
-  molécule d'ADN. Avant de parler des nouvelles technologies de séquençage
-  (NGS) faisons un bref historique du séquençage de l'ADN. En 1977
-  Frederick Sanger développe une technologie de séquençage d'ADN basée sur
-  la méthode \emph{chain-termination}. Ce procédé est désormais connu sous
-  le nom de séquençage Sanger. D'autre méthode furent développées à la
-  même période, notamment celle de Walter Gilbert basée sur la
-  modification chimique de l'ADN, cependant sa grande efficience et sa
-  faible utilisation de la radioactivité permirent au séquençage Sanger de
-  s'imposer comme référence dans la ``première génération'' de séquenceur
-  à application de commerciale et de recherche
+  permettant de déterminer l'ordre des nucléotides A,T,C et G de
+  l'intégralité ou d'une partie d'une molécule d'ADN. Avant de parler des
+  nouvelles technologies de séquençage (NGS) faisons un bref historique du
+  séquençage de l'ADN. En 1977 Frederick Sanger développe une technologie
+  de séquençage d'ADN basée sur la méthode \emph{chain-termination}. Ce
+  procédé est désormais connu sous le nom de séquençage Sanger. D'autre
+  méthode furent développées à la même période, notamment celle de Walter
+  Gilbert basée sur la modification chimique de l'ADN, cependant sa grande
+  efficience et sa faible utilisation de la radioactivité permirent au
+  séquençage Sanger de s'imposer comme référence dans la ``première
+  génération'' de séquenceur à application de commerciale et de recherche
   (\href{http://en.wikipedia.org/wiki/DNA_sequencing}{Wikipédia}). Apparu
   en 1998, les instruments de séquençage automatique ainsi que les
   logiciels associés utilisant le séquençage par capillarité et la
@@ -961,8 +963,8 @@ class (for LaTeX) and the R bookdown package, in general.
   courts la notion de couverture est importante et représente l'un des
   critère majeur à considérer dans l'analyse des données (D. Sims,
   Sudbery, Ilott, Heger, \& Ponting, 2014). La couverture est définie
-  comme le nombre de \emph{reads} qui, après l'étape d'alignement
-  \protect\hyperlink{lalignement}{cf alignment}, se chevauchent les uns
+  comme le nombre de \emph{reads} qui, après l'étape
+  \protect\hyperlink{lalignement}{d'alignement}, se chevauchent les uns
   les autres au sein du région génomique spécifique. Par exemple, une
   couverture de 30x pour le gène XXXX signifie que chaque nucléotide de ce
   gène est chevauché par au moins \emph{reads} distincts.
@@ -973,7 +975,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée]{Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée d'après Brendan et. al, (2014) : Sequencing space based on read length (in bases) and number of reads per run. Points represent official platform/chemistry combination releases and are color-coded based on the platform family. To see this illustration in color, the reader is referred to the web version of this article at www.liebertpub.com/wound}\label{fig:readPerRun}
+  \caption[Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée]{Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée d'après [@Hodkinson2015] : Sequencing space based on read length (in bases) and number of reads per run. Points represent official platform/chemistry combination releases and are color-coded based on the platform family. To see this illustration in color, the reader is referred to the web version of this article at www.liebertpub.com/wound}\label{fig:readPerRun}
   \end{figure}
   
   \subsubsection{La capture des parties à séquencer, avantage et
@@ -1520,62 +1522,42 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsection{Conclusion NGS}\label{conclusion-ngs}
   
-  A key challenge in genomics is to understand the phenotypic consequence
-  of genomic variation. With the advent of next-generation sequencing
-  technologies, the challenge is no longer to generate DNA sequence data,
-  but to interpret them. Currently, the molecular basis of roughly 3700
-  Mendelian diseases has been elucidated, and a similar number of named
-  Mendelian or suspected Mendelian diseases awaits elucidation {[}1{]}
-  {[}1{]} A new face and new challenges for Online Mendelian Inheritance
-  in Man
-  
   En moins de 10 ans, les technologies NGS sont passées du séquençage de
   panel de gènes (environs 100 Mb pour le Roche GS FLX system) au
   séquençage de génome entiers (environs 1500 GB pour l'Illumina Hiseq
   4000) et d'une utilisation exclusive à la recherche à la routine
-  clinique. Cependant, et ce malgré son succès dans le domaine de la
-  génomique et de la post-génomique, plusieurs problématiques découlent de
-  cette technologie. Il reste au NGS plusieurs problématiques à résoudre
+  clinique. Cependant, cette quantité de donnée produites crées de
+  nouvelles problématiques pour les généticiens qui se retrouvent
+  désormais face au ``déluge de données génétiques'' (Schatz \& Langmead,
+  2013). Bien que de nombreux efforts soient pour palier la contrainte
+  instaurée par les \emph{reads} courts dans le cadre d'analyse génomique,
+  les solutions informatique et bioinformatique proposée jusqu'à présent
+  restent en dessous des besoins créés par NGS (J. D. McPherson, 2009).
+  Cette masse de données produite, à l'origine du succès du séquençage
+  haut-débit dans le domaine de la génomique et de la post-génomique, se
+  retrouve desormais être un frein dans la compréhension et
+  l'interprétation des réseaux de gènes et leurs implication dans des
+  pathologies, la limitation de cette technologie n'étant plus le
+  séquençage d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt
+  l'analyse et l'interprétation des donnée générée. Le processus allant de
+  l'extraction de l'ADN à l'identification d'un variant responsable d'une
+  pathologie comprend de nombreuses étapes apportant avec elles leur lot
+  d'erreurs. Bien que dans chacune de ces phases, de nombeux acteurs
+  soient en concurence et cherchent à atteindre une solution idéale,
+  celle-ci n'a toujours pas été trouvé et la prolifération des logiciels
+  et autres algorithmes d'analyses, bien que nécéssaire, s'ajoute à la
+  confusion.
   
   Malgrès les dizaine de milliers d'exomes et de génomes ayant été jusqu'à
   présent étudiés, notre compréhension des mécanismes moléculaire qui
-  sous-tendent la variété génomique huamine reste particulièrement limité,
-  et ce particulièrement dans le contexte de l'analyse de pathologies
-  génétiques.
-  
-  Cependant, cette quantité de donnée produites crées de nouvelles
-  problématiques pour les généticiens qui se retrouvent désormais face au
-  ``déluge de données génétiques'' (Schatz \& Langmead, 2013) ce qui se
-  retrouve être un frein dans la compréhension et l'interprétation des
-  réseaux de gènes et leurs implication dans des pathologies, la
-  limitation de cette technologie n'étant plus le séquençage d'un, de
-  plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et
-  l'interprétation de la masse de donnée générée.
-  
-  De même, nous avons pu voir que le séquençage par NGS se déroulait en
-  plusieurs étapes mêlant à la fois des techniques de biologie moléculaire
-  pour l'amplification par exemple, et des techniques d'informatiques et
-  mathématiques, comme pour l'alignement.
-  
-  De nombreux efforts sont fait pour palier la contrainte instaurée par
-  les \emph{reads} courts dans le cadre d'analyse génomique, cependant les
-  solutions informatique et Bioinformatique proposée jusqu'à présent sont
-  bien en dessous des besoins créés pour l'analyse des données NGS (J. D.
-  McPherson, 2009).
-  
-  Le séquençage nouvelle génération (NGS) a apporté avec lui des
-  opportunités sans précédent dans le domaine de la recherche en
-  génomique. Il a pu être appliqué à une grande variété de contexte avec
-  notamment le séquençage de génome entier, ou \emph{Whole Genome
-  Sequencing} (WGS) ) ou encore le séquençage exomique, le \emph{Whole
-  Exome Sequencing} (WES). Cependant, certaines de ses caractéristiques
-  techniques tel que la production de plusieurs milliards de
-  \textbf{\emph{reads} courts}, bien qu'elles soient en partie responsable
-  de son succès, sont aussi à l'origine de nouvelle problématique,
-  notamment dans l'analyse et l'interprétation des données.
-  
-  cf Evaluation of next-generation sequencing software in mapping and
-  assembly partie CHALLENGES AND PROSPECTS
+  sous-tendent la variété génomique huamine reste limité, et ce
+  particulièrement dans le contexte de l'analyse de pathologies
+  génétiques. En effet, à l'heure actuelle, plus de 3700 pathologie à
+  transmission Mendelienne ont été caractérisée mais un nombre similaire
+  ont toujours une cause inconnue (Amberger, Bocchini, \& Hamosh, 2011).
+  L'ellucidation de ces mystères passera probablement par une
+  harmonysation de méthodes de production des données ainsi que par
+  l'amélioration des techniques d'analyses.
   
   \chapter{Investigation génétique et physiologique de la
   globozoospermie}\label{globo}
@@ -1692,6 +1674,12 @@ class (for LaTeX) and the R bookdown package, in general.
   and Segmental Duplication Maps using Next-Generation Sequencing.
   \emph{Nature Genetics}, \emph{41}(10), 1061--1067.
   \url{http://doi.org/10.1038/ng.437.Personalized}
+  
+  \hypertarget{ref-Amberger2011}{}
+  Amberger, J., Bocchini, C., \& Hamosh, A. (2011). A new face and new
+  challenges for Online Mendelian Inheritance in Man (OMIM). \emph{Human
+  Mutation}, \emph{32}(5), 564--567.
+  \url{http://doi.org/10.1002/humu.21466}
   
   \hypertarget{ref-Asimakopoulos2003}{}
   Asimakopoulos, B. (2003). Is There a Place for Round and Elongated
