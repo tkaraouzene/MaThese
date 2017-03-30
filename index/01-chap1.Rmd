@@ -196,39 +196,24 @@ En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi dans s
 
 ## L'infertilité masculine  
 
-Comme nous avons pu le voir, le spermatogénèse est une succession de processus complexes qui s'effectue de manière synchrone, de fait la moindre altération d'une seule de ces étapes est succeptible d'entrainer un phénotype d'infertilité ((Barratt, 1995 **A TROUVER**).  L'organisation mondiale de la santé définie l'infertilité comme étant : "_une pathologie du système reproductif définie par l’échec d'une grossesse clinique après 12 mois ou plus de rapports sexuels réguliers non protégés_" ([```Who.int. 2013-03-19. Retrieved 2013-06-17```](http://www.who.int/reproductivehealth/topics/infertility/definitions/en/)). Environ 10-15% des couples humains sont considérés infertiles. On estime que dans la moitié des cas, la cause sous-jacente est masculine. Les facteurs causaux sous-jacents de l'infertilité masculine peuvent être attribués à des toxines environnementales, des troubles systémiques tels que la maladie hypothalamo-hypophysaire, les cancers testiculaires et l'aplasie des cellules germinales. Les facteurs génétiques, y compris les aneuploïdies et les mutations de gènes uniques, contribuent également à l'infertilité masculine. Cependant, aucune cause n'est identifiée dans 10-20% des cas.  
 
-Barratt, C.L.R. (1995) Spermatogenesis. In Grudzinsky, J.G. and Yovich, J.L. (eds) Gametes: the spermatozoon. Cambridge University Press, Cambridge  
+L'organisation mondiale de la santé définie l'infertilité comme étant : "*une pathologie du système reproductif définie par l’échec d'une grossesse clinique après 12 mois ou plus de rapports sexuels réguliers non protégés*" ([```Who.int. 2013-03-19. Retrieved 2013-06-17```](http://www.who.int/reproductivehealth/topics/infertility/definitions/en/)). L'étude de l'infertilité représente un des enjeux scientifique et médicale majeur de ces dernières années. On estime qu'environs 10 à 15% des couples humains font face à des problèmes d'infertilité soit plus de 70 millions de personnes dans le monde [@Boivin2007a]. Dans dans la moitié des cas, la cause sous-jacente serait masculine. On estime que  Les facteurs causaux sous-jacents de l'infertilité masculine peuvent être attribués à des toxines environnementales, des troubles systémiques tels que la maladie hypothalamo-hypophysaire, les cancers testiculaires et l'aplasie des cellules germinales. Les facteurs génétiques, y compris les aneuploïdies et les mutations de gènes uniques, contribuent également à l'infertilité masculine. Cependant, aucune cause n'est identifiée dans 10-20% des cas. Comme nous avons pu le voir, le spermatogénèse est une succession de processus complexes qui s'effectue de manière synchrone, de fait la moindre altération génétique affectant une seule de ces étapes est succeptible d'entrainer un phénotype d'infertilité (Barratt, 1995 **A TROUVER**). 
+
+<!-- Barratt, C.L.R. (1995) Spermatogenesis. In Grudzinsky, J.G. and Yovich, J.L. (eds) Gametes: the spermatozoon. Cambridge University Press, Cambridge   -->
 
 ### Les différents phénotypes d'infertilité masculine  
 
+Chez l'homme, l'infertilité est associé à une altération quantitative et / ou qualitative des spermatozoïdes présent dans l'éjaculat. L'ensemble de ces altération peuvent être détectées et quantifiées dans des laboratoires spécialisées par réalisation d'un spermogramme. Au cours de celui-ci, plusieurs critères tel que le le volume de sperme sécrété, son pH, la quantité et la vitalité des spermatozoïdes qu'il contient seront évalués. La proportion de cellules immatures sera elle aussi analysée. Ces cellules épithéliales de l’urètre, appellées aussi cellules rondes, se retrouvent à la fois dans l'éjaculat des individus ayant une quantité de spermatozoïdes "normal" [@Michael1937,@Tomlinson1993a], chez les individus présentant une quantité basse de spermatozoïdes [@MacLeod1970, @Tomlinson1993] ou en étant dépourvu [@Kurilo]. Cependant, leur nombre augmente tandis que la quantité de spermatozïde diminue [@SPERLING1971].  
+
 #### Liée à la quantité  
 
-Immature germ cells are present in ejaculates of subjects with a normal sperm count (Michael and Joel, 1937; Tomlinson et al., 1992), oligozoospermia (Mac Leod, 1970; Tomlinson et al., 1993), or azoospermia (Kurilo et al., 1993) and the presence of immature germ cells increases as the sperm count decreases (Sperling and Kaden, 1971)
-Michael, M. and Joel, K. (1937) Zellformen in normalen und pathologischen Ejakulaten und ihre klinische Bedeutung. Schweiz. Med. Wsch., 33, 757.  
-Tomlinson, M.J., Barratt, C.L.R., Bolton, A.E. et al. (1992) Round cells and sperm fertilizing capacity: the presence of immature germ cells but not seminal leukocytes are associated with reduced success of in vitro fertilization. Fertil. Steril., 58, 1257–1259.  
-MacLeod, J. (1970) The significance of deviations in human sperm morphology. In: Rosemberg, E. and Paulsen, C.A. (eds) The human testis. Plenum, New York, pp. 481–494.  
-Tomlinson, M.J., Barratt, C.L.R. and Cook, I.D. (1993) Prospective study of leukocytes and leukocyte populations in semen suggests they are not a cause of male infertility. Fertil. Steril., 60, 1069–1075  
-Kurilo, L.F., Liubashevskaia, I.A., Dubinskaia, V.P. and Gaeva, T.N. (1993) Karyological analysis of the count of immature germ cells in the ejaculate. Urol. Nefrol. (Mosk.), 2, 45–47.  
-Sperling, K. and Kaden, R. (1971) Meiotic studies of the ejaculated seminal fluids of humans with normal sperm count and oligospermia. Nature, 232, 481  
 
-In humans, spermatogenic arrest was considered a hopeless condition for couples desiring to conceive. However, the
-documented success of intracytoplasmic sperm injection (ICSI; Palermo et al., 1992) has pointed to using this technique to
-inject spermatids into oocytes (Edwards et al. 1994; Ogura et al., 1994)
-Palermo, G., Joris, H., Devroey, P. and Van Steirteghem, A.C. (1992) Pregnancies after intracytoplasmic sperm injection of a single spermatozoon into an oocyte. Lancet, 340, 17–18.  
-Edwards, R.G., Tarin, J.J., Dean, N. et al. (1994) Are spermatids injections into human oocytes now mandatory? Hum. Reprod., 9, 2217–2219.  
-Ogura, A., Matsuda, J. and Yanagimachi, R. (1994) Birth of normal young after electrofusion of mouse oocytes with round spermatids. Proc. Natl. Acad. Sci. USA, 91, 7460–7462  
-  
-Spermatogenic arrest, the inability of spermatogenetic cells to develop into male gametes within the gonads, has been reported in 4–30% of testicular biopsies of patients with severe oligospermia or azoospermia (Wong et al., 1973; Levin, 1979;
-Colgan et al., 1980; Soderstrom and Suominen, 1980; Nomen et al., 1984)
-Wong, T.W., Strauss, F.H. and Worne, N.E. (1973) Testicular biopsy in male infertility: I. Testicular causes of infertility. Arch. Pathol. Lab. Med., 95, 151–159.  
-Levin, H.S. (1979) Testicular biopsy in the study of male infertility. Hum. Pathol., 10, 569–579  
-Colgan, T.J., Bedar, Y.C., Strawbridge, H.T.G. et al. (1980) Reappraisal of the value of the testicular biopsy in the investigation of infertility. Fertil. Steril., 33, 56–60.  
-Soderstro¨m, K.O. and Suominen, J. (1980) Histopathology and ultrastructure of meiotic arrest in human spermatogenesis. Arch. Pathol. Lab. Med., 104, 476–482.  
-Soderstro¨m, K.O. and Suominen, J. (1980) Histopathology and ultrastructure of meiotic arrest in human spermatogenesis. Arch. Pathol. Lab. Med., 104, 476–482.
-  
-Spermatogenic arrest can occur at any stage of germ cell formation; primary spermatocyte arrest is most prominent, followed by spermatid arrest, and least commonly, spermatogonial arrest. Arrest at primary spermatocyte stage can be incomplete, so that a few secondary spermatocytes or spermatids are observed (Girgis et al., 1969)  
-Girgis, S.M., Etriby, A., Ibrahim, A.A. and Kahil, A. (1969) Testicular biopsy in azoospermia. A review of the last ten years’ experience of over 800 cases. Fertil. Steril., 20, 467–477.  
+Chez l'humain, l'arret de la spermatogénèse est définie comme l'incapacité des cellules spermatogénétique à devenir des spermatozoïdes matures. Elle peut survenir à n'importe qu'elle étape de la formation des cellules germinales. Les arrets au stade de spermatocyte I sont les plus fr'équents, suivis par l'arret au niveau des spermatides et moins fréquement au niveau des spermatogonies [@Girgis]. 
+
+1. **L'oligospermie** : L'oligospermie est définie comme ... Un arret de la spermatogénèse à été observée dans 4 à 30% des biopsie testiculaire des hommes présentant une oligospermie sévère [@Colgan1980, @Levin1979, @Soderstrom1980, @WONG1973]. Cet arret à longtemps été considérés comme sans espoir pour les couples désirant consevoir, jusqu'à l'emmergence de *intracytoplasmic sperm injection* (ICIS) [@Palermo1992]  
+2. **L'azoospermie** :  
+    a. **obstructive** :  
+    b. **non-obstructive** :  
 
 #### Liée à la forme  
 
