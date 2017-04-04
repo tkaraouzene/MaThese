@@ -194,6 +194,7 @@ class (for LaTeX) and the R bookdown package, in general.
   Je remercie \ldots{}
   
   \begin{itemize}
+  \tightlist
   \item
     Les rapporteurs
   \item
@@ -210,12 +211,12 @@ class (for LaTeX) and the R bookdown package, in general.
     Léquipe GETI\\
   \item
     La BGM
-  \item
-    Rdley Scott pour le film Gladiator
-  \item
-    Mes amis\\
-  \item
-    Ma famille
+  \end{itemize}
+  
+   - Mes amis\\
+  - Ma famille
+  
+  \begin{itemize}
   \item
     Dadette et Marco\\
   \item
@@ -231,98 +232,6 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     Noham
   \end{itemize}
-  
-  \newpage  
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  ~
-  
-  \begin{verbatim}
-                                    Cette thèse est dédiée à Fabien le québécois
-  \end{verbatim}
   
   \chapter*{Résumé}\label{resume}
   \addcontentsline{toc}{chapter}{Résumé}
@@ -355,12 +264,13 @@ class (for LaTeX) and the R bookdown package, in general.
   (JOHNSON, PETTY, \& NEAVES, 1980). Le cycle spermatogénétique est défini
   comme la succession chronologique des différents stades de
   différenciation d'une génération de cellules germinales (depuis la
-  spermatogonie jusqu'au spermatozoïde). Chacune des étapes 35du cycle
-  spermatogénétique a une durée fixe et constante selon les espèces.
+  spermatogonie jusqu'au spermatozoïde). Chacune des étapes du cycle
+  spermatogénétique a une durée fixe et constante selon les espèces
+  (\textbf{Table : }\ref{tab:spermatotime}).
   
   \begin{table}
   
-  \caption{\label{tab:unnamed-chunk-1}Durée de vie moyenne des cellules germinales humaines}
+  \caption{\label{tab:spermatotime}Durée de vie moyenne des cellules germinales humaines}
   \centering
   \begin{tabular}[t]{l|l}
   \hline
@@ -445,21 +355,21 @@ class (for LaTeX) and the R bookdown package, in general.
   L'entrée en division des spermatogonies Ap se fait par groupes
   cellulaire tous les 16 jours. Les cellules d'une même génération
   maintiennent entre elles des ponts cytoplasmiques jusqu'à la
-  spermiogénèse ce qui permet la synchronisation parfaite du développement
-  gamétique de toutes les cellules filles issues d'un groupe de
-  spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique.
-  Chaque spermatogonie Ap va, lorsqu'elle se divise par mitose, former
-  deux spermatogonies B qui elles-mêmes se diviseront en deux
-  spermatocytes primaires diploïdes (\textbf{Figure :}
-  \ref{fig:spermatogenese}).
+  \protect\hyperlink{spermiogenese}{spermiogénèse} ce qui permet la
+  synchronisation parfaite du développement gamétique de toutes les
+  cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène
+  est appelé onde spermatogénétique. Chaque spermatogonie Ap va,
+  lorsqu'elle se divise par mitose, former deux spermatogonies B qui
+  elles-mêmes se diviseront en deux spermatocytes primaires diploïdes
+  (\textbf{Figure :} \ref{fig:spermatogenese}).
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=0.75]{figure/spermatogenese} 
+  {\centering \includegraphics[scale=0.35]{figure/spermatogenese2} 
   
   }
   
-  \caption{Les différentes phases de la spermatogénèse (À CHANGER !!!!!)}\label{fig:spermatogenese}
+  \caption{Les différentes phases de la spermatogénèse d'après [medizin-kompakt](http://www.medizin-kompakt.de/spermatogenese) : description à écrire !!!}\label{fig:spermatogenese}
   \end{figure}
   
   \subsection{La méiose}\label{la-meiose}
@@ -468,7 +378,7 @@ class (for LaTeX) and the R bookdown package, in general.
   partir de cellules diploïdes (les spermatogonies B) vont se former des
   cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce
   résultat est le fruit de deux divisions successives (\textbf{Figure :
-  }@ref(fig:méiose)) appelée respectivement méiose réductionnelle ou
+  }\ref{fig:meiose}) appelée respectivement méiose réductionnelle ou
   méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va
   séparer les chromosomes homologues, produisant deux cellules et
   réduisant la ploïdie de diploïde à haploïde (d'où son non
@@ -481,11 +391,11 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=0.35]{figure/Meiosis_Stages} 
+  {\centering \includegraphics[scale=0.23]{figure/Meiosis_Stages2} 
   
   }
   
-  \caption[Les différentes étapes de la méiose gamétique masculine]{Les différentes étapes de la méiose gamétique masculine : D’après Sasaki et Matsui,2008}\label{fig:meiose}
+  \caption[Les différentes étapes de la méiose gamétique masculine]{Les différentes étapes de la méiose gamétique masculine d'après [Wikipédia](https://en.wikipedia.org/wiki/Meiosis) : }\label{fig:meiose}
   \end{figure}
   
   La méiose est initiée dès la fin de la phase de multiplication à partir
@@ -500,36 +410,59 @@ class (for LaTeX) and the R bookdown package, in general.
   centromère, le matériel génétique de chaque cellule ayant donc été
   multiplié par 2. Par la suite, ces cellules vont subir deux divisions
   méiotiques, chacune composées de 4 étapes distincte (\textbf{Figure :
-  }\ref{fig:mitose}) :
+  }\ref{fig:meiose}) :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    La prophase, caractérisée par la condensation de la chromatine formant
-    ainsi les chromosomes.\\
+    \textbf{Méiose réductionelle} :
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      \textbf{La prophase I} : Cette longue étape dure 23 jours chez
+      l'homme et peut être subdivisée en 5 phases succèsives : leptotène,
+      zygotène, pachytène, diplotène et diacinèse.
+    \item
+      \textbf{La métaphase I} : phase au cours de laquelle les chromosomes
+      vont s'aligner à l'équateur de la cellule pour former la plaque
+      équatoriale.
+    \item
+      \textbf{L'anaphase I} : les chromatides sœurs (ou les chromosomes
+      homologues en fonction de la phase méiotique) vont se séparer et
+      migrer aux pôles opposés de la cellule.\\
+    \item
+      \textbf{La télophase} : qui est l'étape finale, les chromosomes se
+      décondensent et l'enveloppe nucléaire se reforme autours des
+      chromosomes. La cellule mère se sépare alors en deux cellules filles
+      appelées spermatocytes secondaires.\\
+    \end{enumerate}
   \item
-    La métaphase, phase au cours de laquelle les chromosomes vont
-    s'aligner à l'équateur de la cellule pour former la plaque
-    équatoriale.
-  \item
-    L'anaphase, les chromatides sœurs (ou les chromosomes homologues en
-    fonction de la phase méiotique) vont se séparer et migrer aux pôles
-    opposés de la cellule.\\
-  \item
-    La télophase, qui est l'étape finale, les chromosomes se décondensent
-    et l'enveloppe nucléaire se reforme autours des chromosomes. La
-    cellule mère se sépare alors en deux cellules filles.
+    \textbf{Méiose équationelle} : La MII est similaire à une division
+    mitotique,
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      \textbf{La prophase II} : Contrairement à la prophase I, la prophase
+      II est très courte. Les chromosomes, alors formés de deux
+      chromatides soeurs se dirigent vers la plaque équatoriale.\\
+    \item
+      \textbf{La métaphase II} : À ce stade, les chromosomes sont alignés
+      le long de la plaque équatoriale au niveau de leur centromère.\\
+    \item
+      \textbf{l'anaphase II} : Les centromère de chaque chromosome se
+      rompts permettant aux chromatides soeurs de se diriger vers les
+      pôles opposés des spermatocytes II.\\
+    \item
+      \textbf{La télophase II} : Comme en télophase I, les cellules mères
+      se séparent en deux cellules filles haploïdes appelées spermatides,
+      contenant chacune n chromosomes.
+    \end{enumerate}
   \end{enumerate}
-  
-  \begin{figure}
-  
-  {\centering \includegraphics[scale=.55]{figure/phases_mitose} 
-  
-  }
-  
-  \caption[Les différentes phases de la division cellulaire]{Les différentes phases de la division cellulaire : De la prophase (à gauche) à la télophase (à droite)}\label{fig:mitose}
-  \end{figure}
   
   La première division méiotique aboutit à la formation des spermatocytes
   secondaires (spermatocytes II). À ce stade, les cellules sont haploïdes
@@ -555,7 +488,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption{Schéma simplifié d'un enjambement chromosomique}\label{fig:crossingover}
   \end{figure}
   
-  \subsection{La spermiogénèse}\label{la-spermiogenese}
+  \hypertarget{spermiogenese}{\subsection{La
+  spermiogénèse}\label{spermiogenese}}
   
   La spermiogénèse est la phase finale de la spermatogénèse. Elle dure
   environs 23 jours chez l'humain et peut être subdivisée en sept étapes
@@ -577,34 +511,34 @@ class (for LaTeX) and the R bookdown package, in general.
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    Les spermatides rondes (\textbf{Figure : }\ref{fig:spermiogenese} 1-2)
-    :L'identification de ces cellules représente une difficulté technique.
-    Elles ont cependant pu être décrites en détail par différentes
-    techniques de coloration sous microscope optique (Clermont, 1963,
-    Papic, Katona, \& Skrabalo (1988), Schenck \& Schill (n.d.), Adelman
-    \& Cahill (1989), World Health Organization (1992)). Plusieurs études
-    animales ont pu démontrées le potentiel des spermatides rondes à
-    donner la vie à des individus sains et fertiles, (a Ogura, Matsuda, \&
-    Yanagimachi, 1994), A. Ogura, Matsuda, Asano, Suzuki, \& Yanagimachi
-    (1996), Sasagawa \& Yanagimachi (1997){]}, la même chose ayant été
-    également observée plus récemment chez l'homme (A. Tanaka et al.,
-    2015) bien que le taux de fécondation et d'implantation soit
-    extrêmement faible (Asimakopoulos, 2003). Ils possèdent un noyau rond
-    avec une chromatine pâle et homogène. C'est à partir de ces étapes que
-    démarre la biogenèse de l'acrosome avec la production par l'appareil
-    de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux
-    centrioles contenus dans le cytoplasme vont se déplacer au futur pôle
-    caudal. Le centriole proximal est inactif alors que le centriole
-    distal donne naissance à un ensemble de microtubules à l'origine de
-    l'axonème du futur flagelle.\\
+    \textbf{Les spermatides rondes} (\textbf{Figure :
+    }\ref{fig:spermiogenese} 1-2) :L'identification de ces cellules
+    représente une difficulté technique. Elles ont cependant pu être
+    décrites en détail par différentes techniques de coloration sous
+    microscope optique (Clermont, 1963, Papic, Katona, \& Skrabalo (1988),
+    Schenck \& Schill (n.d.), Adelman \& Cahill (1989), World Health
+    Organization (1992)). Plusieurs études animales ont pu démontrées le
+    potentiel des spermatides rondes à donner la vie à des individus sains
+    et fertiles, (a Ogura, Matsuda, \& Yanagimachi, 1994), A. Ogura,
+    Matsuda, Asano, Suzuki, \& Yanagimachi (1996), Sasagawa \& Yanagimachi
+    (1997){]}, la même chose ayant été également observée plus récemment
+    chez l'homme (A. Tanaka et al., 2015) bien que le taux de fécondation
+    et d'implantation soit extrêmement faible (Asimakopoulos, 2003). Ils
+    possèdent un noyau rond avec une chromatine pâle et homogène. C'est à
+    partir de ces étapes que démarre la biogenèse de l'acrosome avec la
+    production par l'appareil de Golgi des vésicules pro-acrosomales
+    (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont
+    se déplacer au futur pôle caudal. Le centriole proximal est inactif
+    alors que le centriole distal donne naissance à un ensemble de
+    microtubules à l'origine de l'axonème du futur flagelle.\\
   \item
-    Les spermatides en élongation (\textbf{Figure :
+    \textbf{Les spermatides en élongation} (\textbf{Figure :
     }\ref{fig:spermiogenese} 3-4) :\\
     peuvent aussi donner naissance avec un meilleur taux que les
     spermatides rondes et engendrerai théoriquement moins de risques
     d'anomalies génétiques ((Asimakopoulos, 2003)). \textbf{A completer}\\
   \item
-    Les spermatides en condensation (\textbf{Figure :
+    \textbf{Les spermatides en condensation} (\textbf{Figure :
     }\ref{fig:spermiogenese} 5-7) : C'est le stade final de la
     différentiation de la spermatide en spermatozoïde. À ce stade le noyau
     est très allongé, avec une partie caudale globulaire et une partie
@@ -626,24 +560,30 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Principales étapes et modifications structurales lors de la spermiogénèse]{Principales étapes et modifications structurales lors de la spermiogénèse : 1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-7. Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome ; Ax, axonème ; CC, corps chromatoïdes ; CR, corps résiduel ; FD, fibres denses ; GF, gaine fibreuse ; M, mitochondrie ; Ma, manchette. D’après Touré et al., 2011}\label{fig:spermiogenese}
+  \caption[Principales étapes et modifications structurales lors de la spermiogénèse]{Principales étapes et modifications structurales lors de la spermiogénèse d'après Touré et al., 2011 : 1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-7. Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome ; Ax, axonème ; CC, corps chromatoïdes ; CR, corps résiduel ; FD, fibres denses ; GF, gaine fibreuse ; M, mitochondrie ; Ma, manchette. D’après }\label{fig:spermiogenese}
   \end{figure}
+  
+  \newpage  
   
   \section{Structure et fonction du
   spermatozoïde}\label{structure-et-fonction-du-spermatozoide}
   
   \subsection{Anatomie du spermatozoïde}\label{anatomie-du-spermatozoide}
   
-  Une fois Il est composé de deux parties principales : La tête et le
-  flagelle (\textbf{Figure : }\ref{fig:spz}).
+  Le spermatozoïde est une cellule hautement différenciée dont la taille,
+  l'orientation et la symétrie sont déterminée. La morphologie générale du
+  spermatozoïde éjaculé est similaire à celle du spermatozoïde
+  testiculaire. Le spermatozoïde humain normal mature mesure environ 60
+  \(\upmu\)m de long et est essentiellement constitué de deux parties : la
+  tête et le flagelle (\textbf{Figure : }\ref{fig:spz}).
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=.6]{figure/spermatozoide} 
+  {\centering \includegraphics[scale=.75]{figure/sperm_anatomy} 
   
   }
   
-  \caption[Anatomie du spermatozoïde]{Anatomie du spermatozoïde}\label{fig:spz}
+  \caption[Anatomie simplifiée du spermatozoïde]{Anatomie simplifiée du spermatozoïde}\label{fig:spz}
   \end{figure}
   
   \subsubsection{La tête}\label{la-tete}
@@ -665,7 +605,13 @@ class (for LaTeX) and the R bookdown package, in general.
     pénétrer la zone pellucide qui entoure les ovocytes. Ce processus de
     relargage est appelé réaction acrosomal.\\
   \item
-    \textbf{L'acroplaxome} : \textbf{TODO !!!}\\
+    \textbf{L'acroplaxome} : L'acroplaxome est une structure cytosquelette
+    composée de de microfilaments d'actine (F- actine) et de kératine 5.
+    Cette structure est positionnée en face de l'appareil de golgi et
+    contre le noyau et sert de point d'attachement ainsi que de guide aux
+    la vésicules pro-acrosomales (Abraham L Kierszenbaum \& Tres, 2004).
+    C'est une structure transitoire qui disparaît remplacée par la thèque
+    périnucléaire dans le spermatozoïde mature.\\
   \item
     \textbf{Le noyau} : C'est une structure cellulaire présente dans la
     majorité des cellules eucaryotes. Il contient l'essentiel du matériel
@@ -685,8 +631,8 @@ class (for LaTeX) and the R bookdown package, in general.
     2001). Cette compaction extrême permet de réduire la taille du noyau,
     mais aussi de protéger l'ADN d'agents de dégradation comme l'oxydation
     des bases. Parallèlement à cette condensation chromatinienne se
-    produit un arrêt des processus de transcription cellulaire
-    (Kierszenbaum \& Tres, 1978).Le noyau du spermatozoïde est donc un
+    produit un arrêt des processus de transcription cellulaire (A L
+    Kierszenbaum \& Tres, 1978).Le noyau du spermatozoïde est donc un
     noyau au repos, transcriptionnellement inactif (Ward, 1994)
   \end{enumerate}
   
@@ -716,7 +662,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Structure simplifiée de l'axonème d'après Inaba (2003)]{L'axonème es constitué de neuf doublets de microtubules périphériques reliés entre eux par des liens de nexine d'un doublet central relié aux doublets périphériques par des ponts radiaires}\label{fig:axoneme}
+  \caption[Structure simplifiée de l'axonème]{Structure simplifiée de l'axonème d'après [@Inaba2003] : L'axonème es constitué de neuf doublets de microtubules périphériques reliés entre eux par des liens de nexine d'un doublet central relié aux doublets périphériques par des ponts radiaires}\label{fig:axoneme}
   \end{figure}
   
   Le flagelle su spermatozoïde peut être divisé en trois partie distinctes
@@ -752,7 +698,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Structure du flagelle d’un spermatozoïde d’après Borg et al. (2010)]{Structure du flagelle d’un spermatozoïde d’après Borg et al. (2010) : Coupes transversales en microscopie électronique. Le flagelle se compose de trois parties : la pièce intermédiaire, contenant les mitochondries, la pièce principale et la pièce terminale. L’axonème, en position centrale, parcours tout le flagelle. Des structures périaxonèmales sont observables : les fibres denses dans la pièce intermédiaire et principale, et la gaine fibreuse dans la pièce principale seulement.}\label{fig:flagelle}
+  \caption[Structure du flagelle d’un spermatozoïde]{Structure du flagelle d’un spermatozoïde d'après Borg et al. (2010) : Coupes transversales en microscopie électronique. Le flagelle se compose de trois parties : la pièce intermédiaire, contenant les mitochondries, la pièce principale et la pièce terminale. L’axonème, en position centrale, parcours tout le flagelle. Des structures périaxonèmales sont observables : les fibres denses dans la pièce intermédiaire et principale, et la gaine fibreuse dans la pièce principale seulement.}\label{fig:flagelle}
   \end{figure}
   
   \subsection{Fonction du spermatozoïde}\label{fonction-du-spermatozoide}
@@ -760,6 +706,8 @@ class (for LaTeX) and the R bookdown package, in general.
   En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi
   dans sa fonction puisque c'est la seule cellule produite de manière
   endogène et dont l'action est exercée de manière exogène.
+  
+  \newpage  
   
   \section{L'infertilité masculine}\label{linfertilite-masculine}
   
@@ -819,58 +767,179 @@ class (for LaTeX) and the R bookdown package, in general.
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    \textbf{L'oligospermie} : L'oligospermie est définie comme \ldots{} Un
-    arret de la spermatogénèse à été observée dans 4 à 30\% des biopsie
-    testiculaire des hommes présentant une oligospermie sévère (Colgan,
-    Bedard, Strawbridge, Buckspan, \& Klotz, 1980, Levin (1979),
-    Soderström \& Suominen (1980), WONG, STRAUS, \& WARNER (1973)). Cet
-    arret à longtemps été considérés comme sans espoir pour les couples
-    désirant consevoir, jusqu'à l'emmergence de \emph{intracytoplasmic
-    sperm injection} (ICIS) (Palermo, Joris, Devroey, \& Van Steirteghem,
-    1992)\\
+    \textbf{L'oligozoospermie} : L'oligozoospermie est définie comme un
+    phénotype d'infertilité masculine caractérisé par une production
+    inferieure à 15 millions de spermatozoïdes par mL de sperm (T. G.
+    Cooper et al., 2010). Un arret de la spermatogénèse à été observée
+    dans 4 à 30\% des biopsie testiculaire des hommes présentant une
+    oligospermie sévère (Colgan, Bedard, Strawbridge, Buckspan, \& Klotz,
+    1980, Levin (1979), Soderström \& Suominen (1980), WONG, STRAUS, \&
+    WARNER (1973)). Cet arret à longtemps été considérés comme sans espoir
+    pour les couples désirant consevoir, jusqu'à l'emmergence de
+    \emph{intracytoplasmic sperm injection} (ICIS) (Palermo, Joris,
+    Devroey, \& Van Steirteghem, 1992)\\
   \item
-    \textbf{L'azoospermie} :
+    \textbf{L'azoospermie} : Comme l'oligozoospermie, l'azoospermie est un
+    phénotype d'infertilité masculine cette fois-ci caractérisé par
+    l'abscence total de spermatozoïde dans lm'éjaculat. On distingue des
+    causes excrétoires empêchant l'excrétion des spermatozoïdes, on parle
+    alors d'azoospermie obstructive et des causes sécrétoires, les plus
+    fréquentes, accompagnées d'un défaut de la spermatogenèse, on parle
+    alors d'azoospermie non-obstructive.
+  \end{enumerate}
+  
+  \subsubsection{Liée à la morphologie}\label{liee-a-la-morphologie}
+  
+  Ces anomalies sont observables en effectuant un spermocytogramme.
+  Plusieurs classifications ont été établie, cependant, c'est la
+  classification de David modifiée (\textbf{Table :}
+  \ref{fig:anomaliemorphosperm}) qui est la plus répendue en France. Pour
+  ce faire, on procède générallement à une observation de 100
+  spermatozoïdes au cours de laquelle l'ensemble des anomalies observées
+  sont relevées et quantifiées permettant ainsi de définir un index
+  d'anomalies multiple (nombre total d'anomalies/nombre de spermatozoïdes
+  anormaux) révélant le nombre moyen d'anomalies par spermatozoïdes.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.75]{figure/sperm_morpho_abnormalities} 
+  
+  }
+  
+  \caption[Différentes anomalies morphologiques du spermatozoïde selon la classification de David modifiée adapté... TABLEAU à adapter et à insérer !!!!!]{Différentes anomalies morphologiques du spermatozoïde selon la classification de David modifiée adapté... TABLEAU à adapter et à insérer !!!!! d'après [@Auger2010]}\label{fig:anomaliemorphosperm}
+  \end{figure}
+  
+  \subsubsection{Liée à la mobilité}\label{liee-a-la-mobilite}
+  
+  Le succès du passage du spermatozoïdes le long du tractus génitale
+  féminin dépend en grande partie de la mobilité et de la vitesse du
+  spermatozoïde (Lindholmer, 1974, Björndahl (2010)). La vitesse moyenne
+  d'un spermatozoïde étant de 25 \(\upmu\)m/s. Une mauvaise mobilité
+  observée dans plus de 50\% des spermatozoïdes éjaculés se révèle être un
+  prédicteur de l'échec de la fécondation (Aitken, Sutton, Warner, \&
+  Richardson, 1985).
+  
+  \subsection{La génétique de
+  l'infertilité}\label{la-genetique-de-linfertilite}
+  
+  Ainsi, l'infertilité masculine d'origine génétique pourrait concerner
+  près de 1 homme sur 40 (Tüttelmann et al., 2011)
+  
+  \subsubsection{Les causes fréquentes}\label{les-causes-frequentes}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Les microdélétions du chromosome Y} : Le chromosome Y est un
+    petit chromosome atteignant une taille d'environ 53 Mb et est porteur
+    de 78 gènes principalement impliqués dans la différentiation sexuelle
+    masculine et la spermatogénèse (Skaletsky et al., 2003). De fait, le
+    chromosome Y représente une région d'intéret évidente dans l'étude de
+    facteur génétique liés à l'infertilité masculine. L'évolution des
+    technologie a permi de mettre en évidence des délétion invisibles au
+    karyotype dans la région du facteur AZF (\emph{Azoospermia Factor}).
+    Cette région peut-être subdivisée en trois sous-partie, AZFa, AZFb et
+    AZFc (\textbf{Figure :} \ref{fig:chry}). Depuis plusieurs années, de
+    nombreuses séries de patients azoospermiques ou oligozoospermiques ont
+    été publiées et tendent à montrer que les microdélétions du chromosome
+    Y seraient responsables de 10\% des cas d'azoospermie non-obstructives
+    et chez 5\% des cas d'oligozoospermie sévères (\textless{}5 millions
+    de spermotoides/ml) (Hotaling \& Carrell, 2014).
+  \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.45]{figure/chromozomeY} 
+  
+  }
+  
+  \caption[Représentation schématique du chromosome Y adapté]{Représentation schématique du chromosome Y adapté d'après [@OFlynnOBrien2010] : Visualisation la région AZF ainsi que des trois sous-régions AZF a, b, c et des principaux gènes compris dans chacune des sous-régions}\label{fig:chry}
+  \end{figure}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    \textbf{Anomalies chromosomiques} : Des anomalies chromosomique de
+    nombre ou de structure impliquant le autosomes ou, le plus souvent,
+    les gonosomes, peuvent être impliqués dans des cas d'infertilité
+    masculine. Le pourcentage d'individu concerné varie entre 2 et 8\% et
+    peut atteindre 15\% pour les patients azoospermiques soit 10 à 20 fois
+    la fréquence retrouvée dans la population générale (Ravel, Berthaut,
+    Bresson, Siffroi, \& Genetics Commission of the French Federation of
+    CECOS, 2006).
   
     \begin{enumerate}
     \def\labelenumii{\alph{enumii}.}
     \tightlist
     \item
-      \textbf{obstructive} :\\
+      \textbf{Syndrome de Klinefelter} : Le syndrome de Klinfelter (ou 46,
+      XXY) fut décrit pour la première fois en 1942 par Harry F.
+      Klinefelter et décrit une affection due à la présence d'un
+      chromosome X supplémentaire suite à une erreur de ségrégation des
+      chromosome au moment de la méiose. Sa prévalence dans la population
+      générale est estimée à environs 1 sur 1200 (1 homme sur 600)
+      (Bojesen \& Gravholt, 2011) mais elle est environs 50 fois
+      superieure chez les patients infertiles azoospermiques (Gekas et
+      al., 2001).\\
     \item
-      \textbf{non-obstructive} :
+      \textbf{Les anomalies de structure} : Les translocation et les
+      invertions sont les anomalies de structures retrouvées le plus
+      fréquement chez les patients infertiles.
+  
+      \begin{enumerate}
+      \def\labelenumiii{\roman{enumiii}.}
+      \tightlist
+      \item
+        La translocation est définie comme l'échange de materiel génétique
+        entre deux chromosomes non homologues. On en distingue deux types,
+        les translocation réciproques et les translocation
+        robertsonniennes. Les premières sont retrouvées 4 à 10 fois plus
+        fréquemment chez les patients infertiles que dans la population
+        générale (Elliott \& Cooke, 1997), les secondes sont retrouvées
+        chez 1.6\% des patients oligozoospermiques et 0.09\% des patients
+        azoospermiques (O'Flynn O'Brien, Varghese, \& Agarwal, 2010).\\
+      \item
+        Les inversions chromosomiques caractérisent le mécanisme de cassur
+        d'un fragment de chromosome suivi de son retournement à 180° et sa
+        réintégration à la même position. Ces inversions vont gêner
+        l'appariement des chromosomes homologues (formation d'une boucle
+        d'inversion) pendant la méiose et sont, comme les translocations,
+        retrouvées plus fréquemment chez les patients infertiles que dans
+        la population générale (Krausz \& Forti, 2000).\\
+      \end{enumerate}
+    \item
+      \textbf{Autres anomalies chromosomiques} : Parmis les anomalies de
+      structures chromosomique responsables d'infertilité masculine, on
+      peut par exemple citer les hommes de formule 46,XX bien quelle soit
+      moins fréquente que les translocations et les inversions. Ces
+      patients sont généralement totalement infertiles et présentent une
+      azoospermie par absence des sous- régions AZFa,b et c (Vorona,
+      Zitzmann, Gromoll, Schüring, \& Nieschlag, 2007) bien qu'ils aient
+      un phénotype masculin normal.
     \end{enumerate}
+  \item
+    \textbf{Mutations du gène \emph{CFTR} }: L'identification du gène
+    \emph{CFTR} (Cystic Fibrosis Transmembrane conductance Regulator) chez
+    les patients atteints de mucovisidose et présentant une agénésie
+    bilatérale des canaux déférents (ABCD) a permis d'associer ce gène au
+    phénotype d'azoospermie obstructive. Cette malformation serait
+    responsable de 2\% des cas d'infertilité masculine et de 25\% des cas
+    d'azoospermie obstructive (J. Yu, Chen, Ni, \& Li, 2012).
   \end{enumerate}
   
-  \subsubsection{Liée à la forme}\label{liee-a-la-forme}
-  
-  Teratozoospermie
-  
-  \paragraph{La globozoospermie}\label{la-globozoospermie}
-  
-  La globozoospermie est une anomalie des spermatozoïdes caractérisé par
-  une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire
-  désorganisée (Singh, n.d., Pedersen \& Rebbe (1974))
-  
-  \subsubsection{Liée à la mobilité}\label{liee-a-la-mobilite}
-  
-  Sperm motility is necessary for the transport of male DNA to eggs in
-  species with both external and internal fertilization.
-  
-  \subsection{La génétique de
-  l'infertilité}\label{la-genetique-de-linfertilite}
-  
-  \subsubsection{Les causes fréquentes}\label{les-causes-frequentes}
-  
-  \paragraph{Les microdélétions du chromosome
-  Y}\label{les-microdeletions-du-chromosome-y}
-  
-  \paragraph{Anomalies chromosomiques}\label{anomalies-chromosomiques}
-  
-  \paragraph{Mutations CFTR}\label{mutations-cftr}
+  Bien que la prévalence de ces anomalies génétiques varien en fonction du
+  phénotype concerné, il est estimé que ces défauts soient seulement
+  retrouvés chez 5\% des cas d'infertilité masculine tout phénotype
+  confondus. Cette observation suffère fortement l'implication d'autres
+  gènes encore inconnus dans les différents phénotypes d'infertilité
+  masculine (\textbf{Nieschlag et al., 2010 A trouver}).
   
   \subsubsection{Les nouveaux gènes}\label{les-nouveaux-genes}
   
-  \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+  \newpage  
   
   \section{Les techniques d'analyses
   génétiques}\label{les-techniques-danalyses-genetiques}
@@ -879,7 +948,33 @@ class (for LaTeX) and the R bookdown package, in general.
   de l'information génétique par Oswald Theodore Avery en 1944. Sa
   structure en double hélice composée par quatre bases, la thymine (T),
   l'adénine (A), la guanine (G) et la cytosine (C) fut caractérisée en
-  1953 par James D. Watson et Francis Crick
+  1953 par James D. Watson et Francis Crick. \textbf{Petite intro à
+  terminer !!!}
+  
+  \subsection{\texorpdfstring{Approche ``gènes
+  candidats''}{Approche gènes candidats}}\label{approche-genes-candidats}
+  
+  L'approche gène candidat consiste à rechercher des mutations chez un
+  patient dans un gène cible. Le choix du gène cible se fera en fonction
+  de plusieurs critères. Le premier d'entre eux est l'étude de gènes
+  reliés à des phénotypes proche du phénotype étudié dans différents
+  modèles animaux et notamment murins. Dans ce cas, les mutations seront
+  recherchées sur le gène orthologue humain (Boer, Vries, \& Ramos, 2015).
+  Une autre possibilité consiste à rechercher des variants dans des gènes
+  paralogues à un gène précédement identifié avec l'idée sous-jacente que
+  leur structure proche implique une fonction similaire. Enfin la dernière
+  méthode consiste à étudier des gènes connus comme étant des partenaires
+  de gènes déjà identifiés dans cette pathologie en supposant que si un
+  variant dans un gène donné entraine une pathologie, un variant dans un
+  partenaire de ce gène pourrait entrainer le même phénotype. Cette
+  approche est bien souvent infructueuse dû à la grande partie de
+  l'hétérogénéité génétique des phénotypes étudiés, au nombre limité de
+  patients testés (Elinati et al., 2012) et aux connaissances souvent
+  incomplètes sur le phénotype. De fait, cette approche a quasiment
+  disparu au profit des méthodes à haut débit que sont les puces et le
+  séquençage nouvelle génération (NGS), néanmoins, quelques cette méthode
+  compte à son actif plusieurs succès retentissants {[}INSERT PETITE
+  LISTE{]}.
   
   \subsection{Les puces}\label{les-puces}
   
@@ -1117,7 +1212,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Exemple de séquençage CRT tel qu'il est effectué par Illumina]{Exemple de séquençage CRT tel qu'il est effectué par Illumina d'après [@Goodwin2016] : a : ajout d'un dNTP labellisé par un fluorophore et 3'-bloqué. b : identification du dNTP ajouté grâce au fluorophore. c : le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'élongation}\label{fig:crtSeq}
+  \caption[Exemple de séquençage CRT tel qu'il est effectué par Illumina]{Exemple de séquençage CRT tel qu'il est effectué par Illumina d'après [@Goodwin2016] : **a** : ajout d'un dNTP labellisé par un fluorophore et 3'-bloqué. **b** : identification du dNTP ajouté grâce au fluorophore. **c** : le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'élongation}\label{fig:crtSeq}
   \end{figure}
   
   \begin{enumerate}
@@ -1177,6 +1272,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption[Exemple de séquençage SBL tel qu'il est effectué par SOLiD]{Exemple de séquençage SBL tel qu'il est effectué par SOLiD d'après [@Goodwin2016] : }\label{fig:sblSeq}
   \end{figure}
   
+  \newpage  
+  
   \section{L'analyse bioinformatique des données de
   NGS}\label{lanalyse-bioinformatique-des-donnees-de-ngs}
   
@@ -1200,10 +1297,10 @@ class (for LaTeX) and the R bookdown package, in general.
   l'émergence du séquençage haut débit et notamment du WGS et du WES a
   permis de réunir une quantité jusqu'à présent inégalé d'information sur
   les variations génétiques, et d'une manière plus générale, sur les gènes
-  et leurs fonctions (Mardis, 2008, Bentley (2006)). Cependant, de par
-  leur nature et leur quantité, l'acquisition de ces nouvelles données a
-  engendrée de nouvelles problématiques qui freinent les biologistes dans
-  leurs recherches.
+  et leurs fonctions (E. R. Mardis, 2008, Bentley (2006)). Cependant, de
+  par leur nature et leur quantité, l'acquisition de ces nouvelles données
+  a engendrée de nouvelles problématiques qui freinent les biologistes
+  dans leurs recherches.
   
   \subsection{Les données fournies pa le
   NGS}\label{les-donnees-fournies-pa-le-ngs}
@@ -1213,9 +1310,9 @@ class (for LaTeX) and the R bookdown package, in general.
   
   Après la phase d'amplification, chaque clone est analyser puis, la
   séquence composant chacun de ces clone est déterminée. La taille de
-  cette séquence varie en fonction des plateforme de séquençage
-  (\textbf{Figure : }\ref{fig:readPerRun}) mais est généralement comprise
-  entre 40 et 150 pb pour le NGS. deux types de \emph{reads} :
+  cette séquence varie en fonction des plateforme de séquençage mais est
+  généralement comprise entre 40 et 150 pb pour le NGS (\textbf{Figure :
+  }\ref{fig:readPerRun}). deux types de \emph{reads} :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1464,7 +1561,7 @@ class (for LaTeX) and the R bookdown package, in general.
     (gène, transcrit). L'annotation au niveau de l'unité génétique
     consiste à récupérer l'ensemble des information disponible non plus
     sur le variant uniquement mais sur la ou les unités génétique qu'il
-    impacte. Ce ``dézoom'' permet d'ajouter des information
+    impacte. Ce ``dézoom'' permet d'ajouter des informations
     complémentaires particulièrement utile notamment lorsque peut
     d'information sont disponibles sur le variant lui-même. En pratique,
     la plupart des variants connues pour impliquer une pathologie sont des
@@ -1651,6 +1748,13 @@ class (for LaTeX) and the R bookdown package, in general.
   Adelman, M. M., \& Cahill, E. M. (1989). \emph{Atlas of sperm
   morphology} (p. 123). ASCP Press.
   
+  \hypertarget{ref-Aitken1985}{}
+  Aitken, R. J., Sutton, M., Warner, P., \& Richardson, D. W. (1985).
+  Relationship between the movement characteristics of human spermatozoa
+  and their ability to penetrate cervical mucus and zona-free hamster
+  oocytes. \emph{Journal of Reproduction and Fertility}, \emph{73}(2),
+  441--9. Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/3989795}
+  
   \hypertarget{ref-Alkan2010}{}
   Alkan, C., Kidd, J. M., Marques-bonet, T., Aksay, G., Hormozdiari, F.,
   Kitzman, J. O., \ldots{} Eichler, E. E. (2010). Personalized Copy-Number
@@ -1691,12 +1795,28 @@ class (for LaTeX) and the R bookdown package, in general.
   in Genetics and Development}, \emph{16}(6), 545--552.
   \url{http://doi.org/10.1016/j.gde.2006.10.009}
   
+  \hypertarget{ref-Bjorndahl2010}{}
+  Björndahl, L. (2010). The usefulness and significance of assessing
+  rapidly progressive spermatozoa. \emph{Asian Journal of Andrology},
+  \emph{12}(1), 33--5. \url{http://doi.org/10.1038/aja.2008.50}
+  
+  \hypertarget{ref-DeBoer2015}{}
+  Boer, P. de, Vries, M. de, \& Ramos, L. (2015). A mutation study of
+  sperm head shape and motility in the mouse: lessons for the clinic.
+  \emph{Andrology}, \emph{3}(2), 174--202.
+  \url{http://doi.org/10.1111/andr.300}
+  
   \hypertarget{ref-Boivin2007a}{}
   Boivin, J., Bunting, L., Collins, J. A., \& Nygren, K. G. (2007).
   International estimates of infertility prevalence and treatment-seeking:
   potential need and demand for infertility medical care. \emph{Human
   Reproduction}, \emph{22}(6), 1506--1512.
   \url{http://doi.org/10.1093/humrep/dem046}
+  
+  \hypertarget{ref-Bojesen2011}{}
+  Bojesen, A., \& Gravholt, C. H. (2011). Morbidity and mortality in
+  Klinefelter syndrome (47,XXY). \emph{Acta Paediatrica}, \emph{100}(6),
+  807--813. \url{http://doi.org/10.1111/j.1651-2227.2011.02274.x}
   
   \hypertarget{ref-Cho2001}{}
   Cho, C., Willis, W. D., Goulding, E. H., Jung-Ha, H., Choi, Y. C.,
@@ -1743,6 +1863,13 @@ class (for LaTeX) and the R bookdown package, in general.
   Project: Lessons from Large-Scale Biology. \emph{Science},
   \emph{300}(5617), 286--290. \url{http://doi.org/10.1126/science.1084564}
   
+  \hypertarget{ref-Cooper2010}{}
+  Cooper, T. G., Noonan, E., Eckardstein, S. von, Auger, J., Baker, H. W.
+  G., Behre, H. M., \ldots{} Vogelsong, K. M. (2010). World Health
+  Organization reference values for human semen characteristics.
+  \emph{Human Reproduction Update}, \emph{16}(3), 231--245.
+  \url{http://doi.org/10.1093/humupd/dmp048}
+  
   \hypertarget{ref-DePristo2011}{}
   DePristo, M. A., Banks, E., Poplin, R., Garimella, K. V., Maguire, J.
   R., Hartl, C., \ldots{} Pritchard, E. (2011). A framework for variation
@@ -1754,6 +1881,11 @@ class (for LaTeX) and the R bookdown package, in general.
   Eddy, E. M. (2007). The scaffold role of the fibrous sheath.
   \emph{Society of Reproduction and Fertility Supplement}, \emph{65},
   45--62. Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/17644954}
+  
+  \hypertarget{ref-Elliott1997}{}
+  Elliott, D. J., \& Cooke, H. J. (1997). The molecular genetics of male
+  infertility. \emph{BioEssays}, \emph{19}(9), 801--809.
+  \url{http://doi.org/10.1002/bies.950190910}
   
   \hypertarget{ref-Escalier1991}{}
   Escalier, D., Gallo, J. M., Albert, M., Meduri, G., Bermudez, D., David,
@@ -1767,6 +1899,14 @@ class (for LaTeX) and the R bookdown package, in general.
   Flicek, P., \& Birney, E. (2009). Sense from sequence reads: methods for
   alignment and assembly. \emph{Nature Methods}, \emph{6}(11 Suppl),
   S6--S12. \url{http://doi.org/10.1038/nmeth0610-479b}
+  
+  \hypertarget{ref-Gekas2001}{}
+  Gekas, J., Thepot, F., Turleau, C., Siffroi, J. P., Dadoune, J. P.,
+  Briault, S., \ldots{} Association des Cytogeneticiens de Langue
+  Francaise. (2001). Chromosomal factors of infertility in candidate
+  couples for ICSI: an equal risk of constitutional aberrations in women
+  and men. \emph{Human Reproduction (Oxford, England)}, \emph{16}(1),
+  82--90. Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/11139542}
   
   \hypertarget{ref-Girgis}{}
   Girgis, S. M., Etriby, A. N., Ibrahim, A. A., \& Kahil, S. A. (1969).
@@ -1828,6 +1968,12 @@ class (for LaTeX) and the R bookdown package, in general.
   sequencing. \emph{Briefings in Bioinformatics}, \emph{11}(2), 181--197.
   \url{http://doi.org/10.1093/bib/bbp046}
   
+  \hypertarget{ref-Hotaling2014}{}
+  Hotaling, J., \& Carrell, D. T. (2014). Clinical genetic testing for
+  male factor infertility: current applications and future directions.
+  \emph{Andrology}, \emph{2}(3), 339--350.
+  \url{http://doi.org/10.1111/j.2047-2927.2014.00200.x}
+  
   \hypertarget{ref-Hwang2015}{}
   Hwang, S., Kim, E., Lee, I., \& Marcotte, E. M. (2015). Systematic
   comparison of variant calling pipelines using gold standard personal
@@ -1859,6 +2005,12 @@ class (for LaTeX) and the R bookdown package, in general.
   spermatogenesis. \emph{Federation Proceedings}, \emph{37}(11), 2512--6.
   Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/357185}
   
+  \hypertarget{ref-Kierszenbaum2004}{}
+  Kierszenbaum, A. L., \& Tres, L. L. (2004). The
+  acrosome-acroplaxome-manchette complex and the shaping of the spermatid
+  head. \emph{Archives of Histology and Cytology}, \emph{67}(4), 271--84.
+  Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/15700535}
+  
   \hypertarget{ref-Korbel2009}{}
   Korbel, J. O., Urban, A. E., Affourtit, J. P., Godwin, B., Grubert, F.,
   Simons, J. F., \ldots{} Snyder, M. (2009). Paired-End Mapping Reveals
@@ -1873,6 +2025,11 @@ class (for LaTeX) and the R bookdown package, in general.
   through phenotype data. \emph{Nucleic Acids Research},
   \emph{42}(Database issue), D966--74.
   \url{http://doi.org/10.1093/nar/gkt1026}
+  
+  \hypertarget{ref-Krausz2000}{}
+  Krausz, C., \& Forti, G. (2000). Clinical aspects of male infertility.
+  \emph{Results and Problems in Cell Differentiation}, \emph{28}, 1--21.
+  Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/10626292}
   
   \hypertarget{ref-Kumar2009}{}
   Kumar, P., Henikoff, S., \& Ng, P. C. (2009). Predicting the effects of
@@ -1928,6 +2085,11 @@ class (for LaTeX) and the R bookdown package, in general.
   quality scores Mapping short DNA sequencing reads and calling variants
   using mapping quality scores, 1851--1858.
   \url{http://doi.org/10.1101/gr.078212.108}
+  
+  \hypertarget{ref-Lindholmer1974}{}
+  Lindholmer, C. (1974). The importance of seminal plasma for human sperm
+  motility. \emph{Biology of Reproduction}, \emph{10}(5), 533--42.
+  Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/4142752}
   
   \hypertarget{ref-Lunter2011}{}
   Lunter, G., \& Goodson, M. (2011). Stampy: A statistical algorithm for
@@ -2024,6 +2186,12 @@ class (for LaTeX) and the R bookdown package, in general.
   and Genetics}, \emph{13}(5), 431--434.
   \url{http://doi.org/10.1007/BF02066177}
   
+  \hypertarget{ref-OFlynnOBrien2010}{}
+  O'Flynn O'Brien, K. L., Varghese, A. C., \& Agarwal, A. (2010). The
+  genetic causes of male factor infertility: A review. \emph{Fertility and
+  Sterility}, \emph{93}(1), 1--12.
+  \url{http://doi.org/10.1016/j.fertnstert.2009.10.045}
+  
   \hypertarget{ref-ORawe2013}{}
   O'Rawe, J., Jiang, T., Sun, G., Wu, Y., Wang, W., Hu, J., \ldots{} Lyon,
   G. J. (2013). Low concordance of multiple variant-calling pipelines:
@@ -2042,11 +2210,6 @@ class (for LaTeX) and the R bookdown package, in general.
   Reproducibility and relation to histologic findings in the diagnosis of
   male infertility. \emph{Acta Cytologica}, \emph{32}(5), 697--706.
   Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/3421018}
-  
-  \hypertarget{ref-Pedersen1974}{}
-  Pedersen, H., \& Rebbe, H. (1974). Fine structure of round-headed human
-  spermatozoa. \emph{Journal of Reproduction and Fertility}, \emph{37}(1),
-  51--4. \url{http://doi.org/10.1530/JRF.0.0370051}
   
   \hypertarget{ref-Petrovski2013}{}
   Petrovski, S., Wang, Q., Heinzen, E. L., Allen, A. S., Goldstein, D. B.,
@@ -2067,6 +2230,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \ldots{} Yang, H. (2010). A human gut microbial gene catalog established
   by metagenomic sequencing. \emph{Nature}, \emph{464}(7285), 59--65.
   \url{http://doi.org/10.1038/nature08821.A}
+  
+  \hypertarget{ref-Ravel2006}{}
+  Ravel, C., Berthaut, I., Bresson, J. L., Siffroi, J. P., \& Genetics
+  Commission of the French Federation of CECOS. (2006). Prevalence of
+  chromosomal abnormalities in phenotypically normal and fertile adult
+  males: large-scale survey of over 10 000 sperm donor karyotypes.
+  \emph{Human Reproduction}, \emph{21}(6), 1484--1489.
+  \url{http://doi.org/10.1093/humrep/del024}
   
   \hypertarget{ref-Rosenfeld2012}{}
   Rosenfeld, J. A., Mason, C. E., Smith, T. M., Wallin, C., \& Diekhans,
@@ -2103,10 +2274,12 @@ class (for LaTeX) and the R bookdown package, in general.
   analyses. \emph{Nature Reviews. Genetics}, \emph{15}(2), 121--32.
   \url{http://doi.org/10.1038/nrg3642}
   
-  \hypertarget{ref-Singh}{}
-  Singh, G. (n.d.). Ultrastructural features of round-headed human
-  spermatozoa. \emph{International Journal of Fertility}, \emph{37}(2),
-  99--102. Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/1349598}
+  \hypertarget{ref-Skaletsky2003}{}
+  Skaletsky, H., Kuroda-Kawaguchi, T., Minx, P. J., Cordum, H. S.,
+  Hillier, L., Brown, L. G., \ldots{} Page, D. C. (2003). The
+  male-specific region of the human Y chromosome is a mosaic of discrete
+  sequence classes. \emph{Nature}, \emph{423}(6942), 825--837.
+  \url{http://doi.org/10.1038/nature01722}
   
   \hypertarget{ref-Soderstrom1980}{}
   Soderström, K. O., \& Suominen, J. (1980). Histopathology and
@@ -2182,12 +2355,25 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{Nat Rev Genet.}, \emph{13}(1), 36--46.
   \url{http://doi.org/10.1038/nrg3117.Repetitive}
   
+  \hypertarget{ref-Tuttelmann2011}{}
+  Tüttelmann, F., Simoni, M., Kliesch, S., Ledig, S., Dworniczak, B.,
+  Wieacker, P., \& Röpke, A. (2011). Copy number variants in patients with
+  severe oligozoospermia and Sertoli-cell-only syndrome. \emph{PloS One},
+  \emph{6}(4), e19426. \url{http://doi.org/10.1371/journal.pone.0019426}
+  
   \hypertarget{ref-VanTassell2008}{}
   Van Tassell, C. P., Smith, T. P. L., Matukumalli, L. K., Taylor, J. F.,
   Schnabel, R. D., Lawley, C. T., \ldots{} Sonstegard, T. S. (2008). SNP
   discovery and allele frequency estimation by deep sequencing of reduced
   representation libraries. \emph{Nature Methods}, \emph{5}(3), 247--252.
   \url{http://doi.org/10.1038/nmeth.1185}
+  
+  \hypertarget{ref-Vorona2007}{}
+  Vorona, E., Zitzmann, M., Gromoll, J., Schüring, A. N., \& Nieschlag, E.
+  (2007). Clinical, Endocrinological, and Epigenetic Features of the 46,XX
+  Male Syndrome, Compared with 47,XXY Klinefelter Patients. \emph{The
+  Journal of Clinical Endocrinology \& Metabolism}, \emph{92}(9),
+  3458--3465. \url{http://doi.org/10.1210/jc.2007-0447}
   
   \hypertarget{ref-Ward1994}{}
   Ward, W. S. (1994). The structure of the sleeping genome: implications
@@ -2218,6 +2404,12 @@ class (for LaTeX) and the R bookdown package, in general.
   sequencing technologies foster new cutting-edge computing techniques in
   bioinformatics. \emph{BMC Genomics}, \emph{10 Suppl 1}, I1.
   \url{http://doi.org/10.1186/1471-2164-10-S1-I1}
+  
+  \hypertarget{ref-Yu2012}{}
+  Yu, J., Chen, Z., Ni, Y., \& Li, Z. (2012). CFTR mutations in men with
+  congenital bilateral absence of the vas deferens (CBAVD): a systemic
+  review and meta-analysis. \emph{Human Reproduction}, \emph{27}(1),
+  25--35. \url{http://doi.org/10.1093/humrep/der377}
   
   \hypertarget{ref-Zhao2015}{}
   Zhao, S., \& Zhang, B. (2015). A comprehensive evaluation of ensembl,

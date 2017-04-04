@@ -1,1 +1,7 @@
 # Investigation génétique et physiologique de la globozoospermie {#globo}  
+
+
+
+<!-- ##### La globozoospermie   -->
+
+<!-- La globozoospermie est une anomalie des spermatozoïdes caractérisé par une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée [@Singh, @Pedersen1974] -->

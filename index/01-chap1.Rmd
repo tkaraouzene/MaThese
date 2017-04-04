@@ -6,12 +6,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## La spermatogénèse  
 
-La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994], **Sharpe1994 à trouver !!!**). C'est au cours de celle-ci qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continue dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes 35du cycle spermatogénétique a une durée fixe et constante selon les espèces.   
+La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994], **Sharpe1994 à trouver !!!**). C'est au cours de celle-ci qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continue dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes du cycle spermatogénétique a une durée fixe et constante selon les espèces (**Table : **\@ref(tab:spermatotime)).   
 
-```{r}
+```{r spermatotime}
 
 tab.name <- "Durée de vie moyenne des cellules germinales humaines"
-cellules_germinales <- c("Spermatogonies Ap","Spermatogonie B","Spermatocytes primaires","Spermatocytes secondaires","Spermatides")
+cellules_germinales <- as.factor(c("Spermatogonies Ap","Spermatogonie B","Spermatocytes primaires","Spermatocytes secondaires","Spermatides"))
 duree_de_vie <- c("16-18","7.5-9","23","1","1")
 
 t <- data.frame(cellules_germinales,duree_de_vie)
@@ -46,47 +46,58 @@ La phase de multiplication est la phase au cours de laquelle les spermatogonies 
 2. Les spermatogonies de type A pale (ou Ap)  
 3. Les spermatogonies de type B  
   
-Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogénèse et servent de réserve. Elles vont au cours d'une première mitose former une spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenese)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la régénération de la population de cellules germinales au sein de l'épithélium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tous les 16 jours. Les cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la spermiogénèse ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonie Ap va, lorsqu'elle se divise par mitose, former deux spermatogonies B qui elles-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenese)).  
+Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogénèse et servent de réserve. Elles vont au cours d'une première mitose former une spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenese)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la régénération de la population de cellules germinales au sein de l'épithélium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tous les 16 jours. Les cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la [spermiogénèse](#spermiogenese) ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonie Ap va, lorsqu'elle se divise par mitose, former deux spermatogonies B qui elles-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenese)).  
 
-```{r spermatogenese,fig.cap=fig.info,out.extra="scale=0.75"}
+```{r spermatogenese,fig.cap=fig.info,out.extra="scale=0.35"}
 
-fig.name <- "Les différentes phases de la spermatogénèse (À CHANGER !!!!!)"
-fig.description <- ""
-fig.info <- paste0(fig.name,fig.description)
+fig.name <- "Les différentes phases de la spermatogénèse"
+fig.from <- "[medizin-kompakt](http://www.medizin-kompakt.de/spermatogenese)"
+fig.description <- "description à écrire !!!"
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
-include_graphics(path = "figure/spermatogenese.jpg")
+include_graphics(path = "figure/spermatogenese2.jpg")
 
 ```
 
 ### La méiose  
 
-La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:méiose)) appelée respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son non *réductionnelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:crossingover)).
+La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:meiose)) appelée respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son non *réductionnelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:crossingover)).
 
-```{r meiose,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.35"}
+```{r meiose,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.23"}
 
 fig.name <- "Les différentes étapes de la méiose gamétique masculine"
-fig.description <- "D’après Sasaki et Matsui,2008"
-fig.info <- paste(fig.name,fig.description,sep = " : ")
+fig.description <- ""
+fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
-include_graphics(path = "figure/Meiosis_Stages.png")
+include_graphics(path = "figure/Meiosis_Stages2.png")
 
 ```
 
-La méiose est initiée dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au cours de cette phase a lieu la réplication de l'ADN. Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliés entre elles par le centromère, le matériel génétique de chaque cellule ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distincte (**Figure : **\@ref(fig:mitose)) : 
+La méiose est initiée dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au cours de cette phase a lieu la réplication de l'ADN. Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliés entre elles par le centromère, le matériel génétique de chaque cellule ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distincte (**Figure : **\@ref(fig:meiose)) : 
 
-1. La prophase, caractérisée par la condensation de la chromatine formant ainsi les chromosomes.  
-2. La métaphase, phase au cours de laquelle les chromosomes vont s'aligner à l'équateur de la cellule pour former la plaque équatoriale. 
-3. L'anaphase, les chromatides sœurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule.      
-4. La télophase, qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme autours des chromosomes. La cellule mère se sépare alors en deux cellules filles.       
+1. **Méiose réductionelle** : 
+    a. **La prophase I** : Cette longue étape dure 23 jours chez l'homme et peut être subdivisée en 5 phases succèsives : leptotène, zygotène, pachytène,
+diplotène et diacinèse. 
+    b. **La métaphase I** : phase au cours de laquelle les chromosomes vont s'aligner à l'équateur de la cellule pour former la plaque équatoriale. 
+    c. **L'anaphase I** : les chromatides sœurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule.      
+    d. **La télophase** : qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme autours des chromosomes. La cellule mère se sépare alors en deux cellules filles appelées spermatocytes secondaires.   
+2. **Méiose équationelle** : La MII est similaire à une division mitotique, 
+    a. **La prophase II** : Contrairement à la prophase I, la prophase II est très courte. Les chromosomes, alors formés de deux chromatides soeurs se dirigent vers la plaque équatoriale.  
+    b. **La métaphase II** :  À ce stade, les chromosomes sont alignés le long de la plaque équatoriale au niveau de leur centromère.  
+    c. **l'anaphase II** : Les centromère de chaque chromosome se rompts permettant aux chromatides soeurs de se diriger vers les pôles opposés des spermatocytes II.  
+    d. **La télophase II** : Comme en télophase I, les cellules mères se séparent en deux cellules filles haploïdes appelées spermatides, contenant chacune n
+chromosomes.  
+
 
 ```{r mitose,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
 
-# link <- '[larousse](http://www.larousse.fr/encyclopedie/images/Phases_de_la_mitose/1009782)'
-fig.name <- "Les différentes phases de la division cellulaire"
-fig.description <- "De la prophase (à gauche) à la télophase (à droite)"
-fig.info <- paste(fig.name,fig.description,sep = " : ")
-
-include_graphics(path = "figure/phases_mitose.jpg") 
+# # link <- '[larousse](http://www.larousse.fr/encyclopedie/images/Phases_de_la_mitose/1009782)'
+# fig.name <- "Les différentes phases de la division cellulaire"
+# fig.description <- "De la prophase (à gauche) à la télophase (à droite)"
+# fig.info <- paste(fig.name,fig.description,sep = " : ")
+# 
+# include_graphics(path = "figure/phases_mitose.jpg") 
 
 ```
 
@@ -102,15 +113,15 @@ include_graphics(path = "figure/crossingover.jpg")
 
 ```
 
-### La spermiogénèse  
+### La spermiogénèse  {#spermiogenese}
 
 La spermiogénèse est la phase finale de la spermatogénèse. Elle dure environs 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **\@ref(fig:spermiogenese)). La spermiogénèse définie la cytodiférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologique et fonctionnelles du spermatozoïde seront déterminées (Clermont & Oko 1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commence au niveau des spermatides rondes[@Escalier1991]. Pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
 Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10  $\upmu$m) que l’on peut schématiquement diviser en trois classes :  
 
-1. Les spermatides rondes (**Figure : **\@ref(fig:spermiogenese) 1-2) :L'identification de ces cellules représente une difficulté technique. Elles ont cependant pu être décrites en détail par différentes techniques de coloration sous microscope optique [@Clermont1963, @Papic, @Schenck, @Adelman1989, @WorldHealthOrganization1992]. Plusieurs études animales ont pu démontrées le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, [@Ogura1994], @Kimura1995, @Sasagawa], la même chose ayant été également observée plus récemment chez l'homme [@Tanaka2015] bien que le taux de fécondation et d'implantation soit extrêmement faible [@Asimakopoulos2003]. Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
-2. Les spermatides en élongation (**Figure : **\@ref(fig:spermiogenese) 3-4) :  
+1. **Les spermatides rondes** (**Figure : **\@ref(fig:spermiogenese) 1-2) :L'identification de ces cellules représente une difficulté technique. Elles ont cependant pu être décrites en détail par différentes techniques de coloration sous microscope optique [@Clermont1963, @Papic, @Schenck, @Adelman1989, @WorldHealthOrganization1992]. Plusieurs études animales ont pu démontrées le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, [@Ogura1994], @Kimura1995, @Sasagawa], la même chose ayant été également observée plus récemment chez l'homme [@Tanaka2015] bien que le taux de fécondation et d'implantation soit extrêmement faible [@Asimakopoulos2003]. Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
+2. **Les spermatides en élongation** (**Figure : **\@ref(fig:spermiogenese) 3-4) :  
 peuvent aussi donner naissance avec un meilleur taux que les spermatides rondes et engendrerai théoriquement moins de risques d'anomalies génétiques ([@Asimakopoulos2003]). **A completer**  
-3. Les spermatides en condensation (**Figure : **\@ref(fig:spermiogenese) 5-7) : C'est le stade final de la différentiation de la spermatide en spermatozoïde. À ce stade le noyau est très allongé, avec une partie caudale globulaire et une partie antérieure saillante. La chromatine est sombre et condensée. L’axonème va continuer à s’allonger pour former le flagelle mature. Les différentes organelles inutiles pour la physiologique spermatique et l’excès de cytoplasme vont former la gouttelette cytoplasmique qui va se détacher et donner le corps résiduel qui va ensuite être phagocyté par les cellules de Sertoli [@Hermo2010].  
+3. **Les spermatides en condensation** (**Figure : **\@ref(fig:spermiogenese) 5-7) : C'est le stade final de la différentiation de la spermatide en spermatozoïde. À ce stade le noyau est très allongé, avec une partie caudale globulaire et une partie antérieure saillante. La chromatine est sombre et condensée. L’axonème va continuer à s’allonger pour former le flagelle mature. Les différentes organelles inutiles pour la physiologique spermatique et l’excès de cytoplasme vont former la gouttelette cytoplasmique qui va se détacher et donner le corps résiduel qui va ensuite être phagocyté par les cellules de Sertoli [@Hermo2010].  
 
 Une fois ces étapes de différentiation finies, les spermatides sont relachées en tant que spermatozoïdes dans la lumière du tube séminifère. Ce procédé est appelé spermiation.  
 
@@ -118,38 +129,46 @@ Une fois ces étapes de différentiation finies, les spermatides sont relachées
 ```{r spermiogenese,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=0.3"}
 
 fig.name <- "Principales étapes et modifications structurales lors de la spermiogénèse"
-fig.description <- "1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-7. Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome ; Ax, axonème ; CC, corps chromatoïdes ; CR, corps résiduel ; FD, fibres denses ; GF, gaine fibreuse ; M, mitochondrie ; Ma, manchette. D’après Touré et al., 2011"
-fig.info = paste(fig.name,fig.description,sep = " : ")
+fig.description <- "1. La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. 2. La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. 3-7. Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome ; Ax, axonème ; CC, corps chromatoïdes ; CR, corps résiduel ; FD, fibres denses ; GF, gaine fibreuse ; M, mitochondrie ; Ma, manchette. D’après "
+
+fig.from <- "Touré et al., 2011"
+
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
 include_graphics(path = "figure/spermiogenese.png")
 
 ```
 
+\newpage  
+
 ## Structure et fonction du spermatozoïde 
 
 ### Anatomie du spermatozoïde  
 
-Une fois
-Il est composé de deux parties principales : La tête et le flagelle  (**Figure : **\@ref(fig:spz)).  
+Le spermatozoïde est une cellule hautement différenciée dont la taille, l'orientation et la symétrie sont déterminée. La morphologie générale du spermatozoïde éjaculé est similaire à celle du spermatozoïde testiculaire. Le spermatozoïde humain normal mature mesure environ 60 $\upmu$m de long et est essentiellement constitué de deux parties : la tête et le flagelle (**Figure : **\@ref(fig:spz)).
 
-```{r spz,fig.cap=fig.name,fig.scap=fig.name,out.extra="scale=.6"}
+```{r spz,fig.cap=fig.name,fig.scap=fig.name,out.extra="scale=.75"}
 
-fig.name <- "Anatomie du spermatozoïde"
+fig.name <- "Anatomie simplifiée du spermatozoïde"
+fig.from <- "[medical-dictionary](http://medical-dictionary.thefreedictionary.com/Human+sperm)"
 
-include_graphics(path = "figure/spermatozoide.png")
+fig.info <- paste0(fig.name," d'après ",fig.from)
+
+
+include_graphics(path = "figure/sperm_anatomy.png")
 
 ```
 
 #### La tête  
 
 1. **L'acrosome** : C'est une vésicule de sécrétion géante située dans la moitié supérieure de la tête du spermatozoïde. Elle se développe à partir de l'appareil de Golgi lors de la spermiogénèse. Au cours de sa formation, l'acrosome forme tout d'abord un granule sphérique qui se colle sur la partie apicale du noyau. En s'aplatissant contre celui-ci, l'acrosome va prendre une forme hémisphérique recouvrant la membrane nucléaire formant la coiffe céphalique... Le rôle de l'acrosome est fondamental dans le processus de fécondation puisqu'il permet d'excréter notamment l'acrosine, une enzyme de digestion permettant au spermatozoïde de pénétrer la zone pellucide qui entoure les ovocytes. Ce processus de relargage est appelé réaction acrosomal.     
-2.  **L'acroplaxome** : **TODO !!!**  
+2.  **L'acroplaxome** : L'acroplaxome est une structure cytosquelette composée de de microfilaments d’actine (F- actine) et de kératine 5. Cette structure est positionnée en face de l’appareil de golgi et contre le noyau et sert de point d'attachement ainsi que de guide aux la vésicules pro-acrosomales [@Kierszenbaum2004]. C’est une structure transitoire qui disparaît remplacée par la thèque périnucléaire dans le spermatozoïde mature.     
 3.  **Le noyau** : C'est une structure cellulaire présente dans la majorité des cellules eucaryotes. Il contient l'essentiel du matériel génétique. Le noyau du spermatozoïde est caractérisé par une compaction extrêmement importante de l’ADN. Dans les cellules somatiques l’ADN est enroulé par unité de 146 paires de bases autour d’un octamère d’histones dit de cœur (H2A, H2B, H3 et H4) afin d’organiser les 3 milliards de paires de bases du génome humain dans un noyau de quelques microns (**Figure : **\@ref(fig:noyau)). L’ADN des spermatides va subir une réorganisation chromatinienne plus importante au cours de la spermatogénèse afin d’augmenter sa compaction. Ainsi, les octamères d'histones présents dans les cellules somatiques sont remplacées par deux protéines riches en arginine et en cystéine PRM1 et PRMM2). Ces protéines sont appelées des protamines (**Figure : **\@ref(fig:noyau)). L'intégrité des deux protéines composant ce dimère est nécessaire pour la procréation [@Cho2001]. Cette compaction extrême permet de réduire la taille du noyau, mais aussi de protéger l’ADN d’agents de dégradation comme l’oxydation des bases. Parallèlement à cette condensation chromatinienne se produit un arrêt des processus de transcription cellulaire [@Kierszenbaum1978].Le noyau du spermatozoïde est donc un noyau au repos, transcriptionnellement inactif [@Ward1994]
 
 ```{r noyau,fig.cap=fig.description,fig.scap=fig.name,out.extra="scale=.55"}
 
 fig.name <- "Schéma de la compaction de l’ADN dans les cellules somatiques et dans les spermatozoïdes"
-
+fig.from <- "[]"
 fig.description <- paste(fig.name,"D'après Braun (2001)",sep = " : ")
 
 include_graphics(path = "figure/noyau.png")
@@ -160,13 +179,14 @@ include_graphics(path = "figure/noyau.png")
 
 Le flagelle représente la queue du spermatozoïde. Celui-ci permet, par mouvement d'oscilation à haute vitesse, le déplacement du spermatozoïde. Cette mobilité est générée par un cytosquelette interne extrêmement conservé durant l'évolution appelée l'axonème. Celui-ci est composé de neuf doublets de microtubules périphériques et de deux doublets internes [@Inaba2003] (**Figure : **\@ref(fig:axoneme)), on parle alors de structure "9 + 2". Les doublets externes sont reliés entre eux par des ponts de nexine et au doublet central par des ponts radiaires. 
 
-```{r axoneme,fig.cap=fig.description,fig.scap=fig.name,out.extra="scale=.3"}
+```{r axoneme,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.3"}
 
-fig.name <- "Structure simplifiée de l'axonème d'après Inaba (2003)"
+fig.name <- "Structure simplifiée de l'axonème"
 
 fig.description <- "L'axonème es constitué de neuf doublets de microtubules périphériques reliés entre eux par des liens de nexine d'un doublet central relié aux doublets périphériques par des ponts radiaires"
 
-fig.info <- paste(fig.name,fig.description,sep = " : ")
+fig.from <- "[@Inaba2003]"
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
 include_graphics(path = "figure/axoneme.png")
 
@@ -180,11 +200,14 @@ Le flagelle su spermatozoïde peut être divisé en trois partie distinctes (**F
 
 ```{r flagelle,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
 
-fig.name <- "Structure du flagelle d’un spermatozoïde d’après Borg et al. (2010)"
+fig.name <- "Structure du flagelle d’un spermatozoïde"
 
 fig.description <- "Coupes transversales en microscopie électronique. Le flagelle se compose de trois parties : la pièce intermédiaire, contenant les mitochondries, la pièce principale et la pièce terminale. L’axonème, en position centrale, parcours tout le flagelle. Des structures périaxonèmales sont observables : les fibres denses dans la pièce intermédiaire et principale, et la gaine fibreuse dans la pièce principale seulement."
 
-fig.info <- paste(fig.name,fig.description,sep = " : ")
+fig.from <- "Borg et al. (2010)"
+
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+
 
 include_graphics(path = "figure/sperm2.png")
 
@@ -194,8 +217,10 @@ include_graphics(path = "figure/sperm2.png")
 
 En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène.  
 
-## L'infertilité masculine  
 
+\newpage  
+
+## L'infertilité masculine  
 
 L'organisation mondiale de la santé définie l'infertilité comme étant : "*une pathologie du système reproductif définie par l’échec d'une grossesse clinique après 12 mois ou plus de rapports sexuels réguliers non protégés*" ([```Who.int. 2013-03-19. Retrieved 2013-06-17```](http://www.who.int/reproductivehealth/topics/infertility/definitions/en/)). L'étude de l'infertilité représente un des enjeux scientifique et médicale majeur de ces dernières années. On estime qu'environs 10 à 15% des couples humains font face à des problèmes d'infertilité soit plus de 70 millions de personnes dans le monde [@Boivin2007a]. Dans dans la moitié des cas, la cause sous-jacente serait masculine. On estime que  Les facteurs causaux sous-jacents de l'infertilité masculine peuvent être attribués à des toxines environnementales, des troubles systémiques tels que la maladie hypothalamo-hypophysaire, les cancers testiculaires et l'aplasie des cellules germinales. Les facteurs génétiques, y compris les aneuploïdies et les mutations de gènes uniques, contribuent également à l'infertilité masculine. Cependant, aucune cause n'est identifiée dans 10-20% des cas. Comme nous avons pu le voir, le spermatogénèse est une succession de processus complexes qui s'effectue de manière synchrone, de fait la moindre altération génétique affectant une seule de ces étapes est succeptible d'entrainer un phénotype d'infertilité (Barratt, 1995 **A TROUVER**). 
 
@@ -207,44 +232,77 @@ Chez l'homme, l'infertilité est associé à une altération quantitative et / o
 
 #### Liée à la quantité  
 
+Chez l'humain, l'arret de la spermatogénèse est définie comme l'incapacité des cellules spermatogénétique à devenir des spermatozoïdes matures. Elle peut survenir à n'importe qu'elle étape de la formation des cellules germinales. Les arrets au stade de spermatocyte I sont les plus fr'équents, suivis par l'arret au niveau des spermatides et moins fréquement au niveau des spermatogonies [@Girgis].  
 
-Chez l'humain, l'arret de la spermatogénèse est définie comme l'incapacité des cellules spermatogénétique à devenir des spermatozoïdes matures. Elle peut survenir à n'importe qu'elle étape de la formation des cellules germinales. Les arrets au stade de spermatocyte I sont les plus fr'équents, suivis par l'arret au niveau des spermatides et moins fréquement au niveau des spermatogonies [@Girgis]. 
+1. **L'oligozoospermie** : L'oligozoospermie est définie comme un phénotype d'infertilité masculine caractérisé par une production inferieure à 15 millions de spermatozoïdes par mL de sperm [@Cooper2010]. Un arret de la spermatogénèse à été observée dans 4 à 30% des biopsie testiculaire des hommes présentant une oligospermie sévère [@Colgan1980, @Levin1979, @Soderstrom1980, @WONG1973]. Cet arret à longtemps été considérés comme sans espoir pour les couples désirant consevoir, jusqu'à l'emmergence de *intracytoplasmic sperm injection* (ICIS) [@Palermo1992]  
+2. **L'azoospermie** :  Comme l'oligozoospermie, l'azoospermie est un phénotype d'infertilité masculine cette fois-ci caractérisé par l'abscence total de spermatozoïde dans lm'éjaculat. On distingue des causes excrétoires empêchant l’excrétion des spermatozoïdes, on parle alors d'azoospermie obstructive et des causes sécrétoires, les plus fréquentes, accompagnées d’un défaut de la spermatogenèse, on parle alors d'azoospermie non-obstructive.  
 
-1. **L'oligospermie** : L'oligospermie est définie comme ... Un arret de la spermatogénèse à été observée dans 4 à 30% des biopsie testiculaire des hommes présentant une oligospermie sévère [@Colgan1980, @Levin1979, @Soderstrom1980, @WONG1973]. Cet arret à longtemps été considérés comme sans espoir pour les couples désirant consevoir, jusqu'à l'emmergence de *intracytoplasmic sperm injection* (ICIS) [@Palermo1992]  
-2. **L'azoospermie** :  
-    a. **obstructive** :  
-    b. **non-obstructive** :  
+#### Liée à la morphologie  
 
-#### Liée à la forme  
+Ces anomalies sont observables en effectuant un spermocytogramme. Plusieurs classifications ont été établie, cependant, c'est la classification de David modifiée (**Table :** \@ref(fig:anomaliemorphosperm)) qui est la plus répendue en France. Pour ce faire, on procède générallement à une observation de 100 spermatozoïdes au cours de laquelle l'ensemble des anomalies observées sont relevées et quantifiées permettant ainsi de définir un index d’anomalies multiple (nombre total d’anomalies/nombre de spermatozoïdes anormaux) révélant le nombre moyen d’anomalies par spermatozoïdes.
 
-Teratozoospermie  
 
-##### La globozoospermie  
+```{r anomaliemorphosperm, fig.cap=tab.info,fig.scap=tab.name,out.extra="scale=.75"}
 
-La globozoospermie est une anomalie des spermatozoïdes caractérisé par une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée [@Singh, @Pedersen1974]
+# récupérer le tableau Adapté d’Auger, 2010.
+
+tab.name <- "Différentes anomalies morphologiques du spermatozoïde selon la classification de David modifiée adapté... TABLEAU à adapter et à insérer !!!!!"
+tab.from <- "[@Auger2010]"
+tab.info <- paste0(tab.name," d'après ",tab.from)
+
+include_graphics(path = "figure/sperm_morpho_abnormalities.png")
+
+```
 
 #### Liée à la mobilité  
 
-Sperm motility is necessary for the transport of male DNA to eggs in species with both external and internal fertilization.  
-
+Le succès du passage du spermatozoïdes le long du tractus génitale féminin dépend en grande partie de la mobilité et de la vitesse du spermatozoïde [@Lindholmer1974, @Bjorndahl2010]. La vitesse moyenne d'un spermatozoïde étant de 25 $\upmu$m/s. Une mauvaise mobilité observée dans plus de 50% des spermatozoïdes éjaculés se révèle être un prédicteur de l'échec de la fécondation [@Aitken1985]. 
 
 ### La génétique de l'infertilité  
 
+Ainsi, l’infertilité masculine d’origine génétique pourrait concerner près de 1 homme sur 40 [@Tuttelmann2011]
+
 #### Les causes fréquentes  
 
-##### Les microdélétions du chromosome Y  
+1. **Les microdélétions du chromosome Y** : Le chromosome Y est un petit chromosome atteignant une taille d'environ 53 Mb et est porteur de 78 gènes principalement impliqués dans la différentiation sexuelle masculine et la spermatogénèse [@Skaletsky2003]. De fait, le chromosome Y représente une région d'intéret évidente dans l'étude de facteur génétique liés à l'infertilité masculine. L'évolution des technologie a permi de mettre en évidence des délétion invisibles au karyotype dans la région du facteur AZF (*Azoospermia Factor*). Cette région peut-être subdivisée en trois sous-partie, AZFa, AZFb et AZFc (**Figure :** \@ref(fig:chry)). Depuis plusieurs années, de nombreuses séries de patients azoospermiques ou oligozoospermiques ont été publiées et tendent à montrer que les microdélétions du chromosome Y seraient responsables de 10% des cas d'azoospermie non-obstructives et chez 5% des cas d'oligozoospermie sévères (<5 millions de spermotoides/ml) [@Hotaling2014].  
 
-##### Anomalies chromosomiques  
+```{r chry,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.45"}
 
-##### Mutations CFTR
+fig.name <- "Représentation schématique du chromosome Y adapté"
+fig.from <- "[@OFlynnOBrien2010]"
+fig.description <- "Visualisation la région AZF ainsi que des trois sous-régions AZF a, b, c et des principaux gènes compris dans chacune des sous-régions"
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+
+include_graphics(path = "figure/chromozomeY.png")
+
+```
+
+2. **Anomalies chromosomiques** : Des anomalies chromosomique de nombre ou de structure impliquant le autosomes ou, le plus souvent, les gonosomes, peuvent être impliqués dans des cas d'infertilité masculine. Le pourcentage d'individu concerné varie entre 2 et 8% et peut atteindre 15% pour les patients azoospermiques soit 10 à 20 fois la fréquence retrouvée dans la population générale [@Ravel2006].
+    a. **Syndrome de Klinefelter** : Le syndrome de Klinfelter (ou 46, XXY) fut décrit pour la première fois en 1942 par Harry F. Klinefelter et décrit une affection due à la présence d’un chromosome X supplémentaire suite à une erreur de ségrégation des chromosome au moment de la méiose. Sa prévalence dans la population générale est estimée à environs 1 sur 1200 (1 homme sur 600) [@Bojesen2011] mais elle est environs 50 fois superieure chez les patients infertiles azoospermiques [@Gekas2001].  
+    b. **Les anomalies de structure** :  Les translocation et les invertions sont les anomalies de structures retrouvées le plus fréquement chez les patients infertiles. 
+        i. La translocation est définie comme l'échange de materiel génétique entre deux chromosomes non homologues. On en distingue deux types, les translocation réciproques et les translocation robertsonniennes. Les premières sont retrouvées 4 à 10 fois plus fréquemment chez les patients infertiles que dans la population générale [@Elliott1997], les secondes sont retrouvées chez 1.6% des patients oligozoospermiques et 0.09% des patients azoospermiques [@OFlynnOBrien2010].  
+        ii. Les inversions chromosomiques caractérisent le mécanisme de cassur d'un fragment de chromosome suivi de son retournement à 180° et sa réintégration à la même position. Ces inversions vont gêner l’appariement des chromosomes homologues (formation d’une boucle d’inversion) pendant la méiose et sont, comme les translocations, retrouvées plus fréquemment chez les patients infertiles que dans la population générale [@Krausz2000].  
+    c. **Autres anomalies chromosomiques** :  Parmis les anomalies de structures chromosomique responsables d'infertilité masculine, on peut par exemple citer les hommes de formule 46,XX bien quelle soit moins fréquente que les translocations et les inversions. Ces patients sont généralement totalement infertiles et présentent une azoospermie par absence des sous-
+régions AZFa,b et c [@Vorona2007] bien qu'ils aient un phénotype masculin normal.  
+
+3. **Mutations du gène *CFTR* **:  L'identification du gène *CFTR* (Cystic Fibrosis Transmembrane conductance Regulator) chez les patients atteints de mucovisidose et présentant une agénésie bilatérale des canaux déférents (ABCD) a permis d'associer ce gène au phénotype d'azoospermie obstructive. Cette malformation serait responsable de 2% des cas d'infertilité masculine et de 25% des cas d'azoospermie obstructive [@Yu2012].  
+
+Bien que la prévalence de ces anomalies génétiques varien en fonction du phénotype concerné, il est estimé que ces défauts soient seulement retrouvés chez 5% des cas d'infertilité masculine tout phénotype confondus. Cette observation suffère fortement l'implication d'autres gènes encore inconnus dans les différents phénotypes d’infertilité masculine (**Nieschlag et al., 2010 A trouver**).    
 
 #### Les nouveaux gènes 
 
-***
+
+\newpage  
 
 ## Les techniques d'analyses génétiques
 
-L'acide désoxyribonucléique (ADN) a été identifié comme étant le porteur de l'information génétique par Oswald Theodore Avery en 1944. Sa structure en double hélice composée par quatre bases, la thymine (T), l'adénine (A), la guanine (G) et la cytosine (C) fut caractérisée en 1953 par James D. Watson et Francis Crick 
+L'acide désoxyribonucléique (ADN) a été identifié comme étant le porteur de l'information génétique par Oswald Theodore Avery en 1944. Sa structure en double hélice composée par quatre bases, la thymine (T), l'adénine (A), la guanine (G) et la cytosine (C) fut caractérisée en 1953 par James D. Watson et Francis Crick. **Petite intro à terminer !!!**  
+
+### Approche "gènes candidats"  
+
+L’approche gène candidat consiste à rechercher des mutations chez un patient dans un gène cible. Le choix du gène cible se fera en fonction de plusieurs critères. Le premier d’entre
+eux est l’étude de gènes reliés à des phénotypes proche du phénotype étudié dans différents modèles animaux et notamment murins. Dans ce cas, les mutations seront recherchées sur le
+gène orthologue humain [@DeBoer2015]. Une autre possibilité consiste à rechercher des variants dans des gènes paralogues à un gène précédement identifié avec l'idée sous-jacente que leur structure proche implique une fonction similaire. Enfin la dernière méthode consiste à étudier des gènes connus comme étant des partenaires de gènes déjà identifiés dans cette pathologie en supposant que si un variant dans un gène donné entraine une pathologie, un variant dans un partenaire de ce gène pourrait entrainer le même phénotype. Cette approche est bien souvent infructueuse dû à la grande partie de l'hétérogénéité génétique des phénotypes étudiés, au nombre limité de patients testés (Elinati et al., 2012) et aux connaissances souvent incomplètes sur le phénotype. De fait, cette approche a quasiment disparu au profit des méthodes à haut débit que sont les puces et le séquençage nouvelle génération (NGS), néanmoins, quelques cette méthode compte à son actif plusieurs succès retentissants [INSERT PETITE LISTE].  
 
 ### Les puces  
 
@@ -267,7 +325,7 @@ Le terme séquençage de l'ADN fait référence à l'ensemble des techniques per
 
 Contrairement à la méthode Sanger, le NGS *lit* des fragments d'ADN, provenant d'un génome entier, de manière aléatoire. On parle alors de séquençage de génomes entiers ou *whole genome sequencing* (WGS). Pour cela, la molécule d'ADN est "coupée" en plusieurs fragments d'une taille donnée. Ce sont ensuite ces fragments qui seront, après une étape d'amplification spécifique au différentes plateformes, séquencés simultanément. C'est pourquoi on parle souvent de séquençage parallèle massif pour décrire le NGS. Le produit de ce séquençage est appelé *read*. Cette technologie est avantageuse de par la masse de *reads* qu'elle produit et par son faible cout par bases séquencées [@Metzker2010]. Ces caractéristiques ont permis au séquençage Haut-débit d'être couramment utilisé dans le domaine de la recherche clinique.  
 
-La taille des *reads* obtenus par séquençage NGS est nettement inférieure à celle atteinte par le séquençage Sanger. À l'heure actuelle, les *reads* obtenus par séquençage NGS ont une taille comprise entre 50 et 500 pb pour la plupart des plateforme contre ... obtenus par Sanger  (**Figure :** \@ref(fig:readPerRun)), c'est pour cela que les résultats du séquençage NGS sont appelés des *reads* courts ou *short reads*.   
+La taille des *reads* obtenus par séquençage NGS est nettement inférieure à celle atteinte par le séquençage Sanger. À l'heure actuelle, les *reads* obtenus par séquençage NGS ont une taille comprise entre 50 et 500 pb pour la plupart des plateforme contre ... obtenus par Sanger (**Figure :** \@ref(fig:readPerRun)), c'est pour cela que les résultats du séquençage NGS sont appelés des *reads* courts ou *short reads*.   
 Étant donnée que le NGS produit à l'heure actuelle des *reads* courts la notion de couverture est importante et représente l'un des critère majeur à considérer dans l'analyse des données [@Sims2014]. La couverture est définie comme le nombre de *reads* qui, après l'étape [d'alignement](#lalignement), se chevauchent les uns les autres au sein du région génomique spécifique. Par exemple, une couverture de 30x pour le gène XXXX signifie que chaque nucléotide de ce gène est chevauché par au moins *reads* distincts.  
 
 ```{r}
@@ -334,7 +392,7 @@ La réaction de séquence est l'étape suivant l'amplification et consiste à d�
 
 fig.name <- "Exemple de séquençage CRT tel qu'il est effectué par Illumina" 
 fig.from <- "[@Goodwin2016]"
-fig.description <- "a : ajout d'un dNTP labellisé par un fluorophore et 3'-bloqué. b : identification du dNTP ajouté grâce au fluorophore. c : le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'élongation"
+fig.description <- "**a** : ajout d'un dNTP labellisé par un fluorophore et 3'-bloqué. **b** : identification du dNTP ajouté grâce au fluorophore. **c** : le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'élongation"
 
 fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
@@ -374,6 +432,9 @@ include_graphics(path = "figure/SBL_seq_solid.png")
 <!-- Pour plus d'info :  cf file:///home/karaout/T%C3%A9l%C3%A9chargements/9781461407812-c1.pdf -->
 <!-- 3. **Séquençage de molécule unique** (SMS) :   -->
 
+
+\newpage  
+
 ## L'analyse bioinformatique des données de NGS  
 
 La stratégie consistant à séquencer en parallèle plusieurs milliers de *reads* court a engendré plusieurs nouveaux défis bioinformatique dans l'analyse et l'interprétation des données de séquençage et la recherche de variants dans le génome humain [@Wold2007, @Yang2009]. Ces techniques ont été appliquées dans différents contextes, notamment la métagénomique [@Qin2010], la détéction de SNPs [@VanTassell2008] et de variants structuraux [@Alkan2010, @Medvedev2009] mais également dans des études portant sur la méthylation de l'ADN [@Taylor2007], l'analyse de l'expression des ARNs messagers [@Sultan2008], dans la génétique du cancer [@Guffanti2009] et la médecine personnalisée [@Auffray2009]. Cependant, pour l'ensemble de ces applications, la grande quantité de données générées par chaque analyse pose plusieurs défis informatiques [@Horner2009]. En effet, les progrès techniques des dernières décennies ont rendu possible le séquençage de plusieurs millions des *reads* d'ADN en un temps relativement court et à couts raisonnable. Ainsi, l'émergence du séquençage haut débit et notamment du WGS et du WES a permis de réunir une quantité jusqu'à présent inégalé d'information sur les variations génétiques, et d'une manière plus générale, sur les gènes et leurs fonctions [@Mardis2008, @Bentley2006]. Cependant, de par leur nature et leur quantité, l'acquisition de ces nouvelles données a engendrée de nouvelles problématiques qui freinent les biologistes dans leurs recherches.  
@@ -382,7 +443,7 @@ La stratégie consistant à séquencer en parallèle plusieurs milliers de *read
 
 #### Un *read* c'est quoi ?  
 
-Après la phase d'amplification, chaque clone est analyser puis, la séquence composant chacun de ces clone est déterminée. La taille de cette séquence varie en fonction des plateforme de séquençage (**Figure : **\@ref(fig:readPerRun)) mais est généralement comprise entre 40 et 150 pb pour le NGS.   deux types de *reads* :
+Après la phase d'amplification, chaque clone est analyser puis, la séquence composant chacun de ces clone est déterminée. La taille de cette séquence varie en fonction des plateforme de séquençage mais est généralement comprise entre 40 et 150 pb pour le NGS (**Figure : **\@ref(fig:readPerRun)).   deux types de *reads* :
 
 1. ***Read single-end* **:  
 2. ***Read paired-end* **:  Avec le séquençage de *paired-end reads* les deux extrémités (les *ends*) du fragmant d'ADN est desormais séquencée. La distance séparant les deux extrémité du *read* étant connue, cela permet aux aligneur d'utiliser cette information afin d'améliorer leur précision, notamment dans les zones répétées [@Li2008].  En plus de SNP, ce format permet de mettre en évidence des variants structuraux [@Korbel2009].
@@ -446,7 +507,7 @@ include_graphics(path = "figure/venn_Diag_patho_pred.png")
 
 ```
 
-2. **Au niveau de l'unité génétique** : DÉCRIRE UNITÉ GÉNÉTIQUE (gène, transcrit). L'annotation au niveau de l'unité génétique consiste à récupérer l'ensemble des information disponible non plus sur le variant uniquement mais sur la ou les unités génétique qu'il impacte. Ce "dézoom" permet d'ajouter des information complémentaires particulièrement utile notamment lorsque peut d'information sont disponibles sur le variant lui-même. En pratique, la plupart des variants connues pour impliquer une pathologie sont des variants privés, c'est à dire spécifique à une famille ou un individus limitant ainsi la quantiter d'information disponible sur ce variant. Élargir l'annotation au niveau des unités génétiques impactés par des variants permet d'augmenter considérablement la quantité d'information disponible et permet donc d'améliorer la capaciter des alogrithme à filtrer et / ou prioriser les variants rendant donc les analyses plus efficaces. On peut relever certains logiciels tel que le *Protein ANalysis THrough Evolutionary Relationships* (PANTHER) [@Mi2017] permet par exemple de classer une liste de gènes en fonction de leurs fonctions moléculaires, des processus biologiques et des voies de signalisation dans lesquels ils sont impliqués. On peut également noter *the Human Phenotype Ontology project* (HPO) [@Kohler2014] qui fournit une classification (À completer). Plus récemment, ont a pu voir emmerger des "scores mutationnel" tel que RVIS [@Petrovski2013] ou encore le pLI [@Lek2016]. En se basant sur les bases de données telle que ESP ou encore ExAC, ces scores permettent de classer les gènes en fonction de leur tolérence (ou intolérance) aux variations avec l'idée sous-jacente que "les gènes impliqués dans des pathologies à transmission Mendeliennes" devraient être moins tolérant aux variations que les autres.  
+2. **Au niveau de l'unité génétique** : DÉCRIRE UNITÉ GÉNÉTIQUE (gène, transcrit). L'annotation au niveau de l'unité génétique consiste à récupérer l'ensemble des information disponible non plus sur le variant uniquement mais sur la ou les unités génétique qu'il impacte. Ce "dézoom" permet d'ajouter des informations complémentaires particulièrement utile notamment lorsque peut d'information sont disponibles sur le variant lui-même. En pratique, la plupart des variants connues pour impliquer une pathologie sont des variants privés, c'est à dire spécifique à une famille ou un individus limitant ainsi la quantiter d'information disponible sur ce variant. Élargir l'annotation au niveau des unités génétiques impactés par des variants permet d'augmenter considérablement la quantité d'information disponible et permet donc d'améliorer la capaciter des alogrithme à filtrer et / ou prioriser les variants rendant donc les analyses plus efficaces. On peut relever certains logiciels tel que le *Protein ANalysis THrough Evolutionary Relationships* (PANTHER) [@Mi2017] permet par exemple de classer une liste de gènes en fonction de leurs fonctions moléculaires, des processus biologiques et des voies de signalisation dans lesquels ils sont impliqués. On peut également noter *the Human Phenotype Ontology project* (HPO) [@Kohler2014] qui fournit une classification (À completer). Plus récemment, ont a pu voir emmerger des "scores mutationnel" tel que RVIS [@Petrovski2013] ou encore le pLI [@Lek2016]. En se basant sur les bases de données telle que ESP ou encore ExAC, ces scores permettent de classer les gènes en fonction de leur tolérence (ou intolérance) aux variations avec l'idée sous-jacente que "les gènes impliqués dans des pathologies à transmission Mendeliennes" devraient être moins tolérant aux variations que les autres.  
 
 Comme nous l'avons vu, l'accumulation de ces information est extrêmement importante puisqu'elle permet aux biologistes de faire face à la masse de données générés par le NGS l'aidant ainsi dans ses prises de décisions. Il est à noter que la plupart de ces informations sont extrêment dépendantes du jeux de gènes utilisés, les prédictions seront donc différentes si l'on se base les gènes RefSeq, Ensembl ou UCSC [@McCarthy2014,@Zhao2015] bien que les gènes du *Consensus Coding Sequence project* (CCDS) soient bien représentés par ces trois listes [@Pruitt2009]. De même, pour une même liste de gène, de nombreuse différences seront observées en fonction du ou des logiciels de prédiction utilisés [@McCarthy2014, Salgado2016].  
 
