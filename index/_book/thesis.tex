@@ -391,11 +391,11 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=0.23]{figure/Meiosis_Stages2} 
+  {\centering \includegraphics[scale=0.33]{figure/Meiosis_Stages} 
   
   }
   
-  \caption[Les différentes étapes de la méiose gamétique masculine]{Les différentes étapes de la méiose gamétique masculine d'après [Wikipédia](https://en.wikipedia.org/wiki/Meiosis) : }\label{fig:meiose}
+  \caption[Les différentes étapes de la méiose gamétique masculine]{Les différentes étapes de la méiose gamétique masculine d'après D’après Sasaki et Matsui, 2008}\label{fig:meiose}
   \end{figure}
   
   La méiose est initiée dès la fin de la phase de multiplication à partir
@@ -416,7 +416,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    \textbf{Méiose réductionelle} :
+    \textbf{Méiose réductionelle} : (\textbf{Figure : }\ref{fig:meiosei})
   
     \begin{enumerate}
     \def\labelenumii{\alph{enumii}.}
@@ -425,6 +425,39 @@ class (for LaTeX) and the R bookdown package, in general.
       \textbf{La prophase I} : Cette longue étape dure 23 jours chez
       l'homme et peut être subdivisée en 5 phases succèsives : leptotène,
       zygotène, pachytène, diplotène et diacinèse.
+  
+      \begin{enumerate}
+      \def\labelenumiii{\roman{enumiii}.}
+      \tightlist
+      \item
+        \textbf{Leptotène} : condensation de la chromatine et formation
+        des chromosomes.\\
+      \item
+        \textbf{Zygotène} : Appariement des chromosomes homologues par
+        paires appelées bivalents grâce l'intermédiaire d'une structure
+        multi-protéique : le complexe synaptonémal.\\
+      \item
+        \textbf{Pachytène} : Ce stade dure 16 jours et est le plus long de
+        la prophase I. C'est au cours de celui-ci qu'à lieu l'échange de
+        matériel génétique par le biais des crossing-over (\textbf{Figure
+        : }\ref{fig:crossingover}) entre les chromatides non-sœurs appelés
+        nodules de recombinaison.\\
+      \item
+        \textbf{Diplotène} : La dissociation du complexe synaptonémal va
+        permettre aux chromosomes homologues d'initier leur séparation.
+        Certains sites d'appariement étroits nommés chiasmas demeurent
+        néanmoins permettant une séparation plus progressive des
+        chromosomes et réduisant ainsi le risque d'aneuploïdies (nombre
+        anormal de chromosomes) (Handyside, 2012).\\
+      \item
+        \textbf{Diacinèse} : Cette étape marque la fin de la méiose I et
+        fait office de transition avec la méiose II. Elle est caractérisée
+        par une condensation maximale des chromosomes et la disparition de
+        la membrane nucléaire et du nucléole. Le fuseau méiotique commence
+        à s'assembler, les centromères des chromosomes homologues
+        s'éloignent et les chiasmas glissent progressivement vers les
+        télomères.\\
+      \end{enumerate}
     \item
       \textbf{La métaphase I} : phase au cours de laquelle les chromosomes
       vont s'aligner à l'équateur de la cellule pour former la plaque
@@ -434,14 +467,29 @@ class (for LaTeX) and the R bookdown package, in general.
       homologues en fonction de la phase méiotique) vont se séparer et
       migrer aux pôles opposés de la cellule.\\
     \item
-      \textbf{La télophase} : qui est l'étape finale, les chromosomes se
+      \textbf{La télophase I} : qui est l'étape finale, les chromosomes se
       décondensent et l'enveloppe nucléaire se reforme autours des
       chromosomes. La cellule mère se sépare alors en deux cellules filles
-      appelées spermatocytes secondaires.\\
+      appelées spermatocytes secondaires.
     \end{enumerate}
+  \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.43]{figure/MeiosisI} 
+  
+  }
+  
+  \caption[Les différentes étapes de la première division méiotique masculine adapté]{Les différentes étapes de la première division méiotique masculine adapté d'après [Wikipédia](https://en.wikipedia.org/wiki/Meiosis)}\label{fig:meiosei}
+  \end{figure}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
   \item
-    \textbf{Méiose équationelle} : La MII est similaire à une division
-    mitotique,
+    \textbf{Méiose équationelle} : (\textbf{Figure : }\ref{fig:meioseii})
+    La MII est similaire à une division mitotique,
   
     \begin{enumerate}
     \def\labelenumii{\alph{enumii}.}
@@ -463,6 +511,15 @@ class (for LaTeX) and the R bookdown package, in general.
       contenant chacune n chromosomes.
     \end{enumerate}
   \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.43]{figure/MeiosisII} 
+  
+  }
+  
+  \caption[Les différentes étapes de la deuxième division méiotique masculine adapté]{Les différentes étapes de la deuxième division méiotique masculine adapté d'après [Wikipédia](https://en.wikipedia.org/wiki/Meiosis)}\label{fig:meioseii}
+  \end{figure}
   
   La première division méiotique aboutit à la formation des spermatocytes
   secondaires (spermatocytes II). À ce stade, les cellules sont haploïdes
@@ -1951,6 +2008,12 @@ class (for LaTeX) and the R bookdown package, in general.
   Events in Spermiogenesis} (p. 334). Cambridge University Press.
   Retrieved from
   \url{http://www.cambridge.org/us/academic/subjects/medicine/obstetrics-and-gynecology-reproductive-medicine/cellular-and-molecular-events-spermiogenesis}
+  
+  \hypertarget{ref-Handyside2012}{}
+  Handyside, A. H. (2012). Molecular origin of female meiotic
+  aneuploidies. \emph{Biochimica et Biophysica Acta (BBA) - Molecular
+  Basis of Disease}, \emph{1822}(12), 1913--1920.
+  \url{http://doi.org/10.1016/j.bbadis.2012.07.007}
   
   \hypertarget{ref-Hermo2010}{}
   Hermo, L., Pelletier, R. M., Cyr, D. G., \& Smith, C. E. (2010). Surfing

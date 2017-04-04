@@ -63,33 +63,59 @@ include_graphics(path = "figure/spermatogenese2.jpg")
 
 La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:meiose)) appelée respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son non *réductionnelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:crossingover)).
 
-```{r meiose,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.23"}
+```{r meiose,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.33"}
 
 fig.name <- "Les différentes étapes de la méiose gamétique masculine"
 fig.description <- ""
-fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
-fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+fig.from <- "D’après Sasaki et Matsui, 2008"
+fig.info <- paste0(fig.name," d'après ",fig.from)
 
-include_graphics(path = "figure/Meiosis_Stages2.png")
+include_graphics(path = "figure/Meiosis_Stages.png")
 
 ```
 
 La méiose est initiée dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 à 4 jours. Au cours de cette phase a lieu la réplication de l'ADN. Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliés entre elles par le centromère, le matériel génétique de chaque cellule ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distincte (**Figure : **\@ref(fig:meiose)) : 
 
-1. **Méiose réductionelle** : 
+1. **Méiose réductionelle** : (**Figure : **\@ref(fig:meiosei))
     a. **La prophase I** : Cette longue étape dure 23 jours chez l'homme et peut être subdivisée en 5 phases succèsives : leptotène, zygotène, pachytène,
-diplotène et diacinèse. 
+diplotène et diacinèse.  
+        i. **Leptotène** : condensation de la chromatine et formation des chromosomes.  
+        ii. **Zygotène** : Appariement des chromosomes homologues par paires appelées bivalents grâce l’intermédiaire d’une structure multi-protéique : le complexe synaptonémal.  
+        iii. **Pachytène** : Ce stade dure 16 jours et est le plus long de la prophase I. C'est au cours de celui-ci qu'à lieu l’échange de matériel génétique par le biais des crossing-over (**Figure : **\@ref(fig:crossingover)) entre les chromatides non-sœurs appelés nodules de recombinaison.  
+        iv. **Diplotène** : La dissociation du complexe synaptonémal va permettre aux chromosomes homologues d'initier leur séparation. Certains sites d’appariement étroits nommés chiasmas demeurent néanmoins permettant une séparation plus progressive des chromosomes et réduisant ainsi le risque d’aneuploïdies (nombre anormal de chromosomes) [@Handyside2012].  
+        v. **Diacinèse** : Cette étape marque la fin de la méiose I et fait office de transition avec la méiose II. Elle est caractérisée par une condensation maximale des chromosomes et la disparition de la membrane nucléaire et du nucléole. Le fuseau méiotique commence à s’assembler, les centromères des chromosomes homologues s’éloignent et les chiasmas glissent progressivement vers les télomères.  
     b. **La métaphase I** : phase au cours de laquelle les chromosomes vont s'aligner à l'équateur de la cellule pour former la plaque équatoriale. 
     c. **L'anaphase I** : les chromatides sœurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule.      
-    d. **La télophase** : qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme autours des chromosomes. La cellule mère se sépare alors en deux cellules filles appelées spermatocytes secondaires.   
-2. **Méiose équationelle** : La MII est similaire à une division mitotique, 
+    d. **La télophase I** : qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme autours des chromosomes. La cellule mère se sépare alors en deux cellules filles appelées spermatocytes secondaires.   
+
+```{r meiosei,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.43"}
+
+fig.name <- "Les différentes étapes de la première division méiotique masculine adapté"
+fig.description <- ""
+fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
+fig.info <- paste0(fig.name," d'après ",fig.from)
+
+include_graphics(path = "figure/MeiosisI.png")
+
+```
+    
+2. **Méiose équationelle** : (**Figure : **\@ref(fig:meioseii)) La MII est similaire à une division mitotique, 
     a. **La prophase II** : Contrairement à la prophase I, la prophase II est très courte. Les chromosomes, alors formés de deux chromatides soeurs se dirigent vers la plaque équatoriale.  
     b. **La métaphase II** :  À ce stade, les chromosomes sont alignés le long de la plaque équatoriale au niveau de leur centromère.  
     c. **l'anaphase II** : Les centromère de chaque chromosome se rompts permettant aux chromatides soeurs de se diriger vers les pôles opposés des spermatocytes II.  
     d. **La télophase II** : Comme en télophase I, les cellules mères se séparent en deux cellules filles haploïdes appelées spermatides, contenant chacune n
 chromosomes.  
 
+```{r meioseii,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.43"}
 
+fig.name <- "Les différentes étapes de la deuxième division méiotique masculine adapté"
+fig.description <- ""
+fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
+fig.info <- paste0(fig.name," d'après ",fig.from)
+
+include_graphics(path = "figure/MeiosisII.png")
+
+```
 ```{r mitose,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
 
 # # link <- '[larousse](http://www.larousse.fr/encyclopedie/images/Phases_de_la_mitose/1009782)'
