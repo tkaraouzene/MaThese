@@ -10,7 +10,7 @@ Ranking transcript (or gene) considering their variation load was already done b
 
 ## Matériel & Méthodes  
 
-### Récuération des données ExAC, filtrage et pré analyse
+### Récupération des données ExAC, filtrage et pré analyse
 
 ## Résultats  
 
