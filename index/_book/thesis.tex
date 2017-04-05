@@ -150,6 +150,17 @@ class (for LaTeX) and the R bookdown package, in general.
 %%
 %
 
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 \begin{document}
 
 % Everything below added by CII
@@ -384,7 +395,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Les différentes étapes de la méiose gamétique masculine]{Les différentes étapes de la méiose gamétique masculine d'après D’après Sasaki et Matsui, 2008}\label{fig:meiose}
+  \caption[Les différentes étapes de la méiose gamétique masculine]{Les différentes étapes de la méiose gamétique masculine d'après Sasaki et Matsui, 2008}\label{fig:meiose}
   \end{figure}
   
   La méiose est initiée dès la fin de la phase de multiplication à partir
@@ -405,14 +416,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    \textbf{Méiose réductionelle} : (\textbf{Figure : }\ref{fig:meiosei})
+    \textbf{Méiose réductionnelle} : (\textbf{Figure : }\ref{fig:meiosei})
   
     \begin{enumerate}
     \def\labelenumii{\alph{enumii}.}
     \tightlist
     \item
       \textbf{La prophase I} : Cette longue étape dure 23 jours chez
-      l'homme et peut être subdivisée en 5 phases succèsives : leptotène,
+      l'homme et peut être subdivisée en 5 phases successives : leptotène,
       zygotène, pachytène, diplotène et diacinèse.
   
       \begin{enumerate}
@@ -477,7 +488,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \setcounter{enumi}{1}
   \tightlist
   \item
-    \textbf{Méiose équationelle} : (\textbf{Figure : }\ref{fig:meioseii})
+    \textbf{Méiose équationnelle} : (\textbf{Figure : }\ref{fig:meioseii})
     La MII est similaire à une division mitotique,
   
     \begin{enumerate}
@@ -486,13 +497,13 @@ class (for LaTeX) and the R bookdown package, in general.
     \item
       \textbf{La prophase II} : Contrairement à la prophase I, la prophase
       II est très courte. Les chromosomes, alors formés de deux
-      chromatides soeurs se dirigent vers la plaque équatoriale.\\
+      chromatides sœurs se dirigent vers la plaque équatoriale.\\
     \item
       \textbf{La métaphase II} : À ce stade, les chromosomes sont alignés
       le long de la plaque équatoriale au niveau de leur centromère.\\
     \item
-      \textbf{l'anaphase II} : Les centromère de chaque chromosome se
-      rompts permettant aux chromatides soeurs de se diriger vers les
+      \textbf{L'anaphase II} : Les centromère de chaque chromosome se
+      rompent permettant aux chromatides sœurs de se diriger vers les
       pôles opposés des spermatocytes II.\\
     \item
       \textbf{La télophase II} : Comme en télophase I, les cellules mères
@@ -546,7 +557,7 @@ class (for LaTeX) and the R bookdown package, in general.
   Elle est caractérisée par 3 évènements majeurs : la formation de
   l'acrosome, la compaction de l'ADN nucléaire et la formation du
   flagelle. Le développement de l'acrosome et la formation du flagelle
-  commence au niveau des spermatides rondes(Escalier et al., 1991).
+  commence au niveau des spermatides rondes (Escalier et al., 1991).
   Pendant l'élongation de la spermatide, le noyau se condense et devient
   hautement polarisé (Hamilton, D. W., Waites, 1990).\\
   Les spermatides sont situées dans le compartiment adluminal, à proximité
@@ -558,7 +569,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \tightlist
   \item
     \textbf{Les spermatides rondes} (\textbf{Figure :
-    }\ref{fig:spermiogenese} 1-2) :L'identification de ces cellules
+    }\ref{fig:spermiogenese} 1-2) : L'identification de ces cellules
     représente une difficulté technique. Elles ont cependant pu être
     décrites en détail par différentes techniques de coloration sous
     microscope optique (Clermont, 1963, Papic, Katona, \& Skrabalo (1988),
@@ -597,7 +608,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \end{enumerate}
   
   Une fois ces étapes de différentiation finies, les spermatides sont
-  relachées en tant que spermatozoïdes dans la lumière du tube séminifère.
+  relâchées en tant que spermatozoïdes dans la lumière du tube séminifère.
   Ce procédé est appelé spermiation.
   
   \begin{figure}
@@ -678,7 +689,7 @@ class (for LaTeX) and the R bookdown package, in general.
     mais aussi de protéger l'ADN d'agents de dégradation comme l'oxydation
     des bases. Parallèlement à cette condensation chromatinienne se
     produit un arrêt des processus de transcription cellulaire (A L
-    Kierszenbaum \& Tres, 1978).Le noyau du spermatozoïde est donc un
+    Kierszenbaum \& Tres, 1978). Le noyau du spermatozoïde est donc un
     noyau au repos, transcriptionnellement inactif (Ward, 1994)
   \end{enumerate}
   
@@ -694,13 +705,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsubsection{Le flagelle}\label{le-flagelle}
   
   Le flagelle représente la queue du spermatozoïde. Celui-ci permet, par
-  mouvement d'oscilation à haute vitesse, le déplacement du spermatozoïde.
-  Cette mobilité est générée par un cytosquelette interne extrêmement
-  conservé durant l'évolution appelée l'axonème. Celui-ci est composé de
-  neuf doublets de microtubules périphériques et de deux doublets internes
-  (Inaba, 2003) (\textbf{Figure : }\ref{fig:axoneme}), on parle alors de
-  structure ``9 + 2''. Les doublets externes sont reliés entre eux par des
-  ponts de nexine et au doublet central par des ponts radiaires.
+  mouvement d'oscillation à haute vitesse, le déplacement du
+  spermatozoïde. Cette mobilité est générée par un cytosquelette interne
+  extrêmement conservé durant l'évolution appelée l'axonème. Celui-ci est
+  composé de neuf doublets de microtubules périphériques et de deux
+  doublets internes (Inaba, 2003) (\textbf{Figure : }\ref{fig:axoneme}),
+  on parle alors de structure ``9 + 2''. Les doublets externes sont reliés
+  entre eux par des ponts de nexine et au doublet central par des ponts
+  radiaires.
   
   \begin{figure}
   
@@ -763,10 +775,10 @@ class (for LaTeX) and the R bookdown package, in general.
   non protégés}''
   (\href{http://www.who.int/reproductivehealth/topics/infertility/definitions/en/}{\texttt{Who.int.\ 2013-03-19.\ Retrieved\ 2013-06-17}}).
   L'étude de l'infertilité représente un des enjeux scientifique et
-  médicale majeur de ces dernières années. On estime qu'environs 10 à 15\%
+  médicale majeur de ces dernières années. On estime qu'environ 10 à 15\%
   des couples humains font face à des problèmes d'infertilité soit plus de
   70 millions de personnes dans le monde (Boivin, Bunting, Collins, \&
-  Nygren, 2007). Dans dans la moitié des cas, la cause sous-jacente serait
+  Nygren, 2007). Dans la moitié des cas, la cause sous-jacente serait
   masculine. On estime que Les facteurs causaux sous-jacents de
   l'infertilité masculine peuvent être attribués à des toxines
   environnementales, des troubles systémiques tels que la maladie
@@ -774,39 +786,39 @@ class (for LaTeX) and the R bookdown package, in general.
   cellules germinales. Les facteurs génétiques, y compris les aneuploïdies
   et les mutations de gènes uniques, contribuent également à l'infertilité
   masculine. Cependant, aucune cause n'est identifiée dans 10-20\% des
-  cas. Comme nous avons pu le voir, le spermatogénèse est une succession
+  cas. Comme nous avons pu le voir, la spermatogénèse est une succession
   de processus complexes qui s'effectue de manière synchrone, de fait la
   moindre altération génétique affectant une seule de ces étapes est
-  succeptible d'entrainer un phénotype d'infertilité (Barratt, 1995
+  susceptible d'entrainer un phénotype d'infertilité (Barratt, 1995
   \textbf{A TROUVER}).
   
   \subsection{Les différents phénotypes d'infertilité
   masculine}\label{les-differents-phenotypes-dinfertilite-masculine}
   
-  Chez l'homme, l'infertilité est associé à une altération quantitative et
-  / ou qualitative des spermatozoïdes présent dans l'éjaculat. L'ensemble
-  de ces altération peuvent être détectées et quantifiées dans des
-  laboratoires spécialisées par réalisation d'un spermogramme. Au cours de
-  celui-ci, plusieurs critères tel que le le volume de sperme sécrété, son
+  Chez l'homme, l'infertilité est associée à une altération quantitative
+  et / ou qualitative des spermatozoïdes présents dans l'éjaculat.
+  L'ensemble de ces altérations peuvent être détectées et quantifiées dans
+  des laboratoires spécialisés par réalisation d'un spermogramme. Au cours
+  de celui-ci, plusieurs critères tel que le volume de sperme sécrété, son
   pH, la quantité et la vitalité des spermatozoïdes qu'il contient seront
   évalués. La proportion de cellules immatures sera elle aussi analysée.
-  Ces cellules épithéliales de l'urètre, appellées aussi cellules rondes,
+  Ces cellules épithéliales de l'urètre, appelées aussi cellules rondes,
   se retrouvent à la fois dans l'éjaculat des individus ayant une quantité
   de spermatozoïdes ``normal'' (Michael \& Joel, 1937,M. Tomlinson et al.
   (1993)), chez les individus présentant une quantité basse de
   spermatozoïdes (MacLeod, 1970, M. J. Tomlinson, Barratt, \& Cooke
   (1993)) ou en étant dépourvu (Kurilo, Liubashevskaia, Dubinskaia, \&
   Gaeva, 1993). Cependant, leur nombre augmente tandis que la quantité de
-  spermatozïde diminue (SPERLING \& KADEN, 1971).
+  spermatozoïde diminu (SPERLING \& KADEN, 1971).
   
   \subsubsection{Liée à la quantité}\label{liee-a-la-quantite}
   
-  Chez l'humain, l'arret de la spermatogénèse est définie comme
+  Chez l'humain, l'arrêt de la spermatogénèse est défini comme
   l'incapacité des cellules spermatogénétique à devenir des spermatozoïdes
   matures. Elle peut survenir à n'importe qu'elle étape de la formation
-  des cellules germinales. Les arrets au stade de spermatocyte I sont les
-  plus fr'équents, suivis par l'arret au niveau des spermatides et moins
-  fréquement au niveau des spermatogonies (Girgis, Etriby, Ibrahim, \&
+  des cellules germinales. Les arrêts au stade de spermatocyte I sont les
+  plus fréquents, suivis par l'arrêt au niveau des spermatides et moins
+  fréquemment au niveau des spermatogonies (Girgis, Etriby, Ibrahim, \&
   Kahil, 1969).
   
   \begin{enumerate}
@@ -815,19 +827,19 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     \textbf{L'oligozoospermie} : L'oligozoospermie est définie comme un
     phénotype d'infertilité masculine caractérisé par une production
-    inferieure à 15 millions de spermatozoïdes par mL de sperm (T. G.
-    Cooper et al., 2010). Un arret de la spermatogénèse à été observée
+    inférieure à 15 millions de spermatozoïdes par ml de sperme (T. G.
+    Cooper et al., 2010). Un arrêt de la spermatogénèse a été observée
     dans 4 à 30\% des biopsie testiculaire des hommes présentant une
     oligospermie sévère (Colgan, Bedard, Strawbridge, Buckspan, \& Klotz,
     1980, Levin (1979), Soderström \& Suominen (1980), WONG, STRAUS, \&
-    WARNER (1973)). Cet arret à longtemps été considérés comme sans espoir
-    pour les couples désirant consevoir, jusqu'à l'emmergence de
+    WARNER (1973)). Cet arrêt a longtemps été considérés comme sans espoir
+    pour les couples désirant concevoir, jusqu'à l'émergence de
     \emph{intracytoplasmic sperm injection} (ICIS) (Palermo, Joris,
     Devroey, \& Van Steirteghem, 1992)\\
   \item
     \textbf{L'azoospermie} : Comme l'oligozoospermie, l'azoospermie est un
     phénotype d'infertilité masculine cette fois-ci caractérisé par
-    l'abscence total de spermatozoïde dans lm'éjaculat. On distingue des
+    l'absence total de spermatozoïde dans l'éjaculat. On distingue des
     causes excrétoires empêchant l'excrétion des spermatozoïdes, on parle
     alors d'azoospermie obstructive et des causes sécrétoires, les plus
     fréquentes, accompagnées d'un défaut de la spermatogenèse, on parle
@@ -839,8 +851,8 @@ class (for LaTeX) and the R bookdown package, in general.
   Ces anomalies sont observables en effectuant un spermocytogramme.
   Plusieurs classifications ont été établie, cependant, c'est la
   classification de David modifiée (\textbf{Table :}
-  \ref{fig:anomaliemorphosperm}) qui est la plus répendue en France. Pour
-  ce faire, on procède générallement à une observation de 100
+  \ref{fig:anomaliemorphosperm}) qui est la plus rependue en France. Pour
+  ce faire, on procède généralement à une observation de 100
   spermatozoïdes au cours de laquelle l'ensemble des anomalies observées
   sont relevées et quantifiées permettant ainsi de définir un index
   d'anomalies multiple (nombre total d'anomalies/nombre de spermatozoïdes
@@ -881,17 +893,17 @@ class (for LaTeX) and the R bookdown package, in general.
     petit chromosome atteignant une taille d'environ 53 Mb et est porteur
     de 78 gènes principalement impliqués dans la différentiation sexuelle
     masculine et la spermatogénèse (Skaletsky et al., 2003). De fait, le
-    chromosome Y représente une région d'intéret évidente dans l'étude de
+    chromosome Y représente une région d'intérêt évidente dans l'étude de
     facteur génétique liés à l'infertilité masculine. L'évolution des
-    technologie a permi de mettre en évidence des délétion invisibles au
-    karyotype dans la région du facteur AZF (\emph{Azoospermia Factor}).
-    Cette région peut-être subdivisée en trois sous-partie, AZFa, AZFb et
+    technologies a permis de mettre en évidence des délétion invisibles au
+    caryotype dans la région du facteur AZF (\emph{Azoospermia Factor}).
+    Cette région peut être subdivisée en trois sous-partie, AZFa, AZFb et
     AZFc (\textbf{Figure :} \ref{fig:chry}). Depuis plusieurs années, de
     nombreuses séries de patients azoospermiques ou oligozoospermiques ont
     été publiées et tendent à montrer que les microdélétions du chromosome
     Y seraient responsables de 10\% des cas d'azoospermie non-obstructives
     et chez 5\% des cas d'oligozoospermie sévères (\textless{}5 millions
-    de spermotoides/ml) (Hotaling \& Carrell, 2014).
+    de spermatozoïdes/ml) (Hotaling \& Carrell, 2014).
   \end{enumerate}
   
   \begin{figure}
@@ -909,7 +921,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \tightlist
   \item
     \textbf{Anomalies chromosomiques} : Des anomalies chromosomique de
-    nombre ou de structure impliquant le autosomes ou, le plus souvent,
+    nombre ou de structure impliquant les autosomes ou, le plus souvent,
     les gonosomes, peuvent être impliqués dans des cas d'infertilité
     masculine. Le pourcentage d'individu concerné varie entre 2 et 8\% et
     peut atteindre 15\% pour les patients azoospermiques soit 10 à 20 fois
@@ -921,25 +933,24 @@ class (for LaTeX) and the R bookdown package, in general.
     \def\labelenumii{\alph{enumii}.}
     \tightlist
     \item
-      \textbf{Syndrome de Klinefelter} : Le syndrome de Klinfelter (ou 46,
-      XXY) fut décrit pour la première fois en 1942 par Harry F.
+      \textbf{Syndrome de Klinefelter} : Le syndrome de Klinefelter (ou
+      46, XXY) fut décrit pour la première fois en 1942 par Harry F.
       Klinefelter et décrit une affection due à la présence d'un
       chromosome X supplémentaire suite à une erreur de ségrégation des
-      chromosome au moment de la méiose. Sa prévalence dans la population
-      générale est estimée à environs 1 sur 1200 (1 homme sur 600)
-      (Bojesen \& Gravholt, 2011) mais elle est environs 50 fois
-      superieure chez les patients infertiles azoospermiques (Gekas et
-      al., 2001).\\
+      chromosomes au moment de la méiose. Sa prévalence dans la population
+      générale est estimée à environ 1 sur 1200 (1 homme sur 600) (Bojesen
+      \& Gravholt, 2011) mais elle est environs 50 fois supérieure chez
+      les patients infertiles azoospermiques (Gekas et al., 2001).\\
     \item
       \textbf{Les anomalies de structure} : Les translocation et les
-      invertions sont les anomalies de structures retrouvées le plus
-      fréquement chez les patients infertiles.
+      inversions sont les anomalies de structures retrouvées le plus
+      fréquemment chez les patients infertiles.
   
       \begin{enumerate}
       \def\labelenumiii{\roman{enumiii}.}
       \tightlist
       \item
-        La translocation est définie comme l'échange de materiel génétique
+        La translocation est définie comme l'échange de matériel génétique
         entre deux chromosomes non homologues. On en distingue deux types,
         les translocation réciproques et les translocation
         robertsonniennes. Les premières sont retrouvées 4 à 10 fois plus
@@ -948,42 +959,127 @@ class (for LaTeX) and the R bookdown package, in general.
         chez 1.6\% des patients oligozoospermiques et 0.09\% des patients
         azoospermiques (O'Flynn O'Brien, Varghese, \& Agarwal, 2010).\\
       \item
-        Les inversions chromosomiques caractérisent le mécanisme de cassur
-        d'un fragment de chromosome suivi de son retournement à 180° et sa
-        réintégration à la même position. Ces inversions vont gêner
-        l'appariement des chromosomes homologues (formation d'une boucle
-        d'inversion) pendant la méiose et sont, comme les translocations,
-        retrouvées plus fréquemment chez les patients infertiles que dans
-        la population générale (Krausz \& Forti, 2000).\\
+        Les inversions chromosomiques caractérisent le mécanisme de
+        cassure d'un fragment de chromosome suivi de son retournement à
+        180° et sa réintégration à la même position. Ces inversions vont
+        gêner l'appariement des chromosomes homologues (formation d'une
+        boucle d'inversion) pendant la méiose et sont, comme les
+        translocations, retrouvées plus fréquemment chez les patients
+        infertiles que dans la population générale (Krausz \& Forti,
+        2000).\\
       \end{enumerate}
     \item
-      \textbf{Autres anomalies chromosomiques} : Parmis les anomalies de
+      \textbf{Autres anomalies chromosomiques} : Parmi les anomalies de
       structures chromosomique responsables d'infertilité masculine, on
-      peut par exemple citer les hommes de formule 46,XX bien quelle soit
+      peut par exemple citer les hommes de formule 46,XX bien qu'elle soit
       moins fréquente que les translocations et les inversions. Ces
       patients sont généralement totalement infertiles et présentent une
-      azoospermie par absence des sous- régions AZFa,b et c (Vorona,
+      azoospermie par absence des sous- régions AZF a, b et c (Vorona,
       Zitzmann, Gromoll, Schüring, \& Nieschlag, 2007) bien qu'ils aient
       un phénotype masculin normal.
     \end{enumerate}
   \item
     \textbf{Mutations du gène \emph{CFTR} }: L'identification du gène
-    \emph{CFTR} (Cystic Fibrosis Transmembrane conductance Regulator) chez
-    les patients atteints de mucovisidose et présentant une agénésie
-    bilatérale des canaux déférents (ABCD) a permis d'associer ce gène au
-    phénotype d'azoospermie obstructive. Cette malformation serait
-    responsable de 2\% des cas d'infertilité masculine et de 25\% des cas
-    d'azoospermie obstructive (J. Yu, Chen, Ni, \& Li, 2012).
+    \emph{CFTR} (\emph{Cystic Fibrosis Transmembrane conductance
+    Regulator}) chez les patients atteints de mucoviscidose et présentant
+    une agénésie bilatérale des canaux déférents (ABCD) a permis
+    d'associer ce gène au phénotype d'azoospermie obstructive. Cette
+    malformation serait responsable de 2\% des cas d'infertilité masculine
+    et de 25\% des cas d'azoospermie obstructive (J. Yu, Chen, Ni, \& Li,
+    2012).
   \end{enumerate}
   
-  Bien que la prévalence de ces anomalies génétiques varien en fonction du
+  Bien que la prévalence de ces anomalies génétiques varie en fonction du
   phénotype concerné, il est estimé que ces défauts soient seulement
   retrouvés chez 5\% des cas d'infertilité masculine tout phénotype
-  confondus. Cette observation suffère fortement l'implication d'autres
+  confondus. Cette observation suggère fortement l'implication d'autres
   gènes encore inconnus dans les différents phénotypes d'infertilité
   masculine (\textbf{Nieschlag et al., 2010 A trouver}).
   
   \subsubsection{Les nouveaux gènes}\label{les-nouveaux-genes}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Les anomalies morphologiques liées à la tête du
+    spermatozoïdes} :
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      \textbf{La macrozoospermie} : Ce phénotype d'infertilité masculine
+      rare est caractérisé par la présence de 100\% des spermatozoïdes de
+      l'éjaculat présentant une tête anormalement grosse ainsi que
+      plusieurs flagelles. Il fut observé pour la première fois en 1978
+      (Nistal, Paniagua, \& Herruzo, 1978), mais ce n'est qu'en 2007 q'une
+      explication génétique fut enfin trouvée. Une étude portant sur 14
+      patients nord Africains a permis d'identifier la délétion c144delC
+      du gène \emph{AURKC} (\emph{Aurora kinase C}) comme responsable du
+      phénotype de l'ensemble des individus de l'étude (Dieterich et al.,
+      2007). Depuis, d'autres études ont permis d'associer d'autre
+      variants sur ce même gène à ce phénotype {[}INSERT REF{]}. Des
+      anomalies du gène \emph{AURKC} seraient ainsi respondable d'environs
+      83.7\% des cas macrozoospermie chez des patients non apparentés
+      {[}INSERT REF{]}. Le gène \emph{AURKC}, étant impliqué dans la
+      méiose, conduit lorsqu'il est muté à un dysfonctionement de celle-ci
+      menant à des spermatozoïdes polyploïdes, c'est à dire, portant une
+      quantité de materiel génétique trop important {[}INSERT REF{]}.\\
+    \item
+      \textbf{La globozoospermie} : La globozoospermie est aussi un
+      phénotype rare d'infertilité dont la prévalence est estimée à de
+      0,1\%. Il fut dentifié pour la première fois en 1971 et est
+      caractérisé par la présence d'une majorité de spermatozoïde dépourvu
+      d'acrosome dans l'éjaculat empechant ainsi le spermatozoïde de
+      franchir la zone pellucide de l'ovocyte compremettant ainsi la
+      fécondation (A. Dam et al., 2006, C. G. S. Sen, Holstein, \&
+      Schirren (1971), A. F. Holstein, Schirren, \& Schirren (1973)). En
+      2007, une étude familiale a permis de lier ce phénotype à la
+      mutation c.848G\textgreater{}A dans le gène \emph{SPATA16}
+      (\emph{spermatogenesis-associated protein 16}) (A. H. Dam et al.,
+      2007) dont la protéine va, au cours de la spermatogénèse fusioner
+      avec les vésicules proacrosomales pour former l'acrosome (A. H. Dam
+      et al., 2007, L. Lu, Lin, Xu, Zhou, \& Sha (2006)). Plus tard, en
+      2011, une étude portant sur 20 patients tunisiens permit
+      d'identifier une délétion homozygote de 200 kb emportant la totalité
+      du gène \emph{DPY19L2} (\emph{Dpy-19 Like 2}) chez 15 des 20
+      patients (Harbuz et al., 2011). cf
+      \protect\hyperlink{globo}{globo}\\
+    \item
+      \textbf{Spermatozoïdes acéphaliques} : Ce phénotype reporté
+      plusieurs fois (Hector E. Chemes \& Rawe, 2010, Panidis et al.
+      (2001), H E Chemes et al. (1987)) caractérise les patients
+      présentant des spermatozoïdes déporvu de tête dans leur éjaculat.
+      Une étude récente a put lier ce phénotype à une mutation
+      c.824C\textgreater{}T homozygote ainsi qu'à deux variants
+      hétérozygotes composites c.1006C\textgreater{}T et
+      c.485T\textgreater{}A dans le gène \emph{SUN5} (Zhu et al., 2016)
+      qui avait précédement été décrit comme localisant à la jonction tête
+      / flagelle du spermatozoïde (Yassine et al., 2015).\\
+    \end{enumerate}
+  \item
+    \textbf{Les anomalies liées au flagelle et à la motilité} :
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      \textbf{Phénotype MMAF} :\\
+    \item
+      \textbf{Asthenozoospermia} :\\
+    \end{enumerate}
+  \item
+    \textbf{Les échec de fécondation du spermatozoïde} : \textbf{PETITE
+    EXPLICATION DE CE QU'EST L'ACTIVATION OVOCYTAIRE}. \textbf{EXPLIQUER
+    LA FANCTION DE PLCZ1}. Plusieurs cas d'echec d'activation ovocitaire
+    ont été liés à l'bscence ou la mauvaise localisation de la protéine
+    \emph{PLCZ1} (\emph{phospholipase C Zeta 1}). Malgré celà, aucune
+    preuve génétique directe n'avait été reporté jusque récemment où deux
+    mutations au sein du gène \emph{PLCZ1} furent retrouvés chez un
+    patient (Heytens et al., 2009) et un peu plus tard une mutation
+    homozygote chez deux frères consanguins (Escoffier et al., 2016).
+  \end{enumerate}
   
   \newpage  
   
@@ -994,8 +1090,13 @@ class (for LaTeX) and the R bookdown package, in general.
   de l'information génétique par Oswald Theodore Avery en 1944. Sa
   structure en double hélice composée par quatre bases, la thymine (T),
   l'adénine (A), la guanine (G) et la cytosine (C) fut caractérisée en
-  1953 par James D. Watson et Francis Crick. \textbf{Petite intro à
-  terminer !!!}
+  1953 par James D. Watson et Francis Crick. Cependant, l'existence
+  ``d'entités d'information génétique discrètes'' que sont les gènes fut
+  suggéré dès la deuxième moitié du XIX\(^{ième}\) siècle grâce aux
+  travaux de Gregor Mendel portant sur l'hérédité de certains traits chez
+  le poids. Depuis, de nombreuses méthodes permettant de lier le phénotype
+  d'un individu à son génotype on vu le jour au gré des améliorations
+  technologiques.
   
   \subsection{\texorpdfstring{Approche ``gènes
   candidats''}{Approche gènes candidats}}\label{approche-genes-candidats}
@@ -1007,7 +1108,7 @@ class (for LaTeX) and the R bookdown package, in general.
   modèles animaux et notamment murins. Dans ce cas, les mutations seront
   recherchées sur le gène orthologue humain (Boer, Vries, \& Ramos, 2015).
   Une autre possibilité consiste à rechercher des variants dans des gènes
-  paralogues à un gène précédement identifié avec l'idée sous-jacente que
+  paralogues à un gène précédemment identifié avec l'idée sous-jacente que
   leur structure proche implique une fonction similaire. Enfin la dernière
   méthode consiste à étudier des gènes connus comme étant des partenaires
   de gènes déjà identifiés dans cette pathologie en supposant que si un
@@ -1044,7 +1145,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsection{Le séquençage NGS}\label{le-sequencage-ngs}
   
   Le terme séquençage de l'ADN fait référence à l'ensemble des techniques
-  permettant de déterminer l'ordre des nucléotides A,T,C et G de
+  permettant de déterminer l'ordre des nucléotides A, T, C et G de
   l'intégralité ou d'une partie d'une molécule d'ADN. Avant de parler des
   nouvelles technologies de séquençage (NGS) faisons un bref historique du
   séquençage de l'ADN. En 1977 Frederick Sanger développe une technologie
@@ -1083,7 +1184,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \ldots{} obtenus par Sanger (\textbf{Figure :} \ref{fig:readPerRun}),
   c'est pour cela que les résultats du séquençage NGS sont appelés des
   \emph{reads} courts ou \emph{short reads}.\\
-  Étant donnée que le NGS produit à l'heure actuelle des \emph{reads}
+  Étant donné que le NGS produit à l'heure actuelle des \emph{reads}
   courts la notion de couverture est importante et représente l'un des
   critère majeur à considérer dans l'analyse des données (D. Sims,
   Sudbery, Ilott, Heger, \& Ponting, 2014). La couverture est définie
@@ -1143,8 +1244,8 @@ class (for LaTeX) and the R bookdown package, in general.
   Dans la plupart des technologies, la phase de séquençage est précédée
   par une étape d'amplification de l'ADN. Cette amplification se fait dans
   la grande majorité des cas sur une surface solide excepté pour la PCR en
-  émulation qui s'effectue en phase aqueuse. Elle permet d'obtenir dans
-  une région définie plusieurs milliers de copie du même fragment d'ADN,
+  émulsion qui s'effectue en phase aqueuse. Elle permet d'obtenir dans une
+  région définie plusieurs milliers de copie du même fragment d'ADN,
   appelés des clones. Cette étape assure que le signal émis lors du
   séquençage pourra être distingué du bruit. Chacun de ces \emph{spots}
   d'amplification appelés aussi centre de réaction, se retrouve donc être
@@ -1209,7 +1310,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS]{Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS d'après [@Goodwin2016] : **a** : PCR en émultion. **b** : amplification par pont. **c** : Amplification par modèle mobile. **d** : }\label{fig:ngsampli}
+  \caption[Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS]{Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS d'après [@Goodwin2016] : **a** : PCR en émulsion. **b** : amplification par pont. **c** : Amplification par modèle mobile. **d** : }\label{fig:ngsampli}
   \end{figure}
   
   \subsubsection{La réaction de séquence}\label{la-reaction-de-sequence}
@@ -1226,7 +1327,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     \textbf{Séquençage par synthèse} (SBS) : Ce type de séquençage
     regroupe l'ensemble des méthodes utilisant l'ADN polymérase pour
-    synthetiser de l'ADN. En 2016, Sahra Goodwin et ses collègues ont
+    synthétiser de l'ADN. En 2016, Sahra Goodwin et ses collègues ont
     différentiés deux catégories de séquençage par synthèse (Goodwin,
     McPherson, \& McCombie, 2016) :
   
@@ -1242,13 +1343,13 @@ class (for LaTeX) and the R bookdown package, in general.
       parlera de groupement \(\mathrm{3'-bloqué}\). Le processus est
       initialisé une amorce est liée au fragment d'ADN et permettra
       l'initialisation de la polymerisation. À chaque cycle, un mixe
-      comprenant l'ensemble des quatres de desoxynucléotides (dNTPs),
-      préalablement labelisés par uyn fluorophore et
-      \(\mathrm{3'-bloqué}\) sont mis en contact du fragment. Après
-      l'incorporation d'un unique dNTP au fragment, les dNATP non liés
-      sont éliminée et la nature du dNTP ajouté est identifé grace à son
-      fluorophore. Le fluorophore et le groupement \(\mathrm{3'-bloqué}\)
-      sont retirés permettant ainsi à un nouveau cycle de commencer.
+      comprenant l'ensemble des quatre de desoxynucléotides (dNTPs),
+      préalablement labélisés par un fluorophore et \(\mathrm{3'-bloqué}\)
+      sont mis en contact du fragment. Après l'incorporation d'un unique
+      dNTP au fragment, les dNATP non liés sont éliminée et la nature du
+      dNTP ajouté est identifé grace à son fluorophore. Le fluorophore et
+      le groupement \(\mathrm{3'-bloqué}\) sont retirés permettant ainsi à
+      un nouveau cycle de commencer.
     \end{enumerate}
   \end{enumerate}
   
@@ -1329,7 +1430,7 @@ class (for LaTeX) and the R bookdown package, in general.
   recherche de variants dans le génome humain (Wold \& Myers, 2007, M. Q.
   Yang et al. (2009)). Ces techniques ont été appliquées dans différents
   contextes, notamment la métagénomique (J. Qin et al., 2010), la
-  détéction de SNPs (Van Tassell et al., 2008) et de variants structuraux
+  détection de SNPs (Van Tassell et al., 2008) et de variants structuraux
   (Alkan et al., 2010, Medvedev, Stanciu, \& Brudno (2009)) mais également
   dans des études portant sur la méthylation de l'ADN (K. H. Taylor et
   al., 2007), l'analyse de l'expression des ARNs messagers (Sultan et al.,
@@ -1348,17 +1449,17 @@ class (for LaTeX) and the R bookdown package, in general.
   a engendrée de nouvelles problématiques qui freinent les biologistes
   dans leurs recherches.
   
-  \subsection{Les données fournies pa le
-  NGS}\label{les-donnees-fournies-pa-le-ngs}
+  \subsection{Les données fournies par le
+  NGS}\label{les-donnees-fournies-par-le-ngs}
   
   \subsubsection{\texorpdfstring{Un \emph{read} c'est quoi
   ?}{Un read c'est quoi ?}}\label{un-read-cest-quoi}
   
-  Après la phase d'amplification, chaque clone est analyser puis, la
-  séquence composant chacun de ces clone est déterminée. La taille de
-  cette séquence varie en fonction des plateforme de séquençage mais est
+  Après la phase d'amplification, chaque clone est analysé puis, la
+  séquence composant chacun de ce clone est déterminée. La taille de cette
+  séquence varie en fonction des plateformes de séquençage mais est
   généralement comprise entre 40 et 150 pb pour le NGS (\textbf{Figure :
-  }\ref{fig:readPerRun}). deux types de \emph{reads} :
+  }\ref{fig:readPerRun}). Il existe deux types de \emph{reads} :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1368,8 +1469,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     \textbf{\emph{Read paired-end} }: Avec le séquençage de
     \emph{paired-end reads} les deux extrémités (les \emph{ends}) du
-    fragmant d'ADN est desormais séquencée. La distance séparant les deux
-    extrémité du \emph{read} étant connue, cela permet aux aligneur
+    fragment d'ADN est désormais séquencée. La distance séparant les deux
+    extrémités du \emph{read} étant connue, cela permet aux aligneurs
     d'utiliser cette information afin d'améliorer leur précision,
     notamment dans les zones répétées (H. Li et al., 2008). En plus de
     SNP, ce format permet de mettre en évidence des variants structuraux
@@ -1379,24 +1480,24 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsubsection{Le format FASTQ}\label{le-format-fastq}
   
   Le format FASTQ (\textbf{Figure : }\ref{fig:fastqformat}) est le format
-  de donnée le plus courrament retourné par les séquenceur haut-débit à
-  l'heure actuelle. Sa création est cependant anterieur à l'emmergence du
+  de donnée le plus couramment retourné par les séquenceur haut-débit à
+  l'heure actuelle. Sa création est cependant antérieure à l'émergence du
   NGS puisqu'il fut inventé à la fin du XX\(^{ième}\) par Jim Mullikin au
   \href{https://fr.wikipedia.org/wiki/Wellcome_Trust_Sanger_Institute}{Wellcome
   Trust Sanger Institute} alors que le séquençage commencait à prendre de
   l'ampleur grâce à des projets tel que le
   \href{https://fr.wikipedia.org/wiki/Projet_G\%C3\%A9nome_Humain}{Projet
-  Génome Humain}. La quantité de donné générées par ces programme à
-  nécécité une analyse automatisé, c'est ainsi que chaque base séquencée
+  Génome Humain}. La quantité de donné générées par ces programmes à
+  nécessité une analyse automatisé, c'est ainsi que chaque base séquencée
   s'est vue associé un score de qualité appelé \emph{Phred-score}. Chaque
   séquence générait ainsi deux fichiers, un fichier FASTA contenant les
   séquences et un fichier QUAL contenant les scores \emph{Phred} associés
-  à chaque bases du fichier FASTA Cock2009. Plus tard, afin de n'avoir à
+  à chaque base du fichier FASTA Cock2009. Plus tard, afin de n'avoir à
   manipuler qu'un seul fichier, les fichiers FASTA et QUAL furent
-  fusionnés en ce que l'on appelle desormais le fichier FASTQ. Ce format
-  est aujourd'huis le plus utilisé par les différents séquenceur on peut
-  notter certaines différences dans les formats FASTQ provenant des
-  différentes plateforme puisqu'à l'époque, aucune spécification
+  fusionnés en ce que l'on appelle désormais le fichier FASTQ. Ce format
+  est aujourd'hui le plus utilisé par les différents séquenceurs on peut
+  noter certaines différences dans les formats FASTQ provenant des
+  différentes plateformes puisqu'à l'époque, aucune spécification
   officielle n'avait été donnée (Cock, Fields, Goto, Heuer, \& Rice,
   2009).
   
@@ -1422,7 +1523,7 @@ class (for LaTeX) and the R bookdown package, in general.
   Consortium human build 37}) a été créés à partir de 13 volontaires
   anonymes New-Yorkais. Dès lors, cette référence servira de patron aux
   aligneurs afin qu'ils replacent correctement les différents \emph{reads}
-  des l'individus séquencés. Cette étape peut être comparée à la
+  des individus séquencés. Cette étape peut être comparée à la
   reconstruction d'un puzzle dans laquelle les \emph{reads} seraient les
   pièces et le génome de référence le modèle. Elle constitue probablement
   l'étape la plus importante de l'analyse des données issues du séquençage
@@ -1461,18 +1562,18 @@ class (for LaTeX) and the R bookdown package, in general.
   algorithmes différents ont émergés ces dernières années pour répondre à
   cette problématique. Parmi les plus connus on note SAMtools (H. Li et
   al., 2009), Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC)
-  (McKenna et al., 2010), Freebayes, SOAPindel et TVC . Les quatre
-  premiers cités, peuvent être utilisés pour analyser des données
-  provenant de tout type de plateforme de séquençage contrairement à TVC
-  qui a été développé spécifiquement pour les données provenant de Ion
-  Proton. Les données issues de NGS peuvent présenter un taux d'erreur
-  important. Ce taux d'erreur est multifactoriel et inclus notamment les
-  erreurs de l'alignement. L'un des éléments clef à prendre en compte pour
-  pouvoir effectuer un appel de qualité est la couverture de la position
-  appelée (D. Sims et al., 2014). Cependant, malgré la prise en compte de
-  cet élément, l'appel de variants reste un processus difficile souvent
-  lié à plusieurs erreurs. Plusieurs de ces erreurs sont même directement
-  liées à la plateforme de séquençage utilisée en amont, et les différents
+  (McKenna et al., 2010), Freebayes, SOAPindel et TVC. Les quatre premiers
+  cités, peuvent être utilisés pour analyser des données provenant de tout
+  type de plateforme de séquençage contrairement à TVC qui a été développé
+  spécifiquement pour les données provenant de Ion Proton. Les données
+  issues de NGS peuvent présenter un taux d'erreur important. Ce taux
+  d'erreur est multifactoriel et inclus notamment les erreurs de
+  l'alignement. L'un des éléments clef à prendre en compte pour pouvoir
+  effectuer un appel de qualité est la couverture de la position appelée
+  (D. Sims et al., 2014). Cependant, malgré la prise en compte de cet
+  élément, l'appel de variants reste un processus difficile souvent lié à
+  plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées
+  à la plateforme de séquençage utilisée en amont, et les différents
   logiciels ne présentent pas les mêmes performances en fonction de ces
   différentes plateforme (Hwang, Kim, Lee, \& Marcotte, 2015), c'est
   pourquoi il convient d'adapter le logiciel d'appel en fonction de la
@@ -1516,7 +1617,7 @@ class (for LaTeX) and the R bookdown package, in general.
   concordance était cette fois seulement de 26,8\% pour les indels non
   retrouvés par les 3 \emph{caller} (O'Rawe et al., 2013). Ces résultats
   sont cependant à pondérés avec une étude de 2015 comparant 4
-  \emph{caller} et montrant que 91,7\% des SNVs séqeuencés sur une
+  \emph{caller} et montrant que 91,7\% des SNVs séquencés sur une
   plateforme Illumina étaient appelés par 3 \emph{caller}, cependant, pour
   les variants séquencés sur Ion Proton, seulement 27,3\% des variants
   étaient appelés par au moins 3 \emph{caller} et 57,4\% des variants
@@ -1526,18 +1627,18 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsection{L'annotation des variants, filtrage et
   priorisation}\label{lannotation-des-variants-filtrage-et-priorisation}
   
-  Traditionellement, les scientifiques developpaient leur expertise dans
-  un nombre de pathologie et de gènes associés limité. L'emmergence du NGS
-  a totallement remis en cause cette pratique, dès lors qu'il est
-  desormais courrant de retrouver pus de 30.000 variants différents par
-  exome. Afin de pouvoir lier un variant à une pathologie, il est desormai
+  Traditionnellement, les scientifiques développaient leur expertise dans
+  un nombre de pathologie et de gènes associés limité. L'émergence du NGS
+  a totalement remis en cause cette pratique, dès lors qu'il est désormais
+  courant de retrouver pus de 30.000 variants différents par exome. Afin
+  de pouvoir lier un variant à une pathologie, il est désormais
   indispensable d'annoter cet ensemble de variant, c'est à dire d'associer
   à ces variants l'ensembles des informations qui les caractérisent afin
-  de pouvoir les replacer dans leur contexte biologique. Ces information
+  de pouvoir les replacer dans leur contexte biologique. Ces informations
   serviront ensuite d'indicateur afin filtrer ou prioriser un variant.
-  Cette dernière étape de l'analyse est elle aussi crutiale puisqu'elle
-  permet de réduire le nombre de variant à considérer \ldots{}.. On peut
-  généralement distinguer deux niveau d'annotation d'un variant :
+  Cette dernière étape de l'analyse est elle aussi cruciale puisqu'elle
+  permet de réduire le nombre de variant à considérer \ldots{}. On peut
+  généralement distinguer deux niveaux d'annotation d'un variant :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1550,21 +1651,21 @@ class (for LaTeX) and the R bookdown package, in general.
     \def\labelenumii{\alph{enumii}.}
     \tightlist
     \item
-      \textbf{Information issues des résultats du séquençage} : la
+      \textbf{Informations issues des résultats du séquençage} : la
       couverture du variant ainsi que la qualité qui lui est associée
-      peuvent permetrre de considérer un variant comme étant. Le génotype
-      associé à ce variant est égallement une information importante.\\
+      peuvent permettre de considérer un variant comme étant. Le génotype
+      associé à ce variant est également une information importante.\\
     \item
       \textbf{La fréquence du variant dans la population générale} :
-      l'emmergence du séquençage haut-débit a permi de de gros consortium
-      tel que ESP6500 {[}CITATION{]}, 1KG {[}CITATION{]}. Ces consortium
+      l'émergence du séquençage haut-débit a permis de de gros consortium
+      tel que ESP6500 {[}CITATION{]}, 1KG {[}CITATION{]}. Ces consortiums
       on put mettre à disposition du public de données de séquençage
       exomique de 6503 individus pour ESP et de 2504 pour la phase 3 du
       1000Genomes. On peut également noter l'\emph{Exome Aggregate
       Consortium} (ExAC) (Lek et al., 2016) qui n'a effectuer aucun
-      séquençage mais qui a récupérer les données de plusieurs gros jeux
+      séquençage mais qui à récupérer les données de plusieurs gros jeux
       (notamment 1000Genome et ESP) afin de leur appliquer la même analyse
-      bioinformatique harmonysant ainsi les données provenant de 60.706
+      bioinformatique harmonisant ainsi les données provenant de 60.706
       individus non apparentés. Cette masse d'information permet de se
       faire une idée de la fréquence d'un variant dans la population
       générale et même au sein de sous population humaine.\\
@@ -1573,17 +1674,17 @@ class (for LaTeX) and the R bookdown package, in general.
       phénotype-génotype, les chercheurs se limitent au variant
       chevauchant des transcrits codant pour une protéine. Il est donc
       important de savoir l'impact d'un variant sur ce transcrit, c'est à
-      dire si le variant va causer une mutation synonymes, un
+      dire si le variant va causer une mutation synonyme, un
       faux-sens\ldots{} Des logiciels tel que \emph{Variant Effect
       Predictor} (VEP) (W. McLaren et al., 2016), SnpEff (Cingolani et
-      al., 2012) ou encore ANNOVAR {[}@{]} vont prédire l'impacte qu'aura
+      al., 2012) ou encore ANNOVAR {[}@{]} vont prédire l'impact qu'aura
       un variant sur les différents transcrits qu'il chevauche. D'autre
       logiciel tel que SIFT (P. Kumar, Henikoff, \& Ng, 2009), PROVEAN (Y.
       Choi, Sims, Murphy, Miller, \& Chan, 2012), Polyphen2, ou encore
       CADD vont chercher à prédire la pathogénicité de ce variant, c'est à
       dire la probabilité que ce variant soit délétère pour l'individu qui
-      le porte. Bien que cette inforlation soit important, elle est à
-      pondérer étant donné le peut de concordance qu'il existe entre les
+      le porte. Bien que cette information soit important, elle est à
+      pondérer étant donné le peu de concordance qu'il existe entre les
       prédictions de ces différents logiciel (\textbf{Figure :}
       \ref{fig:vennpred}).
     \end{enumerate}
@@ -1605,17 +1706,17 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     \textbf{Au niveau de l'unité génétique} : DÉCRIRE UNITÉ GÉNÉTIQUE
     (gène, transcrit). L'annotation au niveau de l'unité génétique
-    consiste à récupérer l'ensemble des information disponible non plus
-    sur le variant uniquement mais sur la ou les unités génétique qu'il
+    consiste à récupérer l'ensemble des informations disponible non plus
+    sur le variant uniquement mais sur la ou les unités génétiques qu'il
     impacte. Ce ``dézoom'' permet d'ajouter des informations
     complémentaires particulièrement utile notamment lorsque peut
     d'information sont disponibles sur le variant lui-même. En pratique,
     la plupart des variants connues pour impliquer une pathologie sont des
-    variants privés, c'est à dire spécifique à une famille ou un individus
-    limitant ainsi la quantiter d'information disponible sur ce variant.
+    variants privés, c'est à dire spécifique à une famille ou un individu
+    limitant ainsi la quantité d'information disponible sur ce variant.
     Élargir l'annotation au niveau des unités génétiques impactés par des
     variants permet d'augmenter considérablement la quantité d'information
-    disponible et permet donc d'améliorer la capaciter des alogrithme à
+    disponible et permet donc d'améliorer la capacité des algorithmes à
     filtrer et / ou prioriser les variants rendant donc les analyses plus
     efficaces. On peut relever certains logiciels tel que le \emph{Protein
     ANalysis THrough Evolutionary Relationships} (PANTHER) (Mi et al.,
@@ -1623,28 +1724,28 @@ class (for LaTeX) and the R bookdown package, in general.
     leurs fonctions moléculaires, des processus biologiques et des voies
     de signalisation dans lesquels ils sont impliqués. On peut également
     noter \emph{the Human Phenotype Ontology project} (HPO) (Köhler et
-    al., 2014) qui fournit une classification (À completer). Plus
-    récemment, ont a pu voir emmerger des ``scores mutationnel'' tel que
+    al., 2014) qui fournit une classification (À compléter). Plus
+    récemment, on a pu voir émerger des ``scores mutationnel'' tel que
     RVIS (Petrovski et al., 2013) ou encore le pLI (Lek et al., 2016). En
     se basant sur les bases de données telle que ESP ou encore ExAC, ces
-    scores permettent de classer les gènes en fonction de leur tolérence
+    scores permettent de classer les gènes en fonction de leur tolérance
     (ou intolérance) aux variations avec l'idée sous-jacente que ``les
-    gènes impliqués dans des pathologies à transmission Mendeliennes''
+    gènes impliqués dans des pathologies à transmission Mendéliennes''
     devraient être moins tolérant aux variations que les autres.
   \end{enumerate}
   
-  Comme nous l'avons vu, l'accumulation de ces information est extrêmement
-  importante puisqu'elle permet aux biologistes de faire face à la masse
-  de données générés par le NGS l'aidant ainsi dans ses prises de
-  décisions. Il est à noter que la plupart de ces informations sont
-  extrêment dépendantes du jeux de gènes utilisés, les prédictions seront
+  Comme nous l'avons vu, l'accumulation de cette information est
+  extrêmement importante puisqu'elle permet aux biologistes de faire face
+  à la masse de données générés par le NGS l'aidant ainsi dans ses prises
+  de décisions. Il est à noter que la plupart de ces informations sont
+  extrêmes dépendantes du jeu de gènes utilisés, les prédictions seront
   donc différentes si l'on se base les gènes RefSeq, Ensembl ou UCSC (D.
   J. McCarthy et al., 2014,S. Zhao \& Zhang (2015)) bien que les gènes du
   \emph{Consensus Coding Sequence project} (CCDS) soient bien représentés
   par ces trois listes (K. D. Pruitt et al., 2009). De même, pour une même
-  liste de gène, de nombreuse différences seront observées en fonction du
+  liste de gêne, de nombreuses différences seront observées en fonction du
   ou des logiciels de prédiction utilisés (D. J. McCarthy et al., 2014,
-  Salgado2016).
+  Salgado, Bellgard, Desvignes, \& B??roud (2016)).
   
   \subsection{Conclusion NGS}\label{conclusion-ngs}
   
@@ -1661,32 +1762,32 @@ class (for LaTeX) and the R bookdown package, in general.
   restent en dessous des besoins créés par NGS (J. D. McPherson, 2009).
   Cette masse de données produite, à l'origine du succès du séquençage
   haut-débit dans le domaine de la génomique et de la post-génomique, se
-  retrouve desormais être un frein dans la compréhension et
-  l'interprétation des réseaux de gènes et leurs implication dans des
+  retrouve désormais être un frein dans la compréhension et
+  l'interprétation des réseaux de gènes et leurs implications dans des
   pathologies, la limitation de cette technologie n'étant plus le
   séquençage d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt
   l'analyse et l'interprétation des donnée générée. Le processus allant de
   l'extraction de l'ADN à l'identification d'un variant responsable d'une
   pathologie comprend de nombreuses étapes apportant avec elles leur lot
-  d'erreurs. Bien que dans chacune de ces phases, de nombeux acteurs
-  soient en concurence et cherchent à atteindre une solution idéale,
+  d'erreurs. Bien que dans chacune de ces phases, de nombreux acteurs
+  soient en concurrence et cherchent à atteindre une solution idéale,
   celle-ci n'a toujours pas été trouvé et la prolifération des logiciels
-  et autres algorithmes d'analyses, bien que nécéssaire, s'ajoute à la
+  et autres algorithmes d'analyses, bien que nécessaire, s'ajoute à la
   confusion.
   
-  Malgrès les dizaine de milliers d'exomes et de génomes ayant été jusqu'à
+  Malgré les dizaines de milliers d'exomes et de génomes ayant été jusqu'à
   présent étudiés, notre compréhension des mécanismes moléculaire qui
-  sous-tendent la variété génomique huamine reste limité, et ce
+  sous-tendent la variété génomique humaine reste limité, et ce
   particulièrement dans le contexte de l'analyse de pathologies
   génétiques. En effet, à l'heure actuelle, plus de 3700 pathologie à
-  transmission Mendelienne ont été caractérisée mais un nombre similaire
-  ont toujours une cause inconnue (Amberger, Bocchini, \& Hamosh, 2011).
-  L'ellucidation de ces mystères passera probablement par une
-  harmonysation de méthodes de production des données ainsi que par
+  transmission Mendélienne ont été caractérisée mais un nombre similaire
+  ont toujours une cause inconnue (Amberger, Bocchini, \& Hamosh,
+  2011).L'élucidation de ces mystères passera probablement par une
+  harmonisation de méthodes de production des données ainsi que par
   l'amélioration des techniques d'analyses.
   
-  \chapter{Investigation génétique et physiologique de la
-  globozoospermie}\label{globo}
+  \hypertarget{globo}{\chapter{Investigation génétique et physiologique de
+  la globozoospermie}\label{globo}}
   
   \chapter{MutaScript}\label{mutascript}
   
@@ -1751,8 +1852,8 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \section{Matériel \& Méthodes}\label{materiel-methodes}
   
-  \subsection{Récuération des données ExAC, filtrage et pré
-  analyse}\label{recueration-des-donnees-exac-filtrage-et-pre-analyse}
+  \subsection{Récupération des données ExAC, filtrage et pré
+  analyse}\label{recuperation-des-donnees-exac-filtrage-et-pre-analyse}
   
   \section{Résultats}\label{resultats}
   
@@ -1864,6 +1965,19 @@ class (for LaTeX) and the R bookdown package, in general.
   Klinefelter syndrome (47,XXY). \emph{Acta Paediatrica}, \emph{100}(6),
   807--813. \url{http://doi.org/10.1111/j.1651-2227.2011.02274.x}
   
+  \hypertarget{ref-Chemes2010}{}
+  Chemes, H. E., \& Rawe, V. Y. (2010). The making of abnormal
+  spermatozoa: cellular and molecular mechanisms underlying pathological
+  spermiogenesis. \emph{Cell and Tissue Research}, \emph{341}(3),
+  349--357. \url{http://doi.org/10.1007/s00441-010-1007-3}
+  
+  \hypertarget{ref-Chemes1987}{}
+  Chemes, H. E., Carizza, C., Scarinci, F., Brugo, S., Neuspiller, N., \&
+  Schwarsztein, L. (1987). Lack of a head in human spermatozoa from
+  sterile patients: a syndrome associated with impaired fertilization.
+  \emph{Fertility and Sterility}, \emph{47}(2), 310--6. Retrieved from
+  \url{http://www.ncbi.nlm.nih.gov/pubmed/3545911}
+  
   \hypertarget{ref-Cho2001}{}
   Cho, C., Willis, W. D., Goulding, E. H., Jung-Ha, H., Choi, Y. C.,
   Hecht, N. B., \& Eddy, E. M. (2001). Haploinsufficiency of protamine-1
@@ -1916,12 +2030,32 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{Human Reproduction Update}, \emph{16}(3), 231--245.
   \url{http://doi.org/10.1093/humupd/dmp048}
   
+  \hypertarget{ref-Dam2007a}{}
+  Dam, A. H., Koscinski, I., Kremer, J. A., Moutou, C., Jaeger, A.-S.,
+  Oudakker, A. R., \ldots{} Viville, S. (2007). Homozygous Mutation in
+  SPATA16 Is Associated with Male Infertility in Human Globozoospermia.
+  \emph{The American Journal of Human Genetics}, \emph{81}(4), 813--820.
+  \url{http://doi.org/10.1086/521314}
+  
+  \hypertarget{ref-Dam2006}{}
+  Dam, A., Feenstra, I., Westphal, J., Ramos, L., Golde, R. van, \&
+  Kremer, J. (2006). Globozoospermia revisited. \emph{Human Reproduction
+  Update}, \emph{13}(1), 63--75.
+  \url{http://doi.org/10.1093/humupd/dml047}
+  
   \hypertarget{ref-DePristo2011}{}
   DePristo, M. A., Banks, E., Poplin, R., Garimella, K. V., Maguire, J.
   R., Hartl, C., \ldots{} Pritchard, E. (2011). A framework for variation
   discovery and genotyping using next-generation DNA sequencing data.
   \emph{Nature Genetics}, \emph{43}(5), 491--498.
   \url{http://doi.org/10.1038/ng.806}
+  
+  \hypertarget{ref-Dieterich2007}{}
+  Dieterich, K., Soto Rifo, R., Faure, A. K., Hennebicq, S., Ben Amar, B.,
+  Zahi, M., \ldots{} Ray, P. F. (2007). Homozygous mutation of AURKC
+  yields large-headed polyploid spermatozoa and causes male infertility.
+  \emph{Nature Genetics}, \emph{39}(5), 661--5.
+  \url{http://doi.org/10.1038/ng2027}
   
   \hypertarget{ref-Eddy2007}{}
   Eddy, E. M. (2007). The scaffold role of the fibrous sheath.
@@ -1940,6 +2074,14 @@ class (for LaTeX) and the R bookdown package, in general.
   during meiosis. \emph{Development (Cambridge, England)}, \emph{113}(3),
   779--788. Retrieved from
   \url{http://dev.biologists.org/content/develop/113/3/779.full.pdf}
+  
+  \hypertarget{ref-Escoffier2016}{}
+  Escoffier, J., Lee, H. C., Yassine, S., Zouari, R., Martinez, G.,
+  Karaouzène, T., \ldots{} Arnoult, C. (2016). Homozygous mutation of
+  PLCZ1 leads to defective human oocyte activation and infertility that is
+  not rescued by the WW-binding protein PAWP. \emph{Human Molecular
+  Genetics}, \emph{25}(5), 878--91.
+  \url{http://doi.org/10.1093/hmg/ddv617}
   
   \hypertarget{ref-Flicek2009}{}
   Flicek, P., \& Birney, E. (2009). Sense from sequence reads: methods for
@@ -2004,6 +2146,13 @@ class (for LaTeX) and the R bookdown package, in general.
   Basis of Disease}, \emph{1822}(12), 1913--1920.
   \url{http://doi.org/10.1016/j.bbadis.2012.07.007}
   
+  \hypertarget{ref-Harbuz2011}{}
+  Harbuz, R., Zouari, R., Pierre, V., Ben Khelifa, M., Kharouf, M.,
+  Coutton, C., \ldots{} Ray, P. F. (2011). A recurrent deletion of DPY19L2
+  causes infertility in man by blocking sperm head elongation and acrosome
+  formation. \emph{American Journal of Human Genetics}, \emph{88}(3),
+  351--61. \url{http://doi.org/10.1016/j.ajhg.2011.02.007}
+  
   \hypertarget{ref-Hermo2010}{}
   Hermo, L., Pelletier, R. M., Cyr, D. G., \& Smith, C. E. (2010). Surfing
   the wave, cycle, life history, and genes/proteins expressed by
@@ -2012,6 +2161,19 @@ class (for LaTeX) and the R bookdown package, in general.
   pellucida and egg plasma membrane. \emph{Microscopy Research and
   Technique}, \emph{73}(4), 320--363.
   \url{http://doi.org/10.1002/jemt.20784}
+  
+  \hypertarget{ref-Heytens2009}{}
+  Heytens, E., Parrington, J., Coward, K., Young, C., Lambrecht, S., Yoon,
+  S.-Y., \ldots{} De Sutter, P. (2009). Reduced amounts and abnormal forms
+  of phospholipase C zeta (PLCzeta) in spermatozoa from infertile men.
+  \emph{Human Reproduction (Oxford, England)}, \emph{24}(10), 2417--28.
+  \url{http://doi.org/10.1093/humrep/dep207}
+  
+  \hypertarget{ref-Holstein1973}{}
+  Holstein, A. F., Schirren, C., \& Schirren, C. G. (1973). Human
+  spermatids and spermatozoa lacking acrosomes. \emph{Journal of
+  Reproduction and Fertility}, \emph{35}(3), 489--91. Retrieved from
+  \url{http://www.ncbi.nlm.nih.gov/pubmed/4760149}
   
   \hypertarget{ref-Horner2009}{}
   Horner, D. S., Pavesi, G., Castrignano', T., Meo, P. D. O. de, Liuni,
@@ -2143,6 +2305,13 @@ class (for LaTeX) and the R bookdown package, in general.
   motility. \emph{Biology of Reproduction}, \emph{10}(5), 533--42.
   Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/4142752}
   
+  \hypertarget{ref-Lu2006}{}
+  Lu, L., Lin, M., Xu, M., Zhou, Z.-M., \& Sha, J.-H. (2006). Gene
+  functional research using polyethylenimine-mediated in vivo gene
+  transfection into mouse spermatogenic cells. \emph{Asian Journal of
+  Andrology}, \emph{8}(1), 53--59.
+  \url{http://doi.org/10.1111/j.1745-7262.2006.00089.x}
+  
   \hypertarget{ref-Lunter2011}{}
   Lunter, G., \& Goodson, M. (2011). Stampy: A statistical algorithm for
   sensitive and fast mapping of Illumina sequence reads. \emph{Genome
@@ -2224,6 +2393,12 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{Nature Reviews. Genetics}, \emph{12}(6), 443--51.
   \url{http://doi.org/10.1038/nrg2986}
   
+  \hypertarget{ref-Nistal}{}
+  Nistal, M., Paniagua, R., \& Herruzo, A. (1978). Multi-tailed
+  spermatozoa in a case with asthenospermia and teratospermia.
+  \emph{Virchows Archiv B}, \emph{26}(1), 111--118.
+  \url{http://doi.org/10.1007/bf02889540}
+  
   \hypertarget{ref-Ogura1994}{}
   Ogura, a, Matsuda, J., \& Yanagimachi, R. (1994). Birth of normal young
   after electrofusion of mouse oocytes with round spermatids.
@@ -2255,6 +2430,13 @@ class (for LaTeX) and the R bookdown package, in general.
   Pregnancies after intracytoplasmic injection of single spermatozoon into
   an oocyte. \emph{Lancet (London, England)}, \emph{340}(8810), 17--8.
   Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/1351601}
+  
+  \hypertarget{ref-Panidis2001}{}
+  Panidis, D., Rousso, D., Kourtis, A., Gianoulis, C., Papathanasiou, K.,
+  \& Kalachanis, J. (2001). Headless spermatozoa in semen specimens from
+  fertile and subfertile men. \emph{The Journal of Reproductive Medicine},
+  \emph{46}(11), 947--50. Retrieved from
+  \url{http://www.ncbi.nlm.nih.gov/pubmed/11762149}
   
   \hypertarget{ref-Papic}{}
   Papic, Z., Katona, G., \& Skrabalo, Z. (1988). The cytologic
@@ -2303,6 +2485,13 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{Bioinformatics}, \emph{27}(20), 2790--2796.
   \url{http://doi.org/10.1093/bioinformatics/btr477}
   
+  \hypertarget{ref-Salgado2016}{}
+  Salgado, D., Bellgard, M. I., Desvignes, J. P., \& B??roud, C. (2016).
+  How to Identify Pathogenic Mutations among All Those Variations: Variant
+  Annotation and Filtration in the Genome Sequencing Era. \emph{Human
+  Mutation}, \emph{37}(12), 1272--1282.
+  \url{http://doi.org/10.1002/humu.23110}
+  
   \hypertarget{ref-Sasagawa}{}
   Sasagawa, I., \& Yanagimachi, R. (1997). Spermatids from mice after
   cryptorchid and reversal operations can initiate normal embryo
@@ -2319,6 +2508,12 @@ class (for LaTeX) and the R bookdown package, in general.
   Schenck, U., \& Schill, W. B. (n.d.). Cytology of the human seminiferous
   epithelium. \emph{Acta Cytologica}, \emph{32}(5), 689--96. Retrieved
   from \url{http://www.ncbi.nlm.nih.gov/pubmed/3421017}
+  
+  \hypertarget{ref-Sen2009}{}
+  Sen, C. G. S., Holstein, A. F., \& Schirren, C. (1971). über die
+  Morphogenese rundköpfiger Spermatozoen des Menschen. \emph{Andrologia},
+  \emph{3}(3), 117--125.
+  \url{http://doi.org/10.1111/j.1439-0272.1971.tb02106.x}
   
   \hypertarget{ref-Sims2014}{}
   Sims, D., Sudbery, I., Ilott, N. E., Heger, A., \& Ponting, C. P.
@@ -2457,6 +2652,14 @@ class (for LaTeX) and the R bookdown package, in general.
   bioinformatics. \emph{BMC Genomics}, \emph{10 Suppl 1}, I1.
   \url{http://doi.org/10.1186/1471-2164-10-S1-I1}
   
+  \hypertarget{ref-Yassine2015}{}
+  Yassine, S., Escoffier, J., Abi Nahed, R., Nahed, R. A., Pierre, V.,
+  Karaouzene, T., \ldots{} Arnoult, C. (2015). Dynamics of Sun5
+  localization during spermatogenesis in wild type and Dpy19l2 knock-out
+  mice indicates that Sun5 is not involved in acrosome attachment to the
+  nuclear envelope. \emph{PloS One}, \emph{10}(3), e0118698.
+  \url{http://doi.org/10.1371/journal.pone.0118698}
+  
   \hypertarget{ref-Yu2012}{}
   Yu, J., Chen, Z., Ni, Y., \& Li, Z. (2012). CFTR mutations in men with
   congenital bilateral absence of the vas deferens (CBAVD): a systemic
@@ -2468,6 +2671,12 @@ class (for LaTeX) and the R bookdown package, in general.
   RefSeq, and UCSC annotations in the context of RNA-seq read mapping and
   gene quantification. \emph{BMC Genomics}, \emph{16}(1), 97.
   \url{http://doi.org/10.1186/s12864-015-1308-8}
+  
+  \hypertarget{ref-Zhu2016}{}
+  Zhu, F., Wang, F., Yang, X., Zhang, J., Wu, H., Zhang, Z., \ldots{} Cao,
+  Y. (2016). Biallelic SUN5 Mutations Cause Autosomal-Recessive Acephalic
+  Spermatozoa Syndrome. \emph{The American Journal of Human Genetics},
+  \emph{99}(4), 942--949. \url{http://doi.org/10.1016/j.ajhg.2016.08.004}
 
 
   % Index?

@@ -313,14 +313,26 @@ include_graphics(path = "figure/chromozomeY.png")
 
 Bien que la prévalence de ces anomalies génétiques varie en fonction du phénotype concerné, il est estimé que ces défauts soient seulement retrouvés chez 5% des cas d'infertilité masculine tout phénotype confondus. Cette observation suggère fortement l'implication d'autres gènes encore inconnus dans les différents phénotypes d’infertilité masculine (**Nieschlag et al., 2010 A trouver**).    
 
-#### Les nouveaux gènes 
+#### Les nouveaux gènes  
+
+<!-- cf http://onlinelibrary.wiley.com/doi/10.1111/cge.12905/full -->
+
+1. **Les anomalies morphologiques liées à la tête du spermatozoïdes** :  
+    a. **La macrozoospermie** :  Ce phénotype d'infertilité masculine rare est caractérisé par la présence de 100% des spermatozoïdes de l'éjaculat présentant une tête anormalement grosse ainsi que plusieurs flagelles. Il fut observé pour la première fois en 1978 [@Nistal], mais ce n'est qu'en 2007 q'une explication génétique fut enfin trouvée. Une étude portant sur 14 patients nord Africains a permis d'identifier la délétion c144delC du gène *AURKC* (*Aurora kinase C*) comme responsable du phénotype de l'ensemble des individus de l'étude [@Dieterich2007]. Depuis, d'autres études ont permis d'associer d'autre variants sur ce même gène à ce phénotype [INSERT REF]. Des anomalies du gène *AURKC* seraient ainsi respondable d'environs 83.7% des cas macrozoospermie chez des patients non apparentés [INSERT REF]. Le gène *AURKC*, étant impliqué dans la méiose, conduit lorsqu'il est muté à un dysfonctionement de celle-ci menant à des spermatozoïdes polyploïdes, c'est à dire, portant une quantité de materiel génétique trop important [INSERT REF].    
+    b. **La globozoospermie** : La globozoospermie est aussi un phénotype rare d'infertilité dont la prévalence est estimée à de 0,1%. Il fut dentifié pour la première fois en 1971 et est caractérisé par la présence d'une majorité de spermatozoïde dépourvu d'acrosome dans l'éjaculat empechant ainsi le spermatozoïde de franchir la zone pellucide de l'ovocyte compremettant ainsi la fécondation [@Dam2006, @Sen2009, @Holstein1973]. En 2007, une étude familiale a permis de lier ce phénotype à la mutation c.848G>A dans le gène *SPATA16* (*spermatogenesis-associated protein 16*) [@Dam2007a] dont la protéine va, au cours de la spermatogénèse fusioner avec les vésicules proacrosomales pour former l'acrosome [@Dam2007a, @Lu2006]. Plus tard, en 2011, une étude portant sur 20 patients tunisiens permit d'identifier une délétion homozygote de 200 kb emportant la totalité du gène *DPY19L2* (*Dpy-19 Like 2*) chez 15 des 20 patients [@Harbuz2011]. cf [globo](#globo)  
+    c. **Spermatozoïdes acéphaliques** :  Ce phénotype reporté plusieurs fois [@Chemes2010, @Panidis2001, @Chemes1987] caractérise les patients présentant des spermatozoïdes déporvu de tête dans leur éjaculat. Une étude récente a put lier ce phénotype à une mutation c.824C>T homozygote ainsi qu'à deux variants hétérozygotes composites c.1006C>T et c.485T>A dans le gène *SUN5* [@Zhu2016] qui avait précédement été décrit comme localisant à la jonction tête / flagelle du spermatozoïde [@Yassine2015].    
+2. **Les anomalies liées au flagelle et à la motilité** :  
+    a. **Phénotype MMAF** :  
+    b. **Asthenozoospermia** :  
+3. **Les échec de fécondation du spermatozoïde** :  **PETITE EXPLICATION DE CE QU'EST L'ACTIVATION OVOCYTAIRE**. **EXPLIQUER LA FANCTION DE PLCZ1**. Plusieurs cas d'echec d'activation ovocitaire ont été liés à l'bscence ou la mauvaise localisation de la protéine *PLCZ1* (*phospholipase C Zeta 1*). Malgré celà, aucune preuve génétique directe n'avait été reporté jusque récemment où deux mutations au sein du gène *PLCZ1* furent retrouvés chez un patient [@Heytens2009] et un peu plus tard une mutation homozygote chez deux frères consanguins [@Escoffier2016].  
+
 
 
 \newpage  
 
 ## Les techniques d'analyses génétiques
 
-L'acide désoxyribonucléique (ADN) a été identifié comme étant le porteur de l'information génétique par Oswald Theodore Avery en 1944. Sa structure en double hélice composée par quatre bases, la thymine (T), l'adénine (A), la guanine (G) et la cytosine (C) fut caractérisée en 1953 par James D. Watson et Francis Crick. **Petite intro à terminer !!!**  
+L'acide désoxyribonucléique (ADN) a été identifié comme étant le porteur de l'information génétique par Oswald Theodore Avery en 1944. Sa structure en double hélice composée par quatre bases, la thymine (T), l'adénine (A), la guanine (G) et la cytosine (C) fut caractérisée en 1953 par James D. Watson et Francis Crick. Cependant, l'existence "d'entités d'information génétique discrètes" que sont les gènes fut suggéré dès la deuxième moitié du XIX$^{ième}$ siècle grâce aux travaux de Gregor Mendel portant sur l'hérédité de certains traits chez le poids. Depuis, de nombreuses méthodes permettant de lier le phénotype d'un individu à son génotype on vu le jour au gré des améliorations technologiques.     
 
 ### Approche "gènes candidats"  
 
