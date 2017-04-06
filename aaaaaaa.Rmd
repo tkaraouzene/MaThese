@@ -1,0 +1,25 @@
+---
+title: "Untitled"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r pressure, echo=FALSE,warning=FALSE}
+library(dplyr)
+
+
+name <- data_frame(name = c("sp1","sp2"))
+
+name$pic <- sprintf('![]("/home/karaout/MaThese/index/figure/%s.png)',name$name)
+
+knitr::kable(name)
+
+
+```
+

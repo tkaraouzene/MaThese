@@ -6,7 +6,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## La spermatogénèse  
 
-La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés ([@Gnessi1997, @KIERSZENBAUM1994], **Sharpe1994 à trouver !!!**). C'est au cours de celle-ci qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la méiose) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continue dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes du cycle spermatogénétique a une durée fixe et constante selon les espèces (**Table : **\@ref(tab:spermatotime)).   
+La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés [@Gnessi1997, @KIERSZENBAUM1994], **Sharpe1994 à trouver !!!**. C'est au cours de celle-ci qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la [méiose](#meiose)) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continue dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïde est d'environ 45 million par testicules [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes du cycle spermatogénétique a une durée fixe et constante selon les espèces (**Table : **\@ref(tab:spermatotime)).   
 
 ```{r spermatotime}
 
@@ -59,7 +59,7 @@ include_graphics(path = "figure/spermatogenese2.jpg")
 
 ```
 
-### La méiose  
+### La méiose  {#meiose}
 
 La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaire (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:meiose)) appelée respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son non *réductionnelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:crossingover)).
 
@@ -277,6 +277,7 @@ tab.info <- paste0(tab.name," d'après ",tab.from)
 
 include_graphics(path = "figure/sperm_morpho_abnormalities.png")
 
+
 ```
 
 #### Liée à la mobilité  
@@ -285,7 +286,7 @@ Le succès du passage du spermatozoïdes le long du tractus génitale féminin d
 
 ### La génétique de l'infertilité  
 
-Ainsi, l’infertilité masculine d’origine génétique pourrait concerner près de 1 homme sur 40 [@Tuttelmann2011]
+Comme il a déjà été dit, il est estimé que 10 à 15% des couples humain font face à des problèmes d'infertilité. Par ailleurs, 30% des infertilités restent inexpliquées et près de 40% ont des causes incertaines. Ainsi, l’infertilité masculine d’origine génétique pourrait concerner près de 1 homme sur 40 [@Tuttelmann2011].  
 
 #### Les causes fréquentes  
 
@@ -315,18 +316,20 @@ Bien que la prévalence de ces anomalies génétiques varie en fonction du phén
 
 #### Les nouveaux gènes  
 
+<!-- A familial study of azoospermic men identifies three novel causative mutations in three new human azoospermia genes -->
+
 <!-- cf http://onlinelibrary.wiley.com/doi/10.1111/cge.12905/full -->
+
+<!-- 1. **Les anomalies quantitatives** :  une analyse de trois familles par séquençage [haut-débit](#ngs) a permit d'identifier trois gènes *MEIOB*, *TEX14* et *DNAH6* impliqué dans un phénotype d'azoospermie, de même une étude de 2016 démentre l'association de trois variants dans la séquence codante du gène *RAD21L* en se basant sur une étude statistique effectuée sur 38 japonnais présentant un arret de la fertilité et 200 contrôles [@Minase2017].   -->
 
 1. **Les anomalies morphologiques liées à la tête du spermatozoïdes** :  
     a. **La macrozoospermie** :  Ce phénotype d'infertilité masculine rare est caractérisé par la présence de 100% des spermatozoïdes de l'éjaculat présentant une tête anormalement grosse ainsi que plusieurs flagelles. Il fut observé pour la première fois en 1978 [@Nistal], mais ce n'est qu'en 2007 q'une explication génétique fut enfin trouvée. Une étude portant sur 14 patients nord Africains a permis d'identifier la délétion c144delC du gène *AURKC* (*Aurora kinase C*) comme responsable du phénotype de l'ensemble des individus de l'étude [@Dieterich2007]. Depuis, d'autres études ont permis d'associer d'autre variants sur ce même gène à ce phénotype [INSERT REF]. Des anomalies du gène *AURKC* seraient ainsi respondable d'environs 83.7% des cas macrozoospermie chez des patients non apparentés [INSERT REF]. Le gène *AURKC*, étant impliqué dans la méiose, conduit lorsqu'il est muté à un dysfonctionement de celle-ci menant à des spermatozoïdes polyploïdes, c'est à dire, portant une quantité de materiel génétique trop important [INSERT REF].    
     b. **La globozoospermie** : La globozoospermie est aussi un phénotype rare d'infertilité dont la prévalence est estimée à de 0,1%. Il fut dentifié pour la première fois en 1971 et est caractérisé par la présence d'une majorité de spermatozoïde dépourvu d'acrosome dans l'éjaculat empechant ainsi le spermatozoïde de franchir la zone pellucide de l'ovocyte compremettant ainsi la fécondation [@Dam2006, @Sen2009, @Holstein1973]. En 2007, une étude familiale a permis de lier ce phénotype à la mutation c.848G>A dans le gène *SPATA16* (*spermatogenesis-associated protein 16*) [@Dam2007a] dont la protéine va, au cours de la spermatogénèse fusioner avec les vésicules proacrosomales pour former l'acrosome [@Dam2007a, @Lu2006]. Plus tard, en 2011, une étude portant sur 20 patients tunisiens permit d'identifier une délétion homozygote de 200 kb emportant la totalité du gène *DPY19L2* (*Dpy-19 Like 2*) chez 15 des 20 patients [@Harbuz2011]. cf [globo](#globo)  
     c. **Spermatozoïdes acéphaliques** :  Ce phénotype reporté plusieurs fois [@Chemes2010, @Panidis2001, @Chemes1987] caractérise les patients présentant des spermatozoïdes déporvu de tête dans leur éjaculat. Une étude récente a put lier ce phénotype à une mutation c.824C>T homozygote ainsi qu'à deux variants hétérozygotes composites c.1006C>T et c.485T>A dans le gène *SUN5* [@Zhu2016] qui avait précédement été décrit comme localisant à la jonction tête / flagelle du spermatozoïde [@Yassine2015].    
-2. **Les anomalies liées au flagelle et à la motilité** :  
-    a. **Phénotype MMAF** :  
-    b. **Asthenozoospermia** :  
-3. **Les échec de fécondation du spermatozoïde** :  **PETITE EXPLICATION DE CE QU'EST L'ACTIVATION OVOCYTAIRE**. **EXPLIQUER LA FANCTION DE PLCZ1**. Plusieurs cas d'echec d'activation ovocitaire ont été liés à l'bscence ou la mauvaise localisation de la protéine *PLCZ1* (*phospholipase C Zeta 1*). Malgré celà, aucune preuve génétique directe n'avait été reporté jusque récemment où deux mutations au sein du gène *PLCZ1* furent retrouvés chez un patient [@Heytens2009] et un peu plus tard une mutation homozygote chez deux frères consanguins [@Escoffier2016].  
-
-
+3. **Les anomalies liées au flagelle et à la motilité** :  
+    <!-- a. **Asthenozoospermia** :   -->
+    a. **Phénotype MMAF** :  Le phénotype MMAF (*Multiple morphological abnormalities of the sperm flagella*)  décrit les patients atteints d'asthenozoospermie et et les flagelles spermatiques présentent de multiples anomalies morphologiques. Ce phénotype a été décrit plusieurs fois dans la literature et revait plusieurs formes [@Coutton2015]. Plus précisement , ce phénotype décritles asthenozoospermie résultant d'une mosaïque d'anormalité morphologiques au niveau du flagelle tel que l'abscence total de flagelle, des flagelles enroulés, courts, anguleux... [@Coutton2015, @BenKhelifa2014]. Recemment, le gène *DNAH1* (*Dynein Axonemal Heavy Chain 1*) codant pour une dynéine de la chaine lourde de l'axonème a été retrouvé muté chez près d'un patient sur trois dans sa cohorte comportant 18 patients [@BenKhelifa2014]. Deux autres études ont retrouvée des mutation dans le gène *DNAH1* chez des patients venant de Chine, d'Iran et d'Italie, laissant suggérer que ce gène est l'un des acteurs majeurs dans le syndrome MMAF [@Wang2017, @Amiri-Yekta2016].  
+4. **Les échec de fécondation du spermatozoïde** :  Au moment de la fécondation, l'activation ovocytaire repose sur le relargage par le spermatozoïde de "facteurs spermatiques" qui déclenchent un signal de calcium, constitué d'oscillations Ca$^{2+}$. Ce processus est médié par une protéine spécifique du spermatozoïde : PLC$\zeta$ 1 [@Nomikos2013, @Amdani2013]. Plusieurs cas d'echec d'activation ovocitaire ont été liés à l'bscence ou la mauvaise localisation de la protéine PLC$\zeta$ 1 (*phospholipase C Zeta 1*). Malgré celà, aucune preuve génétique directe n'avait été reporté jusque récemment où deux mutations au sein du gène *PLC*$\zeta$*1* furent retrouvés chez un patient [@Heytens2009] et un peu plus tard une mutation homozygote chez deux frères consanguins [@Escoffier2016].  
 
 \newpage  
 
@@ -355,7 +358,7 @@ gène orthologue humain [@DeBoer2015]. Une autre possibilité consiste à recher
 <!-- Alors que l'être humain possède environs 25.000 gènes différents, l'ensembles de ces gènes n'est pas exprimer au  -->
 <!-- L'emmergence de cette technologie a permis pour la première fois de caractériser le profil d'exprression des -->
 
-### Le séquençage NGS 
+### Le séquençage NGS {#ngs}
 
 Le terme séquençage de l'ADN fait référence à l'ensemble des techniques permettant de déterminer l'ordre des nucléotides A, T, C et G de l'intégralité ou d'une partie d'une molécule d'ADN. Avant de parler des nouvelles technologies de séquençage (NGS) faisons un bref historique du séquençage de l'ADN. En 1977 Frederick Sanger développe une technologie de séquençage d'ADN basée sur la méthode *chain-termination*. Ce procédé est désormais connu sous le nom de séquençage Sanger. D'autre méthode furent développées à la même période, notamment celle de Walter Gilbert basée sur la modification chimique de l'ADN, cependant sa grande efficience et sa faible utilisation de la radioactivité permirent au séquençage Sanger de s'imposer comme référence dans la "première génération" de séquenceur à application de commerciale et de recherche ([Wikipédia](http://en.wikipedia.org/wiki/DNA_sequencing)). Apparu en 1998, les instruments de séquençage automatique ainsi que les logiciels associés utilisant le séquençage par capillarité et la technologie Sanger furent les outils principaux qui permirent la complétion du *human genome project* en 2001 [@Collins2003].  
 

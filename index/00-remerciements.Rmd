@@ -2,26 +2,26 @@
 
 Je remercie ...  
 
- - Les rapporteurs
- - Les membres du jury  
- - Pierre  
- - Nicolas  
- - L'équipe BCM  
-   - Kevin Keurcien Thomas Florient  
- - Léquipe GETI  
- - La BGM  
- 
- <!-- - Ridley Scott pour le film Gladiator -->
- - Mes amis  
- - Ma famille  
- 
- - Dadette et Marco  
- - Simon  
- - Aurélien  
- 
- - Mes parents  
- - Ma soeur  
- 
- - Estelle  
- - Noham
+ <!-- - Les rapporteurs -->
+ <!-- - Les membres du jury   -->
+ <!-- - Pierre   -->
+ <!-- - Nicolas   -->
+ <!-- - L'équipe BCM   -->
+ <!--   - Kevin Keurcien Thomas Florient   -->
+ <!-- - Léquipe GETI   -->
+ <!-- - La BGM   -->
+
+ <!-- <!-- - Ridley Scott pour le film Gladiator --> -->
+ <!-- - Mes amis   -->
+ <!-- - Ma famille   -->
+
+ <!-- - Dadette et Marco   -->
+ <!-- - Simon   -->
+ <!-- - Aurélien   -->
+
+ <!-- - Mes parents   -->
+ <!-- - Ma soeur   -->
+
+ <!-- - Estelle   -->
+ <!-- - Noham -->
 

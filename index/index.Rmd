@@ -17,8 +17,8 @@ output:
   template = "template.tex",
   highlight = "pygments",
   keep_tex = TRUE,
-  pandoc_args = "--top-level-division=chapter")}
-  # pandoc_args = "--chapters")}
+  pandoc_args = "--chapters")}
+  # pandoc_args = "--top-level-division=chapter")}
   # thesisdown::thesis_gitbook: default
   #  thesis_pdf_updt: default
   #  thesisdown::thesis_gitbook: default
@@ -37,6 +37,8 @@ output:
 preface: >
   This is an example of a thesis setup to use the reed thesis document class
   (for LaTeX) and the R bookdown package, in general.
+  
+link-citations: true
 bibliography: bib/MaThese_bib.bib
 # Download your specific bibliography database file and refer to it in the line above.
 
