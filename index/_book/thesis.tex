@@ -2059,6 +2059,12 @@ class (for LaTeX) and the R bookdown package, in general.
     \textbf{Les gènes dispensables} :
   \end{enumerate}
   
+  \subsection{Les figures}\label{les-figures}
+  
+  L'ensemble des graphiques ont été générées en R version 3.3.3 (R Core
+  Team, \protect\hyperlink{ref-RCoreTeam2017}{2017}) grâce au package
+  ggplot2 (Wickham, \protect\hyperlink{ref-Wickham2009}{2009}).
+  
   \section{Résultats}\label{resultats}
   
   \subsection{Résultat de l'annotation}\label{resultat-de-lannotation}
@@ -2076,12 +2082,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsection{Détermination de la formule du
   score}\label{determination-de-la-formule-du-score}
   
-  \paragraph{Le SLAC et le WSLAC}\label{le-slac-et-le-wslac}
+  \subsubsection{Le SLAC et le WSLAC}\label{le-slac-et-le-wslac}
   
   Pour chaque transcrit nous avons défini deux métrique. La première est
-  le SLAC \eqref{eq:slac} qui se définit comme étant pour transcrit, la
+  le \(SLAC\) \eqref{eq:slac} qui se définit comme étant pour transcrit, la
   somme du log des comptages allélique de chaque variant chevauchant ce
-  transcrit.
+  transcrit. La seconde est le \(WSLAC\) \eqref{eq:wslac} qui elle se
+  définit comme étant la la somme \textbf{pondérée} du log des comptages
+  allélique des variants chevauchant le transcrit.
   
   \begin{multline} 
     \forall\ transcrit\ T \in \{transcrit\ codant\ Ensembl\} : \\
@@ -2092,7 +2100,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \begin{multline} 
     \forall\ transcrit\ T \in \{transcrit\ codant\ Ensembl\} : \\
      WSLAC_T = \sum_{I=Impact}\sum_{v=variant}{Poid_I.log(allele\ count_v)}
-    \label{eq:slac}
+    \label{eq:wslac}
   \end{multline}
   
   \begin{enumerate}
@@ -2835,6 +2843,11 @@ class (for LaTeX) and the R bookdown package, in general.
   by metagenomic sequencing. \emph{Nature}, \emph{464}(7285), 59--65.
   \url{http://doi.org/10.1038/nature08821.A}
   
+  \hypertarget{ref-RCoreTeam2017}{}
+  R Core Team. (2017). \emph{R: A Language and Environment for Statistical
+  Computing}. Vienna, Austria: R Foundation for Statistical Computing.
+  Retrieved from \url{https://www.r-project.org/}
+  
   \hypertarget{ref-Ravel2006}{}
   Ravel, C., Berthaut, I., Bresson, J. L., Siffroi, J. P., \& Genetics
   Commission of the French Federation of CECOS. (2006). Prevalence of
@@ -3024,6 +3037,10 @@ class (for LaTeX) and the R bookdown package, in general.
   of sperm DNA organization for somatic cells. \emph{Journal of Cellular
   Biochemistry}, \emph{55}(1), 77--82.
   \url{http://doi.org/10.1002/jcb.240550109}
+  
+  \hypertarget{ref-Wickham2009}{}
+  Wickham, H. (2009). \emph{ggplot2: Elegant Graphics for Data Analysis}.
+  Springer-Verlag New York. Retrieved from \url{http://ggplot2.org}
   
   \hypertarget{ref-Wold2007}{}
   Wold, B., \& Myers, R. M. (2007). Sequence census methods for functional

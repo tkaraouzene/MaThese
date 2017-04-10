@@ -24,6 +24,11 @@ Afin d'évaluer le score MutaScript nous l'avons confrontés au RVIS [@Petrovski
 1. **Les gènes HPO** :  
 2. **Les gènes dispensables** :  
 
+### Les figures  
+
+L'ensemble des graphiques ont été générées en R version 3.3.3 [@RCoreTeam2017] grâce au package ggplot2 [@Wickham2009].  
+
+
 ## Résultats  
 
 ### Résultat de l'annotation  
@@ -34,8 +39,9 @@ Afin d'évaluer le score MutaScript nous l'avons confrontés au RVIS [@Petrovski
 
 ### Détermination de la formule du score
 
-##### Le SLAC et le WSLAC  
-Pour chaque transcrit nous avons défini deux métrique. La première est le SLAC \@ref(eq:slac) qui se définit comme étant pour transcrit, la somme du log des comptages allélique de chaque variant chevauchant ce transcrit.
+#### Le SLAC et le WSLAC  
+
+Pour chaque transcrit nous avons défini deux métrique. La première est le $SLAC$ \@ref(eq:slac) qui se définit comme étant pour transcrit, la somme du log des comptages allélique de chaque variant chevauchant ce transcrit. La seconde est le $WSLAC$ \@ref(eq:wslac) qui elle se définit comme étant la la somme **pondérée** du log des comptages allélique des variants chevauchant le transcrit.  
 
 \begin{multline} 
   \forall\ transcrit\ T \in \{transcrit\ codant\ Ensembl\} : \\
@@ -43,25 +49,18 @@ Pour chaque transcrit nous avons défini deux métrique. La première est le SLA
   (\#eq:slac)
 \end{multline} 
 
-
-
 \begin{multline} 
   \forall\ transcrit\ T \in \{transcrit\ codant\ Ensembl\} : \\
    WSLAC_T = \sum_{I=Impact}\sum_{v=variant}{Poid_I.log(allele\ count_v)}
-  (\#eq:slac)
+  (\#eq:wslac)
 \end{multline} 
 
 
+```{r}
+#insérer ici le graphique SLAC x WSLAC
 
 
-<!-- \begin{equation}  -->
-<!--   WSLAC_T = \sum_{I=\sum_{v= variant}{log(allele\ count_v)} -->
-<!--   (\#eq:slac) -->
-<!-- \end{equation}  -->
-
-
-
-
+```
 
 
 1. Le SLAC et le WSLAC  
