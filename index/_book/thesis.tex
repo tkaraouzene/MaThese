@@ -193,45 +193,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   Je remercie \ldots{}
   
-  \begin{itemize}
-  \tightlist
-  \item
-    Les rapporteurs
-  \item
-    Les membres du jury\\
-  \item
-    Pierre\\
-  \item
-    Nicolas\\
-  \item
-    L'équipe BCM\\
-  \item
-    Kevin Keurcien Thomas Florient\\
-  \item
-    Léquipe GETI\\
-  \item
-    La BGM
-  \end{itemize}
-  
-   - Mes amis\\
-  - Ma famille
-  
-  \begin{itemize}
-  \item
-    Dadette et Marco\\
-  \item
-    Simon\\
-  \item
-    Aurélien
-  \item
-    Mes parents\\
-  \item
-    Ma soeur
-  \item
-    Estelle\\
-  \item
-    Noham
-  \end{itemize}
+   --\textgreater{}
   
   \chapter*{Résumé}\label{resume}
   \addcontentsline{toc}{chapter}{Résumé}
@@ -1735,11 +1697,13 @@ class (for LaTeX) and the R bookdown package, in general.
   Traditionnellement, les scientifiques développaient leur expertise dans
   un nombre de pathologie et de gènes associés limité. L'émergence du NGS
   a totalement remis en cause cette pratique, dès lors qu'il est désormais
-  courant de retrouver pus de 30.000 variants différents par exome. Afin
-  de pouvoir lier un variant à une pathologie, il est désormais
-  indispensable d'annoter cet ensemble de variant, c'est à dire d'associer
-  à ces variants l'ensembles des informations qui les caractérisent afin
-  de pouvoir les replacer dans leur contexte biologique. Ces informations
+  courant de retrouver entre 20.000 et 25.000 variants différents par
+  exome (Gonzaga-Jauregui, Lupski, \& Gibbs,
+  \protect\hyperlink{ref-Gonzaga-Jauregui2012}{2012}). Afin de pouvoir
+  lier un variant à une pathologie, il est désormais indispensable
+  d'annoter cet ensemble de variant, c'est à dire d'associer à ces
+  variants l'ensembles des informations qui les caractérisent afin de
+  pouvoir les replacer dans leur contexte biologique. Ces informations
   serviront ensuite d'indicateur afin filtrer ou prioriser un variant.
   Cette dernière étape de l'analyse est elle aussi cruciale puisqu'elle
   permet de réduire le nombre de variant à considérer \ldots{}. On peut
@@ -1868,10 +1832,18 @@ class (for LaTeX) and the R bookdown package, in general.
   panel de gènes (environs 100 Mb pour le Roche GS FLX system) au
   séquençage de génome entiers (environs 1500 GB pour l'Illumina Hiseq
   4000) et d'une utilisation exclusive à la recherche à la routine
-  clinique. Cependant, cette quantité de donnée produites crées de
-  nouvelles problématiques pour les généticiens qui se retrouvent
-  désormais face au ``déluge de données génétiques'' (Schatz \& Langmead,
-  \protect\hyperlink{ref-Schatz2013}{2013}). Bien que de nombreux efforts
+  clinique. Le nombre croissant de d'études utilisant le WGS ou le WES
+  démontre le pouvoir de ces approches dans des analyses
+  phénotypes-génotypes impliquant des pathologies à transmission
+  Mendelienne. De plus, la diminution constante des couts par génome /
+  éxomes séquencés laisse supposer que ces technologies deviendront d'ici
+  peut le fer de lance de la génétique clinique moderne. Cependant, cette
+  quantité de donnée produites crées de nouvelles problématiques pour les
+  généticiens qui se retrouvent désormais face au ``déluge de données
+  génétiques'' (Schatz \& Langmead,
+  \protect\hyperlink{ref-Schatz2013}{2013}). Le succès d'une étude n'étant
+  plus lié aux capacités de séquençage mais aux compétences dans l'analyse
+  et l'interprétation des données produites. Bien que de nombreux efforts
   soient pour palier la contrainte instaurée par les \emph{reads} courts
   dans le cadre d'analyse génomique, les solutions informatique et
   bioinformatique proposée jusqu'à présent restent en dessous des besoins
@@ -1910,76 +1882,302 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \section{Introduction}\label{introduction}
   
-  Up to a few years, linkage analysis using genetic markers or Sanger
-  sequencing were massively used to identify genetic disorder in clinical
-  research. These technic were extremely time and money expensive and in
-  2011 the genetic cause of over 3,500 Mendelian disorders remained unknow
-  {[}1{]}. The advent of New Generation Sequencing (NGS) has immediately
-  initiate the new ere of clinical research in genomic by bringing the
-  sequencing of entire genomes (WGS) or exome (WES) economically feasible
-  for many small laboratories. This technological leap has permit a great
-  advance in the field of clinical research linking more than \ldots{}
-  genetic cause to a mendelian disorder {[}need citation here{]}. However,
-  despite all of that, NGS bring with him new problematics. Indeed, with
-  over 30,000 variants per individual exome and surrounding 10,000 of
-  which are predicted to lead to a nonsynonymous substitution, a
-  modification of a splice sites, or to a small insertion / deletion
-  (indel) {[}need citation{]}, finding the disease-causing variant became
-  to be the daily labor-intensive task of geneticists. Even more that this
-  new task regrouping among other things informatics and statistic is far
-  from traditional geneticist skills. Usually NGS data analysis is divided
-  in three principal steps. The first one is the raw data pre-processing
-  which mainly consists to mapping raw data to a reference genome (may be
-  cite some soft which do that?). Secondly, the analysis of mismatches
-  between sample data and the reference sequence draw up a list of Single
-  Nucleotide Variation (SNV) and small insertion / deletion (Indels). As
-  said previously this list can enumerate more than 30,000 variation per
-  individual (may be cite some soft which do that?). Finally, the analyze
-  of these variants, including the annotation and filtering, is often
-  weakness of genotype-phenotype analysis. Indeed, in most of case it is
-  not enough to obtain a small human interpretable list and the causal
-  variant is drowned in a multitude of non-causal variant. To improve the
-  quality of variant filtering and so the efficiency of phenotype-genotype
-  analysis we develop MutaScript. This score rank transcript considering
-  their probability of being link to a mendelian disorder. For that we
-  assumed that most mutated transcripts in general population were
-  probably not involved in any severe Mendelian disease. MutaScript score
-  of a transcript combines the allelic frequency of each variant displayed
-  on ExAC {[}2{]} database overlapping this transcript as well as their
-  impact predicted by Variant Effect Predictor (VEP) {[}36{]}. So, higher
-  is the variant impact, higher will be its MutaScript score contribution.
-  Ranking transcript (or gene) considering their variation load was
-  already done by the Residual Variation Intolerance Score (RVIS) {[}4{]}
-  and the Probability of loss-of-function (LoF) Incoherency (pLI) {[}2{]}
-  scores. However, MutaScript differs from them on several points.
-  Firstly, like pLI, MutaScript give a score to each protein-coding
-  transcript where RVIS only scored genes which leads to a loss of
-  information from RVIS. Moreover, RVIS and pLI only consider LoF
-  variants, mainly splice donor / acceptor variants, nonsense or
-  frameshift variants which represent only \ldots{}\% of ExAC variants.
-  MutaScript consider all variants whatever its consequence, and it weight
-  its score contribution considering the predicted deleteriousness of its
-  impact. Also, we noticed a strong correlation between the RVIS score of
-  a gene and the pLI score of a transcript and the CDS size of this gene
-  (or transcript). Because this correlation is mostly due to a bias of
-  their score formula and not because a biological fact, we build
-  MutaScript to avoid this correlation which can lead to interpretation
-  errors. To validate our scores we used the Human Phenotype Ontology
-  (HPO) {[}5{]} and demonstrate that MutaScript is more\ldots{}
+  Il y a quelques années, le séquençage Sanger était encore massivement
+  utilisé en recherche clinique. Cette technique étaiy extremement
+  couteuse en temps et en argent freinant considérablement la progression
+  des recherches du type phénotype-génotype de sorte qu'en 2011, les
+  causes de plus de 3.500 pathologies à transmission Mendelienne restaient
+  inconnus (Stitziel, Kiezun, \& Sunyaev,
+  \protect\hyperlink{ref-Stitziel2011}{2011}). L'emmergence du séquençage
+  haut-débit a immédiatement initié une nouvelle ère dans le domaine de la
+  recherche clinique et permettant dans un temps record et à cout
+  raisonnable d'obtenir la séquence de l'intégralité du génome ou bien des
+  régions exomiques. Ce bond technologique est à l'originbe de grandes
+  avancées permettant de lier plus de \ldots{} variants génétiques à une
+  pathologie mendelienne {[}citation{]}.\\
+  Cependant, de part sa masse, les données produites crées de nouvelles
+  problématiques pour les généticiens qui se retrouvent désormais face au
+  ``déluge de données génétiques'' (Schatz \& Langmead,
+  \protect\hyperlink{ref-Schatz2013}{2013}). En effet, un génome humain
+  typique compte en moyenne 3,5 millions de variants différents et plus de
+  1000 variations du nombre de copies (CNVs) (Gonzaga-Jauregui et al.,
+  \protect\hyperlink{ref-Gonzaga-Jauregui2012}{2012}) après comparaison
+  avec le génome de référence. Parmis ceux-ci, 20.000-25.000 d'entre eux
+  impactent des régions codant pour une protéine avec environs 10.000
+  variants impliquant un changement d'acide aminé et 50-100 prédit comme
+  tronquant la protéine (Gonzaga-Jauregui et al.,
+  \protect\hyperlink{ref-Gonzaga-Jauregui2012}{2012}). Ainsi, les analyses
+  fastidieuse permettant de mettre en évidence le variant responsable de
+  la pathologie font desormais partit du quotidien des généticiens.
+  Appliquer ces tache est d'autant plus laborieux qu'elles nécéssites
+  entre autres des compétences en informatique et en statistiques qui sont
+  assez éloignées des compétences ``traditionelles'' des généticiens. De
+  manière générale, ces analyses se découpent en trois étapes principales.
+  La première est l'étape d'alignement qui basiquement consiste à aligner
+  les \emph{reads} générés lors de l'étape de séquençage le long d'un
+  génome de référence. Une fois cela fait, l'étape d'appel des variants
+  consiste à recensser l'ensembles des ``différences'' observées entre les
+  données de l'individu séquencé et le génome de référence permettant
+  ainsi d'établire une liste de SNVs et de petites insertions / délétions
+  (indels) avec leur génotype associés. Comme dit précédement, cette liste
+  peut atteindre 25.000 variants différents par individus. La dernière des
+  étapes regroupe l'annotation et le filtrage des variants. Elle
+  représente souvent la faiblesse des analyses phénotype-génotype puisque
+  dans une grande partie des cas, le pouvoir filtrant n'est pas assez
+  puissant pour obtenir une liste de variants suffisamant petite pour
+  qu'elle soit interprétable par l'homme, ainsi le variant causal se
+  retrouve bien souvent noyé parmi d'autre variant rendant l'analyse et
+  l'interprétation moins efficaces.\\
+  Améliorer la qualité de l'annotation et le filtrage des variants dans
+  les analyses phénotype-génotype se révèle donc être une des clés
+  permettant d'améliorer l'efficience de ces analyses, c'est pourquoi nous
+  avons déveloper le score MutaScript. Ce score a pour but de classer
+  l'ensemble des transcrit codant en fonction de leur charge mutationelle
+  avec l'idée sous-jacente que les transcrits les plus mutés dans la
+  population générale ne sont porbablement pas impliqués dans des
+  pathologies sévères à transmission Mendelienne et, \emph{a contrario}
+  ceux retrouvés comme n'étant pas / peu mutés le sont probablement. Pour
+  ce faire, le score MutaScript repose sur trois (\ldots{}). La première
+  étant le jeux de transcrit fournit par Ensembl (B. L. Aken et al.,
+  \protect\hyperlink{ref-Aken2017}{2017}) qui comporte \ldots{} transcrits
+  codants. Afin de connaitre la harge mutationelle des ces transcrits,
+  nous nous sommes basées sur les variants mis à disposition par \emph{the
+  Exome Aggragate Consortium} (ExAC) (Lek et al.,
+  \protect\hyperlink{ref-Lek2016}{2016}) qui réunit les données d'exome de
+  60.706 individus non apparentés que nous avons ensuite annoté grâce au
+  logiciel \emph{variant effect predictor} (VEP) (W. McLaren et al.,
+  \protect\hyperlink{ref-McLaren2016}{2016}) afin de prédire l'impacte de
+  chaque variant sur l'ensemble des transcrits qu'ils chevauchent de sorte
+  à ce que les variants ayant un impacte prédit commé étant délétère aient
+  une plus grosse contribution au score MutaScript que ceux ayant un
+  impacte faible. À l'heure actuelle, plusieurs logiciels tel que SIFT (P.
+  Kumar et al., \protect\hyperlink{ref-Kumar2009}{2009}) ou encore
+  PolyPhen-2 (I. A. Adzhubei et al.,
+  \protect\hyperlink{ref-Adzhubei2010}{2010}). Cependant, ces logiciels
+  donnent un score pour un variant et n'extrapolent pas leurs prédictions
+  aux niveau du gènes et/ou du transcrits. D'autres logiciels tel que
+  Exomiser (Robinson et al., \protect\hyperlink{ref-Robinson2014}{2014})
+  et Endeavour (Tranchevent et al.,
+  \protect\hyperlink{ref-Tranchevent2016}{2016}) cependant, pour pouvoir
+  fonctionner, ces logiciels nécéssitent d'avoir des connaissances
+  génétiques sur la pathologie étudiée. Plus récemment, favorisé par
+  l'emmergence de gros jeux de données exomiques comme ExAC, d'autres
+  scores ont vu le jour tel que le \emph{residual variance intoler- ance
+  score} (RVIS) (Petrovski et al.,
+  \protect\hyperlink{ref-Petrovski2013}{2013}) ou encore \emph{the the
+  Probability of loss-of-function Incoherency} (pLI) (Lek et al.,
+  \protect\hyperlink{ref-Lek2016}{2016}). MutaScript se présente comme une
+  alternative à ces derniers scores et, bien que sa fonction soit
+  similaire, il diffère de ceux-ci sur de nombreux points. Tout d'abord,
+  MutaScript donne un score à l'ensemble des transcrits codant pour une
+  protéine là où pLI donne un score seulement au transcrit consensus de
+  chaque gène et RVIS qui aggrege les séquence codante de l'ensemble des
+  transcrits d'un même gène créant ainsi un transcrit ``chimérique''. Ce
+  procédé, bien qu'il facilite l'interprétation du score, engendre une
+  perte d'information puisque l'on se retrouve avec un seul score par gène
+  et non par transcrits. De plus, dans la conception de leur score, RVIS
+  et pLI ne consifère que les variants dit \emph{loss-of-function} (LoF),
+  c'est à dire les variants impactant l'epissage, engendrant un codont
+  strop ou un décallage du cadre de lecture. Cependant, ces variants ne
+  représentent que \ldots{}\% des variants fournit par la base de données
+  ExAC. C'est pourquoi, MutaScript prend en compte l'ensemble des
+  variants, peut importe leur impacte sur les différents transcrits qu'ils
+  chevauchent, et leur attribue un poid en fonction de cet impacte de
+  sorte à ce que les variants délétères contribuent plus au score d'un
+  transcrits que les autres. Aussi, l'étude des scores RVIS et pLI nous a
+  permis de mettre en évidence une corrélation forte entre le score qu'ils
+  attribuent à un gène et la taille de la séquence codante (CDS) de ce
+  même gène. Cette corrélation étant principalement due à un biais causé
+  par leur manière de calculer leur score et non à une réalité biologique,
+  MutaScript fut construit de sorte à éviter cette corrélation qui peut
+  mener à des erreurs d'interprétations. Afin d'évaluer le score
+  MutaScript nous l'avons confrontés au RVIS (Petrovski et al.,
+  \protect\hyperlink{ref-Petrovski2013}{2013}) ainsi qu'à pLI (Lek et al.,
+  \protect\hyperlink{ref-Lek2016}{2016}) afin de comparer à la fois leur
+  capacité à prédire les gènes intolérant aux variation en se basant sur
+  des listes de gènes fournit par \emph{the human phenotype ontology}
+  (HPO) (Köhler et al., \protect\hyperlink{ref-Kohler2014}{2014}) mais
+  aussi en testant sa capaciter à prédire les gènes considérés comme
+  ``dispensables'' pour la vie et la reproduction humaine en se basant
+  sur\ldots{}
   
   \section{Matériel \& Méthodes}\label{materiel-methodes}
   
-  \subsection{Récupération des données ExAC, filtrage et pré
-  analyse}\label{recuperation-des-donnees-exac-filtrage-et-pre-analyse}
+  \subsection{Récupération et filtrage des
+  données}\label{recuperation-et-filtrage-des-donnees}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Le jeu de transcrits Ensembl} : Pour cette étude, nous nous
+    sommes basés sur la version 75 du jeu de transcrits fournit par
+    Ensembl (B. L. Aken et al., \protect\hyperlink{ref-Aken2017}{2017}).
+    le fichier gtf contenant les données est téléchargeable
+    \href{insérer\%20liens\%20vers\%20gtf}{ici}. Cette version bien
+    qu'elle ne soit pas la dernière publiée par Ensembl, est la dernière à
+    se basée sur la version GRCH37/hg19 qui est la version du génome qu'a
+    choisi ExAC pour effectuer l'alignement de ses données. À partir du
+    fichier gtf, seul les transcrit taggés comme codant pour une protéine
+    furent conservés, de même, l'ensemble des transcrits ayant une
+    couverture mediane \textless{}15 sur plus de 30\% de leur séquence
+    codante dans les données ExAC furent filtrés.\\
+  \item
+    \textbf{Filtrage des variants} :
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      Lien pour télécharger le vcf ExAC\\
+    \item
+      L'ensemble des variants n'ayant pas la mention ``PASS'' dans la
+      colonne FILTER du fichier VCF fournit par ExAC furent filtrés.\\
+    \item
+      L'ensemble des variant n'ayant pas une couverture médiane \(\ge\) 15
+      furent filtrés\\
+    \item
+      L'ensemble des variants intronique (sauf ceux proches des sites
+      d'epissage) et les variants situés dans les régions \emph{upstream}
+      et \emph{downstream} furent filtrés\\
+    \end{enumerate}
+  \item
+    \textbf{Réannotation des données ExAC} : Afin d'utiliser une version
+    plus récente de VEP, l'annotation fut effectuées avec le logiciel VEP
+    version 81 en utilisant la version 75 des transcrits Ensembl (INSÉRER
+    LA COMMANDE)
+  \end{enumerate}
+  
+  \subsection{Validation du score}\label{validation-du-score}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Les gènes HPO} :\\
+  \item
+    \textbf{Les gènes dispensables} :
+  \end{enumerate}
   
   \section{Résultats}\label{resultats}
   
-  \subsection{Définition de la formule de
-  score}\label{definition-de-la-formule-de-score}
+  \subsection{Résultat de l'annotation}\label{resultat-de-lannotation}
   
-  \subsection{Analyse de la corrélation}\label{analyse-de-la-correlation}
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    tableau avec l'ensemble des csq et l'impacte vep associée
+  \item
+    fréquene des ces impactes\\
+    3 bar plot des poids
+  \end{enumerate}
   
-  \subsection{Analyse HPO}\label{analyse-hpo}
+  \subsection{Détermination de la formule du
+  score}\label{determination-de-la-formule-du-score}
+  
+  \paragraph{Le SLAC et le WSLAC}\label{le-slac-et-le-wslac}
+  
+  Pour chaque transcrit nous avons défini deux métrique. La première est
+  le SLAC \eqref{eq:slac} qui se définit comme étant pour transcrit, la
+  somme du log des comptages allélique de chaque variant chevauchant ce
+  transcrit.
+  
+  \begin{multline} 
+    \forall\ transcrit\ T \in \{transcrit\ codant\ Ensembl\} : \\
+      SLAC_T = \sum_{v\ =\ variant\ chevauchant\ T}{log(allele\ count_v)}
+    \label{eq:slac}
+  \end{multline}
+  
+  \begin{multline} 
+    \forall\ transcrit\ T \in \{transcrit\ codant\ Ensembl\} : \\
+     WSLAC_T = \sum_{I=Impact}\sum_{v=variant}{Poid_I.log(allele\ count_v)}
+    \label{eq:slac}
+  \end{multline}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Le SLAC et le WSLAC
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      formule du SLAC et du WSLAC\\
+    \item
+      graphique SLAC x WSLAC avec regression linéaire\\
+    \item
+      discussion sur la forme du graphique
+    \end{enumerate}
+  \item
+    Calcule de l'offset (décalage de l'origine)
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      but de l'offset\\
+    \item
+      graphique montrant l'évolution dse la corrélation
+      CDS\textasciitilde{}score en fonction de l'offset
+    \end{enumerate}
+  \end{enumerate}
+  
+  \subsection{Analyse du score}\label{analyse-du-score}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    distribution du ratio (histo)
+  \item
+    Analyse du top / bottom 50
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      pie chart contribution moyenne des 4 impacts\\
+    \item
+      analyse panther (les pathway + expression differencielle)
+    \end{enumerate}
+  \item
+    variance entre les fifférent transcrits d'un même gène
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      histo de la variance\\
+    \item
+      disscution des gènes ayant la plus haute variance (interet de
+      regarder le score par transcrit plutôt que par gène)
+    \end{enumerate}
+  \end{enumerate}
+  
+  \section{Comparaison avec RVIS et
+  pLI}\label{comparaison-avec-rvis-et-pli}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    corrélation score\textasciitilde{}size\\
+  \item
+    hpo\\
+  \item
+    gene dispensable
+  
+    \begin{enumerate}
+    \def\labelenumii{\alph{enumii}.}
+    \tightlist
+    \item
+      liste des 240 gènes\\
+    \item
+      recepteurs olphactifs
+    \end{enumerate}
+  \end{enumerate}
   
   \section{Conclusion}\label{conclusion}
   
@@ -2012,12 +2210,24 @@ class (for LaTeX) and the R bookdown package, in general.
   Adelman, M. M., \& Cahill, E. M. (1989). \emph{Atlas of sperm
   morphology} (p. 123). ASCP Press.
   
+  \hypertarget{ref-Adzhubei2010}{}
+  Adzhubei, I. A., Schmidt, S., Peshkin, L., Ramensky, V. E., Gerasimova,
+  A., Bork, P., \ldots{} Sunyaev, S. R. (2010). A method and server for
+  predicting damaging missense mutations. \emph{Nature Methods},
+  \emph{7}(4), 248--9. \url{http://doi.org/10.1038/nmeth0410-248}
+  
   \hypertarget{ref-Aitken1985}{}
   Aitken, R. J., Sutton, M., Warner, P., \& Richardson, D. W. (1985).
   Relationship between the movement characteristics of human spermatozoa
   and their ability to penetrate cervical mucus and zona-free hamster
   oocytes. \emph{Journal of Reproduction and Fertility}, \emph{73}(2),
   441--9. Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/3989795}
+  
+  \hypertarget{ref-Aken2017}{}
+  Aken, B. L., Achuthan, P., Akanni, W., Amode, M. R., Bernsdorff, F.,
+  Bhai, J., \ldots{} Flicek, P. (2017). Ensembl 2017. \emph{Nucleic Acids
+  Research}, \emph{45}(D1), D635--D642.
+  \url{http://doi.org/10.1093/nar/gkw1104}
   
   \hypertarget{ref-Alkan2010}{}
   Alkan, C., Kidd, J. M., Marques-bonet, T., Aksay, G., Hormozdiari, F.,
@@ -2255,6 +2465,12 @@ class (for LaTeX) and the R bookdown package, in general.
   integrated system with hormones and local environment. \emph{Endocrine
   Reviews}, \emph{18}(4), 541--609.
   \url{http://doi.org/10.1210/er.18.4.541}
+  
+  \hypertarget{ref-Gonzaga-Jauregui2012}{}
+  Gonzaga-Jauregui, C., Lupski, J. R., \& Gibbs, R. A. (2012). Human
+  genome sequencing in health and disease. \emph{Annual Review of
+  Medicine}, \emph{63}, 35--61.
+  \url{http://doi.org/10.1146/annurev-med-051010-162644}
   
   \hypertarget{ref-Goodwin2016}{}
   Goodwin, S., McPherson, J. D., \& McCombie, W. R. (2016). Coming of age:
@@ -2627,6 +2843,13 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{Human Reproduction}, \emph{21}(6), 1484--1489.
   \url{http://doi.org/10.1093/humrep/del024}
   
+  \hypertarget{ref-Robinson2014}{}
+  Robinson, P. N., Köhler, S., Oellrich, A., Sanger Mouse Genetics
+  Project, S. M. G., Wang, K., Mungall, C. J., \ldots{} Smedley, D.
+  (2014). Improved exome prioritization of disease genes through
+  cross-species phenotype comparison. \emph{Genome Research},
+  \emph{24}(2), 340--8. \url{http://doi.org/10.1101/gr.160325.113}
+  
   \hypertarget{ref-Rosenfeld2012}{}
   Rosenfeld, J. A., Mason, C. E., Smith, T. M., Wallin, C., \& Diekhans,
   M. (2012). Limitations of the Human Reference Genome for Personalized
@@ -2694,6 +2917,12 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{Nature}, \emph{232}(5311), 481--481.
   \url{http://doi.org/10.1038/232481a0}
   
+  \hypertarget{ref-Stitziel2011}{}
+  Stitziel, N. O., Kiezun, A., \& Sunyaev, S. (2011). Computational and
+  statistical approaches to analyzing variants identified by exome
+  sequencing. \emph{Genome Biology}, \emph{12}(9), 227.
+  \url{http://doi.org/10.1186/gb-2011-12-9-227}
+  
   \hypertarget{ref-Su2014}{}
   Su, Z., Łabaj, P. P., Li, S. S., Thierry-Mieg, J., Thierry-Mieg, D.,
   Shi, W., \ldots{} Shi, L. (2014). A comprehensive assessment of RNA-seq
@@ -2749,6 +2978,12 @@ class (for LaTeX) and the R bookdown package, in general.
   associated with reduced success of in vitro fertilization.
   \emph{International Journal of Gynecology \& Obstetrics}, \emph{42}(2),
   223--224. \url{http://doi.org/10.1016/0020-7292(93)90672-J}
+  
+  \hypertarget{ref-Tranchevent2016}{}
+  Tranchevent, L.-C., Ardeshirdavani, A., ElShal, S., Alcaide, D., Aerts,
+  J., Auboeuf, D., \& Moreau, Y. (2016). Candidate gene prioritization
+  with Endeavour. \emph{Nucleic Acids Research}, \emph{44}(W1),
+  W117--W121. \url{http://doi.org/10.1093/nar/gkw365}
   
   \hypertarget{ref-Treangen2013}{}
   Treangen, T. J., \& Salzberg, S. L. (2013). Repetitive DNA and

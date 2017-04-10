@@ -2,34 +2,95 @@
 
 ## Introduction  
 
-Up to a few years, linkage analysis using genetic markers or Sanger sequencing were massively used to identify genetic disorder in clinical research. These technic were extremely time and money expensive and in 2011 the genetic cause of over 3,500 Mendelian disorders remained unknow [1]. The advent of New Generation Sequencing (NGS) has immediately initiate the new ere of clinical research in genomic by bringing the sequencing of entire genomes (WGS) or exome (WES) economically feasible for many small laboratories. This technological leap has permit a great advance in the field of clinical research linking more than … genetic cause to a mendelian disorder [need citation here].
-However, despite all of that, NGS bring with him new problematics. Indeed, with over 30,000 variants per individual exome and surrounding 10,000 of which are predicted to lead to a nonsynonymous substitution, a modification of a splice sites, or to a small insertion / deletion (indel) [need citation], finding the disease-causing variant became to be the daily labor-intensive task of geneticists. Even more that this new task regrouping among other things informatics and statistic is far from traditional geneticist skills. 
-Usually NGS data analysis is divided in three principal steps. The first one is the raw data pre-processing which mainly consists to mapping raw data to a reference genome (may be cite some soft which do that?). Secondly, the analysis of mismatches between sample data and the reference sequence draw up a list of Single Nucleotide Variation (SNV) and small insertion / deletion (Indels). As said previously this list can enumerate more than 30,000 variation per individual (may be cite some soft which do that?). Finally, the analyze of these variants, including the annotation and filtering, is often weakness of genotype-phenotype analysis. Indeed, in most of case it is not enough to obtain a small human interpretable list and the causal variant is drowned in a multitude of non-causal variant. 
-To improve the quality of variant filtering and so the efficiency of phenotype-genotype analysis we develop MutaScript. This score rank transcript considering their probability of being link to a mendelian disorder. For that we assumed that most mutated transcripts in general population were probably not involved in any severe Mendelian disease. MutaScript score of a transcript combines the allelic frequency of each variant displayed on ExAC [2] database overlapping this transcript as well as their impact predicted by Variant Effect Predictor (VEP) [36]. So, higher is the variant impact, higher will be its MutaScript score contribution. 
-Ranking transcript (or gene) considering their variation load was already done by the Residual Variation Intolerance Score (RVIS) [4] and the Probability of loss-of-function (LoF) Incoherency (pLI) [2] scores. However, MutaScript differs from them on several points. Firstly, like pLI, MutaScript give a score to each protein-coding transcript where RVIS only scored genes which leads to a loss of information from RVIS. Moreover, RVIS and pLI only consider LoF variants, mainly splice donor / acceptor variants, nonsense or frameshift variants which represent only …% of ExAC variants. MutaScript consider all variants whatever its consequence, and it weight its score contribution considering the predicted deleteriousness of its impact. Also, we noticed a strong correlation between the RVIS score of a gene and the pLI score of a transcript and the CDS size of this gene (or transcript). Because this correlation is mostly due to a bias of their score formula and not because a biological fact, we build MutaScript to avoid this correlation which can lead to interpretation errors. To validate our scores we used the Human Phenotype Ontology (HPO) [5] and demonstrate that MutaScript is more…
+Il y a quelques années, le séquençage Sanger était encore massivement utilisé en recherche clinique. Cette technique étaiy extremement couteuse en temps et en argent freinant considérablement la progression des recherches du type phénotype-génotype de sorte qu'en 2011, les causes de plus de 3.500 pathologies à transmission Mendelienne restaient inconnus [@Stitziel2011]. L'emmergence du séquençage haut-débit a immédiatement initié une nouvelle ère dans le domaine de la recherche clinique et permettant dans un temps record et à cout raisonnable d'obtenir la séquence de l'intégralité du génome ou bien des régions exomiques. Ce bond technologique est à l'originbe de grandes avancées permettant de lier plus de ... variants génétiques à une pathologie mendelienne [citation].  
+Cependant, de part sa masse, les données produites crées de nouvelles problématiques pour les généticiens qui se retrouvent désormais face au "déluge de données génétiques" [@Schatz2013]. En effet, un génome humain typique compte en moyenne 3,5 millions de variants différents et plus de 1000 variations du nombre de copies (CNVs) [@Gonzaga-Jauregui2012] après comparaison avec le génome de référence. Parmis ceux-ci, 20.000-25.000 d'entre eux impactent des régions codant pour une protéine avec environs 10.000 variants impliquant un changement d'acide aminé et 50-100 prédit comme tronquant la protéine [@Gonzaga-Jauregui2012]. Ainsi, les analyses fastidieuse permettant de mettre en évidence le variant responsable de la pathologie font desormais partit du quotidien des généticiens. Appliquer ces tache est d'autant plus laborieux qu'elles nécéssites entre autres des compétences en informatique et en statistiques qui sont assez éloignées des compétences "traditionelles" des généticiens. De manière générale, ces analyses se découpent en trois étapes principales. La première est l'étape d'alignement qui basiquement consiste à aligner les *reads* générés lors de l'étape de séquençage le long d'un génome de référence. Une fois cela fait, l'étape d'appel des variants consiste à recensser l'ensembles des "différences" observées entre les données de l'individu séquencé et le génome de référence permettant ainsi d'établire une liste de SNVs et de petites insertions / délétions (indels) avec leur génotype associés. Comme dit précédement, cette liste peut atteindre 25.000 variants différents par individus. La dernière des étapes regroupe l'annotation et le filtrage des variants. Elle représente souvent la faiblesse des analyses phénotype-génotype puisque dans une grande partie des cas, le pouvoir filtrant n'est pas assez puissant pour obtenir une liste de variants suffisamant petite pour qu'elle soit interprétable par l'homme, ainsi le variant causal se retrouve bien souvent noyé parmi d'autre variant rendant l'analyse et l'interprétation moins efficaces.  
+Améliorer la qualité de l'annotation et le filtrage des variants dans les analyses phénotype-génotype se révèle donc être une des clés permettant d'améliorer l'efficience de ces analyses, c'est pourquoi nous avons déveloper le score MutaScript. Ce score a pour but de classer l'ensemble des transcrit codant en fonction de leur charge mutationelle avec l'idée sous-jacente que les transcrits les plus mutés dans la population générale ne sont porbablement pas impliqués dans des pathologies sévères à transmission Mendelienne et, *a contrario* ceux retrouvés comme n'étant pas / peu mutés le sont probablement. Pour ce faire, le score MutaScript repose sur trois (...). La première étant le jeux de transcrit fournit par Ensembl [@Aken2017] qui comporte ... transcrits codants. Afin de connaitre la harge mutationelle des ces transcrits, nous nous sommes basées sur les variants mis à disposition par *the Exome Aggragate Consortium* (ExAC) [@Lek2016] qui réunit les données d'exome de 60.706 individus non apparentés que nous avons ensuite annoté grâce au logiciel *variant effect predictor* (VEP) [@McLaren2016] afin de prédire l'impacte de chaque variant sur l'ensemble des transcrits qu'ils chevauchent de sorte à ce que les variants ayant un impacte prédit commé étant délétère aient une plus grosse contribution au score MutaScript que ceux ayant un impacte faible. À l'heure actuelle, plusieurs logiciels tel que SIFT [@Kumar2009] ou encore PolyPhen-2 [@Adzhubei2010]. Cependant, ces logiciels donnent un score pour un variant et n'extrapolent pas leurs prédictions aux niveau du gènes et/ou du transcrits. D'autres logiciels tel que Exomiser [@Robinson2014] et Endeavour [@Tranchevent2016] cependant, pour pouvoir fonctionner, ces logiciels nécéssitent d'avoir des connaissances génétiques sur la pathologie étudiée. Plus récemment, favorisé par l'emmergence de gros jeux de données exomiques comme ExAC, d'autres scores ont vu le jour tel que le *residual variance intoler- ance score* (RVIS) [@Petrovski2013] ou encore *the the Probability of loss-of-function Incoherency* (pLI) [@Lek2016]. MutaScript se présente comme une alternative à ces derniers scores et, bien que sa fonction soit similaire, il diffère de ceux-ci sur de nombreux points. Tout d'abord, MutaScript donne un score à l'ensemble des transcrits codant pour une protéine là où pLI donne un score seulement au transcrit consensus de chaque gène et RVIS qui aggrege les séquence codante de l'ensemble des transcrits d'un même gène créant ainsi un transcrit "chimérique". Ce procédé, bien qu'il facilite l'interprétation du score, engendre une perte d'information puisque l'on se retrouve avec un seul score par gène et non par transcrits. De plus, dans la conception de leur score, RVIS et pLI ne consifère que les variants dit *loss-of-function* (LoF), c'est à dire les variants impactant l'epissage, engendrant un codont strop ou un décallage du cadre de lecture. Cependant, ces variants ne représentent que ...% des variants fournit par la base de données ExAC. C'est pourquoi, MutaScript prend en compte l'ensemble des variants, peut importe leur impacte sur les différents transcrits qu'ils chevauchent, et leur attribue un poid en fonction de cet impacte de sorte à ce que les variants délétères contribuent plus au score d'un transcrits que les autres. Aussi, l'étude des scores RVIS et pLI nous a permis de mettre en évidence une corrélation forte entre le score qu'ils attribuent à un gène et la taille de la séquence codante (CDS) de ce même gène. Cette corrélation étant principalement due à un biais causé par leur manière de calculer leur score et non à une réalité biologique, MutaScript fut construit de sorte à éviter cette corrélation qui peut mener à des erreurs d'interprétations. 
+Afin d'évaluer le score MutaScript nous l'avons confrontés au RVIS [@Petrovski2013] ainsi qu'à pLI [@Lek2016] afin de comparer à la fois leur capacité à prédire les gènes intolérant aux variation en se basant sur des listes de gènes fournit par *the human phenotype ontology* (HPO) [@Kohler2014] mais aussi en testant sa capaciter à prédire les gènes considérés comme "dispensables" pour la vie et la reproduction humaine en se basant sur...  
 
-## Matériel & Méthodes  
+## Matériel & Méthodes 
 
-### Récupération des données ExAC, filtrage et pré analyse
+### Récupération et filtrage des données  
+
+1. **Le jeu de transcrits Ensembl** : Pour cette étude, nous nous sommes basés sur la version 75 du jeu de transcrits fournit par Ensembl [@Aken2017]. le fichier gtf contenant les données est téléchargeable [ici](insérer liens vers gtf). Cette version bien qu'elle ne soit pas la dernière publiée par Ensembl, est la dernière à se basée sur la version GRCH37/hg19 qui est la version du génome qu'a choisi ExAC pour effectuer l'alignement de ses données. À partir du fichier gtf, seul les transcrit taggés comme codant pour une protéine furent conservés, de même, l'ensemble des transcrits ayant une couverture mediane <15 sur plus de 30% de leur séquence codante dans les données ExAC furent filtrés.  
+2. **Filtrage des variants** : 
+    a. Lien pour télécharger le vcf ExAC  
+    b. L'ensemble des variants n'ayant pas la mention "PASS" dans la colonne FILTER du fichier VCF fournit par ExAC furent filtrés.  
+    c. L'ensemble des variant n'ayant pas une couverture médiane $\ge$ 15 furent filtrés  
+    d. L'ensemble des variants intronique (sauf ceux proches des sites d'epissage) et les variants situés dans les régions *upstream* et *downstream* furent filtrés  
+3. **Réannotation des données ExAC** :  Afin d'utiliser une version plus récente de VEP, l'annotation fut effectuées avec le logiciel VEP version 81 en utilisant la version 75 des transcrits Ensembl  (INSÉRER LA COMMANDE)  
+
+### Validation du score  
+
+1. **Les gènes HPO** :  
+2. **Les gènes dispensables** :  
 
 ## Résultats  
 
-### Définition de la formule de score  
+### Résultat de l'annotation  
 
-### Analyse de la corrélation  
+1. tableau avec l'ensemble des csq et l'impacte vep associée 
+2. fréquene des ces impactes  
+3 bar plot des poids  
 
-### Analyse HPO  
+### Détermination de la formule du score
+
+##### Le SLAC et le WSLAC  
+Pour chaque transcrit nous avons défini deux métrique. La première est le SLAC \@ref(eq:slac) qui se définit comme étant pour transcrit, la somme du log des comptages allélique de chaque variant chevauchant ce transcrit.
+
+\begin{multline} 
+  \forall\ transcrit\ T \in \{transcrit\ codant\ Ensembl\} : \\
+    SLAC_T = \sum_{v\ =\ variant\ chevauchant\ T}{log(allele\ count_v)}
+  (\#eq:slac)
+\end{multline} 
+
+
+
+\begin{multline} 
+  \forall\ transcrit\ T \in \{transcrit\ codant\ Ensembl\} : \\
+   WSLAC_T = \sum_{I=Impact}\sum_{v=variant}{Poid_I.log(allele\ count_v)}
+  (\#eq:slac)
+\end{multline} 
+
+
+
+
+<!-- \begin{equation}  -->
+<!--   WSLAC_T = \sum_{I=\sum_{v= variant}{log(allele\ count_v)} -->
+<!--   (\#eq:slac) -->
+<!-- \end{equation}  -->
+
+
+
+
+
+
+1. Le SLAC et le WSLAC  
+    a. formule du SLAC et du WSLAC  
+    b. graphique SLAC x WSLAC avec regression linéaire  
+    c. discussion sur la forme du graphique  
+    
+2. Calcule de l'offset (décalage de l'origine)  
+    a. but de l'offset  
+    b. graphique montrant l'évolution dse la corrélation CDS~score en fonction de l'offset  
+
+### Analyse du score  
+    
+1. distribution du ratio (histo)  
+
+2. Analyse du top / bottom 50  
+    a. pie chart contribution moyenne des 4 impacts  
+    b. analyse panther (les pathway + expression differencielle)  
+
+3. variance entre les fifférent transcrits d'un même gène  
+    a. histo de la variance  
+    b. disscution des gènes ayant la plus haute variance (interet de regarder le score par transcrit plutôt que par gène)  
+    
+## Comparaison avec RVIS et pLI  
+
+1. corrélation score~size  
+2. hpo  
+3. gene dispensable  
+    a. liste des 240 gènes  
+    b. recepteurs olphactifs  
 
 ## Conclusion  
-
-
-
-
-<!-- 1.	Stitziel, N. O., Kiezun, A. & Sunyaev, S. Computational and statistical approaches to analyzing variants identified by exome sequencing. Genome Biol. 12, 227 (2011).-->
-<!-- 2.	Lek, M. et al. Analysis of protein-coding genetic variation in 60,706 humans. Nature 536, 285–291 (2016). -->
-<!-- 3.	McLaren, W. et al. The Ensembl Variant Effect Predictor. Genome Biol. 17, 122 (2016). -->
-<!-- 4.	Petrovski, S. et al. Genic Intolerance to Functional Variation and the Interpretation of Personal Genomes. PLoS Genet. 9, e1003709 (2013). -->
-<!-- 5.	Köhler, S. et al. The Human Phenotype Ontology in 2017. Nucleic Acids Res. (2016). doi:10.1093/nar/gkw1039 -->
-
-
-
