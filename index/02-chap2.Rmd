@@ -1,7 +1,44 @@
 # Investigation génétique et physiologique de la globozoospermie {#globo}  
 
+## Introduction sur la globozoospermie  
+
+Comme expliqué précédemment, La globozoospermie est phénotype menant à l'infertilité masculine rare (prévalence < 0.1%) mais néanmoins sévère [@Sen2009]. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh, @Pedersen1974] (**Figure : **\@ref(fig:globospz). On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultantes de plusieurs facteurs, les premières études présentants des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphollogiques très typiques des spermatozoïdes laissaient penser à une cause monogénique.En 2007, une étude portant sur une famille juive ashkenaz comprenant six frères dont trois atteins a pu mettre lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysé, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gènes n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients [@Harbuz2011]. Les études effectuées ulterieurement sur ce phénotype ont ensuite pu montrer que les altération de gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011, @ElInati2012].
+
+```{r globospz,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.50"}
+
+fig.name <- "Observation au microscope à balayage d'un spermatozoïde normal (**A**) et d'un spermatozoïde globozoocéphale (**B**)"
+fig.from <- "[@Harbuz2011]"
+fig.info <- paste0(fig.name," adapté d'après ",fig.from)
+
+include_graphics(path = "figure/globo_normal_spz.png")
+
+```
+
+## Le gène DPY19L2
+
+<!-- 1. son origine, orthologue chez c evidence... -->
+Chez les mammifères il existe trois paralogues de *DPY19L2* de fonction encore inconnue et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplication de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gènes tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
+
+```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.50"}
+
+fig.name <- "Représentation schématique du mécanisme de NAHR causé par les séquences LCR flanquant le gène *DPY19L2*"
+fig.from <- "[@Coutton2013]"
+fig.description <- "**1** : Le gène *DPY19L2* est entouré par les séquences LCR1 et LCR2 qui correspondent respectivement au LCR centromérique et télomérique. Ces LCRs sont séparés par environs 200kb et chacun d'eux mesurent approximativement 28kb. **2** : NAHR résultant du mauvais alignement des LCRs 1 et 2 de la même chromatide entrainant la formation d'un allèle délété (a) et d'un ADN circulaire comprenant le gène *DPY19L2*. Cet ADN circulaire sera éliminé au cours sdu cycle cellulaire. **3** : NAHR résultant du mauvais alignement des LCRs 1 et 2 provenant de deux chromatides différentes conduisant à la formation d'un allèle délété (a) et d'un allèle dupliqué (b)"
+fig.info <- paste0(fig.name," adapté d'après ",fig.from," : ",fig.description)
+
+include_graphics(path = "figure/dpy_nahr.png")
+
+```
+
+### Les études sur le modèle murin  
+
+## Résultats  
+
+### Les méchanismes mutationnels (PLOS)
+### Les anomalies épigénétiques : (PLCzeta, compaction, fragmentation)
+### La transcriptomique
 
 
-<!-- ##### La globozoospermie   -->
+## Conclusion  
 
-<!-- La globozoospermie est une anomalie des spermatozoïdes caractérisé par une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée [@Singh, @Pedersen1974] -->
+

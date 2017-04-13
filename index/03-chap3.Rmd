@@ -34,6 +34,17 @@ L'ensemble des graphiques ont été générées en R version 3.3.3 [@RCoreTeam20
 ### Résultat de l'annotation  
 
 1. tableau avec l'ensemble des csq et l'impacte vep associée 
+
+```{r}
+
+
+
+
+
+```
+
+
+
 2. fréquene des ces impactes  
 3 bar plot des poids  
 
