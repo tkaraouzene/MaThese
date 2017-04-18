@@ -1,7 +1,3 @@
-```{r chap01.setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
 # Introduction {#introInf}
 
 ## La spermatogénèse  

@@ -2,18 +2,11 @@
 
 ## Introduction sur la globozoospermie  
 
-Comme expliqué précédemment, La globozoospermie est phénotype menant à l'infertilité masculine rare (prévalence < 0.1%) mais néanmoins sévère [@Sen2009]. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh, @Pedersen1974] (**Figure : **\@ref(fig:globospz). On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultantes de plusieurs facteurs, les premières études présentants des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphollogiques très typiques des spermatozoïdes laissaient penser à une cause monogénique.En 2007, une étude portant sur une famille juive ashkenaz comprenant six frères dont trois atteins a pu mettre lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysé, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gènes n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients [@Harbuz2011]. Les études effectuées ulterieurement sur ce phénotype ont ensuite pu montrer que les altération de gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011, @ElInati2012].
-
-
-
-For example, PLCzeta ,the sperm factor required for oocyte activation, is absent or minimally present in globozoospermia (Heytens et al., 2009; Taylor et al., 2010; Yoon et al., 2008). This compromises oocyte activation and therefore accounts, at least partly, for the low fertilization rate observed with these individuals.
-
-
-
+Comme expliqué précédemment, La globozoospermie est phénotype rare (< 0.1% des patients infertiles) mais néanmoins sévère [@Sen2009] de teratozoospermie menant à l'infertilité masculine. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh, @Pedersen1974] (**Figure : **\@ref(fig:globospz)). En plus des anomalies morphologiques, les spermatozoïdes globozoocéphales présentent également des desorganisations au niveau moléculaire. Par exemble, le facteur spermatique PLC$\zeta$ requit pour l'activation ovocitaire, est absent ou en quantité infime dans les spermatozoïdes globozoocéphales [@Heytens2009, @Taylor2010, @Yoon2008] compremettant ainsi l'activation ovocytaire et expliquant les faible taux de fécondation observés en IVF (*in vitro* fertilization) et en ICSI (intra cytoplasmic sperm injection) [citation...]. On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultantes de plusieurs facteurs, les premières études présentants des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphologiques très typiques des spermatozoïdes laissaient penser à une cause monogénique. En 2007, une étude portant sur une famille juive ashkenaz comprenant six frères dont trois atteins a pu lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysé, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gènes n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients analysés [@Harbuz2011]. Les études effectuées ulterieurement sur ce phénotype ont ensuite pu montrer que les altérations du gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011, @ElInati2012].  
 
 ```{r globospz,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.50"}
 
-fig.name <- "Observation au microscope à balayage d'un spermatozoïde normal (**A**) et d'un spermatozoïde globozoocéphale (**B**)"
+fig.name <- "Observation au microscope à balayage d'un spermatozoïde normal (**A**) et d'un spermatozoïde globozoocéphale (**B**) (changer les photos avec celles sur lesquelles on voit l'acrosome colorés)"
 fig.from <- "[@Harbuz2011]"
 fig.info <- paste0(fig.name," adapté d'après ",fig.from)
 
@@ -21,12 +14,9 @@ include_graphics(path = "figure/globo_normal_spz.png")
 
 ```
 
-## Le gène DPY19L2
-
-<!-- 1. son origine, orthologue chez c evidence... -->
 Chez les mammifères il existe trois paralogues de *DPY19L2* de fonction encore inconnue et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplication de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gènes tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
 
-```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.50"}
+```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.5"}
 
 fig.name <- "Représentation schématique du mécanisme de NAHR causé par les séquences LCR flanquant le gène *DPY19L2*"
 fig.from <- "[@Coutton2013]"
@@ -37,19 +27,37 @@ include_graphics(path = "figure/dpy_nahr.png")
 
 ```
 
-### Les études sur le modèle murin  
+En 2012, le développement d'un modèle murin KO *Dpy19l2*$^{-/-}$ a permi de mieux comprendre les mécanismes moléculaires impliqué dans la globozoospermie causée par la délétion du gène *DPY19L2* chez l'huamin [@Pierre2012]. Tout d'abord car ce modèle de souris KO présentait les mêmes caractéristiques que les patients humains. Tout d'abord, ces souris étaient infertiles et présentaient des spermatozoïdes globozoocéphales (**Figure : **\@ref(fig:mouseglobo)) mais aussi et surtout, l'ensembles des autres dysfonctionnement étaient retrouvés, c'est à dire : l'absence de l'acrosome, les défaults morphologiques du noyau, de l'enveloppe nucléaire et de l'acroplaxome ainsi que le mauvais positionnement de la manchette [@Pierre2012]. Ainsi il a pu être démontré que la protéine Dpy19l2 étaient principalement exprimé dans le spermatides et plus spécifiquement dans la membrane nucléaire intèrne faisant face à la vésicule acrosomale et que l'absence de cette protéine entrainait la destabilisation à la fois de la lamine nucléaire, de la jonction entre l'acroplaxome et l'enveloppe nucléaire [@Pierre2012]. 
 
-En 2012, le développement d'un modèle murin KO *Dpy19l2*$^{-/-}$ a permi de mieux comprendre les mécanismes moléculaires impliqué dans la globozoospermie causée par la délétion du gène *DPY19L2* chez l'huamin [@Pierre2012]. Tout d'abord car ce modèle de souris KO présentait les mêmes caractéristiques que les patients humains. Tout d'abord, ces souris étaient infertiles et présentaient des spermatozoïdes globozoocéphales (figure phénotype souris) mais aussi et surtout, l'ensembles des autres dysfonctionnement étaient retrouvés, c'est à dire : l'absence de l'acrosome, les défaults morphologiques du noyau, de l'enveloppe nucléaire et de l'acroplaxome ainsi que le mauvais positionnement de la manchette [@Pierre2012]. Ainsi il a pu être démontré que la protéine Dpy19l2 étaient principalement exprimé dans le spermatides et plus spécifiquement dans la membrane nucléaire intèrne faisant face à la vésicule acrosomale et que l'absence de cette protéine entrainait la destabilisation à la fois de la lamine nucléaire, de la jonction entre l'acroplaxome et l'enveloppe nucléaire [@Pierre2012]. 
+```{r mouseglobo,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.8"}
+
+fig.name <- "Comparaison entre les spermatozoïdes des souris *Dpy19l2*$^{-/-}$ (à gauche) et les souris sauvages *Dpy19l2*$^{+/+}$ (à droite)"
+fig.from <- "[@Pierre2012]"
+fig.info <- paste0(fig.name," d'après ",fig.from)
+
+include_graphics(path = "figure/mouse_globo_spz.png")
 
 
+```
 
 ## Résultats  
 
+### Objectifs  
+
 ### Les méchanismes mutationnels (PLOS)
+
+####  Mise en évidence d'un excès de duplication dans la population générale  
+
 ### Les anomalies épigénétiques : (PLCzeta, compaction, fragmentation)
-### La transcriptomique
+
+### La transcriptomique  
+
+
+\begin{flushleft} 
+\includegraphics[width=7.5in]{/home/karaout/MaThese/index/bib/12610_2013_Article_8.pdf}
+\newpage
+\end{flushleft}
 
 
 ## Conclusion  
-
 
