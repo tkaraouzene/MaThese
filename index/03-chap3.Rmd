@@ -2,20 +2,20 @@
 
 ## Intro  
 
-Comme vu précédemment, l'emmergence du séquençage haut débit avec nottament les séquençage de génomes ou d'exomes entiers a révolutionné les méthodes de recherche dans le cadre d'étude phénotype-génotype...  
+<!-- Comme vu précédemment, l'émergence du séquençage haut débit avec notamment les séquençages de génomes ou d'exomes entiers a révolutionné les méthodes de recherche dans le cadre d'étude phénotype-génotype...   -->
 
 
 
 
-Etats des lieux : les logiciels existants, les pipelines leurs limites.
+<!-- Etats des lieux : les logiciels existants, les pipelines leurs limites. -->
 
-Ce chapitre décrit la constitution et l’utilisation d’un pipeline d’analyse des données de séquençage exomique et son utilisation dans le cadre de la recherche de mutations entrainant différents phénotypes d’infertilité. La difficulté des études génétiques visant à identifier des gènes pathogènes vient de l’abondance de variants rares chez tout un chacun et de la difficulté d’effectuer des tris efficaces et justes pour ne retenir que la ou les mutations causales. Thomas développe un pipeline se basant sur des outils existant mais permettant d’effectuer des tris successif efficaces et pertinents  
+<!-- Ce chapitre décrit la constitution et l’utilisation d’un pipeline d’analyse des données de séquençage exomique et son utilisation dans le cadre de la recherche de mutations entrainant différents phénotypes d’infertilité. La difficulté des études génétiques visant à identifier des gènes pathogènes vient de l’abondance de variants rares chez tout un chacun et de la difficulté d’effectuer des tris efficaces et justes pour ne retenir que la ou les mutations causales. Thomas développe un pipeline se basant sur des outils existant mais permettant d’effectuer des tris successifs efficaces et pertinents   -->
 
-## Resultats  
+## Résultats  
 
 ### Description de la pipeline  
 
-description des outils choisis et de la pipeline  
+<!-- description des outils choisis et de la pipeline   -->
 
 ### utilisations de la pipeline pour l’identifications de variants pathogènes et l’identification de nouveaux gènes impliqués dans l’infertilité  
 
@@ -27,11 +27,11 @@ description des outils choisis et de la pipeline
 
 #### Etude d’une large cohorte de patients MMAF  
 
-1. Les nouveaux gènes candidats évidents  
-2. L’efficacité diagnostique   
-3. L’analyse individuelle  
-    a. Les mutations dans les gènes identifiés  
-    b. Liste complète des gènes avec 2 variants tronquants  
-    c Liste complète des gènes avec deux variants dont un tronquant  
-    d. Liste des  gènes avec 2 variants intronique ou faux-sens/synonymes avec un score élevé UMD-predictor ou HSF.  
-    e. Liste des gènes avec un variant hétérozygote tronquant  
+<!-- 1. Les nouveaux gènes candidats évidents   -->
+<!-- 2. L’efficacité diagnostique    -->
+<!-- 3. L’analyse individuelle   -->
+<!--     a. Les mutations dans les gènes identifiés   -->
+<!--     b. Liste complète des gènes avec 2 variants tronquants   -->
+<!--     c Liste complète des gènes avec deux variants dont un tronquant   -->
+<!--     d. Liste des  gènes avec 2 variants intronique ou faux-sens/synonymes avec un score élevé UMD-predictor ou HSF.   -->
+<!--     e. Liste des gènes avec un variant hétérozygote tronquant   -->
