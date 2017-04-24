@@ -118,8 +118,6 @@ df_filter_freq <- filter(df_filter_impact,
 
 df_passing_filter_genes <- distinct(df_filter_freq,SYMBOL)
 
-# df_passing_filter_genes %>% collect() %>% .[["SYMBOL"]]
-
 ```
 
 Ainsi, comme pour les études précédentes nous avons appliqué notre pipeline d'analyse nous permettant de recansser un total de `r nrow(df_variants_b1)` variants différents pour B1 et `r nrow(df_variants_b2)` différents pour B2 (**Figure : **\@ref(fig:varb1b2)). Ayant emmit l'hypothèse d'une cause génétique commune expliquant le phénotype de B1 et B2, nous nous sommes concentrés uniquement sur les variants homozygotes communs aux deux frères réduisant ainsi notre liste de variant à un total de `r nrow(df_filter_common_homo_variants)` variants (... SNVs et ... indels). À partir de cette liste, nous avons soustrait l'ensemble des variants prédit par VEP comme n'impactant pas un transcrit codant pour une protéine. De même, nous avons filtrer l'ensemble des variant présent dans les séquences UTRs, causant une substitution synonymes ou une substitution faux-sens prédite "benign" par PolyPhen2 et "tolerated" par SIFT. Suite à cela, nous avons filtrer les variants fréquents dans la population générale en filtrant l'ensemble des variant ayant une MAF $\ge$ `r maf_cutoff`, de même, nous avons confrontés les variants restant à une base de donnée interne ressencant les variant de `r nrow(select(df_ctrl,RUN) %>% distinct(RUN))` individus non atteint d'azoospermie afin de filtrer les variants homozygotes retrouvés dans cette basse de données de contrôle.  
@@ -141,7 +139,29 @@ ggplot(df_variants_b1_b2,aes(GENOTYPE)) +
 
 ```
 
-Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à une liste de `r nrow(distinct(df_filter_freq,CHR,POSITION,REF,ALT))` variants impactant `r nrow(df_passing_filter_genes)` gènes différents : *SPINK2* et *GUF1*  
+Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à une liste de `r nrow(distinct(df_filter_freq,CHR,POSITION,REF,ALT))` variants impactant `r nrow(df_passing_filter_genes)` gènes différents : *SPINK2* et *GUF1*. Parmi ces deux gènes, seul *SPINK2* était décrit comme fortement exprimé dans le testicule [INS2RER FIGURE ACEVIEW]. Nous avons d'ailleurs pu confirmer cette forte expression par RT-PCR quantitative en temps réel  forte à la fois chez l'Homme (**Figure : **\@ref(fig:spink2exp) - **A**) et chez la souris (**Figure : **\@ref(fig:spink2exp) - **B**). Ces données ont donc fait de *SPINK2* le seul candidat évident pouvant expliquer ce phénotype. Le variant partagé par les deux frères : Chr4:57686748G>C n'a été recencé dans aucune des bases de données que sont ExAC, 1000Genomes et ESP6500. Le gène *SPINK2* est localisé sur le chromosome 4 et contient 4 exons (**Figure : **\@ref(fig:spink2exp)). Sa localisation intronique à 3 pb du 2$^{ième}$ exon indique que ce variant pourrait avoir un effet sur l'épissage de l'ARNm       
+
+```{r spink2exp, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.42"}
+
+fig.name <- "Expression du gène *SPINK2* dans plusieurs tissus"
+fig.description <- "On peut constater que chez l'humain (**A**) comme chez la souris (**B**), le gène *SPINK2* a non seulement une forte expression exclusive au testicule"
+fig.info <- paste(fig.name,fig.description, sep = " : ")
+
+include_graphics(path = "figure/spink2_expression.png")
+
+```
+
+
+```{r spink2trans, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.42"}
+
+fig.name <- "Représentation du gène *SPINK2*"
+fig.description <- "le variant c.206-3C>G observé chez les frères B1 et B2 crée un nouveau site accepteur d'épissage ajoutant 2 nucléotides à l'exon 2 induisant un décalage du cadre de lecture menant à un codon stop 3 nucléotides plus loin et / ou causant le saut de l'exon 2 menant à un codon stop prématuré"
+fig.info <- paste(fig.name,fig.description, sep = " : ")
+
+include_graphics(path = "figure/spink2_transcripts.png")
+
+```
+
 
 #### Etude d’une large cohorte de patients MMAF  
 
