@@ -247,7 +247,7 @@ L'organisation mondiale de la santé définie l'infertilité comme étant : "*un
 
 Chez l'homme, l'infertilité est associée à une altération quantitative et / ou qualitative des spermatozoïdes présents dans l'éjaculat. L'ensemble de ces altérations peuvent être détectées et quantifiées dans des laboratoires spécialisés par réalisation d'un spermogramme. Au cours de celui-ci, plusieurs critères tel que le volume de sperme sécrété, son pH, la quantité et la vitalité des spermatozoïdes qu'il contient seront évalués. La proportion de cellules immatures sera elle aussi analysée. Ces cellules épithéliales de l’urètre, appelées aussi cellules rondes, se retrouvent à la fois dans l'éjaculat des individus ayant une quantité de spermatozoïdes "normale" [@Michael1937,@Tomlinson1993a], chez les individus présentant une quantité basse de spermatozoïdes [@MacLeod1970, @Tomlinson1993] ou en étant dépourvu [@Kurilo]. Cependant, leur nombre augmente tandis que la quantité de spermatozoïde diminue [@SPERLING1971].  
 
-#### Liée à la quantité  
+#### Liée à la quantité {#infquant}  
 
 Chez l'humain, l'arrêt de la spermatogénèse est défini comme l'incapacité des cellules spermatogénétiques à devenir des spermatozoïdes matures. Elle peut survenir à n'importe quelle étape de la formation des cellules germinales. Les arrêts au stade de spermatocyte I sont les plus fréquents, suivi par l'arrêt au niveau des spermatides et moins fréquemment au niveau des spermatogonies [@Girgis].  
 

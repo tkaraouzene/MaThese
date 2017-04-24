@@ -1,5 +1,23 @@
 # Mise en place d’une stratégie pour l’analyse des données exomiques – application en recherche clinique  
 
+```{r include.packages2, include = FALSE}
+# This chunk ensures that the thesisdown package is
+# installed and loaded. This thesisdown package includes
+# the template files for the thesis.
+if(!require(devtools))
+  install.packages("devtools", repos = "http://cran.rstudio.com")
+if(!require(thesisdown))
+  devtools::install_github("ismayc/thesisdown")
+library(thesisdown)
+library(knitr)
+
+opts_knit$set(eval.after = c("fig.cap","fig.scap"))
+
+knitr::opts_chunk$set(fig.align='center',echo=FALSE)
+
+knitr::opts_knit$set(kable.force.latex = TRUE)
+
+```
 ## Intro  
 
 <!-- Comme vu précédemment, l'émergence du séquençage haut débit avec notamment les séquençages de génomes ou d'exomes entiers a révolutionné les méthodes de recherche dans le cadre d'étude phénotype-génotype...   -->
@@ -24,6 +42,106 @@
 #### Etude familiale echec de fécondation -> PLCzeta  
 
 #### Etude familiale azoospermie : SPINK2  
+
+Comme nous avons pu le voir, l'[azoospermie](#infquant) est un phénotype d'infertilité masculine caractérisé par l'absence de spermatozoïde dans l'éjaculat. En 2017, notre équipe a publiée des résultats liant une mutation du gène *SPINK2* à ce phénotype. Pour cette étude, nous avons effectué un séquençage exomique de deux frères azoospermes (B1 et B2) issus d'un union consanguin puisque nleurs parents sont cousin au deuxième degré (**Figure : **\@ref(fig:spink2tree)). Étant donné l'historique consanguin de cette famille nous avons emis l'hypothèse d'un phénotype à transmission autosomique recessif. 
+
+```{r spink2tree,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.75"}
+
+fig.name <- "Arbre généalogique des deux frères azoospermes B1 et B2"
+fig.description <- "Sur cette arbre nous pouvons observés la parentés des parents (P1 et P2), cousins au deuxième degré"
+fig.info <- paste(fig.name,fig.description, sep = " : ")
+
+include_graphics(path = "figure/spink2_arbre_genealogique.png")
+
+```
+
+```{r spink2data, message=FALSE, cache=TRUE}
+
+library(tidyr)
+library(dplyr)
+library(data.table)
+library(ggplot2)
+
+
+####
+# Loading data
+####
+
+df_variants_b1_b2 <- fread("../../genotype_spink2_brothers.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE) %>%
+  gather(RUN,CALL,starts_with("Ghs")) %>%
+  filter(CALL %in% c(2,3,"b","c")) %>%
+  mutate(STRAND = if_else(CALL %in% c(2,3),"Both_strand","Single_strand"),
+         GENOTYPE = if_else(CALL %in% c(2,"b"),"Heterozygous","Homozygous"),
+         RUN = if_else(RUN == "Ghs44","B1","B2")) 
+
+df_ctrl <- fread("../../genotype_not_azoo.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE) %>%
+  gather(RUN,CALL,starts_with("Ghs")) %>%
+  filter(CALL %in% c(3,"c")) %>%
+  select(-CALL)
+
+df_all_coding_variants <- fread("../../all_coding_variants_vep81.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE)
+
+####
+# Filtering
+####
+
+# Variants carried by B1
+df_variants_b1 <- filter(df_variants_b1_b2, RUN == "B1")
+# Variants carried by B2
+df_variants_b2 <- filter(df_variants_b1_b2, RUN == "B2")
+
+# Only homozygous variants 
+# Shared by B1 AND B2
+df_filter_common_homo_variants <- df_variants_b1 %>%
+  inner_join(df_variants_b2, by=c("CHR","POSITION","REF","ALT","GENOTYPE")) %>%
+  filter(GENOTYPE == "Homozygous") %>%
+  select(-ends_with(".x"), -ends_with(".y"),-GENOTYPE) %>%
+  inner_join(df_all_coding_variants,by = c("CHR", "POSITION", "REF", "ALT"))
+
+df_filter_impact <-   filter(df_filter_common_homo_variants,
+                             Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
+                             Consequence != "5_prime_UTR_variant",
+                             Consequence != "3_prime_UTR_variant",
+                             Consequence != "intergenic_variant",
+                             !grepl("NMD_transcript_variant",Consequence),
+                             !(grepl("tolerated",SIFT) & grepl("benign",PolyPhen)))
+
+maf_cutoff <- 0.01
+df_filter_freq <- filter(df_filter_impact,
+                         is.na(ExAC_AF) | ExAC_AF <= maf_cutoff,
+                         is.na(ESP) | ESP <= maf_cutoff,
+                         is.na(`1KG`) | `1KG` <= maf_cutoff) %>%
+  # Filter variants observed as homo in other patho
+  anti_join(df_ctrl, by = c("CHR", "POSITION", "REF", "ALT")) %>%
+  select(-Feature_type,-BIOTYPE,-SYMBOL_SOURCE,-HGNC_ID,CADD_RAW,ExAC_AF_FIN,ExAC_AF_OTH,-(ExAC_AF_AMR:ExAC_AF_SAS))
+
+
+df_passing_filter_genes <- distinct(df_filter_freq,SYMBOL)
+
+# df_passing_filter_genes %>% collect() %>% .[["SYMBOL"]]
+
+```
+
+Ainsi, comme pour les études précédentes nous avons appliqué notre pipeline d'analyse nous permettant de recansser un total de `r nrow(df_variants_b1)` variants différents pour B1 et `r nrow(df_variants_b2)` différents pour B2 (**Figure : **\@ref(fig:varb1b2)). Ayant emmit l'hypothèse d'une cause génétique commune expliquant le phénotype de B1 et B2, nous nous sommes concentrés uniquement sur les variants homozygotes communs aux deux frères réduisant ainsi notre liste de variant à un total de `r nrow(df_filter_common_homo_variants)` variants (... SNVs et ... indels). À partir de cette liste, nous avons soustrait l'ensemble des variants prédit par VEP comme n'impactant pas un transcrit codant pour une protéine. De même, nous avons filtrer l'ensemble des variant présent dans les séquences UTRs, causant une substitution synonymes ou une substitution faux-sens prédite "benign" par PolyPhen2 et "tolerated" par SIFT. Suite à cela, nous avons filtrer les variants fréquents dans la population générale en filtrant l'ensemble des variant ayant une MAF $\ge$ `r maf_cutoff`, de même, nous avons confrontés les variants restant à une base de donnée interne ressencant les variant de `r nrow(select(df_ctrl,RUN) %>% distinct(RUN))` individus non atteint d'azoospermie afin de filtrer les variants homozygotes retrouvés dans cette basse de données de contrôle.  
+
+```{r varb1b2, fig.cap=fig.info,fig.scap=fig.name,fig.width=5.5}
+
+fig.name <- "Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés"
+fig.description <- ""
+fig.info <- paste(fig.name)
+
+ggplot(df_variants_b1_b2,aes(GENOTYPE)) +
+  geom_bar(aes(fill = RUN),position = position_dodge()) +
+  scale_fill_discrete(name = "Patient") +
+  xlab("Variants genotypes") +
+  ylab("Count")
+
+# + 
+#   theme(legend.position="bottom")
+
+```
+
+Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à une liste de `r nrow(distinct(df_filter_freq,CHR,POSITION,REF,ALT))` variants impactant `r nrow(df_passing_filter_genes)` gènes différents : *SPINK2* et *GUF1*  
 
 #### Etude d’une large cohorte de patients MMAF  
 

@@ -152,6 +152,17 @@ class (for LaTeX) and the R bookdown package, in general.
 %%
 %
 
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 \begin{document}
 
 % Everything below added by CII
@@ -787,7 +798,8 @@ class (for LaTeX) and the R bookdown package, in general.
   tandis que la quantité de spermatozoïde diminue (SPERLING \& KADEN,
   \protect\hyperlink{ref-SPERLING1971}{1971}).
   
-  \subsubsection{Liée à la quantité}\label{liee-a-la-quantite}
+  \hypertarget{infquant}{\subsubsection{Liée à la
+  quantité}\label{infquant}}
   
   Chez l'humain, l'arrêt de la spermatogénèse est défini comme
   l'incapacité des cellules spermatogénétiques à devenir des
@@ -2023,6 +2035,58 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Etude familiale azoospermie :
   SPINK2}\label{etude-familiale-azoospermie-spink2}
+  
+  Comme nous avons pu le voir, l'\protect\hyperlink{infquant}{azoospermie}
+  est un phénotype d'infertilité masculine caractérisé par l'absence de
+  spermatozoïde dans l'éjaculat. En 2017, notre équipe a publiée des
+  résultats liant une mutation du gène \emph{SPINK2} à ce phénotype. Pour
+  cette étude, nous avons effectué un séquençage exomique de deux frères
+  azoospermes (B et B2) issus d'un union consanguin puisque nleurs parents
+  sont cousin au deuxième degré (\textbf{Figure : }\ref{fig:spink2tree}).
+  Étant donné l'historique consanguin de cette famille nous avons emis
+  l'hypothèse d'un phénotype à transmission autosomique recessif.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.75]{figure/spink2_arbre_genealogique} 
+  
+  }
+  
+  \caption[Arbre généalogique des deux frères azoospermes B1 et B2]{Arbre généalogique des deux frères azoospermes B1 et B2 : Sur cette arbre nous pouvons observés la parentés des parents (P1 et P2), cousins au deuxième degré}\label{fig:spink2tree}
+  \end{figure}
+  
+  Ainsi, comme pour les études précédentes nous avons appliqué notre
+  pipeline d'analyse nous permettant de recansser un total de 88546
+  variants différents pour B1 et 66521 différents pour B2 (\textbf{Figure
+  : }\ref{fig:varb1b2}). Ayant emmit l'hypothèse d'une cause génétique
+  commune expliquant le phénotype de B1 et B2, nous nous sommes concentrés
+  uniquement sur les variants homozygotes communs aux deux frères
+  réduisant ainsi notre liste de variant à un total de 27604 variants
+  (\ldots{} SNVs et \ldots{} indels). À partir de cette liste, nous avons
+  soustrait l'ensemble des variants prédit par VEP comme n'impactant pas
+  un transcrit codant pour une protéine. De même, nous avons filtrer
+  l'ensemble des variant présent dans les séquences UTRs, causant une
+  substitution synonymes ou une substitution faux-sens prédite ``benign''
+  par PolyPhen2 et ``tolerated'' par SIFT. Suite à cela, nous avons
+  filtrer les variants fréquents dans la population générale en filtrant
+  l'ensemble des variant ayant une MAF \(\ge\) 0.01, de même, nous avons
+  confrontés les variants restant à une base de donnée interne ressencant
+  les variant de 83 individus non atteint d'azoospermie afin de filtrer
+  les variants homozygotes retrouvés dans cette basse de données de
+  contrôle.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/varb1b2-1} 
+  
+  }
+  
+  \caption[Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés]{Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés}\label{fig:varb1b2}
+  \end{figure}
+  
+  Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à
+  une liste de 2 variants impactant 2 gènes différents : \emph{SPINK2} et
+  \emph{GUF1}
   
   \subsubsection{Etude d'une large cohorte de patients
   MMAF}\label{etude-dune-large-cohorte-de-patients-mmaf}
