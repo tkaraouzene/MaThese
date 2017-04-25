@@ -43,7 +43,9 @@ knitr::opts_knit$set(kable.force.latex = TRUE)
 
 #### Etude familiale azoospermie : SPINK2  
 
-Comme nous avons pu le voir, l'[azoospermie](#infquant) est un phénotype d'infertilité masculine caractérisé par l'absence de spermatozoïde dans l'éjaculat. En 2017, notre équipe a publiée des résultats liant une mutation du gène *SPINK2* à ce phénotype. Pour cette étude, nous avons effectué un séquençage exomique de deux frères azoospermes (B1 et B2) issus d'un union consanguin puisque nleurs parents sont cousin au deuxième degré (**Figure : **\@ref(fig:spink2tree)). Étant donné l'historique consanguin de cette famille nous avons emis l'hypothèse d'un phénotype à transmission autosomique recessif. 
+##### Description de la cohorte familiale  
+
+Comme nous avons pu le voir, l'[azoospermie](#infquant) est un phénotype d'infertilité masculine caractérisé par l'absence de spermatozoïde dans l'éjaculat. En 2017, notre équipe a publiée des résultats liant une mutation du gène *SPINK2* à ce phénotype. Pour cette étude, nous avons effectué un séquençage exomique de deux frères azoospermes (B1 et B2) issus d'un union consanguin puisque leurs parents sont cousin au deuxième degré (**Figure : **\@ref(fig:spink2tree)). Étant donné l'historique consanguin de cette famille nous avons emis l'hypothèse d'un phénotype à transmission autosomique recessif. 
 
 ```{r spink2tree,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.75"}
 
@@ -120,6 +122,8 @@ df_passing_filter_genes <- distinct(df_filter_freq,SYMBOL)
 
 ```
 
+##### Séquençage WES et analyse bioinformatique  
+
 Ainsi, comme pour les études précédentes nous avons appliqué notre pipeline d'analyse nous permettant de recansser un total de `r nrow(df_variants_b1)` variants différents pour B1 et `r nrow(df_variants_b2)` différents pour B2 (**Figure : **\@ref(fig:varb1b2)). Ayant emmit l'hypothèse d'une cause génétique commune expliquant le phénotype de B1 et B2, nous nous sommes concentrés uniquement sur les variants homozygotes communs aux deux frères réduisant ainsi notre liste de variant à un total de `r nrow(df_filter_common_homo_variants)` variants (... SNVs et ... indels). À partir de cette liste, nous avons soustrait l'ensemble des variants prédit par VEP comme n'impactant pas un transcrit codant pour une protéine. De même, nous avons filtrer l'ensemble des variant présent dans les séquences UTRs, causant une substitution synonymes ou une substitution faux-sens prédite "benign" par PolyPhen2 et "tolerated" par SIFT. Suite à cela, nous avons filtrer les variants fréquents dans la population générale en filtrant l'ensemble des variant ayant une MAF $\ge$ `r maf_cutoff`, de même, nous avons confrontés les variants restant à une base de donnée interne ressencant les variant de `r nrow(select(df_ctrl,RUN) %>% distinct(RUN))` individus non atteint d'azoospermie afin de filtrer les variants homozygotes retrouvés dans cette basse de données de contrôle.  
 
 ```{r varb1b2, fig.cap=fig.info,fig.scap=fig.name,fig.width=5.5}
@@ -151,16 +155,39 @@ include_graphics(path = "figure/spink2_expression.png")
 
 ```
 
-
 ```{r spink2trans, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.42"}
 
 fig.name <- "Représentation du gène *SPINK2*"
-fig.description <- "le variant c.206-3C>G observé chez les frères B1 et B2 crée un nouveau site accepteur d'épissage ajoutant 2 nucléotides à l'exon 2 induisant un décalage du cadre de lecture menant à un codon stop 3 nucléotides plus loin et / ou causant le saut de l'exon 2 menant à un codon stop prématuré"
+fig.description <- "L'épissage du gène *SPINK2* crée un transcrit de 4 exons (Transcrit normal). Cependant, le variant c.206-3C>G observé chez les frères B1 et B2 crée un nouveau site accepteur d'épissage ajoutant 2 nucléotides à l'exon 2 induisant un décalage du cadre de lecture menant à un codon stop 3 nucléotides plus loin (Transcrit 1) et / ou causant le saut de l'exon 2 menant à un codon stop prématuré (Transcrit 2)"
 fig.info <- paste(fig.name,fig.description, sep = " : ")
 
 include_graphics(path = "figure/spink2_transcripts.png")
 
 ```
+
+##### Analyse du phénotypoe murin de souris *Spink2*$^{-/-}$  
+
+Afin de confirmer que l'abscence de la protéine SPINK2 entraine un phénotype d'infertilité, nous avons étudié les caractéristiques reproductive de souris KO *Spink2*$^{-/-}$.  L'abscence d'ARNm testiculaire chez les souris KO a été confirmé par qRT-PCR montrant aucune amplification du gène *Spink2*, contrairement aux souris sauvages. Les analyses de ces souris a permi de mettre en évidence l'infertilité des souris KO (**Figure : **\@ref(fig:spink2komice) - **A**) dûe à l'abscence de spermatozoïdes dans leur éjaculat (**Figure : **\@ref(fig:spink2komice) - **B**). De même, nous avons pu observé une diminution significative de la taille des testicules chez les souris *Spink2*$^{-/-}$ (**Figure : **\@ref(fig:spink2komice) - **B**).  
+
+```{r spink2komice, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=.35"}
+
+fig.name <- "Mise en évidence de l'azoospermie des souris *Spink2*$^{-/-}$"
+fig.description <- "**A** : Taille des portées de souris mâles *Spink2*$^{+/-}$ et *Spink2*$^{-/-}$ avec des souris femelles sauvages (n=5). **B** : Ratio (poid du testicule) / (poid du corps) des souris sauvages et *Spink2*$^{-/-}$. **C** : Concentration spermatique au sein de l'épididyme chez des souris sauvages, *Spink2*$^{+/-}$ et *Spink2*$^{-/-}$ (n=10)"
+fig.info <- paste(fig.name,fig.description, sep = " : ")
+
+include_graphics(path = "figure/spink2_ko_mice_fertility.png")
+
+```
+
+
+
+
+##### Estimation de l'incidence du gène *SPINK2* chez des patients azoospermes  
+
+Afin 
+
+
+
 
 
 #### Etude d’une large cohorte de patients MMAF  
