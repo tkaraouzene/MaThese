@@ -188,25 +188,14 @@ include_graphics(path = "figure/spink2_transcripts.png")
 
 ```
 
-##### Analyse du phénotypoe murin de souris *Spink2*$^{-/-}$  
-
-Afin de confirmer que l'abscence de la protéine SPINK2 entraine un phénotype d'infertilité, nous avons étudié les caractéristiques reproductive de souris KO *Spink2*$^{-/-}$.  L'abscence d'ARNm testiculaire chez les souris KO a été confirmé par qRT-PCR montrant aucune amplification du gène *Spink2*, contrairement aux souris sauvages. Les analyses de ces souris a permi de mettre en évidence l'infertilité des souris KO (**Figure : **\@ref(fig:spink2komice) - **A**) dûe à l'abscence de spermatozoïdes dans leur éjaculat (**Figure : **\@ref(fig:spink2komice) - **B**). De même, nous avons pu observé une diminution significative de la taille des testicules chez les souris *Spink2*$^{-/-}$ (**Figure : **\@ref(fig:spink2komice) - **B**).  
-
-```{r spink2komice, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=.35"}
-
-fig.name <- "Mise en évidence de l'azoospermie des souris *Spink2*$^{-/-}$"
-fig.description <- "**A** : Taille des portées de souris mâles *Spink2*$^{+/-}$ et *Spink2*$^{-/-}$ avec des souris femelles sauvages (n=5). **B** : Ratio (poid du testicule) / (poid du corps) des souris sauvages et *Spink2*$^{-/-}$. **C** : Concentration spermatique au sein de l'épididyme chez des souris sauvages, *Spink2*$^{+/-}$ et *Spink2*$^{-/-}$ (n=10)"
-fig.info <- paste(fig.name,fig.description, sep = " : ")
-
-include_graphics(path = "figure/spink2_ko_mice_fertility.png")
-
-```
-
 ##### Estimation de l'incidence du gène *SPINK2* chez des patients azoospermes  
 
-Afin 
+Afin de déterminer l'incidence des variants du gène *SPINK2* dans la population azoospermiques nous avos séquencer l'intégralité des séquences codantes de ce gène chez 611 individus comprenant 210 patients azoospermiques, 393 oligozoospermiques et présentant un phénotype non spécifié. Parmi cet ensemble de patient, seul le patient 105 (P105) présentant un phénotype d'oligozoospermie s'est révélé porteur d'un variant non répertorié dans les bases de données et présentant un impact prédit comme délétère. Ce variant, c.1A>T, présent à l'état hétérozygote chez P105 affecte le codon start décalant ainsi le démarage de la traduction produisant ainsi une protéine tranquée.   
 
-##### La fonction de *SPINK2*  
+##### Autres résultats  
+
+Dans cette même études nous avons égallement pu étudié les caractéristiques reproductives de souris KO *Spink2*$^{-/-}$ et de souris hétérozygotes *Spink2*$^{+/-}$ . Ainsi, nous avons pu confirmer que les souris mâles KO étaient infertiles et présentaient un phénotype d'azoospermie ainsi qu'une diminution de la taille de leurs testicules tandis que les hétérozygotes étaient parfaitement fertiles bien leur nombre de spermatozoïdes par mL de sperme soit plus faibles que les souris sauvages. Les souris femelles, elles, présentaient des caractéristiques reproductives tout à fait normal.    
+
 
 ##### Conclusion *SPINK2*  
 
