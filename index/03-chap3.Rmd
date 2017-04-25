@@ -41,6 +41,8 @@ knitr::opts_knit$set(kable.force.latex = TRUE)
 
 #### Etude familiale echec de fécondation -> PLCzeta  
 
+\newpage  
+
 #### Etude familiale azoospermie : SPINK2  
 
 ##### Description de la cohorte familiale  
@@ -63,7 +65,7 @@ library(tidyr)
 library(dplyr)
 library(data.table)
 library(ggplot2)
-
+library(stringi)
 
 ####
 # Loading data
@@ -72,7 +74,8 @@ library(ggplot2)
 df_variants_b1_b2 <- fread("../../genotype_spink2_brothers.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE) %>%
   gather(RUN,CALL,starts_with("Ghs")) %>%
   filter(CALL %in% c(2,3,"b","c")) %>%
-  mutate(STRAND = if_else(CALL %in% c(2,3),"Both_strand","Single_strand"),
+  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT),"SNV","Indel"), 
+         STRAND = if_else(CALL %in% c(2,3),"Both_strand","Single_strand"),
          GENOTYPE = if_else(CALL %in% c(2,"b"),"Heterozygous","Homozygous"),
          RUN = if_else(RUN == "Ghs44","B1","B2")) 
 
@@ -94,11 +97,12 @@ df_variants_b2 <- filter(df_variants_b1_b2, RUN == "B2")
 
 # Only homozygous variants 
 # Shared by B1 AND B2
-df_filter_common_homo_variants <- df_variants_b1 %>%
-  inner_join(df_variants_b2, by=c("CHR","POSITION","REF","ALT","GENOTYPE")) %>%
-  filter(GENOTYPE == "Homozygous") %>%
-  select(-ends_with(".x"), -ends_with(".y"),-GENOTYPE) %>%
+df_filter_common_variants <- df_variants_b1 %>%
+  inner_join(df_variants_b2, by=c("CHR","POSITION","REF","ALT","GENOTYPE","TYPE")) %>%
+  select(-ends_with(".x"), -ends_with(".y")) %>%
   inner_join(df_all_coding_variants,by = c("CHR", "POSITION", "REF", "ALT"))
+
+df_filter_common_homo_variants <- filter(df_filter_common_variants,GENOTYPE == "Homozygous")
 
 df_filter_impact <-   filter(df_filter_common_homo_variants,
                              Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
@@ -117,16 +121,31 @@ df_filter_freq <- filter(df_filter_impact,
   anti_join(df_ctrl, by = c("CHR", "POSITION", "REF", "ALT")) %>%
   select(-Feature_type,-BIOTYPE,-SYMBOL_SOURCE,-HGNC_ID,CADD_RAW,ExAC_AF_FIN,ExAC_AF_OTH,-(ExAC_AF_AMR:ExAC_AF_SAS))
 
-
-df_passing_filter_genes <- distinct(df_filter_freq,SYMBOL)
+df_passing_filter_genes <- distinct(df_filter_freq,
+                                    SYMBOL,CHR,POSITION,REF,ALT) %>%
+       select(Chromosome = CHR, Position = POSITION,`Reference allele` = REF,`Alterated allele` = ALT,Gene=SYMBOL)
 
 ```
 
 ##### Séquençage WES et analyse bioinformatique  
 
-Ainsi, comme pour les études précédentes nous avons appliqué notre pipeline d'analyse nous permettant de recansser un total de `r nrow(df_variants_b1)` variants différents pour B1 et `r nrow(df_variants_b2)` différents pour B2 (**Figure : **\@ref(fig:varb1b2)). Ayant emmit l'hypothèse d'une cause génétique commune expliquant le phénotype de B1 et B2, nous nous sommes concentrés uniquement sur les variants homozygotes communs aux deux frères réduisant ainsi notre liste de variant à un total de `r nrow(df_filter_common_homo_variants)` variants (... SNVs et ... indels). À partir de cette liste, nous avons soustrait l'ensemble des variants prédit par VEP comme n'impactant pas un transcrit codant pour une protéine. De même, nous avons filtrer l'ensemble des variant présent dans les séquences UTRs, causant une substitution synonymes ou une substitution faux-sens prédite "benign" par PolyPhen2 et "tolerated" par SIFT. Suite à cela, nous avons filtrer les variants fréquents dans la population générale en filtrant l'ensemble des variant ayant une MAF $\ge$ `r maf_cutoff`, de même, nous avons confrontés les variants restant à une base de donnée interne ressencant les variant de `r nrow(select(df_ctrl,RUN) %>% distinct(RUN))` individus non atteint d'azoospermie afin de filtrer les variants homozygotes retrouvés dans cette basse de données de contrôle.  
+Ainsi, comme pour les études précédentes nous avons appliqué notre pipeline d'analyse nous permettant de recansser un total de `r nrow(df_variants_b1)` variants différents pour B1 et `r nrow(df_variants_b2)` différents pour B2 (**Figure : **\@ref(fig:varb1b2)). Ayant emmit l'hypothèse d'une cause génétique commune expliquant le phénotype de B1 et B2, nous nous sommes concentrés uniquement sur les variants homozygotes communs aux deux frères réduisant ainsi notre liste de variant à un total de `r nrow(df_filter_common_homo_variants)` variants dont `r nrow(df_filter_common_homo_variants %>% filter(TYPE == "SNV"))` SNVs et `r nrow(df_filter_common_homo_variants %>% filter(TYPE == "Indel"))` indels (**Table : **\@ref(tab:tabcommonvar)). À partir de cette liste, nous avons soustrait l'ensemble des variants prédit par VEP comme n'impactant pas un transcrit codant pour une protéine. De même, nous avons filtrer l'ensemble des variant présent dans les séquences UTRs, causant une substitution synonymes ou une substitution faux-sens prédite "benign" par PolyPhen2 et "tolerated" par SIFT. Suite à cela, nous avons filtrer les variants fréquents dans la population générale en filtrant l'ensemble des variant ayant une MAF $\ge$ `r maf_cutoff`, de même, nous avons confrontés les variants restant à une base de donnée interne ressencant les variant de `r nrow(select(df_ctrl,RUN) %>% distinct(RUN))` individus non atteint d'azoospermie afin de filtrer les variants homozygotes retrouvés dans cette basse de données de contrôle.  
 
-```{r varb1b2, fig.cap=fig.info,fig.scap=fig.name,fig.width=5.5}
+```{r tabcommonvar}
+
+tab.name <- "Comptage des variants communs à B1 et B2"
+
+kable(group_by(df_filter_common_variants,
+               TYPE,GENOTYPE) %>% 
+        select(Genotype = GENOTYPE,`Variant type` = TYPE) %>% 
+        summarise(Count = n()) %>% 
+        arrange(desc(`Variant type`)),
+      caption = tab.name)
+
+```
+
+
+```{r varb1b2, fig.cap=fig.info,fig.scap=fig.name,fig.width=4.5,fig.height=3.8}
 
 fig.name <- "Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés"
 fig.description <- ""
@@ -138,12 +157,16 @@ ggplot(df_variants_b1_b2,aes(GENOTYPE)) +
   xlab("Variants genotypes") +
   ylab("Count")
 
-# + 
-#   theme(legend.position="bottom")
-
 ```
 
-Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à une liste de `r nrow(distinct(df_filter_freq,CHR,POSITION,REF,ALT))` variants impactant `r nrow(df_passing_filter_genes)` gènes différents : *SPINK2* et *GUF1*. Parmi ces deux gènes, seul *SPINK2* était décrit comme fortement exprimé dans le testicule [INS2RER FIGURE ACEVIEW]. Nous avons d'ailleurs pu confirmer cette forte expression par RT-PCR quantitative en temps réel  forte à la fois chez l'Homme (**Figure : **\@ref(fig:spink2exp) - **A**) et chez la souris (**Figure : **\@ref(fig:spink2exp) - **B**). Ces données ont donc fait de *SPINK2* le seul candidat évident pouvant expliquer ce phénotype. Le variant partagé par les deux frères : Chr4:57686748G>C n'a été recencé dans aucune des bases de données que sont ExAC, 1000Genomes et ESP6500. Le gène *SPINK2* est localisé sur le chromosome 4 et contient 4 exons (**Figure : **\@ref(fig:spink2exp)). Sa localisation intronique à 3 pb du 2$^{ième}$ exon indique que ce variant pourrait avoir un effet sur l'épissage de l'ARNm       
+Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à une liste de `r nrow(distinct(df_filter_freq,CHR,POSITION,REF,ALT))` variants impactant `r nrow(df_passing_filter_genes)` gènes différents (**Table : **\@ref(tab:passingfiltervar)): *SPINK2* et *GUF1*. Parmi ces deux gènes, seul *SPINK2* était décrit comme fortement exprimé dans le testicule [INS2RER FIGURE ACEVIEW]. Nous avons d'ailleurs pu confirmer cette forte expression par RT-PCR quantitative en temps réel  forte à la fois chez l'Homme (**Figure : **\@ref(fig:spink2exp) - **A**) et chez la souris (**Figure : **\@ref(fig:spink2exp) - **B**). Ces données ont donc fait de *SPINK2* le seul candidat évident pouvant expliquer ce phénotype. Le variant partagé par les deux frères : Chr4:57686748G>C n'a été recencé dans aucune des bases de données que sont ExAC, 1000Genomes et ESP6500. Le gène *SPINK2* est localisé sur le chromosome 4 et contient 4 exons (**Figure : **\@ref(fig:spink2exp)). Sa localisation intronique à 3 pb du 2$^{ième}$ exon indique que ce variant pourrait avoir un effet sur l'épissage de l'ARNm  
+
+```{r passingfiltervar}
+
+tab.name <- "Liste des variants ayant passé l'ensemble des filtres"
+kable(df_passing_filter_genes,caption = tab.name)
+
+```
 
 ```{r spink2exp, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.42"}
 
@@ -179,16 +202,23 @@ include_graphics(path = "figure/spink2_ko_mice_fertility.png")
 
 ```
 
-
-
-
 ##### Estimation de l'incidence du gène *SPINK2* chez des patients azoospermes  
 
 Afin 
 
+##### La fonction de *SPINK2*  
+
+##### Conclusion *SPINK2*  
+
+```{r spink2cleanup, include=FALSE}
+
+rm(list=ls(all=TRUE))
+gc()
+```
 
 
 
+\newpage  
 
 #### Etude d’une large cohorte de patients MMAF  
 
