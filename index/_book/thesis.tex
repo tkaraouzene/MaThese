@@ -210,6 +210,37 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \section{Intro}\label{intro}
   
+  Dans ce chapitre, je détaillerai les résultats de 4 articles dont je
+  suis coauteur :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \protect\hyperlink{famdnah1}{\textbf{Whole-exome sequencing of
+    familial cases of multiple morphological abnormalities of the sperm
+    flagella (MMAF) reveals new DNAH1 mutations}} : {[}todo{]}
+  \item
+    \protect\hyperlink{plcz}{\textbf{Homozygous mutation of PLCZ1 leads to
+    defective human oocyte activation and infertility that is not rescued
+    by the WW-binding protein PAWP}} : Dans cet article j'ai, comme
+    précédemment, effectué l'integralité des analyses bioinformatiques des
+    données d'exomes effectués sur deux frères infertiles présentant des
+    échecs de fécondation.\\
+  \item
+    \protect\hyperlink{spink2}{\textbf{SPINK2 deficiency causes
+    infertility by inducing sperm defects in heterozygotes and azoospermia
+    in homozygotes}} : Dans cet article j'ai effectuer non seulement
+    l'intégralité des analyses bioinformatiques des données d'exomes de
+    deux frères infertiles présentant un phénotype d'azoospermie mais
+    aussi séquencer en Sanger les séquences codantes du gène \emph{SPINK2}
+    pour une parie des 611 individus analyser ainsi que contribué à
+    l'extraction de l'ARN testiculaire des souris pour l'analyse
+    fonctionelle du gène \emph{Spink2} sur le modèle murin.\\
+  \item
+    \protect\hyperlink{cohortemmah}{****} : {[}todo{]}
+  \end{enumerate}
+  
   \section{Résultats}\label{resultats}
   
   \subsection{Description de la
@@ -219,16 +250,20 @@ class (for LaTeX) and the R bookdown package, in general.
   variants pathogènes et l'identification de nouveaux gènes impliqués dans
   l'infertilité}\label{utilisations-de-la-pipeline-pour-lidentifications-de-variants-pathogenes-et-lidentification-de-nouveaux-genes-impliques-dans-linfertilite}
   
-  \subsubsection{Etude familiale MMAF -\textgreater{}
-  DNAH1}\label{etude-familiale-mmaf---dnah1}
+  \newpage  
   
-  \subsubsection{Etude familiale echec de fécondation -\textgreater{}
-  PLCzeta}\label{etude-familiale-echec-de-fecondation---plczeta}
+  \hypertarget{famdnah1}{\subsubsection{Etude familiale MMAF
+  -\textgreater{} DNAH1}\label{famdnah1}}
   
   \newpage  
   
-  \subsubsection{Etude familiale azoospermie :
-  SPINK2}\label{etude-familiale-azoospermie-spink2}
+  \hypertarget{plcz}{\subsubsection{Etude familiale echec de fécondation
+  -\textgreater{} PLCzeta}\label{plcz}}
+  
+  \newpage  
+  
+  \hypertarget{spink2}{\subsubsection{Etude familiale azoospermie :
+  SPINK2}\label{spink2}}
   
   \paragraph{Description de la cohorte
   familiale}\label{description-de-la-cohorte-familiale}
@@ -255,25 +290,28 @@ class (for LaTeX) and the R bookdown package, in general.
   \paragraph{Séquençage WES et analyse
   bioinformatique}\label{sequencage-wes-et-analyse-bioinformatique}
   
-  Ainsi, comme pour les études précédentes nous avons appliqué notre
-  pipeline d'analyse nous permettant de recansser un total de 88546
-  variants différents pour B1 et 66521 différents pour B2 (\textbf{Figure
-  : }\ref{fig:varb1b2}). Ayant emmit l'hypothèse d'une cause génétique
-  commune expliquant le phénotype de B1 et B2, nous nous sommes concentrés
-  uniquement sur les variants homozygotes communs aux deux frères
-  réduisant ainsi notre liste de variant à un total de 27604 variants dont
-  26718 SNVs et 886 indels (\textbf{Table : }\ref{tab:tabcommonvar}). À
-  partir de cette liste, nous avons soustrait l'ensemble des variants
-  prédit par VEP comme n'impactant pas un transcrit codant pour une
-  protéine. De même, nous avons filtrer l'ensemble des variant présent
-  dans les séquences UTRs, causant une substitution synonymes ou une
-  substitution faux-sens prédite ``benign'' par PolyPhen2 et ``tolerated''
-  par SIFT. Suite à cela, nous avons filtrer les variants fréquents dans
-  la population générale en filtrant l'ensemble des variant ayant une MAF
-  \(\ge\) 0.01, de même, nous avons confrontés les variants restant à une
-  base de donnée interne ressencant les variant de 83 individus non
-  atteint d'azoospermie afin de filtrer les variants homozygotes retrouvés
-  dans cette basse de données de contrôle.
+  Le séquençage exomique des deux frères B1 et B2 fût réalisé au Mount
+  Sinaï Institutes en {[}TODO: mettre l'année du séquençage{]}. Suite à
+  celà nous avons, comme pour les études précédentes nous avons appliqué
+  notre pipeline d'analyse nous permettant de recansser un total de 88546
+  variants différents pour B1 et 66521 pour B2 (\textbf{Figure :
+  }\ref{fig:varb1b2}). Ayant emmit l'hypothèse d'une cause génétique
+  commune expliquant le phénotype des deux frères, nous nous sommes
+  concentrés uniquement sur les variants homozygotes communs aux deux
+  frères réduisant ainsi notre liste de variant à un total de 27604
+  variants dont 26718 SNVs et 886 indels (\textbf{Table :
+  }\ref{tab:tabcommonvar}). À partir de cette liste, nous avons soustrait
+  l'ensemble des variants prédit par VEP comme n'impactant pas un
+  transcrit codant pour une protéine. De même, nous avons filtrer
+  l'ensemble des variant présent dans les séquences UTRs ou encore ceux
+  causant une substitution synonymes ou une substitution faux-sens prédite
+  ``benign'' par PolyPhen2 et ``tolerated'' par SIFT. Suite à cela, nous
+  avons filtrer les variants fréquents dans la population générale en
+  filtrant l'ensemble des variant ayant une MAF \(\ge\) 0.01, de même,
+  nous avons confrontés les variants restant à une base de donnée interne
+  ressencant les variant de 83 individus non atteint d'azoospermie afin de
+  filtrer les variants homozygotes retrouvés dans cette basse de données
+  de contrôle.
   
   \begin{table}
   
@@ -304,8 +342,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \end{figure}
   
   Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à
-  une liste de 2 variants impactant 2 gènes différents (\textbf{Table :
-  }\ref{tab:passingfiltervar}): \emph{SPINK2} et \emph{GUF1}. Parmi ces
+  une liste de 2 variants impactant 2 gènes différents : \emph{SPINK2} et
+  \emph{GUF1} (\textbf{Table : }\ref{tab:passingfiltervar}). Parmi ces
   deux gènes, seul \emph{SPINK2} était décrit comme fortement exprimé dans
   le testicule {[}INS2RER FIGURE ACEVIEW{]}. Nous avons d'ailleurs pu
   confirmer cette forte expression par RT-PCR quantitative en temps réel
@@ -358,7 +396,7 @@ class (for LaTeX) and the R bookdown package, in general.
   azoospermes}{Estimation de l'incidence du gène SPINK2 chez des patients azoospermes}}\label{estimation-de-lincidence-du-gene-spink2-chez-des-patients-azoospermes}
   
   Afin de déterminer l'incidence des variants du gène \emph{SPINK2} dans
-  la population azoospermiques nous avos séquencer l'intégralité des
+  la population azoospermiques nous avons séquencé l'intégralité des
   séquences codantes de ce gène chez 611 individus comprenant 210 patients
   azoospermiques, 393 oligozoospermiques et présentant un phénotype non
   spécifié. Parmi cet ensemble de patient, seul le patient 105 (P105)
@@ -370,7 +408,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \paragraph{Autres résultats}\label{autres-resultats}
   
-  Dans cette même études nous avons égallement pu étudié les
+  Dans cette même étude nous avons égallement pu étudié les
   caractéristiques reproductives de souris KO \emph{Spink2}\(^{-/-}\) et
   de souris hétérozygotes \emph{Spink2}\(^{+/-}\) . Ainsi, nous avons pu
   confirmer que les souris mâles KO étaient infertiles et présentaient un
@@ -378,15 +416,13 @@ class (for LaTeX) and the R bookdown package, in general.
   testicules tandis que les hétérozygotes étaient parfaitement fertiles
   bien leur nombre de spermatozoïdes par mL de sperme soit plus faibles
   que les souris sauvages. Les souris femelles, elles, présentaient des
-  caractéristiques reproductives tout à fait normal.
-  
-  \paragraph{\texorpdfstring{Conclusion
-  \emph{SPINK2}}{Conclusion SPINK2}}\label{conclusion-spink2}
+  caractéristiques reproductives tout à fait normal. {[}TODO: finir cette
+  partie{]}.
   
   \newpage  
   
-  \subsubsection{Etude d'une large cohorte de patients
-  MMAF}\label{etude-dune-large-cohorte-de-patients-mmaf}
+  \hypertarget{cohortemmah}{\subsubsection{Etude d'une large cohorte de
+  patients MMAF}\label{cohortemmah}}
   
   \chapter{MutaScript}\label{mutascript}
   
