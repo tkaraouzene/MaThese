@@ -1,8 +1,27 @@
 # Investigation génétique et physiologique de la globozoospermie {#globo}  
 
+```{r include.packages3, include = FALSE}
+# This chunk ensures that the thesisdown package is
+# installed and loaded. This thesisdown package includes
+# the template files for the thesis.
+if(!require(devtools))
+  install.packages("devtools", repos = "http://cran.rstudio.com")
+if(!require(thesisdown))
+  devtools::install_github("ismayc/thesisdown")
+library(thesisdown)
+library(knitr)
+
+opts_knit$set(eval.after = c("fig.cap","fig.scap"))
+
+knitr::opts_chunk$set(fig.align='center',echo=FALSE)
+
+knitr::opts_knit$set(kable.force.latex = TRUE)
+
+```
+
 ## Introduction sur la globozoospermie  
 
-Comme expliqué précédemment, La globozoospermie est phénotype rare (< 0.1% des patients infertiles) mais néanmoins sévère [@Sen2009] de teratozoospermie menant à l'infertilité masculine. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh, @Pedersen1974] (**Figure : **\@ref(fig:globospz)). En plus des anomalies morphologiques, les spermatozoïdes globozoocéphales présentent également des désorganisations au niveau moléculaire. Par exemple, le facteur spermatique PLC$\zeta$ requit pour l'activation ovocitaire, est absent ou en quantité infime dans les spermatozoïdes globozoocéphales [@Heytens2009, @Taylor2010, @Yoon2008] compromettant ainsi l'activation ovocytaire et expliquant le faible taux de fécondation observés en IVF (*in vitro* fertilization) et en ICSI (intra cytoplasmic sperm injection) [citation...]. On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultante de plusieurs facteurs, les premières études présentant des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphologiques très typiques des spermatozoïdes laissaient penser à une cause monogénique. En 2007, une étude portant sur une famille juive ashkénaze comprenant six frères dont trois atteins a pu lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysé, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gène n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients analysés [@Harbuz2011]. Les études effectuées ultérieurement sur ce phénotype ont ensuite pu montrer que les altérations du gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011, @ElInati2012].  
+Comme expliqué précédemment, La globozoospermie est phénotype rare (< 0.1% des patients infertiles) mais néanmoins sévère [@Sen2009] de teratozoospermie menant à l'infertilité masculine. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh, @Pedersen1974] (**Figure : **\@ref(fig:globospz)). En plus des anomalies morphologiques, les spermatozoïdes globozoocéphales présentent également des désorganisations au niveau moléculaire. Par exemple, le facteur spermatique PLC$\zeta$ requit pour l'activation ovocitaire, est absent ou en quantité infime dans les spermatozoïdes globozoocéphales [@Heytens2009, @Taylor2010, @Yoon2008] compromettant ainsi l'activation ovocytaire et expliquant le faible taux de fécondation observés en IVF (*in vitro* fertilization) et en ICSI (intra cytoplasmic sperm injection) [@Dam2006]. On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultante de plusieurs facteurs, les premières études présentant des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphologiques très typiques des spermatozoïdes laissaient penser à une cause monogénique. En 2007, une étude portant sur une famille juive ashkénaze comprenant six frères dont trois atteins a pu lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysé, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gène n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients analysés [@Harbuz2011]. Les études effectuées ultérieurement sur ce phénotype ont ensuite pu montrer que les altérations du gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011, @ElInati2012].  
 
 ```{r globospz,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.50"}
 
@@ -11,19 +30,6 @@ fig.from <- "[@Harbuz2011]"
 fig.info <- paste0(fig.name," adapté d'après ",fig.from)
 
 include_graphics(path = "figure/globo_normal_spz.png")
-
-```
-
-Chez les mammifères il existe trois paralogues de *DPY19L2* de fonction encore inconnue et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplications de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gène tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
-
-```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.5"}
-
-fig.name <- "Représentation schématique du mécanisme de NAHR causé par les séquences LCR flanquant le gène *DPY19L2*"
-fig.from <- "[@Coutton2013]"
-fig.description <- "**1** : Le gène *DPY19L2* est entouré par les séquences LCR1 et LCR2 qui correspondent respectivement au LCR centromérique et télomérique. Ces LCRs sont séparés par environs 200kb et chacun d'eux mesurent approximativement 28kb. **2** : NAHR résultant du mauvais alignement des LCRs 1 et 2 du même chromatide entrainant la formation d'un allèle délété (a) et d'un ADN circulaire comprenant le gène *DPY19L2*. Cet ADN circulaire sera éliminé au cours du cycle cellulaire. **3** : NAHR résultant du mauvais alignement des LCRs 1 et 2 provenant de deux chromatides différents conduisant à la formation d'un allèle délété (a) et d'un allèle dupliqué (b)"
-fig.info <- paste0(fig.name," adapté d'après ",fig.from," : ",fig.description)
-
-include_graphics(path = "figure/dpy_nahr.png")
 
 ```
 
@@ -40,23 +46,73 @@ include_graphics(path = "figure/mouse_globo_spz.png")
 
 ```
 
+Dans ce chapitre je détaillerai les résultats de trois articles dont je suis co-auteur : 
+
+1. [**Fine Characterisation of a Recombination Hotspot at the DPY19L2 Locus and Resolution of the Paradoxical Excess of Duplications over Deletions in the General Population**](#mecamut) : au cours de cette étude j'ai participé à divers manipulation de biologie moléculaire tel que l'extraction d'ADN spermatique, quantification des délétions / duplications *de novo*. De même, j'ai pu contribuer au divers analyses statistiques.  
+2. [**Comparative testicular transcriptome of wild type and globozoospermic Dpy19l2 knock out mice**](#transcriptome) : Dans cette étude j'ai pu effectuer l'intégralité des manipulation de biomoléculaire (extraction de l'ARN testiculaire de souris et analyse sur puce) de même que l'intégralité de l'analyse bioinformatique des résultats.  
+
 ## Résultats  
 
-### Objectifs  
+### Les mécanismes mutationnels {#mecamut}
 
-### Les mécanismes mutationnels (PLOS)
+#### Confirmation de l'excès de délétion 
 
-####  Mise en évidence d'un excès de duplication dans la population générale  
+Chez les mammifères il existe trois paralogues de *DPY19L2* de fonction encore inconnue et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplications de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gène tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
 
-### Les anomalies épigénétiques : (PLCzeta, compaction, fragmentation)
+```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.5"}
 
-### La transcriptomique  
+fig.name <- "Représentation schématique du mécanisme de NAHR causé par les séquences LCR flanquant le gène *DPY19L2*"
+fig.description <- "**1** : Le gène *DPY19L2* est entouré par les séquences LCR1 et LCR2 qui correspondent respectivement au LCR centromérique et télomérique. Ces LCRs sont séparés par environs 200kb et chacun d'eux mesurent approximativement 28kb. **2** : NAHR résultant du mauvais alignement des LCRs 1 et 2 du même chromatide entrainant la formation d'un allèle délété (a) et d'un ADN circulaire comprenant le gène *DPY19L2*. Cet ADN circulaire sera éliminé au cours du cycle cellulaire. **3** : NAHR résultant du mauvais alignement des LCRs 1 et 2 provenant de deux chromatides différents conduisant à la formation d'un allèle délété (a) et d'un allèle dupliqué (b)"
+fig.info <- paste0(fig.name," : ",fig.description)
+
+include_graphics(path = "figure/dpy_nahr.png")
+
+```
+
+Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèle délété que d'allèle dupliqué puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de donnée [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) [@MacDonald2014] indique un excès de duplication puisque sur un total de ... individus analysés, un totlal de 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à l'analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés  
+
+#### Détermination du taux de recombinaison *de novo* de *DPY19L2*  
+
+Alors que les résultats précédents confirment un excès de l'allèle dupliqué de *DPY19L2* dans la population générale, nous avons par la suite cherché à déterminer les taux *de novo* de duplications / délétions de ce même locus Afin de voir si cet exces était dû à une séléction de l'allèle dupliqué ou au fait que celui-ci était effectivement produit plus fréquement que l'allèle délété. Pour ce faire nous avons quantifié le taux d'apparition de ces événements génétiques à partir d'ADN spermatique. Les spermatozoïdes étant le produits direct de la méiose, ils sont donc les reflets d'haplotypes produits *de novo*. Pour cela nous avons isolé, par dillutions succèsives l'ADN spermatique de trois donneurs de sorte à ce que chaque réaction d'amplification amplifie le locus *DPY19L2* d'une seule molécule d'ADN (**Figure** : \@ref(fig:dupdelrate)). Ainsi, la probabilité qu'un puit contiene une recombinaison (délétion ou duplication) au locus *DPY19L2* suivait une distribution hypergéométrique (**Équation** : \@ref(eq:hypergeo)) nous avons donc pu estimer la fréquence de duplication / délétion $\lambda$ (**Équation** : \@ref(eq:lambda))
+
+\begin{equation} 
+\frac{\frac{(N - R)!}{W!(N-R-W)!}}{\frac{N!}{W!(N-W)!}} = \frac{(N-R)!(N-W)!}{N!(N-W-R)!} = \prod_{i=0}^{R-1}{\frac{N-W-i}{N-i}}
+(\#eq:hypergeo)
+\end{equation}
+
+\begin{equation} 
+\lambda = \frac{R}{N}
+(\#eq:lambda)
+\end{equation}
+
+Nous avons pu ainsi établir le taux de délétion *de novo* à 1.8 x 10$^{-5}$ (IC 95% : 1.4x 10$^{-6}$; 2.2x 10$^{-6}$) tandis que le taux de duplication *de novo* est estimé à 7.7 x 10$^{-6}$ (IC 95% : 6.1 x 10$^{-6}$; 9.7 x 10$^{-6}$) montrant un enrichisement environ deux fois supperieur des délétion par rapport aux duplications dur le site de *DPY19L2*.  
+
+```{r dupdelrate,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.35"}
+
+fig.name <- "Ratio des délétions / duplications *de novo* observées au locus *DPY19L2* déterminé par PCR digital à partir d'ADN spermatique de trois donneurs"
+fig.description <- "[TODO]"
+fig.info <- paste0(fig.name," : ",fig.description)
+
+include_graphics(path = "figure/globo_du_del_rate.png")
+
+```
+
+
+#### Autres résultats  
+
+
+<!-- ### Les anomalies épigénétiques : (PLCzeta, compaction, fragmentation) -->
+
+### La transcriptomique {#transcriptome}
 
 
 \begin{flushleft} 
 \includegraphics[width=7.5in]{/home/karaout/MaThese/index/bib/12610_2013_Article_8.pdf}
 \newpage
-\end{flushleft}
+\end{flushleft}  
+
+
+
 
 
 ## Conclusion  

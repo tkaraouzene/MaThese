@@ -204,235 +204,365 @@ class (for LaTeX) and the R bookdown package, in general.
   \chapter{Investigation génétique et physiologique de la
   globozoospermie}\label{globo}
   
-  \chapter{Mise en place d'une stratégie pour l'analyse des données
-  exomiques -- application en recherche
-  clinique}\label{mise-en-place-dune-strategie-pour-lanalyse-des-donnees-exomiques-application-en-recherche-clinique}
+  \section{Introduction sur la
+  globozoospermie}\label{introduction-sur-la-globozoospermie}
   
-  \section{Intro}\label{intro}
+  Comme expliqué précédemment, La globozoospermie est phénotype rare
+  (\textless{} 0.1\% des patients infertiles) mais néanmoins sévère (Sen,
+  Holstein, \& Schirren, \protect\hyperlink{ref-Sen2009}{1971}) de
+  teratozoospermie menant à l'infertilité masculine. Cette anomalie est
+  caractérisée par la présence de spermatozoïdes présentant une tête ronde
+  dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans
+  l'éjaculat (Singh, n.d., Pedersen \& Rebbe
+  (\protect\hyperlink{ref-Pedersen1974}{1974})) (\textbf{Figure :
+  }\ref{fig:globospz}). En plus des anomalies morphologiques, les
+  spermatozoïdes globozoocéphales présentent également des
+  désorganisations au niveau moléculaire. Par exemple, le facteur
+  spermatique PLC\(\zeta\) requit pour l'activation ovocitaire, est absent
+  ou en quantité infime dans les spermatozoïdes globozoocéphales (Heytens
+  et al., \protect\hyperlink{ref-Heytens2009}{2009}, Taylor et al.
+  (\protect\hyperlink{ref-Taylor2010}{2010}), S.-Y. Yoon et al.
+  (\protect\hyperlink{ref-Yoon2008}{2008})) compromettant ainsi
+  l'activation ovocytaire et expliquant le faible taux de fécondation
+  observés en IVF (\emph{in vitro} fertilization) et en ICSI (intra
+  cytoplasmic sperm injection) (A. Dam et al.,
+  \protect\hyperlink{ref-Dam2006}{2006}). On distingue la globozoospermie
+  totale avec 100\% des spermatozoïdes présentant le phénotype ou
+  partielle en fonction du taux de spermatozoïdes atteints. Bien que
+  l'infertilité masculine soit souvent la résultante de plusieurs
+  facteurs, les premières études présentant des patients atteints par un
+  phénotype complet (Sen et al., \protect\hyperlink{ref-Sen2009}{1971})
+  suggéraient que la globozoospermie était une exception. De plus les
+  caractéristiques morphologiques très typiques des spermatozoïdes
+  laissaient penser à une cause monogénique. En 2007, une étude portant
+  sur une famille juive ashkénaze comprenant six frères dont trois atteins
+  a pu lier ce phénotype à une mutation homozygotes sur le gène
+  \emph{SPATA16} présente chez les trois frères atteint (A. H. D. M. Dam
+  et al., \protect\hyperlink{ref-Dam2007}{2007}). Cependant, dans la même
+  étude, 29 autres patients présentant le même phénotype ont été analysé,
+  et pour ceux-ci, aucun variant du gène \emph{SPATA16} n'a pu être lié au
+  phénotype (A. H. D. M. Dam et al.,
+  \protect\hyperlink{ref-Dam2007}{2007}) indiquant clairement que les
+  mutations de ce gène n'étaient pas les seules responsables. En 2011, une
+  autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre
+  en évidence une délétion homozygote de 200kb emportant la totalité du
+  gène \emph{DPY19L2} chez 15 des 20 patients analysés (Harbuz et al.,
+  \protect\hyperlink{ref-Harbuz2011}{2011}). Les études effectuées
+  ultérieurement sur ce phénotype ont ensuite pu montrer que les
+  altérations du gène \emph{DPY19L2}, et notamment cette délétion, étaient
+  responsables de la majorité des cas de globozoospermie (P. F. Ray \&
+  Arnoult, \protect\hyperlink{ref-Ray2011}{2011}, ElInati et al.
+  (\protect\hyperlink{ref-ElInati2012}{2012})).
   
-  Dans ce chapitre, je détaillerai les résultats de 4 articles dont je
-  suis coauteur :
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.50]{figure/globo_normal_spz} 
+  
+  }
+  
+  \caption[Observation au microscope à balayage d'un spermatozoïde normal (**A**) et d'un spermatozoïde globozoocéphale (**B**) (changer les photos avec celles sur lesquelles on voit l'acrosome colorés)]{Observation au microscope à balayage d'un spermatozoïde normal (**A**) et d'un spermatozoïde globozoocéphale (**B**) (changer les photos avec celles sur lesquelles on voit l'acrosome colorés) adapté d'après [@Harbuz2011]}\label{fig:globospz}
+  \end{figure}
+  
+  En 2012, le développement d'un modèle murin KO \emph{Dpy19l2}\(^{-/-}\)
+  a permis de mieux comprendre les mécanismes moléculaires impliqué dans
+  la globozoospermie causée par la délétion du gène \emph{DPY19L2} chez
+  l'humain (V. Pierre et al., \protect\hyperlink{ref-Pierre2012}{2012}).
+  Tout d'abord car ce modèle de souris KO présentait les mêmes
+  caractéristiques que les patients humains. Tout d'abord, ces souris
+  étaient infertiles et présentaient des spermatozoïdes globozoocéphales
+  (\textbf{Figure : }\ref{fig:mouseglobo}) mais aussi et surtout,
+  l'ensembles des autres dysfonctionnements étaient retrouvés, c'est à
+  dire : l'absence de l'acrosome, les défauts morphologiques du noyau, de
+  l'enveloppe nucléaire et de l'acroplaxome ainsi que le mauvais
+  positionnement de la manchette (V. Pierre et al.,
+  \protect\hyperlink{ref-Pierre2012}{2012}). Ainsi il a pu être démontré
+  que la protéine Dpy19l2 étaient principalement exprimé dans le
+  spermatides et plus spécifiquement dans la membrane nucléaire interne
+  faisant face à la vésicule acrosomale et que l'absence de cette protéine
+  entrainait la déstabilisation à la fois de la lamine nucléaire, de la
+  jonction entre l'acroplaxome et l'enveloppe nucléaire (V. Pierre et al.,
+  \protect\hyperlink{ref-Pierre2012}{2012}).
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.8]{figure/mouse_globo_spz} 
+  
+  }
+  
+  \caption[Comparaison entre les spermatozoïdes des souris *Dpy19l2*$^{-/-}$ (à gauche) et les souris sauvages *Dpy19l2*$^{+/+}$ (à droite)]{Comparaison entre les spermatozoïdes des souris *Dpy19l2*$^{-/-}$ (à gauche) et les souris sauvages *Dpy19l2*$^{+/+}$ (à droite) d'après [@Pierre2012]}\label{fig:mouseglobo}
+  \end{figure}
+  
+  Dans ce chapitre je détaillerai les résultats de trois articles dont je
+  suis co-auteur :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    \protect\hyperlink{famdnah1}{\textbf{Whole-exome sequencing of
-    familial cases of multiple morphological abnormalities of the sperm
-    flagella (MMAF) reveals new DNAH1 mutations}} : {[}todo{]}
+    \protect\hyperlink{mecamut}{\textbf{Fine Characterisation of a
+    Recombination Hotspot at the DPY19L2 Locus and Resolution of the
+    Paradoxical Excess of Duplications over Deletions in the General
+    Population}} : au cours de cette étude j'ai participé à divers
+    manipulation de biologie moléculaire tel que l'extraction d'ADN
+    spermatique, quantification des délétions / duplications \emph{de
+    novo}. De même, j'ai pu contribuer au divers analyses statistiques.\\
   \item
-    \protect\hyperlink{plcz}{\textbf{Homozygous mutation of PLCZ1 leads to
-    defective human oocyte activation and infertility that is not rescued
-    by the WW-binding protein PAWP}} : Dans cet article j'ai, comme
-    précédemment, effectué l'integralité des analyses bioinformatiques des
-    données d'exomes effectués sur deux frères infertiles présentant des
-    échecs de fécondation.\\
-  \item
-    \protect\hyperlink{spink2}{\textbf{SPINK2 deficiency causes
-    infertility by inducing sperm defects in heterozygotes and azoospermia
-    in homozygotes}} : Dans cet article j'ai effectuer non seulement
-    l'intégralité des analyses bioinformatiques des données d'exomes de
-    deux frères infertiles présentant un phénotype d'azoospermie mais
-    aussi séquencer en Sanger les séquences codantes du gène \emph{SPINK2}
-    pour une parie des 611 individus analyser ainsi que contribué à
-    l'extraction de l'ARN testiculaire des souris pour l'analyse
-    fonctionelle du gène \emph{Spink2} sur le modèle murin.\\
-  \item
-    \protect\hyperlink{cohortemmah}{****} : {[}todo{]}
+    \protect\hyperlink{transcriptome}{\textbf{Comparative testicular
+    transcriptome of wild type and globozoospermic Dpy19l2 knock out
+    mice}} : Dans cette étude j'ai pu effectuer l'intégralité des
+    manipulation de biomoléculaire (extraction de l'ARN testiculaire de
+    souris et analyse sur puce) de même que l'intégralité de l'analyse
+    bioinformatique des résultats.
   \end{enumerate}
   
   \section{Résultats}\label{resultats}
   
-  \subsection{Description de la
-  pipeline}\label{description-de-la-pipeline}
+  \hypertarget{mecamut}{\subsection{Les mécanismes
+  mutationnels}\label{mecamut}}
   
-  \subsection{utilisations de la pipeline pour l'identifications de
-  variants pathogènes et l'identification de nouveaux gènes impliqués dans
-  l'infertilité}\label{utilisations-de-la-pipeline-pour-lidentifications-de-variants-pathogenes-et-lidentification-de-nouveaux-genes-impliques-dans-linfertilite}
+  \subsubsection{Confirmation de l'excès de
+  délétion}\label{confirmation-de-lexces-de-deletion}
   
-  \newpage  
-  
-  \hypertarget{famdnah1}{\subsubsection{Etude familiale MMAF
-  -\textgreater{} DNAH1}\label{famdnah1}}
-  
-  \newpage  
-  
-  \hypertarget{plcz}{\subsubsection{Etude familiale echec de fécondation
-  -\textgreater{} PLCzeta}\label{plcz}}
-  
-  \newpage  
-  
-  \hypertarget{spink2}{\subsubsection{Etude familiale azoospermie :
-  SPINK2}\label{spink2}}
-  
-  \paragraph{Description de la cohorte
-  familiale}\label{description-de-la-cohorte-familiale}
-  
-  Comme nous avons pu le voir, l'\protect\hyperlink{infquant}{azoospermie}
-  est un phénotype d'infertilité masculine caractérisé par l'absence de
-  spermatozoïde dans l'éjaculat. En 2017, notre équipe a publiée des
-  résultats liant une mutation du gène \emph{SPINK2} à ce phénotype. Pour
-  cette étude, nous avons effectué un séquençage exomique de deux frères
-  azoospermes (B1 et B2) issus d'un union consanguin puisque leurs parents
-  sont cousin au deuxième degré (\textbf{Figure : }\ref{fig:spink2tree}).
-  Étant donné l'historique consanguin de cette famille nous avons emis
-  l'hypothèse d'un phénotype à transmission autosomique recessif.
+  Chez les mammifères il existe trois paralogues de \emph{DPY19L2} de
+  fonction encore inconnue et un pseudogène présentant une très forte
+  homologie de séquence (\textgreater{} 95\%) (Carson, Cheung, \& Scherer,
+  \protect\hyperlink{ref-Carson2006}{2006}). Chez l'Homme, ce gène est
+  flanqué de deux séquences présentant une forte homologie
+  (\textgreater{}95\%) d'une taille de 28kb (\textbf{Figure :
+  }\ref{fig:nahr} - \textbf{1}). Ces séquences appelées LCRs (\emph{low
+  copy repeats}) représentent une large portion du génome humain (Cheung
+  et al., \protect\hyperlink{ref-Cheung2003}{2003}, Bailey et al.
+  (\protect\hyperlink{ref-Bailey2002}{2002})) et vont, de par leur
+  homologie favoriser les duplications de gènes jouant ainsi un rôle
+  important dans l'évolution des génomes des vertébrés (Walsh,
+  \protect\hyperlink{ref-Walsh2003}{2003}, Ohno
+  (\protect\hyperlink{ref-Ohno1970}{1970})). Dans le cas de
+  \emph{DPY19L2}, ces LCRs vont, au cours de la méiose entrainer la venue
+  de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une
+  délétion du gène \emph{DPY19L2} et la formation d'un ADN circulaire
+  comprenant le gène (\textbf{Figure : }\ref{fig:nahr} - \textbf{2}) soit
+  à un allèle possédant deux copies du gène tandis que l'autre n'en
+  possède aucune (\textbf{Figure : }\ref{fig:nahr} - \textbf{3}).
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=0.75]{figure/spink2_arbre_genealogique} 
+  {\centering \includegraphics[scale=0.5]{figure/dpy_nahr} 
   
   }
   
-  \caption[Arbre généalogique des deux frères azoospermes B1 et B2]{Arbre généalogique des deux frères azoospermes B1 et B2 : Sur cette arbre nous pouvons observés la parentés des parents (P1 et P2), cousins au deuxième degré}\label{fig:spink2tree}
+  \caption[Représentation schématique du mécanisme de NAHR causé par les séquences LCR flanquant le gène *DPY19L2*]{Représentation schématique du mécanisme de NAHR causé par les séquences LCR flanquant le gène *DPY19L2* : **1** : Le gène *DPY19L2* est entouré par les séquences LCR1 et LCR2 qui correspondent respectivement au LCR centromérique et télomérique. Ces LCRs sont séparés par environs 200kb et chacun d'eux mesurent approximativement 28kb. **2** : NAHR résultant du mauvais alignement des LCRs 1 et 2 du même chromatide entrainant la formation d'un allèle délété (a) et d'un ADN circulaire comprenant le gène *DPY19L2*. Cet ADN circulaire sera éliminé au cours du cycle cellulaire. **3** : NAHR résultant du mauvais alignement des LCRs 1 et 2 provenant de deux chromatides différents conduisant à la formation d'un allèle délété (a) et d'un allèle dupliqué (b)}\label{fig:nahr}
   \end{figure}
   
-  \paragraph{Séquençage WES et analyse
-  bioinformatique}\label{sequencage-wes-et-analyse-bioinformatique}
+  Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation
+  de plus d'allèle délété que d'allèle dupliqué puisque les cas présentés
+  en figures \ref{fig:nahr} - \textbf{2} et \ref{fig:nahr} - \textbf{3}
+  induisent la formation d'un allèle délété tandis que seul le cas
+  \ref{fig:nahr} - \textbf{3} forme un allèle dupliqué. Cependant, les
+  données mises à disposition par la base de donnée
+  \href{http://dgv.tcag.ca/dgv/app/home}{\emph{Database of Genomic
+  Variants}} (MacDonald, Ziman, Yuen, Feuk, \& Scherer,
+  \protect\hyperlink{ref-MacDonald2014}{2014}) indique un excès de
+  duplication puisque sur un total de \ldots{} individus analysés, un
+  totlal de 83 duplications et de 26 délétions hétérozygotes ont été
+  observées pour le locus de \emph{DPY19L2}. Afin de confirmer ces
+  résultats et ainsi écarter l'hypothèse d'un biais causé par la présence
+  du pseudogène \emph{DPY19L2P1} très homologue avec \emph{DPY19L2}
+  (Carson et al., \protect\hyperlink{ref-Carson2006}{2006}) notre équipe a
+  procedé à l'analyse du locus de \emph{DPY19L2} de 1699 individus par
+  CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes
+  furent observés
   
-  Le séquençage exomique des deux frères B1 et B2 fût réalisé au Mount
-  Sinaï Institutes en {[}TODO: mettre l'année du séquençage{]}. Suite à
-  celà nous avons, comme pour les études précédentes nous avons appliqué
-  notre pipeline d'analyse nous permettant de recansser un total de 88546
-  variants différents pour B1 et 66521 pour B2 (\textbf{Figure :
-  }\ref{fig:varb1b2}). Ayant emmit l'hypothèse d'une cause génétique
-  commune expliquant le phénotype des deux frères, nous nous sommes
-  concentrés uniquement sur les variants homozygotes communs aux deux
-  frères réduisant ainsi notre liste de variant à un total de 27604
-  variants dont 26718 SNVs et 886 indels (\textbf{Table :
-  }\ref{tab:tabcommonvar}). À partir de cette liste, nous avons soustrait
-  l'ensemble des variants prédit par VEP comme n'impactant pas un
-  transcrit codant pour une protéine. De même, nous avons filtrer
-  l'ensemble des variant présent dans les séquences UTRs ou encore ceux
-  causant une substitution synonymes ou une substitution faux-sens prédite
-  ``benign'' par PolyPhen2 et ``tolerated'' par SIFT. Suite à cela, nous
-  avons filtrer les variants fréquents dans la population générale en
-  filtrant l'ensemble des variant ayant une MAF \(\ge\) 0.01, de même,
-  nous avons confrontés les variants restant à une base de donnée interne
-  ressencant les variant de 83 individus non atteint d'azoospermie afin de
-  filtrer les variants homozygotes retrouvés dans cette basse de données
-  de contrôle.
+  \subsubsection{\texorpdfstring{Détermination du taux de recombinaison
+  \emph{de novo} de
+  \emph{DPY19L2}}{Détermination du taux de recombinaison de novo de DPY19L2}}\label{determination-du-taux-de-recombinaison-de-novo-de-dpy19l2}
   
-  \begin{table}
+  Alors que les résultats précédents confirment un excès de l'allèle
+  dupliqué de \emph{DPY19L2} dans la population générale, nous avons par
+  la suite cherché à déterminer les taux \emph{de novo} de duplications /
+  délétions de ce même locus Afin de voir si cet exces était dû à une
+  séléction de l'allèle dupliqué ou au fait que celui-ci était
+  effectivement produit plus fréquement que l'allèle délété. Pour ce faire
+  nous avons quantifié le taux d'apparition de ces événements génétiques à
+  partir d'ADN spermatique. Les spermatozoïdes étant le produits direct de
+  la méiose, ils sont donc les reflets d'haplotypes produits \emph{de
+  novo}. Pour cela nous avons isolé, par dillutions succèsives l'ADN
+  spermatique de trois donneurs de sorte à ce que chaque réaction
+  d'amplification amplifie le locus \emph{DPY19L2} d'une seule molécule
+  d'ADN (\textbf{Figure} : \ref{fig:dupdelrate}). Ainsi, la probabilité
+  qu'un puit contiene une recombinaison (délétion ou duplication) au locus
+  \emph{DPY19L2} suivait une distribution hypergéométrique
+  (\textbf{Équation} : \eqref{eq:hypergeo}) nous avons donc pu estimer la
+  fréquence de duplication / délétion \(\lambda\) (\textbf{Équation} :
+  \eqref{eq:lambda})
   
-  \caption{\label{tab:tabcommonvar}Comptage des variants communs à B1 et B2}
-  \centering
-  \begin{tabular}[t]{l|l|r}
-  \hline
-  Variant type & Genotype & Count\\
-  \hline
-  SNV & Heterozygous & 27056\\
-  \hline
-  SNV & Homozygous & 26718\\
-  \hline
-  Indel & Heterozygous & 874\\
-  \hline
-  Indel & Homozygous & 886\\
-  \hline
-  \end{tabular}
-  \end{table}
+  \begin{equation} 
+  \frac{\frac{(N - R)!}{W!(N-R-W)!}}{\frac{N!}{W!(N-W)!}} = \frac{(N-R)!(N-W)!}{N!(N-W-R)!} = \prod_{i=0}^{R-1}{\frac{N-W-i}{N-i}}
+  \label{eq:hypergeo}
+  \end{equation}
+  
+  \begin{equation} 
+  \lambda = \frac{R}{N}
+  \label{eq:lambda}
+  \end{equation}
+  
+  Nous avons pu ainsi établir le taux de délétion \emph{de novo} à 1.8 x
+  10\(^{-5}\) (IC 95\% : 1.4x 10\(^{-6}\); 2.2x 10\(^{-6}\)) tandis que le
+  taux de duplication \emph{de novo} est estimé à 7.7 x 10\(^{-6}\) (IC
+  95\% : 6.1 x 10\(^{-6}\); 9.7 x 10\(^{-6}\)) montrant un enrichisement
+  environ deux fois supperieur des délétion par rapport aux duplications
+  dur le site de \emph{DPY19L2}.
   
   \begin{figure}
   
-  {\centering \includegraphics{thesis_files/figure-latex/varb1b2-1} 
+  {\centering \includegraphics[scale=0.35]{figure/globo_du_del_rate} 
   
   }
   
-  \caption[Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés]{Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés}\label{fig:varb1b2}
+  \caption[Ratio des délétions / duplications *de novo* observées au locus *DPY19L2* déterminé par PCR digital à partir d'ADN spermatique de trois donneurs]{Ratio des délétions / duplications *de novo* observées au locus *DPY19L2* déterminé par PCR digital à partir d'ADN spermatique de trois donneurs : [TODO]}\label{fig:dupdelrate}
   \end{figure}
   
-  Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à
-  une liste de 2 variants impactant 2 gènes différents : \emph{SPINK2} et
-  \emph{GUF1} (\textbf{Table : }\ref{tab:passingfiltervar}). Parmi ces
-  deux gènes, seul \emph{SPINK2} était décrit comme fortement exprimé dans
-  le testicule {[}INS2RER FIGURE ACEVIEW{]}. Nous avons d'ailleurs pu
-  confirmer cette forte expression par RT-PCR quantitative en temps réel
-  forte à la fois chez l'Homme (\textbf{Figure : }\ref{fig:spink2exp} -
-  \textbf{A}) et chez la souris (\textbf{Figure : }\ref{fig:spink2exp} -
-  \textbf{B}). Ces données ont donc fait de \emph{SPINK2} le seul candidat
-  évident pouvant expliquer ce phénotype. Le variant partagé par les deux
-  frères : Chr4:57686748G\textgreater{}C n'a été recencé dans aucune des
-  bases de données que sont ExAC, 1000Genomes et ESP6500. Le gène
-  \emph{SPINK2} est localisé sur le chromosome 4 et contient 4 exons
-  (\textbf{Figure : }\ref{fig:spink2exp}). Sa localisation intronique à 3
-  pb du 2\(^{ième}\) exon indique que ce variant pourrait avoir un effet
-  sur l'épissage de l'ARNm
+  \subsubsection{Autres résultats}\label{autres-resultats}
   
-  \begin{table}
+  \hypertarget{transcriptome}{\subsection{La
+  transcriptomique}\label{transcriptome}}
   
-  \caption{\label{tab:passingfiltervar}Liste des variants ayant passé l'ensemble des filtres}
-  \centering
-  \begin{tabular}[t]{r|r|l|l|l}
-  \hline
-  Chromosome & Position & Reference allele & Alterated allele & Gene\\
-  \hline
-  4 & 57686748 & G & C & SPINK2\\
-  \hline
-  4 & 44683156 & G & T & GUF1\\
-  \hline
-  \end{tabular}
-  \end{table}
+  \begin{flushleft} 
+  \includegraphics[width=7.5in]{/home/karaout/MaThese/index/bib/12610_2013_Article_8.pdf}
+  \newpage
+  \end{flushleft}
   
-  \begin{figure}
+  \section{Conclusion}\label{conclusion}
   
-  {\centering \includegraphics[scale=0.42]{figure/spink2_expression} 
-  
-  }
-  
-  \caption[Expression du gène *SPINK2* dans plusieurs tissus]{Expression du gène *SPINK2* dans plusieurs tissus : On peut constater que chez l'humain (**A**) comme chez la souris (**B**), le gène *SPINK2* a non seulement une forte expression exclusive au testicule}\label{fig:spink2exp}
-  \end{figure}
-  
-  \begin{figure}
-  
-  {\centering \includegraphics[scale=0.42]{figure/spink2_transcripts} 
-  
-  }
-  
-  \caption[Représentation du gène *SPINK2*]{Représentation du gène *SPINK2* : L'épissage du gène *SPINK2* crée un transcrit de 4 exons (Transcrit normal). Cependant, le variant c.206-3C>G observé chez les frères B1 et B2 crée un nouveau site accepteur d'épissage ajoutant 2 nucléotides à l'exon 2 induisant un décalage du cadre de lecture menant à un codon stop 3 nucléotides plus loin (Transcrit 1) et / ou causant le saut de l'exon 2 menant à un codon stop prématuré (Transcrit 2)}\label{fig:spink2trans}
-  \end{figure}
-  
-  \paragraph{\texorpdfstring{Estimation de l'incidence du gène
-  \emph{SPINK2} chez des patients
-  azoospermes}{Estimation de l'incidence du gène SPINK2 chez des patients azoospermes}}\label{estimation-de-lincidence-du-gene-spink2-chez-des-patients-azoospermes}
-  
-  Afin de déterminer l'incidence des variants du gène \emph{SPINK2} dans
-  la population azoospermiques nous avons séquencé l'intégralité des
-  séquences codantes de ce gène chez 611 individus comprenant 210 patients
-  azoospermiques, 393 oligozoospermiques et présentant un phénotype non
-  spécifié. Parmi cet ensemble de patient, seul le patient 105 (P105)
-  présentant un phénotype d'oligozoospermie s'est révélé porteur d'un
-  variant non répertorié dans les bases de données et présentant un impact
-  prédit comme délétère. Ce variant, c.1A\textgreater{}T, présent à l'état
-  hétérozygote chez P105 affecte le codon start décalant ainsi le démarage
-  de la traduction produisant ainsi une protéine tranquée.
-  
-  \paragraph{Autres résultats}\label{autres-resultats}
-  
-  Dans cette même étude nous avons égallement pu étudié les
-  caractéristiques reproductives de souris KO \emph{Spink2}\(^{-/-}\) et
-  de souris hétérozygotes \emph{Spink2}\(^{+/-}\) . Ainsi, nous avons pu
-  confirmer que les souris mâles KO étaient infertiles et présentaient un
-  phénotype d'azoospermie ainsi qu'une diminution de la taille de leurs
-  testicules tandis que les hétérozygotes étaient parfaitement fertiles
-  bien leur nombre de spermatozoïdes par mL de sperme soit plus faibles
-  que les souris sauvages. Les souris femelles, elles, présentaient des
-  caractéristiques reproductives tout à fait normal. {[}TODO: finir cette
-  partie{]}.
-  
-  \newpage  
-  
-  \hypertarget{cohortemmah}{\subsubsection{Etude d'une large cohorte de
-  patients MMAF}\label{cohortemmah}}
+  \chapter{Mise en place d'une stratégie pour l'analyse des données
+  exomiques -- application en recherche
+  clinique}\label{mise-en-place-dune-strategie-pour-lanalyse-des-donnees-exomiques-application-en-recherche-clinique}
   
   \chapter{MutaScript}\label{mutascript}
   
-  \chapter*{Conclusion}\label{conclusion}
+  \chapter*{Conclusion}\label{conclusion-1}
   \addcontentsline{toc}{chapter}{Conclusion}
   
   \chapter{The First Appendix}\label{the-first-appendix}
   
   \chapter*{References}\label{references}
   \addcontentsline{toc}{chapter}{References}
+  
+  \hypertarget{refs}{}
+  \hypertarget{ref-Bailey2002}{}
+  Bailey, J. A., Gu, Z., Clark, R. A., Reinert, K., Samonte, R. V.,
+  Schwartz, S., \ldots{} Eichler, E. E. (2002). Recent Segmental
+  Duplications in the Human Genome. \emph{Science}, \emph{297}(5583),
+  1003--1007. \url{http://doi.org/10.1126/science.1072047}
+  
+  \hypertarget{ref-Carson2006}{}
+  Carson, A. R., Cheung, J., \& Scherer, S. W. (2006). Duplication and
+  relocation of the functional DPY19L2 gene within low copy repeats.
+  \emph{BMC Genomics}, \emph{7}, 45.
+  \url{http://doi.org/10.1186/1471-2164-7-45}
+  
+  \hypertarget{ref-Cheung2003}{}
+  Cheung, J., Estivill, X., Khaja, R., MacDonald, J. R., Lau, K., Tsui,
+  L.-C., \& Scherer, S. W. (2003). Genome-wide detection of segmental
+  duplications and potential assembly errors in the human genome sequence.
+  \emph{Genome Biology}, \emph{4}(4), R25.
+  \url{http://doi.org/10.1186/gb-2003-4-4-r25}
+  
+  \hypertarget{ref-Dam2007}{}
+  Dam, A. H. D. M., Koscinski, I., Kremer, J. A. M., Moutou, C., Jaeger,
+  A.-S., Oudakker, A. R., \ldots{} Viville, S. (2007). Homozygous mutation
+  in SPATA16 is associated with male infertility in human globozoospermia.
+  \emph{American Journal of Human Genetics}, \emph{81}(4), 813--20.
+  \url{http://doi.org/10.1086/521314}
+  
+  \hypertarget{ref-Dam2006}{}
+  Dam, A., Feenstra, I., Westphal, J., Ramos, L., Golde, R. van, \&
+  Kremer, J. (2006). Globozoospermia revisited. \emph{Human Reproduction
+  Update}, \emph{13}(1), 63--75.
+  \url{http://doi.org/10.1093/humupd/dml047}
+  
+  \hypertarget{ref-ElInati2012}{}
+  ElInati, E., Kuentz, P., Redin, C., Jaber, S., Vanden Meerschaut, F.,
+  Makarian, J., \ldots{} Viville, S. (2012). Globozoospermia is mainly due
+  to DPY19L2 deletion via non-allelic homologous recombination involving
+  two recombination hotspots. \emph{Human Molecular Genetics},
+  \emph{21}(16), 3695--3702. \url{http://doi.org/10.1093/hmg/dds200}
+  
+  \hypertarget{ref-Harbuz2011}{}
+  Harbuz, R., Zouari, R., Pierre, V., Ben Khelifa, M., Kharouf, M.,
+  Coutton, C., \ldots{} Ray, P. F. (2011). A recurrent deletion of DPY19L2
+  causes infertility in man by blocking sperm head elongation and acrosome
+  formation. \emph{American Journal of Human Genetics}, \emph{88}(3),
+  351--61. \url{http://doi.org/10.1016/j.ajhg.2011.02.007}
+  
+  \hypertarget{ref-Heytens2009}{}
+  Heytens, E., Parrington, J., Coward, K., Young, C., Lambrecht, S., Yoon,
+  S.-Y., \ldots{} De Sutter, P. (2009). Reduced amounts and abnormal forms
+  of phospholipase C zeta (PLCzeta) in spermatozoa from infertile men.
+  \emph{Human Reproduction (Oxford, England)}, \emph{24}(10), 2417--28.
+  \url{http://doi.org/10.1093/humrep/dep207}
+  
+  \hypertarget{ref-MacDonald2014}{}
+  MacDonald, J. R., Ziman, R., Yuen, R. K. C., Feuk, L., \& Scherer, S. W.
+  (2014). The Database of Genomic Variants: a curated collection of
+  structural variation in the human genome. \emph{Nucleic Acids Research},
+  \emph{42}(Database issue), D986--92.
+  \url{http://doi.org/10.1093/nar/gkt958}
+  
+  \hypertarget{ref-Ohno1970}{}
+  Ohno, S. (1970). \emph{Evolution by Gene Duplication}. Berlin,
+  Heidelberg: Springer Berlin Heidelberg.
+  \url{http://doi.org/10.1007/978-3-642-86659-3}
+  
+  \hypertarget{ref-Pedersen1974}{}
+  Pedersen, H., \& Rebbe, H. (1974). Fine structure of round-headed human
+  spermatozoa. \emph{Journal of Reproduction and Fertility}, \emph{37}(1),
+  51--4. \url{http://doi.org/10.1530/JRF.0.0370051}
+  
+  \hypertarget{ref-Pierre2012}{}
+  Pierre, V., Martinez, G., Coutton, C., Delaroche, J., Yassine, S.,
+  Novella, C., \ldots{} Arnoult, C. (2012). Absence of Dpy19l2, a new
+  inner nuclear membrane protein, causes globozoospermia in mice by
+  preventing the anchoring of the acrosome to the nucleus.
+  \emph{Development}, \emph{139}(16), 2955--2965.
+  \url{http://doi.org/10.1242/dev.077982}
+  
+  \hypertarget{ref-Ray2011}{}
+  Ray, P. F., \& Arnoult, C. (2011). La délétion homozygote du gène
+  \textless{}i\textgreater{}DPY19L2\textless{}/i\textgreater{} est
+  responsable de la majorité des cas de globozoospermie.
+  \emph{Médecine/Sciences}, \emph{27}(8-9), 692--693.
+  \url{http://doi.org/10.1051/medsci/2011278004}
+  
+  \hypertarget{ref-Sen2009}{}
+  Sen, C. G. S., Holstein, A. F., \& Schirren, C. (1971). über die
+  Morphogenese rundköpfiger Spermatozoen des Menschen. \emph{Andrologia},
+  \emph{3}(3), 117--125.
+  \url{http://doi.org/10.1111/j.1439-0272.1971.tb02106.x}
+  
+  \hypertarget{ref-Singh}{}
+  Singh, G. (n.d.). Ultrastructural features of round-headed human
+  spermatozoa. \emph{International Journal of Fertility}, \emph{37}(2),
+  99--102. Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/1349598}
+  
+  \hypertarget{ref-Taylor2010}{}
+  Taylor, S., Yoon, S., Morshedi, M., Lacey, D., Jellerette, T., Fissore,
+  R., \& Oehninger, S. (2010). Complete globozoospermia associated with
+  PLC\(\zeta\) deficiency treated with calcium ionophore and ICSI results
+  in pregnancy. \emph{Reproductive BioMedicine Online}, \emph{20}(4),
+  559--564. \url{http://doi.org/10.1016/j.rbmo.2009.12.024}
+  
+  \hypertarget{ref-Walsh2003}{}
+  Walsh, B. (2003). Population-genetic models of the fates of duplicate
+  genes. \emph{Genetica}, \emph{118}(2-3), 279--94. Retrieved from
+  \url{http://www.ncbi.nlm.nih.gov/pubmed/12868616}
+  
+  \hypertarget{ref-Yoon2008}{}
+  Yoon, S.-Y., Jellerette, T., Salicioni, A. M., Lee, H. C., Yoo, M.-S.,
+  Coward, K., \ldots{} Fissore, R. A. (2008). Human sperm devoid of PLC,
+  zeta 1 fail to induce Ca(2+) release and are unable to initiate the
+  first step of embryo development. \emph{The Journal of Clinical
+  Investigation}, \emph{118}(11), 3671--81.
+  \url{http://doi.org/10.1172/JCI36942}
 
 
   % Index?

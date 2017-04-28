@@ -4,12 +4,28 @@
 # This chunk ensures that the thesisdown package is
 # installed and loaded. This thesisdown package includes
 # the template files for the thesis.
+
+
+
 if(!require(devtools))
   install.packages("devtools", repos = "http://cran.rstudio.com")
 if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
+
+
+
+
+
+
 library(thesisdown)
 library(knitr)
+
+
+library(tidyr)
+library(dplyr)
+library(data.table)
+library(ggplot2)
+library(stringi)
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
@@ -39,7 +55,37 @@ Dans ce chapitre, je détaillerai les résultats de 4 articles dont je suis coau
 
 ## Résultats  
 
+```{r all_coding_variants, cache=TRUE}
+
+df_all_coding_variants <- fread("../../all_coding_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE)
+
+```
+
 ### Description de la pipeline  
+
+Notre pipeline d'analyse effectue l'ensemble des étapes allanbt de l'alignement des données jusqu'au filtrage des variants  
+
+L'alignement est effectué grâce à l'aligneur MAGIC [@Su2014] qui produit des comptages *quality-adjusted* "variants" et "référence" pour chaque *strands* des *reads* *paired-end* de manière indépendente et ceux, pour chaque position génomique couverte. Les *reads* duppliqués et les *reads* s'alignant sur plusieurs régions génomiques sont exclus des analyses. 
+
+Positions whose sequence coverage was below 10 on either the forward or reverse strand were marked as low confidence, and positions whose coverage was below 10 on both strands were excluded. 
+
+
+Les SNVs et indels sont ensuite identifié grâce à un algorithme d'appel "maison" [TODO: décrire l'algo].
+L'impact des variants identifiés est ensuite prédit grâce au logiciel variant effect predictor [@McLaren2016] de même que pour chaque variant nous ajoutons sa fréquence dans les bases de données ExAC, ESP6500 et 1000Genomes si celui-ci y est recanssé.
+Le 
+
+
+(SNV) and small insertions/deletions (indels) were identified and quality-filtered using in-
+
+house scripts. Briefly, for each variant, independent calls are made on each strand, and only
+
+positions where both calls agree are retained. The most promising candidate variants were
+
+identified using an in-house bioinformatics pipeline, as follows. Variants with a minor allele
+
+frequency greater than 5% in the NHLBI ESP6500
+
+
 
 <!-- description des outils choisis et de la pipeline   -->
 
@@ -51,33 +97,24 @@ Dans ce chapitre, je détaillerai les résultats de 4 articles dont je suis coau
 
 #### Etude familiale echec de fécondation -> PLCzeta  {#plcz}  
 
-
-```{r spink2data, message=FALSE, cache=TRUE}
-
-library(tidyr)
-library(dplyr)
-library(data.table)
-library(ggplot2)
-library(stringi)
+```{r plczdata, message=FALSE, cache=TRUE}
 
 ####
 # Loading data
 ####
 
-df_variants_b1_b2 <- fread("../../genotype_plcz.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN,CALL,starts_with("Ghs")) %>%
-  filter(CALL %in% c(2,3,"b","c")) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT),"SNV","Indel"), 
-         STRAND = if_else(CALL %in% c(2,3),"Both_strand","Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2,"b"),"Heterozygous","Homozygous"),
-         RUN = if_else(RUN == "Ghs113","B1","B2")) 
+df_variants_b1_b2 <- fread("../../genotype_plcz.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  gather(RUN, CALL, starts_with("Ghs")) %>%
+  filter(CALL %in% c(2, 3, "b", "c")) %>%
+  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
+         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
+         RUN = if_else(RUN == "Ghs113", "B1", "B2")) 
 
-df_ctrl <- fread("../../genotype_not_fert_fail.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN,CALL,starts_with("Ghs")) %>%
-  filter(CALL %in% c(3,"c")) %>%
+df_ctrl <- fread("../../genotype_not_fert_fail.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
+  gather(RUN, CALL, starts_with("Ghs")) %>%
+  filter(CALL %in% c(3, "c")) %>%
   select(-CALL)
-
-df_all_coding_variants <- fread("../../all_coding_variants_vep81.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE)
 
 ####
 # Filtering
@@ -90,12 +127,13 @@ df_variants_b2 <- filter(df_variants_b1_b2, RUN == "B2")
 
 # Only homozygous variants 
 # Shared by B1 AND B2
-df_filter_common_variants <- df_variants_b1 %>%
-  inner_join(df_variants_b2, by=c("CHR","POSITION","REF","ALT","GENOTYPE","TYPE")) %>%
+df_filter_common_variants <- inner_join(df_variants_b1, df_variants_b2, 
+                                        by = c("CHR", "POSITION", "REF", "ALT", "GENOTYPE", "TYPE")) %>%
   select(-ends_with(".x"), -ends_with(".y")) %>%
-  inner_join(df_all_coding_variants,by = c("CHR", "POSITION", "REF", "ALT"))
+  inner_join(df_all_coding_variants, 
+             by = c("CHR", "POSITION", "REF", "ALT"))
 
-df_filter_common_homo_variants <- filter(df_filter_common_variants,GENOTYPE == "Homozygous")
+df_filter_common_homo_variants <- filter(df_filter_common_variants, GENOTYPE == "Homozygous")
 
 df_filter_impact <-   filter(df_filter_common_homo_variants,
                              Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
@@ -103,49 +141,41 @@ df_filter_impact <-   filter(df_filter_common_homo_variants,
                              Consequence != "3_prime_UTR_variant",
                              Consequence != "intergenic_variant",
                              !grepl("NMD_transcript_variant",Consequence),
-                             !(grepl("tolerated",SIFT) & grepl("benign",PolyPhen)))
+                             !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen)))
 
-maf_cutoff <- 0.05
+maf_cutoff <- 0.01
 df_filter_freq <- filter(df_filter_impact,
                          is.na(ExAC_AF) | ExAC_AF <= maf_cutoff,
                          is.na(ESP) | ESP <= maf_cutoff,
                          is.na(`1KG`) | `1KG` <= maf_cutoff) %>%
-  # Filter variants observed as homo in other patho
-  anti_join(df_ctrl, by = c("CHR", "POSITION", "REF", "ALT")) %>%
-  select(-Feature_type,-BIOTYPE,-SYMBOL_SOURCE,-HGNC_ID,CADD_RAW,ExAC_AF_FIN,ExAC_AF_OTH,-(ExAC_AF_AMR:ExAC_AF_SAS))
+  anti_join(df_ctrl, by = c("CHR", "POSITION", "REF", "ALT")) %>%   # Filter variants observed as homo in other patho1
+  select(-Feature_type, -BIOTYPE, -SYMBOL_SOURCE, -HGNC_ID, CADD_RAW, ExAC_AF_FIN, ExAC_AF_OTH, -(ExAC_AF_AMR:ExAC_AF_SAS))
 
-
-df_passing_filter_genes <- distinct(df_filter_freq,
-                                    SYMBOL,CHR,POSITION,REF,ALT) %>%
-       select(Chromosome = CHR, Position = POSITION,`Reference allele` = REF,`Alterated allele` = ALT,Gene=SYMBOL)
-
-View(df_passing_filter_genes)
-
+df_passing_filter_genes <- distinct(df_filter_freq, SYMBOL, CHR, POSITION, REF, ALT) %>%
+       select(Chromosome = CHR, Position = POSITION, `Reference allele` = REF, `Alterated allele` = ALT, Gene = SYMBOL)
 
 ```
 
-
-```{r plc_zeta_tabcommonvar}
+```{r plczetatabcommonvar}
 
 tab.name <- "Comptage des variants communs à B1 et B2"
 
-knitr::kable(group_by(df_filter_common_variants,
-               TYPE,GENOTYPE) %>% 
-        select(Genotype = GENOTYPE,`Variant type` = TYPE) %>% 
-        summarise(Count = n()) %>% 
-        arrange(desc(`Variant type`)),
-      caption = tab.name)
+knitr::kable(group_by(df_filter_common_variants, TYPE, GENOTYPE) %>%
+               select(Genotype = GENOTYPE, `Variant type` = TYPE) %>%
+               summarise(Count = n()) %>%
+               arrange(desc(`Variant type`)),
+             caption = tab.name)
 
 ```
 
-```{r varb1b2, fig.cap=fig.info,fig.scap=fig.name,fig.width=4.5,fig.height=3.8}
+```{r varplcz, fig.cap=fig.info,fig.scap=fig.name,fig.width=4.5,fig.height=3.8}
 
 fig.name <- "Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés"
 fig.description <- ""
 fig.info <- paste(fig.name)
 
-ggplot(df_variants_b1_b2,aes(GENOTYPE)) +
-  geom_bar(aes(fill = RUN),position = position_dodge()) +
+ggplot(df_variants_b1_b2, aes(GENOTYPE)) +
+  geom_bar(aes(fill = RUN), position = position_dodge()) +
   scale_fill_discrete(name = "Patient") +
   xlab("Variants genotypes") +
   ylab("Count")
@@ -172,34 +202,27 @@ include_graphics(path = "figure/spink2_arbre_genealogique.png")
 
 ```{r spink2data, message=FALSE, cache=TRUE}
 
-library(tidyr)
-library(dplyr)
-library(data.table)
-library(ggplot2)
-library(stringi)
-
 ####
 # Loading data
 ####
 
-df_variants_b1_b2 <- fread("../../genotype_spink2_brothers.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN,CALL,starts_with("Ghs")) %>%
-  filter(CALL %in% c(2,3,"b","c")) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT),"SNV","Indel"), 
-         STRAND = if_else(CALL %in% c(2,3),"Both_strand","Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2,"b"),"Heterozygous","Homozygous"),
-         RUN = if_else(RUN == "Ghs44","B1","B2")) 
+df_variants_b1_b2 <- fread("../../genotype_spink2_brothers.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  gather(RUN, CALL, starts_with("Ghs")) %>%
+  filter(CALL %in% c(2, 3, "b", "c")) %>%
+  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
+         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
+         RUN = if_else(RUN == "Ghs44", "B1", "B2")) 
 
-df_ctrl <- fread("../../genotype_not_azoo.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN,CALL,starts_with("Ghs")) %>%
-  filter(CALL %in% c(3,"c")) %>%
+df_ctrl <- fread("../../genotype_not_azoo.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  gather(RUN, CALL, starts_with("Ghs")) %>%
+  filter(CALL %in% c(3, "c")) %>%
   select(-CALL)
-
-df_all_coding_variants <- fread("../../all_coding_variants_vep81.csv",sep = "\t", header = TRUE,showProgress = FALSE, verbose = FALSE)
 
 ####
 # Filtering
 ####
+
 
 # Variants carried by B1
 df_variants_b1 <- filter(df_variants_b1_b2, RUN == "B1")
@@ -232,6 +255,7 @@ df_filter_freq <- filter(df_filter_impact,
   anti_join(df_ctrl, by = c("CHR", "POSITION", "REF", "ALT")) %>%
   select(-Feature_type,-BIOTYPE,-SYMBOL_SOURCE,-HGNC_ID,CADD_RAW,ExAC_AF_FIN,ExAC_AF_OTH,-(ExAC_AF_AMR:ExAC_AF_SAS))
 
+
 df_passing_filter_genes <- distinct(df_filter_freq,
                                     SYMBOL,CHR,POSITION,REF,ALT) %>%
        select(Chromosome = CHR, Position = POSITION,`Reference allele` = REF,`Alterated allele` = ALT,Gene=SYMBOL)
@@ -246,15 +270,13 @@ Le séquençage exomique des deux frères B1 et B2 fût réalisé au Mount Sina�
 
 tab.name <- "Comptage des variants communs à B1 et B2"
 
-kable(group_by(df_filter_common_variants,
-               TYPE,GENOTYPE) %>% 
+knitr::kable(group_by(df_filter_common_variants, TYPE, GENOTYPE) %>% 
         select(Genotype = GENOTYPE,`Variant type` = TYPE) %>% 
         summarise(Count = n()) %>% 
         arrange(desc(`Variant type`)),
       caption = tab.name)
 
 ```
-
 
 ```{r varb1b2, fig.cap=fig.info,fig.scap=fig.name,fig.width=4.5,fig.height=3.8}
 
@@ -270,7 +292,7 @@ ggplot(df_variants_b1_b2,aes(GENOTYPE)) +
 
 ```
 
-Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à une liste de `r nrow(distinct(df_filter_freq,CHR,POSITION,REF,ALT))` variants impactant `r nrow(df_passing_filter_genes)` gènes différents : *SPINK2* et *GUF1* (**Table : **\@ref(tab:passingfiltervar)). Parmi ces deux gènes, seul *SPINK2* était décrit comme fortement exprimé dans le testicule [INS2RER FIGURE ACEVIEW]. Nous avons d'ailleurs pu confirmer cette forte expression par RT-PCR quantitative en temps réel  forte à la fois chez l'Homme (**Figure : **\@ref(fig:spink2exp) - **A**) et chez la souris (**Figure : **\@ref(fig:spink2exp) - **B**). Ces données ont donc fait de *SPINK2* le seul candidat évident pouvant expliquer ce phénotype. Le variant partagé par les deux frères : Chr4:57686748G>C n'a été recencé dans aucune des bases de données que sont ExAC, 1000Genomes et ESP6500. Le gène *SPINK2* est localisé sur le chromosome 4 et contient 4 exons (**Figure : **\@ref(fig:spink2exp)). Sa localisation intronique à 3 pb du 2$^{ième}$ exon indique que ce variant pourrait avoir un effet sur l'épissage de l'ARNm  
+Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à une liste de `r nrow(distinct(df_filter_freq, CHR, POSITION, REF, ALT))` variants impactant `r nrow(df_passing_filter_genes)` gènes différents : *SPINK2* et *GUF1* (**Table : **\@ref(tab:passingfiltervar)). Parmi ces deux gènes, seul *SPINK2* était décrit comme fortement exprimé dans le testicule [INS2RER FIGURE ACEVIEW]. Nous avons d'ailleurs pu confirmer cette forte expression par RT-PCR quantitative en temps réel  forte à la fois chez l'Homme (**Figure : **\@ref(fig:spink2exp) - **A**) et chez la souris (**Figure : **\@ref(fig:spink2exp) - **B**). Ces données ont donc fait de *SPINK2* le seul candidat évident pouvant expliquer ce phénotype. Le variant partagé par les deux frères : Chr4:57686748G>C n'a été recencé dans aucune des bases de données que sont ExAC, 1000Genomes et ESP6500. Le gène *SPINK2* est localisé sur le chromosome 4 et contient 4 exons (**Figure : **\@ref(fig:spink2exp)). Sa localisation intronique à 3 pb du 2$^{ième}$ exon indique que ce variant pourrait avoir un effet sur l'épissage de l'ARNm
 
 ```{r passingfiltervar}
 
