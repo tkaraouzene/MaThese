@@ -355,15 +355,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \href{http://dgv.tcag.ca/dgv/app/home}{\emph{Database of Genomic
   Variants}} (MacDonald, Ziman, Yuen, Feuk, \& Scherer,
   \protect\hyperlink{ref-MacDonald2014}{2014}) indique un excès de
-  duplication puisque sur un total de \ldots{} individus analysés, un
-  totlal de 83 duplications et de 26 délétions hétérozygotes ont été
-  observées pour le locus de \emph{DPY19L2}. Afin de confirmer ces
-  résultats et ainsi écarter l'hypothèse d'un biais causé par la présence
-  du pseudogène \emph{DPY19L2P1} très homologue avec \emph{DPY19L2}
-  (Carson et al., \protect\hyperlink{ref-Carson2006}{2006}) notre équipe a
-  procedé à l'analyse du locus de \emph{DPY19L2} de 1699 individus par
-  CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes
-  furent observés
+  duplication puisque sur un total de 6575 individus analysés, un totlal
+  de 83 duplications et de 26 délétions hétérozygotes ont été observées
+  pour le locus de \emph{DPY19L2}. Afin de confirmer ces résultats et
+  ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène
+  \emph{DPY19L2P1} très homologue avec \emph{DPY19L2} (Carson et al.,
+  \protect\hyperlink{ref-Carson2006}{2006}) notre équipe a procedé à
+  l'analyse du locus de \emph{DPY19L2} de 1699 individus par CGHarray. Un
+  total de 15 duplication et de 3 délétions hétérozygotes furent observés
   
   \begin{figure}
   
@@ -444,6 +443,17 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Autres résultats}\label{autres-resultats}
   
+  Cette étude a également été pour notre équipe l'occasion d'effectuer une
+  étude plus approfondie des LCRs flanquant le locus de \emph{DPY19L2}.
+  Ainsi, nous avons pu mettre en évidence que les LCRs 1 et 2 contenaient
+  5 répétitions du site de reconnaissance consensus de PRDM9
+  (CCNCCNTNNCCNC), une protéine connue pour {[}TODO : décrire le rôle de
+  PRDM9{]}. De même, nous avons pu mettre en évidence que les
+  recombinaisons s'effectuaient le long de 5 points de cassures distincts
+  répartis le long des LCRs 1 et 2 et que comme attendu, l'incidence des
+  points de cassures dans les recombinaisons du locus \emph{DPY19L2} était
+  proportionelle à la taille des régions {[}TODO : expliquer mieux{]}.
+  
   \hypertarget{transcriptome}{\subsection{La
   transcriptomique}\label{transcriptome}}
   
@@ -451,6 +461,69 @@ class (for LaTeX) and the R bookdown package, in general.
   \includegraphics[width=7.5in]{/home/karaout/MaThese/index/bib/12610_2013_Article_8.pdf}
   \newpage
   \end{flushleft}
+  
+  Dans des études précédentes, notre équipe à réussit à démontrer que la
+  protéine \emph{DPY19L2} était localisée dans la membrane interne des
+  noyaux des spermatides pendant la spermatogénèse et qu'elle est
+  nécessaire pour fixer l'acrosome au noyau {[}TODO: insert ref{]}. De
+  même, nous avons pu mettre en évidence que dans des cellules HEK cette
+  protéine colocalisait avec la protéine SUN5 et que \emph{Dpy19l2}
+  pourrait être un partenaire de SUN5(V. Pierre et al.,
+  \protect\hyperlink{ref-Pierre2012}{2012}). nous avons cherché à observer
+  si, comme la protéine SUN5. Chez la souris, la protéine Sun1 est elle
+  aussi nécéssaire à la gamétogénèse et est connue pour permettre
+  l'intéraction entre le noyau et les télomères (Ding et al.,
+  \protect\hyperlink{ref-Ding2007}{2007}). Dans cette étude nous avons
+  donc chercher à savoir si l'absence de la protéine Dpy19l2 pouvait
+  entrainer des dérèglement transcriptionelle qui pourrait, entre autre,
+  expliquer l'absence de la protéine PLC\(\zeta\) dans les spermatozoïdes
+  globozoocéphales.\\
+  Pour cela, nous avons effectué une analyse comparative du transcriptome
+  testiculaire de deux souris \emph{Dpy19l2}\(^{+/+}\) (S1+ et S2+) et
+  deux souris \emph{Dpy19l2}\(^{-/-}\) (S1- et S2-). Cette analyse a été
+  effectué sur des puces à ADN du type Affymetrix GeneChip® Mouse Exon 1.0
+  contenant des sondes pour 35.557 gènes murins. Pour chacun de ces gènes,
+  nous avons donc chercher à soivoir s'ils étaient différentiellement
+  exprimés chez les sours S1- et S2- lorsqu'on comparait leur expression
+  avec celle des souris S1+ et S2+ en calculant quatre ratio (R1, R2, R3
+  et R4) (\textbf{Équation} : \eqref{eq:micerate}). Les gènes pour lesquels
+  au moins 3 de leurs ratio étaient \(\ge\) 1,7 furent considérés comme
+  sur-exprimés tandis que ceux pour lesquels 3 de leurs ratio étaient
+  \(\le\) 0,58 (\(\frac{1}{1,7}\)) furent considérés comme sous-exprimés.
+  
+  \begin{equation} 
+  \begin{split}
+  \forall gene \in & \ \{genes\ in\ array\}: \\
+  \\
+  & R1_{gene} = \frac{exp_{gene}(S1-)}{exp_{gene}(S1+)} \ \ \ \ R2_{gene} = \frac{exp_{gene}(S2-)}{exp_{gene}(S1+)} \\
+  & R3_{gene} = \frac{exp_{gene}(S1-)}{exp_{gene}(S2+)} \ \ \ \ R4_{gene} = \frac{exp_{gene}(S2-)}{exp_{gene}(S2+)} 
+  \label{eq:micerate}
+  \end{split}
+  \end{equation}
+  
+  Ainsi cette étude a pu mettre en évidence la sous-expression de 6 gènes
+  (incluant \emph{Dpy19l2}) et la sur-expression de 70 gènes chez les
+  souris \emph{Dpy19l2}\(^{-/-}\). Parmi ces gènes, nous ne figurait pas
+  Plc\(\zeta\) indiquant que l'absence de cette protéine chez les
+  spermatozoïdes globozoocéphales n'étaient pas directement dûe à un
+  dysfonctionnement transcriptionel. Afin de prédire les fonction
+  moléculaire dans lesquels étaient impliqués ces gènes, nous nous sommes
+  servi du logiciel PANTHER (Mi et al.,
+  \protect\hyperlink{ref-Mi2017}{2017}). Ainsi, nous avons pu constater
+  que 23 gènes codant pour des protéines de liaison étaient dérégulés,
+  dont 12 sont des protéines de liaison aux acides nucléiques
+  (\textbf{Figure : }\ref{fig:molfunc} - \textbf{A})
+  
+  plusieurs fonction moléculaire se retrouvaient enrichit dans cette liste
+  de gène .
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/molfunc-1} 
+  
+  }
+  
+  \end{figure}
   
   \section{Conclusion}\label{conclusion}
   
@@ -501,6 +574,12 @@ class (for LaTeX) and the R bookdown package, in general.
   Update}, \emph{13}(1), 63--75.
   \url{http://doi.org/10.1093/humupd/dml047}
   
+  \hypertarget{ref-Ding2007}{}
+  Ding, X., Xu, R., Yu, J., Xu, T., Zhuang, Y., \& Han, M. (2007). SUN1 Is
+  Required for Telomere Attachment to Nuclear Envelope and Gametogenesis
+  in Mice. \emph{Developmental Cell}, \emph{12}(6), 863--872.
+  \url{http://doi.org/10.1016/j.devcel.2007.03.018}
+  
   \hypertarget{ref-ElInati2012}{}
   ElInati, E., Kuentz, P., Redin, C., Jaber, S., Vanden Meerschaut, F.,
   Makarian, J., \ldots{} Viville, S. (2012). Globozoospermia is mainly due
@@ -528,6 +607,13 @@ class (for LaTeX) and the R bookdown package, in general.
   structural variation in the human genome. \emph{Nucleic Acids Research},
   \emph{42}(Database issue), D986--92.
   \url{http://doi.org/10.1093/nar/gkt958}
+  
+  \hypertarget{ref-Mi2017}{}
+  Mi, H., Huang, X., Muruganujan, A., Tang, H., Mills, C., Kang, D., \&
+  Thomas, P. D. (2017). PANTHER version 11: expanded annotation data from
+  Gene Ontology and Reactome pathways, and data analysis tool
+  enhancements. \emph{Nucleic Acids Research}, \emph{45}(D1), D183--D189.
+  \url{http://doi.org/10.1093/nar/gkw1138}
   
   \hypertarget{ref-Ohno1970}{}
   Ohno, S. (1970). \emph{Evolution by Gene Duplication}. Berlin,

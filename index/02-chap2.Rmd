@@ -10,6 +10,9 @@ if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
 library(thesisdown)
 library(knitr)
+library(data.table)
+library(scales)
+
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
@@ -55,13 +58,13 @@ Dans ce chapitre je détaillerai les résultats de trois articles dont je suis c
 
 ## Résultats  
 
-### Les mécanismes mutationnels {#mecamut}
+### Les mécanismes mutationnels {#mecamut}  
 
 #### Confirmation de l'excès de délétion 
 
 Chez les mammifères il existe trois paralogues de *DPY19L2* de fonction encore inconnue et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplications de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gène tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
 
-Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèle délété que d'allèle dupliqué puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de donnée [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) [@MacDonald2014] indique un excès de duplication puisque sur un total de ... individus analysés, un totlal de 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à l'analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés  
+Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèle délété que d'allèle dupliqué puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de donnée [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) [@MacDonald2014] indique un excès de duplication puisque sur un total de 6575 individus analysés, un totlal de 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à l'analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés  
 
 ```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.5"}
 
@@ -106,6 +109,15 @@ include_graphics(path = "figure/globo_du_del_rate.png")
 
 #### Autres résultats  
 
+<!-- Séquençage de *PRDM9* chez les trois donneurs.   -->
+<!-- Analyse approfondie des LCRs 1 et 2, déterminaison des points de cassures   -->
+
+Cette étude a également été pour notre équipe l'occasion d'effectuer une étude plus approfondie des LCRs flanquant le locus de *DPY19L2*. Ainsi, nous avons pu mettre en évidence que les LCRs 1 et 2 contenaient 5 répétitions du site de reconnaissance consensus de PRDM9 (CCNCCNTNNCCNC), une  protéine connue pour [TODO : décrire le rôle de PRDM9]. De même, nous avons pu mettre en évidence que les recombinaisons s'effectuaient le long de 5 points de cassures distincts répartis le long des LCRs 1 et 2 et que comme attendu, l'incidence des points de cassures dans les recombinaisons du locus *DPY19L2* était proportionelle à la taille des régions [TODO : expliquer mieux].  
+
+
+<!-- Ainsi, nous avons pu déterminer que les événements de recombinaison occurant à ce locus s'effectuaient par le biais de 5 points de cassures (BP) -->
+
+
 
 <!-- ### Les anomalies épigénétiques : (PLCzeta, compaction, fragmentation) -->
 
@@ -118,6 +130,61 @@ include_graphics(path = "figure/globo_du_del_rate.png")
 \end{flushleft}  
 
 
+Dans des études précédentes, notre équipe à réussit à démontrer que la protéine *DPY19L2* était localisée dans la membrane interne des noyaux des spermatides pendant la spermatogénèse et qu’elle est nécessaire pour fixer l’acrosome au noyau [TODO: insert ref]. De même, nous avons pu mettre en évidence que dans des cellules HEK cette protéine colocalisait avec la protéine SUN5 et que *Dpy19l2* pourrait être un partenaire de SUN5[@Pierre2012].  nous avons cherché à observer si, comme la protéine SUN5. Chez la souris, la protéine Sun1 est elle aussi nécéssaire à la gamétogénèse et est connue pour permettre l'intéraction entre le noyau et les télomères [@Ding2007]. Dans cette étude nous avons donc chercher à savoir si l'absence de la protéine Dpy19l2 pouvait entrainer des dérèglement transcriptionelle qui pourrait, entre autre, expliquer l'absence de la protéine PLC$\zeta$ dans les spermatozoïdes globozoocéphales.  
+Pour cela, nous avons effectué une analyse comparative du transcriptome testiculaire de deux souris *Dpy19l2*$^{+/+}$ (S1+ et S2+) et deux souris *Dpy19l2*$^{-/-}$ (S1- et S2-). Cette analyse a été effectué sur des puces à ADN du type Affymetrix GeneChip® Mouse Exon 1.0 contenant des sondes pour 35.557 gènes murins. Pour chacun de ces gènes, nous avons donc chercher à soivoir s'ils étaient différentiellement exprimés chez les sours S1- et S2- lorsqu'on comparait leur expression avec celle des souris S1+ et S2+ en calculant quatre ratio (R1, R2, R3 et R4) (**Équation** : \@ref(eq:micerate)). Les gènes pour lesquels au moins 3 de leurs ratio étaient $\ge$ 1,7 furent considérés comme sur-exprimés tandis que ceux pour lesquels 3 de leurs ratio étaient $\le$ 0,58 ($\frac{1}{1,7}$) furent considérés comme sous-exprimés.    
+
+\begin{equation} 
+\begin{split}
+\forall gene \in & \ \{genes\ in\ array\}: \\
+\\
+& R1_{gene} = \frac{exp_{gene}(S1-)}{exp_{gene}(S1+)} \ \ \ \ R2_{gene} = \frac{exp_{gene}(S2-)}{exp_{gene}(S1+)} \\
+& R3_{gene} = \frac{exp_{gene}(S1-)}{exp_{gene}(S2+)} \ \ \ \ R4_{gene} = \frac{exp_{gene}(S2-)}{exp_{gene}(S2+)} 
+(\#eq:micerate)
+\end{split}
+\end{equation}
+
+```{r}
+
+df_binding <- fread("data/data_globo_binding.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  mutate(NN = n()) %>%
+  group_by(`Binding target`) %>%
+  mutate(N = n()) %>%
+  select(-Gene) %>%
+  distinct(N,NN)
+
+# df_binding %>% ungroup() %>% filter(`Binding target` == "Nucleic acid") %>% collect() %>% .[["N"]] 
+
+nn <- df_binding %>% ungroup() %>% filter(`Binding target` == "Nucleic acid") %>% collect() %>% .[["NN"]]
+n <- df_binding %>% ungroup() %>% filter(`Binding target` == "Nucleic acid") %>% collect() %>% .[["N"]]
+
+```
+
+
+Ainsi cette étude a pu mettre en évidence la sous-expression de 6 gènes (incluant *Dpy19l2*) et la sur-expression de 70 gènes chez les souris *Dpy19l2*$^{-/-}$. Parmi ces gènes, nous ne figurait pas Plc$\zeta$ indiquant que l'absence de cette protéine chez les spermatozoïdes globozoocéphales n'étaient pas directement dûe à un dysfonctionnement transcriptionel. Afin de prédire les fonction moléculaire dans lesquels étaient impliqués ces gènes, nous nous sommes servi du logiciel PANTHER [@Mi2017]. Ainsi, nous avons pu constater que `r nn` gènes codant pour des protéines de liaison étaient dérégulés, dont `r n` sont des protéines de liaison aux acides nucléiques (**Figure : **\@ref(fig:molfunc) - **A**)
+
+plusieurs fonction moléculaire se retrouvaient enrichit dans cette liste de gène .  
+
+```{r molfunc, fig.cap=fig.info,fig.scap=fig.name,fig.width=4.5,fig.height=3.8}
+
+fig.name <- ""
+fig.description <- "Représentation du nombre de gène (et le pourcentage entre parenthèse) pour chaque cible de liaison"
+fig.info <- paste(fig.name)
+
+ggplot(df_binding,aes("", N)) +
+  geom_bar(width = 1, stat = "identity", aes(fill = `Binding target`)) +
+   coord_polar("y", start=0)  +
+    geom_text(aes(y = N/3 + c(0, cumsum(N)[-length(N)]), 
+                label = paste0(N," (",percent(N/NN),")")), size = 4) +
+  ggtitle("A: Binding") +
+  theme(axis.title.x=element_blank(), 
+        axis.text.x=element_blank(),
+        axis.title.y = element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.grid=element_blank()
+  )
+
+```
 
 
 
