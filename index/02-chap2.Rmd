@@ -51,6 +51,8 @@ Dans ce chapitre je détaillerai les résultats de trois articles dont je suis c
 1. [**Fine Characterisation of a Recombination Hotspot at the DPY19L2 Locus and Resolution of the Paradoxical Excess of Duplications over Deletions in the General Population**](#mecamut) : au cours de cette étude j'ai participé à divers manipulation de biologie moléculaire tel que l'extraction d'ADN spermatique, quantification des délétions / duplications *de novo*. De même, j'ai pu contribuer au divers analyses statistiques.  
 2. [**Comparative testicular transcriptome of wild type and globozoospermic Dpy19l2 knock out mice**](#transcriptome) : Dans cette étude j'ai pu effectuer l'intégralité des manipulation de biomoléculaire (extraction de l'ARN testiculaire de souris et analyse sur puce) de même que l'intégralité de l'analyse bioinformatique des résultats.  
 
+\newpage
+
 ## Résultats  
 
 ### Les mécanismes mutationnels {#mecamut}
@@ -58,6 +60,8 @@ Dans ce chapitre je détaillerai les résultats de trois articles dont je suis c
 #### Confirmation de l'excès de délétion 
 
 Chez les mammifères il existe trois paralogues de *DPY19L2* de fonction encore inconnue et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplications de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gène tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
+
+Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèle délété que d'allèle dupliqué puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de donnée [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) [@MacDonald2014] indique un excès de duplication puisque sur un total de ... individus analysés, un totlal de 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à l'analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés  
 
 ```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.5"}
 
@@ -69,11 +73,9 @@ include_graphics(path = "figure/dpy_nahr.png")
 
 ```
 
-Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèle délété que d'allèle dupliqué puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de donnée [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) [@MacDonald2014] indique un excès de duplication puisque sur un total de ... individus analysés, un totlal de 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à l'analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés  
-
 #### Détermination du taux de recombinaison *de novo* de *DPY19L2*  
 
-Alors que les résultats précédents confirment un excès de l'allèle dupliqué de *DPY19L2* dans la population générale, nous avons par la suite cherché à déterminer les taux *de novo* de duplications / délétions de ce même locus Afin de voir si cet exces était dû à une séléction de l'allèle dupliqué ou au fait que celui-ci était effectivement produit plus fréquement que l'allèle délété. Pour ce faire nous avons quantifié le taux d'apparition de ces événements génétiques à partir d'ADN spermatique. Les spermatozoïdes étant le produits direct de la méiose, ils sont donc les reflets d'haplotypes produits *de novo*. Pour cela nous avons isolé, par dillutions succèsives l'ADN spermatique de trois donneurs de sorte à ce que chaque réaction d'amplification amplifie le locus *DPY19L2* d'une seule molécule d'ADN (**Figure** : \@ref(fig:dupdelrate)). Ainsi, la probabilité qu'un puit contiene une recombinaison (délétion ou duplication) au locus *DPY19L2* suivait une distribution hypergéométrique (**Équation** : \@ref(eq:hypergeo)) nous avons donc pu estimer la fréquence de duplication / délétion $\lambda$ (**Équation** : \@ref(eq:lambda))
+Alors que les résultats précédents confirment un excès de l'allèle dupliqué de *DPY19L2* dans la population générale, nous avons par la suite cherché à déterminer les fréquences de duplications / délétions *de novo* de ce même locus. Ceci ayant pour but de déterminer si cet exces est dû à une séléction de l'allèle dupliqué ou au fait que celui-ci était effectivement produit plus fréquement que l'allèle délété. Pour ce faire nous avons quantifié le taux d'apparition de ces événements génétiques à partir d'ADN spermatique. Les spermatozoïdes étant le produits direct de la méiose, ils sont donc les reflets d'haplotypes produits *de novo*. Pour cela, nous avons analyser par PCR digitale l'ADN spermatique de trois donneurs. Leur ADN a tout d'abor été dilué en série de sorte à ce qu'environ 25% des 96 puits de la PCR contiennent un événement (délétion ou duplication). Ainsi, en acceptant qu'un génome haploïde humain représente 3pg, 50ng d'ADN spermatique furent déposés dans chaque puit pour la PCR spécifique à la délétion, et 100ng dans chaque puit spécifiques à a duplication. Chaque puit contient donc une partie de cette charge d'ADN initiale. La distribution de cette charge d'ADN au sein des 96 puits peut donc s'apparier à un tirage sans remise, la probabilité qu'un puit soit positif pour un événement chromosomique (duplication ou délétion) peut donc être modélisé par une loi hypergéométrique (**Équation** : \@ref(eq:hypergeo)). Nous permettant ainsi d'estimer la fréquence duplication / délétion $\lambda$ pour chaque donneur (**Équation** : \@ref(eq:lambda)) (**Figure : **\@ref(fig:dupdelrate)).  
 
 \begin{equation} 
 \frac{\frac{(N - R)!}{W!(N-R-W)!}}{\frac{N!}{W!(N-W)!}} = \frac{(N-R)!(N-W)!}{N!(N-W-R)!} = \prod_{i=0}^{R-1}{\frac{N-W-i}{N-i}}
@@ -85,9 +87,14 @@ Alors que les résultats précédents confirment un excès de l'allèle dupliqu�
 (\#eq:lambda)
 \end{equation}
 
-Nous avons pu ainsi établir le taux de délétion *de novo* à 1.8 x 10$^{-5}$ (IC 95% : 1.4x 10$^{-6}$; 2.2x 10$^{-6}$) tandis que le taux de duplication *de novo* est estimé à 7.7 x 10$^{-6}$ (IC 95% : 6.1 x 10$^{-6}$; 9.7 x 10$^{-6}$) montrant un enrichisement environ deux fois supperieur des délétion par rapport aux duplications dur le site de *DPY19L2*.  
+Où :  
+. $N$ : représente le nombre de copie de chromosome 12 dans la charge d'ADN initiale (1.6x10${^6}$ pour la PCR spécifique à la délétion, 3.2x10${^6}$ pour la PCR spécifique à la duplication)    
+. $W = \frac{N}{96}$ correspond au nombre de copiede chromosome 12 par puit  
+. $R$ représente le nombre total de recombinaison observées  
 
-```{r dupdelrate,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.35"}
+L'interval de confiance (IC) à 95% est ensuite calculé grâce à une loi binomiale de sorte à modéliser la dilution initiale pour obtenir l'ADN d'*entrée*. Le puit contenant le *pool* des trois ADN spermatique est donc celui ayant les résultats les plus robustes, l'IC étant le plus resséré (**Figure : **\@ref(fig:dupdelrate)), et permet donc d'établir le taux de délétion *de novo* à 1.8 x 10$^{-5}$ (IC 95% : 1.4x 10$^{-6}$; 2.2x 10$^{-6}$) tandis que le taux de duplication *de novo* est estimé à 7.7 x 10$^{-6}$ (IC 95% : 6.1 x 10$^{-6}$; 9.7 x 10$^{-6}$) montrant un enrichisement environ deux fois supperieur des délétion par rapport aux duplications sur le site de *DPY19L2* (**Figure : **\@ref(fig:dupdelrate)).  
+
+```{r dupdelrate,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.38"}
 
 fig.name <- "Ratio des délétions / duplications *de novo* observées au locus *DPY19L2* déterminé par PCR digital à partir d'ADN spermatique de trois donneurs"
 fig.description <- "[TODO]"
@@ -96,7 +103,6 @@ fig.info <- paste0(fig.name," : ",fig.description)
 include_graphics(path = "figure/globo_du_del_rate.png")
 
 ```
-
 
 #### Autres résultats  
 
