@@ -1,0 +1,78 @@
+Gene	Molecular functions	Target
+Dnajc13	Binding	Protein
+Ccng1	Binding	Protein
+Stk33	Binding	Protein
+Ankrd49	Binding	Protein
+Cnn3	Binding	Protein
+Ifna9	Binding	Protein
+Lifr	Binding	Protein
+C7	Binding	Protein
+Sgk3	Binding	Protein
+Med4	Binding	Nucleic acid
+Zfp558	Binding	Nucleic acid
+Mki67ip	Binding	Nucleic acid
+Onecut2	Binding	Nucleic acid
+Zfp72	Binding	Nucleic acid
+Gm9805	Binding	Nucleic acid
+Mynn	Binding	Nucleic acid
+Zfp518	Binding	Nucleic acid
+Emb	Binding	Nucleic acid
+Zfp759	Binding	Nucleic acid
+Sfrs3	Binding	Nucleic acid
+Mki67ip	Binding	Nucleic acid
+Caps2	Binding	Calcium ion
+Sgk3	Binding	Calcium ion
+Bhmt	Catalytic	Transferase
+Gm4776	Catalytic	Transferase
+Lias	Catalytic	Transferase
+Chuk	Catalytic	Transferase
+Sgk3	Catalytic	Transferase
+Stk33	Catalytic	Transferase
+Mki67ip	Catalytic	RNA splicing factor
+Sfrs3	Catalytic	RNA splicing factor
+Dnajc13	Catalytic	Isomerase
+Ppil4	Catalytic	Isomerase
+Npl	Catalytic	Lyase
+Bhmt	Catalytic	Lyase
+Bhmt	Catalytic	Oxydoreductase
+Rnf160	Catalytic	Ligase
+Cdc25c	Catalytic	Hydrolase
+Lipg	Catalytic	Hydrolase
+Cpe	Catalytic	Hydrolase
+Abca1	Catalytic	Hydrolase
+Atp6	Catalytic	Hydrolase
+Dnahc12	Catalytic	Hydrolase
+Dnahc3	Catalytic	Hydrolase
+Cfhr1	Catalytic	Hydrolase
+Abca1	Transporter	Transmembrane
+Slco6d1	Transporter	Transmembrane
+Aqp8	Transporter	Transmembrane
+Atp6	Transporter	Transmembrane
+Cfhr1	Transporter	Lipid
+Zfp558	Transcription	Transcription régulator
+Onecut2	Transcription	Transcription régulator
+Gm9805	Transcription	Transcription régulator
+Zfp72	Transcription	Transcription régulator
+Mynn	Transcription	Transcription régulator
+Zfp759	Transcription	Transcription régulator
+Med4	Transcription	Transcription régulator
+Zfp518	Transcription	Transcription régulator
+Mki67ip	Transcription	Transcription régulator
+Emb	Transcription	Transcription régulator
+Dnahc12	Structural molecule	Cytoskeleton
+Dnahc3	Structural molecule	Cytoskeleton
+Stk33	Structural molecule	Cytoskeleton
+Cnn3	Structural molecule	Cytoskeleton
+Kif15	Structural molecule	Cytoskeleton
+Cmtm3	Structural molecule	Myelin seath
+Ifnar2	Receptor	Cytokine
+Cfhr1	Receptor	Cytokine
+Il1r1	Receptor	Cytokine
+Lifr	Receptor	Cytokine
+Dnajc13	Enzyme regulator	NA
+Ccng1	Enzyme regulator	NA
+Ankrd49	Enzyme regulator	NA
+Timp1	Enzyme regulator	NA
+Dnahc12  	Motor	NA
+Dnahc3	Motor	NA
+Kif15	Motor	NA
