@@ -13,12 +13,58 @@ library(knitr)
 library(data.table)
 library(scales)
 
-
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
 knitr::opts_chunk$set(fig.align='center',echo=FALSE)
 
 knitr::opts_knit$set(kable.force.latex = TRUE)
+
+# Multiple plot function
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
 
 ```
 
@@ -145,48 +191,88 @@ Pour cela, nous avons effectué une analyse comparative du transcriptome testicu
 
 ```{r}
 
-df_binding <- fread("data/data_globo_binding.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+df_mol_function <- fread("data/data_globo_loecular_fuc.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  within(`Molecular functions` <- factor(`Molecular functions`,
+                                         levels = names(sort(table(`Molecular functions`), 
+                                                        decreasing = TRUE))))
+
+
+df_mol_function_simple <- df_mol_function %>%
+  group_by(`Molecular functions`) %>%
   mutate(NN = n()) %>%
-  group_by(`Binding target`) %>%
+  group_by(`Molecular functions`, Target) %>%
   mutate(N = n()) %>%
   select(-Gene) %>%
   distinct(N,NN)
 
-# df_binding %>% ungroup() %>% filter(`Binding target` == "Nucleic acid") %>% collect() %>% .[["N"]] 
-
-nn <- df_binding %>% ungroup() %>% filter(`Binding target` == "Nucleic acid") %>% collect() %>% .[["NN"]]
-n <- df_binding %>% ungroup() %>% filter(`Binding target` == "Nucleic acid") %>% collect() %>% .[["N"]]
+nn <- df_mol_function_simple %>% ungroup() %>% filter(Target == "Nucleic acid") %>% collect() %>% .[["NN"]]
+n <- df_mol_function_simple %>% ungroup() %>% filter(Target == "Nucleic acid") %>% collect() %>% .[["N"]]
 
 ```
 
+Ainsi cette étude a pu mettre en évidence la sous-expression de 6 gènes (incluant *Dpy19l2*) et la sur-expression de 70 gènes chez les souris *Dpy19l2*$^{-/-}$. Parmi ces gènes, nous ne figurait pas *Plc*$\zeta$ indiquant que l'absence de cette protéine chez les spermatozoïdes globozoocéphales n'étaient pas directement dûe à un dysfonctionnement transcriptionel. Afin de prédire les fonction moléculaire dans lesquels étaient impliqués ces gènes, nous nous sommes servi du logiciel PANTHER [@Mi2017]. Ainsi, nous avons pu constater que `r nn` gènes codant pour des protéines de liaison étaient dérégulés (**Figure : **\@ref(fig:molfunc)), dont `r n` sont des protéines de liaison aux acides nucléiques (**Figure : **\@ref(fig:piemol)) suggérant que *Dpy19l2* pourrait effectivement intéragir avec l'ADN. D'autre fonctions moléculaires telles que l'activité catalytique, la régulation de la transcription et des protéines ayant des fonctions structurelles étaient égallement dérégulées chez les souris KO. Ces derniers sont particulièrement intéréssant lorsque l'on sait que les spermatozoïdes globozoocéphales sont caractérisés par plusieurs défauts structurels.   
 
-Ainsi cette étude a pu mettre en évidence la sous-expression de 6 gènes (incluant *Dpy19l2*) et la sur-expression de 70 gènes chez les souris *Dpy19l2*$^{-/-}$. Parmi ces gènes, nous ne figurait pas Plc$\zeta$ indiquant que l'absence de cette protéine chez les spermatozoïdes globozoocéphales n'étaient pas directement dûe à un dysfonctionnement transcriptionel. Afin de prédire les fonction moléculaire dans lesquels étaient impliqués ces gènes, nous nous sommes servi du logiciel PANTHER [@Mi2017]. Ainsi, nous avons pu constater que `r nn` gènes codant pour des protéines de liaison étaient dérégulés, dont `r n` sont des protéines de liaison aux acides nucléiques (**Figure : **\@ref(fig:molfunc) - **A**)
+```{r molfunc, fig.cap=fig.info,fig.scap=fig.name,fig.asp=0.5}
 
-plusieurs fonction moléculaire se retrouvaient enrichit dans cette liste de gène .  
+fig.name <- "Fonctions moléculaires affectées par au moins un gène dérégulé"
+fig.description <- "Bndn = Binding, Ctly = Catalytic, Trnsc = Transcription, Strm = Structural molecule, Enzr = Enzyme regulator, Rcpt = Receptor, Motr = Motor"
+fig.info <- paste(fig.name," : ",fig.description)
 
-```{r molfunc, fig.cap=fig.info,fig.scap=fig.name,fig.width=4.5,fig.height=3.8}
-
-fig.name <- ""
-fig.description <- "Représentation du nombre de gène (et le pourcentage entre parenthèse) pour chaque cible de liaison"
-fig.info <- paste(fig.name)
-
-ggplot(df_binding,aes("", N)) +
-  geom_bar(width = 1, stat = "identity", aes(fill = `Binding target`)) +
-   coord_polar("y", start=0)  +
-    geom_text(aes(y = N/3 + c(0, cumsum(N)[-length(N)]), 
-                label = paste0(N," (",percent(N/NN),")")), size = 4) +
-  ggtitle("A: Binding") +
-  theme(axis.title.x=element_blank(), 
-        axis.text.x=element_blank(),
-        axis.title.y = element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.ticks.y=element_blank(),
-        panel.grid=element_blank()
-  )
+ggplot(df_mol_function,aes(`Molecular functions`)) +
+  geom_bar() +
+  scale_x_discrete(labels = abbreviate)
 
 ```
 
+```{r piemol, fig.cap=fig.info,fig.scap=fig.name,fig.asp=.55}
 
+fig.name <- "Détails des sites ciblés par les gènes dérégulés ayant la fonction moléculaire\"Binding\""
+fig.description <- "Les nombres présent au milieu des parts indiquent la quantité de gène impliqués dans cette fonction moléculaire"
+fig.info <- paste(fig.name," : ",fig.description)
+
+pie_chart_theme <- theme(axis.title.x=element_blank(),
+                         axis.text.x=element_blank(),
+                         axis.title.y = element_blank(),
+                         axis.ticks.x=element_blank(),
+                         axis.ticks.y=element_blank(),
+                         panel.grid=element_blank())
+
+
+p_binding <- ggplot(df_mol_function_simple %>% filter(`Molecular functions` == "Binding"),aes("", N)) +
+  geom_bar(width = 1, stat = "identity", aes(fill = Target)) +
+  coord_polar("y", start = 0)  +
+  geom_text(aes(y = N/3 + c(0, cumsum(N)[-length(N)]), label = N), size = 4) +
+  ggtitle("Binding") +
+  labs(fill = "Binding target") + 
+  pie_chart_theme
+
+p_catalytic <- ggplot(df_mol_function_simple %>% filter(`Molecular functions` == "Catalytic"),aes("", N)) +
+  geom_bar(width = 1, stat = "identity", aes(fill = Target)) +
+  coord_polar("y", start = 0)  +
+  geom_text(aes(y = N/7 + c(0, cumsum(N)[-length(N)]), label = N), size = 4) +
+  ggtitle("Catalytic") +
+  labs(fill = "Reaction") + 
+  pie_chart_theme
+
+p_transcription <- ggplot(df_mol_function_simple %>% filter(`Molecular functions` == "Transcription"),aes("", N)) +
+  geom_bar(width = 1, stat = "identity", aes(fill = Target)) +
+  coord_polar("y", start = 0)  +
+  geom_text(aes(y = N/1 + c(0, cumsum(N)[-length(N)]), label = N), size = 4) +
+  ggtitle("Catalytic") +
+  pie_chart_theme
+
+p_structural_mol <- ggplot(df_mol_function_simple %>% filter(`Molecular functions` == "Structural molecule"),aes("", N)) +
+  geom_bar(width = 1, stat = "identity", aes(fill = Target)) +
+  coord_polar("y", start = 0)  +
+  geom_text(aes(y = N/3 + c(0, cumsum(N)[-length(N)]), label = N), size = 4) +
+  ggtitle("Structural molecule") +
+  pie_chart_theme
+
+
+
+```
+
+Bien que ceux-ci soient modestes, nous avons montrés que les souris *Dpy19l2*$^{-/-}$ présentaient des déréglements transcriptionels affectant plusieurs fonctions moléculaires pouvant ainsi expliquer, du moins en partie, les nombreux défauts morphologiques caractérisant les spermatozoïdes globozoocéphales. De même, nous avons pu observer un déréglement de nombreux gènes impliqués dans la liaison d'acide nucléique et de protéine pouvant ainsi expliquer les défauts d'ancrage de l'acrosome au noyau chez les spermatozoïdes globozoocéphales.
 
 ## Conclusion  
 
