@@ -5,22 +5,13 @@
 # installed and loaded. This thesisdown package includes
 # the template files for the thesis.
 
-
-
 if(!require(devtools))
   install.packages("devtools", repos = "http://cran.rstudio.com")
 if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
 
-
-
-
-
-
 library(thesisdown)
 library(knitr)
-
-
 library(tidyr)
 library(dplyr)
 library(data.table)
@@ -57,7 +48,7 @@ Dans ce chapitre, je détaillerai les résultats de 4 articles dont je suis coau
 
 ```{r all_coding_variants, cache=TRUE}
 
-df_all_coding_variants <- fread("../../all_coding_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE)
+df_all_coding_variants <- fread("data/all_coding_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE)
 
 ```
 
@@ -103,7 +94,7 @@ frequency greater than 5% in the NHLBI ESP6500
 # Loading data
 ####
 
-df_variants_b1_b2 <- fread("../../genotype_plcz.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+df_variants_b1_b2 <- fread("data/genotype_plcz.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   gather(RUN, CALL, starts_with("Ghs")) %>%
   filter(CALL %in% c(2, 3, "b", "c")) %>%
   mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
@@ -111,7 +102,7 @@ df_variants_b1_b2 <- fread("../../genotype_plcz.csv", sep = "\t", header = TRUE,
          GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
          RUN = if_else(RUN == "Ghs113", "B1", "B2")) 
 
-df_ctrl <- fread("../../genotype_not_fert_fail.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
+df_ctrl <- fread("data/genotype_not_fert_fail.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
   gather(RUN, CALL, starts_with("Ghs")) %>%
   filter(CALL %in% c(3, "c")) %>%
   select(-CALL)
@@ -206,7 +197,7 @@ include_graphics(path = "figure/spink2_arbre_genealogique.png")
 # Loading data
 ####
 
-df_variants_b1_b2 <- fread("../../genotype_spink2_brothers.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+df_variants_b1_b2 <- fread("data/genotype_spink2_brothers.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   gather(RUN, CALL, starts_with("Ghs")) %>%
   filter(CALL %in% c(2, 3, "b", "c")) %>%
   mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
@@ -214,7 +205,7 @@ df_variants_b1_b2 <- fread("../../genotype_spink2_brothers.csv", sep = "\t", hea
          GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
          RUN = if_else(RUN == "Ghs44", "B1", "B2")) 
 
-df_ctrl <- fread("../../genotype_not_azoo.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+df_ctrl <- fread("data/genotype_not_azoo.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   gather(RUN, CALL, starts_with("Ghs")) %>%
   filter(CALL %in% c(3, "c")) %>%
   select(-CALL)
