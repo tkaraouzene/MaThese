@@ -1,3 +1,9 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
 # Investigation génétique et physiologique de la globozoospermie {#globo}  
 
 ```{r include.packages3, include = FALSE}
@@ -12,6 +18,7 @@ library(thesisdown)
 library(knitr)
 library(data.table)
 library(scales)
+library(tidyr)
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
@@ -110,7 +117,7 @@ Dans ce chapitre je détaillerai les résultats de trois articles dont je suis c
 
 Chez les mammifères il existe trois paralogues de *DPY19L2* de fonction encore inconnue et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplications de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gène tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
 
-Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèle délété que d'allèle dupliqué puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de donnée [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) [@MacDonald2014] indique un excès de duplication puisque sur un total de 6575 individus analysés, un totlal de 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à l'analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés  
+Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèles délétés que d'allèles dupliqués puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de donnée [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) (DGV) [@MacDonald2014] indique un excès de duplication puisque sur un total de 6575 individus analysés, 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à la ré-analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés coroborant les données fournies par DGV et confirmant ainsi l'excès de l'allèle dupliqué dans la population générale.  
 
 ```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.5"}
 
@@ -124,7 +131,7 @@ include_graphics(path = "figure/dpy_nahr.png")
 
 #### Détermination du taux de recombinaison *de novo* de *DPY19L2*  
 
-Alors que les résultats précédents confirment un excès de l'allèle dupliqué de *DPY19L2* dans la population générale, nous avons par la suite cherché à déterminer les fréquences de duplications / délétions *de novo* de ce même locus. Ceci ayant pour but de déterminer si cet exces est dû à une séléction de l'allèle dupliqué ou au fait que celui-ci était effectivement produit plus fréquement que l'allèle délété. Pour ce faire nous avons quantifié le taux d'apparition de ces événements génétiques à partir d'ADN spermatique. Les spermatozoïdes étant le produits direct de la méiose, ils sont donc les reflets d'haplotypes produits *de novo*. Pour cela, nous avons analyser par PCR digitale l'ADN spermatique de trois donneurs. Leur ADN a tout d'abor été dilué en série de sorte à ce qu'environ 25% des 96 puits de la PCR contiennent un événement (délétion ou duplication). Ainsi, en acceptant qu'un génome haploïde humain représente 3pg, 50ng d'ADN spermatique furent déposés dans chaque puit pour la PCR spécifique à la délétion, et 100ng dans chaque puit spécifiques à a duplication. Chaque puit contient donc une partie de cette charge d'ADN initiale. La distribution de cette charge d'ADN au sein des 96 puits peut donc s'apparier à un tirage sans remise, la probabilité qu'un puit soit positif pour un événement chromosomique (duplication ou délétion) peut donc être modélisé par une loi hypergéométrique (**Équation** : \@ref(eq:hypergeo)). Nous permettant ainsi d'estimer la fréquence duplication / délétion $\lambda$ pour chaque donneur (**Équation** : \@ref(eq:lambda)) (**Figure : **\@ref(fig:dupdelrate)).  
+Alors que les résultats précédents confirment un excès de l'allèle dupliqué de *DPY19L2* dans la population générale, nous avons par la suite cherché à déterminer les fréquences de duplications / délétions *de novo* de ce même locus. Ceci ayant pour but de déterminer si cet exces est dû à une séléction de l'allèle dupliqué ou au fait que celui-ci était effectivement produit plus fréquement que l'allèle délété. Pour ce faire nous avons quantifié le taux d'apparition de ces événements génétiques à partir d'ADN spermatique. Les spermatozoïdes étant le produits direct de la méiose, ils sont donc les reflets d'haplotypes produits *de novo*. Pour cela, nous avons analysé par PCR digitale l'ADN spermatique de trois donneurs ainsi que l'ADN spermatique constitué d'un mix provenant de ces trois donneurs. Leur ADN a tout d'abor été dilué en série de sorte à ce qu'environ 25% des 96 puits de la PCR contiennent un événement (délétion ou duplication). Ainsi, en acceptant qu'un génome haploïde humain représente 3pg, 50ng d'ADN spermatique furent déposés dans chaque puit pour la PCR spécifique à la délétion, et 100ng dans chaque puit spécifiques à a duplication. Chaque puit contient donc une partie de cette charge d'ADN initiale. La distribution de cette charge d'ADN au sein des 96 puits peut donc s'apparier à un tirage sans remise, la probabilité qu'un puit soit positif pour un événement chromosomique (duplication ou délétion) peut donc être modélisé par une loi hypergéométrique (**Équation** : \@ref(eq:hypergeo)). Nous permettant ainsi d'estimer la fréquence duplication / délétion $\lambda$ pour chaque donneur (**Équation** : \@ref(eq:lambda)) (**Figure : **\@ref(fig:dupdelrate)).  
 
 \begin{equation} 
 \frac{\frac{(N - R)!}{W!(N-R-W)!}}{\frac{N!}{W!(N-W)!}} = \frac{(N-R)!(N-W)!}{N!(N-W-R)!} = \prod_{i=0}^{R-1}{\frac{N-W-i}{N-i}}
@@ -153,6 +160,9 @@ include_graphics(path = "figure/globo_du_del_rate.png")
 
 ```
 
+[TODO: expliquer brievement notre hpothèse expliquant ce phénomène] 
+
+
 #### Autres résultats  
 
 <!-- Séquençage de *PRDM9* chez les trois donneurs.   -->
@@ -160,11 +170,7 @@ include_graphics(path = "figure/globo_du_del_rate.png")
 
 Cette étude a également été pour notre équipe l'occasion d'effectuer une étude plus approfondie des LCRs flanquant le locus de *DPY19L2*. Ainsi, nous avons pu mettre en évidence que les LCRs 1 et 2 contenaient 5 répétitions du site de reconnaissance consensus de PRDM9 (CCNCCNTNNCCNC), une  protéine connue pour [TODO : décrire le rôle de PRDM9]. De même, nous avons pu mettre en évidence que les recombinaisons s'effectuaient le long de 5 points de cassures distincts répartis le long des LCRs 1 et 2 et que comme attendu, l'incidence des points de cassures dans les recombinaisons du locus *DPY19L2* était proportionelle à la taille des régions [TODO : expliquer mieux].  
 
-
 <!-- Ainsi, nous avons pu déterminer que les événements de recombinaison occurant à ce locus s'effectuaient par le biais de 5 points de cassures (BP) -->
-
-
-
 <!-- ### Les anomalies épigénétiques : (PLCzeta, compaction, fragmentation) -->
 
 ### La transcriptomique {#transcriptome}
@@ -175,10 +181,9 @@ Cette étude a également été pour notre équipe l'occasion d'effectuer une é
 \newpage
 \end{flushleft}  
 
-
-Dans des études précédentes, notre équipe à réussit à démontrer que la protéine *DPY19L2* était localisée dans la membrane interne des noyaux des spermatides pendant la spermatogénèse et qu’elle est nécessaire pour fixer l’acrosome au noyau [TODO: insert ref]. De même, nous avons pu mettre en évidence que dans des cellules HEK cette protéine colocalisait avec la protéine SUN5 et que *Dpy19l2* pourrait être un partenaire de SUN5[@Pierre2012].  nous avons cherché à observer si, comme la protéine SUN5. Chez la souris, la protéine Sun1 est elle aussi nécéssaire à la gamétogénèse et est connue pour permettre l'intéraction entre le noyau et les télomères [@Ding2007]. Dans cette étude nous avons donc chercher à savoir si l'absence de la protéine Dpy19l2 pouvait entrainer des dérèglement transcriptionelle qui pourrait, entre autre, expliquer l'absence de la protéine PLC$\zeta$ dans les spermatozoïdes globozoocéphales.  
-Pour cela, nous avons effectué une analyse comparative du transcriptome testiculaire de deux souris *Dpy19l2*$^{+/+}$ (S1+ et S2+) et deux souris *Dpy19l2*$^{-/-}$ (S1- et S2-). Cette analyse a été effectué sur des puces à ADN du type Affymetrix GeneChip® Mouse Exon 1.0 contenant des sondes pour 35.557 gènes murins. Pour chacun de ces gènes, nous avons donc chercher à soivoir s'ils étaient différentiellement exprimés chez les sours S1- et S2- lorsqu'on comparait leur expression avec celle des souris S1+ et S2+ en calculant quatre ratio (R1, R2, R3 et R4) (**Équation** : \@ref(eq:micerate)). Les gènes pour lesquels au moins 3 de leurs ratio étaient $\ge$ 1,7 furent considérés comme sur-exprimés tandis que ceux pour lesquels 3 de leurs ratio étaient $\le$ 0,58 ($\frac{1}{1,7}$) furent considérés comme sous-exprimés.    
-
+Dans des études précédentes, notre équipe à réussit à démontrer que la protéine *DPY19L2* était localisée dans la membrane interne des noyaux des spermatides pendant la spermatogénèse et qu’elle est nécessaire pour fixer l’acrosome au noyau [TODO: insert ref]. De même, nous avons pu mettre en évidence que dans des cellules HEK cette protéine colocalisait avec la protéine SUN5 et que *Dpy19l2* pourrait être un partenaire de SUN5[@Pierre2012].  nous avons cherché à observer si, comme la protéine SUN5. Chez la souris, la protéine Sun1 est elle aussi nécéssaire à la gamétogénèse et est connue pour permettre l'intéraction entre le noyau et les télomères [@Ding2007]. Dans cette étude nous avons donc chercher à savoir si l'absence de la protéine Dpy19l2 pouvait entrainer des dérèglement transcriptionelle qui pourrait, entre autre, expliquer l'absence de la protéine PLC$\zeta$ dans les spermatozoïdes globozoocéphales.  De plus, au cours de l'elevage des souris *Dpy19l2* KO au sei de notre laboratoir nous avons pu observé un excès de naissance de souris mâle lorsque l'on croisait deux sours *Dpy19l*$^{+/-}$ [TODO: insérer tableau et figure montrant le biais de sexe].  
+Afin de tenter d'expliquer ces observations, nous avons effectué une analyse comparative du transcriptome testiculaire de deux souris *Dpy19l2*$^{+/+}$ (S1+ et S2+) et deux souris *Dpy19l2*$^{-/-}$ (S1- et S2-) ayant pour but de mettre en évidence d'eventuels dereglement transcriptionels chez la souris KO. 
+Pour effectuer ces analyses, nous avons donc extrait l'ARN testiculaire des 4 souris que nous avons ensuite hybridé sur des puces à ADN Affymetrix GeneChip® Mouse Exon 1.0 contenant des sondes pour 35.557 gènes murins. Cette étape nous a alors permi d'obtenir pour chacune des 4 souris les valeurs d'expression testiculaire de l'ensemble de leurs gènes. Pour chacun de ces gènes, nous avons donc chercher à soivoir s'ils étaient différentiellement exprimés chez les sours S1- et S2- lorsqu'on comparait leur expression avec celle des souris S1+ et S2+. Pour cela, nous avons calculé quatre ratios (R1, R2, R3 et R4) (**Équation** : \@ref(eq:micerate)). Les gènes pour lesquels au moins 3 de leurs ratio étaient $\ge$ 1,7 furent considérés comme sur-exprimés tandis que ceux pour lesquels 3 de leurs ratio étaient $\le$ 0,58 ($\frac{1}{1,7}$) furent considérés comme sous-exprimés.    
 \begin{equation} 
 \begin{split}
 \forall gene \in & \ \{genes\ in\ array\}: \\
@@ -188,6 +193,36 @@ Pour cela, nous avons effectué une analyse comparative du transcriptome testicu
 (\#eq:micerate)
 \end{split}
 \end{equation}
+
+```{r, warning=FALSE}
+
+df_born <- fread("data/souris_dpy_naissance_male_femelle.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  mutate(Birth_id = paste(`issu de`,"_",`né le`)) %>%
+  select(Sex = Sexe, Nb = Nombre, Birth_id) %>%
+  spread(Sex,Nb) %>%
+  rename(Fem = F,
+         Mal = M) %>%
+  mutate(SF = sum(Fem),
+         SM = sum(Mal),
+         ST = SF + SM) %>%
+  group_by(Birth_id) %>% 
+  mutate(Nb_birth = Fem + Mal,
+         p_value = prop.test(unlist(Fem), unlist(Nb_birth), alternative = "less")$p.value,
+         p_tot = prop.test(unlist(SF), unlist(ST), alternative = "less")$p.value) %>%
+  gather(Sex, Nb, Fem:Mal)
+
+
+
+ggplot(df_born,aes(Birth_id,Nb)) + 
+  geom_bar(stat = "identity", position = position_dodge(), aes(fill = Sex)) +
+  scale_x_discrete(labels = paste0("B",c(1:7))) 
+
+
+    # xxx <- df_born %>% group_by(Birth_id) %>% mutate(MAX = max(Nb)) %>% select(Birth_id,p_value,MAX) %>% distinct(Birth_id,p_value,MAX)
+  
+
+```
+
 
 ```{r}
 
@@ -268,11 +303,11 @@ p_structural_mol <- ggplot(df_mol_function_simple %>% filter(`Molecular function
   ggtitle("Structural molecule") +
   pie_chart_theme
 
-
+p_binding
 
 ```
 
-Bien que ceux-ci soient modestes, nous avons montrés que les souris *Dpy19l2*$^{-/-}$ présentaient des déréglements transcriptionels affectant plusieurs fonctions moléculaires pouvant ainsi expliquer, du moins en partie, les nombreux défauts morphologiques caractérisant les spermatozoïdes globozoocéphales. De même, nous avons pu observer un déréglement de nombreux gènes impliqués dans la liaison d'acide nucléique et de protéine pouvant ainsi expliquer les défauts d'ancrage de l'acrosome au noyau chez les spermatozoïdes globozoocéphales.
+Au cours de cette étude nous n'avons pas pu mettre en évidence la cause expliquant le biais de sexe observé dans les naissance des souris. De même aucune dérégulation dans l'expression du gène *Plc*$\zeta$ n'a pu être observé.  Cependant, et que ceux-ci soient modestes, nous avons montrés que les souris *Dpy19l2*$^{-/-}$ présentaient des déréglements transcriptionels affectant plusieurs fonctions moléculaires pouvant ainsi expliquer, du moins en partie, les nombreux défauts morphologiques caractérisant les spermatozoïdes globozoocéphales. De même, nous avons pu observer un déréglement de nombreux gènes impliqués dans la liaison d'acide nucléique et de protéine pouvant ainsi expliquer les défauts d'ancrage de l'acrosome au noyau chez les spermatozoïdes globozoocéphales.
 
 ## Conclusion  
 

@@ -335,14 +335,38 @@ L’approche gène candidat consiste à rechercher des mutations chez un patient
 
 ### Les puces  
 
+Les puces à ADN / ARN ont 
+
+
 1. Bref historique de la technologie  
 2. A quoi ça sert 
 3. Comment ça marche  
 
 #### Les puces à SNP, le génotypage... (titre à revoir)  
 
+Depuis leur emmergence, les puces à ADN ont largement été utilisé comme platforme de génotypage pour les SNP connus. 
 
-#### Du tissu au transcriptome, le différentiel d'expression  
+
+
+#### Les puces à indels 
+
+1. MLPA  
+2. CGHarray  
+
+#### Les puces à expression   
+
+L'utilisation principale des puces à ADN a été de mesuré l'expression des gènes dans un tissus donné. Dans cette application, l'ARN est extrait des cellules d'interet puis est générallement convertit en ADNc. L'ADNc est ensuite hybridé à la puce qui subira ensuite une étape de lavage. L'intensité de fluoresence est ensuite mesurée à chaque spot de la puce. l'intensité du signal sera ensuite le reflet du niveau d'expression d'un gène.  
+
+
+#### Limitation
+
+
+Bien quelles aient été extremement utiles dans un champ d'application varié, cette technologie présente plusieurs limitations. La première est que la mesure que la puce renvoie 
+
+pour les génomes complexes tel que le génome humain, il est extrêmement difficile (voir impossible) de ne pas 
+
+
+En effet, les puces à ADN peuvent détecter uniquement ce pourquoi elles ont été. Ainsi, si la solution que l'on hybride sur la puce contient des séquence d'ADN ou d'ARN pour lesquelles il n'y a aucune sonde complémentaire sur la puce, celles-ci ne seront pas détectées. Cela peut avoir de grandes répercutions puisque par exemple dans le cas des à expression, les gènes qui n'ont pas encore été annotés risques de ne pas être représenté sur la puce.   
 
 <!-- Avant l'emmergence des technologie de séquençage haut débit, les puces à ADN complémentaire (ADNc) était considérées comme étant l'outil le plus puissant pour mesurer l'expression d'un gène dans un tissus. -->
 <!-- Alors que l'être humain possède environs 25.000 gènes différents, l'ensembles de ces gènes n'est pas exprimer au  -->
@@ -491,7 +515,7 @@ include_graphics(path = "figure/fastq.png")
 
 L'alignement constitue la première étape de l'analyse des données de NGS lorsqu'un génome de référence est disponible. L'objectif de l'alignement est de déterminer la position correcte de chacun des *reads* séquencés le long du génome de référence. Cette référence est souvent construite à partir des données de séquençage de plusieurs donneurs et ne représente donc pas la séquence d'un individu en particulier mais est censé représenter la séquence consensus d'une espèce donnée. Par exemple, la séquence de référence humaine GRCh37 (*Genome Reference Consortium human build 37*) a été créé à partir de 13 volontaires anonymes New-Yorkais. Dès lors, cette référence servira de patron aux aligneurs afin qu'ils replacent correctement les différents *reads* des individus séquencés. Cette étape peut être comparée à la reconstruction d'un puzzle dans laquelle les *reads* seraient les pièces et le génome de référence le modèle. Elle constitue probablement l'étape la plus importante de l'analyse des données issues du séquençage haut débit [@Flicek2009] car elle est la base sur laquelle repose l'ensemble des étapes effectuées en aval, notamment l'appel des variants [@Nielsen2011]. Cependant, l'étape d'alignement est sujette à de nombreuses erreurs dont certaines proviennent directement des erreurs survenues lors de l'étape de séquençage, d'autres, sont dues aux caractéristiques des régions séquencées comme par exemple les séquences répétées [@Langmead2012] qui pourront entraîner l'alignement d'un même *read* à plusieurs régions du génome [@Treangen2013]. De nombreux aligneurs ont émergés afin de répondre au mieux à cette problématique tel que Bowtie [@Langmead2009], Bowtie2 [@Langmead2012], BWA, NovoAlign, MAGIC [@Su2014]. De nombreuses études ont cependant montrées de grandes différences entre ces aligneurs, au niveau du temps de calcul, de leur coût en mémoire et de leur taux d'erreur [@Ruffalo2011, @Thankaswamy-Kosalai2017, @Bao2011].   
 
-### L'appel des variants  
+### L'appel des variants  {#varcall}
 
 L'appel des variants, ou *variant calling*, fait référence à l'ensemble des méthodes permettant d'identifier des SNVs ou des indels à partir des résultats de l'alignement. Cette étape est souvent différenciée de l'alignement, cependant, les résultats de l'appel étant extrêmement dépendants de l'alignement, il est conseillé d'effectuer son appel en tenant compte de l'aligneur choisi [@Nielsen2011, @DePristo2011, @Lunter2011]. On appellera variant toute différence de séquence observée entre un individu et la séquence de référence utilisée. Pour reprendre la comparaison avec la construction d'un puzzle, cette étape consiste à détecter quelles sont les pièces qui présentent des différences avec le modèle. De nombreux logiciels d'appels des variants, ou *caller*, basés sur des algorithmes différents ont émergés ces dernières années pour répondre à cette problématique. Parmi les plus connus on note SAMtools [@Li2009], Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) [@McKenna2010], Freebayes, SOAPindel et TVC. Les quatre premiers cités, peuvent être utilisés pour analyser des données provenant de tout type de plateforme de séquençage contrairement à TVC qui a été développé spécifiquement pour les données provenant de Ion Proton. Les données issues de NGS peuvent présenter un taux d'erreur important. Ce taux d'erreur est multifactoriel et inclus notamment les erreurs de l'alignement. L'un des éléments clef à prendre en compte pour pouvoir effectuer un appel de qualité est la couverture de la position appelée [@Sims2014]. Cependant, malgré la prise en compte de cet élément, l'appel de variants reste un processus difficile souvent lié à plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées à la plateforme de séquençage utilisée en amont, et les différents logiciels ne présentent pas les mêmes performances en fonction de ces différentes plateforme [@Hwang2015], c'est pourquoi il convient d'adapter le logiciel d'appel en fonction de la plateforme de séquençage utilisée préalablement. Les erreurs d'appel sont généralement classées en deux catégories principales et certains aligneurs auront tendance à être plus sujets à l'un de ces types d'erreur qu'à l'autre (**Figure : **\@ref(fig:snperror)) :  
 
