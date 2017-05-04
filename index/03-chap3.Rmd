@@ -22,6 +22,7 @@ library(dplyr)
 library(data.table)
 library(ggplot2)
 library(stringi)
+library(scales)
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
@@ -263,9 +264,6 @@ ggplot(df_filter_common_variants,aes(GENOTYPE)) +
   scale_fill_discrete(guide = "none") +
   xlab("")
 
-?
-
-df_filter_common_variants %>% View()
 ```
 
 ```{r varb1b2, fig.cap=fig.info,fig.scap=fig.name,fig.width=4.5,fig.height=3.8}
@@ -331,11 +329,115 @@ gc()
 
 #### Etude d’une large cohorte de patients MMAF  {#cohortemmah}  
 
+```{r cache=TRUE}
+
+df_all_coding_variants <- fread("data/all_coding_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE)
+
+df_rvis <- fread("data/RVIS_Unpublished_ExAC_May2015.txt",sep = "\t",header = TRUE,data.table = FALSE) %>%
+  dplyr::select(GENE = CCDS_r15,SCORE = `RVIS_ExAC_0.05%(AnyPopn)`) %>%
+  mutate(SYMBOL = GENE,
+         RVIS_PERCENTILE = percent_rank(SCORE)) %>%
+  dplyr::select(-SCORE) %>%
+  na.omit() 
+
+df_variants_mmaf <- fread("data/genotype_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  gather(RUN, CALL, starts_with("Ghs")) %>%
+  filter(CALL %in% c(2, 3, "b", "c")) %>%
+  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
+         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"))
+
+# df_mmaf_annotated <- inner_join(df_variants_mmaf,df_all_coding_variants, by = c("CHR", "POSITION", "REF", "ALT"))
+
+df_not_mmaf <- fread("data/genotype_not_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  gather(RUN, CALL, starts_with("Ghs")) %>%
+  filter(CALL %in% c(3, "c")) %>%
+  select(-CALL)
+
+maf_cutoff <- 0.01
+
+df_filtter_mmaf <- df_variants_mmaf %>%
+  inner_join(df_all_coding_variants, by = c("CHR", "POSITION", "REF", "ALT")) %>%
+  filter(GENOTYPE == "Homozygous",
+         Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
+         Consequence != "5_prime_UTR_variant",
+         Consequence != "3_prime_UTR_variant",
+         !grepl("NMD_transcript_variant",Consequence),
+         !(grepl("tolerated",SIFT) & grepl("benign",PolyPhen)),
+         is.na(ExAC_AF) | ExAC_AF <= maf_cutoff,
+         is.na(ESP) | ESP <= maf_cutoff,
+         is.na(`1KG`) | `1KG` <= maf_cutoff) %>%
+  anti_join(df_not_mmaf, by = c("CHR", "POSITION", "REF", "ALT")) %>%
+  select(-CADD_RAW) %>%
+  left_join(df_rvis, by = "SYMBOL") %>%
+  filter(is.na(RVIS_PERCENTILE) | RVIS_PERCENTILE <= .9)
+
+df_passing_filter_mmaf_genes <- distinct(df_filtter_mmaf, SYMBOL,CHR,POSITION,REF,ALT) %>%
+       select(Chromosome = CHR, Position = POSITION,`Reference allele` = REF,`Alterated allele` = ALT,Gene=SYMBOL)
+
+nb_run_per_passing_gene <- df_filtter_mmaf %>%
+  distinct(SYMBOL,RUN) %>%
+  group_by(SYMBOL) %>%
+  summarise(N = n())
+
+```
+
+```{r aaa}
+
+
+df_variants_mmaf_nb_view <- df_variants_mmaf %>%
+  filter(!is.na(REF)) %>%
+  distinct(CHR,POSITION,REF,ALT,TYPE,RUN) %>%
+  group_by(CHR,POSITION,REF,ALT,TYPE) %>%
+  summarise(N = n(),TIME = "Before filtering")
+
+df_var_mmaf <- df_filtter_mmaf %>% distinct(CHR,POSITION,REF,ALT,TYPE,RUN) %>% group_by(TYPE,RUN) %>% summarise(N = n())
+
+df_nb_view <- df_filtter_mmaf %>% distinct(CHR,POSITION,REF,ALT,TYPE,RUN) %>% group_by(CHR,POSITION,REF,ALT,TYPE) %>% summarise(N = n(), TIME = "After filtering")
+# 
+# ggplot(df_mmaf_annotated, aes(RUN)) +
+#   geom_bar(aes(fill = IMPACT), position = position_dodge()) +
+#   scale_fill_discrete(name = "VEP impact prediction", guide=FALSE) +
+#   xlab("") +
+#   ylab("Count") +
+#   facet_grid(IMPACT ~ GENOTYPE, scales = "free")
+
+ggplot(df_var_mmaf,aes("",N)) +
+  geom_boxplot(aes(fill = TYPE)) +
+  facet_wrap(~TYPE,scales = "free") +
+  geom_jitter(position=position_jitter(0.2))
+
+ggplot(df_nb_view,aes(N)) +
+  geom_bar(aes(fill = TYPE)) +
+  geom_text(aes(label = ..count..), position = position_stack(vjust = 1), stat= "count") +
+  facet_grid(TYPE~.,scales = "free") +
+  scale_fill_discrete(guide = "none") +
+  ylab("Count") +
+  xlab("Nb of patient sharing a same variant")
+
+ggplot(df_variants_mmaf_nb_view,aes(N)) +
+  geom_bar(aes(fill = TYPE)) +
+  # geom_text(aes(label = ..count..), position = position_stack(vjust = 1), stat= "count") +
+  facet_grid(TYPE~.,scales = "free") +
+  scale_fill_discrete(guide = "none") +
+  ylab("Count") +
+  xlab("Nb of patient sharing a same variant")
+
+ggplot(nb_run_per_passing_gene,aes(N)) +
+  geom_bar() +
+  ylab("Nb of Gene") +
+  xlab("Nb of patient sharing a variant on the same gene") +
+  scale_x_continuous(breaks = c(1:15))
+
+```
+
 <!-- 1. Les nouveaux gènes candidats évidents   -->
 <!-- 2. L’efficacité diagnostique    -->
 <!-- 3. L’analyse individuelle   -->
 <!--     a. Les mutations dans les gènes identifiés   -->
-<!--     b. Liste complète des gènes avec 2 variants tronquants   -->
+<!--     b. Liste complète des gènes avec 2 variants tronquants --> 
 <!--     c Liste complète des gènes avec deux variants dont un tronquant   -->
 <!--     d. Liste des  gènes avec 2 variants intronique ou faux-sens/synonymes avec un score élevé UMD-predictor ou HSF.   -->
 <!--     e. Liste des gènes avec un variant hétérozygote tronquant   -->
+
+
