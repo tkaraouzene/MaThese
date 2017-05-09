@@ -348,229 +348,84 @@ class (for LaTeX) and the R bookdown package, in general.
     différent sont de même enlevés de la liste finale.
   \end{enumerate}
   
-  \subsection{utilisations de la pipeline pour l'identifications de
-  variants pathogènes et l'identification de nouveaux gènes impliqués dans
-  l'infertilité}\label{utilisations-de-la-pipeline-pour-lidentifications-de-variants-pathogenes-et-lidentification-de-nouveaux-genes-impliques-dans-linfertilite}
+  \subsection{Utilisation de la pipeline dans des cas familiaux
+  :}\label{utilisation-de-la-pipeline-dans-des-cas-familiaux}
   
-  \newpage  
+  \subsubsection{Description des familles}\label{description-des-familles}
   
-  \hypertarget{famdnah1}{\subsubsection{Etude familiale MMAF
-  -\textgreater{} DNAH1}\label{famdnah1}}
+  Dans cette partie, je me concentre sur l'analyse bioinformztique des
+  résultat du séquençage exomique
   
-  \newpage  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \emph{Fam azoo} : Pour cette étude, nous avons effectué un séquençage
+    exomique de deux frères azoospermes (Az1 et Az2) issus d'un union
+    consanguin puisque leurs parents sont cousin au deuxième degré. 
+  \item
+    \emph{Fam fert fail} : PLCZ
+  \item
+    \emph{Fam MMAF 1-4} : DNAH1
+  \end{enumerate}
   
-  \hypertarget{plcz}{\subsubsection{Etude familiale echec de fécondation
-  -\textgreater{} PLCzeta}\label{plcz}}
+  \subsubsection{Resultats des exomes}\label{resultats-des-exomes}
   
-  {[}TODO: Redéfinir brievement l'echec d'activation ovocitaire{]} le rôle
-  de
+  Dans ce chapitre nous nous concentrerons sur l'analyses des résultats du
+  séquençage exomique de {[}TODO: STOP HARDCODING FOLLOWING VALUES{]} 13
+  individus provenant de 6 familles distinctes. La première de ces famille
+  (Famille Az) est composée de deux frères (Az1 et Az2) tout deux porteur
+  d'un phénotype d'\protect\hyperlink{infquant}{azoospermie}
+  non-obstructive. La deuxième famille (famille FF) est elle composée de
+  deux frères (FF1 et FF2) infertiles dont les spermatozoïdes ne
+  parviennent pas à féconder les ovocytes. Les quatre dernières familles
+  (MMAF1, MMAF2, MMAF3 et MMAF4) sont toutes composées de deux frères
+  infertiles (sauf MMAF4 qui comprend trois frères) tous atteins d'un
+  syndrome MMAF caractérisé par des anomalies morphologiques multiples au
+  niveau du flagelle spermatique.
   
-  Cette étude se concentre donc sur le phénotype d'infertilité de deux
-  frères Tunisiens (PLCZ\_1 et PLCZ\_2) issus d'un union consanguin et
-  présentant un phénotype d'echec total de fécondation même lors de
-  tentative d'ICSI. Après avoir effectué un séquençage exomique pour ces
-  deux frères, nous avons appliqué notre pipeline d'analyse sur les
-  résultats du séquençage. Compte tenu de l'hitorique de consanguinité
-  familiale, nous nous sommes concentré uniquement sur les variants
-  homozygotes. De même, ces deux patients présentant le même phénotype et
-  étant frères, nous avons filtré l'intégralité des variants n'étant
-  observés dans les deux exomes. nous ensuite aussi confronté les variants
-  restant à notre base de données de variants identifié sur 132 individus
-  sains ou résentant un autre phénotype d'infertilité masculine filtrant
-  ainsi les variants retrouvés homozygotes chez les individus contrôles.
-  Après avoir effectué l'intégralité des filtres, seul 1 variants
-  impactant 1
-  
-  \begin{table}
-  
-  \caption{\label{tab:plczetatabcommonvar}Comptage des variants communs à B1 et B2}
-  \centering
-  \begin{tabular}[t]{l|l|r}
-  \hline
-  Variant type & Genotype & Count\\
-  \hline
-  SNV & Heterozygous & 33211\\
-  \hline
-  SNV & Homozygous & 33195\\
-  \hline
-  Indel & Heterozygous & 1069\\
-  \hline
-  Indel & Homozygous & 1196\\
-  \hline
-  \end{tabular}
-  \end{table}
+  Pour l'ensemble des individus de ces quatre familles nous avons appliqué
+  notre pipeline d'analyse de sorte à obtenir pour chaque patient une
+  liste de SNV et d'indel avec leur génotype associé (\textbf{Figure :
+  }\ref{fig:resvarcall}). Parmi ces variants, nous avons filtrés
+  l'ensemble de ceux chevauchant uniquement des transcrits annotés
+  \emph{NMD} (\emph{non sense mediated decay}) par VEP qui représentent
+  entre XXX et YYY (TODO)\% des transcrits (\textbf{Figure :
+  }\ref{fig:nmdtranscripts}) afin de nous concentrer sur les variants
+  ayant la plus forte probabilité d'avoir un effet sur une protéine.
+  Chacun de ces variants a été confronté à une liste de variants
+  homozygotes observés sur les individus sains ou présentant un phénotype
+  différent des patients étudiés de notre bases de données interne
+  (\textbf{Figure : }\ref{fig:plotsamplectrl}). Cette
   
   \begin{figure}
   
-  {\centering \includegraphics{thesis_files/figure-latex/varplcz-1} 
+  {\centering \includegraphics{thesis_files/figure-latex/resvarcall-1} 
   
   }
   
-  \caption[Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes et prédiciotn VEP associés]{Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes et prédiciotn VEP associés}\label{fig:varplcz}
+  \caption[Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés]{Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés}\label{fig:resvarcall}
   \end{figure}
   
-  \newpage  
-  
-  \hypertarget{spink2}{\subsubsection{Etude familiale azoospermie :
-  SPINK2}\label{spink2}}
-  
-  \paragraph{Description de la cohorte
-  familiale}\label{description-de-la-cohorte-familiale}
-  
-  Comme nous avons pu le voir, l'\protect\hyperlink{infquant}{azoospermie}
-  est un phénotype d'infertilité masculine caractérisé par l'absence de
-  spermatozoïde dans l'éjaculat. En 2017, notre équipe a publiée des
-  résultats liant une mutation du gène \emph{SPINK2} à ce phénotype. Pour
-  cette étude, nous avons effectué un séquençage exomique de deux frères
-  azoospermes (B1 et B2) issus d'un union consanguin puisque leurs parents
-  sont cousin au deuxième degré (\textbf{Figure : }\ref{fig:spink2tree}).
-  Étant donné l'historique consanguin de cette famille nous avons emis
-  l'hypothèse d'un phénotype à transmission autosomique recessif.
+  \begin{center}\includegraphics{thesis_files/figure-latex/plotsamplectrl-1} \end{center}
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=0.75]{figure/spink2_arbre_genealogique} 
+  {\centering \includegraphics{thesis_files/figure-latex/nmdtranscripts-1} 
   
   }
   
-  \caption[Arbre généalogique des deux frères azoospermes B1 et B2]{Arbre généalogique des deux frères azoospermes B1 et B2 : Sur cette arbre nous pouvons observés la parentés des parents (P1 et P2), cousins au deuxième degré}\label{fig:spink2tree}
-  \end{figure}
-  
-  \paragraph{Séquençage WES et analyse
-  bioinformatique}\label{sequencage-wes-et-analyse-bioinformatique}
-  
-  Le séquençage exomique des deux frères B1 et B2 fût réalisé au Mount
-  Sinaï Institutes en {[}TODO: mettre l'année du séquençage{]}. Suite à
-  celà nous avons, comme pour les études précédentes nous avons appliqué
-  notre pipeline d'analyse nous permettant de recansser un total de 88546
-  variants différents pour B1 et 66521 pour B2 (\textbf{Figure :
-  }\ref{fig:varb1b2}). Ayant emmit l'hypothèse d'une cause génétique
-  commune expliquant le phénotype des deux frères, nous nous sommes
-  concentrés uniquement sur les variants homozygotes communs aux deux
-  frères réduisant ainsi notre liste de variant à un total de 26825
-  variants dont 25963 SNVs et 862 indels (\textbf{Table :
-  }\ref{tab:tabcommonvar}). À partir de cette liste, nous avons soustrait
-  l'ensemble des variants prédit par VEP comme n'impactant pas un
-  transcrit codant pour une protéine. De même, nous avons filtrer
-  l'ensemble des variant présent dans les séquences UTRs ou encore ceux
-  causant une substitution synonymes ou une substitution faux-sens prédite
-  ``benign'' par PolyPhen2 et ``tolerated'' par SIFT. Suite à cela, nous
-  avons filtrer les variants fréquents dans la population générale en
-  filtrant l'ensemble des variant ayant une MAF \(\ge\) 0.01, de même,
-  nous avons confrontés les variants restant à une base de donnée interne
-  ressencant les variant de 83 individus non atteint d'azoospermie afin de
-  filtrer les variants homozygotes retrouvés dans cette basse de données
-  de contrôle.
-  
-  \begin{table}
-  
-  \caption{\label{tab:tabcommonvar}Comptage des variants communs à B1 et B2}
-  \centering
-  \begin{tabular}[t]{l|l|r}
-  \hline
-  Variant type & Genotype & Count\\
-  \hline
-  SNV & Heterozygous & 26634\\
-  \hline
-  SNV & Homozygous & 25963\\
-  \hline
-  Indel & Heterozygous & 852\\
-  \hline
-  Indel & Homozygous & 862\\
-  \hline
-  \end{tabular}
-  \end{table}
-  
-  \begin{center}\includegraphics{thesis_files/figure-latex/tabcommonvar-1} \end{center}
-  
-  \begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/varb1b2-1} 
-  
-  }
-  
-  \caption[Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés]{Comptage des variants retrouvés sur les frères B1 et B2 avec leur génotypes associés}\label{fig:varb1b2}
-  \end{figure}
-  
-  Après avoir appliqué l'ensemble de ces filtres, nous sommes arrivés à
-  une liste de 2 variants impactant 2 gènes différents : \emph{SPINK2} et
-  \emph{GUF1} (\textbf{Table : }\ref{tab:passingfiltervar}). Parmi ces
-  deux gènes, seul \emph{SPINK2} était décrit comme fortement exprimé dans
-  le testicule {[}INS2RER FIGURE ACEVIEW{]}. Nous avons d'ailleurs pu
-  confirmer cette forte expression par RT-PCR quantitative en temps réel
-  forte à la fois chez l'Homme (\textbf{Figure : }\ref{fig:spink2exp} -
-  \textbf{A}) et chez la souris (\textbf{Figure : }\ref{fig:spink2exp} -
-  \textbf{B}). Ces données ont donc fait de \emph{SPINK2} le seul candidat
-  évident pouvant expliquer ce phénotype. Le variant partagé par les deux
-  frères : Chr4:57686748G\textgreater{}C n'a été recencé dans aucune des
-  bases de données que sont ExAC, 1000Genomes et ESP6500. Le gène
-  \emph{SPINK2} est localisé sur le chromosome 4 et contient 4 exons
-  (\textbf{Figure : }\ref{fig:spink2exp}). Sa localisation intronique à 3
-  pb du 2\(^{ième}\) exon indique que ce variant pourrait avoir un effet
-  sur l'épissage de l'ARNm
-  
-  \begin{table}
-  
-  \caption{\label{tab:passingfiltervar}Liste des variants ayant passé l'ensemble des filtres}
-  \centering
-  \begin{tabular}[t]{r|r|l|l|l}
-  \hline
-  Chromosome & Position & Reference allele & Alterated allele & Gene\\
-  \hline
-  4 & 57686748 & G & C & SPINK2\\
-  \hline
-  4 & 44683156 & G & T & GUF1\\
-  \hline
-  \end{tabular}
-  \end{table}
-  
-  \begin{figure}
-  
-  {\centering \includegraphics[scale=0.42]{figure/spink2_expression} 
-  
-  }
-  
-  \caption[Expression du gène *SPINK2* dans plusieurs tissus]{Expression du gène *SPINK2* dans plusieurs tissus : On peut constater que chez l'humain (**A**) comme chez la souris (**B**), le gène *SPINK2* a non seulement une forte expression exclusive au testicule}\label{fig:spink2exp}
+  \caption[Nombre de transcrits NMD et non NMD impacté par exomes]{Nombre de transcrits NMD et non NMD impacté par exomes : Chaque point représente un individu séquencé, la couleur et la forme du point dépend de la famille d'origine de l'individu}\label{fig:nmdtranscripts}
   \end{figure}
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=0.42]{figure/spink2_transcripts} 
+  {\centering \includegraphics{thesis_files/figure-latex/remaininggenes-1} 
   
   }
   
-  \caption[Représentation du gène *SPINK2*]{Représentation du gène *SPINK2* : L'épissage du gène *SPINK2* crée un transcrit de 4 exons (Transcrit normal). Cependant, le variant c.206-3C>G observé chez les frères B1 et B2 crée un nouveau site accepteur d'épissage ajoutant 2 nucléotides à l'exon 2 induisant un décalage du cadre de lecture menant à un codon stop 3 nucléotides plus loin (Transcrit 1) et / ou causant le saut de l'exon 2 menant à un codon stop prématuré (Transcrit 2)}\label{fig:spink2trans}
+  \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille}\label{fig:remaininggenes}
   \end{figure}
-  
-  \paragraph{\texorpdfstring{Estimation de l'incidence du gène
-  \emph{SPINK2} chez des patients
-  azoospermes}{Estimation de l'incidence du gène SPINK2 chez des patients azoospermes}}\label{estimation-de-lincidence-du-gene-spink2-chez-des-patients-azoospermes}
-  
-  Afin de déterminer l'incidence des variants du gène \emph{SPINK2} dans
-  la population azoospermiques nous avons séquencé l'intégralité des
-  séquences codantes de ce gène chez 611 individus comprenant 210 patients
-  azoospermiques, 393 oligozoospermiques et présentant un phénotype non
-  spécifié. Parmi cet ensemble de patient, seul le patient 105 (P105)
-  présentant un phénotype d'oligozoospermie s'est révélé porteur d'un
-  variant non répertorié dans les bases de données et présentant un impact
-  prédit comme délétère. Ce variant, c.1A\textgreater{}T, présent à l'état
-  hétérozygote chez P105 affecte le codon start décalant ainsi le démarage
-  de la traduction produisant ainsi une protéine tranquée.
-  
-  \paragraph{Autres résultats}\label{autres-resultats}
-  
-  Dans cette même étude nous avons égallement pu étudié les
-  caractéristiques reproductives de souris KO \emph{Spink2}\(^{-/-}\) et
-  de souris hétérozygotes \emph{Spink2}\(^{+/-}\) . Ainsi, nous avons pu
-  confirmer que les souris mâles KO étaient infertiles et présentaient un
-  phénotype d'azoospermie ainsi qu'une diminution de la taille de leurs
-  testicules tandis que les hétérozygotes étaient parfaitement fertiles
-  bien leur nombre de spermatozoïdes par mL de sperme soit plus faibles
-  que les souris sauvages. Les souris femelles, elles, présentaient des
-  caractéristiques reproductives tout à fait normal. {[}TODO: finir cette
-  partie{]}.
-  
-  \newpage  
   
   \hypertarget{cohortemmah}{\subsubsection{Etude d'une large cohorte de
   patients MMAF}\label{cohortemmah}}
@@ -582,6 +437,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \begin{center}\includegraphics{thesis_files/figure-latex/aaa-3} \end{center}
   
   \begin{center}\includegraphics{thesis_files/figure-latex/aaa-4} \end{center}
+  
+  \begin{center}\includegraphics{thesis_files/figure-latex/aaa-5} \end{center}
   
   \chapter{MutaScript}\label{mutascript}
   

@@ -211,8 +211,6 @@ df_born <- fread("data/souris_dpy_naissance_male_femelle.csv", sep = "\t", heade
          p_tot = prop.test(unlist(SF), unlist(ST), alternative = "less")$p.value) %>%
   gather(Sex, Nb, Fem:Mal)
 
-
-
 ggplot(df_born,aes(Birth_id,Nb)) + 
   geom_bar(stat = "identity", position = position_dodge(), aes(fill = Sex)) +
   scale_x_discrete(labels = paste0("B",c(1:7))) 
