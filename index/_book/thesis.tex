@@ -52,8 +52,6 @@
 \usepackage{rotating}
 \usepackage{upgreek} % tk : pour pouvoir utiliser le symbole µ droit (pas en itallic)
 
-
-
 % Next line commented out by CII
 %%% \usepackage{natbib}
 % Comment out the natbib line above and uncomment the following two lines to use the new
@@ -385,21 +383,48 @@ class (for LaTeX) and the R bookdown package, in general.
   Pour l'ensemble des individus de ces quatre familles nous avons appliqué
   notre pipeline d'analyse de sorte à obtenir pour chaque patient une
   liste de SNV et d'indel avec leur génotype associé (\textbf{Figure :
-  }\ref{fig:resvarcall}). Afin de connaitre l'impact de ces variants et
-  ainsi nous concentrer sur ceux ayant la plus forte probabilité d'être
-  responsables du phénotype nous les avons annoté grâce au logiciel VEP.
-  Les différentes annotations apportées nous ont tout d'abord permis de
-  filtrer l'intégralité des variants chevauchant un transcrit annoté
-  \emph{nonsense-mediated decay} (NMD). En effet, ce mécanisme a pour but
-  de controler la qualité des ARNm cellulaires chez les eucaryotes (Y.-F.
-  Chang, Imam, \& Wilkinson, \protect\hyperlink{ref-Chang2007}{2007}) en
-  éliminant les ARNm qui comportent un codon stop prématuré (Baker \&
-  Parker, \protect\hyperlink{ref-Baker2004}{2004}), pouvant être le
-  résultat d'une erreur de transcription, d'une mutation ou encore d'une
-  erreur d'épissage. Cette première étape de filtre permet à elle seule de
-  filtrer systematiquement les variants de 2587 à 3212 transcrits en
-  fonction des individus soit, entre 7261 et 10872 variants différent par
-  individus (\textbf{Figure : }\ref{fig:nmdtranscripts}).
+  }\ref{fig:resvarcall}). Ensuite, afin de ne conserver que les variants
+  ayant la plus forte probabilité d'être responsable du phénotype nous
+  avons appliqué succesivement six filtres :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{L'union des variants :} Dans ces différentes études, nos
+    patients ont à chaque fois au moins un frère présentant le même
+    phénotype. Ainsi nous avons pu formuler l'hypothèse d'une cause
+    génétique commune entre les différents frères d'une même famille et
+    donc filtrer l'ensemble des variants qui ne sont pas partagés par
+    l'ensemble des membre de la fraterie.\\
+  \item
+    \textbf{Genotype des variants :}\\
+  \item
+    \textbf{Impact du variant :} on filtre les variants intonique et ceux
+    tombant dans les sequences UTRs. de même les variants synonymes ne
+    sont pas conservés car n'impactent pas la séquences protéique. pour
+    les variant faux sens (changement d'un seul aa de la séquence
+    protéique) il est plus difficile de se décider {[}TODO insert
+    citation{]} nous avons donc utiliser les logiciels SIFT et Polyphen et
+    filtrer l'ensemble des fauxsens prédit comme \emph{tolerated} par SIFT
+    et \emph{benign} par Polyphen.\\
+  \item
+    \textbf{Transcrits NMD :} Le mécanisme NMD (\emph{nonsense-mediated
+    decay}) a pour but de controler la qualité des ARNm cellulaires chez
+    les eucaryotes (Y.-F. Chang, Imam, \& Wilkinson,
+    \protect\hyperlink{ref-Chang2007}{2007}) en éliminant les ARNm qui
+    comportent un codon stop prématuré (Baker \& Parker,
+    \protect\hyperlink{ref-Baker2004}{2004}), pouvant être le résultat
+    d'une erreur de transcription, d'une mutation ou encore d'une erreur
+    d'épissage. Il est donc eu probable que les variants présents sur
+    transcrits annotés NMD soient responsables du phénotype. Nous avons
+    donc filtré l'ensemble des variants chevauchant \textbf{uniquement}
+    des transcrits annotés NMD. Cette première étape de filtre permet à
+    elle seule de filtrer systematiquement les variants de 2587 à 3212
+    transcrits (\textbf{Figure : }\ref{fig:nmdtranscripts}) en fonction
+    des individus soit, entre 7261 et 10872 variants différent par
+    individus (\textbf{Figure : }\ref{fig:comparefilter})
+  \end{enumerate}
   
   \begin{figure}
   
@@ -407,18 +432,60 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Nombre de transcrits et variants filtrés car ils sont annotés NMD]{Nombre de transcrits et variants filtrés car ils sont annotés NMD : Chaque point représente un individu séquencé, la couleur et la forme du point dépend de la famille d'origine de l'individu}\label{fig:nmdtranscripts}
+  \caption[Nombre de transcrits filtrés car ils sont annotés NMD]{Nombre de transcrits filtrés car ils sont annotés NMD : Chaque point représente un individu séquencé, la couleur et la forme du point dépend de la famille d'origine de l'individu}\label{fig:nmdtranscripts}
   \end{figure}
   
-  Parmi ces variants, nous avons filtrés l'ensemble de ceux chevauchant
-  uniquement des transcrits annotés \emph{NMD} (\emph{non sense mediated
-  decay}) par VEP qui représentent entre XXX et YYY (TODO)\% des
-  transcrits afin de nous concentrer sur les variants ayant la plus forte
-  probabilité d'avoir un effet sur une protéine. Chacun de ces variants a
-  été confronté à une liste de variants homozygotes observés sur les
-  individus sains ou présentant un phénotype différent des patients
-  étudiés de notre bases de données interne (\textbf{Figure :
-  }\ref{fig:plotsamplectrl}). Cette
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{4}
+  \tightlist
+  \item
+    \textbf{Frequence des variants :} La fréquence d'un variant dans la
+    population générale est un moyen rapide d'avoir un avis sur l'effet
+    délétère de celui-ci. En efft, il est peu probable qu'un retrouvé
+    fréquement dans la population générale soit causal d'une pathologie
+    sévère. Ainsi nous avons filtré pour l'ensemble de nos patients
+    l'ensemble des variants ayant une fréquence \(\ge\) 0.01 dans l'une
+    des trois bases de données que sont ExAC, ESP et 1KG.\\
+  \item
+    \textbf{Présence des variants dans la cohorte contrôle :} Au cours de
+    nos différentes études, nous avons été ammené à séquencé \ldots{}
+    {[}TODO mettre chiffre exacte{]}. L'ensemble de ces individus peuvent
+    être soit sains soit présenter l'un des \ldots{} phénotypes suivant :
+    \ldots{} {[}TODO insert pheno{]}. Ces phénotypes étant très différent,
+    il n'est pas abérant d'emmetre l'hypothèse qu'ils que leurs causes
+    génétiques soient diffrentes. De même, les variants recherché étant
+    rares, il est peu probable qu'un individu porte les variants de deux
+    phénotypes différents. Ainsi, pour chacune de nos \ldots{} {[}todo
+    insert nb of fam{]} familles, nous avons pu constituer une cohorte
+    contrôle composée dans l'ensemble des patients précédemment analysés
+    et ne présentant pas le même phénotype que celui étudié dans la
+    famille (\textbf{Figure : }\ref{fig:plotsamplectrl}). Dès lors, nous
+    avons put filtrer l'ensemble des variants retrouvés à la fois chez nos
+    patients et observés à l'état homozygote dans la cohorte contrôle.
+  \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotsamplectrl-1} 
+  
+  }
+  
+  \caption[Nombre d'individus la cohorte contrôle constituée pour chaque famille de l'analyse]{Nombre d'individus la cohorte contrôle constituée pour chaque famille de l'analyse}\label{fig:plotsamplectrl}
+  \end{figure}
+  
+  Afin de comparer le pouvoir discriminant de chacun de ces filtres, nous
+  avons compté le nombre de variant filtrés par chacun d'entre eux
+  (\textbf{Figure : }\ref{fig:comparefilter})
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/comparefilter-1} 
+  
+  }
+  
+  \caption[Comparaison du pouvoir discriminant de chaque filtre employé.]{Comparaison du pouvoir discriminant de chaque filtre employé.}\label{fig:comparefilter}
+  \end{figure}
   
   \begin{figure}
   
@@ -427,15 +494,6 @@ class (for LaTeX) and the R bookdown package, in general.
   }
   
   \caption[Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés]{Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés}\label{fig:resvarcall}
-  \end{figure}
-  
-  \begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/plotsamplectrl-1} 
-  
-  }
-  
-  \caption[Nombre d'individus dans chaque famille et taille de la cohorte contrôle utilisée dans l'analyse]{Nombre d'individus dans chaque famille et taille de la cohorte contrôle utilisée dans l'analyse : Le diagramme en barre du haut montre la taille des cohorte contrôle utilisée pour chaque famille. Un individus "contrôle" peut être soit sain ou ne pas présenter le même phénotype que les individus de la famille analysée. Le diagramme du bas présente le nombre d'individus analysées dans chacune des familles. Chaque couleur correspond à une famille.}\label{fig:plotsamplectrl}
   \end{figure}
   
   \begin{figure}

@@ -58,12 +58,12 @@ Dans ce chapitre, je détaillerai les résultats de 4 articles dont je suis coau
 ```{r all_coding_variants, cache=TRUE}
 
 df_all_coding_variants <- fread("data/all_coding_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE)
-
+maf_cutoff <- 0.01
 
 rm_var_count <- function(df, coding, ctrl, maf_cutoff) {
   
   tot_var <- df %>% 
-    select(-(CALL:GENOTYPE)) %>%
+    select(-(CALL:STRAND)) %>%
     group_by(FAM, RUN) %>% 
     mutate(Ntot = n_distinct(CHR, POSITION, REF, ALT))
   
@@ -78,11 +78,11 @@ rm_var_count <- function(df, coding, ctrl, maf_cutoff) {
   rm_nmd <- ungroup(tot_var) %>%
     variant_join(coding, mode = "inner") %>%
     mutate(IS_NMD = grepl("NMD_transcript_variant",Consequence)) %>%
-    distinct(RUN, FAM, Is_NMD, CHR, POSITION, REF, ALT, Feature) %>% 
+    distinct(RUN, FAM, IS_NMD, CHR, POSITION, REF, ALT, Ntot, Feature) %>% 
     group_by(CHR, POSITION, REF, ALT, RUN) %>%
     mutate(N = n()) %>%
     filter(N == 1,
-           Is_NMD == TRUE) %>%
+           IS_NMD == TRUE) %>%
     group_by(RUN, FAM) %>% 
     summarise(N_REMOVE = n_distinct(CHR, POSITION, REF, ALT),
               N_TOT = mean(Ntot),
@@ -109,7 +109,7 @@ rm_var_count <- function(df, coding, ctrl, maf_cutoff) {
               FILTER = "IMPACT")
   
   rm_genotype <- tot_var %>% 
-    filter_genotype(het = FALSE) %>%
+    filter_genotype(homo = FALSE) %>% # filter homo var to know how many het are filtered
     group_by(FAM, RUN) %>% 
     summarise(N_REMOVE = n_distinct(CHR, POSITION, REF, ALT),
               N_TOT = mean(Ntot),
@@ -167,7 +167,7 @@ kable(df_seq, col.names = c("Familly","Individuals","Phenotype","Year","Platefor
 
 #### Resultats des exomes  
 
-```{r datafamaz, cache=TRUE}
+```{r datafamaz, dependson="all_coding_variants",  cache=TRUE}
 
 maf_cutoff <- 0.01
 
@@ -188,7 +188,7 @@ df_ctrl_az <- fread("data/genotype_not_azoo.csv", sep = "\t", header = TRUE, sho
 rm_var_az <- rm_var_count(df_fam_az, df_all_coding_variants, df_ctrl_az, maf_cutoff)
 
 
-rm_var_aznb_ctrl_az <- df_ctrl_az %>% resume_run(type ="nb")
+nb_ctrl_az <- df_ctrl_az %>% resume_run(type ="nb")
 
 ```
 
@@ -217,7 +217,7 @@ gc()
 
 ```
 
-```{r datafamff, cache=TRUE}
+```{r datafamff, dependson="all_coding_variants", cache=TRUE}
 
 maf_cutoff <- 0.01
 
@@ -266,7 +266,7 @@ gc()
 
 ```
 
-```{r datammaf1 , cache=TRUE, include=FALSE}
+```{r datammaf1, dependson="all_coding_variants", cache=TRUE, include=FALSE}
 
 df_fam_mmaf1 <- fread("data/genotype_MMAF_fam1.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   gather(RUN, CALL, starts_with("Ghs")) %>%
@@ -313,7 +313,7 @@ df_passing_genes_mmaf1 <- resume_gene(df_filter_mmaf1)
 
 ```
 
-```{r datammaf2, cache=TRUE, include=FALSE}
+```{r datammaf2, dependson="all_coding_variants", cache=TRUE, include=FALSE}
 
 df_fam_mmaf2 <- fread("data/genotype_MMAF_fam2.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   gather(RUN, CALL, starts_with("Ghs")) %>%
@@ -330,7 +330,6 @@ rm_var_mmaf2 <- rm_var_count(df_fam_mmaf2, df_all_coding_variants, df_ctrl_mmaf,
 
 ```{r filterfammmaf2, cache=TRUE, include=FALSE}
 
-maf_cutoff <- 0.01
 
 df_mmaf2_1 <- filter(df_fam_mmaf2, RUN == "MMAF2_1")
 df_mmaf2_2 <- filter(df_fam_mmaf2, RUN == "MMAF2_2")
@@ -352,7 +351,7 @@ df_passing_genes_mmaf2 <- resume_gene(df_filter_mmaf2)
 
 ```
 
-```{r datammaf3, cache=TRUE, include=FALSE}
+```{r datammaf3, dependson="all_coding_variants", cache=TRUE, include=FALSE}
 
 df_fam_mmaf3 <- fread("data/genotype_MMAF_fam3.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   gather(RUN, CALL, starts_with("Ghs")) %>%
@@ -391,7 +390,7 @@ df_passing_genes_mmaf3 <- resume_gene(df_filter_mmaf3)
 
 ```
 
-```{r datammaf4, cache=TRUE, include=FALSE}
+```{r datammaf4, dependson="all_coding_variants", cache=TRUE, include=FALSE}
 
 df_fam_mmaf4 <- fread("data/genotype_MMAF_fam4.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   gather(RUN, CALL, starts_with("Ghs")) %>%
@@ -437,7 +436,6 @@ gc()
 
 ```{r nmdtr, cache=TRUE}
 
-
 df_nmd <- rbind(df_fam_az, df_fam_ff, df_fam_mmaf1, df_fam_mmaf2, df_fam_mmaf3, df_fam_mmaf4) %>% 
   variant_join(df_all_coding_variants, mode = "inner") %>%
   ungroup() %>%
@@ -468,66 +466,48 @@ max_var_nmd <- df_nmd_min_max %>% collect() %>% .[["MAX_VAR"]]
 
 ```
 
-Pour l'ensemble des individus de ces quatre familles nous avons appliqué notre pipeline d'analyse de sorte à obtenir pour chaque patient une liste de SNV et d'indel avec leur génotype associé (**Figure : **\@ref(fig:resvarcall)). Afin de connaitre l'impact de ces variants et ainsi nous concentrer sur ceux ayant la plus forte probabilité d'être responsables du phénotype nous les avons annoté grâce au logiciel VEP. Les différentes annotations apportées nous ont tout d'abord permis de filtrer l'intégralité des variants chevauchant un transcrit annoté *nonsense-mediated decay* (NMD). En effet, ce mécanisme a pour but de controler la qualité des ARNm cellulaires chez les eucaryotes [@Chang2007] en éliminant les ARNm qui comportent un codon stop prématuré [@Baker2004], pouvant être le résultat d'une erreur de transcription, d'une mutation ou encore d'une erreur d'épissage. Cette première étape de filtre permet à elle seule de filtrer systematiquement les variants de `r min_tr_nmd` à `r max_tr_nmd` transcrits en fonction des individus soit, entre `r min_var_nmd` et `r max_var_nmd` variants différent par individus (**Figure : **\@ref(fig:nmdtranscripts)).  
+Pour l'ensemble des individus de ces quatre familles nous avons appliqué notre pipeline d'analyse de sorte à obtenir pour chaque patient une liste de SNV et d'indel avec leur génotype associé (**Figure : **\@ref(fig:resvarcall)). Ensuite, afin de ne conserver que les variants ayant la plus forte probabilité d'être responsable du phénotype nous avons appliqué succesivement six filtres :  
 
-```{r nmdtranscripts, fig.cap=fig.info,fig.scap=fig.name, fig.asp=.6, cache=TRUE}
+1. **L'union des variants :** Dans ces différentes études, nos patients ont à chaque fois au moins un frère présentant le même phénotype. Ainsi nous avons pu formuler l'hypothèse d'une cause génétique commune entre les différents frères d'une même famille et donc filtrer l'ensemble des variants qui ne sont pas partagés par l'ensemble des membre de la fraterie.     
+2. **Genotype des variants :**  
+3. **Impact du variant :** on filtre les variants intonique et ceux tombant dans les sequences UTRs. de même les variants synonymes ne sont pas conservés car n'impactent pas la séquences protéique. pour les variant faux sens (changement d'un seul aa de la séquence protéique) il est plus difficile de se décider [TODO insert citation] nous avons donc utiliser les logiciels SIFT et Polyphen et filtrer l'ensemble des fauxsens prédit comme *tolerated* par SIFT et *benign* par Polyphen.    
+4. **Transcrits NMD :** Le mécanisme NMD (*nonsense-mediated decay*) a pour but de controler la qualité des ARNm cellulaires chez les eucaryotes [@Chang2007] en éliminant les ARNm qui comportent un codon stop prématuré [@Baker2004], pouvant être le résultat d'une erreur de transcription, d'une mutation ou encore d'une erreur d'épissage. Il est donc eu probable que les variants présents sur transcrits annotés NMD soient responsables du phénotype. Nous avons donc filtré l'ensemble des variants chevauchant **uniquement** des transcrits annotés NMD. Cette première étape de filtre permet à elle seule de filtrer systematiquement les variants de `r min_tr_nmd` à `r max_tr_nmd` transcrits (**Figure : **\@ref(fig:nmdtranscripts)) en fonction des individus soit, entre `r min_var_nmd` et `r max_var_nmd` variants différent par individus (**Figure : **\@ref(fig:comparefilter))  
 
-fig.name <- "Nombre de transcrits et variants filtrés car ils sont annotés NMD"
+```{r nmdtranscripts, fig.cap=fig.info,fig.scap=fig.name, cache=TRUE}
+
+fig.name <- "Nombre de transcrits filtrés car ils sont annotés NMD"
 fig.description <- "Chaque point représente un individu séquencé, la couleur et la forme du point dépend de la famille d'origine de l'individu"
 fig.info <- paste0(fig.name," : ",fig.description)
 
-ggplot(df_nmd,aes(TARGET,NB)) + 
-  geom_boxplot(alpha = .4, aes(fill = TARGET), outlier.size = -1) +
-  geom_jitter(aes(col = FAM, shape = FAM), size = 3, position=position_jitter(0.3)) +
-  scale_x_discrete(labels = c("Filtered transcripts", "Filtered variants")) +
-  scale_fill_discrete(guide = "none") + 
+# ggplot(df_nmd, aes(TARGET,NB)) + 
+#   geom_boxplot(alpha = .4, aes(fill = TARGET), outlier.size = -1) +
+#   geom_jitter(aes(col = FAM, shape = FAM), size = 3, position=position_jitter(0.3)) +
+#   scale_x_discrete(labels = c("Filtered transcripts", "Filtered variants")) +
+#   scale_fill_discrete(guide = "none") + 
+#   scale_color_discrete(name = "Familly") +
+#   scale_shape_discrete(name = "Familly") +
+#   ylab("Nb of transcripts / variants filterd when NMD") + 
+#   theme(axis.title.x=element_blank())
+
+ggplot(df_nmd, aes("",NB_TR)) +
+  geom_boxplot(width = 0.35, alpha = .4, outlier.size = -1) +
+  geom_jitter(aes(col = RUN), size = 3, position=position_jitter(0.3)) +
+  scale_fill_discrete(guide = "none") +
   scale_color_discrete(name = "Familly") +
-  scale_shape_discrete(name = "Familly") +
-  ylab("Nb of transcripts / variants filterd when NMD") + 
-  theme(axis.title.x=element_blank())
+  ylab("Nb of transcripts flagged as NMD") + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+
 
 ```
-
-Suite à cela, nous avons comparé les variants des différents patients avec celle d'une cohorte d'individu contrôle (**Figure : **\@ref(fig:plotsamplectrl)). Ces individus contrôles peuvent être soit sains soit présenté un phénotype d'infertilité différents des patients avec lesquelles ont les compare. Ainsi nous avons pu filtrer l'intégralité des variants présents chez nos patients et observés à l'état homozygote dans la cohorte contrôle.   
-
-
-
-```{r filterctrl}
-
-rm_var_all <- rbind(rm_var_az, 
-                    rm_var_ff, 
-                    rm_var_mmaf1, 
-                    rm_var_mmaf2, 
-                    rm_var_mmaf3, 
-                    rm_var_mmaf4) %>%
-  group_by(RUN, FILTER) %>%
-  mutate(PERCENT = N_REMOVE / N_TOT) 
-
-rm_var_all %>% View
-ggplot(rm_var_all, aes(FILTER, N_REMOVE)) +
-  geom_boxplot(outlier.size = -1, aes(fill = FILTER), alpha = .3) + 
-  geom_jitter(position=position_jitter(0.2), aes(col = FAM, shape = FAM)) + 
-  scale_fill_discrete(guide = "none") + 
-  xlab("Applied filter") + 
-  ylab("Nb of removed variant")
-
-```
-
-
-
-
-
-
-
-
-
-
+5. **Frequence des variants :**  La fréquence d'un variant dans la population générale est un moyen rapide d'avoir un avis sur l'effet délétère de celui-ci. En efft, il est peu probable qu'un retrouvé fréquement dans la population générale soit causal d'une pathologie sévère. Ainsi nous avons filtré pour l'ensemble de nos patients l'ensemble des variants ayant une fréquence $\ge$ `r maf_cutoff` dans l'une des trois bases de données que sont ExAC, ESP et 1KG.    
+6. **Présence des variants dans la cohorte contrôle :**  Au cours de nos différentes études, nous avons été ammené à séquencé ... [TODO mettre chiffre exacte]. L'ensemble de ces individus peuvent être soit sains soit présenter l'un des ... phénotypes suivant : ... [TODO insert pheno]. Ces phénotypes étant très différent, il n'est pas abérant d'emmetre l'hypothèse qu'ils que leurs causes génétiques soient diffrentes. De même, les variants recherché étant rares, il est peu probable qu'un individu porte les variants de deux phénotypes différents. Ainsi, pour chacune de nos ... [todo insert nb of fam] familles, nous avons pu constituer une cohorte contrôle composée dans l'ensemble des patients précédemment analysés et ne présentant pas le même phénotype que celui étudié dans la famille (**Figure : **\@ref(fig:plotsamplectrl)). Dès lors, nous avons put filtrer l'ensemble des variants retrouvés à la fois chez nos patients et observés à l'état homozygote dans la cohorte contrôle.  
 
 ```{r plotsamplectrl, fig.cap=fig.info,fig.scap=fig.name, cache=TRUE}
 
-fig.name <- "Nombre d'individus dans chaque famille et taille de la cohorte contrôle utilisée dans l'analyse"
-fig.description <- "Le diagramme en barre du haut montre la taille des cohorte contrôle utilisée pour chaque famille. Un individus \"contrôle\" peut être soit sain ou ne pas présenter le même phénotype que les individus de la famille analysée. Le diagramme du bas présente le nombre d'individus analysées dans chacune des familles. Chaque couleur correspond à une famille."
-fig.info <- paste0(fig.name," : ",fig.description)
+fig.name <- "Nombre d'individus la cohorte contrôle constituée pour chaque famille de l'analyse"
+fig.info <- paste0(fig.name)
 
 fam_lab = c("Az", "FF", "MMAF1", "MMAF2", "MMAF3", "MMAF4")
 nb_sample <- c(resume_run(df_fam_az, type = "nb"), 
@@ -552,12 +532,44 @@ ggplot(df_sample_ctrl, aes(FAM, NB, fill = FAM)) +
   scale_fill_discrete(guide = "none") +
   xlab("Familly")
 
-df_fam_az %>% View
-
-
 ```
 
+Afin de comparer le pouvoir discriminant de chacun de ces filtres, nous avons compté le nombre de variant filtrés par chacun d'entre eux (**Figure : **\@ref(fig:comparefilter))
 
+
+
+
+
+<!-- Afin de connaitre l'impact de ces variants et ainsi nous concentrer sur ceux ayant la plus forte probabilité d'être responsables du phénotype nous les avons annoté grâce au logiciel VEP. Les différentes annotations apportées nous ont tout d'abord permis de filtrer l'intégralité des variants chevauchant un transcrit annoté *nonsense-mediated decay* (NMD). En effet, ce mécanisme  .   -->
+
+
+
+
+
+
+```{r comparefilter, dependson=c("datafamaz","datafamff","datammaf1","datammaf2","datammaf3","datammaf4"), fig.cap=fig.info,fig.scap=fig.name, fig.asp=.6, cache=TRUE}
+
+fig.name <- "Comparaison du pouvoir discriminant de chaque filtre employé."
+fig.description <- ""
+fig.info <- paste0(fig.name)
+
+rm_var_all <- rbind(rm_var_az, 
+                    rm_var_ff, 
+                    rm_var_mmaf1, 
+                    rm_var_mmaf2, 
+                    rm_var_mmaf3, 
+                    rm_var_mmaf4) %>%
+  group_by(RUN, FILTER) %>%
+  mutate(PERCENT = N_REMOVE / N_TOT) 
+
+ggplot(rm_var_all, aes(FILTER, N_REMOVE)) +
+  geom_boxplot(outlier.size = -1, alpha = .3) + 
+  geom_jitter(position=position_jitter(0.2), aes(col = RUN)) + 
+  scale_fill_discrete(guide = "none") + 
+  xlab("Applied filter") + 
+  ylab("Nb of removed variants")
+
+```
 
 ```{r resvarcall, fig.cap=fig.info,fig.scap=fig.name,fig.width=7, cache=TRUE} 
 
@@ -567,7 +579,6 @@ fig.info <- paste(fig.name)
 
 ggplot(rbind(df_fam_az,df_fam_ff,df_fam_mmaf1,df_fam_mmaf2,df_fam_mmaf3,df_fam_mmaf4), aes(RUN, fill = GENOTYPE)) +
   geom_bar(position = position_dodge()) +
-  # geom_text(aes(label = ..count..), position = position_dodge(width = .9), vjust= 1, stat = "count") +
   scale_fill_discrete(name = "Genotype") +
   facet_grid(TYPE ~ FAM, scales = "free") + 
   xlab("Patient") +
@@ -590,15 +601,15 @@ df_remaining_gene <- rbind(df_filter_az %>% distinct(SYMBOL,FAM.x) %>% mutate(CA
            df_filter_mmaf1 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = FALSE),
            df_filter_mmaf2 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = TRUE),
            df_filter_mmaf3 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = FALSE),
-           df_filter_mmaf4 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = FALSE)) %>%
+           df_filter_mmaf4 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = FALSE)) %>% 
   group_by(FAM.x, CAUSAL) %>%
   summarise(N = n())
-
 
 ggplot(df_remaining_gene, aes(FAM.x, N)) + 
   geom_bar(stat = "identity", aes(fill = CAUSAL)) + 
   scale_y_continuous(limits = c(0,max(df_remaining_gene$N) + 1), breaks = seq(0,max(df_remaining_gene$N) + 1,2)) + 
-  ylab("Count") + 
+  geom_text(aes(label = N), position = position_dodge(width = .9), vjust = -.25) +
+  ylab("Nb of remaining genes after all filtering") + 
   theme(axis.title.x=element_blank()) + 
   scale_fill_discrete(name = "Causal variant?")
 
