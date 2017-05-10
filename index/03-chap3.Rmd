@@ -207,6 +207,8 @@ df_mmaf1_2 <- filter(df_fam_mmaf1, RUN == "MMAF1_2")
 
 df_filter_mmaf1 <- variant_join(df_mmaf1_1, df_mmaf1_2, mode = "inner") %>% # keep 
   filter_genotype(het = FALSE) %>%
+  
+
   variant_join(df_ctrl_mmaf, mode = "anti") %>%
   variant_join(df_all_coding_variants, mode = "inner") %>%
   filter(Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
@@ -337,7 +339,32 @@ gc()
 
 ```
 
-Dans ce chapitre nous nous concentrerons sur l'analyses des résultats du séquençage exomique de [TODO: STOP HARDCODING FOLLOWING VALUES] 13 individus provenant de 6 familles distinctes. La première de ces famille (Famille Az) est composée de deux frères (Az1 et Az2) tout deux porteur d'un phénotype d'[azoospermie](#infquant) non-obstructive. La deuxième famille (famille FF) est elle composée de deux frères (FF1 et FF2) infertiles dont les spermatozoïdes ne parviennent pas à féconder les ovocytes. Les quatre dernières familles (MMAF1, MMAF2, MMAF3 et MMAF4) sont toutes composées de deux frères infertiles (sauf MMAF4 qui comprend trois frères) tous atteins d'un syndrome MMAF caractérisé par des anomalies morphologiques multiples au niveau du flagelle spermatique.  
+Dans ce chapitre nous nous concentrerons sur l'analyses des résultats du séquençage exomique de [TODO: STOP HARDCODING FOLLOWING VALUES] 13 individus provenant de 6 familles distinctes. La première de ces famille (Famille Az) est composée de deux frères (Az1 et Az2) tout deux porteur d'un phénotype d'[azoospermie](#infquant) non-obstructive. La deuxième famille (famille FF) est elle composée de deux frères (FF1 et FF2) infertiles dont les spermatozoïdes ne parviennent pas à féconder les ovocytes. Les quatre dernières familles (MMAF1, MMAF2, MMAF3 et MMAF4) sont toutes composées de deux frères infertiles (sauf MMAF4 qui comprend trois frères) tous atteins d'un syndrome MMAF caractérisé par des anomalies morphologiques multiples au niveau du flagelle spermatique. Un séquençage exomique fût réalisé pour l'ensemble des individus de ces quatres familles. 
+
+```{r}
+
+df_seq <- data_frame(FAM = c("Az","FF","MMAF1","MMAF2","MMAF3","MMAF4"),
+                     PHENOTYPE = c("Azoospermia","Fertilization failure","MMAF","MMAF","MMAF","MMAF"),
+                     YEAR = c(2012,2014,2014,2014,2014,2014),
+                     PLATFORM = c("Illumina HiSeq2000","Illumina HiSeq2000","Illumina HiSeq2000","Illumina HiSeq2000","Illumina HiSeq2000","Illumina HiSeq2000"),
+                     PLACE = c("Mount Sinai Institut","Genoscope (Evry)","Genoscope (Evry)","Genoscope (Evry)","Genoscope (Evry)","Genoscope (Evry)"))
+
+
+tab.name <- ""
+
+kable(df_seq, col.names = c("Familly","Phenotype","Year","Plateform","Place"),caption = tab.name)
+
+
+
+
+
+
+
+```
+
+
+
+
 
 Pour l'ensemble des individus de ces quatre familles nous avons appliqué notre pipeline d'analyse de sorte à obtenir pour chaque patient une liste de SNV et d'indel avec leur génotype associé (**Figure : **\@ref(fig:resvarcall)). Parmi ces variants, nous avons filtrés l'ensemble de ceux chevauchant uniquement des transcrits annotés *NMD* (*non sense mediated decay*) par VEP qui représentent entre XXX et YYY (TODO)% des transcrits (**Figure : **\@ref(fig:nmdtranscripts)) afin de nous concentrer sur les variants ayant la plus forte probabilité d'avoir un effet sur une protéine. Chacun de ces variants a été confronté à une liste de variants homozygotes observés sur les individus sains ou présentant un phénotype différent des patients étudiés de notre bases de données interne (**Figure : **\@ref(fig:plotsamplectrl)). Cette 
 
@@ -429,21 +456,22 @@ fig.description <- "Chaque point représente un individu séquencé, la couleur 
 fig.info <- paste(fig.name)
 
 
-df_remaining_gene <- rbind(df_filter_az %>% distinct(SYMBOL,FAM.x),
-           df_filter_ff %>% distinct(SYMBOL,FAM.x),
-           df_filter_mmaf1 %>% distinct(SYMBOL,FAM.x),
-           df_filter_mmaf2 %>% distinct(SYMBOL,FAM.x),
-           df_filter_mmaf3 %>% distinct(SYMBOL,FAM.x),
-           df_filter_mmaf4 %>% distinct(SYMBOL,FAM.x)) %>%
-  group_by(FAM.x) %>%
+df_remaining_gene <- rbind(df_filter_az %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = TRUE),
+           df_filter_ff %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = TRUE),
+           df_filter_mmaf1 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = FALSE),
+           df_filter_mmaf2 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = TRUE),
+           df_filter_mmaf3 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = FALSE),
+           df_filter_mmaf4 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = FALSE)) %>%
+  group_by(FAM.x, CAUSAL) %>%
   summarise(N = n())
 
 
 ggplot(df_remaining_gene, aes(FAM.x, N)) + 
-  geom_bar(stat = "identity") + 
+  geom_bar(stat = "identity", aes(fill = CAUSAL)) + 
   scale_y_continuous(limits = c(0,max(df_remaining_gene$N) + 1), breaks = seq(0,max(df_remaining_gene$N) + 1,2)) + 
   ylab("Count") + 
-  theme(axis.title.x=element_blank())
+  theme(axis.title.x=element_blank()) + 
+  scale_fill_discrete(name = "Causal variant?")
 
 ```
 
