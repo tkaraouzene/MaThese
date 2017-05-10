@@ -320,15 +320,15 @@ class (for LaTeX) and the R bookdown package, in general.
     séquence codante de l'ensemble des transcrits qu'il chevauche. Suite à
     cela nous ajoutons, lorsque celle-ci est disponible, la fréquence du
     variant dans les bases de données ExAC (Lek et al.,
-    \protect\hyperlink{ref-Lek2016}{2016}), ESP600 ({\textbf{???}}) et
-    1000Genomes ({\textbf{???}}) donnant ainsi une estimation de sa
-    fréquence dans la population générale. De même, la particularité de
-    cette pipeline est qu'elle conserve l'ensemble des variants identifiés
-    dans les études effectués précédement permettant d'ajouter aux
-    annotations la fréquences d'un variant chez les individus déjà
-    séquencé et donc la fréquence d'un variant dans chaque phénotype
-    étudié créant ainsi une base de données interne qui pourra servir de
-    contrôle dans les études ulterieur.
+    \protect\hyperlink{ref-Lek2016}{2016}), ESP600 {[}TODO{]} et
+    1000Genomes {[}TODO{]} donnant ainsi une estimation de sa fréquence
+    dans la population générale. De même, la particularité de cette
+    pipeline est qu'elle conserve l'ensemble des variants identifiés dans
+    les études effectués précédement permettant d'ajouter aux annotations
+    la fréquences d'un variant chez les individus déjà séquencé et donc la
+    fréquence d'un variant dans chaque phénotype étudié créant ainsi une
+    base de données interne qui pourra servir de contrôle dans les études
+    ulterieur.
   \item
     \textbf{Le filtrage des variants} : L'étape de filtrage est
     extremement importante si l'on souhaite analyser de manière efficace
@@ -353,74 +353,72 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Description des familles}\label{description-des-familles}
   
-  Dans cette partie, je me concentre sur l'analyse bioinformztique des
-  résultat du séquençage exomique
-  
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    \emph{Fam azoo} : Pour cette étude, nous avons effectué un séquençage
-    exomique de deux frères azoospermes (Az1 et Az2) issus d'un union
-    consanguin puisque leurs parents sont cousin au deuxième degré. 
-  \item
-    \emph{Fam fert fail} : PLCZ
-  \item
-    \emph{Fam MMAF 1-4} : DNAH1
-  \end{enumerate}
-  
-  \subsubsection{Resultats des exomes}\label{resultats-des-exomes}
-  
-  Dans ce chapitre nous nous concentrerons sur l'analyses des résultats du
-  séquençage exomique de {[}TODO: STOP HARDCODING FOLLOWING VALUES{]} 13
-  individus provenant de 6 familles distinctes. La première de ces famille
-  (Famille Az) est composée de deux frères (Az1 et Az2) tout deux porteur
-  d'un phénotype d'\protect\hyperlink{infquant}{azoospermie}
-  non-obstructive. La deuxième famille (famille FF) est elle composée de
-  deux frères (FF1 et FF2) infertiles dont les spermatozoïdes ne
-  parviennent pas à féconder les ovocytes. Les quatre dernières familles
-  (MMAF1, MMAF2, MMAF3 et MMAF4) sont toutes composées de deux frères
-  infertiles (sauf MMAF4 qui comprend trois frères) tous atteins d'un
-  syndrome MMAF caractérisé par des anomalies morphologiques multiples au
-  niveau du flagelle spermatique. Un séquençage exomique fût réalisé pour
-  l'ensemble des individus de ces quatres familles.
+  Dans cette partie, je me concentre sur l'analyse bioinformatique des
+  résultat du séquençage exomique de treize individus provenant de quatre
+  familles différentes (\textbf{Table : }\ref{tab:recapfam}) :
   
   \begin{table}
   
-  \caption{\label{tab:unnamed-chunk-1}}
+  \caption{\label{tab:recapfam}Tableau recapitulatif des familles séquencées}
   \centering
-  \begin{tabular}[t]{l|l|r|l|l}
+  \begin{tabular}[t]{l|r|l|r|l|l}
   \hline
-  Familly & Phenotype & Year & Plateform & Place\\
+  Familly & Individuals & Phenotype & Year & Plateform & Place\\
   \hline
-  Az & Azoospermia & 2012 & Illumina HiSeq2000 & Mount Sinai Institut\\
+  Az & 2 & Azoospermia & 2012 & Illumina HiSeq2000 & Mount Sinai Institut\\
   \hline
-  FF & Fertilization failure & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
+  FF & 2 & Fertilization failure & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
   \hline
-  MMAF1 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
+  MMAF1 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
   \hline
-  MMAF2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
+  MMAF2 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
   \hline
-  MMAF3 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
+  MMAF3 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
   \hline
-  MMAF4 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
+  MMAF4 & 3 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
   \hline
   \end{tabular}
   \end{table}
   
+  \subsubsection{Resultats des exomes}\label{resultats-des-exomes}
+  
   Pour l'ensemble des individus de ces quatre familles nous avons appliqué
   notre pipeline d'analyse de sorte à obtenir pour chaque patient une
   liste de SNV et d'indel avec leur génotype associé (\textbf{Figure :
-  }\ref{fig:resvarcall}). Parmi ces variants, nous avons filtrés
-  l'ensemble de ceux chevauchant uniquement des transcrits annotés
-  \emph{NMD} (\emph{non sense mediated decay}) par VEP qui représentent
-  entre XXX et YYY (TODO)\% des transcrits (\textbf{Figure :
-  }\ref{fig:nmdtranscripts}) afin de nous concentrer sur les variants
-  ayant la plus forte probabilité d'avoir un effet sur une protéine.
-  Chacun de ces variants a été confronté à une liste de variants
-  homozygotes observés sur les individus sains ou présentant un phénotype
-  différent des patients étudiés de notre bases de données interne
-  (\textbf{Figure : }\ref{fig:plotsamplectrl}). Cette
+  }\ref{fig:resvarcall}). Afin de connaitre l'impact de ces variants et
+  ainsi nous concentrer sur ceux ayant la plus forte probabilité d'être
+  responsables du phénotype nous les avons annoté grâce au logiciel VEP.
+  Les différentes annotations apportées nous ont tout d'abord permis de
+  filtrer l'intégralité des variants chevauchant un transcrit annoté
+  \emph{nonsense-mediated decay} (NMD). En effet, ce mécanisme a pour but
+  de controler la qualité des ARNm cellulaires chez les eucaryotes (Y.-F.
+  Chang, Imam, \& Wilkinson, \protect\hyperlink{ref-Chang2007}{2007}) en
+  éliminant les ARNm qui comportent un codon stop prématuré (Baker \&
+  Parker, \protect\hyperlink{ref-Baker2004}{2004}), pouvant être le
+  résultat d'une erreur de transcription, d'une mutation ou encore d'une
+  erreur d'épissage. Cette première étape de filtre permet à elle seule de
+  filtrer systematiquement les variants de 2587 à 3212 transcrits en
+  fonction des individus soit, entre 7261 et 10872 variants différent par
+  individus (\textbf{Figure : }\ref{fig:nmdtranscripts}).
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/nmdtranscripts-1} 
+  
+  }
+  
+  \caption[Nombre de transcrits et variants filtrés car ils sont annotés NMD]{Nombre de transcrits et variants filtrés car ils sont annotés NMD : Chaque point représente un individu séquencé, la couleur et la forme du point dépend de la famille d'origine de l'individu}\label{fig:nmdtranscripts}
+  \end{figure}
+  
+  Parmi ces variants, nous avons filtrés l'ensemble de ceux chevauchant
+  uniquement des transcrits annotés \emph{NMD} (\emph{non sense mediated
+  decay}) par VEP qui représentent entre XXX et YYY (TODO)\% des
+  transcrits afin de nous concentrer sur les variants ayant la plus forte
+  probabilité d'avoir un effet sur une protéine. Chacun de ces variants a
+  été confronté à une liste de variants homozygotes observés sur les
+  individus sains ou présentant un phénotype différent des patients
+  étudiés de notre bases de données interne (\textbf{Figure :
+  }\ref{fig:plotsamplectrl}). Cette
   
   \begin{figure}
   
@@ -431,15 +429,13 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption[Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés]{Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés}\label{fig:resvarcall}
   \end{figure}
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/plotsamplectrl-1} \end{center}
-  
   \begin{figure}
   
-  {\centering \includegraphics{thesis_files/figure-latex/nmdtranscripts-1} 
+  {\centering \includegraphics{thesis_files/figure-latex/plotsamplectrl-1} 
   
   }
   
-  \caption[Nombre de transcrits NMD et non NMD impacté par exomes]{Nombre de transcrits NMD et non NMD impacté par exomes : Chaque point représente un individu séquencé, la couleur et la forme du point dépend de la famille d'origine de l'individu}\label{fig:nmdtranscripts}
+  \caption[Nombre d'individus dans chaque famille et taille de la cohorte contrôle utilisée dans l'analyse]{Nombre d'individus dans chaque famille et taille de la cohorte contrôle utilisée dans l'analyse : Le diagramme en barre du haut montre la taille des cohorte contrôle utilisée pour chaque famille. Un individus "contrôle" peut être soit sain ou ne pas présenter le même phénotype que les individus de la famille analysée. Le diagramme du bas présente le nombre d'individus analysées dans chacune des familles. Chaque couleur correspond à une famille.}\label{fig:plotsamplectrl}
   \end{figure}
   
   \begin{figure}
@@ -475,6 +471,18 @@ class (for LaTeX) and the R bookdown package, in general.
   \addcontentsline{toc}{chapter}{References}
   
   \hypertarget{refs}{}
+  \hypertarget{ref-Baker2004}{}
+  Baker, K. E., \& Parker, R. (2004). Nonsense-mediated mRNA decay:
+  terminating erroneous gene expression. \emph{Current Opinion in Cell
+  Biology}, \emph{16}(3), 293--9.
+  \url{http://doi.org/10.1016/j.ceb.2004.03.003}
+  
+  \hypertarget{ref-Chang2007}{}
+  Chang, Y.-F., Imam, J. S., \& Wilkinson, M. F. (2007). The
+  Nonsense-Mediated Decay RNA Surveillance Pathway. \emph{Annual Review of
+  Biochemistry}, \emph{76}(1), 51--74.
+  \url{http://doi.org/10.1146/annurev.biochem.76.050106.093909}
+  
   \hypertarget{ref-DePristo2011}{}
   DePristo, M. A., Banks, E., Poplin, R., Garimella, K. V., Maguire, J.
   R., Hartl, C., \ldots{} Pritchard, E. (2011). A framework for variation
