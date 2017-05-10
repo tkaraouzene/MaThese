@@ -352,12 +352,35 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsubsection{Description des familles}\label{description-des-familles}
   
   Dans cette partie, je me concentre sur l'analyse bioinformatique des
-  résultat du séquençage exomique de treize individus provenant de quatre
-  familles différentes (\textbf{Table : }\ref{tab:recapfam}) :
+  résultat du séquençage exomique effectué entre 2012 et 2014 de 13
+  individus infertiles provenant de 6 familles différentes. Parmi
+  celles-ci, 3 phénotypes différents ont été observés :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{\protect\hyperlink{infquant}{L'Azoospermie} :} Comme nous
+    avons pu le voir, l'azoospermie est un phénotype d'infertilité
+    masculine caractérisé par l'absence de spermatozoïde dans
+    l'éjaculat.\\
+  \item
+    \textbf{Echec de fécondation :} Ce phénotype d'infertilité se
+    caractérise par l'incapacité des spermatozoïdes à féconder
+    l'ovocyte.\\
+  \item
+    \textbf{MMAF} : Le syndrome MMAF (\emph{multiple morphological
+    abnormalities of the sperm flagella}) caractérise comme son nom
+    l'indique les patients présentant une majorité de spermatozoïdes
+    atteins par une mosaïque d'anomalie morphologique du flagelle.
+  \end{enumerate}
+  
+  Un récapitulatif des familles et de leur phénotype est disponible dans
+  la table \ref{tab:recapfam}.
   
   \begin{table}
   
-  \caption{\label{tab:recapfam}Tableau recapitulatif des familles séquencées}
+  \caption{\label{tab:recapfam}Tableau recapitulatif des familles séquencées et de leur phénotype}
   \centering
   \begin{tabular}[t]{l|r|l|r|l|l}
   \hline
@@ -383,9 +406,20 @@ class (for LaTeX) and the R bookdown package, in general.
   Pour l'ensemble des individus de ces quatre familles nous avons appliqué
   notre pipeline d'analyse de sorte à obtenir pour chaque patient une
   liste de SNV et d'indel avec leur génotype associé (\textbf{Figure :
-  }\ref{fig:resvarcall}). Ensuite, afin de ne conserver que les variants
-  ayant la plus forte probabilité d'être responsable du phénotype nous
-  avons appliqué succesivement six filtres :
+  }\ref{fig:resvarcall}).
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/resvarcall-1} 
+  
+  }
+  
+  \caption[Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés]{Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés}\label{fig:resvarcall}
+  \end{figure}
+  
+  Ensuite, afin de ne conserver que les variants ayant la plus forte
+  probabilité d'être responsable du phénotype nous avons appliqué
+  succesivement six filtres :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -476,7 +510,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   Afin de comparer le pouvoir discriminant de chacun de ces filtres, nous
   avons compté le nombre de variant filtrés par chacun d'entre eux
-  (\textbf{Figure : }\ref{fig:comparefilter})
+  indépendamments des autres (\textbf{Figure : }\ref{fig:comparefilter}).
   
   \begin{figure}
   
@@ -487,14 +521,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption[Comparaison du pouvoir discriminant de chaque filtre employé.]{Comparaison du pouvoir discriminant de chaque filtre employé.}\label{fig:comparefilter}
   \end{figure}
   
-  \begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/resvarcall-1} 
-  
-  }
-  
-  \caption[Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés]{Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés}\label{fig:resvarcall}
-  \end{figure}
+  Après avoir effectuer l'ensemble de ces filtres, seuls quelques variants
   
   \begin{figure}
   
@@ -505,18 +532,124 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille}\label{fig:remaininggenes}
   \end{figure}
   
-  \hypertarget{cohortemmah}{\subsubsection{Etude d'une large cohorte de
-  patients MMAF}\label{cohortemmah}}
+  \begin{table}
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/aaa-1} \end{center}
+  \caption{\label{tab:tablegeneaz}Tableau des gènes ayant passé l'ensemble des filtres pour la famille AZ}
+  \centering
+  \begin{tabular}[t]{l}
+  \hline
+  Gene\\
+  \hline
+  GUF1\\
+  \hline
+  SPINK2\\
+  \hline
+  \end{tabular}
+  \end{table}
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/aaa-2} \end{center}
+  \begin{table}
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/aaa-3} \end{center}
+  \caption{\label{tab:tablegeneff}Tableau des gènes ayant passé l'ensemble des filtres pour la famille FF}
+  \centering
+  \begin{tabular}[t]{l}
+  \hline
+  FamiGene\\
+  \hline
+  PLCZ1\\
+  \hline
+  \end{tabular}
+  \end{table}
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/aaa-4} \end{center}
+  \begin{table}
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/aaa-5} \end{center}
+  \caption{\label{tab:tablegenemmaf1}Tableau des gènes ayant passé l'ensemble des filtres pour la famille MMAF1}
+  \centering
+  \begin{tabular}[t]{l}
+  \hline
+  Gene\\
+  \hline
+  PLA2G4B\\
+  \hline
+  JMJD7-PLA2G4B\\
+  \hline
+  \end{tabular}
+  \end{table}
+  
+  \begin{table}
+  
+  \caption{\label{tab:tablegenemmaf2}Tableau des gènes ayant passé l'ensemble des filtres pour la famille MMAF2}
+  \centering
+  \begin{tabular}[t]{l}
+  \hline
+  Gene\\
+  \hline
+  MYH11\\
+  \hline
+  DNAH1\\
+  \hline
+  \end{tabular}
+  \end{table}
+  
+  \begin{table}
+  
+  \caption{\label{tab:tablegenemmaf3}Tableau des gènes ayant passé l'ensemble des filtres pour la famille MMAF3}
+  \centering
+  \begin{tabular}[t]{l}
+  \hline
+  Gene\\
+  \hline
+  WEE2\\
+  \hline
+  PCSK5\\
+  \hline
+  ZFYVE28\\
+  \hline
+  GBP2\\
+  \hline
+  FCGR3A\\
+  \hline
+  \end{tabular}
+  \end{table}
+  
+  \begin{table}
+  
+  \caption{\label{tab:tablegenemmaf4}Tableau des gènes ayant passé l'ensemble des filtres pour la famille MMAF4}
+  \centering
+  \begin{tabular}[t]{l}
+  \hline
+  Gene\\
+  \hline
+  MMP9\\
+  \hline
+  TGIF2\\
+  \hline
+  ZNF469\\
+  \hline
+  HYDIN\\
+  \hline
+  MTSS1L\\
+  \hline
+  CDH23\\
+  \hline
+  CCDC37\\
+  \hline
+  DAPK1\\
+  \hline
+  SEMA5B\\
+  \hline
+  SLC13A3\\
+  \hline
+  TMEM231\\
+  \hline
+  ZNF276\\
+  \hline
+  \end{tabular}
+  \end{table}
+  
+  --\textgreater{}
+  
+  --\textgreater{} --\textgreater{} --\textgreater{} --\textgreater{}
+  --\textgreater{} --\textgreater{} --\textgreater{} --\textgreater{}
   
   \chapter{MutaScript}\label{mutascript}
   
