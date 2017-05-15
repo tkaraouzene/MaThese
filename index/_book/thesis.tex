@@ -352,7 +352,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsubsection{Description des familles}\label{description-des-familles}
   
   Dans cette partie, je me concentre sur l'analyse bioinformatique des
-  résultat du séquençage exomique effectué entre 2012 et 2014 de 13
+  résultats des séquençages exomiques effectués entre 2012 et 2014 de 13
   individus infertiles provenant de 6 familles différentes. Parmi
   celles-ci, 3 phénotypes différents ont été observés :
   
@@ -378,28 +378,19 @@ class (for LaTeX) and the R bookdown package, in general.
   Un récapitulatif des familles et de leur phénotype est disponible dans
   la table \ref{tab:recapfam}.
   
-  \begin{table}
-  
-  \caption{\label{tab:recapfam}Tableau recapitulatif des familles séquencées et de leur phénotype}
-  \centering
-  \begin{tabular}[t]{l|r|l|r|l|l}
-  \hline
+  \begin{longtable}[t]{lrlrll}
+  \caption{\label{tab:recapfam}Tableau recapitulatif des familles séquencées et de leur phénotype}\\
+  \toprule
   Familly & Individuals & Phenotype & Year & Plateform & Place\\
-  \hline
+  \midrule
   Az & 2 & Azoospermia & 2012 & Illumina HiSeq2000 & Mount Sinai Institut\\
-  \hline
   FF & 2 & Fertilization failure & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  \hline
   MMAF1 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  \hline
   MMAF2 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  \hline
   MMAF3 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  \hline
   MMAF4 & 3 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  \hline
-  \end{tabular}
-  \end{table}
+  \bottomrule
+  \end{longtable}
   
   \subsubsection{Resultats des exomes}\label{resultats-des-exomes}
   
@@ -432,16 +423,23 @@ class (for LaTeX) and the R bookdown package, in general.
     donc filtrer l'ensemble des variants qui ne sont pas partagés par
     l'ensemble des membre de la fraterie.\\
   \item
-    \textbf{Genotype des variants :}\\
+    \textbf{Genotype des variants :} Dans ces études, nous avons emmis
+    l'hypothèse d'une transmission recessive du phénotype. Ainsi, seul les
+    variants homozygotes ont été conservés. Ce filtre est le plus efficace
+    du pipeline en permettant de filtrer entre 38814 et 53448 variants par
+    individus (\textbf{Figure : }\ref{fig:resvarcall},
+    \ref{fig:comparefilter}).\\
   \item
-    \textbf{Impact du variant :} on filtre les variants intonique et ceux
-    tombant dans les sequences UTRs. de même les variants synonymes ne
-    sont pas conservés car n'impactent pas la séquences protéique. pour
-    les variant faux sens (changement d'un seul aa de la séquence
-    protéique) il est plus difficile de se décider {[}TODO insert
-    citation{]} nous avons donc utiliser les logiciels SIFT et Polyphen et
-    filtrer l'ensemble des fauxsens prédit comme \emph{tolerated} par SIFT
-    et \emph{benign} par Polyphen.\\
+    \textbf{Impact du variant :} Afin de ne conserver que les variants
+    ayant un effet potentiellement tronquant sur la protéine, nous avons
+    filtré les variants intonique et ceux tombant dans les sequences UTRs.
+    De même les variants synonymes ne sont pas conservés car ceux-ci n'ont
+    aucun effet sur séquences protéique. Pour les variants faux sens
+    (changement d'un seul aa de la séquence protéique) il est plus
+    difficile de se décider {[}TODO insert citation{]} nous avons donc
+    utilisé les logiciels SIFT et Polyphen et filtré l'ensemble des
+    fauxsens prédit comme \emph{tolerated} par SIFT et \emph{benign} par
+    Polyphen.\\
   \item
     \textbf{Transcrits NMD :} Le mécanisme NMD (\emph{nonsense-mediated
     decay}) a pour but de controler la qualité des ARNm cellulaires chez
@@ -450,14 +448,14 @@ class (for LaTeX) and the R bookdown package, in general.
     comportent un codon stop prématuré (Baker \& Parker,
     \protect\hyperlink{ref-Baker2004}{2004}), pouvant être le résultat
     d'une erreur de transcription, d'une mutation ou encore d'une erreur
-    d'épissage. Il est donc eu probable que les variants présents sur
+    d'épissage. Il est donc peu probable que les variants présents sur
     transcrits annotés NMD soient responsables du phénotype. Nous avons
     donc filtré l'ensemble des variants chevauchant \textbf{uniquement}
-    des transcrits annotés NMD. Cette première étape de filtre permet à
-    elle seule de filtrer systematiquement les variants de 2587 à 3212
-    transcrits (\textbf{Figure : }\ref{fig:nmdtranscripts}) en fonction
-    des individus soit, entre 7261 et 10872 variants différent par
-    individus (\textbf{Figure : }\ref{fig:comparefilter})
+    des transcrits annotés NMD. Cette étape de filtre permet à elle seule
+    de filtrer systematiquement les variants de 2587 à 3212 transcrits
+    (\textbf{Figure : }\ref{fig:nmdtranscripts}) en fonction des individus
+    soit, entre 7261 et 10872 variants différents par individus
+    (\textbf{Figure : }\ref{fig:comparefilter}).
   \end{enumerate}
   
   \begin{figure}
@@ -483,20 +481,20 @@ class (for LaTeX) and the R bookdown package, in general.
     des trois bases de données que sont ExAC, ESP et 1KG.\\
   \item
     \textbf{Présence des variants dans la cohorte contrôle :} Au cours de
-    nos différentes études, nous avons été ammené à séquencé \ldots{}
-    {[}TODO mettre chiffre exacte{]}. L'ensemble de ces individus peuvent
-    être soit sains soit présenter l'un des \ldots{} phénotypes suivant :
-    \ldots{} {[}TODO insert pheno{]}. Ces phénotypes étant très différent,
-    il n'est pas abérant d'emmetre l'hypothèse qu'ils que leurs causes
-    génétiques soient diffrentes. De même, les variants recherché étant
-    rares, il est peu probable qu'un individu porte les variants de deux
-    phénotypes différents. Ainsi, pour chacune de nos \ldots{} {[}todo
-    insert nb of fam{]} familles, nous avons pu constituer une cohorte
-    contrôle composée dans l'ensemble des patients précédemment analysés
-    et ne présentant pas le même phénotype que celui étudié dans la
-    famille (\textbf{Figure : }\ref{fig:plotsamplectrl}). Dès lors, nous
-    avons put filtrer l'ensemble des variants retrouvés à la fois chez nos
-    patients et observés à l'état homozygote dans la cohorte contrôle.
+    nos différentes études, nous avons été ammené à séquencé 134.
+    L'ensemble de ces individus peuvent être soit sains soit présenter
+    l'un des 6 phénotypes étudié au cours de nos différentes études
+    (\textbf{Table : }@tab(fig:TODO)). Ces phénotypes étant très
+    différent, il n'est pas abérant d'emmetre l'hypothèse qu'ils que leurs
+    causes génétiques soient diffrentes. De même, les variants recherché
+    étant rares, il est peu probable qu'un individu porte les variants de
+    deux phénotypes différents. Ainsi, pour chacune des 6 familles, nous
+    avons pu constituer une cohorte contrôle composée dans l'ensemble des
+    patients précédemment analysés et ne présentant pas le même phénotype
+    que celui étudié dans la famille (\textbf{Figure :
+    }\ref{fig:plotsamplectrl}). Dès lors, nous avons put filtrer
+    l'ensemble des variants retrouvés à la fois chez nos patients et
+    observés à l'état homozygote dans la cohorte contrôle.
   \end{enumerate}
   
   \begin{figure}
@@ -522,134 +520,1711 @@ class (for LaTeX) and the R bookdown package, in general.
   \end{figure}
   
   Après avoir effectuer l'ensemble de ces filtres, seuls quelques variants
+  subsistent nous permettant d'obtenir unle liste de gènes restrainte pour
+  chaque famille (\textbf{Table : }@tab(fig:tablegene)). Ainsi, la cause
+  génétique expliquant le phénotype d'une famille a pu être mis en
+  évidence dans \ldots{} familles sur \ldots{} {[}TODO{]} (\textbf{Figure
+  : }\ref{fig:plotremaininggenes}). Il est a noté que l'ensemble des
+  familles pour lesquelles la cause génétique a été identifiée présente un
+  historique consanguin {[}figure arbre{]} ce qui n'était pas le cas pour
+  les \ldots{} autres. Cette consanguinité observée dans une partie des
+  famille nous a permi de justifier l'exclusion des variants
+  hétérozygotes. En revanche pour les \ldots{} autres fa milles, rien ne
+  justifiait un tel filtre. Ainsi, pour celles-ci il est probable que les
+  variants responsables se soient vu exclus par ce filtre. C'est pourquoi,
+  notre équipe se concentre actuellement sur les variants hétérozygotes de
+  ces familles.
   
   \begin{figure}
   
-  {\centering \includegraphics{thesis_files/figure-latex/remaininggenes-1} 
+  {\centering \includegraphics{thesis_files/figure-latex/plotremaininggenes-1} 
   
   }
   
-  \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille}\label{fig:remaininggenes}
+  \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille}\label{fig:plotremaininggenes}
   \end{figure}
   
   \begin{table}
   
-  \caption{\label{tab:tablegeneaz}Tableau des gènes ayant passé l'ensemble des filtres pour la famille AZ}
+  \caption{\label{tab:tablegene}Tableau des gènes ayant passé l'ensemble des filtres pour les fifférentes familles}
   \centering
-  \begin{tabular}[t]{l}
-  \hline
-  Gene\\
-  \hline
-  GUF1\\
-  \hline
-  SPINK2\\
-  \hline
+  \begin{tabular}[t]{llllll}
+  \toprule
+  AZ & FF & MMAF1 & MMAF2 & MMAF3 & MMAF4\\
+  \midrule
+  GUF1 &  &  &  &  & \\
+  SPINK2 &  &  &  &  & \\
+   & PLCZ1 &  &  &  & \\
+   &  & PLA2G4B &  &  & \\
+   &  & JMJD7-PLA2G4B &  &  & \\
+  \addlinespace
+   &  &  & MYH11 &  & \\
+   &  &  & DNAH1 &  & \\
+   &  &  &  & WEE2 & \\
+   &  &  &  & PCSK5 & \\
+   &  &  &  & ZFYVE28 & \\
+  \addlinespace
+   &  &  &  & GBP2 & \\
+   &  &  &  & FCGR3A & \\
+   &  &  &  &  & MMP9\\
+   &  &  &  &  & TGIF2\\
+   &  &  &  &  & ZNF469\\
+  \addlinespace
+   &  &  &  &  & HYDIN\\
+   &  &  &  &  & MTSS1L\\
+   &  &  &  &  & CDH23\\
+   &  &  &  &  & CCDC37\\
+   &  &  &  &  & DAPK1\\
+  \addlinespace
+   &  &  &  &  & SEMA5B\\
+   &  &  &  &  & SLC13A3\\
+   &  &  &  &  & TMEM231\\
+   &  &  &  &  & ZNF276\\
+  \bottomrule
   \end{tabular}
   \end{table}
   
-  \begin{table}
+  \hypertarget{cohortemmah}{\subsection{Etude d'une large cohorte de
+  patients MMAF}\label{cohortemmah}}
   
-  \caption{\label{tab:tablegeneff}Tableau des gènes ayant passé l'ensemble des filtres pour la famille FF}
-  \centering
-  \begin{tabular}[t]{l}
-  \hline
-  FamiGene\\
-  \hline
-  PLCZ1\\
-  \hline
-  \end{tabular}
-  \end{table}
+  \begin{verbatim}
+  ##      Chromosome  Position Reference allele Alterated allele           Gene
+  ## 1            20  21686448                T                C           PAX1
+  ## 2            20   1460491                G                A         SIRPB2
+  ## 3            19  33904511                C                T           PEPD
+  ## 4            14  55604902                C                A         LGALS3
+  ## 5            14  21500228                A                C          TPPP2
+  ## 6            12  53207812                C                T           KRT4
+  ## 7            22  45258402                G                A        ARHGAP8
+  ## 8            22  42539492                T                G        CYP2D7P
+  ## 9            22  41654029                C                T        RANGAP1
+  ## 10           22  39773044                T                C         SYNGR1
+  ## 11           18  47113165                C                T           LIPG
+  ## 12           18  44140078                T                C         LOXHD1
+  ## 13           18  43842977                A                G       C18orf25
+  ## 14           16   9857925                C                G         GRIN2A
+  ## 15           15  52567755                G                A          MYO5C
+  ## 16           14  93685055                G                A           UBR7
+  ## 17           12  93100481                G                T       C12orf74
+  ## 18            7 100675538                C                A          MUC17
+  ## 19            7  91670121                G                A          AKAP9
+  ## 20            7  87816004                G                A         ADAM22
+  ## 21            3 196053903                C                A        TM4SF19
+  ## 22            3  63601065                A                C          SYNPR
+  ## 23            2  99949559                T                C         TXNDC9
+  ## 24            2  99271976                T                C         MGAT4A
+  ## 25            1  55224730             TCTT                T          PARS2
+  ## 26            1  52306074             CTTC                C           NRD1
+  ## 27           17   5289554                T                C          NUP88
+  ## 28           12  72070508             TGTT                T          THAP2
+  ## 29            1  12921098                A                C        PRAMEF2
+  ## 30           14  36986846                C                A         NKX2-1
+  ## 31           14  24842558                A                G         NFATC4
+  ## 32           14  23902865                G                A           MYH7
+  ## 33           14  21109505                G                T          OR6S1
+  ## 34           11  33005708                G                A          QSER1
+  ## 35           11  18487273                C                T        LDHAL6A
+  ## 36           10 102778932                C                T          PDZD7
+  ## 37           10  98802831                G                A          SLIT1
+  ## 38           10  98802831                G                A ARHGAP19-SLIT1
+  ## 39            9 117068924                G                A        COL27A1
+  ## 40            7 141869960                T                C  RP11-1220K2.2
+  ## 41            2 234698628                T                C         MROH2A
+  ## 42            2 202123028                C                G          CASP8
+  ## 43            2 190606152                A                C          ANKAR
+  ## 44           19  58421111                C                T         ZNF417
+  ## 45           19  18717400             GCAG                G          CRLF1
+  ## 46           12  49091971               AG                A          CCNT1
+  ## 47           19   3810773                G                T           ZFR2
+  ## 48            7 142162359                C                A        TRBV6-6
+  ## 49           14  33205051                G                A          AKAP6
+  ## 50           10  88476324                T                A           LDB3
+  ## 51            8  10411468                A                T         PRSS55
+  ## 52            4    438084                C                T         ZNF721
+  ## 53            1  54060404                G                A          GLIS1
+  ## 54            1  47882606                G                A          FOXE3
+  ## 55            1   8415618                G                T           RERE
+  ## 56            1   7870001                G                A           PER3
+  ## 57           22  22326327               CC                C          TOP3B
+  ## 58           20  56188219                C                T           ZBP1
+  ## 59           17  40189847                G                A        ZNF385C
+  ## 60           12  58131251                G                T          AGAP2
+  ## 61           12  53586255                G                A          ITGB7
+  ## 62           12  53567287                C                T           CSAD
+  ## 63           12  14947516                G                C          WBP11
+  ## 64           11 118371775                C                T          KMT2A
+  ## 65            1  47611765                G                A        CYP4A22
+  ## 66           20  43992180                T                G           SYS1
+  ## 67           17  33802153                A                G        SLFN12L
+  ## 68           16   1433876                T                C           UNKL
+  ## 69           13  45589616                C                G        GPALPP1
+  ## 70            6  29912399                G              GTG          HLA-A
+  ## 71            2 238434379                G                A           MLPH
+  ## 72            2 236578965                G                T          AGAP1
+  ## 73            1 235505320                T               TT          GGPS1
+  ## 74           22  42564607                C                T          TCF20
+  ## 75           22  39746022                G                C         SYNGR1
+  ## 76           21  45649481                G                A         ICOSLG
+  ## 77           21  38302544               AA                A           HLCS
+  ## 78           17  18243524                T                C          SHMT1
+  ## 79           16  29676047                G                T            SPN
+  ## 80            8 110504092             TTTT                T        PKHD1L1
+  ## 81            7 157959683                C                T         PTPRN2
+  ## 82            7 157406784                C                T     AC005481.5
+  ## 83            7 156432904                G                A        C7orf13
+  ## 84            5 178418555                C                A           GRM6
+  ## 85            2 135966514                T                C         ZRANB3
+  ## 86            2  95941820                C                T          PROM2
+  ## 87            2  89999280                C                T      IGKV2D-28
+  ## 88            2  85925780                G                A           GNLY
+  ## 89            1 240656363                G                C          GREM2
+  ## 90            4 178262626               TT                T          NEIL3
+  ## 91            3  10076850              TTT                T         FANCD2
+  ## 92           19  50000442               AA                A          RPS11
+  ## 93           19  43268141               GG                G           PSG8
+  ## 94           19  43237116                T                C           PSG3
+  ## 95           14  93712337                G                C          BTBD7
+  ## 96           19  10395141                G                A          ICAM1
+  ## 97           19   6680256                C                G             C3
+  ## 98           14 105413068                G                C         AHNAK2
+  ## 99           14 105410029                A                G         AHNAK2
+  ## 100          14 105406024                G                C         AHNAK2
+  ## 101          14  96875286                G                A            AK7
+  ## 102          10  91474707                T               TT         KIF20B
+  ## 103           8  22476161                A                C          CCAR2
+  ## 104           8  17601248                C                T          MTUS1
+  ## 105           4   3107081                C                T            HTT
+  ## 106           4   1348920                G                A          UVSSA
+  ## 107           3  49690834                A                G            BSN
+  ## 108           3  48732676                C                T          IP6K2
+  ## 109           3  13613081                C                T          FBLN2
+  ## 110           2 168099316                T                C          XIRP2
+  ## 111           2  64682532                G                A         LGALSL
+  ## 112           2  47596855                G               GG          EPCAM
+  ## 113          18  12963155               TT                T          SEH1L
+  ## 114           9  37746410                C                T         FRMPD1
+  ## 115           9  35677780                C                A            CA9
+  ## 116           9  32635111                G                C          TAF1L
+  ## 117           1 200958066                G                A         KIF21B
+  ## 118          20  45839444                G                A         ZMYND8
+  ## 119          17  73951699                T                C          ACOX1
+  ## 120          15  81625233             CTTC                C           TMC3
+  ## 121          15  76019462                C                T         ODF3L1
+  ## 122          12 117289573                G                A          RNFT2
+  ## 123          12 117289571                G                A          RNFT2
+  ## 124           3 100467232                C                G            TFG
+  ## 125          17  38519545                G                A           GJD3
+  ## 126          17  38319731                T              TGT          CASC3
+  ## 127           1 155716706                T                C          MSTO1
+  ## 128          22  39381904                A                C       APOBEC3B
+  ## 129          20  60908177                T                G          LAMA5
+  ## 130          18  48577774                A                C          SMAD4
+  ## 131          10 101591737                T                C          ABCC2
+  ## 132           7  99023149                C                A   ATP5J2-PTCD1
+  ## 133           7  99023149                C                A          PTCD1
+  ## 134           6 150343181                C                G         RAET1L
+  ## 135          20  57599401                C                T          TUBB1
+  ## 136          10 128904495                G                A          DOCK1
+  ## 137          10 115340443                C                T          HABP2
+  ## 138          10 105905296               TT                T          WDR96
+  ## 139          10  95085594                T                C           MYOF
+  ## 140           9 136915690                C                T           BRD3
+  ## 141           9 136573556                G                A          SARDH
+  ## 142           9 136029295                T                G          GBGT1
+  ## 143           6  13620635                T                C           NOL7
+  ## 144           6  13620635                T                C     AL441883.1
+  ## 145           3  52014907                T                G        ABHD14A
+  ## 146           1 248685830              AAA                A          OR2G6
+  ## 147           1 236343188                G                A        GPR137B
+  ## 148           1  25655425                T                A            RHD
+  ## 149          20  36760894                C                A           TGM2
+  ## 150          20  30381660                G                A           TPX2
+  ## 151           6  42204125                C             CCTC         TRERF1
+  ## 152           1  14099636                C                T          PRDM2
+  ## 153          16   4625931                C                T       C16orf96
+  ## 154          15  42977345                C                T         STARD9
+  ## 155          15  41991300                A                T            MGA
+  ## 156          15  40558401                C                G           PAK6
+  ## 157          14  94756669                G                A      SERPINA10
+  ## 158          12 106460938                G                T          NUAK1
+  ## 159          12  56811549                C                T       TIMELESS
+  ## 160          12  56398531                G                A           SUOX
+  ## 161          12  30877343                T                C        CAPRIN2
+  ## 162          11  70644655                C                T         SHANK2
+  ## 163          11  64434997                C                T          NRXN2
+  ## 164           9 131397191                C                T          WDR34
+  ## 165           9 127790740                C                A           SCAI
+  ## 166           9  88842951                G                A       C9orf153
+  ## 167           8  38260050                C                T          LETM2
+  ## 168           6  49668376                C                T         CRISP2
+  ## 169           6  43266884                T                C        SLC22A7
+  ## 170           5 150947603                C                T           FAT2
+  ## 171           5 150886819                C                T           FAT2
+  ## 172           2  65298652             CAAC                C          CEP68
+  ## 173          16  71319756                A                C          CMTR2
+  ## 174          16  69760330                A                T           NQO1
+  ## 175          16  58032138                G                A         ZNF319
+  ## 176          12 111856403                G                A          SH2B3
+  ## 177           9 133932499                C                T          LAMC3
+  ## 178           9 130166017                C                T         SLC2A8
+  ## 179           9 130083051                A                G         GARNL3
+  ## 180           7 100815661               CT                C          NAT16
+  ## 181           7 100353018             CAAC                C            ZAN
+  ## 182           7 100210487                C                T         MOSPD3
+  ## 183           6  90338827                T               TT         ANKRD6
+  ## 184           5 170380655                C                T        RANBP17
+  ## 185           1 196799813                G                A          CFHR1
+  ## 186          19   4446621                C                T          UBXN6
+  ## 187          18  61465831                T               TT       SERPINB7
+  ## 188          11   3742061               AC                A          NUP98
+  ## 189          11   1262467                G                A          MUC5B
+  ## 190           4   2659543                C                A        FAM193A
+  ## 191           9 114195655                G                A       KIAA0368
+  ## 192           3  49846852                G                A           UBA7
+  ## 193           3  47050775                G                C         NBEAL2
+  ## 194           3  40557438                G                A         ZNF620
+  ## 195           3  40429537                C                G         ENTPD3
+  ## 196           2  73195640                G                A          SFXN5
+  ## 197           2  20870475                G                A           GDF7
+  ## 198          17  76422562                G                A     AC061992.1
+  ## 199          17  74473032                G                A         RHBDF2
+  ## 200          17  72368467                C                T         GPR142
+  ## 201          16  15808876                C                G          MYH11
+  ## 202          14  75537349                C                G        ZC2HC1C
+  ## 203          10 135085088                C                T          ADAM8
+  ## 204          12  12301870                A                G           LRP6
+  ## 205           9 129641664                C                T         ZBTB34
+  ## 206           9  86292683                C                A         UBQLN1
+  ## 207           8 121209041                G                T        COL14A1
+  ## 208           6  56472185                T                C            DST
+  ## 209           5  23527565                A                C          PRDM9
+  ## 210           3  36888705                G                A         TRANK1
+  ## 211          14  47120939                T                C         RPL10L
+  ## 212           1  62939753                A                C          DOCK7
+  ## 213          17  38079519                G                A         ORMDL3
+  ## 214          22  18021876                C                A          CECR2
+  ## 215          20  20033322                G                A         CRNKL1
+  ## 216          19  57334156                C                T           PEG3
+  ## 217          19  57334156                C                T           ZIM2
+  ## 218          19  54947506                T               TT          TTYH1
+  ## 219          19  44982283                T                A         ZNF180
+  ## 220          15  89172589                G                A            AEN
+  ## 221          15  68119583                G                A          SKOR1
+  ## 222          15  67073338                C                T          SMAD6
+  ## 223          15  43584899                C                T           TGM7
+  ## 224          13 114783599                C                T          RASA3
+  ## 225          12  92818673                A                G          CLLU1
+  ## 226          12  70272830                C                G          MYRFL
+  ## 227          11  71821156                G                A        ANAPC15
+  ## 228           5  37182862                C                T        C5orf42
+  ## 229          10  90565577                G                A           LIPM
+  ## 230           7 142575398                C                T          TRPV6
+  ## 231           7 120770355                T                C          CPED1
+  ## 232           7 103824398                T                C           ORC5
+  ## 233           7 100692149                C                T          MUC17
+  ## 234           7 100684926                C                T          MUC17
+  ## 235           7 100369544                A                T            ZAN
+  ## 236           6 136882715                C                T         MAP3K5
+  ## 237           6 109225609                G                A          ARMC2
+  ## 238           5 170692679                G                A        RANBP17
+  ## 239           2  26624966                C               CC           DRC1
+  ## 240           5 140552573                G                A         PCDHB7
+  ## 241           5 140188757                C                T         PCDHA4
+  ## 242           5  35013058                C                T          AGXT2
+  ## 243           4   2461842                C                T  RP11-503N18.3
+  ## 244           4   2460483                C                T  RP11-503N18.3
+  ## 245           3  50329885                A                T          IFRD2
+  ## 246           3  49691430                T                A            BSN
+  ## 247           3  49165978                C                T          LAMB2
+  ## 248           3  48621180                C                T         COL7A1
+  ## 249           3  48506225              CTC                C          ATRIP
+  ## 250           2   3197801                G                T          TSSC1
+  ## 251           1 156261200                C                T         TMEM79
+  ## 252           1 156212830                A                T           PMF1
+  ## 253           1 156212830                A                T     PMF1-BGLAP
+  ## 254           1 152733395                C                T           KPRP
+  ## 255           1 152084443                T             TCCT           TCHH
+  ## 256           1 152084441                G                C           TCHH
+  ## 257           1 152084438                G                C           TCHH
+  ## 258           1 152084437                A                T           TCHH
+  ## 259           1 117603001                G                A           TTF2
+  ## 260           1  12026326                A                G          PLOD1
+  ## 261          19  11354031                C                T          DOCK6
+  ## 262          18   9104206                C               CC         NDUFV2
+  ## 263          17  72937990                G                A          OTOP3
+  ## 264          17  66518940                G                A        PRKAR1A
+  ## 265          17  36454566                A                G         MRPL45
+  ## 266          17  33464849                C                G           NLE1
+  ## 267          16  30078341              CCA                C          ALDOA
+  ## 268          16  27761217                T                A       KIAA0556
+  ## 269          12 113874568               CC                C           SDSL
+  ## 270          12  11508483                A                G           PRB1
+  ## 271          12   8850842                G                A         RIMKLB
+  ## 272           9 139360719                G                T         SEC16A
+  ## 273           3  38523684                C                T         ACVR2B
+  ## 274           8 103250840                G               GG          RRM2B
+  ## 275           2 239353086                G                A           ASB1
+  ## 276           2 190670550                A               AA           PMS1
+  ## 277           1 196748442                T                C          CFHR3
+  ## 278          19  50028734                G                T          FCGRT
+  ## 279          17  73929161                G                A           FBF1
+  ## 280          11   7661051             CTCC                C        PPFIBP2
+  ## 281           3 133969438                G               GG            RYK
+  ## 282          17  67190118              ATA                A         ABCA10
+  ## 283           2 219130413                C                G           AAMP
+  ## 284          19  33586658              TCT                T        GPATCH1
+  ## 285          19  14736295               TT                T           EMR3
+  ## 286          19   5229555                C                T          PTPRS
+  ## 287          17  59984907                C                T          INTS2
+  ## 288          16   1420341                C                T           UNKL
+  ## 289          16    736078                G                T          WDR24
+  ## 290          13  78475230                C                T          EDNRB
+  ## 291          12  56514414                G                A         ZC3H10
+  ## 292          12  31249877                C                T          DDX11
+  ## 293          11 104819406                A                G          CASP4
+  ## 294          11   4881705               GG                G        OR51H1P
+  ## 295           8  38961159                G                T          ADAM9
+  ## 296           7 116339605                C                T            MET
+  ## 297           3  56766353                C                T        ARHGEF3
+  ## 298           3  56591287                C                G         CCDC66
+  ## 299           3  53326337                G                A          DCP1A
+  ## 300           3  52382919                A                C          DNAH1
+  ## 301           3  49377396                C                A           USP4
+  ## 302           3  47450563                C                T         PTPN23
+  ## 303           3  47308480                G                T           KIF9
+  ## 304           2 238268805                G                A         COL6A3
+  ## 305           1  89616174                T                C           GBP7
+  ## 306           1  25627459                T                C            RHD
+  ## 307           1  11008762                G                A       C1orf127
+  ## 308          21  47556396                G                T           FTCD
+  ## 309          21  47541477                G                A         COL6A2
+  ## 310          19  52222793                T                G           HAS1
+  ## 311          18  71793327                C                A         FBXO15
+  ## 312          16  74657972                A                G          RFWD3
+  ## 313          15 101905115                A                G          PCSK6
+  ## 314          13  84453992                C                T        SLITRK1
+  ## 315          10 135169004                C                T           FUOM
+  ## 316           9 123904538                T                C          CNTRL
+  ## 317           8  87437445                A                C           WWP1
+  ## 318           7 105305600                G                A        ATXN7L1
+  ## 319           6  32729613                T                C       HLA-DQB2
+  ## 320           6  31237159                C                G          HLA-C
+  ## 321           5 140562634                T                C        PCDHB16
+  ## 322           4 103265743                C                T        SLC39A8
+  ## 323           3 127324966                C                T           MCM2
+  ## 324           3 125877314                C                T        ALDH1L1
+  ## 325           3 125775266                C                T        SLC41A3
+  ## 326          13  25745286                C                G          AMER2
+  ## 327           3 113119409                G                A          WDR52
+  ## 328          21  33964726               AA                A       C21orf59
+  ## 329          20   9424868                C                A          PLCB4
+  ## 330          19  50060395                G                A          NOSIP
+  ## 331          19  43991280                A                G         PHLDB3
+  ## 332          19  42910447                C                T           LIPE
+  ## 333          18   5891746                C                T       TMEM200C
+  ## 334          17   4447854                G                A        MYBBP1A
+  ## 335          17   4058094                C                T         CYB5D2
+  ## 336          14 105418119                G                C         AHNAK2
+  ## 337          13  64321298                T                G     AL445989.1
+  ## 338          12 132401514                C                T           ULK1
+  ## 339          11 124950640                G                A        SLC37A2
+  ## 340           9 138392813                G                T          MRPS2
+  ## 341           6 116912047               TT                T          RWDD1
+  ## 342           6  10902902                A                G         SYCP2L
+  ## 343           6   3850871                C                G         FAM50B
+  ## 344           5 149501575                C                T         PDGFRB
+  ## 345           5 102423628                T                C           GIN1
+  ## 346           5  94784082                T                C         FAM81B
+  ## 347           5  90007092                C                G          GPR98
+  ## 348           5  73136450                A                C       ARHGEF28
+  ## 349           5  42801179                C                T          SEPP1
+  ## 350           5  42800866                G                A          SEPP1
+  ## 351           2 169923745                A                G          DHRS9
+  ## 352           2   3502804                G                A           ADI1
+  ## 353          22  40415898                G                A         FAM83F
+  ## 354          22  22312869                T                A          TOP3B
+  ## 355          18  72775978                G                A         ZNF407
+  ## 356          16  67702400                A                G       C16orf86
+  ## 357          13 101735435                C                T          NALCN
+  ## 358          12 132510280                G                A          EP400
+  ## 359          12 132401025                C                T           ULK1
+  ## 360          12  64509588                C                G         SRGAP1
+  ## 361          12  53410337                A                G          EIF4B
+  ## 362          12  52965240                T                C          KRT74
+  ## 363          12  10124287                G                A        CLEC12A
+  ## 364          12   1040418                T                C          RAD52
+  ## 365          11  60265027                C                T         MS4A12
+  ## 366           8 120118131                C                T        COLEC10
+  ## 367           8  37696528                G                T         GPR124
+  ## 368           6 167738709                G                C          TTLL2
+  ## 369           3  37090074                A                G           MLH1
+  ## 370           2  31215873                G                C        GALNT14
+  ## 371          22  41077895                C                T          MCHR1
+  ## 372          22  41075532                A                T          MCHR1
+  ## 373          21  33740708               TT                T           URB1
+  ## 374          19   2253732                G                A          JSRP1
+  ## 375          19   1241874                C                T          ATP5D
+  ## 376           1   9067408                A                T         SLC2A7
+  ## 377          14  74036585                C                A          ACOT2
+  ## 378           5 140242685                C                A     AC005609.1
+  ## 379          10  20357167                G                T         PLXDC2
+  ## 380           8 139635975                C                T        COL22A1
+  ## 381           8 132051742                C                T          ADCY8
+  ## 382           7 134852500                A                C        C7orf49
+  ## 383           6  96034884                T              TAT          MANEA
+  ## 384           3 179103351                T              TTT           MFN1
+  ## 385           3  97593540                G                A         CRYBG3
+  ## 386           2 231334506               AA                A          SP100
+  ## 387           1  65891031                T                G         LEPROT
+  ## 388           1  39758439                G                T          MACF1
+  ## 389          21  45713720                G                A           AIRE
+  ## 390          21  44589854                G                A          CRYAA
+  ## 391          18  61305260                A                T       SERPINB4
+  ## 392          17  73780721                T                C            UNK
+  ## 393          17  40963741                G                A          BECN1
+  ## 394          17  40738110                C                T        FAM134C
+  ## 395          17  36490579                G                A         GPR179
+  ## 396          17   9501544                T               TT          WDR16
+  ## 397           3  52721545                C                T           GNL3
+  ## 398          17   3195353                T                C          OR3A1
+  ## 399          14  39870946                G                A         FBXO33
+  ## 400          14  32623861                G                A        ARHGAP5
+  ## 401          11  65617059                G                T          SNX32
+  ## 402          11  57571209                A                G         CTNND1
+  ## 403          11  45868839                A                C           CRY2
+  ## 404          17  74093934                C                T          EXOC7
+  ## 405           8  82357149                A                G           PMP2
+  ## 406           8  41529917                G                A           ANK1
+  ## 407           8  36763226                G                A          KCNU1
+  ## 408           7  99943599                G                A          PILRB
+  ## 409           6  87994213                C                T           GJB7
+  ## 410           5 179250987                T                A         SQSTM1
+  ## 411           5 140027435                C                T        MIR3655
+  ## 412           5 114860106                T                C          FEM1C
+  ## 413           5 111755670               GG                G   EPB41L4A-AS2
+  ## 414           1 113661918                C                T          LRIG2
+  ## 415           3  46718333                C                A         ALS2CL
+  ## 416           2 186603611                C                T          FSIP2
+  ## 417           9  33796693             GGAG                G          PRSS3
+  ## 418          12  49222518                C                T         CACNB3
+  ## 419          17   4457510                C                G        MYBBP1A
+  ## 420           2  37255917                G                A        HEATR5B
+  ## 421          19  44622458                C                T         ZNF225
+  ## 422          19  10676491                C                T           KRI1
+  ## 423          19   9085146                G                C          MUC16
+  ## 424          19   9069958                G                A          MUC16
+  ## 425          19   9058351                G                A          MUC16
+  ## 426          19   9058340                C                T          MUC16
+  ## 427          19   9054279                G                C          MUC16
+  ## 428          19   6183048                A                G         ACSBG2
+  ## 429          13  40254109                T               TT           COG6
+  ## 430          12 104081983                G                T          STAB2
+  ## 431          11  57070265                C                T       TNKS1BP1
+  ## 432          10  97748105             AACA                A         CC2D2B
+  ## 433          17  79426077                C                T  RP11-1055B8.7
+  ## 434           4  74450890                C                G         RASSF6
+  ## 435           3  75788178                T                C         ZNF717
+  ## 436          16  67986291                G                A        SLC12A4
+  ## 437           3 158537431               TA                T          MFSD1
+  ## 438          14  52781513                T                G         PTGER2
+  ## 439           9  13188803                C                T           MPDZ
+  ## 440          19  47768205                T                G          CCDC9
+  ## 441          14  50117066                A                G          POLE2
+  ## 442          10  21785670               CC                C         CASC10
+  ## 443           7 142651354                G                A            KEL
+  ## 444           5 178566913                T                G        ADAMTS2
+  ## 445           1 243434292                A                G        SDCCAG8
+  ## 446           3 183952451                G                A         VWA5B2
+  ## 447           1  38265768                A                C         MANEAL
+  ## 448           8  17731935                T                C           FGL1
+  ## 449          14  24878171                C                T         NYNRIN
+  ## 450           7 103138521                T                G           RELN
+  ## 451           8 144124511                C              CCG        C8orf31
+  ## 452           6  13283771                A                C        PHACTR1
+  ## 453           1 111968024                A                C          OVGP1
+  ## 454           3  14708976                A                C        CCDC174
+  ## 455          19  36269270                C                G       ARHGAP33
+  ## 456          12   7510040                G                C        CD163L1
+  ## 457           1  22188299                A                C          HSPG2
+  ## 458          19   1008644                G                C         GRIN3B
+  ## 459          19    504745                C                T        MADCAM1
+  ## 460          17  43323384                A                G          FMNL1
+  ## 461          17   3599205                A                T          P2RX5
+  ## 462          16  90161966               TT                T        TUBB8P7
+  ## 463          10 123971121                C                A          TACC2
+  ## 464          10 123970690                C                G          TACC2
+  ## 465          10 123845937                C                A          TACC2
+  ## 466          10 116417800                G                A         ABLIM1
+  ## 467          10 105202091                G                T         PDCD11
+  ## 468          10 103900991                T                C          PPRC1
+  ## 469          10  74114714                A                C        DNAJB12
+  ## 470           9 100616733                C             CGCC          FOXE1
+  ## 471           6  71234864                C                G        FAM135A
+  ## 472           6  43100231                C                T           PTK7
+  ## 473          19  44376900                T                G         ZNF404
+  ## 474           6   7386065                G                T          CAGE1
+  ## 475           5  10761137                T                G            DAP
+  ## 476           4   4199548                C                G          OTOP1
+  ## 477           3  48716065                G                A        NCKIPSD
+  ## 478           2 215593522                T                C          BARD1
+  ## 479           2 190320091                A                G          WDR75
+  ## 480           2 179554549                G                C            TTN
+  ## 481           1 235564813                G                A           TBCE
+  ## 482           1 231830492                C                T          DISC1
+  ## 483           1  62190770                C                T          TM2D1
+  ## 484           3 125726032                G                A        SLC41A3
+  ## 485          19  55858768                T                G       SUV420H2
+  ## 486          19  46915114                A                C          CCDC8
+  ## 487          19   7032880                A                G         MBD3L5
+  ## 488          19   4499647                G                A        HDGFRP2
+  ## 489          19   4499642                G                A        HDGFRP2
+  ## 490           1 156255775                G                A         TMEM79
+  ## 491           2 167322405                G                C          SCN7A
+  ## 492           9 139305139                G                C          PMPCA
+  ## 493          10   7601824                G                T          ITIH5
+  ## 494          17   3582878                C                T          P2RX5
+  ## 495           9 100116970                A                G        CCDC180
+  ## 496           9  96054801                G                A           WNK2
+  ## 497           9  94484868                A                G           ROR2
+  ## 498           9  70428263                C                G        FOXD4L4
+  ## 499           9  70428259                T                G        FOXD4L4
+  ## 500           9  43876136                A                T       CNTNAP3B
+  ## 501           8  24774812                G                A           NEFM
+  ## 502          11  62569106                A              ACA           NXF1
+  ## 503           4 191003270                C                A         DUX4L4
+  ## 504           4 191003258                A                C         DUX4L4
+  ## 505           4  37357982                C                T       KIAA1239
+  ## 506           3  40528359                G                C         ZNF619
+  ## 507           3  30819668                T               TT          GADL1
+  ## 508           9 107456995                T                A         OR13D1
+  ## 509           1 152188586                C                T           HRNR
+  ## 510          19  17954220                T                G           JAK3
+  ## 511           2 152544153                T                C            NEB
+  ## 512          16  70497175                G                T            FUK
+  ## 513          16  69143293                C                T           HAS3
+  ## 514          16  66860418                G                C           NAE1
+  ## 515          16  28468046                G                C         NPIPB7
+  ## 516          12 133049776                C                G           MUC8
+  ## 517          10 106118294                G                T        CCDC147
+  ## 518          10 105928513                G                A          WDR96
+  ## 519          10  98820437                T                A          SLIT1
+  ## 520          10  90574981               GG                G           LIPM
+  ## 521          10  81465816                C                T         NUTM2B
+  ## 522          10  61830584                T                C           ANK3
+  ## 523           9  21187530                T                C          IFNA4
+  ## 524           1  27699672               GG                G           FCN3
+  ## 525           3 100523692                C                G         ABI3BP
+  ## 526           7   5963571                T                A           CCZ1
+  ## 527           7   5963559                G                T           CCZ1
+  ## 528           6  39325116                G                A           KIF6
+  ## 529          19  37239474                G                A         ZNF850
+  ## 530           6  33141933               CC                C        COL11A2
+  ## 531           6  26056361                G                A       HIST1H1C
+  ## 532           1  85406567                G                A         MCOLN2
+  ## 533           3 195506486                C                T           MUC4
+  ## 534           3  48630606                A                G         COL7A1
+  ## 535           3  46480854                G                A            LTF
+  ## 536           1 118535192                G                A         SPAG17
+  ## 537           1  32158399                C                T        COL16A1
+  ## 538          22  25291183             TTCT                T          SGSM1
+  ## 539          22  22673103             TCCT                T       IGLV5-52
+  ## 540          21  45879881                G                T        LRRC3DN
+  ## 541           1 151743735                A                C           OAZ3
+  ## 542          19  16682910                G                T        SLC35E1
+  ## 543          19   1106209                G                A           GPX4
+  ## 544          10  45799066                A               AA         OR13A1
+  ## 545          17  73774871                G                A          H3F3B
+  ## 546          17  39394626                C                G       KRTAP9-8
+  ## 547          17  18630970                G                A        TRIM16L
+  ## 548          17  16675944                C                A       CCDC144A
+  ## 549           2 179600360                A                G            TTN
+  ## 550          11  62343057                C                T           TUT1
+  ## 551          15  32686358                G                T        GOLGA8K
+  ## 552          14  94582825                T                G          IFI27
+  ## 553           9  86909103                C                G        SLC28A3
+  ## 554          13  49076863                C                T         RCBTB2
+  ## 555          16  84031804                C                T         NECAB2
+  ## 556          11  77413223                T                C           RSF1
+  ## 557          16   3740936                G                A          TRAP1
+  ## 558          22  50666409                C                T        TUBGCP6
+  ## 559           9 126144759                G                A        DENND1A
+  ## 560           7  16841410                A                G           AGR2
+  ## 561           7  15725967                G                T          MEOX2
+  ## 562           7   7034872                G                T     AC079804.1
+  ## 563           7   4215466                C                T           SDK1
+  ## 564           6 165706908                G                A       C6orf118
+  ## 565           6 157527529                A                C         ARID1B
+  ## 566           6 154412485                T                C          OPRM1
+  ## 567           6  32497960                C                A       HLA-DRB5
+  ## 568           9 133303763                G                C          HMCN2
+  ## 569           2 237104908                C                G          ASB18
+  ## 570           5 150947891                C                G           FAT2
+  ## 571          19  55331387                C                T        KIR3DL1
+  ## 572           5 122926206                A                G        CSNK1G3
+  ## 573          11  73431883                T                C          RAB6A
+  ## 574           4 140640704                G                A          MAML3
+  ## 575           3 169569410                G                C         LRRC31
+  ## 576           3 122335871                G                C         PARP15
+  ## 577          16  30594521                A                C         ZNF785
+  ## 578           3  98188554                T                C          OR5K1
+  ## 579          11 128843207                G                A       ARHGAP32
+  ## 580          22  44022552                T                C         EFCAB6
+  ## 581           1 248789478              TCT                T         OR2T11
+  ## 582           1 185137464                T                A           SWT1
+  ## 583           1 160651021                G                A           CD48
+  ## 584           1 157504466                T                C          FCRL5
+  ## 585           1 145302745                A                T         NBPF10
+  ## 586           1  22333489                G                A         CELA3A
+  ## 587           2 232325404             CCTC                C            NCL
+  ## 588          17  59560453                C                G           TBX4
+  ## 589          15  82932833                C                A      GOLGA6L18
+  ## 590           9 135704037                T                A            AK8
+  ## 591           5 179201298                C                T          MAML1
+  ## 592          13  41814531                C                T          MTRF1
+  ## 593           6 152129363                A                G           ESR1
+  ## 594           6  43638658             AGAA                A          RSPH9
+  ## 595          10  81058800                G                A          ZMIZ1
+  ## 596           9  86530505                A                T          KIF27
+  ## 597           9  45733796                T                C        FAM27E2
+  ## 598           3 195510614                T                C           MUC4
+  ## 599           3 195510611                G                T           MUC4
+  ## 600           5 112770248                C                T         TSSK1B
+  ## 601           3 101571931                C                A         NFKBIZ
+  ## 602          21  43816130                C                G        TMPRSS3
+  ## 603           2 240702099                G                A     AC093802.1
+  ## 604           1  38155366                G                T       C1orf109
+  ## 605           1  29475307                C                T          SRSF4
+  ## 606           3 129120474                C                T        EFCAB12
+  ## 607          19   7935863                G                T  CTD-3193O13.9
+  ## 608          18  20509340               TT                T          RBBP8
+  ## 609          19  38903583                G                A        RASGRP4
+  ## 610          16  88504775                T                G         ZNF469
+  ## 611           5 176520442                C                A          FGFR4
+  ## 612          16     66573                T                G         WASH4P
+  ## 613          11  18127572                G             GGCG          SAAL1
+  ## 614          19  41594557                G                A        CYP2A13
+  ## 615           7 128412721                G                T         OPN1SW
+  ## 616           3 146318211                G                A         PLSCR5
+  ## 617          10 112341677                T              TTT           SMC3
+  ## 618          10  49376743                A                G         FRMPD2
+  ## 619          12 117289559               AG                A          RNFT2
+  ## 620           2 215646008                T                A          BARD1
+  ## 621           9  43822749                G                A       CNTNAP3B
+  ## 622           7 100635127                C                A          MUC12
+  ## 623           3  47953641                T                A           MAP4
+  ## 624           3  64627587                C                A        ADAMTS9
+  ## 625           7 149535726                T                G         ZNF862
+  ## 626          17  77015642                A                G    C1QTNF1-AS1
+  ## 627           7 131241055                A                G          PODXL
+  ## 628          20  43385001                G                A          RIMS4
+  ## 629           7 100639419                G                A          MUC12
+  ## 630          10   3143740                A                G           PFKP
+  ## 631          15  49882083                C                T        FAM227B
+  ## 632           7 117232223                C                T           CFTR
+  ## 633           1  11710790                C             CGGC          FBXO2
+  ## 634           6  36953921               GG                G          MTCH1
+  ## 635          12  14599918                T               TT         ATF7IP
+  ## 636          17   3195336                A                G          OR3A1
+  ## 637          15  32685721                C             CTTC        GOLGA8K
+  ## 638           3 195506674                A                G           MUC4
+  ## 639           2  72371486                T                G        CYP26B1
+  ## 640           3  52837989                G                A          ITIH3
+  ## 641           1  13645757                G                C       PRAMEF15
+  ## 642           1  41536259                G                A          SCMH1
+  ## 643           9  41323425                G                A      SPATA31A4
+  ## 644          16    818797                G                A           MSLN
+  ## 645          16    320591                C                A          RGS11
+  ## 646          15  23605892             GGAG                G        GOLGA8S
+  ## 647           6 111696171                C                A          REV3L
+  ## 648           6 109286249              TTT                T          ARMC2
+  ## 649          17  73566318                G                T          LLGL2
+  ## 650           3 195513088                T                C           MUC4
+  ## 651           3 195513077                G                A           MUC4
+  ## 652           3 195513076                C                G           MUC4
+  ## 653           3 195512377                G             GATG           MUC4
+  ## 654           3 195509476                A                G           MUC4
+  ## 655           3 195509443                A                G           MUC4
+  ## 656           3 195507905                C                T           MUC4
+  ## 657           3 195506076                C                G           MUC4
+  ## 658           3 140998313                G                A          ACPL2
+  ## 659           1 171251268                T                C           FMO1
+  ## 660           1 171083248                C                T           FMO3
+  ## 661          19  13934269                A                C         ZSWIM4
+  ## 662          17  34522695                A                G         CCL3L3
+  ## 663           6 160966559                G                A            LPA
+  ## 664           8  10467637                T                C          RP1L1
+  ## 665          12 133049800                G               GT           MUC8
+  ## 666          12   6134844                A                G            VWF
+  ## 667           8 110293192               AA                A         NUDCD1
+  ## 668           8  12043032                C                A        FAM86B1
+  ## 669          19   2934694                C                A          ZNF77
+  ## 670           8  10466878                T             TTCT          RP1L1
+  ## 671           1  53537305                G                A           PODN
+  ## 672          17   6349445               CC                C         FAM64A
+  ## 673           1 148754950                G                A         NBPF16
+  ## 674          10 120466994              TCT                T         CACUL1
+  ## 675          22  20708966                T                A        FAM230A
+  ## 676          21  44837495                G                C           SIK1
+  ## 677          19  52394958                T                A         ZNF649
+  ## 678          19  52250222                G                A           FPR1
+  ## 679           3 195506291                C                T           MUC4
+  ## 680           2 238242176                G                C         COL6A3
+  ## 681          19  54972501                C                T          LENG8
+  ## 682          12  52452502                T                G          NR4A1
+  ## 683           4  40440261                C                T          RBM47
+  ## 684          11 114577567                C                T          NXPE2
+  ## 685           9  43129647                G                A      ANKRD20A3
+  ## 686           7  76912065               GG                G        CCDC146
+  ## 687           5 113698645                C             CCGC          KCNN2
+  ## 688           3 195510613                C                T           MUC4
+  ## 689           4 169182043                A                G          DDX60
+  ## 690           4  70361431                C                T         UGT2B4
+  ## 691          12 109536366                C                T            UNG
+  ## 692           1  22033396               AA                A          USP48
+  ## 693          22  37334245                C                T         CSF2RB
+  ## 694          19  37721371                T                G         ZNF383
+  ## 695           4   2673912                C                A        FAM193A
+  ## 696           8 142528502                A                C     AC138647.1
+  ## 697          16  31448086                C                A         ZNF843
+  ## 698           6  24596249                A                C       KIAA0319
+  ## 699          15  91454706                G                C         MAN2A2
+  ## 700          15  90446471                C                T C15orf38-AP3S2
+  ## 701          15  90446471                C                T       C15orf38
+  ## 702           1  40431601                C                T         MFSD2A
+  ## 703          19  56002383                C                A          SSC5D
+  ## 704          10  99221761                C                A          MMS19
+  ## 705          17  80706723             TTGT                T           FN3K
+  ## 706          12  51457720                G                C         CSRNP2
+  ## 707          20   3732298                G                A        HSPA12B
+  ## 708           6  31612095                G                A           BAG6
+  ## 709           7  31697923                T               TT        CCDC129
+  ## 710          16  21414204                G                A         NPIPB3
+  ## 711          16  81942175                A                G          PLCG2
+  ## 712           1 223986383                T                C        TP53BP2
+  ## 713          14 106379089                T                C        IGHD4-4
+  ## 714           9  70177977                G                T        FOXD4L5
+  ## 715          16   3115660                A                G           IL32
+  ## 716           5  36049454                C                G         UGT3A2
+  ## 717          11 118307348                C                T          KMT2A
+  ## 718          20  30610508                A                T          CCM2L
+  ## 719           6  17764896                G                C         KIF13A
+  ## 720           7 156754901                T                G           NOM1
+  ## 721           4 140651609             CTGC                C          MAML3
+  ## 722          17  62856876                C                T       LRRC37A3
+  ## 723          16    820141                G                C          MSLNL
+  ## 724           3 195514570                A                G           MUC4
+  ## 725           3 195514558                T                G           MUC4
+  ## 726           3 195510655                T                G           MUC4
+  ## 727           3 195508475                C                T           MUC4
+  ## 728           3 195506869                C                T           MUC4
+  ## 729           3 195506507                C                T           MUC4
+  ## 730           3 195512412                C                G           MUC4
+  ## 731           3 113114596                C                T          WDR52
+  ## 732          21  47418806                T                C         COL6A1
+  ## 733           2 219130676                T                C           AAMP
+  ## 734           6  30995080                G                C          MUC22
+  ## 735           2 131673915                C                A        ARHGEF4
+  ## 736           8  66621256                A                T          MTFR1
+  ## 737           1 240255582             GCGG                G           FMN2
+  ## 738           1 216246603                C                T          USH2A
+  ## 739           3 195506870                T                C           MUC4
+  ## 740          14  19553436                C                T          POTEG
+  ## 741          21  17198629                G                A          USP25
+  ## 742           7  32623543                G                A           AVL9
+  ## 743           5 139745800                C                G         SLC4A9
+  ## 744          22  38228644                C                T        ANKRD54
+  ## 745          19  43699204                C                A           PSG4
+  ## 746          19  38899459                G                C         FAM98C
+  ## 747          19  10224845                G                A         P2RY11
+  ## 748          19  10079083                G                A         COL5A3
+  ## 749          17  58012664                A                G        RPS6KB1
+  ## 750          19   4552427                C                T         SEMA6B
+  ## 751          19   1233530                T                G       C19orf26
+  ## 752          17   4098694                G                A         ANKFY1
+  ## 753           6 109285509                T                A          ARMC2
+  ## 754          11   1282678                T                G          MUC5B
+  ## 755           1 228539131                C                G          OBSCN
+  ## 756           9 135946594                A                G            CEL
+  ## 757           4 152571525                G                T       FAM160A1
+  ## 758           8  72936152                G                A          TRPA1
+  ## 759           7 150721486                C                A          ATG9B
+  ## 760          11  18291355              AAA                A           SAA1
+  ## 761           5 167881043             GGAG                G           WWC1
+  ## 762           3 195506387                G                T           MUC4
+  ## 763           3 195506185                G                A           MUC4
+  ## 764           3 195506117                G                T           MUC4
+  ## 765           3  56653819               CG                C         CCDC66
+  ## 766           2 240982075                A                G          PRR21
+  ## 767           2 240982047                A                G          PRR21
+  ## 768           2 219924867                G                A            IHH
+  ## 769          12  31604795             AGAA                A        DENND5B
+  ## 770           1 156553233               CC                C          TTC24
+  ## 771           1 201860591                A                G         SHISA4
+  ## 772           1 152277797                C                G            FLG
+  ## 773          19  12297520                A                C         ZNF136
+  ## 774          14 105418127                C                T         AHNAK2
+  ## 775           2   7027135                G                A          RSAD2
+  ## 776           2 128744480                T                C         SAP130
+  ## 777          12  58152351                A                C         MARCH9
+  ## 778           7 100634568                A                G          MUC12
+  ## 779          19  45815163                G                A            CKM
+  ## 780          19  43999676                T                C         PHLDB3
+  ## 781          19  40886704                C                G          HIPK4
+  ## 782           1 148754956                T                G         NBPF16
+  ## 783          19  33878846                C                T           PEPD
+  ## 784          19  33616059                A                C        GPATCH1
+  ## 785          11  60152688                C                G          MS4A7
+  ## 786          19   1470087                T                C           APC2
+  ## 787           5 139422644                A                C           NRG2
+  ## 788          17  42849205                C                G         ADAM11
+  ## 789          12  10241759                C                T         CLEC1A
+  ## 790          10 103577629                C                T          MGEA5
+  ## 791          17  16256718                C                A          CENPV
+  ## 792          19  40890022                T                C          HIPK4
+  ## 793          17    674560                C                T          GLOD4
+  ## 794          16  88798231                T                G         PIEZO1
+  ## 795          16  48685305                C                A     AC007611.1
+  ## 796          16  21415829                C                A         NPIPB3
+  ## 797          16  21414870                G                A         NPIPB3
+  ## 798           2  71825708                G                A           DYSF
+  ## 799           3 195508500                G                C           MUC4
+  ## 800           6  29625050             CTCC                C            MOG
+  ## 801           2  97482681                C                G          CNNM3
+  ## 802           3  32030680                G                C         ZNF860
+  ## 803          12 121883173                T                C          KDM2B
+  ## 804           3 195510299                T                C           MUC4
+  ## 805          12  57111947               TG                T           NACA
+  ## 806          11  65487412                C                T       RNASEH2C
+  ## 807          20  31659952                G                A         BPIFB3
+  ## 808          11 119992681                G                A         TRIM29
+  ## 809           1 204589057                C                T          LRRN2
+  ## 810          15  60745776                T                C          NARG2
+  ## 811           3  53839053                G                A        CACNA1D
+  ## 812          10     93576                C                A          TUBB8
+  ## 813           9 114659496                A                G           UGCG
+  ## 814           2 113943012                A                G           PSD4
+  ## 815           9  43129615                C                A      ANKRD20A3
+  ## 816           8 145581999                A                C          FBXL6
+  ## 817           8 145534886                T                G           HSF1
+  ## 818           3  52414073               CC                C          DNAH1
+  ## 819           8  18725487                T                C           PSD3
+  ## 820           8 139658913                G                C        COL22A1
+  ## 821          11  18195252                C                T        MRGPRX4
+  ## 822           8  95160964               TT                T          CDH17
+  ## 823          13  19752540              AAA                A         TUBA3C
+  ## 824          17   7251713                C                T          ACAP1
+  ## 825           7 138595985                T                A       KIAA1549
+  ## 826           7  99818084                C                A          PVRIG
+  ## 827           5 147805208                G                A         FBXO38
+  ## 828           3  56653818                A                C         CCDC66
+  ## 829           8  70981894                G                A         PRDM14
+  ## 830          16  57822523                G                A          KIFC3
+  ## 831          12 133049794                G                A           MUC8
+  ## 832          14  39818128                G                C         CTAGE5
+  ## 833          10  38122026                T                A         ZNF248
+  ## 834           3 195506530                C                G           MUC4
+  ## 835           3 195506522                C                A           MUC4
+  ## 836          12  53590542                G                T          ITGB7
+  ## 837           7 155301698                G                A          CNPY1
+  ## 838          10 104121574                C                T           GBF1
+  ## 839           3 195510358                G                T           MUC4
+  ## 840          10  19641230                C                T         MALRD1
+  ## 841           4 129867228                C                T          SCLT1
+  ## 842           1   1290917                G                C          MXRA8
+  ## 843          11  77920562                C                T          USP35
+  ## 844          15  69714068                A                G          KIF23
+  ## 845           1  12953156                G                A       PRAMEF10
+  ## 846           7 100549493                C                T          MUC3A
+  ## 847          17   7697615                G                A          DNAH2
+  ## 848           1 146400208                A                C         NBPF12
+  ## 849           5  35740278               TT                T          SPEF2
+  ## 850           1 154938871                C                T           SHC1
+  ## 851           1 152082145                A                G           TCHH
+  ## 852           1   2435353                C                A          PLCH2
+  ## 853          22  21562464                G                A           GGT2
+  ## 854          19  40424269                C                T          FCGBP
+  ## 855           3 195506905                A                G           MUC4
+  ## 856          13  79946071                T               TT          RBM26
+  ## 857          12 133050602                A                G           MUC8
+  ## 858          14  24646413                G             GAAG           REC8
+  ## 859           3  38948850                C                T     AC116038.1
+  ## 860          19   3531983                A                C           FZR1
+  ## 861          12 108943074                A                C          SART3
+  ## 862          12 102117558                G                T          CHPT1
+  ## 863          12  58174137                C                G       METTL21B
+  ## 864          15  75632073                T                G         COMMD4
+  ## 865          12  55688833                G                A          OR6C6
+  ## 866          11 108043045                A                T           NPAT
+  ## 867          12  26383963                G                A           SSPN
+  ## 868           6  84896315             TCTT                T       KIAA1009
+  ## 869          11  88845966                C                T     AP001482.1
+  ## 870          19  41355738                C                G         CYP2A6
+  ## 871          11   4566768                C                G         OR52M1
+  ## 872          10  51225281                C                G          AGAP8
+  ## 873           1  34190951                C                G          CSMD2
+  ## 874           2 118588196                G                A          DDX18
+  ## 875           6  43485114                A                G         POLR1C
+  ## 876          10     93577                T                A          TUBB8
+  ## 877           5  41150106                C                T             C6
+  ## 878           8  27737199                C                T         SCARA5
+  ## 879           3 195514559                G                T           MUC4
+  ## 880           4   1803162                G                A          FGFR3
+  ## 881          11 111958677                A                G           SDHD
+  ## 882          22  22556577                G                T      IGLV11-55
+  ## 883           3 195510610                A                G           MUC4
+  ## 884          17  44060841                T                G           MAPT
+  ## 885           3 195510310                T                G           MUC4
+  ## 886           3 195509345                C                T           MUC4
+  ## 887           3 195507262                T                G           MUC4
+  ## 888           7  76891535                C                T        CCDC146
+  ## 889          10  94409586                T                A          KIF11
+  ## 890          15  82637334                T                C      GOLGA6L10
+  ## 891          19  35739849               CC                C            LSR
+  ## 892           3  50379974                G                A        ZMYND10
+  ## 893           2  10050890                C                A          TAF1B
+  ## 894           2  90043637                A                G      IGKV2D-24
+  ## 895           1  12939476                G                C        PRAMEF4
+  ## 896           1 162762655                A                G        HSD17B7
+  ## 897           1 148009509                C                T         NBPF14
+  ## 898           1 148009487                T                C         NBPF14
+  ## 899           1 148009468                C                G         NBPF14
+  ## 900           1 145330748                A                C         NBPF10
+  ## 901          11 111780950                G                T          CRYAB
+  ## 902          16  69364992                G                A           COG8
+  ## 903           2 108460116                G                A          RGPD4
+  ## 904           3  66023664                G                T          MAGI1
+  ## 905          17  41121211                C                T        PTGES3L
+  ## 906          17  41121210              GCG                G        PTGES3L
+  ## 907           3 183882589                C                T           DVL3
+  ## 908          13  24330743                C                T          MIPEP
+  ## 909           9 131708504                T                C           DOLK
+  ## 910           6 107361297                T                A       C6orf203
+  ## 911           2 233712247             CGCC                C         GIGYF2
+  ## 912          20   3640641                G                C          GFRA4
+  ## 913           3 195506051                G                A           MUC4
+  ## 914          12  31648735               AA                A        DENND5B
+  ## 915           1 153507176                C                T         S100A6
+  ## 916           3 112991481                C                T            BOC
+  ## 917           1 186276284             CTCC                C           PRG4
+  ## 918           9 136645059                G                A           VAV2
+  ## 919           7 128370027                G                A        FAM71F1
+  ## 920          10 134884584                G                A         GPR123
+  ## 921          19  53268990                C                G         ZNF600
+  ## 922           4  16008270                C                T          PROM1
+  ## 923           1 110031067                A                C        ATXN7L2
+  ## 924           7  97841812                C                T        BHLHA15
+  ## 925          12  52942001                G                A          KRT71
+  ## 926           7 131241058                G                A          PODXL
+  ## 927          15  66857613                A                G           LCTL
+  ## 928          12  92818773                C                T          CLLU1
+  ## 929          20  32358096                C                T         ZNF341
+  ## 930           1 148754929                C                A         NBPF16
+  ## 931          14  96953278                T                C            AK7
+  ## 932           1   2433636                C                T          PLCH2
+  ## 933          12  26807064               AT                A          ITPR2
+  ## 934           7  73787370                A                C          CLIP2
+  ## 935           1 247615148                T                C         OR2B11
+  ## 936          16  90095597                T                C        C16orf3
+  ## 937          17  18396068                T                G        LGALS9C
+  ## 938           5 145979873                C                T        PPP2R2B
+  ## 939           2  89999277                T                C      IGKV2D-28
+  ## 940           7 102111925                C                T        MIR4467
+  ## 941          11 126162666                G                A          TIRAP
+  ## 942          18   3164323                C                T          MYOM1
+  ## 943          19   8434123                G                C        ANGPTL4
+  ## 944           3 195511208                T                G           MUC4
+  ## 945          17  38519546                C                G  CTD-2267D19.3
+  ## 946           1  12953271                T                A       PRAMEF10
+  ## 947          22  45792321                C                A          SMC1B
+  ## 948           9  17457519               AA                A          CNTLN
+  ## 949           3 195514687                G                T           MUC4
+  ## 950          20  34078517                G                A         CEP250
+  ## 951           5  90052865                C                G          GPR98
+  ## 952          19  50003820                A              AGA    hsa-mir-150
+  ## 953          14  91739076                G                C        CCDC88C
+  ## 954          12 109949025                G                A          UBE3B
+  ## 955           3  52020630                A                G           ACY1
+  ## 956          15  81558093                A                G           IL16
+  ## 957          19  54744182                A                T         LILRA6
+  ## 958          17  40318422                G                A          KCNH4
+  ## 959          20   3674309                C                T        SIGLEC1
+  ## 960           2  37480321                T               TT          PRKD3
+  ## 961          17  57644131                C                T          DHX40
+  ## 962          11 104897720               CC                C          CASP1
+  ## 963           9  38611284                G                A       ANKRD18A
+  ## 964           8 144511980             GTGG                G           MAFA
+  ## 965          16  72993515                G                A          ZFHX3
+  ## 966          15  82637293                A                G      GOLGA6L10
+  ## 967           3  46574357                T                G          LRRC2
+  ## 968           5   6377369                G               GG          MED10
+  ## 969          21  19653353               TT                T       TMPRSS15
+  ## 970          22  42321451                G                A      TNFRSF13C
+  ## 971          19  52097568                A               AA     AC018755.1
+  ## 972           4  79462014                T                A          FRAS1
+  ## 973           3  14106202                G                A          TPRXL
+  ## 974           2  88926751             CAGC                C        EIF2AK3
+  ## 975          16  21848694                T                A         NPIPB4
+  ## 976           1  35580285             AATA                A          ZMYM1
+  ## 977          19  49573364             GAGG                G          KCNA7
+  ## 978           7  98507898                G                A          TRRAP
+  ## 979           2 158115924                C                T         GALNT5
+  ## 980          19  10671026                C                A           KRI1
+  ## 981          19  10657572                C                T          ATG4D
+  ## 982          13  28959073                C                T           FLT1
+  ## 983           8 139701173                T                G        COL22A1
+  ## 984          17   9596450                G                A          USP43
+  ## 985           1  11839852               TT                T       C1orf167
+  ## 986           1  24780535               TT                T         NIPAL3
+  ## 987           7 140266999                G                A        DENND2A
+  ## 988           2 186618487               AC                A          FSIP2
+  ## 989          12   7086296                C                A         LPCAT3
+  ## 990           4  68441211                C                A          STAP1
+  ## 991          12 105582100                T                C          APPL2
+  ## 992           4  48546796                A                G           FRYL
+  ## 993           3  44803076                C                T       KIAA1143
+  ## 994           3  42680854                A                G           NKTR
+  ## 995           3 195505945                A                G           MUC4
+  ## 996           6  74496994                T                G          CD109
+  ## 997          10  75255613                G                T         PPP3CB
+  ## 998           2  10050889                A                T          TAF1B
+  ## 999           3 158537430               TT                T          MFSD1
+  ## 1000         22  42910722                G                A          RRP7A
+  ## 1001         11 108121787                G                A            ATM
+  ## 1002          3 183493769             GAGG                G         YEATS2
+  ## 1003          7  97861243                T                C         TECPR1
+  ## 1004          6 101110420                C                T          ASCC3
+  ## 1005         17  39642661             GGAG                G          KRT36
+  ## 1006          6  27791979                A               AA       HIST1H4J
+  ## 1007         14  31858073                T                C        HEATR5A
+  ## 1008         17  72363858               CC                C         GPR142
+  ## 1009         11  17663747                G                A           OTOG
+  ## 1010         10 105944769                C                T          WDR96
+  ## 1011         10  98105840                G                A         OPALIN
+  ## 1012          9 124083642                C                T            GSN
+  ## 1013          7   5998617                T                C        RSPH10B
+  ## 1014         15  33359208                T                C           FMN1
+  ## 1015          7 103159772                G                A           RELN
+  ## 1016          1 223962552                T                C          CAPN2
+  ## 1017          7 100648604                A                T          MUC12
+  ## 1018         12 123214372                G                A          HCAR1
+  ## 1019          1 178745811               TT                T        RALGPS2
+  ## 1020          1  46290240                A                G          MAST2
+  ## 1021          1  36096870                C                T          PSMB2
+  ## 1022          8 144522386                T             TTTG          ZC3H3
+  ## 1023         19  14910445             GAAG                G          OR7C1
+  ## 1024          1 148754927                A                T         NBPF16
+  ## 1025         17  18194242                C                T          TOP3A
+  ## 1026         10  81901913                G                A          PLAC9
+  ## 1027          4   8605841                G                A            CPZ
+  ## 1028          9 119491316                T                C          ASTN2
+  ## 1029         19  52395150                T                C         ZNF649
+  ## 1030          3  38101313                G                A          DLEC1
+  ## 1031          9 135946948                T                G            CEL
+  ## 1032         11   5631776                G                T          TRIM6
+  ## 1033         11   5631776                G                T   TRIM6-TRIM34
+  ## 1034         20  32245789                T                C         NECAB3
+  ## 1035         12    980497                A                G           WNK1
+  ## 1036          4  28372346                A                C   RP11-180C1.1
+  ## 1037         12 125621418                C                G           AACS
+  ## 1038          9  96070676                C                T           WNK2
+  ## 1039          2 152695896                A                G         CACNB4
+  ## 1040          1 225156549                G                A         DNAH14
+  ## 1041          3  38355325                G                A       SLC22A14
+  ## 1042          1  22895820                G                A          EPHA8
+  ## 1043         16  82875781                A              ACG     AC099506.1
+  ## 1044         19  10748382                G                C        SLC44A2
+  ## 1045         10  55626625                G                A         PCDH15
+  ## 1046          3  39148995                C                T        GORASP1
+  ## 1047          2 220197294               GG                G         RESP18
+  ## 1048          9 139101101                G                A          QSOX2
+  ## 1049          3  52382920                T                C          DNAH1
+  ## 1050         12    662695                C                T       B4GALNT3
+  ## 1051          5  74981153                G                A           POC5
+  ## 1052          3 119422069                G                C         MAATS1
+  ## 1053         17  38978767                C                T          KRT10
+  ## 1054         21  47549202                C                T         COL6A2
+  ## 1055          3 195506516                T                A           MUC4
+  ## 1056          8 121174812                C                A        COL14A1
+  ## 1057         17   6928049                G             GCAG          BCL6B
+  ## 1058          3 113329939                A                G          SIDT1
+  ## 1059          7 100634901                G                A          MUC12
+  ## 1060         17  65665619                T                C        PITPNC1
+  ## 1061          2 179730571                G                T        CCDC141
+  ## 1062          1  13695625                G                T       PRAMEF19
+  ## 1063         17  76235126                T                G        TMEM235
+  ## 1064          2   7154834               TT                T        RNF144A
+  ## 1065         12  49314978               AA                A         CCDC65
+  ## 1066         14  22591990                C               CC       TRAV26-1
+  ## 1067          3 195506692                C                G           MUC4
+  ## 1068         14 105414939                G                T         AHNAK2
+  ## 1069          2 166032777             TTAT                T          SCN3A
+  ## 1070          3  25792697                C                A          NGLY1
+  ## 1071         16   2580531                C                G         AMDHD2
+  ## 1072          8  19263328                C                G     CSGALNACT1
+  ## 1073         14  94120117                T                G          UNC79
+  ## 1074         10 129845730                C                T          PTPRE
+  ## 1075          1 148754914                A                G         NBPF16
+  ## 1076         19  56466624                G                A          NLRP8
+  ## 1077         11  89771855              TTT                T        TRIM49C
+  ## 1078          7 100695234                C                T          MUC17
+  ## 1079         12  58127961                C                T          AGAP2
+  ## 1080         19  40367831                T                G          FCGBP
+  ## 1081          8  41798866                G                A          KAT6A
+  ## 1082          7 123267186               GG                G          ASB15
+  ## 1083          7 105279049                G                A        ATXN7L1
+  ## 1084          5 140773791                A                G        PCDHGA8
+  ## 1085         10 103340014                G                A           POLL
+  ## 1086          8  33451084                C                T         DUSP26
+  ## 1087         16   2283475                G                C           E4F1
+  ## 1088          3  49694086                G                A            BSN
+  ## 1089         10  88451649                A                G           LDB3
+  ## 1090         17  20770017                C                T      CCDC144NL
+  ## 1091         18  30350987                C                T     AC012123.1
+  ## 1092         12    974269                T                A           WNK1
+  ## 1093          3 113063450                G                A          WDR52
+  ## 1094          3 195506315                T                C           MUC4
+  ## 1095         13  32907042                C                T          BRCA2
+  ## 1096          6  32629237                A                G       HLA-DQB1
+  ## 1097          7  45123263                T                G          NACAD
+  ## 1098         20  17950556             TTCT                T          MGME1
+  ## 1099         10  88703219                G                A          MMRN2
+  ## 1100         19  50365370                G                A           PNKP
+  ## 1101         19  48544822                G                C          CABP5
+  ## 1102          9 114132881                T                C       KIAA0368
+  ## 1103          1  24554451                C                A     AL590683.1
+  ## 1104          1  12887658                C                A       PRAMEF11
+  ## 1105          3 195506533                C                A           MUC4
+  ## 1106         13  41341137                G                A         MRPS31
+  ## 1107         22  37603326                C                T          SSTR3
+  ## 1108          1  12887416                A                C       PRAMEF11
+  ## 1109          4  88047328                C                T           AFF1
+  ## 1110          5 118183865                G                A          DTWD2
+  ## 1111          4  90844311                C                T          MMRN1
+  ## 1112         20  44838973                T                G          CDH22
+  ## 1113          2  27346928                C                A          ABHD1
+  ## 1114         12  50513947                C                T          COX14
+  ## 1115          2 153415248                C               CC          FMNL2
+  ## 1116          3 195510302                C                G           MUC4
+  ## 1117          6  12037953               TT                T         HIVEP1
+  ## 1118          1 161018268                T                C       ARHGAP30
+  ## 1119         22  44583650                C                T          PARVG
+  ## 1120         14  31364948                A                G          STRN3
+  ## 1121         17   4856086               CC                C           ENO3
+  ## 1122          5 145477767                C                T        PLAC8L1
+  ## 1123         16  77769807                G                A          NUDT7
+  ## 1124         21  46900701                G                A        COL18A1
+  ## 1125          5  74807615                A                C       COL4A3BP
+  ## 1126         16  67686233             GAAG                G          RLTPR
+  ## 1127          9  78790138                A                G          PCSK5
+  ## 1128         11 125301207             GGAG                G         PKNOX2
+  ## 1129          6 170871039                A             AGCA            TBP
+  ## 1130         17  77705100                A                G          ENPP7
+  ## 1131          5 139743342                G                A         SLC4A9
+  ## 1132          3  49321577                G                C           USP4
+  ## 1133         19   9067066                G                A          MUC16
+  ## 1134          6  32489757                C                G       HLA-DRB5
+  ## 1135          9 113189895                G                A          SVEP1
+  ## 1136         22  46685754                C                T          TTC38
+  ## 1137         21  38092257               AA                A           SIM2
+  ## 1138          4 159782494                A                G          FNIP2
+  ## 1139          9  96081433                C                T       C9orf129
+  ## 1140         19  42891400                G                A           CNFN
+  ## 1141         14  37050561                A                C         NKX2-8
+  ## 1142          9  46390448                G                T        FAM27D1
+  ## 1143          6  30995078                G                A          MUC22
+  ## 1144          3  36873206                T                C         TRANK1
+  ## 1145          3 195510601                A                G           MUC4
+  ## 1146         19   4298238                C                T         TMIGD2
+  ## 1147         14  76524980               TT                T          IFT43
+  ## 1148          9 100080823                C                G        CCDC180
+  ## 1149          5 175477677                T                C  RP11-826N14.2
+  ## 1150         13  70293719               AA                A          KLHL1
+  ## 1151          3  10280678                G                C          IRAK2
+  ## 1152         17  74270190                C                A         QRICH2
+  ## 1153         20  34116056               CC                C      C20orf173
+  ## 1154         16  70913663                G                T          HYDIN
+  ## 1155         16  72821301                G                A          ZFHX3
+  ## 1156          5 140798879                G                C        PCDHGB7
+  ## 1157          9  67935868                G                A      ANKRD20A1
+  ## 1158         10 105807928                T                C         MIR936
+  ## 1159         20  21492686                G                T         NKX2-2
+  ## 1160          4  71347171                C                T           MUC7
+  ## 1161         19   8436316                G                A        ANGPTL4
+  ## 1162         16  50327355                C                T          ADCY7
+  ## 1163          9  86258357                G                A           IDNK
+  ## 1164         12 118582477                C                T          PEBP1
+  ## 1165         11  55540964                G                T         OR5D13
+  ## 1166          8 145741401                C                T         RECQL4
+  ## 1167          3  42166995                G                A          TRAK1
+  ## 1168          3  44636650                G                A         ZNF660
+  ## 1169         10   5255003                G                A         AKR1C4
+  ## 1170          2 113147238                A                G          RGPD8
+  ## 1171         15  43621136                T                C          LCMT2
+  ## 1172          3 195514471                A                G           MUC4
+  ## 1173          5 177159036                G                A        FAM153A
+  ## 1174         14  31852854                C                T        HEATR5A
+  ## 1175          2 238244874             CAGC                C         COL6A3
+  ## 1176          2 162089414                A                G           TANK
+  ## 1177          9  41323469                C                T      SPATA31A4
+  ## 1178         21  46875961                G                A        COL18A1
+  ## 1179          2 203500158                G             GCGG        FAM117B
+  ## 1180          6  43252017                C                T          TTBK1
+  ## 1181         14  55650364                C                T         DLGAP5
+  ## 1182          4  69403599                A                G        UGT2B17
+  ## 1183          3 195514572                G                C           MUC4
+  ## 1184         16  84494315                C                T         ATP2C2
+  ## 1185         12  57922164                G                C           MBD6
+  ## 1186          3 195514174                G                A           MUC4
+  ## 1187         17  43008959             AAGA                A         KIF18B
+  ## 1188         11   3819102                T                G          PGAP2
+  ## 1189         11  32674757                A                G         CCDC73
+  ## 1190         11   3249972                C                A         MRGPRE
+  ## 1191          1  85405243                T                A         MCOLN2
+  ## 1192          3 179103351                T               TT           MFN1
+  ## 1193          7 100486793                G                A          UFSP1
+  ## 1194         11   7674358               AT                A        PPFIBP2
+  ## 1195         10 105232984                G                C         CALHM3
+  ## 1196          4   3318517                C                T          RGS12
+  ## 1197          2 186654145                A               AA          FSIP2
+  ## 1198          2 131403826                A                G          POTEJ
+  ## 1199         11  60511258                A                G         MS4A18
+  ## 1200          8  67546801                G                A         VCPIP1
+  ## 1201          7  82764800                G                A           PCLO
+  ## 1202          7 129986089               GG                G           CPA5
+  ## 1203         20  44004194                T                C        TP53TG5
+  ## 1204         12 132402007                G                T           ULK1
+  ## 1205          8  41790786                G                A          KAT6A
+  ## 1206          1 151694626                G                A         RIIAD1
+  ## 1207          1 235324219                G                A          RBM34
+  ## 1208         22  32108471                T                C         PRR14L
+  ## 1209         20  34092213                G                A         CEP250
+  ## 1210          1  43201474                G                C         CLDN19
+  ## 1211          3  28579395                T                C         ZCWPW2
+  ## 1212         19  58966439                T                C        ZNF324B
+  ## 1213         15  60720819                A                C          NARG2
+  ## 1214          6  82461785                C                T         FAM46A
+  ## 1215          1 156212068                T                C          BGLAP
+  ## 1216         19  40376880                T                G          FCGBP
+  ## 1217         11  75140981                G                A         KLHL35
+  ## 1218         18  59936640                T               TT       KIAA1468
+  ## 1219         12  52826909                C                T          KRT75
+  ## 1220         17  20353297                C                A        LGALS9B
+  ## 1221         17  18024794                C                T         MYO15A
+  ## 1222          7 100648048                G                A          MUC12
+  ## 1223         12 122516875                C                T          MLXIP
+  ## 1224          8  11188770                G                T        SLC35G5
+  ## 1225         14 106329465             AGTA                A          IGHJ6
+  ## 1226          4   8613762                G                T            CPZ
+  ## 1227         22  38136941                C                T         TRIOBP
+  ## 1228         21  33954602                G                A    AP000275.65
+  ## 1229         21  33954602                G                A         TCP10L
+  ## 1230          2 242029837                T                A        MTERFD2
+  ## 1231          3 118865767                G                A        C3orf30
+  ## 1232          7  73472000                A                G            ELN
+  ## 1233         10 105928535                C                T          WDR96
+  ## 1234          8 117783994             TTCT                T          UTP23
+  ## 1235          8 110535457              TTT                T        PKHD1L1
+  ## 1236          6 167717457                C                T         UNC93A
+  ## 1237          1 155294666                C                T          RUSC1
+  ## 1238         14  90489420             TGGT                T           TDP1
+  ## 1239          5  70944917                C                G          MCCC2
+  ## 1240          9  21481231                G                C           IFNE
+  ## 1241          7  72756860                C                T          FKBP6
+  ## 1242          1  25655538                G                A            RHD
+  ## 1243         19  51607669                A                G           CTU1
+  ## 1244          4 152681998                G                A         PET112
+  ## 1245          4 151788915                C                T           LRBA
+  ## 1246          4 147858745                C                T          TTC29
+  ## 1247          4 138449982                C                G         PCDH18
+  ## 1248          4  79428704                C                T          FRAS1
+  ## 1249          4  79421055                G                A          FRAS1
+  ## 1250          2  97637722                G                T        FAM178B
+  ## 1251         16  88713533                T                G           CYBA
+  ## 1252          1 185137465                A               AA           SWT1
+  ## 1253          2  39095391                C                A          DHX57
+  ## 1254          8  10464692                A                T          RP1L1
+  ## 1255          2  29293862             GGGG                G        C2orf71
+  ## 1256          2  28865775                G                C           PLB1
+  ## 1257          1 235345115                C                T         ARID4B
+  ## 1258          1 207268822                C                T          C4BPB
+  ## 1259          5 149212298                C                A       PPARGC1B
+  ## 1260          1   8420200                T                G           RERE
+  ## 1261         19    829668                G                T           AZU1
+  ## 1262         10 134733618                C                T          TTC40
+  ## 1263          3 195508478                G                C           MUC4
+  ## 1264         19  36831616                T                A          ZFP14
+  ## 1265          1 235324212                G                A          RBM34
+  ## 1266          3 179082937                G                A           MFN1
+  ## 1267          7  99758088                A                G        GAL3ST4
+  ## 1268         20  25657106                T                C         ZNF337
+  ## 1269          2  10192393                A                G          KLF11
+  ## 1270         16   1265315                G                A        CACNA1H
+  ## 1271          2 178990451               AA                A          RBM45
+  ## 1272         11  64074743                C                T          ESRRA
+  ## 1273         14  92792313                A                G        SLC24A4
+  ## 1274          3  47452833                G                A         PTPN23
+  ## 1275          7 158448959                G                A         NCAPG2
+  ## 1276         11   1009101                T                G          AP2A2
+  ## 1277          8  52384820                A                T          PXDNL
+  ## 1278         16    843067                G                A         CHTF18
+  ## 1279         13  24895209                C                T        C1QTNF9
+  ## 1280         10 111702464                C                T  RP11-451M19.3
+  ## 1281         16  50744565                T                G           NOD2
+  ## 1282         15  65113473                G                A           PIF1
+  ## 1283         19  52918485               GG                G         ZNF528
+  ## 1284         19  36210896                C                G          KMT2B
+  ## 1285         20  23473642                C                A           CST8
+  ## 1286         19  50339548                G                A          MED25
+  ## 1287         19  17405091                C                G          ABHD8
+  ## 1288         17   4851767                G                A           PFN1
+  ## 1289         21  47722008                G             GGTG       C21orf58
+  ## 1290         11  66627157                G                A          LRFN4
+  ## 1291         19  50370404                G                A           PNKP
+  ## 1292          1   6215713                G                A           CHD5
+  ## 1293         19  44981185                T                C         ZNF180
+  ## 1294          5 138728144                G                C          PROB1
+  ## 1295         10  99344668                C                T         PI4K2A
+  ## 1296         10  99344668                C                T          HOGA1
+  ## 1297          6  32486332                C                G       HLA-DRB5
+  ## 1298         19  16630967                T                G          CHERP
+  ## 1299          1  32138335                T                C        COL16A1
+  ## 1300          3  98216885                G                A          OR5K2
+  ## 1301         19  36002711                G                A           DMKN
+  ## 1302          2  44528268               TT                T         SLC3A1
+  ## 1303          6 160560882             TGAT                T        SLC22A1
+  ## 1304         16  21415830                G              GCT         NPIPB3
+  ## 1305          8  38678044                C                A          TACC1
+  ## 1306         19  57089247                A                G         ZNF470
+  ## 1307         11  71733468                A                G          NUMA1
+  ## 1308          2  67626390                A                G          ETAA1
+  ## 1309         19  36430710                G                A          LRFN3
+  ## 1310          1 248813655             GAAG                G         OR2T27
+  ## 1311          5 145509631                C                T           LARS
+  ## 1312         19  50139932                C                T           RRAS
+  ## 1313          7  72717940                C                T          NSUN5
+  ## 1314         14  60483447                C                T          LRRC9
+  ## 1315          6 110536489                C                G          CDC40
+  ## 1316          8  41573337                G                A           ANK1
+  ## 1317          9  33465301                A                C           NOL6
+  ## 1318         11  59945790                C                T         MS4A6A
+  ## 1319         14  95584095                A                C         DICER1
+  ## 1320          6  42236281                A                G         TRERF1
+  ## 1321          6 122752567                T               TT           HSF2
+  ## 1322          6  32489844                C                T       HLA-DRB5
+  ## 1323         16   6366989             TCTT                T         RBFOX1
+  ## 1324          6  33423004                C                G          ZBTB9
+  ## 1325          3  16679432                A                T           DAZL
+  ## 1326         19  54744183                A                G         LILRA6
+  ## 1327         17  39724752                C                A           KRT9
+  ## 1328          6 106543549                A                G          PRDM1
+  ## 1329          2 233399059                G                T          CHRND
+  ## 1330          3  51430436                C                T         RBM15B
+  ## 1331         19   9407518                T                C         ZNF699
+  ## 1332         11  66259215             GGAG                G           DPP3
+  ## 1333          9 114356501                C                A          PTGR1
+  ## 1334         17  34590406                C                G        TBC1D3C
+  ## 1335         15 100269365                T                G         LYSMD4
+  ## 1336          5 146722779                T                C         STK32A
+  ## 1337         19   1487955                G                A          PCSK4
+  ## 1338         13 103520565                A                G     BIVM-ERCC5
+  ## 1339         13 103520565                A                G          ERCC5
+  ## 1340          4 110772922                G                T          LRIT3
+  ## 1341         12 125478410                T             TGCT         BRI3BP
+  ## 1342          6  27218519             CTCC                C         PRSS16
+  ## 1343          4 113538658                T                C        C4orf21
+  ## 1344          1  44070598                C                T          PTPRF
+  ## 1345         19  58514136                C                T  CTD-2368P22.1
+  ## 1346         18   3452002                T                C          TGIF1
+  ## 1347         19  38810700                G                A          KCNK6
+  ## 1348          3  37778407                G                A          ITGA9
+  ## 1349          8 144351610                C                T           GLI4
+  ## 1350          3 112328940               AA                A         CCDC80
+  ## 1351         14  74567851                G                A          LIN52
+  ## 1352         17  33769137                C                T         SLFN13
+  ## 1353         11   1157557                G                C         MUC5AC
+  ## 1354          1 233802497                G                A          KCNK1
+  ## 1355         13  46844703                A                T         LRRC63
+  ## 1356         15  92937321                G                T        ST8SIA2
+  ## 1357         15  28632776                G                T        GOLGA8F
+  ## 1358          5 140256952                G                C        PCDHA12
+  ## 1359         12 122676103                G                A         LRRC43
+  ## 1360          1 230898462                C                T          CAPN9
+  ## 1361          9 115381191                G                A       KIAA1958
+  ## 1362          2 168101767                G                C          XIRP2
+  ## 1363          1 196794681                G                T          CFHR1
+  ## 1364         15  30437034                A             AGAA        GOLGA8T
+  ## 1365         16  89017578                G                A   RP11-830F9.6
+  ## 1366          9 138670290                A                G          KCNT1
+  ## 1367          2 176957932                A                C         HOXD13
+  ## 1368          2 179408940                C                T            TTN
+  ## 1369         22  43950949                G                A         EFCAB6
+  ## 1370         16  90095596                A                G        C16orf3
+  ## 1371          3  48265003                T                C           CAMP
+  ## 1372         12    662412                G                C       B4GALNT3
+  ## 1373         12  15834192                T                C           EPS8
+  ## 1374         19  53344258                C                T         ZNF468
+  ## 1375         12 122255297                G                A         SETD1B
+  ## 1376          8  37607378                T                C         ERLIN2
+  ## 1377         13 103382151                G                A        CCDC168
+  ## 1378         18  70534492                T                G          NETO1
+  ## 1379          9  70176768               AG                A        FOXD4L5
+  ## 1380         22  20708976                G                C        FAM230A
+  ## 1381          3  75788153                C                G         ZNF717
+  ## 1382          6 114292233                G                A          HDAC2
+  ## 1383          5 140751866                G                T        PCDHGB3
+  ## 1384         16  71570827                A                T          CHST4
+  ## 1385          3  52422540                C                G          DNAH1
+  ## 1386         22  21402338                G                C    AC002472.13
+  ## 1387          6  36106657                T                G         MAPK13
+  ## 1388          7 140221699                C                T        DENND2A
+  ## 1389          4 183721502                T                G          TENM3
+  ## 1390          1 146400153                C                T         NBPF12
+  ## 1391          6 160198443                G                T          ACAT2
+  ## 1392          2 187702100                G                T         ZSWIM2
+  ## 1393          4 122604580                A                G          ANXA5
+  ## 1394         18  61390365                T                C      SERPINB11
+  ## 1395          9  40775035                C                T         ZNF658
+  ## 1396         19  53645420                A                C         ZNF347
+  ## 1397         19  53668751                G                A         ZNF665
+  ## 1398          1 145360584                G                A         NBPF10
+  ## 1399          2 160843751               TT                T         PLA2R1
+  ## 1400         14  23302706                C                T         MRPL52
+  ## 1401          8 146112250             TTGT                T         ZNF250
+  ## 1402         10 105921781                G                A          WDR96
+  ## 1403          3 179597878                C                T          PEX5L
+  ## 1404         17  46115123                G               GG          COPZ2
+  ## 1405          1  19564513                G                A           EMC1
+  ## 1406         17  38297455               TT                T          CASC3
+  ## 1407          2 113147666                C                A          RGPD8
+  ## 1408         15  74366893                A                G        GOLGA6A
+  ## 1409          7  92158135                C                T          RBM48
+  ## 1410          3  50290567                G                A          GNAI2
+  ## 1411         15  63075963                T                C           TLN2
+  ## 1412          4   2941327                G                A          NOP14
+  ## 1413         17   4542794                C                G         ALOX15
+  ## 1414          3 183029490                C                T         MCF2L2
+  ## 1415         17  73929118                G                A           FBF1
+  ## 1416         10 105912486                T                G          WDR96
+  ## 1417          3  49050499                G                A           WDR6
+  ## 1418         19   9049085                G                T          MUC16
+  ## 1419         15  42147740                C                T         SPTBN5
+  ## 1420         14  75535990                G                C          ACYP1
+  ## 1421         10  14941164                T                C        DCLRE1C
+  ## 1422          9  26978261                G                A          IFT74
+  ## 1423         11   5153499                T                C         OR52A5
+  ## 1424          1   1407293                G                T         ATAD3B
+  ## 1425         10 115348754             TCTT                T           NRAP
+  ## 1426          3  62306200                G                C        C3orf14
+  ## 1427          3  49343201                T                A           USP4
+  ## 1428          3 112718284               TT                T         GTPBP8
+  ## 1429         11  94759689                G                A          KDM4E
+  ## 1430         19   2248286                T                G          SF3A2
+  ## 1431         15  54919253                T                C         UNC13C
+  ## 1432         17  18167278                G                A          MIEF2
+  ## 1433          9  20944735                G                A          FOCAD
+  ## 1434         12  48189381                G                T          HDAC7
+  ## 1435          1 100618010             CTTC                C         LRRC39
+  ## 1436          3  48266088                T               TT           CAMP
+  ## 1437          2 179399634                C                T            TTN
+  ## 1438         19  36003975                C                A           DMKN
+  ## 1439         12  11214632                A                C        TAS2R46
+  ## 1440          3 195506867                G                C           MUC4
+  ## 1441          1 148754966                C                T         NBPF16
+  ## 1442          2 242012782                G                A          SNED1
+  ## 1443          1 155649287                C                A         YY1AP1
+  ## 1444          9 139716505                A                G          RABL6
+  ## 1445          6  42819873                C                A       GLTSCR1L
+  ## 1446          8  74706353               TT                T          UBE2W
+  ## 1447         17  38563079                C                T          TOP2A
+  ## 1448         19  36211720                G                A          KMT2B
+  ## 1449         17  71364710                C                T           SDK2
+  ## 1450          7 116862976                G                T            ST7
+  ## 1451          6 119234579                T                C           MCM9
+  ## 1452          9 138836945             CCTC                C          UBAC1
+  ## 1453         16   1823391               GG                G           EME2
+  ## 1454          1 152733658                C                A           KPRP
+  ## 1455          8 145066287                T                C          GRINA
+  ## 1456         20  31626754                C                T         BPIFB6
+  ## 1457         20  21337275                T                A           XRN2
+  ## 1458          3  78676694                C                T          ROBO1
+  ## 1459         21  45656861                G                A         ICOSLG
+  ## 1460          6  32151458                G                A           AGER
+  ## 1461          4  71468347             GGAG                G           AMBN
+  ## 1462          5 140719772                A                G        PCDHGA2
+  ## 1463          2 203686202                T                C          ICA1L
+  ## 1464         15  43499436                G                A          EPB42
+  ## 1465          2 241870463                G                A     AC104809.3
+  ## 1466          9 101796827                T               TT        COL15A1
+  ## 1467         12  52994871                G                A          KRT72
+  ## 1468          4  89652583                A               AA         FAM13A
+  ## 1469         16  75018912                C                A          WDR59
+  ## 1470          3  38948852                C                T     AC116038.1
+  ## 1471          2  44176798                T                A         LRPPRC
+  ## 1472         19  49539560                T                C           CGB1
+  ## 1473          2 141773450                T                C          LRP1B
+  ## 1474         10 103827047                C                T           HPS6
+  ## 1475         12 133050181                C                G           MUC8
+  ## 1476         17  41121207             GGGG                G        PTGES3L
+  ## 1477         19   1474934               GG                G       C19orf25
+  ## 1478         12 114837349                C                A           TBX5
+  ## 1479         15  23264153                C                T        GOLGA8I
+  ## 1480         16    570466                G                A      RAB11FIP3
+  ## 1481         19  56127196                G                A         ZNF865
+  ## 1482         16  28354457                G                A         NPIPB6
+  ## 1483         19  38385617             GGAG                G          WDR87
+  ## 1484         13  47285979                G                T          LRCH1
+  ## 1485         13  28866586                C                G           PAN3
+  ## 1486          5 140237857                G                A        PCDHA10
+  ## 1487          1   2434023                C                T          PLCH2
+  ## 1488         16  28468328                T                A         NPIPB7
+  ## 1489          1 197069554                G                C           ASPM
+  ## 1490         12 113823012                C                G          PLBD2
+  ## 1491          8 144991172                G                A           PLEC
+  ## 1492         16  87446534             AGCA                A        ZCCHC14
+  ## 1493          2 220075474                G                A          ABCB6
+  ## 1494          7 141490219                G                A         TAS2R5
+  ## 1495         19  45281265                A                G           CBLC
+  ## 1496          2 242694911                C                T         D2HGDH
+  ## 1497         12 112622338                T                G         HECTD4
+  ## 1498          8 144941133                C                G          EPPK1
+  ## 1499          8  12888713                T                A       KIAA1456
+  ## 1500          1  22923859                C                A          EPHA8
+  ## 1501         20  35696456                T                C           RBL1
+  ## 1502         10 103908380                G                A          PPRC1
+  ## 1503          3 108095355                C                T          HHLA2
+  ## 1504          9  98209430                T                C          PTCH1
+  ## 1505         10 134261416                C                T       C10orf91
+  ## 1506          7  73803525                C                G          CLIP2
+  ## 1507          2 230312133                C                T           DNER
+  ## 1508          3 195506704                T                C           MUC4
+  ## 1509          1  16042725                C                T        PLEKHM2
+  ## 1510          7 100639418                C                A          MUC12
+  ## 1511         15  66025082               AA                A        DENND4A
+  ## 1512          4 157555881                C                A   RP11-171N4.2
+  ## 1513          5  52365931                T              TTT          ITGA2
+  ## 1514          7   8196565                A               AG           ICA1
+  ## 1515         12  13352107                C                A           EMP1
+  ## 1516         11 104897721                C                T          CASP1
+  ## 1517          1 202878242                C                T         KLHL12
+  ## 1518          2 179247229                G                A         OSBPL6
+  ## 1519         15  42138422                T                G        PLA2G4B
+  ## 1520         15  42138422                T                G  JMJD7-PLA2G4B
+  ## 1521         21  47359946                A                G          PCBP3
+  ## 1522          9 138754415                G                A        CAMSAP1
+  ## 1523          1  12953268                C                G       PRAMEF10
+  ## 1524          3  49699168                A                G            BSN
+  ## 1525          2 220082504                C                T          ABCB6
+  ## 1526          7  30492190                G                A           NOD1
+  ## 1527         15  40707126                G                A            IVD
+  ## 1528         19  54725824                C                G         LILRB3
+  ## 1529          8  30702291                C                T          TEX15
+  ## 1530         16   3778363                C                T         CREBBP
+  ## 1531         17  42336715                G                T         SLC4A1
+  ## 1532         16    848748                C                T          GNG13
+  ## 1533         21  47269877                C                T          PCBP3
+  ## 1534          8  10469738                C                T          RP1L1
+  ## 1535          3  75787511                C                A         ZNF717
+  ## 1536          5 140762533                C                A        PCDHGA7
+  ## 1537         19   6468591                C                T        DENND1C
+  ## 1538         10  47909190                A                G         FAM21B
+  ## 1539          3 195509515                T                A           MUC4
+  ## 1540          1  11596552                A                G         PTCHD2
+  ## 1541          1  40769500                G                A         COL9A2
+  ## 1542         19  36002422             CCAC                C           DMKN
+  ## 1543          9 135985773                T                C         RALGDS
+  ## 1544          2 171570748             CAAC                C      LINC01124
+  ## 1545          1  13497626                A                G       PRAMEF16
+  ## 1546          4  24833212                G                C        CCDC149
+  ## 1547         15 100252744                C                A          MEF2A
+  ## 1548          3  58124050                G                A           FLNB
+  ## 1549          1  17326767                C                T        ATP13A2
+  ## 1550         11  68852674                C                A          TPCN2
+  ## 1551         13  46170726                A                G        FAM194B
+  ## 1552         19  35232485                C                T         ZNF181
+  ## 1553          7  97949583                G                A       BAIAP2L1
+  ## 1554         22  44761529                G                A   RP1-32I10.10
+  ## 1555          2 234959642                C                T           SPP2
+  ## 1556          3  33893974                G                T        PDCD6IP
+  ## 1557          3  49160567                G                A          LAMB2
+  ## 1558         12 124810024                C                G          NCOR2
+  ## 1559          3  58090893                G                A           FLNB
+  ## 1560          6  33282922                T                C         ZBTB22
+  ## 1561          3 195603342                G                A           TNK2
+  ## 1562          2 242139600                G                A           ANO7
+  ## 1563         11   1271222             CCAC                C          MUC5B
+  ## 1564          8   6478981                C                T          MCPH1
+  ## 1565         10  31139089                A               AA         ZNF438
+  ## 1566          1 146400095                G                A         NBPF12
+  ## 1567          4   2695585                C                T        FAM193A
+  ## 1568          1  54514343               AA                A         TMEM59
+  ## 1569         11   8496301                G                A          STK33
+  ## 1570         16   2096239                G                A          NTHL1
+  ## 1571         19  35997077                G                C           DMKN
+  ## 1572          3  49738004                G                A         RNF123
+  ## 1573          3 195505955                C                T           MUC4
+  ## 1574         19  51768738               GG                G       SIGLECL1
+  ## 1575          4  79351560                C                T          FRAS1
+  ## 1576          9  67968756                G                A      ANKRD20A1
+  ## 1577          3  46785518                G                A         PRSS45
+  ## 1578          1   1961614                C                T          GABRD
+  ## 1579          3 195508538                C                A           MUC4
+  ## 1580          9 136265533                C                T        C9orf96
+  ## 1581         16  84497310                G                C         ATP2C2
+  ## 1582         10  97983635                C                A           BLNK
+  ## 1583          2 177134362                C                G           MTX2
+  ## 1584          9   2047492                A                C        SMARCA2
+  ## 1585         20  43926614                G                A          MATN4
+  ## 1586          6  75851829                A                C        COL12A1
+  ## 1587          3  52382922                T                C          DNAH1
+  ## 1588         12  56154430                C                A          SARNP
+  ## 1589         12  56154430                C                A   RP11-762I7.5
+  ## 1590          5 138738337                C                T        SPATA24
+  ## 1591          3 195506410                G                A           MUC4
+  ## 1592         12 133050224                A                G           MUC8
+  \end{verbatim}
   
-  \begin{table}
+  Dans cette partie, nous allons détailler les analyses effectuées sur une
+  cohorte de 62 individus présentant le phénotype MMAF pour lesquels nous
+  avons effectués un séquençage WES. Nous avons ainsi pu appliquer notre
+  pipeline d'analyse afin d'appeler et annoter les variants de ces 62
+  individus (\textbf{Figure : }\ref{fig:largemmafcall}).
   
-  \caption{\label{tab:tablegenemmaf1}Tableau des gènes ayant passé l'ensemble des filtres pour la famille MMAF1}
-  \centering
-  \begin{tabular}[t]{l}
-  \hline
-  Gene\\
-  \hline
-  PLA2G4B\\
-  \hline
-  JMJD7-PLA2G4B\\
-  \hline
-  \end{tabular}
-  \end{table}
+  \begin{figure}
   
-  \begin{table}
+  {\centering \includegraphics{thesis_files/figure-latex/largemmafcall-1} 
   
-  \caption{\label{tab:tablegenemmaf2}Tableau des gènes ayant passé l'ensemble des filtres pour la famille MMAF2}
-  \centering
-  \begin{tabular}[t]{l}
-  \hline
-  Gene\\
-  \hline
-  MYH11\\
-  \hline
-  DNAH1\\
-  \hline
-  \end{tabular}
-  \end{table}
+  }
   
-  \begin{table}
+  \caption[Comptage des variants pour chaque individus avec leur génotype et l'impact prédite par VEP]{Comptage des variants pour chaque individus avec leur génotype et l'impact prédite par VEP  :  VEP possède quatre niveaux d'impact pour ses variants : **HIGH** : variant ayant une forte probabilité de causer des dommages sévères à la protéine, **MODERATE** : Variants non-tronquant pouvant tout de même affecté la protéine, **LOW** : variant ayant peu de chance d'alterer la protéine, **MODIFIER** :  Variants affectant les régions non codantes du transcrits et dont l'impact sur la protéine est difficile à prévoir. Chaque barre représente le comptage pour un individus}\label{fig:largemmafcall}
+  \end{figure}
   
-  \caption{\label{tab:tablegenemmaf3}Tableau des gènes ayant passé l'ensemble des filtres pour la famille MMAF3}
-  \centering
-  \begin{tabular}[t]{l}
-  \hline
-  Gene\\
-  \hline
-  WEE2\\
-  \hline
-  PCSK5\\
-  \hline
-  ZFYVE28\\
-  \hline
-  GBP2\\
-  \hline
-  FCGR3A\\
-  \hline
-  \end{tabular}
-  \end{table}
+  Les filtres utilisés ont été les mêmes que ceux détaillés dans l'études
+  des cas familiaux, c'est à dire que seul les variants homozygotes ayant
+  une fréquence \(\le\) 0.01 dans la population générales et n'étant pas
+  observés dans la cohorte contrôle de 63 individus furent conservés. De
+  même, les variants synonymes, impactant la séquences UTR ou chevauchant
+  uniquement des transcrits annotés NMD par VEP on été filtrés. Ainsi, ces
+  différents filtres nous ont permis d'obtenir une liste de 1369 SNVs
+  (entre 1 et 77 différents par patients) et de 211 indels (entre 1 et 11
+  différents par patients) (\textbf{Figure : }\ref{fig:plotvarperrun}).
   
-  \begin{table}
+  \begin{figure}
   
-  \caption{\label{tab:tablegenemmaf4}Tableau des gènes ayant passé l'ensemble des filtres pour la famille MMAF4}
-  \centering
-  \begin{tabular}[t]{l}
-  \hline
-  Gene\\
-  \hline
-  MMP9\\
-  \hline
-  TGIF2\\
-  \hline
-  ZNF469\\
-  \hline
-  HYDIN\\
-  \hline
-  MTSS1L\\
-  \hline
-  CDH23\\
-  \hline
-  CCDC37\\
-  \hline
-  DAPK1\\
-  \hline
-  SEMA5B\\
-  \hline
-  SLC13A3\\
-  \hline
-  TMEM231\\
-  \hline
-  ZNF276\\
-  \hline
-  \end{tabular}
-  \end{table}
+  {\centering \includegraphics{thesis_files/figure-latex/plotvarperrun-1} 
   
-  --\textgreater{}
+  }
   
-  --\textgreater{} --\textgreater{} --\textgreater{} --\textgreater{}
-  --\textgreater{} --\textgreater{} --\textgreater{} --\textgreater{}
+  \caption[Comptage des variants filtrés]{Comptage des variants filtrés  :  **A**: Comptage des SNVs et Indels ayant été filtrés (FILTERED) et ayant passé les filtres (PASS), **B**: Pourcentage des SNVs et indels ayant passé les filtres, **C**: Comptage pour chaque individus du nombre de SNVs et d'indels ayant passé les filtres. Chaque point représente le comptage pour un individus}\label{fig:plotvarperrun}
+  \end{figure}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotpassinggenes-1} 
+  
+  }
+  
+  \caption[Analyse des gènes passant les filtres]{Comptage des variants filtrés  :  **A**: Comptage des SNVs et Indels ayant été filtrés (FILTERED) et ayant passé les filtres (PASS), **B**: Pourcentage des SNVs et indels ayant passé les filtres, **C**: Comptage pour chaque individus du nombre de SNVs et d'indels ayant passé les filtres. Chaque point représente le comptage pour un individus}\label{fig:plotpassinggenes}
+  \end{figure}
   
   \chapter{MutaScript}\label{mutascript}
   

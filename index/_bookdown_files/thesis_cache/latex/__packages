@@ -9,3 +9,4 @@ tidyr
 data.table
 stringi
 scales
+cowplot
