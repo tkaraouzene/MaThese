@@ -1,9 +1,9 @@
 ---
 output:
   word_document: default
+  html_document: default
   pdf_document: default
   classoption: landscape
-  html_document: default
 ---
 # Mise en place d’une stratégie pour l’analyse des données exomiques – application en recherche clinique  
 
@@ -59,7 +59,6 @@ Dans ce chapitre, je détaillerai les résultats de 4 articles dont je suis coau
 
 ```{r all_coding_variants, cache=TRUE}
 
-df_all_coding_variants <- fread("data/all_coding_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE)
 maf_cutoff <- 0.01
 
 rm_var_count <- function(df, coding, ctrl, maf_cutoff) {
@@ -181,25 +180,25 @@ include_graphics(path = "figure/vep_csq.jpg")
 
 4. **Le filtrage des variants** : L'étape de filtrage est extremement importante si l'on souhaite analyser de manière efficace les données provenant de WES. C'est pourquoi elle occupe une place importante dans notre pipeline. L'intégralité des paramètres de cette étape peuvent être modifier par l'utilisateur de sorte à faire correspondre les critères de filtre aux bsoins de l'étude. Afin de rendre son utilisation le plus efficace possibe, nous avons souhaité définir des paramètres par défauts pertinent dans la plupart des étude de séquençage exomique de sorte que à moins que le contraire ne soit spécifié, seul les variants impactant les transcrits codant pour une protéine sont conservés. De même les variants synonymes ou affectant les séquences UTRs sont filtrés ainsi que les variants ayant une fréquence $\ge$ 1% dans les bases dans l'une des bases données (ExAC, ESP6500 ou 1KH). Aussi, pour un phénotype donné, l'ensemble des variants observés chez les individus étudiés présentant un phénotype différent sont de même enlevés de la liste finale.   
 
-\newpage        
+<!-- \newpage         -->
 
 ```{r tabvepcsq}
 
 
-tab.name <- "Liste des conséquences prédites par VEP avec leur description et impact associée (trouver comment la faire tenir"
-
-df_vep_csq <-  fread("data/vep_csq.csv", sep = "\t", header = TRUE, showProgress = FALSE, data.table = FALSE, verbose = FALSE) %>% 
-  select(Consequence = `Display term`,
-         Description = `SO description`,
-         Impact = IMPACT)
-
-kable(df_vep_csq, 
-      caption = tab.name, 
-      booktabs = TRUE)
+# tab.name <- "Liste des conséquences prédites par VEP avec leur description et impact associée (trouver comment la faire tenir"
+# 
+# df_vep_csq <-  fread("data/vep_csq.csv", sep = "\t", header = TRUE, showProgress = FALSE, data.table = FALSE, verbose = FALSE) %>% 
+#   select(Consequence = `Display term`,
+#          Description = `SO description`,
+#          Impact = IMPACT)
+# 
+# kable(df_vep_csq, 
+#       caption = tab.name, 
+#       booktabs = TRUE)
 
 ```
 
-\newpage       
+<!-- \newpage        -->
 
 ### Utilisation de la pipeline dans des cas familiaux :  
 
@@ -207,7 +206,11 @@ kable(df_vep_csq,
 
 ```{r}
 
+run_az_fam <- c("Ghs44","Ghs45")
+run_ff_fam <- c("Ghs113","Ghs117")
 run_mmaf_fam <- c("Ghs56","Ghs58","Ghs62","Ghs130","Ghs63","Ghs119","Ghs59","Ghs60","Ghs61")
+
+run_all_fam <- c(run_az_fam, run_ff_fam, run_mmaf_fam)
 
 df_seq <- data_frame(FAM = c("Az","FF","MMAF1","MMAF2","MMAF3","MMAF4"),
                      NB = c(2,2,2,2,2,3),
@@ -234,975 +237,474 @@ Un récapitulatif des familles et de leur phénotype est disponible dans la tabl
 
 tab.name <- "Tableau recapitulatif des familles séquencées et de leur phénotype"
 
-kable(df_seq, 
+kable(df_seq,
       col.names = c("Familly","Individuals","Phenotype","Year","Plateform","Place"),
-      caption = tab.name, 
-      longtable = TRUE, 
+      caption = tab.name,
+      longtable = TRUE,
       booktabs = TRUE)
 
 ```
 
 #### Resultats des exomes  
 
-##### Résultat de l'alignement  
+##### Résultat de l'alignement  les
 
-
-```{r runstrandness, warning=FALSE}
-
-pair_stat <- fread("data/magic_results/All_Exomes.pair_stats.txt", sep = "\t", data.table = FALSE, header = FALSE) %>% transpose()
-names(pair_stat) <- pair_stat[1,] 
-
-pair_stat <- pair_stat %>% 
-  filter(Run %in% run_mmaf_fam) %>%
-  select(Run, Compatible_pairs, Non_compatible_pairs, `Orphans Any`) %>% 
-  rename(`Compatible` = Compatible_pairs,
-         `Non compatible` = Non_compatible_pairs,
-         Orphans = `Orphans Any`) %>%
-  gather(COMPATIBILITY,N,Compatible:Orphans) %>%
-  mutate(N= as.numeric(N))
-
-```
-
-
-
-L'ensemble de nos exomes ayant été réalisés en *paired-end*, les deux extrémités de chaques fragments sont séquencés créant ainsi deux *reads*. Après avoir aligné indépendemment les deux *ends* d'un même *read*, seul ceux pour lesquels les deux *ends* présentent un alignement "compatible" sont conservés. Un alignement est dit "compatible" lorsque les deux *ends* s'alignent face à face (une sur le *strand* + et l'autre sur le *strand* - et couvrent une zone ne faisant pas plus de 3 fois la taille médiane de l'insert.
-
-```{r plotrunstrandness}
-
-ggplot(pair_stat, aes(COMPATIBILITY, N)) + 
-  geom_boxplot(outlier.size = -1) + 
-  facet_wrap(~COMPATIBILITY, scales = "free")
-
-```
-
-
-
-```{r readfate}
+```{r runstrandness, warning=FALSE, cache=TRUE}
 
 df_read_fate_nb <- fread("data/magic_results/All_Exomes.read_fate.txt", sep = "\t", data.table = FALSE, header = TRUE, drop = c(17:32)) %>% 
   select(-V1, -(Sample:RunId), -contains("entropy"), -contains("but"), -contains("insert")) %>%
   rename(RUN = `# Run`,
-         `1 site` = `Mapped uniquely to 1 genomic site and maximum 1 gene`,
+         `Map to 1 site` = `Mapped uniquely to 1 genomic site and maximum 1 gene`,
          S2 = `Mapped at 2 to 9 sites`,
          S10 = `Rejected because they map to 10 or more sites`) %>% 
   filter(RUN != "All runs") %>%
-  mutate(`2 or more sites`  = S2 + S10) %>% 
+  mutate(`Map to 2 or more sites`  = S2 + S10) %>% 
   select(-S2, -S10) %>% 
-  filter(RUN %in% run_mmaf_fam) %>% 
-  gather(WHAT,NB_OF_READS,`Raw reads`:`2 or more sites`) %>% 
-  mutate(IS_CONSERVED = if_else(WHAT == "1 site", "Yes", "No"))
+  filter(RUN %in% run_all_fam) %>% 
+  gather(QUALITY, NB_OF_READS, `Raw reads`:`Map to 2 or more sites`) 
+
+pair_stat <- fread("data/magic_results/All_Exomes.pair_stats.txt", sep = "\t", data.table = FALSE, header = FALSE) %>% transpose()
+names(pair_stat) <- pair_stat[1,] 
+
+pair_stat <- pair_stat %>%
+  filter(Run %in% run_all_fam) %>%
+  select(RUN = Run, Compatible_pairs, Non_compatible_pairs, `Orphans Any`) %>% 
+  rename(`Compatible` = Compatible_pairs,
+         `Non compatible` = Non_compatible_pairs,
+         Orphans = `Orphans Any`) %>%
+  gather(QUALITY, NB_OF_READS, Compatible:Orphans) %>%
+  mutate(NB_OF_READS = as.numeric(NB_OF_READS)) 
+
+df_reads_summary <- rbind(df_read_fate_nb, pair_stat) %>% 
+  mutate(IS_CONSERVED = if_else((QUALITY == "Raw reads" |
+                                   QUALITY == "Compatible" |
+                                   QUALITY == "Map to 1 site"), "Yes", "No" ))
 
 ```
 
+Pour rappel, l'[alignement]({#lalignement}) consiste à repositionnerl'ensemble des *reads* générés au cours de l'étape de séquençage le long d'un génome de référence. La quantité de *reads* peut varier en fonction de plusieurs paramètres et n'est donc pas éguale pour chaque patient bien que l'ordre de grandeur reste le même exceptés pour les deux frères AZ1 et AZ2 pour lesquels on a près de 3 fois plus de *reads* que pour les autres patients (**Figure : **\@ref(fig:readsselection) - **A**). Ceci peut être expliqué car ces deux patients sont les deux seuls à voir été séquencé au Mount Sinaï Institut or leur protocol d'amplification contient un nombre de cycles de PCR superieur à ceux appliqué au Génopole d'Evry où ont été séquencé les autres patients (**Table :**  \@ref(tab:recapfam)), L'ensemble de nos exomes ayant été réalisés en *paired-end*, les deux extrémités de chaques fragments sont séquencés chaque *end* d'un même *read* peut donc être considéré comme un *read* à part entière. Celle-ci sont ensuite alignées **indépendemment** le long du génome de référence, l'information fournit par le *paired-end* n'est utilisé qu'à *posteriri* en tant que critère qualité. Ainsi, après avoir filtré les *reads* ne s'étant pas aligné sur le génome et le *reads* orphelines (une seule des deux *ends* s'est alignée sur le génome), la "compatibilité entre les deux *ends* d'un même *reads* est analysée. Un *read* est dit "compatible" lorsque les deux *ends* qui le composent s'alignent face à face (une sur le *strand* + et l'autre sur le *strand* -) et couvrent une zone ne faisant pas plus de 3 fois la taille médiane de l'insert. Ici encore, seul les *reads* ayant des *ends* "compatibles" seront conservés. Pour l'ensemble de nos patients, les *reads* compatibles sont environs 10 fois plus important que la somme des *reads* non compatible, orphelins ou non mappés (**Figure : **\@ref(fig:readsselection) - **B**). Suite à cela, le nombre de site auxquels se sont alignés les *reads* est analysé. En effet, certaine zone du génome étant dupliqué, l'une des problématique des *short-reads* est qu'il est possible que ceux-ci s'alignent à plusieurs endroit du génome. Afin d'éviter toute ambiguité, seul ceux s'étant aligné sur un site unique sont conservés pour la suite des analyse. ces *reads* représente entre ... et ... % des *reads* ayant passé les précédents filtres (**Figure : **\@ref(fig:readsselection) - **C**). Les *reads* ayant passé l'ensemble des critères qualité seront ensuite utilisé pour effectué l'appel des variants.     
 
-qsswxfdcsdfgds dfsqfdqfg fdrgsfdgh fdgzrfg fgdg s  
+\newpage
 
-```{r plotreadsfate, fig.cap=fig.info,fig.scap=fig.name,fig.width=6, fig.height=6.5}
+```{r readsselection, fig.cap=fig.info,fig.scap=fig.name,fig.width=6.3, fig.height=6.5, cache=TRUE}
 
-fig.name <- "Résultats du mapping des reads pour chaque Patients"
-fig.description <- "**A** : Cette boite à moustache montre le nombre de *reads* bruts générés pour chaque patients (représentés par les points) au cours de l'étape de séquençage. On constate que ce nombre reste pour chaque patient dans le même ordre de grandeur sauf pour un des frères de la famille AZ  qui contient presque 35 millions de *reads* en plus que la mediane. **B** : Ce diagramme en barre montre le nombre de *reads* correctement allignés pour chaque patients. On peut donc constater que la quasi totalité de *reads* générés ont été correctement allignés pour l'ensemble des patients. **C** : Ces deux boites à moustaches montrent .... On constate que la grande majorité des *reads* ne mappent qu'à un seul site (boite bleue), les autres (boite rouge) seront d'ailleur écartés des analyses à suivre"
+fig.name <- "Processus simplifié du contrôle qualité des *reads*"
+fig.description <- "**A** : Diagramme montrant le nombre de *reads* bruts générés pour chaque patients au cours de l'étape de séquençage. On constate que ce nombre reste pour chaque patient dans le même ordre de grandeur sauf pour les frères AZ1 et AZ2  qui contienent presque 3 fois plus de *reads* que la mediane représentée en bleue. **B** : Ce graphique la distribution pour chaque patient des reads compatibles, incompatibles, orphelins et non mappés. Comme attendu, les reads compatible sont les plus important. Ils sont les seuls à être utilisé dans le reste de l'analyse. **C** : Présentation pour chaque *reads* du nombre de site auxquels ils s'alignent. Seuls les reads s'alignant sur un site unique sont conservés"
 fig.info <- paste0(fig.name, " : ", fig.description)
 
-pA <- ggplot(df_read_fate_nb %>% filter(WHAT == "Raw reads"), aes("", NB_OF_READS)) + 
-geom_boxplot(outlier.size = -1) + 
-  geom_jitter(size = 2, position=position_jitter(0.3)) +
+
+pA <- ggplot(df_reads_summary %>% filter(QUALITY == "Raw reads"), aes(RUN, NB_OF_READS)) + 
+  geom_bar(stat = "identity", aes(fill = IS_CONSERVED)) + 
   xlab("") + 
-  ylab("Nb of raw reads")+ 
-  coord_flip() +
-  theme(axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) 
+  ylab("Nb of raw reads") + 
+  # scale_x_discrete(labels = c("AZ1","AZ2","FF1","FF2","MMAF1.1","MMAF1.2","MMAF2.1","MMAF2.2","MMAF3.1","MMAF3.2","MMAF3.3")) + 
+  scale_fill_manual(values = c("chartreuse3", "grey48"), guide = "none") +
+  geom_hline(col = "blue", aes(yintercept = median(NB_OF_READS))) + 
+  geom_text(data=data.frame(x=0,y=median(df_reads_summary$NB_OF_READS)), col = "blue", x = 12.5, y = 110000000, label = median(df_reads_summary$NB_OF_READS))
 
-pB <- ggplot(df_read_fate_nb %>% filter(WHAT == "Well mapped"), aes(RUN, NB_OF_READS)) + 
-  geom_bar(stat = "identity") +
-  ylab("Well mapped reads") 
-  scale_x_discrete(labels = c("AZ1","AZ2","FF1","FF2","MMAF1.1","MMAF1.2","MMAF2.1","MMAF2.2","MMAF3.1","MMAF3.2","MMAF3.3"))
-
-pC <- ggplot(df_read_fate_nb %>% filter(WHAT != "Well mapped" & WHAT != "Raw reads" & WHAT != "Unmapped" & WHAT != "Rejected by alignment quality filter"), aes(WHAT, NB_OF_READS)) + geom_boxplot(outlier.size = -1, aes(fill = IS_CONSERVED)) + 
-  geom_jitter(size = 2, position=position_jitter(0.3)) +
-  facet_wrap(~WHAT, scales = "free") + 
+pB <- ggplot(df_reads_summary %>% 
+         filter(QUALITY == "Compatible" | 
+                  QUALITY == "Non compatible" |
+                  QUALITY == "Orphans" |
+                  QUALITY == "Unmapped"), aes(QUALITY, NB_OF_READS)) + 
+         geom_boxplot(outlier.size = -1, aes(fill = IS_CONSERVED)) + 
+         geom_jitter(position=position_jitter(0.3)) +
+  facet_wrap(~QUALITY, scales = "free", nrow = 1) + 
   ylab("Nb of reads") +
   xlab("") + 
-  scale_fill_discrete(name = "Conserved reads?") +
+  scale_fill_manual(values = c("grey48", "chartreuse3"), guide = "none") + 
   theme(axis.text.x=element_blank(),
         axis.ticks.x=element_blank())
-  
+
+pC <- ggplot(df_reads_summary %>% 
+               filter(QUALITY == "Map to 1 site" | 
+                        QUALITY == "Map to 2 or more sites"), aes(QUALITY, NB_OF_READS)) + 
+  geom_boxplot(outlier.size = -1, aes(fill = IS_CONSERVED)) + 
+  geom_jitter(position=position_jitter(0.3)) +
+  facet_wrap(~QUALITY, scales = "free", nrow = 1) + 
+  scale_fill_manual(name = "Conserved read ?", values = c("grey48", "chartreuse3")) +
+  ylab("Nb of reads") +
+  xlab("") + 
+  theme(axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        legend.position="bottom") +
+  coord_flip()
+
 row1 <- plot_grid(pA, labels = c("A"))
-plot_grid(row1, pB, pC,labels = c("","B","C"), rel_heights = c(0.5,1,1), ncol = 1)
+plot_grid(row1, pB, pC,labels = c("","B","C"), rel_heights = c(1,.7,.7), ncol = 1)
+
+
 
 ```
 
-
-
-```{r}
-
-```
-
-
-
-
-
-
-
-
-
+\newpage
 
 ##### Résultat de l'appel des variants  
 
+```{r varcall, cache=TRUE} 
+
+call <- function(file, fam, run) {
+
+fread(file, sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
+    gather(RUN, CALL, starts_with("Ghs")) %>% 
+  filter(CALL != "*",
+         CALL != "a",
+         CALL != 1) %>% 
+  mutate(RUN = run,
+         FAM = fam, 
+         TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+         STRAND = if_else(CALL %in% c(2:9), "DS", 
+                          if_else(CALL == 0, "NS", "SS")),
+         CALL = if_else(CALL %in% c(2,"b"),"Heterozygous",
+                        if_else(CALL %in% c(3,"c"), "Homozygous",
+                                if_else(CALL %in% c(4:7,"d","e","f","g","h","i"),"Ambigous call",
+                                                if_else(CALL %in% c(8,9), "Discordant call",
+                                                        if_else(CALL == 0, "NA", paste0("ERROR !!!: ",CALL)))))))
+  
+}
+
+df_call_az1 <- call(file = "data/call_results/call_az1.csv", fam = "AZ", run = "AZ1")
+df_call_az2 <- call(file = "data/call_results/call_az2.csv", fam = "AZ", run = "AZ2")
+df_call_ff1 <- call(file = "data/call_results/call_ff1.csv", fam = "FF", run = "FF1")
+df_call_ff2 <- call(file = "data/call_results/call_ff2.csv", fam = "FF", run = "FF2")
+df_call_mmaf1_1 <- call(file = "data/call_results/call_mmaf1_1.csv", fam = "MMAF1", run = "MMAF1.1")
+df_call_mmaf1_2 <- call(file = "data/call_results/call_mmaf1_2.csv", fam = "MMAF1", run = "MMAF1.2")
+df_call_mmaf2_1 <- call(file = "data/call_results/call_mmaf2_1.csv", fam = "MMAF2", run = "MMAF2.1")
+df_call_mmaf2_2 <- call(file = "data/call_results/call_mmaf2_2.csv", fam = "MMAF2", run = "MMAF2.2")
+df_call_mmaf3_1 <- call(file = "data/call_results/call_mmaf3_1.csv", fam = "MMAF3", run = "MMAF3.1")
+df_call_mmaf3_2 <- call(file = "data/call_results/call_mmaf3_2.csv", fam = "MMAF3", run = "MMAF3.2")
+df_call_mmaf4_1 <- call(file = "data/call_results/call_mmaf4_1.csv", fam = "MMAF4", run = "MMAF4.1")
+df_call_mmaf4_2 <- call(file = "data/call_results/call_mmaf4_2.csv", fam = "MMAF4", run = "MMAF4.2")
+df_call_mmaf4_3 <- call(file = "data/call_results/call_mmaf4_3.csv", fam = "MMAF4", run = "MMAF4.3")
+
+df_call_fam <- rbind(df_call_az1, 
+                       df_call_az2,
+                       df_call_ff1, 
+                       df_call_ff2,
+                       df_call_mmaf1_1,
+                       df_call_mmaf1_2,
+                       df_call_mmaf2_1,
+                       df_call_mmaf2_2,
+                       df_call_mmaf3_1,
+                       df_call_mmaf3_2,
+                       df_call_mmaf4_1,
+                       df_call_mmaf4_2,
+                       df_call_mmaf4_3)
+
+df_strand_all <-  df_call_fam %>%
+  select(RUN, STRAND) %>% 
+  group_by(RUN, STRAND) %>%
+  summarise(N = n()) %>%
+  group_by(RUN) %>%
+  mutate(P = N / sum(N),
+         IS_CONSERVED = if_else(STRAND == "NS","No","Yes"))
+     
+df_concordance_all <- df_call_fam %>%
+  select(RUN, CALL, STRAND) %>%
+  filter(STRAND == "DS") %>% 
+  mutate(CALL = if_else(grepl("zygous", CALL), "Concordant call", CALL)) %>%
+  group_by(RUN, CALL) %>%
+  summarise(N = n()) %>%
+  group_by(RUN) %>%
+  mutate(P = N / sum(N),
+         IS_CONSERVED = if_else(CALL == "Concordant call","Yes","No"))
+
+df_geno_all <- df_call_fam %>%
+  select(RUN, CALL, TYPE) %>%
+  filter(grepl("zygous", CALL)) %>% 
+group_by(RUN, CALL, TYPE) %>%
+  summarise(N = n()) %>% 
+  group_by(RUN) %>%
+  mutate(P = N / sum(N),
+         IS_CONSERVED = if_else(grepl("zygous", CALL),"Yes","No"))
+#   
+# df_call_ff <- fread("data/genotype_plcz.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+#   gather(RUN, CALL, starts_with("Ghs")) %>%
+#   filter(CALL %in% c(2, 3, "b", "c")) %>%
+#   mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+#          STRAND = if_else(CALL %in% c(2, 3), "Both strand", "Single strand"),
+#          GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
+#          RUN = if_else(RUN == "Ghs113", "FF1", "FF2"),
+#          FAM = "FF")
+# 
+# df_call_mmaf1 <- fread("data/genotype_MMAF_fam1.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+#   gather(RUN, CALL, starts_with("Ghs")) %>%
+#   filter(CALL %in% c(2, 3, "b", "c")) %>%
+#   mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+#          STRAND = if_else(CALL %in% c(2, 3), "Both strand", "Single strand"),
+#          GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
+#          RUN = if_else(RUN == "Ghs56", "MM1.1", "MM1.2"),
+#          FAM = "MMAF1")
+# 
+# df_call_mmaf2 <- fread("data/genotype_MMAF_fam2.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+#   gather(RUN, CALL, starts_with("Ghs")) %>%
+#   filter(CALL %in% c(2, 3, "b", "c")) %>%
+#   mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+#          STRAND = if_else(CALL %in% c(2, 3), "Both strand", "Single strand"),
+#          GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
+#          RUN = if_else(RUN == "Ghs62", "MM2.1", "MM2.2"),
+#          FAM = "MMAF2")
+# 
+# df_call_mmaf3 <- fread("data/genotype_MMAF_fam3.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+#   gather(RUN, CALL, starts_with("Ghs")) %>%
+#   filter(CALL %in% c(2, 3, "b", "c")) %>%
+#   mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+#          STRAND = if_else(CALL %in% c(2, 3), "Both strand", "Single strand"),
+#          GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
+#          RUN = if_else(RUN == "Ghs63", "MM3.1", "MM3.2"),
+#          FAM = "MMAF3")
+# 
+# df_call_mmaf4 <- fread("data/genotype_MMAF_fam4.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+#   gather(RUN, CALL, starts_with("Ghs")) %>%
+#   filter(CALL %in% c(2, 3, "b", "c")) %>%
+#   mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
+#          STRAND = if_else(CALL %in% c(2, 3), "Both strand", "Single strand"),
+#          GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
+#          RUN = if_else(RUN == "Ghs59", "MM4.1", 
+#                        if_else(RUN == "Ghs60", "MM4.2", "MM4.3")),
+#          FAM = "MMAF4")
+
+# 
+# df_resume_strand_fam <- df_call_fam %>% 
+#   group_by(STRAND, RUN, FAM) %>% 
+#   summarise(N = n()) %>% 
+#   mutate(IS_CONSERVED = if_else(STRAND == "NS","No","Yes"))
+
+
+
+```
+
+```{r cleancall, include=FALSE, warning=FALSE}
+
+rm(df_call_az1,
+   df_call_az2,
+   df_call_ff1, 
+   df_call_ff2,
+   df_call_mmaf1_1,
+   df_call_mmaf1_2,
+   df_call_mmaf2_1,
+   df_call_mmaf2_2,
+   df_call_mmaf3_1,
+   df_call_mmaf3_2,
+   df_call_mmaf4_1,
+   df_call_mmaf4_2,
+   df_call_mmaf4_3)
+gc()
+
+```
+
+Comme dit précédement, l'appel des variants fait suite à l'alignement et consiste à comparer la séquence d'un individus avec celle d'un génome de référence afin d'en relever les différences. La particularité de notre algorithme d'appel est d'effectuer pour chaque position deux appels indépendents. Le premier sera effectué en utilisant uniquement les *reads forward* et le second le *reads reverse*. Les positions ayant une couverture $\le$ 10 sur **les deux** *strands* seront filtrés (NS). Les autres seront conservés bien que ceux ayant une couverture $\le$ 10 sur **un des deux** *strands* (SS) seront considéré comme de faible qualité et seront leurs interprétations sera plus précotionneuse. Ainsi, chez nos `r ` [TODO nb of patients] entre ... et ... variants sont filtrés car leur couverture est < 10 sur les deux *ends* du *reads* (**Figure : **\@ref(fig:plotvarcall) - **A**). 
+
+Pour les position ayant une couverture $\ge$ 10 sur **les deux** *strands* (DS) les résultats des deux appels sont comparés et seul les appel concordant seront conservés, c'est à dire environs ...% des variants DS. Les appels ambigus et discordants seront filtrés et non considérés dans les analyses en aval (**Figure : **\@ref(fig:plotvarcall) - **B**). 
+
+Dès lors il est intéréssant de noter que bien que les variants *single strand* (SS) soient conservés, on peut s'attendre à ce qu'également ... % de ces variants soient abérents, ceux-ci n'ayant put subir le même contrôle que les SS. Pour l'ensemble des variants ayant passé les premiers filtres, c'est à dire les variants SS et les variants DS avec appels concordants, le génotype est déterminé en fonction du pourcentage de *reads* portant le variant à cette position. Par exemple, si à une position donnée, 0% des *reads* portent un variant, l'individu sera appelé "Homozygote référence", si 50% des *reads* sont portent un variant, l'appel sera "hétérozygote" et si 100% des *reads* portent un variant, l'appel sera "Homozygote variant". Ainsi, pour chaque individu nous avons pu établire une liste de variants avec leur génotype associé (**Figure : **\@ref(fig:plotvarcall) - **C**).    
+
+\newpage
+
+```{r plotvarcall, fig.cap=fig.info,fig.scap=fig.name,fig.width=7, fig.height=6.8, cache=TRUE}
+
+fig.name <- "Contrôle qualité des variants appelés"
+fig.description <- "Pour l'ensemble des figures les variants verts sont conservés, les gris sont filtrés. **A** : Distribution du *stranding* des appels pour chaque patients. Environs 16 pourcents des vairants ont une couverture insufisante pour l'appel *forward* et l'appel *revers* et sont donc filtrés, les autres sont conservés. **B** : Comparaison des appels entre les deux *ends* des variants appelés DS. En fonction des individus, 80 à 90 pourcent des appels sont concordants. Les autres appels sont filtrés des analyses ulterieures. **C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre)."
+fig.info <- paste0(fig.name, " : ", fig.description)
+
+pA <- ggplot(df_strand_all, aes(STRAND, P)) +
+  geom_boxplot(outlier.size = -1, aes(fill = IS_CONSERVED)) + 
+  geom_jitter(size = 2, position=position_jitter(0.3)) +
+  ylab("% of called variant") +
+  xlab("") +
+    facet_wrap(~STRAND, scales = "free") +
+  scale_fill_manual(guide = "none", values = c("grey48", "chartreuse3")) +
+  scale_y_continuous(labels = percent) + 
+  theme(axis.title.x = element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+
+pB <- ggplot(df_concordance_all, aes(CALL, P)) +
+  geom_boxplot(aes(fill = IS_CONSERVED), outlier.size = -1) + 
+  geom_jitter(size = 2, position=position_jitter(0.3)) +
+  ylab("% of called variant") +
+  xlab("") +
+  facet_wrap(~CALL, scales = "free") +
+  scale_fill_manual(guide = "none", values = c("grey48", "chartreuse3")) + 
+  scale_y_continuous(labels = percent) + 
+  theme(axis.title.x = element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+
+pC <- ggplot(df_geno_all,aes(RUN, N)) + 
+  geom_bar(stat = "identity", aes(fill = IS_CONSERVED)) +
+  facet_grid(TYPE~CALL, scales = "free") +
+  ylab("Nb of variant") + 
+  scale_fill_manual(name = "Is the variant conserved?", values = c("chartreuse3", "grey48"), breaks = c("Yes","No"), labels = c("Yes","No")) +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+
+row1 <- plot_grid(pA, labels = c("A"))
+plot_grid(row1, pB, pC,labels = c("","B","C"), rel_heights = c(.6,.8,1), ncol = 1)
+
+```
+
+\newpage
+
 ##### Résultats de l'annotation  
 
-plot du comptage des impact / patients
+```{r varannotation, include=FALSE, warning=FALSE, cache=TRUE} 
 
-plot du nombre de variants ayant un match dans une des base de donnée (ExAC...) 
-plot de la distribution des MAF associées des MA
+df_annotate <- df_call_fam %>%
+  filter(grepl("zygous", CALL)) %>% 
+  select(-STRAND) %>%
+  variant_join(fread("data/all_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE), mode = "left") %>% 
+  select(-Allele, -Gene, -Feature_type, -(BIOTYPE:HGNC_ID), -(CADD_RAW:ExAC_AF_OTH), -(ExAC_AF_AMR:ExAC_AF_SAS)) 
 
+df_gene_transcript <- df_annotate %>%
+  group_by(RUN) %>%
+  summarise(TRANSCRIPT = n_distinct(Feature),
+            GENE = n_distinct(SYMBOL)) %>%
+  gather(FEATURE,NB,TRANSCRIPT:GENE) 
+
+df_impact <- df_annotate %>% 
+  group_by(RUN, IMPACT) %>%
+  summarise(N = n()) %>%
+  group_by(RUN) %>%
+  mutate(P = N / sum(N))
+
+```
+
+```{r cleancall2, include=FALSE, warning=FALSE}
+
+rm(df_call_fam)
+gc()
+
+```
+
+```{r annotstat, cache=TRUE}
+
+mean_gene <- df_gene_transcript %>% ungroup() %>% filter(FEATURE == "GENE") %>% summarise(MEAN = mean(NB)) %>% collect() %>% .[["MEAN"]] %>% round(0)
+mean_transcript <- df_gene_transcript %>% ungroup() %>% filter(FEATURE == "TRANSCRIPT") %>% summarise(MEAN = mean(NB)) %>% collect() %>% .[["MEAN"]] %>% round(0)
+rate_tr_gene = (mean_transcript / mean_gene) %>% round(0)
+
+```
+
+```{r varfreq, cache=TRUE}
+
+df_freq <- df_annotate %>%
+  group_by(RUN) %>% 
+  distinct(CHR,POSITION,REF,ALT,ExAC_AF,`1KG`,ESP) %>% 
+  mutate(N_VAR_TOT = n()) %>%
+  gather(DB,FREQ,ExAC_AF:ESP) %>% 
+  filter(!is.na(FREQ)) 
+
+df_freq_stat <- df_freq %>%
+    select(-(CHR:ALT)) %>% 
+  group_by(RUN, DB) %>%
+  summarise(N_PER_RUN_PER_DB = n(),
+            P_PER_RUN_PER_DB = n() / mean(N_VAR_TOT))
+
+df_freq2 <- df_freq %>%
+  ungroup() %>% 
+  distinct(CHR,POSITION,REF,ALT,DB,FREQ) %>% 
+  select(-(CHR:ALT)) 
+```
+
+Afin de connaitre l'effet qu'auront chacun des variants appelés sur les différents transcrits qu'ils chevauchent nous utilisons le logiciel VEP. Grâce à celà, nous pouvons constater que pour chaque patient ... gènes sont en moyenne affecté par au moins un variant tandis que ... sont impactés (soit environs ... transcrits par gènes) (**Figure : **\@ref(fig:plotvarannotation) - **A**). Chaque variant affectera l'ensemble des transcrits qu'il chevauche, ainsi un même variant pourra impacter plusieurs transcrits. Ces impacts sont ensuite classés par VEP en quatre catégories qui sont, de la plus délétère à la moins délétère : HIGH, MODERATE, LOW, MODIFIER. Comme attendu, les variants ayant un impact tronquant se retrouvent être les moins fréquent chez chacun de nos patients. Ceci est d'autant plus flagrant pour l'impact HIGH qui regroupe, entre autre, les variants créant un codon stop ou encore ceux causant un décalage du cadre de lécture, se retrouvent en quantité extrêment faible puisqu'ils ne représentent en moyenne que ... % des variants (soit environs ... par patient (en nb ici)) (**Figure : **\@ref(fig:plotvarannotation) - **B**).  
+
+
+```{r plotvarannotation, fig.cap=fig.info,fig.scap=fig.name,fig.width=6.3, fig.height=5, cache=TRUE}
+
+
+# TODO VENN des prédiction SIFT ET POLYPHEN !!!!!!!!!!!!!!!
+
+fig.name <- "TODO"
+fig.description <- "TODOooooooo ooooooooo oooooooooooooooooo oooooooooooooooo oooooooooooo ooooooooooo oooo oooooooo oooooooooooooooooooooooooooo oooooooooo ooooo ooooooooooooo oooooooooo oooooooooo ooooooo."
+fig.info <- paste0(fig.name, " : ", fig.description)
+
+
+pB <- ggplot(df_gene_transcript, aes(RUN, NB)) + 
+  geom_bar(stat = "identity", position = position_identity(),  aes(fill = FEATURE)) + 
+  scale_fill_discrete(name = "Feature", labels = c("Gene", "Transcript")) + 
+  xlab("Patient") + 
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+pA <- ggplot(df_impact, aes("", P)) +
+  geom_boxplot(outlier.size = -1) + 
+  geom_jitter(size = 2, position = position_jitter(0.3)) +
+  facet_wrap(~IMPACT, scales = "free", nrow = 1) +
+  scale_y_continuous(labels = percent_format()) +
+  theme(axis.title = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+plot_grid(pA, pB, labels = c("A","B"), ncol = 1)
+
+```
+
+```{r plotvarfreq, fig.cap=fig.info,fig.scap=fig.name,fig.width=6.3, fig.height=6, cache=TRUE}
+
+# corélation freq impact matrice
+
+fig.name <- "TODO"
+fig.description <- "TODOooooooo ooooooooo oooooooooooooooooo oooooooooooooooo oooooooooooo ooooooooooo oooo oooooooo oooooooooooooooooooooooooooo oooooooooo ooooo ooooooooooooo oooooooooo oooooooooo ooooooo."
+fig.info <- paste0(fig.name, " : ", fig.description)
+
+pA <- ggplot(df_freq_stat, aes(DB, P_PER_RUN_PER_DB)) + 
+  geom_boxplot(aes(fill = DB)) + 
+  ylab("% of variant found within a DB") + 
+  scale_x_discrete(labels = c("1KG","ESP6500","ExAC")) + 
+  theme(axis.title.x = element_blank()) + 
+  scale_fill_discrete(guide = "none")
+
+
+pB <- ggplot(df_freq2, aes(FREQ)) + 
+  geom_line(aes(col = DB), stat = "bin", bins = 150) +
+  scale_color_discrete(name = "Data base", labels = c("1KG","ESP6500","ExAC")) + 
+  xlab("Variant frequency") +
+  ylab("Nb of variants") + 
+  theme(legend.position = "bottom")
+
+
+plot_grid(pA,pB,labels = c("A","B"), ncol = 1)
+
+
+```
+
+
+```{r}
+# 
+# df_cor_impact_freq <- df_annotate %>% 
+#   ungroup() %>%
+#   distinct(CHR,POSITION,REF,ALT,ExAC_AF,`1KG`,ESP,IMPACT) %>%
+#   select(-(CHR:ALT)) 
+# 
+# 
+# df_cor_impact_freq %>% 
+#   gather(DB,FREQ,ExAC_AF:ESP) %>% View
+#   
+#   spread(IMPACT)
+# 
+# 
+# View(mtcars)
+# 
+# cor()
+# 
+# type
+# 
+# %>% 
+
+
+```
+
+
+
+```{r cleanfreq, include=FALSE, warning=FALSE}
+
+rm(df_freq, df_freq2, df_freq_stat)
+gc()
+
+
+```
+
+
+\newpage
 
 ##### Résultats du filtrage
-
-
-
-```{r taballruns}
-
-# 
-# tab.name <- "Liste des phénotypes étudiés dans notre équipe ainsi que la taille des effectifs séquencés en WES"
-# 
-# kable(resume_pheno, 
-#       caption = tab.name, 
-#       booktabs = TRUE)
-
-```
-
-```{r datafamaz, dependson="all_coding_variants",  cache=TRUE}
-
-maf_cutoff <- 0.01
-
-df_fam_az <- fread("data/genotype_spink2.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(2, 3, "b", "c")) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
-         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
-         RUN = if_else(RUN == "Ghs44", "Az1", "Az2"),
-         FAM = "AZ")
-
-df_ctrl_az <- fread("data/genotype_not_azoo.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(3, "c")) %>%
-  select(-CALL) 
-
-rm_var_az <- rm_var_count(df_fam_az, df_all_coding_variants, df_ctrl_az, maf_cutoff)
-
-nb_ctrl_az <- df_ctrl_az %>% resume_run(type ="nb")
-
-```
-
-```{r filterfamaz, cache=TRUE, include=FALSE}
-
-
-df_az1 <- filter(df_fam_az, RUN == "Az1")
-df_az2 <- filter(df_fam_az, RUN == "Az2")
-
-df_filter_az <- variant_join(df_az1, df_az2, mode = "inner") %>% # keep 
-  filter_genotype(het = FALSE) %>% 
-  variant_join(df_ctrl_az, mode = "anti") %>%
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  filter(Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
-         Consequence != "5_prime_UTR_variant",
-         Consequence != "3_prime_UTR_variant",
-         !grepl("NMD_transcript_variant",Consequence),
-         !(grepl("tolerated",SIFT) & grepl("benign",PolyPhen))) %>%
-  filter_frequence(cutoff = maf_cutoff) %>%
-  select(-CADD_RAW)
-
-df_passing_genes_az <- resume_gene(df_filter_az)
-
-rm(df_ctrl_az, df_az1, df_az2)
-gc()
-
-```
-
-```{r datafamff, dependson="all_coding_variants", cache=TRUE}
-
-maf_cutoff <- 0.01
-
-df_fam_ff <- fread("data/genotype_plcz.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(2, 3, "b", "c")) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
-         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
-         RUN = if_else(RUN == "Ghs113", "FF1", "FF2"),
-         FAM = "FF")
-
-df_ctrl_ff <- fread("data/genotype_not_fert_fail.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(3, "c")) %>%
-  select(-CALL)
-
-rm_var_ff <- rm_var_count(df_fam_ff, df_all_coding_variants, df_ctrl_ff, maf_cutoff)
-
-nb_ctrl_ff <- df_ctrl_ff %>% resume_run(type = "nb")
-
-```
-
-```{r filterfamff, cache=TRUE, include=FALSE}
-
-
-df_ff1 <- filter(df_fam_ff, RUN == "FF1")
-df_ff2 <- filter(df_fam_ff, RUN == "FF2")
-
-df_filter_ff <- variant_join(df_ff1, df_ff2, mode = "inner") %>% # keep 
-  filter_genotype(het = FALSE) %>%
-  variant_join(df_ctrl_ff, mode = "anti") %>%
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  filter(Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
-         Consequence != "5_prime_UTR_variant",
-         Consequence != "3_prime_UTR_variant",
-         !grepl("NMD_transcript_variant",Consequence),
-         !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen))) %>%
-  filter_frequence(cutoff = maf_cutoff) %>%
-  select(-CADD_RAW)
-
-df_passing_genes_ff <- resume_gene(df_filter_ff)
-
-rm(df_ctrl_ff, df_ff1, df_ff2)
-gc()
-
-```
-
-```{r datammaf1, dependson="all_coding_variants", cache=TRUE, include=FALSE}
-
-df_fam_mmaf1 <- fread("data/genotype_MMAF_fam1.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(2, 3, "b", "c")) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
-         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
-         RUN = if_else(RUN == "Ghs56", "MMAF1_1", "MMAF1_2"),
-         FAM = "MMAF1")
-
-df_ctrl_mmaf <- fread("data/genotype_not_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(3, "c")) %>%
-  select(-CALL)
-
-rm_var_mmaf1 <- rm_var_count(df_fam_mmaf1, df_all_coding_variants, df_ctrl_mmaf, maf_cutoff)
-
-nb_ctrl_mmaf <- resume_run(df_ctrl_mmaf, type = "nb")
-
-```
-
-```{r filterfammmaf1, cache=TRUE, include=FALSE}
-
-maf_cutoff <- 0.01
-
-df_mmaf1_1 <- filter(df_fam_mmaf1, RUN == "MMAF1_1")
-df_mmaf1_2 <- filter(df_fam_mmaf1, RUN == "MMAF1_2")
-
-df_filter_mmaf1 <- variant_join(df_mmaf1_1, df_mmaf1_2, mode = "inner") %>% # keep 
-  filter_genotype(het = FALSE) %>%
-  
-
-  variant_join(df_ctrl_mmaf, mode = "anti") %>%
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  filter(Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
-         Consequence != "5_prime_UTR_variant",
-         Consequence != "3_prime_UTR_variant",
-         !grepl("NMD_transcript_variant",Consequence),
-         !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen))) %>%
-  filter_frequence(cutoff = maf_cutoff) %>%
-  select(-CADD_RAW)
-
-df_passing_genes_mmaf1 <- resume_gene(df_filter_mmaf1)
-
-```
-
-```{r datammaf2, dependson="all_coding_variants", cache=TRUE, include=FALSE}
-
-df_fam_mmaf2 <- fread("data/genotype_MMAF_fam2.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(2, 3, "b", "c")) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
-         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
-         RUN = if_else(RUN == "Ghs62", "MMAF2_1", "MMAF2_2"),
-         FAM = "MMAF2")
-
-rm_var_mmaf2 <- rm_var_count(df_fam_mmaf2, df_all_coding_variants, df_ctrl_mmaf, maf_cutoff)
-
-```
-
-```{r filterfammmaf2, cache=TRUE, include=FALSE}
-
-
-df_mmaf2_1 <- filter(df_fam_mmaf2, RUN == "MMAF2_1")
-df_mmaf2_2 <- filter(df_fam_mmaf2, RUN == "MMAF2_2")
-
-df_filter_mmaf2 <- variant_join(df_mmaf2_1, df_mmaf2_2, mode = "inner") %>% # keep 
-  filter_genotype(het = FALSE) %>%
-  variant_join(df_ctrl_mmaf, mode = "anti") %>%
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  filter(Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
-         Consequence != "5_prime_UTR_variant",
-         Consequence != "3_prime_UTR_variant",
-         !grepl("NMD_transcript_variant",Consequence),
-         !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen))) %>%
-  filter_frequence(cutoff = maf_cutoff) %>%
-  select(-CADD_RAW)
-
-df_passing_genes_mmaf2 <- resume_gene(df_filter_mmaf2)
-
-
-```
-
-```{r datammaf3, dependson="all_coding_variants", cache=TRUE, include=FALSE}
-
-df_fam_mmaf3 <- fread("data/genotype_MMAF_fam3.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(2, 3, "b", "c")) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
-         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
-         RUN = if_else(RUN == "Ghs63", "MMAF3_1", "MMAF3_2"),
-         FAM = "MMAF3")
-
-rm_var_mmaf3 <- rm_var_count(df_fam_mmaf3, df_all_coding_variants, df_ctrl_mmaf, maf_cutoff)
-
-```
-
-```{r filterfammmaf3, cache=TRUE, include=FALSE}
-
-maf_cutoff <- 0.01
-
-df_mmaf3_1 <- filter(df_fam_mmaf3, RUN == "MMAF3_1")
-df_mmaf3_2 <- filter(df_fam_mmaf3, RUN == "MMAF3_2")
-
-df_filter_mmaf3 <- variant_join(df_mmaf3_1, df_mmaf3_2, mode = "inner") %>% # keep 
-  filter_genotype(het = FALSE) %>%
-  variant_join(df_ctrl_mmaf, mode = "anti") %>%
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  filter(Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
-         Consequence != "5_prime_UTR_variant",
-         Consequence != "3_prime_UTR_variant",
-         !grepl("NMD_transcript_variant",Consequence),
-         !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen))) %>%
-  filter_frequence(cutoff = maf_cutoff) %>%
-  select(-CADD_RAW)
-
-df_passing_genes_mmaf3 <- resume_gene(df_filter_mmaf3)
-
-
-```
-
-```{r datammaf4, dependson="all_coding_variants", cache=TRUE, include=FALSE}
-
-df_fam_mmaf4 <- fread("data/genotype_MMAF_fam4.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(2, 3, "b", "c")) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"), 
-         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"),
-         RUN = if_else(RUN == "Ghs59", "MMAF4_1", 
-                       if_else(RUN == "Ghs60", "MMAF4_2", "MMAF4_3")),
-         FAM = "MMAF4")
-
-rm_var_mmaf4 <- rm_var_count(df_fam_mmaf4, df_all_coding_variants, df_ctrl_mmaf, maf_cutoff)
-
-```
-
-```{r filterfammmaf4, cache=TRUE, include=FALSE}
-
-maf_cutoff <- 0.01
-
-df_mmaf4_1 <- filter(df_fam_mmaf4, RUN == "MMAF4_1")
-df_mmaf4_2 <- filter(df_fam_mmaf4, RUN == "MMAF4_2")
-df_mmaf4_3 <- filter(df_fam_mmaf4, RUN == "MMAF4_3")
-
-df_filter_mmaf4 <- variant_join(df_mmaf4_1, df_mmaf4_2, mode = "inner") %>% 
-  filter_genotype(het = FALSE) %>%
-  variant_join(df_ctrl_mmaf, mode = "anti") %>%
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  filter(Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
-         Consequence != "5_prime_UTR_variant",
-         Consequence != "3_prime_UTR_variant",
-         !grepl("NMD_transcript_variant",Consequence),
-         !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen))) %>%
-  filter_frequence(cutoff = maf_cutoff) %>%
-  select(-CADD_RAW)
-
-df_passing_genes_mmaf4 <- resume_gene(df_filter_mmaf4)
-
-rm(df_mmaf4_1, df_mmaf4_2, df_mmaf4_3)
-gc()
-
-
-```
-
-```{r}
-
-rm_var_all <- rbind(rm_var_az, 
-                    rm_var_ff, 
-                    rm_var_mmaf1, 
-                    rm_var_mmaf2, 
-                    rm_var_mmaf3, 
-                    rm_var_mmaf4) %>%
-  group_by(RUN, FILTER) %>%
-  mutate(PERCENT = N_REMOVE / N_TOT) 
-
-resume_geno <- rm_var_all %>% 
-  ungroup() %>% 
-  filter(FILTER == "GENOTYPE") %>% 
-  summarise(N_MAX_GENO = max(N_REMOVE),
-            N_MIN_GENO = min(N_REMOVE))
-
-min_var_geno <- resume_geno %>% collect() %>% .[["N_MIN_GENO"]] 
-max_var_geno <- resume_geno %>% collect() %>% .[["N_MAX_GENO"]] 
-
-```
-
-```{r nmdtr, cache=TRUE}
-
-df_nmd <- rbind(df_fam_az, df_fam_ff, df_fam_mmaf1, df_fam_mmaf2, df_fam_mmaf3, df_fam_mmaf4) %>% 
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  ungroup() %>%
-  select(CHR, POSITION, REF, ALT, RUN, FAM, Feature, Consequence) %>%
-  mutate(Is_NMD = grepl("NMD_transcript_variant", Consequence)) %>% 
-  select(-Consequence) %>%
-  distinct(RUN, FAM, Is_NMD, CHR, POSITION, REF, ALT, Feature) %>% 
-  group_by(CHR, POSITION, REF, ALT, RUN) %>%
-  mutate(N = n()) %>%
-  filter(N == 1,
-         Is_NMD == TRUE) %>%
-  group_by(RUN, FAM) %>% 
-  summarise(NB_TR = n_distinct(Feature),
-            NB_VAR = n_distinct(CHR, POSITION, REF, ALT))
-
-df_nmd_min_max <- ungroup(df_nmd) %>%
-  summarise(MIN_TR = min(NB_TR),
-         MAX_TR = max(NB_TR),
-         MIN_VAR = min(NB_VAR),
-         MAX_VAR = max(NB_VAR))
-
-
-min_tr_nmd <- df_nmd_min_max %>% collect() %>% .[["MIN_TR"]] 
-max_tr_nmd <- df_nmd_min_max %>% collect() %>% .[["MAX_TR"]]
-
-min_var_nmd <- df_nmd_min_max %>% collect() %>% .[["MIN_VAR"]]
-max_var_nmd <- df_nmd_min_max %>% collect() %>% .[["MAX_VAR"]]
-
-```
-
-Pour l'ensemble des individus de ces quatre familles nous avons appliqué notre pipeline d'analyse de sorte à obtenir pour chaque patient une liste de SNV et d'indel avec leur génotype associé (**Figure : **\@ref(fig:resvarcall)).  
-
-```{r resvarcall, fig.cap=fig.info,fig.scap=fig.name,fig.width=7, cache=TRUE} 
-
-# TODO : mettre pour chaque un box plot montrant le nb de single strand, both_strand et filtered pour chaque patients 
-# x <- rbind(df_fam_az,df_fam_ff,df_fam_mmaf1,df_fam_mmaf2,df_fam_mmaf3,df_fam_mmaf4)
-# 
-# x <- x %>% group_by(RUN, STRAND) %>% summarise(N = n_distinct(CHR,POSITION,REF,ALT))
-# 
-# ggplot(x, aes(STRAND,N)) + geom_boxplot()
-
-fig.name <- "Comptage des SNVs et indels retrouvés par patients avec leur génotypes associés"
-fig.description <- ""
-fig.info <- paste(fig.name)
-
-ggplot(rbind(df_fam_az,df_fam_ff,df_fam_mmaf1,df_fam_mmaf2,df_fam_mmaf3,df_fam_mmaf4), aes(RUN, fill = GENOTYPE)) +
-  geom_bar(position = position_dodge()) +
-  scale_fill_discrete(name = "Genotype") +
-  facet_grid(TYPE ~ FAM, scales = "free") + 
-  xlab("Patient") +
-  ylab("Count") + 
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
-
-```
-
-Ensuite, afin de ne conserver que les variants ayant la plus forte probabilité d'être responsable du phénotype nous avons appliqué succesivement six filtres :  
-
-1. **L'union des variants :** Dans ces différentes études, nos patients ont à chaque fois au moins un frère présentant le même phénotype. Ainsi nous avons pu formuler l'hypothèse d'une cause génétique commune entre les différents frères d'une même famille et donc filtrer l'ensemble des variants qui ne sont pas partagés par l'ensemble des membre de la fraterie.     
-2. **Genotype des variants :**  Dans ces études, nous avons emmis l'hypothèse d'une transmission recessive du phénotype. Ainsi, seul les variants homozygotes ont été conservés. Ce filtre est le plus efficace du pipeline en permettant de filtrer entre `r min_var_geno` et `r max_var_geno` variants par individus (**Figure : **\@ref(fig:resvarcall), \@ref(fig:comparefilter)).    
-3. **Impact du variant :** Afin de ne conserver que les variants ayant un effet potentiellement tronquant sur la protéine, nous avons filtré les variants intonique et ceux tombant dans les sequences UTRs. De même les variants synonymes ne sont pas conservés (exeptés ceux se trouvant proches des régions d'épissage) car ceux-ci n'ont aucun effet sur séquences protéique. Pour les variants faux sens (changement d'un seul aa de la séquence protéique) il est plus difficile de se décider [TODO insert citation] nous avons donc utilisé les logiciels SIFT et Polyphen et filtré l'ensemble des fauxsens prédit comme *tolerated* par SIFT et *benign* par Polyphen.  
-4. **Transcrits NMD :** Le mécanisme NMD (*nonsense-mediated decay*) a pour but de controler la qualité des ARNm cellulaires chez les eucaryotes [@Chang2007] en éliminant les ARNm qui comportent un codon stop prématuré [@Baker2004], pouvant être le résultat d'une erreur de transcription, d'une mutation ou encore d'une erreur d'épissage. Il est donc peu probable que les variants présents sur transcrits annotés NMD soient responsables du phénotype. Nous avons donc filtré l'ensemble des variants chevauchant **uniquement** des transcrits annotés NMD. Cette étape de filtre permet à elle seule de filtrer systematiquement les variants de `r min_tr_nmd` à `r max_tr_nmd` transcrits (**Figure : **\@ref(fig:nmdtranscripts)) en fonction des individus soit, entre `r min_var_nmd` et `r max_var_nmd` variants différents par individus (**Figure : **\@ref(fig:comparefilter)).    
-
-```{r nmdtranscripts, fig.cap=fig.info,fig.scap=fig.name, fig.height=4, cache=TRUE}
-
-fig.name <- "Nombre de transcrits filtrés car ils sont annotés NMD"
-fig.description <- "Chaque point représente un individu séquencé, la couleur et la forme du point dépend de la famille d'origine de l'individu"
-fig.info <- paste0(fig.name," : ",fig.description)
-
-ggplot(df_nmd, aes("",NB_TR)) +
-  geom_boxplot(width = 0.35, alpha = .4, outlier.size = -1) +
-  geom_jitter(aes(col = RUN), size = 3, position=position_jitter(0.3)) +
-  scale_fill_discrete(guide = "none") +
-  scale_color_discrete(name = "Familly") +
-  ylab("Nb of transcripts flagged as NMD") + 
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
-
-
-```
-5. **Frequence des variants :**  La fréquence d'un variant dans la population générale est un moyen rapide d'avoir un avis sur l'effet délétère de celui-ci. En efft, il est peu probable qu'un retrouvé fréquement dans la population générale soit causal d'une pathologie sévère. Ainsi nous avons filtré pour l'ensemble de nos patients l'ensemble des variants ayant une fréquence $\ge$ `r maf_cutoff` dans l'une des trois bases de données que sont ExAC, ESP et 1KG.    
-6. **Présence des variants dans la cohorte contrôle :**  Au cours de nos différentes études, nous avons été ammené à séquencé `r n_tot_runs`. L'ensemble de ces individus peuvent être soit sains soit présenter l'un des `r n_pheno` phénotypes étudié au cours de nos différentes études (**Table : **\@ref(tab:TODO)). Ces phénotypes étant très différent, il n'est pas abérant d'emmetre l'hypothèse qu'ils que leurs causes génétiques soient diffrentes. De même, les variants recherché étant rares, il est peu probable qu'un individu porte les variants de deux phénotypes différents. Ainsi, pour chacune des `r nb_fam` familles, nous avons pu constituer une cohorte contrôle composée dans l'ensemble des patients précédemment analysés et ne présentant pas le même phénotype que celui étudié dans la famille (**Figure : **\@ref(fig:plotsamplectrl)). Dès lors, nous avons put filtrer l'ensemble des variants retrouvés à la fois chez nos patients et observés à l'état homozygote dans la cohorte contrôle.  
-
-
-```{r plotsamplectrl, fig.cap=fig.info,fig.scap=fig.name, fig.height=4, cache=TRUE}
-
-fig.name <- "Nombre d'individus la cohorte contrôle constituée pour chaque famille de l'analyse"
-fig.description <- "Ici, chaque barre représente une famille et sa hauteur est déterminée par le nombre d'individus composant la cohorte contrôle à laquelle elle a été confronté. Chaque individus de la cohorte contrôle a été séquencés en WES par notre équipe. Afin d'être considérer comme \"contrôle\" un individus doit être sain ou présenter un phénotype d'infertilité différent de la famille étudiée. Par exemple, un individus MMAF pourra servir de contrôle aux familles AZ et FF mais pas aux familles MMAF1-4"
-fig.info <- paste0(fig.name, " : ", fig.description)
-
-fam_lab = c("Az", "FF", "MMAF1", "MMAF2", "MMAF3", "MMAF4")
-nb_sample <- c(resume_run(df_fam_az, type = "nb"), 
-               resume_run(df_fam_ff, type = "nb"), 
-               resume_run(df_fam_mmaf1, type = "nb"), 
-               resume_run(df_fam_mmaf2, type = "nb"), 
-               resume_run(df_fam_mmaf3, type = "nb"), 
-               resume_run(df_fam_mmaf4, type = "nb"))
-
-nb_ctrl <- c(nb_ctrl_az, nb_ctrl_ff,nb_ctrl_mmaf,nb_ctrl_mmaf,nb_ctrl_mmaf,nb_ctrl_mmaf)
-
-df_sample_ctrl <- data_frame(FAM = fam_lab,
-                             Sample = nb_sample,
-                             Ctrl = nb_ctrl) %>% 
-  gather(TYPE,NB,Sample:Ctrl) %>%
-  filter(TYPE == "Ctrl")
-
-ggplot(df_sample_ctrl, aes(FAM, NB, fill = FAM)) + 
-  geom_bar(stat = "identity", position = "dodge") + 
-  geom_text(aes(label = NB), position = position_dodge(width = .9), vjust = -.25) +
-  ylab("Number of control individuals") + 
-  scale_fill_discrete(guide = "none") +
-  xlab("Familly")
-
-```
-
-Afin de comparer le pouvoir discriminant de chacun de ces filtres, nous avons compté le nombre de variant filtrés par chacun d'entre eux indépendamments des autres (**Figure : **\@ref(fig:comparefilter)).  
-
-```{r comparefilter, dependson=c("datafamaz","datafamff","datammaf1","datammaf2","datammaf3","datammaf4"), fig.cap=fig.info,fig.scap=fig.name, fig.asp=.6, cache=TRUE}
-
-fig.name <- "Comparaison du pouvoir discriminant de chaque filtre employé TODO mettre union"
-fig.description <- "Les boites à moustache représentent la quantité de variants filtrés par chacun des 6 filtres utilisés sur l'ensemble des patients. Chaque point représente un patient et sa hauteur informe du nombre exact de variant filtrés par uin filtre donné. Comme on peut le voir, le filtre le plus discriminant est celui consistant à filtrer l'ensemble des variants hétérozygotes ce qui n'est pas surprenant puisqu'ils représentent entre ... et ... pourcents des variants observés pour chaque patients"
-
-fig.info <- paste0(fig.name, " : ", fig.description)
-
-ggplot(rm_var_all, aes(FILTER, N_REMOVE)) +
-  geom_boxplot(outlier.size = -1, alpha = .3) + 
-  geom_jitter(position=position_jitter(0.2), aes(col = RUN)) + 
-  scale_fill_discrete(guide = "none") + 
-  xlab("Applied filter") + 
-  ylab("Nb of removed variants")
-
-```
-
-```{r remaininggense}
-
-df_remaining_gene <- rbind(df_filter_az %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = "SPINK2"),
-                           df_filter_ff %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = "PLCZ"),
-                           df_filter_mmaf1 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = "???"),
-                           df_filter_mmaf2 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = "DNAH1"),
-                           df_filter_mmaf3 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = "???"),
-                           df_filter_mmaf4 %>% distinct(SYMBOL,FAM.x) %>% mutate(CAUSAL = "???")) %>% 
-  mutate(FIND_CAUSAL = if_else(CAUSAL == "???","No","Yes")) %>%
-  rename(Familly = FAM.x)
-  
-
-df_causal <- group_by(df_remaining_gene, Familly, FIND_CAUSAL, CAUSAL) %>%
-  summarise(N = n())
-
-```
-
-Après avoir effectuer l'ensemble de ces filtres, seuls quelques variants subsistent nous permettant d'obtenir unle liste de gènes restrainte pour chaque famille (**Table : **\@ref(tab:tablegene)). Ainsi, la cause génétique expliquant le phénotype d'une famille a pu être mis en évidence dans ... familles sur ... [TODO] (**Figure : **\@ref(fig:plotremaininggenes)). Il est a noté que l'ensemble des familles pour lesquelles la cause génétique a été identifiée présente un historique consanguin [figure arbre] ce qui n'était pas le cas pour les ... autres. Cette consanguinité observée dans une partie des famille nous a permi de justifier l'exclusion des variants hétérozygotes. En revanche pour les ... autres fa milles, rien ne justifiait un tel filtre. Ainsi, pour celles-ci il est probable que les variants responsables se soient vu exclus par ce filtre. C'est pourquoi, notre équipe se concentre actuellement sur les variants hétérozygotes de ces familles.     
-
-```{r plotremaininggenes, fig.cap=fig.info,fig.scap=fig.name, cache=TRUE}
-
-fig.name <- "Nombre de gènes passant l'ensemble des filtres par famille"
-fig.description <- "Chaque barre représente une des familles analysées. La hauteure de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres bleues caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au dessus de la barre). Les barres rouges indique qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit \"???\" au dessus de la barre)"
-fig.info <- paste(fig.name, " : ", fig.description)
-
-ggplot(df_causal, aes(Familly, N)) + 
-  geom_bar(stat = "identity", aes(fill = FIND_CAUSAL)) + 
-  scale_y_continuous(limits = c(0,max(df_causal$N) + 1), breaks = seq(0,max(df_causal$N) + 1,2)) + 
-  geom_text(aes(label = CAUSAL), position = position_dodge(width = .9), vjust = -.25) +
-  ylab("Nb of remaining genes after all filtering") + 
-  theme(axis.title.x=element_blank()) + 
-  scale_fill_discrete(name = "Is the causal variant found?")
-
-```
-
-```{r tablegene}
-
-tab.name <- "Tableau des gènes ayant passé l'ensemble des filtres pour les fifférentes familles"
-
-kable(df_remaining_gene %>%
-        select(Familly, SYMBOL) %>%
-        ungroup() %>%
-        mutate(ind = row_number()) %>%
-        
-        spread(Familly, SYMBOL, fill = " ") %>% select(-ind),
-      booktabs = TRUE,
-      caption = tab.name)
-
-```
-
-```{r cleanfam, include=FALSE}
-
-rm(rm_var_all, rm_var_az, rm_var_ff, rm_var_mmaf1, rm_var_mmaf2, rm_var_mmaf3, rm_var_mmaf4)
-rm(resume_pheno, resume_tot, resume_geno)
-rm(df_fam_az, df_fam_ff, df_fam_mmaf1, df_fam_mmaf2, df_fam_mmaf3, df_fam_mmaf4)
-rm(df_filter_az, df_filter_ff, df_filter_mmaf1, df_filter_mmaf2, df_filter_mmaf3, df_filter_mmaf4)
-rm(df_mmaf1_1, df_mmaf1_2, df_mmaf2_1, df_mmaf2_2, df_mmaf3_1, df_mmaf3_2, df_mmaf4_1, df_mmaf4_2, df_mmaf4_3)
-
-gc()
-
-```
-
-### Etude d’une large cohorte de patients MMAF  {#cohortemmah}  
-
-```{r mmafdata, cache=TRUE}
-
-df_rvis <- fread("data/RVIS_Unpublished_ExAC_May2015.txt",sep = "\t",header = TRUE,data.table = FALSE) %>%
-  dplyr::select(GENE = CCDS_r15,SCORE = `RVIS_ExAC_0.05%(AnyPopn)`) %>%
-  mutate(SYMBOL = GENE,
-         RVIS_PERCENTILE = percent_rank(SCORE)) %>%
-  dplyr::select(-SCORE) %>%
-  na.omit()
-
-df_ciliome_gene <- fread("data/ciliome.csv",sep = "\t",header = TRUE, data.table = FALSE) %>% 
-  select(SYMBOL = Symbol, EVIDENCE = `Novelty category`, LOCALISATION = `Immunostaining of cilia`) %>% 
-  mutate(EVIDENCE = substring(EVIDENCE, 4),
-         LOCALISATION = substring(LOCALISATION, 4))
-
-df_mmaf_all <- fread("data/genotype_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  gather(RUN, CALL, starts_with("Ghs")) %>%
-  filter(CALL %in% c(2, 3, "b", "c"),
-         !(RUN %in% run_mmaf_fam)) %>%
-  mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"),
-         STRAND = if_else(CALL %in% c(2, 3), "Both_strand", "Single_strand"),
-         GENOTYPE = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous"))
-
-df_filter_mmaf_all <- df_mmaf_all %>%
-  filter_genotype(het = FALSE) %>%
-  variant_join(df_ctrl_mmaf, mode = "anti") %>%
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  filter(Consequence != "synonymous_variant",     # Filter variant considering their impact on transcript
-         Consequence != "5_prime_UTR_variant",
-         Consequence != "3_prime_UTR_variant",
-         !grepl("NMD_transcript_variant",Consequence),
-         !(grepl("tolerated",SIFT) & grepl("benign",PolyPhen))) %>%  filter_frequence(cutoff = maf_cutoff) %>%
-  select(-CADD_RAW) %>% 
-  left_join(df_ciliome_gene, by = "SYMBOL")
-
-df_passing_filter_mmaf_genes <- df_filter_mmaf_all %>% 
-  select(RUN, SYMBOL) %>% 
-  group_by(SYMBOL) %>%
-  summarise(N_RUN = n_distinct(RUN))
-
-# distinct(df_filter_mmaf_all, SYMBOL,CHR,POSITION,REF,ALT) %>%
-#        select(Chromosome = CHR, Position = POSITION,`Reference allele` = REF,`Alterated allele` = ALT,Gene=SYMBOL)
-
-nb_run_per_passing_gene <- ungroup(df_filter_mmaf_all) %>%
-  distinct(SYMBOL,RUN) %>%
-  mutate(N_TOT = n_distinct(SYMBOL)) %>%
-  group_by(RUN) %>%
-  summarise(N_TOT = mean(N_TOT),
-            N_per_run = n_distinct(SYMBOL)) 
-
-nb_run_mmaf <- df_runs %>% select(`Magic ID`, Pathologie) %>% 
-  filter(Pathologie == "Flag",
-         !(`Magic ID` %in% run_mmaf_fam)) %>% 
-  nrow()
-
-df_mmaf_annotated <- variant_join(df_mmaf_all, df_all_coding_variants, mode = "inner")
-
-
-```
-
-Dans cette partie, nous allons détailler les analyses effectuées sur une cohorte de `r nb_run_mmaf` individus présentant le phénotype MMAF pour lesquels nous avons effectués un séquençage WES. Nous avons ainsi pu appliquer notre pipeline d'analyse afin d'appeler et annoter les variants de ces `r nb_run_mmaf` individus (**Figure : **\@ref(fig:largemmafcall)).
-
-```{r largemmafcall, dependson="mmafdata", fig.cap=fig.info,fig.scap=fig.name, cache=TRUE}
-
-fig.name <- "Comptage des variants pour chaque individus avec leur génotype et l'impact prédite par VEP"
-fig.description <- "VEP possède quatre niveaux d'impact pour ses variants : **HIGH** : variant ayant une forte probabilité de causer des dommages sévères à la protéine, **MODERATE** : Variants non-tronquant pouvant tout de même affecté la protéine, **LOW** : variant ayant peu de chance d'alterer la protéine, **MODIFIER** :  Variants affectant les régions non codantes du transcrits et dont l'impact sur la protéine est difficile à prévoir. Chaque barre représente le comptage pour un individus"
-
-fig.info <- paste(fig.name," : ",fig.description)
-
-ggplot(df_mmaf_annotated, aes(RUN)) +
-  geom_bar(aes(fill = IMPACT), position = position_dodge()) +
-  scale_fill_discrete(name = "VEP impact prediction", guide=FALSE) +
-  xlab("Individuals") +
-  ylab("Nb of variant") +
-  facet_grid(IMPACT ~ GENOTYPE, scales = "free") + 
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
-
-```
-
-```{r varperrun, dependson="mmafdata", cache=TRUE}
-
-df_var_per_run <- df_filter_mmaf_all %>% 
-  group_by(TYPE)%>%
-  mutate(N_tot = n_distinct(CHR, POSITION, REF, ALT)) %>% 
-  distinct(CHR,POSITION,REF,ALT,RUN, N_tot) %>% 
-  group_by(TYPE, RUN) %>% 
-  summarise(N_per_run = n(),
-            N_tot = mean(N_tot))  
-
-nb_snv_tot <- df_var_per_run %>% filter(TYPE == "SNV") %>% collect() %>% .[["N_tot"]] %>% mean()
-nb_indel_tot <- df_var_per_run %>% filter(TYPE == "Indel") %>% collect() %>% .[["N_tot"]] %>% mean()
-
-nb_snv_max <- df_var_per_run %>% filter(TYPE == "SNV") %>% collect() %>% .[["N_per_run"]] %>% max()
-nb_snv_min <- df_var_per_run %>% filter(TYPE == "SNV") %>% collect() %>% .[["N_per_run"]] %>% min()
-
-nb_indel_max <- df_var_per_run %>% filter(TYPE == "Indel") %>% collect() %>% .[["N_per_run"]] %>% max()
-nb_indel_min <- df_var_per_run %>% filter(TYPE == "Indel") %>% collect() %>% .[["N_per_run"]] %>% min()
-
-df_filter_pass_or_not <- df_mmaf_all %>%
-  filter(!is.na(REF)) %>%
-  distinct(CHR,POSITION,REF,ALT,TYPE,RUN) %>%
-  group_by(CHR,POSITION,REF,ALT,TYPE) %>%
-  left_join(df_filter_mmaf_all, by = c("CHR", "POSITION", "REF", "ALT", "TYPE")) %>% 
-  mutate(STATUS = if_else(is.na(CALL), "FILTERED", "PASS")) %>%
-  select(-(CALL:ExAC_AF)) %>% 
-  distinct(STATUS) %>%
-  ungroup() %>%
-  mutate(N_TOT = n()) %>%
-  group_by(STATUS, TYPE) %>%
-  summarise(N_TYPE_STATUS = n(),
-            N_TOT = mean(N_TOT)) %>% group_by(TYPE) %>%
-  mutate(N_TYPE = sum(N_TYPE_STATUS)) %>% 
-  group_by(STATUS, TYPE) %>% 
-  mutate(P_TYPE_STATUS = N_TYPE_STATUS / N_TYPE) 
-
-
-
-```
-
-```{r dependson="mmafdata"}
-
-n_gene_min <- nb_run_per_passing_gene$N_per_run %>% min
-n_gene_max <- nb_run_per_passing_gene$N_per_run %>% max
-
-n_gene_tot <- df_passing_filter_mmaf_genes %>% nrow
-
-n_gene_1 <- filter(df_passing_filter_mmaf_genes, N_RUN == 1) %>% nrow
-p_gene_1 <- ((n_gene_1 / n_gene_tot) * 100) %>% round(0)
-
-n_gene_up_1 <- filter(df_passing_filter_mmaf_genes, N_RUN > 1) %>% nrow
-p_gene_up_1 <- ((n_gene_up_1 / n_gene_tot) * 100) %>% round(0)
-
-```
-
-Les filtres utilisés ont été les mêmes que ceux détaillés dans l'études des cas familiaux, c'est à dire que seul les variants homozygotes ayant une fréquence $\le$ `r maf_cutoff` dans la population générales et n'étant pas observés dans la cohorte contrôle de `r nb_ctrl_mmaf` individus furent conservés. De même, les variants synonymes, impactant la séquences UTR ou chevauchant uniquement des transcrits annotés NMD par VEP on été filtrés. Ainsi, ces différents filtres nous ont permis d'obtenir une liste de `r nb_snv_tot` SNVs (entre `r nb_snv_min` et `r nb_snv_max` différents par patients) et de `r nb_indel_tot` indels (entre `r nb_indel_min` et `r nb_indel_max` différents par patients) (**Figure : **\@ref(fig:plotvarperrun)).  Cet ensemble de variant nous a alors permis d'obtenir des listes comprenant entre `r n_gene_min` et `r n_gene_max` gènes différents par patients (**Figure : **\@ref(fig:plotpassinggenes) - **A**) constituant ainsi un total de `r n_gene_tot` gènes différents pour l'ensemble des patients. Parmi ceux là, `r n_gene_1` (`r p_gene_1`%) ont été retrouvés mutés chez un seul patients tandis que `r n_gene_up_1` (`r p_gene_up_1`%) ont été retrouvé chez au moins 2 patients (**Figure : **\@ref(fig:plotpassinggenes) - **B**). 
-
-```{r plotvarperrun, dependson="mmafdata", fig.cap=fig.info,fig.scap=fig.name, echo=FALSE, cache=TRUE}
-
-fig.name <- "Comptage des variants filtrés"
-fig.description <- "**A**: Comptage des SNVs et Indels ayant été filtrés (FILTERED) et ayant passé les filtres (PASS), **B**: Pourcentage des SNVs et indels ayant passé les filtres, **C**: Comptage pour chaque individus du nombre de SNVs et d'indels ayant passé les filtres. Chaque point représente le comptage pour un individus"
-
-fig.info <- paste(fig.name," : ",fig.description)
-
-p1 <- ggplot(df_var_per_run,aes("",N_per_run)) +
-  geom_boxplot(outlier.size = -1, aes(fill = TYPE)) +
-  facet_wrap(~TYPE,scales = "free") +
-  geom_jitter(position=position_jitter(0.2)) +
-  scale_fill_discrete(guide = "none") +
-  ylab("Nb of variants") + 
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
-
-p2 <- ggplot(df_filter_pass_or_not, aes(TYPE, N_TYPE_STATUS)) + 
-  geom_bar(aes(fill = TYPE), stat = "identity") + 
-  facet_wrap(~STATUS, scales = "free") + 
-  scale_fill_discrete(guide = "none") + 
-  ylab("Nb of variants") +
-  theme(axis.title.x=element_blank())
-
-p3 <- ggplot(df_filter_pass_or_not %>% filter(STATUS == "PASS"), aes(TYPE, P_TYPE_STATUS)) + 
-  geom_bar(aes(fill = TYPE), stat = "identity") + 
-  facet_wrap(~STATUS, scales = "free") + 
-  scale_y_continuous(labels = percent) + 
-  scale_fill_discrete(guide = "none") + 
-  ylab("Percent of variants") +
-  theme(axis.title.x=element_blank())
-
-top_row <- plot_grid(p2,p3, labels = c("A","B"), align = 'h')
-plot_grid(top_row,p1, ncol = 1, labels = c("","C"))
-
-```
-
-```{r plotpassinggenes, dependson="mmafdata", fig.cap=fig.info,fig.scap=fig.name, fig.height=6.5, fig.width=6}
-
-fig.name <- "Analyse des gènes passant les filtres"
-fig.description <- "**A**: Représentation du nombre de gène ayant passé l'ensemble des filtres pour chaque individus (chaque point correspond à un individu), **B**: Visualisation du nombre de patient portant au moins un sur le même gène"
-
-pA <- ggplot(nb_run_per_passing_gene, aes("", N_per_run)) +
-  geom_boxplot(width = .5) + 
-  geom_jitter(position=position_jitter(0.2)) + 
-  ylab("Nb of passing filter gene") + 
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
-
-pB <- ggplot(df_passing_filter_mmaf_genes, aes(N_RUN)) +
-  geom_text(aes(label = ..count..),  position = position_dodge(width = .9), vjust = -.25, stat= "count") +
-  geom_bar(position = position_dodge()) +
-  ylab("Nb of Gene") +
-  xlab("Nb of patient carrying a variant on the same gene") +
-  scale_x_continuous(breaks = c(1:15)) 
-
-plot_grid(pA,pB, ncol = 1, rel_heights = c(1, 1.8), labels = c("A","B"))
-
-```
-
-```{r cil, dependson="mmafdata"}
-
-n_gene_cil <- df_ciliome_gene %>% select(SYMBOL) %>% distinct() %>% nrow
-
-
-df_ciliome <- df_filter_mmaf_all %>% 
-  group_by(EVIDENCE) %>% 
-  filter(!is.na(EVIDENCE)) %>% 
-  group_by(SYMBOL) %>%
-  mutate(N_RUN = n_distinct(RUN)) %>% 
-  distinct(EVIDENCE, N_RUN) %>% 
-  arrange(desc(N_RUN)) %>%
-  ungroup() %>%
-  select(SYMBOL, N_RUN, EVIDENCE)
-  
-```
-
-
-Le flagelle spermatique pouvant s'apparenté à un cil, nous avons ensuite comparés ces gènes avec une liste de `r n_gene_cil` gènes prédits comme faisant parti du ciliome [TODO: insert ref]. Ainsi, sur notre ensemble de gène ayant passé les filtres `r df_ciliome %>% nrow` sont prédit comme faisant parti du ciliome (**Table :** \@ref(tab:tabciliome)). 
-
-```{r tabciliome, dependson="mmafdata"}
-
-tab.name <- "Gènes ayant passé les filtres et annotés comme faisant partie du ciliome"
-
-kable(df_ciliome, 
-      col.names = c("Gene", "Patient carrying a variant on the gene"," Ciliome evidence"),
-      caption = tab.name, 
-      longtable = TRUE, 
-      booktabs = TRUE)
-
-```
-
-Ces analyses nous ont permis de mettre en évidence certains candidats évidents (TODO: insert table avec candidats évidents) nous permettant ainsi d'identifier la cause génétique de ... patients soit ...% de notre cohorte (TODO). 
-
-```{r}
-
-# Mettre table des candidats évidents
-# <!-- 1. Les nouveaux gènes candidats évidents -->
-
-```
-
-```{r}
-
-# À mettre en annexe
-# ##### Filtrer de sorte à obtenir la liste des candidats évidents (demander liste à Pierre)
-# tab.name <- "Liste des gènes passant les filtres chez au moins deux patients !!!!! TODO CECI est un header, à changer !!!!!"
-# kable(head(df_passing_filter_mmaf_genes %>% filter(N_RUN >= 2), n = 30), caption = tab.name, col.names = c("Gene", "Nb of individuals"), longtable = TRUE, booktabs = TRUE) 
-
-
-```
-
-
-
-
-```{r filterhetmmaf, cache=TRUE}
-
-# <!--     b. Liste complète des gènes avec 2 variants tronquants -->
-
-df_filter_het_mmaf <- df_mmaf_all %>%
-  filter_genotype(homo = FALSE) %>%
-  variant_join(df_ctrl_mmaf, mode = "anti") %>%
-  variant_join(df_all_coding_variants, mode = "inner") %>%
-  filter(!grepl("NMD_transcript_variant",Consequence),
-         IMPACT == "HIGH") %>% 
-  filter_frequence(cutoff = maf_cutoff) %>%
-  select(-CADD_RAW, -IMPACT,-(STRAND:`1KG`), -(SIFT:ExAC_AF)) %>%
-  group_by(RUN, Feature, SYMBOL) %>%
-  mutate(N_PER_RUN = n()) %>% 
-  filter(N_PER_RUN > 1) %>%
-  group_by(RUN, N_PER_RUN) %>%
-  distinct(SYMBOL) %>% 
-  ungroup() %>% 
-  mutate(N_TOT_GENE = n_distinct(SYMBOL))
-  
-```
-
-```{r plotfilterhetmmaf, cache=TRUE}
-# 
-# fig.name <- "Analyse des gènes passant les filtres"
-# fig.description <- "**A**: Représentation du nombre de gène ayant passé l'ensemble des filtres pour chaque individus (chaque point correspond à un individu), **B**: Visualisation du nombre de patient portant au moins un sur le même gène"
-# 
-# ggplot(df_filter_het_mmaf, aes("",)) +
-#   geom_boxplot(width = .5, stat = "count") + 
-#   geom_jitter(position=position_jitter(0.2)) + 
-#   ylab("Nb of passing filter gene") + 
-#   theme(axis.title.x = element_blank(),
-#         axis.text.x = element_blank(),
-#         axis.ticks.x = element_blank())
-# 
-# ggplot(df_filter_het_mmaf, aes(N_PER_RUN)) +
-#   geom_text(aes(label = ..count..),  position = position_dodge(width = .9), vjust = -.25, stat= "count") +
-#   geom_bar(position = position_dodge(),fill = ) +
-#   ylab("Nb of Gene") +
-#   xlab("Nb of patient carrying a variant on the same gene") +
-#   scale_x_continuous(breaks = c(1:5))
-# 
-# plot_grid(pA,pB, ncol = 1, rel_heights = c(1, 1.8), labels = c("A","B"))
-# 
-# ggplot(df_filter_het_mmaf, aes(RUN)) + 
-# geom_bar()
-# # 
-# 
-# df_filter_het_mmaf %>% group_by(SYMBOL) %>% mutate(N_RUN = n()) %>% ungroup() %>% mutate(N_GENE_TOT = n_distinct(SYMBOL)) %>% ungroup() %>% distinct(SYMBOL) %>% View
-# 
-
-```
-
-
-```{r aaa, cache=TRUE}
-
-# ggplot(df_nb_view,aes(N)) +
-#   geom_bar(aes(fill = TYPE)) +
-#   geom_text(aes(label = ..count..), position = position_stack(vjust = 1), stat= "count") +
-#   facet_grid(TYPE~.,scales = "free") +
-#   scale_fill_discrete(guide = "none") +
-#   ylab("Count") +
-#   xlab("Nb of patient sharing a same variant")
-# 
-# ggplot(df_variants_mmaf_nb_view,aes(N)) +
-#   geom_bar(aes(fill = TYPE)) +
-#   # geom_text(aes(label = ..count..), position = position_stack(vjust = 1), stat= "count") +
-#   facet_grid(TYPE~.,scales = "free") +
-#   scale_fill_discrete(guide = "none") +
-#   ylab("Count") +
-#   xlab("Nb of patient sharing a same variant")
-
-```
-
-
-
-<!-- 2. L’efficacité diagnostique -->
-<!-- 3. L’analyse individuelle -->
-<!--     a. Les mutations dans les gènes identifiés -->
-<!--     b. Liste complète des gènes avec 2 variants tronquants -->
-<!--     c Liste complète des gènes avec deux variants dont un tronquant -->
-<!--     d. Liste des  gènes avec 2 variants intronique ou faux-sens/synonymes avec un score élevé UMD-predictor ou HSF. -->
-<!--     e. Liste des gènes avec un variant hétérozygote tronquant -->
-
-
-
-
-
-
-
-
-
-
-
