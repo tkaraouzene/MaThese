@@ -19,6 +19,7 @@ If you feel it necessary to include an appendix, it goes here.
 **In Chapter \@ref(ref-labels):**
 
 ```{r ref.label='include_packages_2', results='hide', echo = TRUE}
+  
 ```
 
 # The Second Appendix, for Fun

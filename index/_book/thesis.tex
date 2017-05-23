@@ -594,7 +594,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Processus simplifié du contrôle qualité des *reads*]{Processus simplifié du contrôle qualité des *reads* : Pour chacun des graphiques, les *reads* représentés envert sont conservés tandis que ceux en rouge sont filtrés. **A** : Quantité de *reads* bruts générés pour chaque patients au cours de l'étape de séquençage. La médiane des *reads* est représentée en bleue. **C** : Pourcentage pour chaque individu de *reads* s'étant aligné correctement et ne s'étant pas alignés sur le génome de référence. **C** : Distribution pour chaque patient des *reads* compatibles (Comp), non compatibles (Non comp) et orphelins (Orphans). **D** : Présentation pour chaque *reads* du nombre de site auxquels ils s'alignent}\label{fig:readsselection}
+  \caption[Processus simplifié du contrôle qualité des *reads*]{Processus simplifié du contrôle qualité des *reads* : Pour chacun des graphiques, les *reads* représentés envert sont conservés tandis que ceux en rouge sont filtrés. **A** : Quantité de *reads* bruts générés pour chaque patients au cours de l'étape de séquençage. La médiane des *reads* est représentée en bleue. **B** : Pourcentage pour chaque individu de *reads* s'étant aligné correctement et ne s'étant pas alignés sur le génome de référence. **C** : Distribution pour chaque patient des *reads* compatibles (Comp), non compatibles (Non comp) et orphelins (Orphans). **D** : Présentation pour chaque *reads* du nombre de site auxquels ils s'alignent}\label{fig:readsselection}
   \end{figure}
   
   \newpage
@@ -724,6 +724,9 @@ class (for LaTeX) and the R bookdown package, in general.
   
   (À discuter !!!!!) (\textbf{Figure : }\ref{fig:plotvarannotation} -
   \textbf{D})
+  
+  LES FIGURES SUR LA FRÉQUENCE SONT À DISCUTER CAR LEUR INTERPRÉTATION ME
+  LAISSE PERPLEX (SURTOUT LA PROPORTION DE NOS VARIANTS PRÉSENTS DANS 1KG)
   
   \newpage
   
@@ -1108,13 +1111,15 @@ class (for LaTeX) and the R bookdown package, in general.
     infertiles présentant des échecs de fécondation.
   \end{enumerate}
   
-  Pour 1 d'entre elle, un cadidat potentiel a pu être mis en évidence
-  (\textbf{Figure : }\ref{fig:plotremaininggenes}) et notre équipe
-  travaille actuellement sur la caractérisation de ce gène afin de savoir
-  s'il peut effectivement expliquer le phénotype MMAF de cette famille.
+  Pour une d'entre elle, un cadidat potentiel a pu être mis en évidence
+  avec le gène \emph{TGIF2} et notre équipe travaille actuellement sur la
+  caractérisation de ce gène afin de savoir s'il peut effectivement
+  expliquer le phénotype MMAF de cette famille (\textbf{Figure :
+  }\ref{fig:plotremaininggenes}).
   
-  Pour les 2 familles restantes, l'explication la plus vraissemblable est
-  que le variant ait été filtré par l'un de nos six filtres, probablement
+  Pour les 2 familles restantes, aucun variant n'a pu pour l'instant
+  expliquer leur phénotype. L'explication la plus vraissemblable est que
+  le variant ait été filtré par l'un de nos six filtres, probablement
   celui consistant à filtrer l'ensemble des variants hétérozygotes. En
   effet, l'hypothèse d'un variant causal homozygote était extrêmement
   crédible pour les familles AZ, FF et MMAF2 étant donné l'historique
@@ -1142,7 +1147,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille  :  Chaque barre représente une des familles analysées. La hauteure de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres vertes caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au dessus de la barre). Les barres rouges indique qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit "???" au dessus de la barre)}\label{fig:plotremaininggenes}
+  \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille  :  Chaque barre représente une des familles analysées. La hauteure de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres vertes caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au dessus de la barre). La barre orange caractérise la famille pour laquelle un candidat potentiel a été identifié (le symbole du gène est écrit au dessus suivit d'un "?"). Les Les barres rouges indique qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit "???" au dessus de la barre)}\label{fig:plotremaininggenes}
   \end{figure}
   
   \newpage
