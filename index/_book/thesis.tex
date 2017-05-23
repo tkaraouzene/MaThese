@@ -216,9 +216,9 @@ class (for LaTeX) and the R bookdown package, in general.
   dans le cadre d'étude phénotype-génotype en permettant de manière rapide
   et à moindre coup le séquençage de la quasi totalité des gènes humains.
   Les causes de plusieurs centaines de pathologies ont pu être identifiées
-  grâce à ces technique depuis leur premier succès pubilié en 2010 (Ng et
-  al., n.d.). Dès lors, l'analyse des données issues du séquençage est
-  devenu la clef dans la réussite de ces études.
+  grâce à ces technique depuis leur premier succès pubilié en 2010 (S. B.
+  Ng et al., n.d.). Dès lors, l'analyse des données issues du séquençage
+  est devenu la clef dans la réussite de ces études.
   
   Il existe de nombreux logiciels qui à partir des variants appelés
   effectuent les étapes d'annotation et de filtrage. C'est par exemple le
@@ -229,37 +229,6 @@ class (for LaTeX) and the R bookdown package, in general.
   manière les étapes d'alignement et d'appel des variants. Or, comme il a
   été dit plus tôt, ces deux étapes constituent la bases de l'analyse
   {[}TODO insert ref{]} et les résultats
-  
-  Dans ce chapitre, je détaillerai les résultats de 4 articles dont je
-  suis coauteur :
-  
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    \protect\hyperlink{famdnah1}{\textbf{Whole-exome sequencing of
-    familial cases of multiple morphological abnormalities of the sperm
-    flagella (MMAF) reveals new DNAH1 mutations}} : {[}todo{]}
-  \item
-    \protect\hyperlink{plcz}{\textbf{Homozygous mutation of PLCZ1 leads to
-    defective human oocyte activation and infertility that is not rescued
-    by the WW-binding protein PAWP}} : Dans cet article j'ai, comme
-    précédemment, effectué l'integralité des analyses bioinformatiques des
-    données d'exomes effectués sur deux frères infertiles présentant des
-    échecs de fécondation.\\
-  \item
-    \protect\hyperlink{spink2}{\textbf{SPINK2 deficiency causes
-    infertility by inducing sperm defects in heterozygotes and azoospermia
-    in homozygotes}} : Dans cet article j'ai effectuer non seulement
-    l'intégralité des analyses bioinformatiques des données d'exomes de
-    deux frères infertiles présentant un phénotype d'azoospermie mais
-    aussi séquencer en Sanger les séquences codantes du gène \emph{SPINK2}
-    pour une parie des 611 individus analyser ainsi que contribué à
-    l'extraction de l'ARN testiculaire des souris pour l'analyse
-    fonctionelle du gène \emph{Spink2} sur le modèle murin.\\
-  \item
-    \protect\hyperlink{cohortemmah}{****} : {[}todo{]}
-  \end{enumerate}
   
   \section{Résultats}\label{resultats}
   
@@ -365,6 +334,151 @@ class (for LaTeX) and the R bookdown package, in general.
     différent sont de même enlevés de la liste finale.
   \end{enumerate}
   
+  \newpage
+  
+  \blandscape
+  
+  \begin{longtable}[]{@{}lll@{}}
+  \caption{\label{tab:tabvepcsq} Liste simplifiée des conséquences prédites
+  par VEP avec leur description et impact associée}\tabularnewline
+  \toprule
+  \begin{minipage}[b]{0.18\columnwidth}\raggedright\strut
+  VEP consequence\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\raggedright\strut
+  VEP impact\strut
+  \end{minipage} & \begin{minipage}[b]{0.63\columnwidth}\raggedright\strut
+  Description\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  \begin{minipage}[b]{0.18\columnwidth}\raggedright\strut
+  VEP consequence\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\raggedright\strut
+  VEP impact\strut
+  \end{minipage} & \begin{minipage}[b]{0.63\columnwidth}\raggedright\strut
+  Description\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Splice acceptor / donor\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  HIGH\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A splice variant that changes the 2 base region at the 3' / 5' end of an
+  intron\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Stop gained\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  HIGH\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A sequence variant whereby at least one base of a codon is changed,
+  resulting in a premature stop codon, leading to a shortened
+  transcript\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Frameshift\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  HIGH\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A sequence variant which causes a disruption of the translational
+  reading frame, because the number of nucleotides inserted or deleted is
+  not a multiple of three\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Stop lost\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  HIGH\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A sequence variant where at least one base of the terminator codon
+  (stop) is changed, resulting in an elongated transcript\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Start lost\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  HIGH\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A codon variant that changes at least one base of the canonical start
+  codo\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Inframe insertion / deletion\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  MODERATE\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  An inframe non synonymous variant that inserts / deletes bases into in
+  the coding sequenc\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Missense\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  MODERATE\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A sequence variant, that changes one or more bases, resulting in a
+  different amino acid sequence but where the length is preserved\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Splice region\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  LOW\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A sequence variant in which a change has occurred within the region of
+  the splice site, either within 1-3 bases of the exon or 3-8 bases of the
+  intron\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Stop retained\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  LOW\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A sequence variant where at least one base in the terminator codon is
+  changed, but the terminator remains\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Synonymous\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  LOW\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A sequence variant where there is no resulting change to the encoded
+  amino acid\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  5 / 3 prime UTR\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  MODIFIER\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A UTR variant of the 5' / 3' UTR\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Intron\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  MODIFIER\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A transcript variant occurring within an intron\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  NMD transcript\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  MODIFIER\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A variant in a transcript that is the target of NMD\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  Non coding transcript\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  MODIFIER\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  A transcript variant of a non coding RNA gene\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
+  
+  \elandscape
+  
+  \newpage
+  
   \subsection{Utilisation de la pipeline dans des cas familiaux
   :}\label{utilisation-de-la-pipeline-dans-des-cas-familiaux}
   
@@ -395,67 +509,82 @@ class (for LaTeX) and the R bookdown package, in general.
   \end{enumerate}
   
   Un récapitulatif des familles et de leur phénotype est disponible dans
-  la table \ref{tab:recapfam}.
+  la table \ref{tab:tabrecapfam}.
   
-  \begin{longtable}[t]{lrlrll}
-  \caption{\label{tab:recapfam}Tableau recapitulatif des familles séquencées et de leur phénotype}\\
+  \begin{longtable}[t]{lrlrl}
+  \caption{\label{tab:tabrecapfam}Tableau recapitulatif des familles séquencées et de leur phénotype}\\
   \toprule
-  Familly & Individuals & Phenotype & Year & Plateform & Place\\
+  Familly & Individuals & Phenotype & Year & Place\\
   \midrule
-  Az & 2 & Azoospermia & 2012 & Illumina HiSeq2000 & Mount Sinai Institut\\
-  FF & 2 & Fertilization failure & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  MMAF1 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  MMAF2 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  MMAF3 & 2 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
-  MMAF4 & 3 & MMAF & 2014 & Illumina HiSeq2000 & Genoscope (Evry)\\
+  Az & 2 & Azoospermia & 2012 & Mount Sinai Institut\\
+  FF & 2 & Fertilization failure & 2014 & Genoscope (Evry)\\
+  MMAF1 & 2 & MMAF & 2014 & Genoscope (Evry)\\
+  MMAF2 & 2 & MMAF & 2014 & Genoscope (Evry)\\
+  MMAF3 & 2 & MMAF & 2014 & Genoscope (Evry)\\
+  MMAF4 & 3 & MMAF & 2014 & Genoscope (Evry)\\
   \bottomrule
   \end{longtable}
   
+  \newpage  
+  
   \subsubsection{Resultats des exomes}\label{resultats-des-exomes}
   
-  \paragraph{Résultat de l'alignement
-  les}\label{resultat-de-lalignement-les}
+  \paragraph{Résultat de l'alignement}\label{resultat-de-lalignement}
   
   Pour rappel, l'\href{\%7B\#lalignement\%7D}{alignement} consiste à
-  repositionnerl'ensemble des \emph{reads} générés au cours de l'étape de
-  séquençage le long d'un génome de référence. La quantité de \emph{reads}
+  repositionner l'ensemble des \emph{reads} générés au cours de l'étape de
+  séquençage le long d'un génome de référence.
+  
+  La quantité de \emph{reads} composant les exomes de chaque individus
   peut varier en fonction de plusieurs paramètres et n'est donc pas éguale
-  pour chaque patient bien que l'ordre de grandeur reste le même exceptés
-  pour les deux frères AZ1 et AZ2 pour lesquels on a près de 3 fois plus
-  de \emph{reads} que pour les autres patients (\textbf{Figure :
-  }\ref{fig:readsselection} - \textbf{A}). Ceci peut être expliqué car ces
-  deux patients sont les deux seuls à voir été séquencé au Mount Sinaï
-  Institut or leur protocol d'amplification contient un nombre de cycles
-  de PCR superieur à ceux appliqué au Génopole d'Evry où ont été séquencé
-  les autres patients (\textbf{Table :} \ref{tab:recapfam}), L'ensemble de
-  nos exomes ayant été réalisés en \emph{paired-end}, les deux extrémités
-  de chaques fragments sont séquencés chaque \emph{end} d'un même
-  \emph{read} peut donc être considéré comme un \emph{read} à part
-  entière. Celle-ci sont ensuite alignées \textbf{indépendemment} le long
-  du génome de référence, l'information fournit par le \emph{paired-end}
-  n'est utilisé qu'à \emph{posteriri} en tant que critère qualité. Ainsi,
-  après avoir filtré les \emph{reads} ne s'étant pas aligné sur le génome
-  et le \emph{reads} orphelines (une seule des deux \emph{ends} s'est
-  alignée sur le génome), la ``compatibilité entre les deux \emph{ends}
-  d'un même \emph{reads} est analysée. Un \emph{read} est dit''compatible"
-  lorsque les deux \emph{ends} qui le composent s'alignent face à face
-  (une sur le \emph{strand} + et l'autre sur le \emph{strand} -) et
-  couvrent une zone ne faisant pas plus de 3 fois la taille médiane de
-  l'insert. Ici encore, seul les \emph{reads} ayant des \emph{ends}
-  ``compatibles'' seront conservés. Pour l'ensemble de nos patients, les
-  \emph{reads} compatibles sont environs 10 fois plus important que la
-  somme des \emph{reads} non compatible, orphelins ou non mappés
-  (\textbf{Figure : }\ref{fig:readsselection} - \textbf{B}). Suite à cela,
-  le nombre de site auxquels se sont alignés les \emph{reads} est analysé.
-  En effet, certaine zone du génome étant dupliqué, l'une des
-  problématique des \emph{short-reads} est qu'il est possible que ceux-ci
-  s'alignent à plusieurs endroit du génome. Afin d'éviter toute ambiguité,
+  pour chaque patient bien que l'ordre de grandeur reste le même exceptés,
+  c'est à dire une médiane de 91438630 \emph{reads}. Seul les deux frères
+  AZ1 et AZ2 se distinguent près de 3 fois plus de \emph{reads} que pour
+  les autres patients. Cette différence peut être expliqué car ces deux
+  patients sont les deux seuls à voir été séquencé au Mount Sinaï Institut
+  or leur protocol d'amplification précédent le séquençage contient un
+  nombre de cycles de PCR superieur à ceux appliqué au Génopole d'Evry où
+  ont été séquencé les autres patients (\textbf{Table :}
+  \ref{tab:tabrecapfam}, \textbf{Figure : }\ref{fig:readsselection} -
+  \textbf{A}).
+  
+  L'ensemble de nos exomes ayant été réalisés en \emph{paired-end}, les
+  deux extrémités de chaques fragments sont séquencés chaque \emph{end}
+  d'un même \emph{read} peut donc être considéré comme un \emph{read} à
+  part entière qui sont alignées \textbf{indépendemment} le long du génome
+  de référence. L'information fournit par le \emph{paired-end} n'étant
+  utilisé qu'à \emph{posteriri} en tant que critère qualité. La première
+  étape du contrôle qualité des \emph{reads} consiste filtrer les
+  \emph{reads} ne s'étant pas aligné sur le génome. Ces \emph{reads} sont
+  extrêmemnt minoritaires puisqu'ils représentent entre 1.2 et 5.5 \% des
+  \emph{reads} de nos individus (\textbf{Figure :
+  }\ref{fig:readsselection} - \textbf{B}).
+  
+  Une fois cela fait, nous vérifions la ``compatibilité'' des deux
+  \emph{ends} composant chacun des \emph{reads} s'étant correctement
+  alignés. Un \emph{reads} est dit compatible lorsque les deux \emph{ends}
+  qui le composent s'alignent face à face (une sur le \emph{strand} + et
+  l'autre sur le \emph{strand} -) et couvrent une zone ne faisant pas plus
+  de 3 fois la taille médiane de l'insert. Les \emph{reads} dont les deux
+  \emph{ends} se sont alignées mais ne remplissant pas ces conditions
+  seront dit ``Non compatible'', ceux dont une seule des deux \emph{ends}
+  s'est alignés seront appellés ``orphelins''. Dans nos analyses, seuls
+  les \emph{reads} compatibles sont conservés, c'est à dire environs
+  \ldots{} \% (mediane) des \emph{reads} s'étant correctement alignés.
+  (\textbf{Figure : }\ref{fig:readsselection} - \textbf{C}).
+  
+  La dernière étape de ce contrôle-qualité consiste à analyser le nombre
+  de site auxquels se sont alignés les \emph{reads}. En effet, certaine
+  zone du génome étant dupliqué, l'une des problématique des
+  \emph{short-reads} est qu'il est possible que ceux-ci s'alignent à
+  plusieurs régions différentes du génome. Afin d'éviter toute ambiguité,
   seul ceux s'étant aligné sur un site unique sont conservés pour la suite
-  des analyse. ces \emph{reads} représente entre \ldots{} et \ldots{} \%
-  des \emph{reads} ayant passé les précédents filtres (\textbf{Figure :
-  }\ref{fig:readsselection} - \textbf{C}). Les \emph{reads} ayant passé
-  l'ensemble des critères qualité seront ensuite utilisé pour effectué
-  l'appel des variants.
+  des analyse. ces \emph{reads} représente entre 92.3 et 96.9 \% des
+  \emph{reads} ayant passé les précédents filtres (\textbf{Figure :
+  }\ref{fig:readsselection} - \textbf{C}).
+  
+  Les \emph{reads} ayant passé l'ensemble des critères qualité mentionnés
+  précédemment seront ensuite utilisés pour effectué l'appel des variants.
   
   \newpage
   
@@ -465,7 +594,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Processus simplifié du contrôle qualité des *reads*]{Processus simplifié du contrôle qualité des *reads* : **A** : Quantité de *reads* bruts générés pour chaque patients au cours de l'étape de séquençage. On constate que ce nombre reste pour chaque patient dans le même ordre de grandeur sauf pour les frères AZ1 et AZ2  qui contienent presque 3 fois plus de *reads* que la mediane représentée en bleue.. **B** : Distribution pour chaque patient des *reads* compatibles, incompatibles, orphelins et non mappés. Comme attendu, les reads compatible sont les plus important. Ils sont les seuls à être utilisé dans le reste de l'analyse.. **C** : Présentation pour chaque *reads* du nombre de site auxquels ils s'alignent. Seuls les reads s'alignant sur un site unique sont conservés}\label{fig:readsselection}
+  \caption[Processus simplifié du contrôle qualité des *reads*]{Processus simplifié du contrôle qualité des *reads* : Pour chacun des graphiques, les *reads* représentés envert sont conservés tandis que ceux en rouge sont filtrés. **A** : Quantité de *reads* bruts générés pour chaque patients au cours de l'étape de séquençage. La médiane des *reads* est représentée en bleue. **C** : Pourcentage pour chaque individu de *reads* s'étant aligné correctement et ne s'étant pas alignés sur le génome de référence. **C** : Distribution pour chaque patient des *reads* compatibles (Comp), non compatibles (Non comp) et orphelins (Orphans). **D** : Présentation pour chaque *reads* du nombre de site auxquels ils s'alignent}\label{fig:readsselection}
   \end{figure}
   
   \newpage
@@ -478,37 +607,67 @@ class (for LaTeX) and the R bookdown package, in general.
   référence afin d'en relever les différences. La particularité de notre
   algorithme d'appel est d'effectuer pour chaque position deux appels
   indépendents. Le premier sera effectué en utilisant uniquement les
-  \emph{reads forward} et le second le \emph{reads reverse}. Les positions
-  ayant une couverture \(\le\) 10 sur \textbf{les deux} \emph{strands}
-  seront filtrés (NS). Les autres seront conservés bien que ceux ayant une
-  couverture \(\le\) 10 sur \textbf{un des deux} \emph{strands} (SS)
-  seront considéré comme de faible qualité et seront leurs interprétations
-  sera plus précotionneuse. Ainsi, chez nos \texttt{r} {[}TODO nb of
-  patients{]} entre \ldots{} et \ldots{} variants sont filtrés car leur
-  couverture est \textless{} 10 sur les deux \emph{ends} du \emph{reads}
-  (\textbf{Figure : }\ref{fig:plotvarcall} - \textbf{A}).
+  \emph{reads forward} et le second le \emph{reads reverse}. Encore une
+  fois, plusieurs filtres sont appliqués de sorte à conserver uniquement
+  les variants les plus qualitatifs.
   
-  Pour les position ayant une couverture \(\ge\) 10 sur \textbf{les deux}
-  \emph{strands} (DS) les résultats des deux appels sont comparés et seul
-  les appel concordant seront conservés, c'est à dire environs \ldots{}\%
-  des variants DS. Les appels ambigus et discordants seront filtrés et non
-  considérés dans les analyses en aval (\textbf{Figure :
+  Tout d'abord, nos appels sont classés en trois catégories :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Les appels \emph{double strand} (DS) :} Qualifie les positions
+    ayant une couverture \(\ge\) 10 sur \textbf{les deux} strands. Ces
+    appels sont ceux sont ceux ayant la meilleure qualité
+  \item
+    \textbf{Les appels \emph{single strand} (SS) :} Ces appels définissent
+    les positions pour lesquels \textbf{un des deux} \emph{strands}
+    présentent une couverture \(\le\) 10. Dans ce cas, ce \emph{strand}
+    est ignoré et l'appel est effectué uniquement en utilisant le second
+    \emph{strand}.\\
+  \item
+    \textbf{Les appels \emph{non strand} (NS) :} Les positions NS sont
+    celles pour lesquelles la couverture es \(\le\) 10 sur \textbf{les
+    deux} strands. Aucun appel n'est effectué à ces positions.
+  \end{enumerate}
+  
+  Dans nos données, les appels SS sont majoritaire et représentent
+  environs 48.1 \% de nos appels (contre 35.6 \% d'appels DS). Au vus de
+  l'importance de ces appels, nous avons fait le choix de les conserver
+  afin de ne pas filtrer une quantité trop importante de données. Ces
+  appels seront cependant considérés comme étant de faible qualité, de
+  fait, leurs analyses et interprétation seront plus précotionneuses. En
+  revanche, au vus de la trop grande incertitude de l'appel des variants
+  NS, ceux-ci sont systematiquement filtrés éliminant ainsi entre 10.3 et
+  18.7 \% des positions appellées (\textbf{Figure : }\ref{fig:plotvarcall}
+  - \textbf{A}).
+  
+  Un second filtre est appliqué aux variants ayant été précédemment
+  appelés DS. Celui-ci consiste à comparer les appels effectués
+  indépendemments sur chacune des deux \emph{ends} et à vérifier leur
+  concordance, c'est à dire que les deux appels soit identique. Les appels
+  discordant et ambigus sont filtrer, ainsi environs 86.3 \% des variants
+  DS passent ce filtre. Il est intéréssant de noter que bien que les
+  variants \emph{single strand} (SS) soient conservés, on peut s'attendre
+  à ce qu'environ 13.7 \% de ceux-ci soient abérents, ceux-ci n'ayant put
+  subir le même contrôle que les SS (\textbf{Figure :
   }\ref{fig:plotvarcall} - \textbf{B}).
   
-  Dès lors il est intéréssant de noter que bien que les variants
-  \emph{single strand} (SS) soient conservés, on peut s'attendre à ce
-  qu'également \ldots{} \% de ces variants soient abérents, ceux-ci
-  n'ayant put subir le même contrôle que les SS. Pour l'ensemble des
-  variants ayant passé les premiers filtres, c'est à dire les variants SS
-  et les variants DS avec appels concordants, le génotype est déterminé en
-  fonction du pourcentage de \emph{reads} portant le variant à cette
-  position. Par exemple, si à une position donnée, 0\% des \emph{reads}
-  portent un variant, l'individu sera appelé ``Homozygote référence'', si
-  50\% des \emph{reads} sont portent un variant, l'appel sera
-  ``hétérozygote'' et si 100\% des \emph{reads} portent un variant,
-  l'appel sera ``Homozygote variant''. Ainsi, pour chaque individu nous
-  avons pu établire une liste de variants avec leur génotype associé
-  (\textbf{Figure : }\ref{fig:plotvarcall} - \textbf{C}).
+  Pour l'ensemble des variants ayant passé les filtres énnoncés ci-dessus,
+  c'est à dire les variants SS et les variants DS avec appels concordants,
+  le génotype est déterminé en fonction du pourcentage de \emph{reads}
+  portant le variant à cette position. Par exemple, si à une position
+  donnée, 0\% des \emph{reads} portent un variant, l'individu sera appelé
+  ``Homozygote référence'', si 50\% des \emph{reads} sont portent un
+  variant, l'appel sera ``hétérozygote'' et si 100\% des \emph{reads}
+  portent un variant, l'appel sera ``Homozygote variant''. Ainsi, pour
+  chaque individu nous avons pu établire une liste de SNVs et d'indels
+  avec leur génotype associé. Pour chacun de nos 13 patients les ordres de
+  grandeur du nombre de variants appelés sont identique. ainsi pour chaque
+  patients nous avons appelés environ 43695 variants hétérozygotes (41044
+  SNVs et 2651 indels) et 65040 variants homozygotes (32520 SNVs et 1809
+  indels) (\textbf{Figure : }\ref{fig:plotvarcall} - \textbf{C}).
   
   \newpage
   
@@ -518,31 +677,55 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Contrôle qualité des variants appelés]{Contrôle qualité des variants appelés : Pour l'ensemble des figures les variants verts sont conservés, les gris sont filtrés. **A** : Distribution du *stranding* des appels pour chaque patients. Environs 16 pourcents des vairants ont une couverture insufisante pour l'appel *forward* et l'appel *revers* et sont donc filtrés, les autres sont conservés. **B** : Comparaison des appels entre les deux *ends* des variants appelés DS. En fonction des individus, 80 à 90 pourcent des appels sont concordants. Les autres appels sont filtrés des analyses ulterieures. **C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre).}\label{fig:plotvarcall}
+  \caption[Contrôle qualité des variants appelés]{Contrôle qualité des variants appelés : Pour chacun des graphiques, les variants représentés en vert sont conservés tandis que ceux en rouge sont filtrés. **A** : Distribution du *stranding* des appels pour chaque patients. **B** : Comparaison des appels entre les deux *ends* des variants appelés DS. **C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre}\label{fig:plotvarcall}
   \end{figure}
   
   \newpage
   
   \paragraph{Résultats de l'annotation}\label{resultats-de-lannotation}
   
-  Afin de connaitre l'effet qu'auront chacun des variants appelés sur les
-  différents transcrits qu'ils chevauchent nous utilisons le logiciel VEP.
-  Grâce à celà, nous pouvons constater que pour chaque patient \ldots{}
-  gènes sont en moyenne affecté par au moins un variant tandis que
-  \ldots{} sont impactés (soit environs \texttt{r} transcrits par gènes)
-  (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{A}). Chaque
-  variant affectera l'ensemble des transcrits qu'il chevauche, ainsi un
-  même variant pourra impacter plusieurs transcrits. Ces impacts sont
-  ensuite classés par VEP en quatre catégories qui sont, de la plus
-  délétère à la moins délétère : HIGH, MODERATE, LOW, MODIFIER. Comme
-  attendu, les variants ayant un impact tronquant se retrouvent être les
-  moins fréquent chez chacun de nos patients. Ceci est d'autant plus
-  flagrant pour l'impact HIGH qui regroupe, entre autre, les variants
-  créant un codon stop ou encore ceux causant un décalage du cadre de
-  lécture, se retrouvent en quantité extrêment faible puisqu'ils ne
-  représentent en moyenne que \ldots{} \% des variants (soit environs
-  \ldots{} par patient (en nb ici)) (\textbf{Figure :
-  }\ref{fig:plotvarannotation} - \textbf{B}).
+  L'annotation des variants appelés consiste à ajouter un maximum
+  d'informations sur les variants. Ces informations seront ensuite
+  utilisés afin de filtrer et / ou prioriser des les variants. Dans ces
+  analyses nous avons utiliser le logiciel \emph{Variant Effect Predictor}
+  (VEP) (W. McLaren et al., \protect\hyperlink{ref-McLaren2016}{2016}) qui
+  va à la fois prédire l'effet qu'auront ces variants sur l'ensembles des
+  transcrits (et gènes) qu'ils chevauchent, ajouter, lorsqu'elle est
+  disponible, la fréquence de chacun des ces variants dans les bases de
+  données ExAC, 1000Genomes (1KG) et ESP6500. Pour finir VEP nous
+  permettra de connaitre les prédictions de pathogénécités fournies par
+  SIFT et PolyPhen pour les variants faux-sens.
+  
+  Après avoir annoter nos variants par VEP, nous avons pu constater que
+  pour chaque patient 24975 gènes sont en moyenne affecté par au moins un
+  variant pour en moyenne 122735 transcrits (soit environs 5 transcrits
+  par gènes) (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{A}).
+  
+  Chaque variant affectera l'ensemble des transcrits qu'il chevauche,
+  ainsi un même variant pourra impacter plusieurs transcrits. Ces impacts
+  sont ensuite classés par VEP en quatre catégories qui sont, de la plus
+  délétère à la moins délétère : HIGH, MODERATE, LOW, MODIFIER
+  (\textbf{Table :}\ref{tab:tabvepcsq}). Comme attendu, les variants ayant
+  un impact tronquant se retrouvent être les moins fréquent chez chacun de
+  nos patients. Ceci est d'autant plus flagrant pour l'impact HIGH qui
+  regroupe, entre autre, les variants créant un codon stop ou encore ceux
+  causant un décalage du cadre de lécture (\textbf{Table
+  :}\ref{tab:tabvepcsq}), se retrouvent en quantité extrêment faible
+  puisqu'ils ne représentent en moyenne que 0.15 \% des variants, soit une
+  moyenne de 466 hétérozygotes et 370 homozygotes par patient)
+  (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{B}).
+  
+  Parmi ces variants, certains étaient déjà recancé dans une des trois
+  base donnée (ExAC, ESP et 1KG). Ainsi, on peut observer qu'entre 38.6 et
+  55.5 \% de nos variant étaient listés dans ExAC et entre 33.1 et 43.8 \%
+  dans ESP. En revanche environ 87.1 \% d'entre eux sont recanssés dans
+  1KG (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{C}) (À
+  discuter !!!!!).
+  
+  (À discuter !!!!!) (\textbf{Figure : }\ref{fig:plotvarannotation} -
+  \textbf{D})
+  
+  \newpage
   
   \begin{figure}
   
@@ -550,27 +733,12 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[TODO]{TODO : TODOooooooo ooooooooo oooooooooooooooooo oooooooooooooooo oooooooooooo ooooooooooo oooo oooooooo oooooooooooooooooooooooooooo oooooooooo ooooo ooooooooooooo oooooooooo oooooooooo ooooooo.}\label{fig:plotvarannotation}
-  \end{figure}
-  
-  \begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/plotvarfreq-1} 
-  
-  }
-  
-  \caption[TODO]{TODO : TODOooooooo ooooooooo oooooooooooooooooo oooooooooooooooo oooooooooooo ooooooooooo oooo oooooooo oooooooooooooooooooooooooooo oooooooooo ooooo ooooooooooooo oooooooooo oooooooooo ooooooo.}\label{fig:plotvarfreq}
+  \caption[Annotation des variants par VEP]{Annotation des variants par VEP : **A** : Quantification du nombre de gènes (en bleu) / transcripts (en rose) impactés par au moins un variant pour chaque patients chacun représentés par une barre. **B** : Distribution des impact HIGH MODERATE LOW et MODIFIER en fonction des patients et du génotype du variant. **C** : Pourcentage de nos variants retrouvés au sein des trois bases de données : ExAC, ESP et 1KG. **D** : Distribution des fréquences de nos variants au sein des trois bases de données : ExAC, ESP et 1KG}\label{fig:plotvarannotation}
   \end{figure}
   
   \newpage
   
   \paragraph{Résultats du filtrage}\label{resultats-du-filtrage}
-  
-  \begin{verbatim}
-  ##             used  (Mb) gc trigger   (Mb)  max used   (Mb)
-  ## Ncells    754897  40.4    2564361  137.0   3205452  171.2
-  ## Vcells 115550903 881.6  363498973 2773.3 454172341 3465.1
-  \end{verbatim}
   
   Les étapes précédentes nous ont permis de mettre en évidence pour chaque
   patient une liste de variants passant l'ensemble de nos critères
@@ -593,15 +761,12 @@ class (for LaTeX) and the R bookdown package, in general.
     même phénotype. Ainsi nous avons pu formuler l'hypothèse d'une cause
     génétique commune entre les différents patients d'une même famille et
     donc filtrer l'ensemble des variants qui ne sont pas partagés par
-    l'ensemble des membre de la fraterie {[}TODO: discussion de
-    l'efficacité du filtre{]}.\\
+    l'ensemble des membre de la fraterie.\\
   \item
     \textbf{Filtre 2 : Genotype des variants :} Dans ces études, nous
     avons emmis l'hypothèse d'une transmission recessive du phénotype.
-    Ainsi, seul les variants homozygotes ont été conservés. Ce filtre est
-    le plus efficace du pipeline en permettant de filtrer entre \ldots{}
-    et \ldots{} variants par individus (\textbf{Figure :
-    }\ref{fig:resvarcall}, \ref{fig:comparefilter}).\\
+    Ainsi, seul les variants homozygotes ont été conservés.
+    (\textbf{Figure : }\ref{fig:resvarcall}, \ref{fig:comparefilter}).\\
   \item
     \textbf{Filtre 3 : Impact du variant :} Afin de ne conserver que les
     variants ayant un effet potentiellement tronquant sur la protéine,
@@ -611,12 +776,14 @@ class (for LaTeX) and the R bookdown package, in general.
     n'ont aucun effet sur séquences protéique. Pour les variants faux sens
     (changement d'un seul aa de la séquence protéique) il est plus
     difficile de se décider {[}TODO insert citation{]} nous avons donc
-    utilisé les logiciels SIFT et Polyphen et filtré l'ensemble des
+    utilisé les logiciels SIFT (Kumar, Henikoff, \& Ng,
+    \protect\hyperlink{ref-Kumar2009}{2009}) et Polyphen (Adzhubei et al.,
+    \protect\hyperlink{ref-Adzhubei2010}{2010}) et filtré l'ensemble des
     fauxsens prédit comme \emph{tolerated} par SIFT et \emph{benign} par
     Polyphen.\\
   \item
-    \textbf{Filtre 4 : Les transcrits non pertinents :} Au cours de nos
-    analyses nous nous sommes concentré uniquement sur les transcrits
+    \textbf{Filtre 4 : Les transcrits ``non pertinents'' :} Au cours de
+    nos analyses nous nous sommes concentré uniquement sur les transcrits
     codant pour une protéine. Ainsi, l'ensemble des transcrits annotés
     comme étant non codant furent filtrés. De même Le mécanisme NMD
     (\emph{nonsense-mediated decay}) a pour but de controler la qualité
@@ -652,7 +819,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     \textbf{Frequence des variants :} La fréquence d'un variant dans la
     population générale est un moyen rapide d'avoir un avis sur l'effet
-    délétère de celui-ci. En efft, il est peu probable qu'un retrouvé
+    délétère de celui-ci. En effet, il est peu probable qu'un retrouvé
     fréquement dans la population générale soit causal d'une pathologie
     sévère. Ainsi nous avons filtré pour l'ensemble de nos patients
     l'ensemble des variants ayant une fréquence \(\ge\) 0.01 dans l'une
@@ -664,12 +831,12 @@ class (for LaTeX) and the R bookdown package, in general.
     l'un des 6 phénotypes étudié au cours de nos différentes études
     (\textbf{Table : }\ref{tab:TODO}). Ces phénotypes étant très
     différent, il n'est pas abérant d'emmetre l'hypothèse qu'ils que leurs
-    causes génétiques soient diffrentes. De même, les variants recherché
-    étant rares, il est peu probable qu'un individu porte les variants de
-    deux phénotypes différents. Ainsi, pour chacune des 6 familles, nous
-    avons pu constituer une cohorte contrôle composée dans l'ensemble des
-    patients précédemment analysés et ne présentant pas le même phénotype
-    que celui étudié dans la famille (\textbf{Figure :}
+    causes génétiques le soient égallement. De même, les variants
+    recherchés étant rares, il est peu probable qu'un individu porte les
+    variants de deux phénotypes différents. Ainsi, pour chacune des 6
+    familles, nous avons pu constituer une cohorte contrôle composée dans
+    l'ensemble des patients précédemment analysés et ne présentant pas le
+    même phénotype que celui étudié dans la famille (\textbf{Figure :}
     \ref{fig:plotsamplectrl}). Dès lors, nous avons put filtrer l'ensemble
     des variants retrouvés à la fois chez nos patients et observés à
     l'état homozygote dans la cohorte contrôle.
@@ -686,23 +853,288 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  {[}TODO : COMPARAISON DE L'EFFICACITE DES FILTRES{]}
+  \newpage
   
-  Après avoir effectuer l'ensemble de ces filtres, seuls quelques variants
+  Comme on pouvait s'y attendre, ces six filtres on un pouvoir
+  discriminant extrêmemnt différent (\textbf{Figure :}
+  \ref{fig:plotcomparefilter}). En effet, tandis que le filtre
+  ``Transcript relevance'' (filtre n°4) éliminer en moyenne 3.9 \% des
+  variants de chaque individus tandis que le filtre ``Variant impact''
+  (filtre n° 3) élimine jusqu'à 90.1 \% de ces mêmes variants
+  (\textbf{Figure :} \ref{fig:plotcomparefilter} - \textbf{A}). Cette
+  différence n'est pas surprenante. En effet, comme nous l'avions vu plus
+  tôt, les variants de la catégorie VEP MODIFIER qui regroupe entre autres
+  les variants chevauchant les séquences UTRs et introniques
+  (\textbf{Table :} ) représentent en moyenne \ldots{} \% des variants de
+  nos patients (\textbf{Figure :} \ref{fig:plotvarannotation} -
+  \textbf{A}). Ceux-ci étant tous filtrés, on s'attendais donc à une
+  valeure aussi élevée. On peut égallement constater l'importance de la
+  cohorte contrôle qui, je le rapelle, permet de filtrer l'ensemble des
+  variants homozygotes observés en son sein, puisque ce filtre permet
+  retirer entre 76.5 et 88.4\% des variants de chaque individus
+  (\textbf{Figure :} \ref{fig:plotvarannotation} - \textbf{A}).
+  
+  Cependant, regarder uniquement le pourcentage de variants filtrés par
+  chaque filtre révèle une information partielle. En effet, dans ce cas de
+  figure, on obsèrve la quantité de variant éliminé par chaque filtre
+  indépendemment les un des autres. Ainsi, un même variant peut donc être
+  filtrer par plusieurs filtre. Dès lors, il faut égallement analyser la
+  quantité de variants filtrés \textbf{spécifiquement} par chaque filtre.
+  Ainsi, on peut constater que le classement des filtres en fonctions de
+  leur stringeance reste quasi identique (\textbf{Figure :}
+  \ref{fig:plotcomparefilter} - \textbf{B}) il est tout de même
+  intéréssant de noter que désormai le filtre ``Variant impact'' apparait
+  moins efficaces que les filtres ``Ctrl'' et ``Genotype'' en filtrant
+  spécifiquement une moyenne de 253 variants par individu contre 423 pour
+  le filtre génotype et 882 pour le filtre ``Ctrl''. Ainsi, ce dernier
+  devient celui filtrant spécifiquement le plus de variants avec entre 364
+  et 1060 variants spécifiquement filtrés par patients confirmant ainsi
+  l'importance de ce filtre dans nos analyses. Aussi, les filtres
+  ``Transcript relevance'', ``Union'' et ``Frequency'' apparaissent
+  desormai comme étant annecdotique en comparaison aux trois autres
+  filtres puisqu'ils filtres au maximum 43 variants spécifiques
+  (\textbf{Figure :} \ref{fig:plotcomparefilter} - \textbf{B}).
+  
+  \newpage
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotcomparefilter-1} 
+  
+  }
+  
+  \caption[Comparaison de l'efficacité de chacun des six filtres utilisés]{Comparaison de l'efficacité de chacun des six filtres utilisés : **A** : Comparaison du pourcentage de variants filtrés par chacun des six filtres indépendamment les uns des autres pour chaque patient (représenté par les points. Dès lors, un même variants peut être filtré par plusieurs filtres. **B** : Comparaison du nombre de variant filtrés spécifiquement par chacun des filtres. Ici, un variant ne peut-être filtré que par un seul filtre}\label{fig:plotcomparefilter}
+  \end{figure}
+  
+  \newpage
+  
+  Après avoir appliquer l'ensemble de ces filtres, seuls quelques variants
   subsistent nous permettant d'obtenir unle liste de gènes restrainte pour
-  chaque famille (\textbf{Table : }\ref{tab:tablegene}). Ainsi, la cause
-  génétique expliquant le phénotype d'une famille a pu être mis en
-  évidence dans \ldots{} familles sur \ldots{} {[}TODO{]} (\textbf{Figure
-  : }\ref{fig:plotremaininggenes}). Il est a noté que l'ensemble des
-  familles pour lesquelles la cause génétique a été identifiée présente un
-  historique consanguin {[}figure arbre{]} ce qui n'était pas le cas pour
-  les \ldots{} autres. Cette consanguinité observée dans une partie des
-  famille nous a permi de justifier l'exclusion des variants
-  hétérozygotes. En revanche pour les \ldots{} autres fa milles, rien ne
-  justifiait un tel filtre. Ainsi, pour celles-ci il est probable que les
-  variants responsables se soient vu exclus par ce filtre. C'est pourquoi,
-  notre équipe se concentre actuellement sur les variants hétérozygotes de
-  ces familles.
+  chaque famille (\textbf{Table : }\ref{tab:tablegene}) et ainsi de tirer
+  des conclusion quant au variant responsable du phénotype.
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    \textbf{Famille AZ} : Parmi les 2 gènes restant pour cette famille,
+    \emph{SPINK2} est apparu comme étant un candidat évident. Notamment
+    son expression étant spécifique au testicule tandis que celle de
+    \emph{GUF1} est ubiquitaire (TODO fig). De plus, des mutation du gène
+    \emph{Spink2} chez la souris avait déjà été identifiée comme induisant
+    des defauts de la spermatogénèse (B. Lee et al.,
+    \protect\hyperlink{ref-Lee2011}{2011}).
+  \item
+    \textbf{Famille FF} : Pour cette famille, le gène
+    \emph{PLC}\(\zeta 1\) a passé l'ensemble des filtres. Nos connaissance
+    sur la fonction de se gène et nottamment son rôle dans l'activation
+    ovocytaire (TODO: REF) on fait de ce gène le candidat idéal pour
+    expliquer le phénotype de ces deux frères.\\
+  \item
+    \textbf{Famille MMAF1} : L'analyse bibliographique des 2 gènes ayant
+    passé l'ensemble des filtres n'a ici put nous permettre de d'affirmer
+    que l'un de ces gènes étaient responsable du phénotype MMAF de ces 2
+    frères.\\
+  \item
+    \textbf{Famille MMAF2} : À l'issus des filtres, 2 gènes ressortaient
+    chez ces deux frères : \emph{MYH11} et \emph{DNAH1}. Or, notre équipe
+    ayant déjà, il y a quelques années établit le liens entre des
+    mutations du gène \emph{DNAH1} et le syndrome MMAF (Ben Khelifa et
+    al., \protect\hyperlink{ref-BenKhelifa2014}{2014}) ce gène s'est
+    révélé être un candidat idéal pour expliquer le phénotype de ces 2
+    frères. De plus, l'implication de \emph{MYH11} dans le phénotype de
+    dissection aortique (Imai et al.,
+    \protect\hyperlink{ref-Imai2015}{2015}) l'ont écarté des candidats
+    pour le phénotype MMAF.\\
+  \item
+    \textbf{Famille MMAF3} : Comme pour les gènes de la famille MMAF2,
+    l'analyse bibliographique des 5 gènes ayant ici passé les filtres de
+    même que l'étude de leurs expressions ne nous a pas permis de conclure
+    que l'un d'entre eux étaient responsable du phénotype MMAF de ces 2
+    frères.\\
+  \item
+    \textbf{Famille MMAF4} : Seul le gène \emph{TGIF2} a passé l'ensemble
+    des filtres pour la famille MMAF4. L'expression ubiquitaire de ce gène
+    n'en font pas un candidats idéal. Cependant une étude de 2011
+    effectuée sur le wallaby décrit que la protéine TGIF2 localise
+    spécifiquement dans le cytoplasme du spermatide, ainsi que dans le
+    corps résiduel et la pièce intermédiaire du flagelle du spermatozoïde
+    mature (Hu, Yu, Shaw, Renfree, \& Pask,
+    \protect\hyperlink{ref-Hu2011}{2011}). Ces données pourrait corréler
+    avec le phénotype MMAF de ces 3 frères.
+  \end{enumerate}
+  
+  \newpage
+  
+  \begin{longtable}[]{@{}llllll@{}}
+  \caption{\label{tab:tablegene} Liste des gènes ayant passé l'ensemble des
+  filtres pour chaque famille}\tabularnewline
+  \toprule
+  \begin{minipage}[b]{0.08\columnwidth}\raggedright\strut
+  AZ\strut
+  \end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
+  FF\strut
+  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
+  MMAF1\strut
+  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
+  MMAF2\strut
+  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
+  MMAF3\strut
+  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
+  MMAF4\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  \begin{minipage}[b]{0.08\columnwidth}\raggedright\strut
+  AZ\strut
+  \end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
+  FF\strut
+  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
+  MMAF1\strut
+  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
+  MMAF2\strut
+  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
+  MMAF3\strut
+  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
+  MMAF4\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
+  SPINK2\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+  PLCZ1\strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+  PLA2G4B\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  MYH11\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  PCSK5\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  TGIF2\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
+  GUF1\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+  JMJD7-PLA2G4B\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  DNAH1\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  WEE2\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  GBP2\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  FCGR3A\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  ZFYVE28\strut
+  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
+  
+  \newpage 
+  
+  \subsubsection{Discussion}\label{discussion}
+  
+  L'analyse de ces 6 familles nous a permis de mettre en évidence
+  l'efficacité de notre pipeline d'analyse puisque pour 3 d'entre elles
+  (soit 50\%) le variant causal a pu être identifié avec certitude
+  (\textbf{Figure : }\ref{fig:plotremaininggenes}) et les résultats
+  publiés dans trois revus dont je suis co-auteur :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Famille AZ} : \protect\hyperlink{spink2}{\textbf{SPINK2
+    deficiency causes infertility by inducing sperm defects in
+    heterozygotes and azoospermia in homozygotes}} : Dans cet article j'ai
+    effectuer non seulement l'intégralité des analyses bioinformatiques
+    des données d'exomes de deux frères infertiles présentant un phénotype
+    d'azoospermie mais aussi séquencer en Sanger les séquences codantes du
+    gène \emph{SPINK2} pour une parie des 611 individus analyser ainsi que
+    contribué à l'extraction de l'ARN testiculaire des souris pour
+    l'analyse fonctionelle du gène \emph{Spink2} sur le modèle murin.\\
+  \item
+    \textbf{Famille FF} : \protect\hyperlink{plcz}{\textbf{Homozygous
+    mutation of PLCZ1 leads to defective human oocyte activation and
+    infertility that is not rescued by the WW-binding protein PAWP}} :
+    Dans cet article j'ai, effectué l'integralité des analyses
+    bioinformatiques des données d'exomes effectués sur deux frères
+    infertiles présentant des échecs de fécondation.\\
+  \item
+    \textbf{Famille MMAF2} :
+    \protect\hyperlink{famdnah1}{\textbf{Whole-exome sequencing of
+    familial cases of multiple morphological abnormalities of the sperm
+    flagella (MMAF) reveals new DNAH1 mutations}} : Dans cet article j'ai,
+    comme précédemment, effectué l'integralité des analyses
+    bioinformatiques des données d'exomes effectués sur deux frères
+    infertiles présentant des échecs de fécondation.
+  \end{enumerate}
+  
+  Pour 1 d'entre elle, un cadidat potentiel a pu être mis en évidence
+  (\textbf{Figure : }\ref{fig:plotremaininggenes}) et notre équipe
+  travaille actuellement sur la caractérisation de ce gène afin de savoir
+  s'il peut effectivement expliquer le phénotype MMAF de cette famille.
+  
+  Pour les 2 familles restantes, l'explication la plus vraissemblable est
+  que le variant ait été filtré par l'un de nos six filtres, probablement
+  celui consistant à filtrer l'ensemble des variants hétérozygotes. En
+  effet, l'hypothèse d'un variant causal homozygote était extrêmement
+  crédible pour les familles AZ, FF et MMAF2 étant donné l'historique
+  consanguin de ces 3 familles dont les parents sont à caque fois
+  apparentés. En revanche rien ne laisse supposé une telle chose pour les
+  familles restantes. Cependant, le filtre des variants hétérozygotes pour
+  l'ensemble des patients de ces 3 familles a été maintenu en première
+  intention afin de faciliter les analyses en réduisant au maximum le
+  nombre de variant. Au vus des résultats il apparait clair que les
+  variant responsable de leur phénotypes aient été filtrés pour au moins 2
+  de ces familles . Dès lors, l'ensemble des analyses effectuées lors de
+  l'étape de filtrage doiventr être refaites en changeant les paramètres
+  de filtrage. Cette fois-ci, les variants hétérozygotes seront conservés
+  et les gènes sur lesquels au moins deux variants hétérozygotes seront
+  recanssés seront analysés en priorité. En effet, bien que les analyses
+  exomiques nous fournissent en l'état pas d'informations suffisante pour
+  savoir si ces deux variants sont présent sur le même allèle ou bien sur
+  deux allèles différents, cela pourrait-être la signature de variants
+  hétérozygotes composites. C'est donc sur ces analyses que se concentre
+  actuellement notre équipe.
   
   \begin{figure}
   
@@ -710,8 +1142,10 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille  :  Chaque barre représente une des familles analysées. La hauteure de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres bleues caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au dessus de la barre). Les barres rouges indique qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit "???" au dessus de la barre)}\label{fig:plotremaininggenes}
+  \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille  :  Chaque barre représente une des familles analysées. La hauteure de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres vertes caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au dessus de la barre). Les barres rouges indique qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit "???" au dessus de la barre)}\label{fig:plotremaininggenes}
   \end{figure}
+  
+  \newpage
   
   \chapter{MutaScript}\label{mutascript}
   
@@ -724,11 +1158,25 @@ class (for LaTeX) and the R bookdown package, in general.
   \addcontentsline{toc}{chapter}{References}
   
   \hypertarget{refs}{}
+  \hypertarget{ref-Adzhubei2010}{}
+  Adzhubei, I. A., Schmidt, S., Peshkin, L., Ramensky, V. E., Gerasimova,
+  A., Bork, P., \ldots{} Sunyaev, S. R. (2010). A method and server for
+  predicting damaging missense mutations. \emph{Nature Methods},
+  \emph{7}(4), 248--9. \url{http://doi.org/10.1038/nmeth0410-248}
+  
   \hypertarget{ref-Baker2004}{}
   Baker, K. E., \& Parker, R. (2004). Nonsense-mediated mRNA decay:
   terminating erroneous gene expression. \emph{Current Opinion in Cell
   Biology}, \emph{16}(3), 293--9.
   \url{http://doi.org/10.1016/j.ceb.2004.03.003}
+  
+  \hypertarget{ref-BenKhelifa2014}{}
+  Ben Khelifa, M., Coutton, C., Zouari, R., Karaouzène, T., Rendu, J.,
+  Bidart, M., \ldots{} Ray, P. F. (2014). Mutations in DNAH1, which
+  encodes an inner arm heavy chain dynein, lead to male infertility from
+  multiple morphological abnormalities of the sperm flagella.
+  \emph{American Journal of Human Genetics}, \emph{94}(1), 95--104.
+  \url{http://doi.org/10.1016/j.ajhg.2013.11.017}
   
   \hypertarget{ref-Chang2007}{}
   Chang, Y.-F., Imam, J. S., \& Wilkinson, M. F. (2007). The
@@ -742,6 +1190,32 @@ class (for LaTeX) and the R bookdown package, in general.
   discovery and genotyping using next-generation DNA sequencing data.
   \emph{Nature Genetics}, \emph{43}(5), 491--498.
   \url{http://doi.org/10.1038/ng.806}
+  
+  \hypertarget{ref-Hu2011}{}
+  Hu, Y., Yu, H., Shaw, G., Renfree, M. B., \& Pask, A. J. (2011).
+  Differential roles of TGIF family genes in mammalian reproduction.
+  \emph{BMC Developmental Biology}, \emph{11}, 58.
+  \url{http://doi.org/10.1186/1471-213X-11-58}
+  
+  \hypertarget{ref-Imai2015}{}
+  Imai, Y., Morita, H., Takeda, N., Miya, F., Hyodo, H., Fujita, D.,
+  \ldots{} Komuro, I. (2015). A deletion mutation in myosin heavy chain 11
+  causing familial thoracic aortic dissection in two Japanese pedigrees.
+  \emph{International Journal of Cardiology}, \emph{195}, 290--292.
+  \url{http://doi.org/10.1016/j.ijcard.2015.05.178}
+  
+  \hypertarget{ref-Kumar2009}{}
+  Kumar, P., Henikoff, S., \& Ng, P. C. (2009). Predicting the effects of
+  coding non-synonymous variants on protein function using the SIFT
+  algorithm. \emph{Nature Protocols}, \emph{4}(7), 1073--1081.
+  \url{http://doi.org/10.1038/nprot.2009.86}
+  
+  \hypertarget{ref-Lee2011}{}
+  Lee, B., Park, I., Jin, S., Choi, H., Kwon, J. T., Kim, J., \ldots{}
+  Cho, C. (2011). Impaired spermatogenesis and fertility in mice carrying
+  a mutation in the Spink2 gene expressed predominantly in testes.
+  \emph{The Journal of Biological Chemistry}, \emph{286}(33), 29108--17.
+  \url{http://doi.org/10.1074/jbc.M111.244905}
   
   \hypertarget{ref-Lek2016}{}
   Lek, M., Karczewski, K. J., Minikel, E. V., Samocha, K. E., Banks, E.,
