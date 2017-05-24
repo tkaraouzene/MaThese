@@ -211,24 +211,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \section{Intro}\label{intro}
   
-  Comme vu précédemment, l'émergence du séquençage haut débit, avec
-  notamment le WGS et le WES, a révolutionné les méthodes de recherche
-  dans le cadre d'étude phénotype-génotype en permettant de manière rapide
-  et à moindre coup le séquençage de la quasi totalité des gènes humains.
-  Les causes de plusieurs centaines de pathologies ont pu être identifiées
-  grâce à ces technique depuis leur premier succès pubilié en 2010 (S. B.
-  Ng et al., n.d.). Dès lors, l'analyse des données issues du séquençage
-  est devenu la clef dans la réussite de ces études.
-  
-  Il existe de nombreux logiciels qui à partir des variants appelés
-  effectuent les étapes d'annotation et de filtrage. C'est par exemple le
-  cas d'Exomiser {[}TODO: insert ref and Exomiser describtion{]} ou encore
-  de {[}TODO: insert at least one other soft{]}. La plupart de ces
-  logiciels fonctionnent très bien, cependant tous prennent pour point de
-  départ des variants appelés en amont. Ils ne contrôlent donc en aucune
-  manière les étapes d'alignement et d'appel des variants. Or, comme il a
-  été dit plus tôt, ces deux étapes constituent la bases de l'analyse
-  {[}TODO insert ref{]} et les résultats
+  \newpage
   
   \section{Résultats}\label{resultats}
   
@@ -924,7 +907,7 @@ class (for LaTeX) and the R bookdown package, in general.
     son expression étant spécifique au testicule tandis que celle de
     \emph{GUF1} est ubiquitaire (TODO fig). De plus, des mutation du gène
     \emph{Spink2} chez la souris avait déjà été identifiée comme induisant
-    des defauts de la spermatogénèse (B. Lee et al.,
+    des defauts de la spermatogénèse (Lee et al.,
     \protect\hyperlink{ref-Lee2011}{2011}).
   \item
     \textbf{Famille FF} : Pour cette famille, le gène
@@ -968,108 +951,26 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  \begin{longtable}[]{@{}llllll@{}}
-  \caption{\label{tab:tablegene} Liste des gènes ayant passé l'ensemble des
-  filtres pour chaque famille}\tabularnewline
-  \toprule
-  \begin{minipage}[b]{0.08\columnwidth}\raggedright\strut
-  AZ\strut
-  \end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
-  FF\strut
-  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
-  MMAF1\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
-  MMAF2\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
-  MMAF3\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
-  MMAF4\strut
-  \end{minipage}\tabularnewline
-  \midrule
-  \endfirsthead
-  \toprule
-  \begin{minipage}[b]{0.08\columnwidth}\raggedright\strut
-  AZ\strut
-  \end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
-  FF\strut
-  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
-  MMAF1\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
-  MMAF2\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
-  MMAF3\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
-  MMAF4\strut
-  \end{minipage}\tabularnewline
-  \midrule
-  \endhead
-  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
-  SPINK2\strut
-  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
-  PLCZ1\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  PLA2G4B\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  MYH11\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  PCSK5\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  TGIF2\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
-  GUF1\strut
-  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  JMJD7-PLA2G4B\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  DNAH1\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  WEE2\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  GBP2\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  FCGR3A\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.08\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  ZFYVE28\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
-  \strut
-  \end{minipage}\tabularnewline
-  \bottomrule
-  \end{longtable}
+  \begin{table}
+  
+  \caption{\label{tab:tablegene}Liste des gènes ayant passé l'ensemble des filtres pour chaque famille}
+  \centering
+  \begin{tabular}[t]{l|l|l|l|l|l}
+  \hline
+  AZ & FF & MMAF1 & MMAF2 & MMAF3 & MMAF4\\
+  \hline
+  SPINK2 & PLCZ1 & PLA2G4B & MYH11 & PCSK5 & TGIF2\\
+  \hline
+  GUF1 &  & JMJD7-PLA2G4B & DNAH1 & WEE2 & \\
+  \hline
+   &  &  &  & GBP2 & \\
+  \hline
+   &  &  &  & FCGR3A & \\
+  \hline
+   &  &  &  & ZFYVE28 & \\
+  \hline
+  \end{tabular}
+  \end{table}
   
   \newpage 
   
@@ -1150,7 +1051,58 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption[Nombre de gènes passant l'ensemble des filtres par famille]{Nombre de gènes passant l'ensemble des filtres par famille  :  Chaque barre représente une des familles analysées. La hauteure de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres vertes caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au dessus de la barre). La barre orange caractérise la famille pour laquelle un candidat potentiel a été identifié (le symbole du gène est écrit au dessus suivit d'un "?"). Les Les barres rouges indique qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit "???" au dessus de la barre)}\label{fig:plotremaininggenes}
   \end{figure}
   
+  \begin{verbatim}
+  ##          used (Mb) gc trigger (Mb) max used (Mb)
+  ## Ncells 588502 31.5    1168576 62.5   940480 50.3
+  ## Vcells 780174  6.0    1650153 12.6  1098740  8.4
+  \end{verbatim}
+  
   \newpage
+  
+  \subsection{Etude d'une large cohorte de patients
+  MMAF}\label{cohortemmah}
+  
+  \begin{verbatim}
+  ## Warning in fread("data/all_variants_vep81.csv", sep = "\t", header =
+  ## TRUE, : Bumped column 19 to type character on data row 119, field contains
+  ## '1109-1110'. Coercing previously read values in this column from logical,
+  ## integer or numeric back to character which may not be lossless; e.g., if
+  ## '00' and '000' occurred before they will now be just '0', and there may
+  ## be inconsistencies with treatment of ',,' and ',NA,' too (if they occurred
+  ## in this column before the bump). If this matters please rerun and set
+  ## 'colClasses' to 'character' for this column. Please note that column type
+  ## detection uses a sample of 1,000 rows (100 rows at 10 points) so hopefully
+  ## this message should be very rare. If reporting to datatable-help, please
+  ## rerun and include the output from verbose=TRUE.
+  \end{verbatim}
+  
+  \begin{verbatim}
+  ## Warning in fread("data/all_variants_vep81.csv", sep = "\t", header =
+  ## TRUE, : Bumped column 20 to type character on data row 1433, field contains
+  ## '682-683'. Coercing previously read values in this column from logical,
+  ## integer or numeric back to character which may not be lossless; e.g., if
+  ## '00' and '000' occurred before they will now be just '0', and there may
+  ## be inconsistencies with treatment of ',,' and ',NA,' too (if they occurred
+  ## in this column before the bump). If this matters please rerun and set
+  ## 'colClasses' to 'character' for this column. Please note that column type
+  ## detection uses a sample of 1,000 rows (100 rows at 10 points) so hopefully
+  ## this message should be very rare. If reporting to datatable-help, please
+  ## rerun and include the output from verbose=TRUE.
+  \end{verbatim}
+  
+  \begin{verbatim}
+  ## Warning in fread("data/all_variants_vep81.csv", sep = "\t", header =
+  ## TRUE, : Bumped column 21 to type character on data row 7576, field contains
+  ## '40-41'. Coercing previously read values in this column from logical,
+  ## integer or numeric back to character which may not be lossless; e.g., if
+  ## '00' and '000' occurred before they will now be just '0', and there may
+  ## be inconsistencies with treatment of ',,' and ',NA,' too (if they occurred
+  ## in this column before the bump). If this matters please rerun and set
+  ## 'colClasses' to 'character' for this column. Please note that column type
+  ## detection uses a sample of 1,000 rows (100 rows at 10 points) so hopefully
+  ## this message should be very rare. If reporting to datatable-help, please
+  ## rerun and include the output from verbose=TRUE.
+  \end{verbatim}
   
   \chapter{MutaScript}\label{mutascript}
   
@@ -1240,11 +1192,6 @@ class (for LaTeX) and the R bookdown package, in general.
   Thormann, A., \ldots{} Cunningham, F. (2016). The Ensembl Variant Effect
   Predictor. \emph{Genome Biology}, \emph{17}(1), 122.
   \url{http://doi.org/10.1186/s13059-016-0974-4}
-  
-  \hypertarget{ref-Ng}{}
-  Ng, S. B., Buckingham, K. J., Lee, C., Bigham, A. W., Tabor, H. K.,
-  Dent, K. M., \ldots{} Bamshad, M. J. (n.d.). Exome sequencing identifies
-  the cause of a Mendelian disorder. \url{http://doi.org/10.1038/ng.499}
   
   \hypertarget{ref-Nielsen2011}{}
   Nielsen, R., Paul, J. S., Albrechtsen, A., \& Song, Y. S. (2011).
