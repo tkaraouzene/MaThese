@@ -1,9 +1,9 @@
 ---
 output:
-  pdf_document: default
-  html_document: default
-  classoption: landscape
   word_document: default
+  html_document: default
+  pdf_document: default
+  classoption: landscape
 ---
 # Mise en place d’une stratégie pour l’analyse des données exomiques – application en recherche clinique  
 
@@ -26,6 +26,8 @@ library(ggplot2)
 library(stringi)
 library(scales)
 library(cowplot)
+library(stringr)
+
 theme_set(theme_gray()) # otherwise use cowplot default theme
 
 source("script/manage_variants.R")
@@ -407,7 +409,8 @@ df_strand_all <-  df_call_fam %>%
   summarise(N = n()) %>%
   group_by(RUN) %>%
   mutate(P = N / sum(N),
-         IS_RETAINED = if_else(STRAND == "NS","No","Yes"))
+         IS_RETAINED = if_else(STRAND == "NS","No",
+                               if_else(STRAND == "DS", "Yes", "Yes but low quality")))
      
 df_concordance_all <- df_call_fam %>%
   select(RUN, CALL, STRAND) %>%
@@ -427,7 +430,8 @@ df_geno_all <- df_call_fam %>%
   group_by(RUN) %>%
   mutate(P = N / sum(N),
          IS_RETAINED = if_else(grepl("zygous", CALL),"Yes","No")) %>%
-  bind_rows(data_frame(RUN = "AZ1", CALL = "Heterozygous", TYPE = "Indel", N = 0, P = 0, IS_RETAINED = "No")) # it permits to have the "no" field in the legend of the barplot
+  bind_rows(data_frame(RUN = "AZ1", CALL = "Heterozygous", TYPE = "Indel", N = 0, P = 0, IS_RETAINED = "No")) %>% # it permits to have the "no" field in the legend of the barplot
+  bind_rows(data_frame(RUN = "AZ1", CALL = "Heterozygous", TYPE = "Indel", N = 0, P = 0, IS_RETAINED = "Yes but low quality")) 
 
 ```
 
@@ -467,10 +471,10 @@ Pour l'ensemble des variants ayant passé les filtres énoncés ci-dessus, c'est
 
 \newpage
 
-```{r plotvarcall, fig.cap=fig_info,fig.scap=fig_name,fig.width=7, fig.height=7, cache=TRUE}
+```{r plotvarcall, dependson="varcall", fig.cap=fig_info,fig.scap=fig_name,fig.width=7, fig.height=7, cache=TRUE}
 
 fig_name <- "Contrôle qualité des variants appelés"
-fig_description_all <- "Pour chacun des graphiques, les variants représentés en vert sont conservés tandis que ceux en rouge sont filtrés"
+fig_description_all <- "Pour chacun des graphiques, les variants représentés en vert et en orange sont conservés tandis que ceux en rouge sont filtrés"
 fig_description_A <- "**A** : Distribution du *stranding* des appels pour chaque patient"
 fig_description_B <- "**B** : Comparaison des appels entre les deux *ends* des variants appelés DS"
 fig_description_C <- "**C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre"
@@ -483,7 +487,7 @@ pA <- ggplot(df_strand_all, aes(STRAND, P)) +
   ylab("% of called variant") +
   xlab("") +
     facet_wrap(~factor(STRAND, levels = c("DS", "SS", "NS")), scales = "free") +
-  scale_fill_manual(guide = "none", values = c("firebrick3", "chartreuse3")) +
+  scale_fill_manual(guide = "none", values = c("firebrick3", "chartreuse3", "darkorange1")) +
   scale_y_continuous(labels = percent) + 
   theme(axis.title.x = element_blank(),
         axis.text.x=element_blank(),
@@ -505,7 +509,7 @@ pC <- ggplot(df_geno_all,aes(RUN, N)) +
   geom_bar(stat = "identity", aes(fill = IS_RETAINED)) +
   facet_grid(TYPE~CALL, scales = "free") +
   ylab("Nb of variant") + 
-  scale_fill_manual(name = "Is the variant retained?", values = c("firebrick3", "chartreuse3"), breaks = c("Yes","No"), labels = c("Yes","No")) +
+  scale_fill_manual(name = "Is the variant retained?", values = c("firebrick3", "chartreuse3", "darkorange1"), breaks = c("Yes","Yes but low quality", "No")) +
   theme(axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
         legend.position = "bottom")
@@ -1212,9 +1216,53 @@ gc()
 
 \newpage
 
+
 ### Etude d’une large cohorte de patients MMAF  {#cohortemmah}  
 
+#### Description de la cohorte  
+
+```{r cohort, cache=TRUE}
+
+run_mmaf_fam <- c("Ghs56","Ghs58","Ghs62","Ghs130","Ghs63","Ghs119","Ghs59","Ghs60","Ghs61")
+
+df_runs_mmaf <- fread("data/exome_runs.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(2,3,4,10:16), data.table = FALSE) %>%
+  rename(RUN = `Magic ID`, PHENOTYPE = Pathologie, DATE = Date) %>%
+  mutate(PHENOTYPE = if_else(PHENOTYPE == "Flag", "MMAF", PHENOTYPE),
+         YEAR = as.numeric(str_sub(DATE, start= -4)),
+         PROJECT = paste0(Project," (",YEAR, ")")) %>%
+  filter(!(RUN %in% run_mmaf_fam),
+         PHENOTYPE == "MMAF") %>%
+  select(-DATE, -PHENOTYPE)
+
+```
+
+Historique : après avoir mis en évidence DNAH1 -> MMAF notre équipe s'est en partie spécialisé dans ce syndrome.
+
+ainsi, entre (année) et année, notre équipe a effectué le séquençage de ... individus présentant ce phénotype afin d'en établir la cause génétique. 
+parmi ces patients, la majorité provenait d'Afrique du Nord, cependant ... vfenaient de et de ...
+ces séquençage ont été effectué dans ... centres diférents que sont (listes des centre de séquençage) et sur ... plateforme : liste des plateformes
+
+
+\newpage
+
+```{r tabcohort}
+
+kable(df_runs_mmaf %>% 
+        select(-Model, -PROJECT) %>% 
+        rename(Place = Project, Run = RUN, Year = YEAR) %>%
+        group_by(Place, Year) %>% 
+        summarise(`Nb of sequenced individuals` = n()) %>%
+        arrange(Year)
+      , caption = "Liste des différents projets de séquençages effectués")
+
+```
+
+\newpage
+
+#### Application de la pipeline - Résultats
+
 ```{r extradata, cache=TRUE}
+
 
 df_rvis <- fread("data/RVIS_Unpublished_ExAC_May2015.txt",sep = "\t",header = TRUE,data.table = FALSE) %>%
   select(SYMBOL = CCDS_r15,SCORE = `RVIS_ExAC_0.05%(AnyPopn)`) %>%
@@ -1239,13 +1287,14 @@ if (!file.exists(bigmmaf_call_file)) {
   
   df_bigmmaf_call <- fread("data/genotype_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
     gather(RUN, CALL, starts_with("Ghs")) %>%
-    filter(CALL %in% c(2, 3, "b", "c"),
-           !(RUN %in% run_mmaf_fam)) %>%
-    mutate(TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"),
-           CALL = if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous")) %>%
-    left_join(df_rvis, by = SYMBOL) %>%
-    left_join(df_ciliome_gene, by = "SYMBOL")
-  
+    filter(CALL %in% c(0, 2, 3, "b", "c"),
+           !(RUN %in% run_mmaf_fam),
+           !is.na(REF)) %>%
+    mutate(STRAND = if_else(CALL %in% c(2:9), "DS", 
+                            if_else(CALL == 0, "NS", "SS")),
+      TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"),
+           CALL = if_else(CALL == 0, "None",
+                          if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous")))
   saveRDS(df_bigmmaf_call, bigmmaf_call_file)
   
 } else {
@@ -1254,57 +1303,235 @@ if (!file.exists(bigmmaf_call_file)) {
 
 }
 
+df_bigmmaf_call_geno <- df_bigmmaf_call %>% 
+  filter(grepl("zygous", CALL)) %>% 
+  group_by(RUN, TYPE, CALL) %>% 
+  distinct(CHR, POSITION, REF, ALT) %>%
+  count() %>%
+  left_join(df_runs_mmaf, by = "RUN") %>% 
+  select(-(Project:Model))
+                       
+df_bigmmaf_call_strand <- df_bigmmaf_call %>%
+  group_by(RUN, STRAND) %>%
+  count() %>%
+  group_by(RUN) %>%
+  mutate(N_ALL_STRAND = sum(n),
+         P_STRAND = n / N_ALL_STRAND) %>%
+  left_join(df_runs_mmaf, by = "RUN")
+
+# 
+# 
+# df_bigmmaf_call_stat <- df_bigmmaf_call %>%
+#   group_by(RUN, CALL, STRAND, TYPE) %>%
+#   distinct(CHR, POSITION, REF, ALT) %>%
+#   mutate(N_PER_STRAND = n()) %>% 
+#     group_by(RUN, CALL, TYPE) %>% 
+#   mutate(N_BOTH_STRAND = sum(N_PER_STRAND),
+#          P_STRAND = N_PER_STRAND / N_BOTH_STRAND) %>%
+#   left_join(df_runs_mmaf, by = "RUN") %>% 
+#   select(-(Project:Model))
+
+df_distinct_call <- df_bigmmaf_call %>%  
+  filter(grepl("zygous", CALL)) %>% 
+  distinct(CHR, POSITION, REF, ALT, TYPE)
+
 ```
 
+```{r varbigmmafcall, dependson="bigmmafcall", cache=TRUE}
+
+n_distinct_var <- df_distinct_call %>% nrow %>% as.integer
+n_distinct_snv <- df_distinct_call %>% filter(TYPE == "SNV") %>% nrow %>% as.integer
+n_distinct_indel <- df_distinct_call %>% filter(TYPE == "Indel") %>% nrow %>% as.integer
+
+n_mean_var <- df_bigmmaf_call_geno %>% group_by(RUN) %>% summarise(N = sum(n)) %>% collect() %>% .[["N"]] %>% mean %>% round(0) %>% as.integer
+n_mean_snv <- df_bigmmaf_call_geno %>% filter(TYPE == "SNV") %>% group_by(RUN) %>% summarise(N = sum(n)) %>% collect() %>% .[["N"]] %>% mean %>% round(0) %>% as.integer
+n_mean_indel <- df_bigmmaf_call_geno %>% filter(TYPE == "Indel") %>% group_by(RUN) %>% summarise(N = sum(n)) %>% collect() %>% .[["N"]] %>% mean %>% round(0) %>% as.integer
+
+n_mean_homo <- df_bigmmaf_call_geno %>% filter(CALL == "Homozygous") %>% group_by(RUN) %>% summarise(N = sum(n)) %>% collect() %>% .[["N"]] %>% mean %>% round(0) %>% as.integer
+p_mean_homo <- (n_mean_homo / n_mean_var) %>% as.integer %>% round(3) * 100 
+
+```
+
+Après avoir appelé les variants de nos ... patients, nous avons obtenu une total de `r n_distinct_var` variants différents comprenant `r n_distinct_snv` SNVs et `r n_distinct_indel`. Ces variants étant répartit entre chaque patients qui portaient environs chacun `r n_mean_snv` SNV et `r n_mean_indel` indels dont `r p_mean_homo` % étaient homozygote. Comme on peut le voir, la proportion de chaque appel est relativement homogène lorsque l'on compare les patients ayant été séquencés dans le même centre la même année. Cependant, il est possible de noter de grandes disparités lorsque l'on compare les données provenant de différents centres ou bien du même centre avec plusieurs années de différences. Ces écarts peuvent-être causés par plusieurs facteur, tel que les différents kits de capture d'exons qui on put être utilisés puisque ... (todo lister les différents kit de capture dans une table) en revanche nous pouvons écarté un effet dus à la platforme de séquençage ou encore le modèle de séquenceur puisque tout ces projets ont été réalisés sur des Illumina HiSeq2000 (**Table : **\@ref(tab:tabcohort)) (**Figure : **\@ref(fig:plotbigmmafcall) - **A**).  
+
+Le même constat peut être effectué lorsque l'on compare la qualité des appels puisque plus les projets de séquençage s'avèrent être récent, plus la proportion d'appel *Single Strand* s'avère être faible tandis que la proportion d'appel *Double Strand* (DS) est élevée. Ceci est une bonne chose, car, bien que ces deux appels soient conservés dans les analyses ulterieures, les appels DS sont de meilleur qualité que les appels SS. Cette augmentation des appels DS au cours du temps pourrait s'expliquer par une amélioration des protocole de séquençage qinsi que des kit de capture. En revanche cela est à pondérer avec le taux croissant d'appels *No-strand* (NS) au fur et à mesure des années pour atteindre environs ... % en (...Année) avec un projet réalisé au Génoscope. Ces derniers appels étant systématiquement filtrés, ils n'altèreront en rien les résultats obtenus en aval ormis le fait qu'ils réduisent la quantité des données utilisées (**Figure : **\@ref(fig:plotbigmmafcall) - **B** et **C**).
+
+\newpage
+
+```{r plotbigmmafcall, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.6, cache=TRUE}
+
+fig_name <- "Résultats de l'appel des variants par individus et par projet de séquençage"
+fig_description_general <- "Chaque couleur définit un projet de séquençage caractérisé par un centre de séquençage et une année"
+fig_description_A <- "**A** : Quantification pour chaque individus (représentés par les barres) du nombre de variants (SNVs et Indels) appelés homozygotes et hétérozygotes"
+fig_description_B <- "**B** : Quantification des appels *Double Strand* (DS), *Single Strand* (SS) et *No strand* (NS) pour chaque projet de séquençage"
+fig_description_C <- "**C** : Même chose en pourcentage"
+fig_description <- paste(fig_description_general, fig_description_A, fig_description_B, fig_description_C, sep = ". ")
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+pA <- ggplot(df_bigmmaf_call_geno, aes(reorder(RUN, YEAR), n)) + 
+  geom_bar(stat = "identity", aes(fill = PROJECT)) + 
+  facet_grid(TYPE~CALL, scales = "free") +
+  scale_fill_discrete(guide = "none") +
+  ylab("Nb of called variants") + 
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+pB <- ggplot(df_bigmmaf_call_strand, aes(reorder(PROJECT, YEAR), n)) + 
+  geom_boxplot(outlier.size = -1, aes(fill = PROJECT)) + 
+  facet_wrap(~factor(STRAND, levels = c("DS", "SS", "NS")), scales = "free") +
+  ylab("Nb of call") + 
+  scale_x_discrete(limits = c("Strasbourg (2012)", "MountSinai (2012)", "Genoscope (2013)", "Genoscope (2014)", "Genoscope (2015)")) +
+  scale_fill_discrete(guide = "none") +
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+pC <- ggplot(df_bigmmaf_call_strand, aes(reorder(PROJECT, YEAR), P_STRAND)) + 
+  geom_boxplot(outlier.size = -1, aes(fill = PROJECT)) + 
+  facet_wrap(~factor(STRAND, levels = c("DS", "SS", "NS")), scales = "free") +
+  scale_x_discrete(limits = c("Strasbourg (2012)", "MountSinai (2012)", "Genoscope (2013)", "Genoscope (2014)", "Genoscope (2015)")) +
+  scale_fill_discrete(name = "Sequencing project", breaks = c("Strasbourg (2012)", "MountSinai (2012)", "Genoscope (2013)", "Genoscope (2014)", "Genoscope (2015)")) +
+  ylab("% of call") + 
+  scale_y_continuous(labels = percent) +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+row2 <- plot_grid(pB,pC, ncol = 1, rel_heights = c(.43,.57), labels = c("B","C"))
+
+
+plot_grid(pA,row2, ncol = 1, rel_heights = c(.45,.55), labels = c("A",""))
+
+```
+
+\newpage
+
 ```{r bigmmafannotate, cache=TRUE}
-# 
+
+df_distinct_call <-  df_distinct_call %>%
+  variant_join(fread("data/all_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(11,12,14:28,31:34,36:40)), mode = "left")
+
 # bigmmaf_annotate_file <- "results/bigmmaf_annotate_variants.rds"
 # 
 # if (!file.exists(bigmmaf_annotate_file)) {
 # 
-#   df_bigmmaf_annotate <- df_bigmmaf_call %>% 
-#     filter(grepl("zygous", CALL)) %>% 
-#     variant_join(fread("data/all_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(11,12,14:28,31:34,36:40)), mode = "left") %>% 
-#     group_by(RUN) %>% 
+#   df_bigmmaf_annotate <- df_bigmmaf_call %>%
+#     filter(grepl("zygous", CALL)) %>%
+#     variant_join %>%
+#     group_by(RUN) %>%
 #     mutate(N_VAR_PER_RUN = n_distinct(CHR,POSITION,REF,ALT))
-#   
+# 
 #   rm(df_bigmmaf_call)
 #   gc()
-#   
+# 
 #   saveRDS(df_bigmmaf_annotate, bigmmaf_annotate_file)
-#   
+# 
 # } else {
-#   
+# 
 #   df_bigmmaf_annotate <- readRDS(bigmmaf_annotate_file)
-#   
+# 
 # }
 
 ```
 
-```{r cleanbigmmafcall, include=FALSE, warning=FALSE}
-# 
-# rm(df_bigmmaf_call)
-# gc()
-
-```
 
 ```{r filterbigmmaf, cache=TRUE}
-# 
-# maf_cutoff <- .01
-# 
-# df_filter_bigmmaf <- df_bigmmaf_annotate %>% 
-#   ungroup() %>% 
-#   filter_genotype(het = FALSE) %>%
-#   filter_frequence(cutoff = maf_cutoff) %>%
-#   variant_join(df_ctrl_mmaf, mode = "anti") %>% 
-#   filter(Consequence != "synonymous_variant",
-#          IMPACT != "MODIFIER",
-#          !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen)),
-#          !grepl("NMD_transcript_variant", Consequence),
-#          !grepl("non_coding_transcript_variant", Consequence)) %>% 
-#   left_join(df_rvis, by = "SYMBOL") %>%
-#   left_join(df_ciliome_gene, by = "SYMBOL")
-#   
+
+maf_cutoff <- .01
+
+df_distinct_filter <- df_distinct_call %>%   
+  filter_frequence(cutoff = maf_cutoff) %>%
+  variant_join(df_ctrl_mmaf, mode = "anti") %>%
+  filter(Consequence != "synonymous_variant",
+         IMPACT != "MODIFIER",
+         !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen)),
+         !grepl("NMD_transcript_variant", Consequence),
+         !grepl("non_coding_transcript_variant", Consequence)) %>%
+  left_join(df_rvis, by = "SYMBOL") %>%
+  left_join(df_ciliome_gene, by = "SYMBOL")
+
+df_bigmmaf_filter <- df_bigmmaf_call %>%  
+  select(-STRAND) %>%
+  filter_genotype(het = FALSE) %>% 
+  variant_join(df_distinct_filter, mode = "inner") %>% 
+  select(-Allele)
+
+df_bigmmaf_filter_stat <- df_bigmmaf_filter %>% 
+  group_by(RUN) %>%
+  mutate(N_GENE = n_distinct(SYMBOL)) %>%
+  group_by(RUN, TYPE, N_GENE) %>%
+  distinct(CHR, POSITION, REF, ALT) %>%
+  summarise(N_VAR_PER_TYPE = n()) %>%
+  group_by(RUN) %>%
+  mutate(N_VAR_TOT = sum(N_VAR_PER_TYPE)) %>%
+  right_join(df_runs_mmaf, by = "RUN") 
+  
+
 ```
 
+```{r cleanbigmmafcall, include=FALSE, warning=FALSE}
+
+rm(df_distinct_call, df_distinct_filter)
+rm(df_bigmmaf_call)
+gc()
+
+```
+
+
+```{r varfilterbigmmaf, cache=TRUE}
+
+n_distinct_var <- df_bigmmaf_filter %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
+n_distinct_snv <- df_bigmmaf_filter %>% ungroup() %>% filter(TYPE == "SNV") %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
+n_distinct_indel <- df_bigmmaf_filter %>% ungroup() %>% filter(TYPE == "Indel") %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
+n_distinct_gene <- df_bigmmaf_filter %>% ungroup() %>% distinct(SYMBOL) %>% nrow
+
+n_min_var <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_VAR_TOT"]] %>% min
+n_max_var <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_VAR_TOT"]] %>% max
+
+n_mean_indel <- df_bigmmaf_filter_stat %>% filter(TYPE == "Indel") %>% collect() %>% .[["N_VAR_PER_TYPE"]] %>% mean %>% round(0)
+n_mean_snv <- df_bigmmaf_filter_stat %>% filter(TYPE == "SNV") %>% collect() %>% .[["N_VAR_PER_TYPE"]] %>% mean %>% round(0)
+
+n_min_gene <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_GENE"]] %>% min
+n_max_gene <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_GENE"]] %>% max
+
+
+```
+
+Après avoir appliqué les mêmes filtres que ceux décrit précédement à l'exception du filtre n°... Union puisqu'ici nous avons uniquement des individus non apparentés, nous avons put obtenir une liste de `r n_distinct_var` variants différents composés de `r n_distinct_snv` SNVs et `r n_distinct_indel` indels et impactant un total de `r n_distinct_gene` gènes distincts. Ces variants étant répartis sur l'ensemble de nos ... patients ceux-ci portaient en moyenne `r n_mean_snv` SNVS et `r n_mean_indel` indels, de sorte que chacun d'entre eux avaient entre `r n_min_gene` et `r n_max_gene` gènes impactés par au moins un variants.  
+
+
+```{r plotfilterbigmmaf, fig.cap=fig_info,fig.scap=fig_name, fig.height=6, cache=TRUE}
+
+fig_name <- "TODOOOOOOOOOOOOOOOOOO"
+fig_description_general <- "Chaque couleur définit un projet de séquençage caractérisé par un centre de séquençage et une année"
+fig_description_A <- "**A** : Quantification du nombre de SNVs et indels ayant passé l'ensemble des filtres pour chaque patients"
+fig_description_B <- "**B** : Nombre de gènes impactés par au moins un variant ayant passé les filtres pour chaque individus représentés par les barres "
+fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+pA <- ggplot(df_bigmmaf_filter_stat, aes("", N_VAR_PER_TYPE)) +
+  geom_boxplot(outlier.size = -1) + 
+  geom_jitter(position=position_jitter(0.3)) +
+  facet_wrap(~factor(TYPE, levels = c("SNV", "Indel")), scales = "free") + 
+  ylab("Nb of remaining variants after filters") + 
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+pB <- ggplot(df_bigmmaf_filter_stat %>% group_by(RUN) %>% summarise(N_GENE = mean(N_GENE)), aes(reorder(RUN, -N_GENE), N_GENE)) + 
+  geom_bar(stat = "identity") + 
+  ylab("Nb of remaining genes") +
+  xlab("Runs") + 
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+plot_grid(pA,pB, ncol = 1, labels = c("A","B"))
+
+```
+
+
+#### Analyse des listes de gènes  
 

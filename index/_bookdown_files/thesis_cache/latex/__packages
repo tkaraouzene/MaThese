@@ -10,3 +10,4 @@ data.table
 stringi
 scales
 cowplot
+stringr
