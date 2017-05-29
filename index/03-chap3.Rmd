@@ -1151,6 +1151,8 @@ df_genes <- df_remaining_gene %>% select(Familly, SYMBOL) %>%
   select(-ind)
 
 kable(df_genes, 
+      booktabs = TRUE,
+      longtable = TRUE,
       caption = "Liste des gènes ayant passé l'ensemble des filtres pour chaque famille")
 
 # pander::pander(df_genes,
@@ -1243,8 +1245,6 @@ parmi ces patients, la majorité provenait d'Afrique du Nord, cependant ... vfen
 ces séquençage ont été effectué dans ... centres diférents que sont (listes des centre de séquençage) et sur ... plateforme : liste des plateformes
 
 
-\newpage
-
 ```{r tabcohort}
 
 kable(df_runs_mmaf %>% 
@@ -1253,7 +1253,7 @@ kable(df_runs_mmaf %>%
         group_by(Place, Year) %>% 
         summarise(`Nb of sequenced individuals` = n()) %>%
         arrange(Year)
-      , caption = "Liste des différents projets de séquençages effectués")
+      ,booktabs = TRUE, caption = "Liste des différents projets de séquençages effectués")
 
 ```
 
@@ -1500,8 +1500,38 @@ n_max_gene <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_GENE"]] %>% max
 
 ```
 
-Après avoir appliqué les mêmes filtres que ceux décrit précédement à l'exception du filtre n°... Union puisqu'ici nous avons uniquement des individus non apparentés, nous avons put obtenir une liste de `r n_distinct_var` variants différents composés de `r n_distinct_snv` SNVs et `r n_distinct_indel` indels et impactant un total de `r n_distinct_gene` gènes distincts. Ces variants étant répartis sur l'ensemble de nos ... patients ceux-ci portaient en moyenne `r n_mean_snv` SNVS et `r n_mean_indel` indels, de sorte que chacun d'entre eux avaient entre `r n_min_gene` et `r n_max_gene` gènes impactés par au moins un variants.  
+```{r}
 
+tabdnah1 <- df_bigmmaf_filter %>% 
+  filter(SYMBOL == "DNAH1") %>% 
+  mutate(VARIANT = paste(CHR,POSITION,REF,ALT, sep = "-"),
+         Consequence = sapply(strsplit(Consequence, "_", fixed = TRUE),"[[",1)) %>%
+  distinct(RUN, VARIANT, Consequence, SYMBOL)
+
+n_run_dnah1 <- tabdnah1 %>% ungroup() %>% distinct(RUN) %>% nrow
+n_run_dnah1 <- tabdnah1 %>% ungroup() %>% distinct(RUN) %>% nrow
+
+
+```
+
+
+Après avoir appliqué les mêmes filtres que ceux décrit précédement à l'exception du filtre n°... Union puisqu'ici nous avons uniquement des individus non apparentés, nous avons put obtenir une liste de `r n_distinct_var` variants différents composés de `r n_distinct_snv` SNVs et `r n_distinct_indel` indels et impactant un total de `r n_distinct_gene` gènes distincts. Ces variants étant répartis sur l'ensemble de nos ... patients ceux-ci portaient en moyenne `r n_mean_snv` SNVS et `r n_mean_indel` indels, de sorte que chacun d'entre eux avaient entre `r n_min_gene` et `r n_max_gene` gènes impactés par au moins un variants (**Figure : **\@ref(fig:plotfilterbigmmaf)).  
+
+Parmis l'ensemble de nos patients, `r n_run_dnah1` révélèrent porter au moins un variant passant l'ensemble des filtres sur le gène *DNAH1*, candidat évident pour ce phénotype. Ainsi, le patient Ghs90 porte 3 variants successifs induisant 3 variation faux-sens, le patient Ghs95 porte lui un seul variant entrainant lui aussi un faux-sens et le patient Ghs122 porte un indel entrainant un décalage du cadre de lecture (**Table : **\@ref(tab:tabdnah1)). La cause génétique responsable du phénotype MMAF de ces ...(3) patients ayant été identifié, leurs variants furent ensuite retirer de notre liste réduisant ainsi celle-ci à ... variants différents impactant ... gèness.  
+  
+
+
+```{r tabdnah1}
+
+kable(tabdnah1, 
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Run ID","Variant coordinates", "Consequence", "Gene symbol"),
+      caption = "liste des variants passant les filtres et chevauchant le gène *DNAH1*")
+
+```
+
+\newpage
 
 ```{r plotfilterbigmmaf, fig.cap=fig_info,fig.scap=fig_name, fig.height=6, cache=TRUE}
 
@@ -1531,7 +1561,6 @@ pB <- ggplot(df_bigmmaf_filter_stat %>% group_by(RUN) %>% summarise(N_GENE = mea
 plot_grid(pA,pB, ncol = 1, labels = c("A","B"))
 
 ```
-
 
 #### Analyse des listes de gènes  
 
