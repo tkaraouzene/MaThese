@@ -660,14 +660,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Contrôle qualité des variants appelés]{Contrôle qualité des variants appelés : Pour chacun des graphiques, les variants représentés en vert et en orange sont conservés tandis que ceux en rouge sont filtrés. **A** : Distribution du *stranding* des appels pour chaque patient. **B** : Comparaison des appels entre les deux *ends* des variants appelés DS. **C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre}\label{fig:plotvarcall1}
-  \end{figure}\begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/plotvarcall-2} 
-  
-  }
-  
-  \caption[Contrôle qualité des variants appelés]{Contrôle qualité des variants appelés : Pour chacun des graphiques, les variants représentés en vert et en orange sont conservés tandis que ceux en rouge sont filtrés. **A** : Distribution du *stranding* des appels pour chaque patient. **B** : Comparaison des appels entre les deux *ends* des variants appelés DS. **C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre}\label{fig:plotvarcall2}
+  \caption[Contrôle qualité des variants appelés]{Contrôle qualité des variants appelés : Pour chacun des graphiques, les variants représentés en vert et en orange sont conservés tandis que ceux en rouge sont filtrés. **A** : Distribution du *stranding* des appels pour chaque patient. **B** : Comparaison des appels entre les deux *ends* des variants appelés DS. **C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre}\label{fig:plotvarcall}
   \end{figure}
   
   \newpage
@@ -1142,6 +1135,21 @@ class (for LaTeX) and the R bookdown package, in general.
   impactés par au moins un variants (\textbf{Figure :
   }\ref{fig:plotfilterbigmmaf} - \textbf{A} et \textbf{B}).
   
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotfilterbigmmaf-1} 
+  
+  }
+  
+  \caption[TODOOOOOOOOOOOOOOOOOO]{TODOOOOOOOOOOOOOOOOOO : **A** : Quantification du nombre de SNVs et indels ayant passé l'ensemble des filtres pour chaque patients. **B** : Nombre de gènes impactés par au moins un variant ayant passé les filtres pour chaque individus représentés par les barres. **C** : Présentation }\label{fig:plotfilterbigmmaf}
+  \end{figure}
+  
+  \newpage
+  
+  \paragraph{\texorpdfstring{\emph{DNAH1}, un acteur primordial dans le
+  phénotype
+  MMAF}{DNAH1, un acteur primordial dans le phénotype MMAF}}\label{dnah1-un-acteur-primordial-dans-le-phenotype-mmaf}
+  
   Parmis l'ensemble de nos patients, 3 révélèrent porter au moins un
   variant passant l'ensemble des filtres sur le gène \emph{DNAH1},
   candidat évident pour ce phénotype. Ainsi, le patient Ghs90 porte 3
@@ -1149,6 +1157,42 @@ class (for LaTeX) and the R bookdown package, in general.
   porte lui un seul variant entrainant lui aussi un faux-sens et le
   patient Ghs122 porte un indel entrainant un décalage du cadre de lecture
   (\textbf{Table : }\ref{tab:tabdnah1}).
+  
+  Ainsi, au vu de ces premières analyses, des variants dans le gène
+  \emph{DNAH1} seraient responsables du phénotype MMAF de 3 patients.
+  Cependant, comme nous l'avons vu précédemment, bien que la stratégie
+  consistant à filtrer l'ensemble des variants hétérozygotes chez les
+  individus apparentés, celle-ci peut dans le cas d'individus non
+  apparentés entrainer le filtrage du / des variants responsables du
+  phénotype. Ces pourquoi nous avons ensuite cherché des patients
+  potentiellement composites, c'est à dire des patients portant au moins
+  deux allèles \textbf{différents} mutés sur le même gène. Pour cela, nous
+  avons recansser l'ensemble des patients portant au moins deux variants
+  hétérozygotes différents sur le gène \emph{DNAH1}. Cette stratégie nous
+  a ainsi permi de découvrire 6 nouveaux patients pour lesquels le gène
+  \emph{DNAH1} serait responsable du phénotype MMAF. Il faut tout de même
+  noter, qu'en raison de la non conaissance du phasage des variants dans
+  le cas de séquençage WES, le génotype de ces 6 patients est à confirmer
+  de sorte à être certains que les deux variants se situent bien sur deux
+  allèles fifférents de \emph{DNAH1}, un sur celui provenant du père et un
+  autre sur celui provenant de la mère.Le génotype de ces patients est
+  
+  Néanmoins, les mutations du gène \emph{DNAH1} seraient ainsi
+  responsables du phénotype MMAF de 15 \% des individus de notre cohorte.
+  Bien que ce pourcentage soit en deça des 40\% (TODO: à confirmer!)
+  observés dans notre étude précédente (Ben Khelifa et al.,
+  \protect\hyperlink{ref-BenKhelifa2014}{2014}), ces résultats tendent à
+  confirmer le rôle primordial de la protéine DNAH1 dans la la structure
+  du flagelle et l'implication majeure du gène \emph{DNAH1} dans le
+  phénotype MMAF.
+  
+  La cause génétique expliquant le phénotype MMAF ayant été identifié avec
+  certitude chez au moins 3 de ces 9, l'intégralité de leurs variants
+  spécifiques (retrouvés chez aucun autre patients) fut retirer de notre
+  liste réduisant celle-ci à 1458 variants impactant 1221 gènes
+  différents.
+  
+  \newpage
   
   \begin{longtable}[t]{lllll}
   \caption{\label{tab:tabdnah1}liste des variants passant les filtres et chevauchant le gène *DNAH1*}\\
@@ -1167,9 +1211,9 @@ class (for LaTeX) and the R bookdown package, in general.
   Ghs28 & 3-52366296-A-G & Heterozygous & missense & DNAH1\\
   Ghs36 & 3-52362004-T-G & Heterozygous & missense & DNAH1\\
   \addlinespace
-  Ghs36 & 3-52391702-C-T & Heterozygous & stop & DNAH1\\
+  Ghs36 & 3-52391702-C-T & Heterozygous & stop gained & DNAH1\\
   Ghs42 & 3-52407000-G-A & Heterozygous & missense & DNAH1\\
-  Ghs42 & 3-52417872-C-G & Heterozygous & splice & DNAH1\\
+  Ghs42 & 3-52417872-C-G & Heterozygous & splice region & DNAH1\\
   Ghs87 & 3-52387600-G-A & Heterozygous & missense & DNAH1\\
   Ghs87 & 3-52420751-A-C & Heterozygous & missense & DNAH1\\
   \addlinespace
@@ -1178,31 +1222,66 @@ class (for LaTeX) and the R bookdown package, in general.
   \bottomrule
   \end{longtable}
   
-  Ensuite, afin de nous concentrer sur les gènes ayant le plus de risque
-  d'être impliquer dans le phénotype MMAF, nous avons étudié en priorité
-  ceux sur lesquels plusieurs patients portaient au moins un variant ayant
-  passé les filtres. Ainsi, nous avons obtenu une liste de 194 gènes dont
-  135 (soit 70 \%) étaient retrouvés variants chez uniquement 2 patients
-  (\textbf{Figure : }\ref{fig:plotfilterbigmmaf} - \textbf{C}).
-  
   \newpage
+  
+  \paragraph{Les nouveaux acteurs}\label{les-nouveaux-acteurs}
+  
+  Ensuite, en raison du grand nombre de gènes ayant passé les filtres et
+  afin de nous concentrer en priorité ceux ayant la plus forte probabilité
+  d'être impliquer dans le phénotype MMAF, nous avons étudiés les gènes
+  sur lesquels plusieurs patients portaient au moins un variant ayant
+  passé l'ensemble des filtres. Ainsi, nous avons obtenu une liste de 180
+  gènes dont 127 (soit 71 \%) étaient retrouvés variants chez uniquement 2
+  patients (\textbf{Figure : }\ref{fig:plotfilterbigmmaf2}).
+  
+  Afin de nous orientés dans nos recherche, nous avons utilisés une liste
+  de gènes annoté comme faisant partie du cilliome humain. cette liste
+  recansse \ldots{} gènes et les classes en fonction de la qualité de la
+  preuve permettant de définir le gène comme appartenant au cilliome.
+  Ainsi, \ldots{} de nos \ldots{} gènes retenus fesaient partis de cette
+  liste. Il faut tout de même noter que bien que cette liste soit un bon
+  outil pour orienté les recherches et priosiser certains gènes, elle ne
+  peut constituer un critère suffisant pour filtrer le gènes n'en faisant
+  pas partie. Par exemple le gène \emph{DNAH1}, de part son expression
+  ubiquitaire n'a pas été intégré à cette liste, or on connait desormais
+  son implication dans le phénotype MMAF.
   
   \begin{figure}
   
-  {\centering \includegraphics{thesis_files/figure-latex/plotfilterbigmmaf-1} 
+  {\centering \includegraphics{thesis_files/figure-latex/plotfilterbigmmaf2-1} 
   
   }
   
-  \caption[TODOOOOOOOOOOOOOOOOOO]{TODOOOOOOOOOOOOOOOOOO : **A** : Quantification du nombre de SNVs et indels ayant passé l'ensemble des filtres pour chaque patients. **B** : Nombre de gènes impactés par au moins un variant ayant passé les filtres pour chaque individus représentés par les barres. **C** : Présentation }\label{fig:plotfilterbigmmaf}
+  \caption[TODOOOOOOOOOOOOOOOOOO]{TODOOOOOOOOOOOOOOOOOO : Todo0000000000000000 00000000000 00000000000000}\label{fig:plotfilterbigmmaf2}
   \end{figure}
   
   \newpage
+  
+  Cette analyse nous a ainsi permis de mettre en évidence \ldots{}
+  nouveaux acteurs potentiels pour le phénotype MMAF impliquant \ldots{}
+  de nos patients.Ayant conservé uniquement les variants homozygotes au
+  cours de nos filtre, nous avons comme précédemment (introduire le truc u
+  niveau de dnah1) chercher à savoir si parmis les individus restant de la
+  cohorte, certains ne seraient pas hétérozygotes composites.
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{WDR96} :
+  \item
+    \textbf{WDR52} :\\
+  \item
+    \textbf{FSIP2} :\\
+  \item
+    \textbf{CCDC146} :
+  \end{enumerate}
   
   L'étude de ces gènes nous a tout d'abord permis d'identifier deux gènes
   : le gène \emph{WDR96} (récemment renommé \emph{CFAP43}) et le gène
   \emph{WDR52} récemment renommé \emph{CFAP44}). Ces gènes ont
   respectivement été retrouvés mutés chez 6 et 3 patients. En plus du
-  nombre important de patients portant une tronquante mutation sur ces
+  nombre important de patients portant une mutation tronquante sur ces
   gènes (\textbf{Table : }\ref{tab:tabwdr96} et \ref{tab:tabwdr52}), tout
   deux sont retrouvés comme étant sur-exprimés dans le testicule dans les
   bases de donnée publiques. De même, ces deux gènes avaient déjà été
@@ -1210,10 +1289,14 @@ class (for LaTeX) and the R bookdown package, in general.
   ou le fonctionnement du flagelle spermatique (Ivliev, 't Hoen, Roon-Mom,
   Peters, \& Sergeeva, \protect\hyperlink{ref-Ivliev2012}{2012}). Ces
   informations ont ainsi fait de ces deux gènes des candidats idéaux pour
-  expliquer le phénotype de ces 9 individus.
+  expliquer le phénotype d'au moins 8 de ces 9 individus. En effet, au vu
+  de l'incertitude de l'effet de la mutation impactant le patient
+  \ldots{}, c'est à dire un variant intronique situé dans la région
+  d'épissage, la causalité de ce variant dans le phénotype du patient est
+  elle aussi incertaine.
   
-  De même, cette étude nous a permis égallement de relever 3 patients
-  présentants des mutations dans le gènes \emph{FSIP2} (\textbf{Table :
+  Cette étude nous a permis égallement de relever 3 patients présentants
+  des mutations dans le gènes \emph{FSIP2} (\textbf{Table :
   }\ref{tab:tabfsip2}. Comme pour les gènes \emph{WDR96} et \emph{WDR52},
   ce gène présente une forte et quasi exclusive expression testiculaire.
   De plus, une équipe a démontré en 2003 l'implication de ce gène dans la
@@ -1225,19 +1308,19 @@ class (for LaTeX) and the R bookdown package, in general.
   Après avoir identifié la cause génétique du phénotype MMAF de ces 15
   patients (3 patients \emph{DNAH1}, 6 \emph{WDR96}, 3 \emph{WDR52} et 3
   \emph{FSIP2}) grâce à des variants homozygotes, nous avons chercher
-  l'ensemble des patients pouvant être hétérozygotes composites, c'est à
-  dire des patients portant deux allèles différents mutés sur le même
-  gène, l'un venant de la mère, l'autre venant du père. Pour cela, nous
-  avons recansser l'ensemble des patients portant au moins deux variants
-  hétérozygotes différents sur un de ces 4 gènes. Il faut tout de même
-  noter la limite de cette approche dûe au fait de la non connaissance du
-  phasage des variants, c'est à dire qu'il nous est impossible de
-  déterminer si les deux variants sont situés sur le même allèle ou bien
-  sur deux allèles différents.
+  l'ensemble des patients pouvant être hétérozygotes composites sur l'un
+  de ces 4 gènes, .
   
-  Néanmoins, cette stratégie nous a permis d'identifier 6 nouveaux
-  patients présentant des mutation sur le gène \emph{DNAH1}, 1 sur WDR96
-  et 5 sur \emph{FSIP2}.
+  Ainsi, cette stratégie nous a permis d'identifier 6 nouveaux patients
+  présentant des mutation sur le gène \emph{DNAH1}, 1 autres sur WDR96 et
+  5 sur \emph{FSIP2}. Aucun fut trouvé avec au moins deux mutations
+  hétérozygotes sur le gène \emph{WDR52}. Il faut tout de même noter la
+  limite de cette approche dûe au fait de la non connaissance du phasage
+  des variants, c'est à dire qu'il nous est impossible de déterminer si
+  les deux variants sont situés sur le même allèle ou bien sur deux
+  allèles différents.
+  
+  Cette première analyse nous a donc permis
   
   \newpage
   
@@ -1247,12 +1330,12 @@ class (for LaTeX) and the R bookdown package, in general.
   Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
   \midrule
   Ghs102 & 10-105905296-TT-T & Homozygous & frameshift & WDR96\\
-  Ghs105 & 10-105912486-T-G & Homozygous & splice & WDR96\\
-  Ghs126 & 10-105921781-G-A & Homozygous & stop & WDR96\\
-  Ghs17 & 10-105928535-C-T & Homozygous & stop & WDR96\\
-  Ghs25 & 10-105944769-C-T & Homozygous & splice & WDR96\\
+  Ghs105 & 10-105912486-T-G & Homozygous & splice acceptor & WDR96\\
+  Ghs126 & 10-105921781-G-A & Homozygous & stop gained & WDR96\\
+  Ghs17 & 10-105928535-C-T & Homozygous & stop gained & WDR96\\
+  Ghs25 & 10-105944769-C-T & Homozygous & splice region & WDR96\\
   \addlinespace
-  Ghs41 & 10-105928513-G-A & Homozygous & stop & WDR96\\
+  Ghs41 & 10-105928513-G-A & Homozygous & stop gained & WDR96\\
   Ghs132 & 10-105953765-A-AA & Heterozygous & frameshift & WDR96\\
   Ghs132 & 10-105963485-A-G & Heterozygous & missense & WDR96\\
   \bottomrule
@@ -1263,8 +1346,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \toprule
   Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
   \midrule
-  Ghs22 & 3-113063450-G-A & Homozygous & stop & WDR52\\
-  Ghs34 & 3-113114596-C-T & Homozygous & splice & WDR52\\
+  Ghs22 & 3-113063450-G-A & Homozygous & stop gained & WDR52\\
+  Ghs34 & 3-113114596-C-T & Homozygous & splice donor & WDR52\\
   Ghs89 & 3-113119409-G-A & Homozygous & missense & WDR52\\
   \bottomrule
   \end{longtable}
@@ -1295,10 +1378,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  Comme précédemment, la cause génétique expliquant le phénotype de ces 12
-  patients ayant été identifiée, leurs données ont été retirées des
-  analyses ulterieure réduisant ainsi nos listes à 947 variants et 801
-  gènes distincts.
+  \newpage
   
   \subsubsection{Disscution}\label{disscution}
   
