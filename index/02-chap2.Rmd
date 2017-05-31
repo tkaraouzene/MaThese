@@ -19,6 +19,7 @@ library(knitr)
 library(data.table)
 library(scales)
 library(tidyr)
+library(ggpubr)
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
@@ -263,46 +264,47 @@ fig.name <- "Détails des sites ciblés par les gènes dérégulés ayant la fon
 fig.description <- "Les nombres présent au milieu des parts indiquent la quantité de gène impliqués dans cette fonction moléculaire"
 fig.info <- paste(fig.name," : ",fig.description)
 
-pie_chart_theme <- theme(axis.title.x=element_blank(),
-                         axis.text.x=element_blank(),
-                         axis.title.y = element_blank(),
-                         axis.ticks.x=element_blank(),
-                         axis.ticks.y=element_blank(),
-                         panel.grid=element_blank())
+my_pie <- function(df, title = "") {
+  
+  pie_chart_theme <- theme(axis.title.x=element_blank(),
+                           axis.text.x=element_blank(),
+                           axis.title.y = element_blank(),
+                           axis.ticks.x=element_blank(),
+                           axis.ticks.y=element_blank(),
+                           panel.grid=element_blank())
+  
+  ggpie(df,
+        x = "Ngene", 
+        label = "Ngene",
+        fill = "Target",
+        lab.font = "black",
+        color = "white",
+        lab.pos = "in") + 
+    ggtitle(title) +
+    pie_chart_theme + 
+    scale_fill_brewer(palette="Set1")
+  
+}
 
+df_binding <- df_mol_function_simple %>% ungroup() %>% filter(`Molecular functions` == "Binding") %>% select(Target, Ngene = N) %>% as.data.frame()
+df_catalytic <- df_mol_function_simple %>% ungroup() %>% filter(`Molecular functions` == "Catalytic") %>% select(Target, Ngene = N) %>% as.data.frame()
+df_transcription <- df_mol_function_simple %>% ungroup() %>% filter(`Molecular functions` == "Transcription") %>% select(Target, Ngene = N) %>% as.data.frame()
+df_structural_mol <- df_mol_function_simple %>% filter(`Molecular functions` == "Structural molecule") %>% select(Target, Ngene = N) %>% as.data.frame()
 
-p_binding <- ggplot(df_mol_function_simple %>% filter(`Molecular functions` == "Binding"),aes("", N)) +
-  geom_bar(width = 1, stat = "identity", aes(fill = Target)) +
-  coord_polar("y", start = 0)  +
-  geom_text(aes(y = N/3 + c(0, cumsum(N)[-length(N)]), label = N), size = 4) +
-  ggtitle("Binding") +
-  labs(fill = "Binding target") + 
-  pie_chart_theme
-
-p_catalytic <- ggplot(df_mol_function_simple %>% filter(`Molecular functions` == "Catalytic"),aes("", N)) +
-  geom_bar(width = 1, stat = "identity", aes(fill = Target)) +
-  coord_polar("y", start = 0)  +
-  geom_text(aes(y = N/7 + c(0, cumsum(N)[-length(N)]), label = N), size = 4) +
-  ggtitle("Catalytic") +
-  labs(fill = "Reaction") + 
-  pie_chart_theme
-
-p_transcription <- ggplot(df_mol_function_simple %>% filter(`Molecular functions` == "Transcription"),aes("", N)) +
-  geom_bar(width = 1, stat = "identity", aes(fill = Target)) +
-  coord_polar("y", start = 0)  +
-  geom_text(aes(y = N/1 + c(0, cumsum(N)[-length(N)]), label = N), size = 4) +
-  ggtitle("Catalytic") +
-  pie_chart_theme
-
-p_structural_mol <- ggplot(df_mol_function_simple %>% filter(`Molecular functions` == "Structural molecule"),aes("", N)) +
-  geom_bar(width = 1, stat = "identity", aes(fill = Target)) +
-  coord_polar("y", start = 0)  +
-  geom_text(aes(y = N/3 + c(0, cumsum(N)[-length(N)]), label = N), size = 4) +
-  ggtitle("Structural molecule") +
-  pie_chart_theme
+p_binding <- my_pie(df_binding, title = "Binding")
+p_catalytic <- my_pie(df_catalytic, title = "Catalytic")
+p_transcription <- my_pie(df_transcription, title = "Transcription")
+p_structural_mol <- my_pie(df_structural_mol, title = "Structural molecule")
 
 p_binding
 
+```
+```{r}
+
+
+
+
+      
 ```
 
 Au cours de cette étude nous n'avons pas pu mettre en évidence la cause expliquant le biais de sexe observé dans les naissance des souris. De même aucune dérégulation dans l'expression du gène *Plc*$\zeta$ n'a pu être observé.  Cependant, et que ceux-ci soient modestes, nous avons montrés que les souris *Dpy19l2*$^{-/-}$ présentaient des déréglements transcriptionels affectant plusieurs fonctions moléculaires pouvant ainsi expliquer, du moins en partie, les nombreux défauts morphologiques caractérisant les spermatozoïdes globozoocéphales. De même, nous avons pu observer un déréglement de nombreux gènes impliqués dans la liaison d'acide nucléique et de protéine pouvant ainsi expliquer les défauts d'ancrage de l'acrosome au noyau chez les spermatozoïdes globozoocéphales.
