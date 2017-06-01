@@ -1226,25 +1226,50 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \paragraph{Les nouveaux acteurs}\label{les-nouveaux-acteurs}
   
-  Ensuite, en raison du grand nombre de gènes ayant passé les filtres et
-  afin de nous concentrer en priorité ceux ayant la plus forte probabilité
-  d'être impliquer dans le phénotype MMAF, nous avons étudiés les gènes
-  sur lesquels plusieurs patients portaient au moins un variant ayant
-  passé l'ensemble des filtres. Ainsi, nous avons obtenu une liste de 180
-  gènes dont 127 (soit 71 \%) étaient retrouvés variants chez uniquement 2
-  patients (\textbf{Figure : }\ref{fig:plotfilterbigmmaf2}).
+  Ensuite, afin de nous orienter dans nos recherches, nous nous sommes
+  basés sur une étude de 2012 qui prédisait parmis l'ensemble des gènes
+  humains, ceux étant impliqué dans le cilliome, c'est à dire (todo def
+  cilliome) (Ivliev, 't Hoen, Roon-Mom, Peters, \& Sergeeva,
+  \protect\hyperlink{ref-Ivliev2012}{2012}). Ce choix est pertinent
+  puisque le spermatozoïde humain est une cellule ciliée, et le flagelle
+  en est le cil. Nous pouvons donc attendre à ce qu'une partie des gènes
+  responsables du phénotype MMAF soit présents dans cette liste recanssant
+  371 gènes classés dans trois catégories en fonction de la qualité de la
+  preuve permettant de définir le gène comme appartenant au cilliome :
   
-  Afin de nous orientés dans nos recherche, nous avons utilisés une liste
-  de gènes annoté comme faisant partie du cilliome humain. cette liste
-  recansse \ldots{} gènes et les classes en fonction de la qualité de la
-  preuve permettant de définir le gène comme appartenant au cilliome.
-  Ainsi, \ldots{} de nos \ldots{} gènes retenus fesaient partis de cette
-  liste. Il faut tout de même noter que bien que cette liste soit un bon
-  outil pour orienté les recherches et priosiser certains gènes, elle ne
-  peut constituer un critère suffisant pour filtrer le gènes n'en faisant
-  pas partie. Par exemple le gène \emph{DNAH1}, de part son expression
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Strong evidence from previous studies} : (Strong) TODO :
+    décrire cette classe blabli bla bla\ldots{}\\
+  \item
+    \textbf{Weak evidence from previous studies} : (Weak) TODO : décrire
+    cette classe blabli bla bla\ldots{}\\
+  \item
+    \textbf{No evidence from previous studies} : (None) TODO : décrire
+    cette classe blabli bla bla\ldots{}
+  \end{enumerate}
+  
+  Ainsi, 28 de nos 1221 gènes retenus fesaient partis de cette liste dont
+  17 présentaient des preuves fortes de leur appartenance au ciliome. Il
+  faut tout de même noter que bien que cette liste soit un bon outil pour
+  orienter les recherches et priosiser certains gènes, elle ne peut
+  constituer un critère suffisant pour filtrer les gènes n'en faisant pas
+  partie. Par exemple le gène \emph{DNAH1}, de part son expression
   ubiquitaire n'a pas été intégré à cette liste, or on connait desormais
-  son implication dans le phénotype MMAF.
+  son implication dans le phénotype MMAF (\textbf{Figure :
+  }\ref{fig:plotfilterbigmmaf2} - \textbf{A}).
+  
+  Suite à cela, afin de nous concentrer en priorité sur les gènes
+  entrainant un phénotype MMAF chez le plus grand nombre d'individus, nous
+  avons séléctionnés ceux sur lesquels plusieurs patients portaient au
+  moins un variant ayant passé l'ensemble des filtres nous permettant
+  alors d'obtenir une liste de 180 gènes dont 127 (soit 71 \%) étaient
+  retrouvés variants chez uniquement 2 patients (\textbf{Figure :
+  }\ref{fig:plotfilterbigmmaf2} - \textbf{B}).
+  
+  \newpage
   
   \begin{figure}
   
@@ -1257,70 +1282,224 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  Cette analyse nous a ainsi permis de mettre en évidence \ldots{}
-  nouveaux acteurs potentiels pour le phénotype MMAF impliquant \ldots{}
-  de nos patients.Ayant conservé uniquement les variants homozygotes au
-  cours de nos filtre, nous avons comme précédemment (introduire le truc u
-  niveau de dnah1) chercher à savoir si parmis les individus restant de la
-  cohorte, certains ne seraient pas hétérozygotes composites.
+  Cette approche nous a permis de rapidement identifier \ldots{} nouveaux
+  acteurs potentiels pour le phénotype MMAF impliquant \ldots{} de nos
+  patients qui portaient tous au moins une mutation homozygotes sur l'un
+  de ces gènes. Comme précédemment nous avons ensuite cherché des
+  éventuels hétérozygotes composites nous permettant ainsi mettant ainsi
+  en évidence \ldots{} patients portant au moins deux variants
+  hétérozygotes différents sur un de ces gènes.
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    \textbf{WDR96} :
-  \item
-    \textbf{WDR52} :\\
-  \item
-    \textbf{FSIP2} :\\
-  \item
-    \textbf{CCDC146} :
+    \textbf{\emph{WDR52}} : Ce gène (récemment renommé \emph{CFAP44}) a
+    été le premier à être identifié puisqu'il réunissait tout les critères
+    pouvant faire de lui un candidat pour le phénotype MMAF. En effet, ce
+    gène fait partie des gènes prédit avec des preuves fortes comme étant
+    impliqué dans le ciliome humain. De plus, 3 de nos patients portaient
+    des variants homozygotes sur ce gène, tous ayant un effet tronquant
+    sur la protéine. La recherche d'hétérozygotes composites sur ce gènes
+    s'est cependant révélées négatives puisqu'aucun de nos patients ne
+    correspondaient aux critères (\textbf{Table : }\ref{tab:tabwdr52}).
   \end{enumerate}
   
-  L'étude de ces gènes nous a tout d'abord permis d'identifier deux gènes
-  : le gène \emph{WDR96} (récemment renommé \emph{CFAP43}) et le gène
-  \emph{WDR52} récemment renommé \emph{CFAP44}). Ces gènes ont
-  respectivement été retrouvés mutés chez 6 et 3 patients. En plus du
-  nombre important de patients portant une mutation tronquante sur ces
-  gènes (\textbf{Table : }\ref{tab:tabwdr96} et \ref{tab:tabwdr52}), tout
-  deux sont retrouvés comme étant sur-exprimés dans le testicule dans les
-  bases de donnée publiques. De même, ces deux gènes avaient déjà été
-  décrits dans la litterature comme étant impliqués dans la structure et /
-  ou le fonctionnement du flagelle spermatique (Ivliev, 't Hoen, Roon-Mom,
-  Peters, \& Sergeeva, \protect\hyperlink{ref-Ivliev2012}{2012}). Ces
-  informations ont ainsi fait de ces deux gènes des candidats idéaux pour
-  expliquer le phénotype d'au moins 8 de ces 9 individus. En effet, au vu
-  de l'incertitude de l'effet de la mutation impactant le patient
-  \ldots{}, c'est à dire un variant intronique situé dans la région
-  d'épissage, la causalité de ce variant dans le phénotype du patient est
-  elle aussi incertaine.
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabwdr52}liste des variants passant les filtres et chevauchant le gène *WDR52*}\\
+  \toprule
+  Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
+  \midrule
+  Ghs22 & 3-113063450-G-A & Homozygous & stop gained & WDR52\\
+  Ghs34 & 3-113114596-C-T & Homozygous & splice donor & WDR52\\
+  Ghs89 & 3-113119409-G-A & Homozygous & missense & WDR52\\
+  \bottomrule
+  \end{longtable}
   
-  Cette étude nous a permis égallement de relever 3 patients présentants
-  des mutations dans le gènes \emph{FSIP2} (\textbf{Table :
-  }\ref{tab:tabfsip2}. Comme pour les gènes \emph{WDR96} et \emph{WDR52},
-  ce gène présente une forte et quasi exclusive expression testiculaire.
-  De plus, une équipe a démontré en 2003 l'implication de ce gène dans la
-  structure de la gaine fibreuse su flagelle spermatique (Brown, Miki,
-  Harper, \& Eddy, \protect\hyperlink{ref-Brown2003}{2003}) faisant
-  égallement de ce gène un excellent candidat dans l'explication du
-  phénotype MMAF de ces patients.
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    \textbf{\emph{EFCAB6}}, \textbf{\emph{TTC29}}, \textbf{\emph{CCDC146}}
+    : Ces trois gènes ont ensuite été identifié simultanément puisque pour
+    tous trois deux patients sont retrouvés avec un variant homozygote.
+    Pour \emph{TTC29} les deux patients portent la même variation
+    impactant un site doneur d'epissage pouvant donc alterer l'épissage du
+    transcrit induisant à la production d'un protéine abérante. Les deux
+    patients \emph{CCDC146} portent chacun un variant induisant
+    respectivement un codon stop prématuré et un décalage du cadre de
+    lecture. Ces deux entrainant la production d'une protéine tronquée. Et
+    enfin, deux variants faux-sens différents sont portés par les patients
+    \emph{EFCAB6}. De plus ces trois gènes sont présents dans notre liste
+    des gènes du ciliome avec de fortes preuves et les bases de données
+    publiques indiquent que ces trois gènes ont une forte (et quasi
+    exclusive) expression testiculaire. La recherche d'e potentiels
+    hétérozygotes composites s'est en revanche avérées négatives pour les
+    gènes \emph{TTC29} et \emph{CCDC146}. Cependant, un patient portait
+    deux variants hétérozygotes sur \emph{EFCAB6}, l'un induisant un
+    décalage du cadre de lecture et l'autre un faux-sens (\textbf{Table :
+    }\ref{tab:tabefcab6ttc29ccdc146}). \newpage
+  \end{enumerate}
   
-  Après avoir identifié la cause génétique du phénotype MMAF de ces 15
-  patients (3 patients \emph{DNAH1}, 6 \emph{WDR96}, 3 \emph{WDR52} et 3
-  \emph{FSIP2}) grâce à des variants homozygotes, nous avons chercher
-  l'ensemble des patients pouvant être hétérozygotes composites sur l'un
-  de ces 4 gènes, .
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabefcab6ttc29ccdc146}liste des variants passant les filtres et chevauchant les gène *EFCAB6*, *TTC26* et *CCDC146*}\\
+  \toprule
+  Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
+  \midrule
+  Ghs133 & 22-44022552-T-C & Homozygous & missense & EFCAB6\\
+  Ghs17 & 22-43950949-G-A & Homozygous & missense & EFCAB6\\
+  Ghs105 & 22-43924750-G-A & Heterozygous & missense & EFCAB6\\
+  Ghs105 & 22-44022454-C-T & Heterozygous & missense & EFCAB6\\
+  Ghs18 & 22-43924750-G-A & Heterozygous & missense & EFCAB6\\
+  \addlinespace
+  Ghs18 & 22-44083352-TA-T & Heterozygous & frameshift & EFCAB6\\
+  Ghs19 & 4-147858745-C-T & Homozygous & splice donor & TTC29\\
+  Ghs26 & 4-147858745-C-T & Homozygous & splice donor & TTC29\\
+  Ghs32 & 7-76891535-C-T & Homozygous & stop gained & CCDC146\\
+  Ghs35 & 7-76912065-GG-G & Homozygous & frameshift & CCDC146\\
+  \bottomrule
+  \end{longtable}
   
-  Ainsi, cette stratégie nous a permis d'identifier 6 nouveaux patients
-  présentant des mutation sur le gène \emph{DNAH1}, 1 autres sur WDR96 et
-  5 sur \emph{FSIP2}. Aucun fut trouvé avec au moins deux mutations
-  hétérozygotes sur le gène \emph{WDR52}. Il faut tout de même noter la
-  limite de cette approche dûe au fait de la non connaissance du phasage
-  des variants, c'est à dire qu'il nous est impossible de déterminer si
-  les deux variants sont situés sur le même allèle ou bien sur deux
-  allèles différents.
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    \textbf{\emph{LRRC43}} : En poursuivant nos analyses, nous avons
+    identifier le gène \emph{LRRC43} sur lequel 4 portaient le même
+    variant faux-sens à l'état homozygote. De plus, un autre patient
+    portait ce même variant à l'état hétérozygote couplé à un second
+    variant faux-sens hétérozygote lui auss. Ce gène est égallement connu
+    pour avoir une forte expression et exclusive testiculaire. De plus, ce
+    gène est inclu dans notre liste de gène du ciliome bien qu'il soit
+    classé dans la catégorie \emph{No evidence from previous studies}
+    (\textbf{Table : }\ref{tab:tablrrc43}).
+  \end{enumerate}
   
-  Cette première analyse nous a donc permis
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tablrrc43}liste des variants passant les filtres et chevauchant le gène *LRRC43*}\\
+  \toprule
+  Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
+  \midrule
+  Ghs43 & 12-122676103-G-A & Homozygous & missense & LRRC43\\
+  Ghs88 & 12-122676103-G-A & Homozygous & missense & LRRC43\\
+  Ghs96 & 12-122676103-G-A & Homozygous & missense & LRRC43\\
+  Ghs97 & 12-122676103-G-A & Homozygous & missense & LRRC43\\
+  Ghs42 & 12-122670741-C-T & Heterozygous & missense & LRRC43\\
+  Ghs42 & 12-122676103-G-A & Heterozygous & missense & LRRC43\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{3}
+  \tightlist
+  \item
+    \textbf{\emph{ARMC2}} : Comme \emph{LRRC43}, \emph{ARMC2} est classé
+    dans la catégorie \emph{No evidence from previous studies} des gènes
+    du ciliome de notre liste. Cependant son expression testiculaire forte
+    et exclusive font de lui un bon candidat pour expliquer le phénotype
+    MMAF de 3 portant respectivement à l'état homozygote un variant
+    faux-sens, un impactant le site d'epissage et l'autre entrainant un
+    dé\&calage du cadre de lecture (\textbf{Table : }\ref{tab:tabarmc2}).
+  \end{enumerate}
+  
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabarmc2}liste des variants passant les filtres et chevauchant le gène *ARMC2*}\\
+  \toprule
+  Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
+  \midrule
+  Ghs107 & 6-109285509-T-A & Homozygous & missense & ARMC2\\
+  Ghs37 & 6-109286249-TTT-T & Homozygous & frameshift & ARMC2\\
+  Ghs93 & 6-109225609-G-A & Homozygous & splice donor & ARMC2\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{4}
+  \tightlist
+  \item
+    \textbf{\emph{ANKRD20A3}} : Ce gène sur lequel 8 de nos patients
+    portent un variant homozygote (7 d'entre eux portent le même variant
+    faux-sens) et 9 au moins deux variants hétérozygotes ne fait pas parti
+    de la liste des gènes du ciliom. Cependant sa forte et quasi exclusive
+    expression testiculaire font tout de même de ce gène un très bon
+    candidat (\textbf{Table : }\ref{tab:tabankrd20a3}).
+  \end{enumerate}
+  
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabankrd20a3}liste des variants passant les filtres et chevauchant le gène *ANKRD20A3*}\\
+  \toprule
+  Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
+  \midrule
+  Ghs32 & 9-43129615-C-A & Homozygous & missense & ANKRD20A3\\
+  Ghs35 & 9-43129647-G-A & Homozygous & splice region & ANKRD20A3\\
+  Ghs36 & 9-43129615-C-A & Homozygous & missense & ANKRD20A3\\
+  Ghs38 & 9-43129615-C-A & Homozygous & missense & ANKRD20A3\\
+  Ghs39 & 9-43129615-C-A & Homozygous & missense & ANKRD20A3\\
+  \addlinespace
+  Ghs40 & 9-43129615-C-A & Homozygous & missense & ANKRD20A3\\
+  Ghs41 & 9-43129615-C-A & Homozygous & missense & ANKRD20A3\\
+  Ghs42 & 9-43129615-C-A & Homozygous & missense & ANKRD20A3\\
+  Ghs31 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
+  Ghs31 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
+  Ghs31 & 9-43129615-C-A & Heterozygous & missense & ANKRD20A3\\
+  Ghs31 & 9-43129647-G-A & Heterozygous & splice region & ANKRD20A3\\
+  Ghs32 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
+  Ghs32 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  Ghs32 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
+  Ghs32 & 9-43129647-G-A & Heterozygous & splice region & ANKRD20A3\\
+  Ghs34 & 9-43129571-CC-C & Heterozygous & frameshift & ANKRD20A3\\
+  Ghs34 & 9-43129578-G-GG & Heterozygous & frameshift & ANKRD20A3\\
+  Ghs34 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
+  Ghs34 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
+  Ghs34 & 9-43129647-G-A & Heterozygous & splice region & ANKRD20A3\\
+  Ghs36 & 9-43129586-T-G & Heterozygous & missense & ANKRD20A3\\
+  Ghs36 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
+  Ghs36 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
+  Ghs37 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
+  Ghs37 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
+  Ghs38 & 9-43129571-CC-C & Heterozygous & frameshift & ANKRD20A3\\
+  Ghs38 & 9-43129578-G-GG & Heterozygous & frameshift & ANKRD20A3\\
+  Ghs38 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
+  Ghs38 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
+  Ghs38 & 9-43129603-AG-A & Heterozygous & frameshift & ANKRD20A3\\
+  Ghs38 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
+  Ghs38 & 9-43129613-C-A & Heterozygous & missense & ANKRD20A3\\
+  Ghs40 & 9-43129586-T-G & Heterozygous & missense & ANKRD20A3\\
+  Ghs40 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
+  Ghs40 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  Ghs40 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
+  Ghs41 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  Ghs41 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
+  Ghs42 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  Ghs42 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{5}
+  \tightlist
+  \item
+    \textbf{\emph{WDR96}} : Ce gène non plus ne fait pas parti de la liste
+    de gène ciliome, cependant, comme \emph{ANKRD20A3} sa forte expression
+    spécifique au testicule font de lui un bon candidat. Au sein de notre
+    cohorte, 6 patient ont été identifiés car ils portaient un variant
+    homozygote sur ce gène. Parmis eux, 5 portaient une mutation
+    tronquante, le dernier portait un variant intronique proche de la zone
+    d'épissage. En plus de ceux-ci, 1 portait deux variant hétérozygote
+    dont un causait un décalage du cadre de lecture l'autrre entrainant un
+    faux-sens (\textbf{Table : }\ref{tab:tabwdr96}).
+  \end{enumerate}
   
   \newpage
   
@@ -1341,16 +1520,24 @@ class (for LaTeX) and the R bookdown package, in general.
   \bottomrule
   \end{longtable}
   
-  \begin{longtable}[t]{lllll}
-  \caption{\label{tab:tabwdr52}liste des variants passant les filtres et chevauchant le gène *WDR52*}\\
-  \toprule
-  Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
-  \midrule
-  Ghs22 & 3-113063450-G-A & Homozygous & stop gained & WDR52\\
-  Ghs34 & 3-113114596-C-T & Homozygous & splice donor & WDR52\\
-  Ghs89 & 3-113119409-G-A & Homozygous & missense & WDR52\\
-  \bottomrule
-  \end{longtable}
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{6}
+  \tightlist
+  \item
+    \textbf{\emph{FSIP2}} : Bien que ce gène ne soit lui non plus pas
+    inclus dans la liste des gène du ciliome, une équipe a démontré en
+    2003 l'implication de ce gène dans la structure de la gaine fibreuse
+    su flagelle spermatique (Brown, Miki, Harper, \& Eddy,
+    \protect\hyperlink{ref-Brown2003}{2003}) faisant égallement de ce gène
+    un excellent candidat dans l'explication du phénotype MMAF de 3
+    patients portant respectivement à l'état homozygote deux indels
+    différents induisant un décalage du cadre de lecture et un variant
+    faux-sens. De même, les doubles ou triples variants faux-sens
+    retrouvés à l'état hétérozygotes chez 3 de nos patients pourraient
+    aussi expliquer leur phénotype MMAF (\textbf{Table :
+    }\ref{tab:tabfsip2}.
+  \end{enumerate}
   
   \begin{longtable}[t]{lllll}
   \caption{\label{tab:tabfsip2}liste des variants passant les filtres et chevauchant le gène *FSIP2*}\\
@@ -1363,35 +1550,40 @@ class (for LaTeX) and the R bookdown package, in general.
   Ghs101 & 2-186603536-T-C & Heterozygous & missense & FSIP2\\
   Ghs101 & 2-186611436-C-T & Heterozygous & missense & FSIP2\\
   \addlinespace
-  Ghs122 & 2-186658089-C-A & Heterozygous & missense & FSIP2\\
-  Ghs122 & 2-186661399-A-G & Heterozygous & missense & FSIP2\\
   Ghs40 & 2-186626721-A-T & Heterozygous & missense & FSIP2\\
   Ghs40 & 2-186660476-A-G & Heterozygous & missense & FSIP2\\
   Ghs40 & 2-186671231-A-T & Heterozygous & missense & FSIP2\\
-  \addlinespace
   Ghs92 & 2-186626721-A-T & Heterozygous & missense & FSIP2\\
   Ghs92 & 2-186671231-A-T & Heterozygous & missense & FSIP2\\
-  Ghs95 & 2-186626721-A-T & Heterozygous & missense & FSIP2\\
-  Ghs95 & 2-186671231-A-T & Heterozygous & missense & FSIP2\\
   \bottomrule
   \end{longtable}
   
   \newpage
   
-  \newpage
-  
   \subsubsection{Disscution}\label{disscution}
   
-  L'analyse de cette cohorte de \ldots{} patients MMAF nous à la fois
-  permis de confirmer l'importance de l'implication du gène \emph{DNAH1}
-  dans ce phénotype grâce à 9 patients présentant des variants sur ce
-  gène, mais aussi de mettre en évidence de nouveaux gènes impliqués dans
-  ce phénotype. Ainsi, notre pipeline d'analyse a permis d'identifier la
-  cause génétique induisant le phénotype MMAF chez \ldots{} individus de
-  notre cohorte, soit chez \ldots{} \% des individus la composant.
+  L'analyse de cette cohorte de \ldots{} patients MMAF nous dans un
+  premier temps permis de confirmer l'importance de l'implication du gène
+  \emph{DNAH1} dans ce phénotype grâce à 9 patients présentant des
+  variants sur ce gène dont \texttt{rn\ n\_run\_homo\_dnah1}. Elle nous a
+  egallement permis d'identifier \ldots{} gène candidats pouvant expliquer
+  le phénotype de \ldots{} de nos patients. Parmis ceux-ci, \ldots{}
+  portaient au moins un variant homozygote sur un de ces gènes. Pour les
+  autres des études sont nécéssaire afin de déterminer si les différents
+  variants hétérozygotes qu'ils portent sont situés sur leurs deux allèles
+  différents faisant d'eux des hétérozygotes composites. Parmis cet
+  ensemble de patients, il faut noter que \ldots{} d'entre eux porte des
+  variants pouvant expliquer leur phénotype sur plusieurs des gènes
+  candidats que nous avons identifiés. Ici aussi, des analyses
+  complémentaires son nécéssaire afin de déterminer si l'un de ces
+  variants explique bien leur phénotype et si oui, lequel. Ainsi, cette
+  analyse révèle l'efficacité de notre pipeline puisqu'elle a permis
+  d'identifié un gène candidat pour \ldots{} \% de nos patients. Pour les
+  autres des analyses individuelles complémentaires sont nécéssaire afin
+  d'identifier la cause génétique responsable de leur phénotype.
   
-  Ces résultats ont permis l'écriture de \ldots{} articles dont je suis
-  co-auteur :
+  Une partie de ces différents résultats ont déjà été publiés dans
+  \ldots{} articles dont je suis co-auteur :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1403,14 +1595,37 @@ class (for LaTeX) and the R bookdown package, in general.
     \emph{WDR96} et \emph{WDR52} ainsi que les différentes preuves de leur
     implication dans le phénotype MMAF.
   \item
-    (papier DNAH1) :
+    \protect\hyperlink{famdnah1}{\textbf{Whole-exome sequencing of
+    familial cases of multiple morphological abnormalities of the sperm
+    flagella (MMAF) reveals new DNAH1 mutations}} : En plus des résultas
+    évoqué précédemment pour la famille MMAF2, cet article inclus ceux de
+    \ldots{} patients de cette cohorte présentant des variants sur le gène
+    \emph{DNAH1}
   \end{enumerate}
   
-  Les résultats sur le gène \emph{FSIP2} ne sont pour l'instant pas
-  publiés, notre équipe travaillant à l'heure actuelle à la
-  caractérisation de ce gène.
+  Pour les autres, notre équipe travail actuellement à la caractérisation
+  des différents gènes afin de comprendre les processus moléculaires
+  
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-9-1} \end{center}
+  
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-9-2} \end{center}
   
   \section{Conclusion}\label{conclusion}
+  
+  Au cours de ces différentes études nous avons pu identifier les variants
+  pouvant expliquer les phénotypes de \ldots{} des différents patients que
+  nous avons analysé que ce soit au sein d'étude familliale ou bien au
+  sein de plus large cohorte composés d'individus non apparentés. Bien que
+  ces résultats soient satisfaisant, il faut noter que pour \ldots{}
+  patients, soit \ldots{} \% d'entre eux aucun candidat n'a pu à ce jour
+  être identifié. Pour ces patients, le WES permets desormais de nouvelles
+  approches permettant d'identifier de large variants stricturaux
+  (insertion ou délétions) pouvant eux aussi être responsable du phénotype
+  qui ne sont pas détéctés par les analyses classiques. Néanmoins, il
+  semble clair que des avancés soient encore nécéssaire afin d'améliorer
+  l'efficacité de ce genre d'étude nottament en créant de nouveaux filtres
+  permettant ainsi d'épurer les listes de variants facilitant ainsi
+  l'identification des gènes candidats.
   
   \chapter{MutaScript}\label{mutascript}
   
