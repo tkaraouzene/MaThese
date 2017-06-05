@@ -11,3 +11,4 @@ stringi
 scales
 cowplot
 stringr
+foreach
