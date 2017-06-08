@@ -1120,22 +1120,22 @@ class (for LaTeX) and the R bookdown package, in general.
   Résultats}\label{application-de-la-pipeline---resultats}
   
   Après avoir appelé les variants de nos 62 patients, nous avons obtenu un
-  total de 4484558 variants différents comprenant 4160274 SNVs et 324284.
-  Ces variants étant répartit entre chaque patient qui portaient environs
-  chacun 81618 SNV et 5148 indels dont 42.8 \% étaient homozygote. Comme
-  on peut le voir, la proportion de chaque appel est relativement homogène
-  lorsque l'on compare les patients ayant été séquencés dans le même
-  centre la même année. Cependant, il est possible de noter de grandes
-  disparités lorsque l'on compare les données provenant de différents
-  centres ou bien du même centre avec plusieurs années de différences. Ces
-  écarts peuvent-être causés par plusieurs facteur, tel que les différents
-  kits de capture d'exons qui on put être utilisés puisque \ldots{}
-  (\textbf{todo lister les différents kits de capture dans une table}) en
-  revanche nous pouvons écarter un effet dus à la plateforme de séquençage
-  ou encore le modèle de séquenceur puisque tous ces projets ont été
-  réalisés sur des Illumina HiSeq2000 (\textbf{Table :
-  }\ref{tab:tabcohort}) (\textbf{Figure : }\ref{fig:plotbigmmafcall} -
-  \textbf{A}).
+  total de 4484558 variants différents comprenant 4160274 SNVs et 324284
+  indels. Ces variants étant répartit entre chaque patient qui portaient
+  environs chacun 81618 SNV et 5148 indels dont 42.8 \% étaient
+  homozygote. Comme on peut le voir, la proportion de chaque appel est
+  relativement homogène lorsque l'on compare les patients ayant été
+  séquencés dans le même centre la même année. Cependant, il est possible
+  de noter de grandes disparités lorsque l'on compare les données
+  provenant de différents centres ou bien du même centre avec plusieurs
+  années de différences. Ces écarts peuvent-être causés par plusieurs
+  facteur, tel que les différents kits de capture d'exons qui on put être
+  utilisés puisque \ldots{} (\textbf{todo lister les différents kits de
+  capture dans une table}) en revanche nous pouvons écarter un effet dus à
+  la plateforme de séquençage ou encore le modèle de séquenceur puisque
+  tous ces projets ont été réalisés sur des Illumina HiSeq2000
+  (\textbf{Table : }\ref{tab:tabcohort}) (\textbf{Figure :
+  }\ref{fig:plotbigmmafcall} - \textbf{A}).
   
   Le même constat peut être effectué lorsque l'on compare la qualité des
   appels puisque plus les projets de séquençage s'avèrent être récent,
@@ -1177,7 +1177,7 @@ class (for LaTeX) and the R bookdown package, in general.
   impactant un total de 1306 gènes distincts. Ces variants étant répartis
   sur l'ensemble de nos 62 patients ceux-ci portaient en moyenne 25 SNVS
   et 4 indels, de sorte que chacun d'entre eux avaient entre 1 et 73 gènes
-  impactés par au moins un variants (\textbf{Figure :
+  impactés par au moins un variants homozygote (\textbf{Figure :
   }\ref{fig:plotfilterbigmmaf} - \textbf{A} et \textbf{B}).
   
   \begin{figure}
@@ -1186,7 +1186,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[TODOOOOOOOOOOOOOOOOOO]{TODOOOOOOOOOOOOOOOOOO : **A** : Quantification du nombre de SNVs et indels ayant passé l'ensemble des filtres pour chaque patient. **B** : Nombre de gènes impactés par au moins un variant ayant passé les filtres pour chaque individu représenté par les barres. **C** : Présentation }\label{fig:plotfilterbigmmaf}
+  \caption[Résultats de l'étape de filtrage]{Résultats de l'étape de filtrage : **A** : Quantification du nombre de SNVs et indels ayant passé l'ensemble des filtres pour chaque patient. **B** : Nombre de gènes impactés par au moins un variant ayant passé les filtres pour chaque individu représenté par les barres. **C** : Présentation }\label{fig:plotfilterbigmmaf}
   \end{figure}
   
   \newpage
@@ -1297,9 +1297,10 @@ class (for LaTeX) and the R bookdown package, in general.
   orienter les recherches et prioriser certains gènes, elle ne peut
   constituer un critère suffisant pour filtrer les gènes n'en faisant pas
   partie. Par exemple le gène \emph{DNAH1}, de par son expression
-  ubiquitaire n'a pas été intégré à cette liste, or on connait désormais
-  son implication dans le phénotype MMAF (\textbf{Figure :
-  }\ref{fig:plotfilterbigmmaf2} - \textbf{A}).
+  ubiquitaire n'a pas été intégré à cette liste (\textbf{Figure :
+  }\ref{fig:expdnah1}, or on connait désormais son implication dans le
+  phénotype MMAF (\textbf{Figure : }\ref{fig:plotfilterbigmmaf2} -
+  \textbf{A}).
   
   Suite à cela, afin de nous concentrer en priorité sur les gènes
   entrainant un phénotype MMAF chez le plus grand nombre d'individus, nous
@@ -1308,6 +1309,17 @@ class (for LaTeX) and the R bookdown package, in general.
   alors d'obtenir une liste de 180 gènes dont 127 (soit 71 \%) étaient
   retrouvés variants chez uniquement 2 patients (\textbf{Figure :
   }\ref{fig:plotfilterbigmmaf2} - \textbf{B}).
+  
+  \newpage
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/expdnah1-1} 
+  
+  }
+  
+  \caption[Expression tissulaire du gène *DNAH1*]{Expression tissulaire du gène *DNAH1* : D'après les données du Illumina BodyMap}\label{fig:expdnah1}
+  \end{figure}
   
   \newpage
   
