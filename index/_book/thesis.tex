@@ -282,17 +282,20 @@ class (for LaTeX) and the R bookdown package, in general.
     indiquera pour chaque variant la conséquence que celui-ci aura sur la
     séquence codante de l'ensemble des transcrits Ensembl qu'il chevauche
     (\textbf{Figure : }\ref{fig:figvepcsq}) (\textbf{Table :
-    }\ref{tab:tabvepcsq}). Suite à cela nous ajoutons, lorsque celle-ci
-    est disponible, la fréquence du variant dans les bases de données ExAC
-    (Lek et al., \protect\hyperlink{ref-Lek2016}{2016}), ESP600 {[}TODO{]}
-    et 1000Genomes {[}TODO{]} donnant ainsi une estimation de sa fréquence
-    dans la population générale. De même, la particularité de ce pipeline
-    est qu'elle conserve l'ensemble des variants identifiés dans les
-    études effectuées précédemment permettant d'ajouter aux annotations la
-    fréquence d'un variant chez les individus déjà séquencé et donc la
-    fréquence d'un variant dans chaque phénotype étudié créant ainsi une
-    base de données interne qui pourra servir de contrôle dans les études
-    ultérieur.
+    }\ref{tab:tabvepcsq}). Ensite, nous ajoutons récuperons pour chaque
+    gène son expression tissulaire en nous basant sur le projet Illumina
+    BodyMap {[}TODO ref{]} qui recanse les données RNAseq des gènes
+    humains pour 16 tissus différents. Suite à cela nous ajoutons, lorsque
+    celle-ci est disponible, la fréquence du variant dans les bases de
+    données ExAC (Lek et al., \protect\hyperlink{ref-Lek2016}{2016}),
+    ESP600 {[}TODO{]} et 1000Genomes {[}TODO{]} donnant ainsi une
+    estimation de sa fréquence dans la population générale. De même, la
+    particularité de ce pipeline est qu'elle conserve l'ensemble des
+    variants identifiés dans les études effectuées précédemment permettant
+    d'ajouter aux annotations la fréquence d'un variant chez les individus
+    déjà séquencé et donc la fréquence d'un variant dans chaque phénotype
+    étudié créant ainsi une base de données interne qui pourra servir de
+    contrôle dans les études ultérieur.
   \end{enumerate}
   
   \begin{figure}
@@ -500,23 +503,40 @@ class (for LaTeX) and the R bookdown package, in general.
     atteins par une mosaïque d'anomalie morphologique du flagelle.
   \end{enumerate}
   
-  Un récapitulatif des familles et de leur phénotype est disponible dans
-  la table \ref{tab:tabrecapfam}.
+  Parmi ces 6 chacune composée de 2 à 3 frères, 3 d'entre elles présentent
+  un historique de consanguinité, les parents étant soit cousins germains,
+  pour les familles \ldots{} et \ldots{}, soit cousins au second degré,
+  pour la famille \ldots{} . La consanguinité favorisant la transmission
+  de variants à l'état homozygote, nous avons décidé, dans un premiers
+  temps de concentrer nos analyses uniquement sur les variants (SNVs et
+  indels) homozygotes pour l'ensemble des familles. Pour les 3 familles
+  n'ayant pas d'historique de consanguinité, ce choix nous permet de
+  réduire la liste des variants candidats de sorte à faciliter les
+  analyses. L'études des variants hétérozygotes sera effectuée \emph{a
+  posteriori} pour les familles dont la cause génétique du phénotype n'a
+  pas pu être identifiée en se limitant aux variants homozygotes. Un
+  récapitulatif des familles et de leur phénotype est disponible dans la
+  table \ref{tab:tabrecapfam}.
   
-  \begin{longtable}[t]{lrlrl}
+  \newpage
+  
+  \blandscape
+  
+  \begin{longtable}[t]{llllrl}
   \caption{\label{tab:tabrecapfam}Tableau récapitulatif des familles séquencées et de leur phénotype}\\
   \toprule
-  Familly & Individuals & Phenotype & Year & Place\\
+  Family & Consanguinity & Individuals & Phenotype & Year & Place\\
   \midrule
-  Az & 2 & Azoospermia & 2012 & Mount Sinai Institut\\
-  FF & 2 & Fertilization failure & 2014 & Genoscope (Evry)\\
-  MMAF1 & 2 & MMAF & 2014 & Genoscope (Evry)\\
-  MMAF2 & 2 & MMAF & 2014 & Genoscope (Evry)\\
-  MMAF3 & 2 & MMAF & 2014 & Genoscope (Evry)\\
-  MMAF4 & 3 & MMAF & 2014 & Genoscope (Evry)\\
+  AZ & Yes & AZ1, AZ2 & Azoospermia & 2012 & Mount Sinai Institut\\
+  FF & Yes & FF1, FF2 & Fertilization failure & 2014 & Genoscope (Evry)\\
+  MMAF1 & No & MMAF1.1, MMAF1.2 & MMAF & 2014 & Genoscope (Evry)\\
+  MMAF2 & Yes & MMAF2.1, MMAF2.2 & MMAF & 2014 & Genoscope (Evry)\\
+  MMAF3 & No & MMAF3.1, MMAF3.2 & MMAF & 2014 & Genoscope (Evry)\\
+  MMAF4 & No & MMAF4.1, MMAF4.2, MMAF4.3 & MMAF & 2014 & Genoscope (Evry)\\
   \bottomrule
   \end{longtable}
   
+  \elandscape
   \newpage  
   
   \subsubsection{Résultats des exomes}\label{resultats-des-exomes}
@@ -529,27 +549,30 @@ class (for LaTeX) and the R bookdown package, in general.
   
   La quantité de \emph{reads} composant les exomes de chaque individu peut
   varier en fonction de plusieurs paramètres et n'est donc pas égale pour
-  chaque patient bien que l'ordre de grandeur reste le même exceptés,
-  c'est à dire une médiane de 91438630 \emph{reads}. Seul les deux frères
-  AZ1 et AZ2 se distinguent près de 3 fois plus de \emph{reads} que pour
-  les autres patients. Cette différence peut être expliqué car ces deux
-  patients sont les deux seuls à voir été séquencé au Mount Sinaï Institut
-  or leur protocole d'amplification précédent le séquençage contient un
-  nombre de cycles de PCR supérieur à ceux appliqué au Génopole d'Évry où
-  ont été séquencé les autres patients (\textbf{Table :}
-  \ref{tab:tabrecapfam}, \textbf{Figure : }\ref{fig:readsselection} -
-  \textbf{A}).
+  chaque patient bien que l'ordre de grandeur reste le même avec une
+  médiane de 91438630 \emph{reads}. Seuls les deux frères AZ1 et AZ2 se
+  distinguent avec près de 3 fois plus de \emph{reads} que les autres
+  patients. Cette différence peut être expliqué car ces deux patients sont
+  les deux seuls à voir été séquencé au Mount Sinaï Institut or leur
+  protocole d'amplification précédent le séquençage contient un nombre de
+  cycles de PCR supérieur à ceux appliqué au Génopole d'Évry où ont été
+  séquencé les autres patients. Il faut noter que ce nombre plus important
+  de \emph{reads} n'est en rien le reflet d'une meilleure qualité. En
+  effet, ce nombre important de \emph{reads} est causé par une grande
+  quantité de \emph{reads} dupliqués qui seront pour la plupart filtrés au
+  cours des analyses ulterieure (\textbf{Table :} \ref{tab:tabrecapfam},
+  \textbf{Figure : }\ref{fig:readsselection} - \textbf{A}).
   
   L'ensemble de nos exomes ayant été réalisés en \emph{paired-end}, les
-  deux extrémités de chaque fragment sont séquencées chaque \emph{end}
+  deux extrémités de chaque fragment sont séquencées. Chaque \emph{end}
   d'un même \emph{read} peut donc être considéré comme un \emph{read} à
   part entière qui sont alignées \textbf{indépendamment} le long du génome
   de référence. L'information fournit par le \emph{paired-end} n'étant
   utilisé qu'à \emph{posteriori} en tant que critère qualité. La première
   étape du contrôle qualité des \emph{reads} consiste filtrer les
   \emph{reads} ne s'étant pas aligné sur le génome. Ces \emph{reads} sont
-  extrêmement minoritaires puisqu'ils représentent entre 1.2 et 5.5 \% des
-  \emph{reads} de nos individus (\textbf{Figure :
+  extrêmement minoritaires puisqu'ils ne représentent qu'entre 1.2 et 5.5
+  \% des \emph{reads} de nos individus (\textbf{Figure :
   }\ref{fig:readsselection} - \textbf{B}).
   
   Une fois cela fait, nous vérifions la ``compatibilité'' des deux
@@ -640,19 +663,19 @@ class (for LaTeX) and the R bookdown package, in general.
   appelés DS. Celui-ci consiste à comparer les appels effectués
   indépendamment sur chacune des deux \emph{ends} et à vérifier leur
   concordance, c'est à dire que les deux appels soit identique. Les appels
-  discordant et ambigus sont filtrer, ainsi environs 86.3 \% des variants
-  DS passent ce filtre. Il est intéressant de noter que bien que les
-  variants \emph{single strand} (SS) soient conservés, on peut s'attendre
-  à ce qu'environ 13.7 \% de ceux-ci soient aberrants, ceux-ci n'ayant pu
-  subir le même contrôle que les SS (\textbf{Figure :
-  }\ref{fig:plotvarcall} - \textbf{B}).
+  discordant et ambigus sont filtrés, soit environ 86.3 \% des variants
+  DS. Il est intéressant de noter que bien que les variants \emph{single
+  strand} (SS) soient conservés, on peut s'attendre à ce qu'environ 13.7
+  \% de ceux-ci soient aberrants, ceux-ci n'ayant pu subir le même
+  contrôle que les SS (\textbf{Figure : }\ref{fig:plotvarcall} -
+  \textbf{B}).
   
   Pour l'ensemble des variants ayant passé les filtres énoncés ci-dessus,
   c'est à dire les variants SS et les variants DS avec appels concordants,
   le génotype est déterminé en fonction du pourcentage de \emph{reads}
   portant le variant à cette position. Par exemple, si à une position
   donnée, 0\% des \emph{reads} portent un variant, l'individu sera appelé
-  ``Homozygote référence'', si 50\% des \emph{reads} sont portent un
+  ``Homozygote référence'', si 50\% des \emph{reads} sont porteurs d'un
   variant, l'appel sera ``hétérozygote'' et si 100\% des \emph{reads}
   portent un variant, l'appel sera ``Homozygote variant''. Ainsi, pour
   chaque individu nous avons pu établir une liste de SNVs et d'indels avec
@@ -689,10 +712,12 @@ class (for LaTeX) and the R bookdown package, in general.
   permettra de connaitre les prédictions de pathogénicités fournies par
   SIFT et PolyPhen pour les variants faux-sens.
   
-  Après avoir annoter nos variants par VEP, nous avons pu constater que
+  Après avoir annoté nos variants par VEP, nous avons pu constater que
   pour chaque patient 24975 gènes sont en moyenne affecté par au moins un
-  variant pour en moyenne 122735 transcrits (soit environs 5 transcrits
-  par gènes) (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{A}).
+  variant pour en moyenne 122735 transcrits (soit environ 5 transcrits par
+  gènes). Il faut noter que parmi ces gènes se trouvent à la fois des
+  gènes codant pour des protéine \textbf{et} d'autres non codant
+  (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{A}).
   
   Chaque variant affectera l'ensemble des transcrits qu'il chevauche,
   ainsi un même variant pourra impacter plusieurs transcrits. Ces impacts
@@ -729,7 +754,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Annotation des variants par VEP]{Annotation des variants par VEP : **A** : Quantification du nombre de gènes (en bleu) / transcrits (en rose) impactés par au moins un variant pour chaque patient chacun représentés par une barre. **B** : Distribution des impact HIGH MODERATE LOW et MODIFIER en fonction des patients et du génotype du variant. **C** : Pourcentage de nos variants retrouvés au sein des trois bases de données : ExAC, ESP et 1KG. **D** : Distribution des fréquences de nos variants au sein des trois bases de données : ExAC, ESP et 1KG}\label{fig:plotvarannotation}
+  \caption[Annotation des variants par VEP]{Annotation des variants par VEP : **A** : Quantification du nombre de gènes (en bleu) / transcrits (en rose) impactés par au moins un variant pour chaque patient chacun représentés par une barre. **B** : Distribution des impacts HIGH MODERATE LOW et MODIFIER en fonction des patients et du génotype du variant. **C** : Pourcentage des variants retrouvés au sein des trois bases de données : ExAC, ESP et 1KG. **D** : Distribution des fréquences de nos variants au sein des trois bases de données : ExAC, ESP et 1KG}\label{fig:plotvarannotation}
   \end{figure}
   
   \newpage
@@ -739,8 +764,8 @@ class (for LaTeX) and the R bookdown package, in general.
   
   Les étapes précédentes nous ont permis de mettre en évidence pour chaque
   patient une liste de variants passant l'ensemble de nos critères
-  qualités. Ces variants ont dès lors put être annotés nous permettant
-  entre autres d'avoir connaissance de leurs l'impacts sur les différents
+  qualités. Ces variants ont dès lors pu être annotés nous permettant
+  notamment d'avoir connaissance de leurs impacts sur les différents
   transcrits qu'ils chevauchent ou encore leur fréquence dans la
   population générale. Désormais, afin de ne conserver que les variants
   ayant la plus forte probabilité d'être responsable du phénotype de ces
@@ -753,50 +778,48 @@ class (for LaTeX) and the R bookdown package, in general.
   \tightlist
   \item
     \textbf{Filtre 1 : L'union des variants :} Dans ces différentes
-    études, nous avons à chaque fois séquencé des duos ou des trios
-    d'individus provenant d'une même fratrie et étant caractérisés par le
-    même phénotype. Ainsi nous avons pu formuler l'hypothèse d'une cause
-    génétique commune entre les différents patients d'une même famille et
-    donc filtrer l'ensemble des variants qui ne sont pas partagés par
-    l'ensemble des membres de la fratrie.\\
+    études, nous avons à chaque fois séquencé des frères (deux ou trois)
+    présentant phénotype. Ainsi nous avons pu formuler l'hypothèse d'une
+    cause génétique commune entre les différents patients d'une même
+    famille et donc filtrer l'ensemble des variants qui ne sont pas
+    partagés les deux ou trois frères atteints testés.\\
   \item
     \textbf{Filtre 2 : Génotype des variants :} Dans ces études, nous
     avons émis l'hypothèse d'une transmission récessive du phénotype.
-    Ainsi, seul les variants homozygotes ont été conservés.
+    Ainsi, seuls les variants homozygotes ont été conservés.
     (\textbf{Figure : }\ref{fig:resvarcall}, \ref{fig:comparefilter}).\\
   \item
     \textbf{Filtre 3 : Impact du variant :} Afin de ne conserver que les
-    variants ayant un effet potentiellement tronquant sur la protéine,
-    nous avons filtré les variants intronique et ceux tombant dans les
+    variants ayant un effet potentiellement délétère sur la protéine, nous
+    avons filtré les variants intronique et ceux tombant dans les
     séquences UTRs. De même les variants synonymes ne sont pas conservés
     (exceptés ceux se trouvant proches des régions d'épissage) car ceux-ci
-    n'ont aucun effet sur séquences protéique. Pour les variants faux sens
-    (changement d'un seul aa de la séquence protéique) il est plus
-    difficile de se décider {[}TODO insert citation{]} nous avons donc
-    utilisé les logiciels SIFT (Kumar, Henikoff, \& Ng,
-    \protect\hyperlink{ref-Kumar2009}{2009}) et Polyphen (Adzhubei et al.,
-    \protect\hyperlink{ref-Adzhubei2010}{2010}) et filtré l'ensemble des
-    faux-sens prédit comme \emph{tolerated} par SIFT et \emph{benign} par
-    Polyphen.\\
+    n'ont aucun effet sur la séquence protéique. Pour les variants faux
+    sens (changement d'un seul aa de la séquence protéique) il est plus
+    difficile de se trancher, nous avons donc utilisé les logiciels SIFT
+    (Kumar, Henikoff, \& Ng, \protect\hyperlink{ref-Kumar2009}{2009}) et
+    Polyphen (Adzhubei et al., \protect\hyperlink{ref-Adzhubei2010}{2010})
+    et filtré l'ensemble des faux-sens prédits comme \emph{tolerated} par
+    SIFT et \emph{benign} par Polyphen.\\
   \item
     \textbf{Filtre 4 : Les transcrits ``non pertinents'' :} Au cours de
     nos analyses nous nous sommes concentré uniquement sur les transcrits
     codant pour une protéine. Ainsi, l'ensemble des transcrits annotés
-    comme étant non codant furent filtrés. De même Le mécanisme NMD
+    comme étant non codant furent filtrés. De même le mécanisme NMD
     (\emph{nonsense-mediated decay}) a pour but de contrôler la qualité
     des ARNm cellulaires chez les eucaryotes (Y.-F. Chang, Imam, \&
     Wilkinson, \protect\hyperlink{ref-Chang2007}{2007}) en éliminant les
     ARNm qui comportent un codon stop prématuré (Baker \& Parker,
     \protect\hyperlink{ref-Baker2004}{2004}), pouvant être le résultat
     d'une erreur de transcription, d'une mutation ou encore d'une erreur
-    d'épissage. Il est donc peu probable que les variants présents sur
+    d'épissage. Il est donc peu probable que les variants présents sur des
     transcrits annotés NMD soient responsables du phénotype. Dès lors, ces
-    transcrits furent eux aussi filtrés. Ainsi, nous avons pu retirer de
+    transcrits ont été également filtrés. Ainsi, nous avons pu retirer de
     nos listes de variants l'ensemble des mutations impactant
     \textbf{uniquement} des transcrits non codant et / ou annoté NMD.
-    Cette étape de filtre permet à elle seule de systématiquement filtrer
+    Cette étape de filtre permet à elle seule de filtrer systématiquement
     entre 36576 et 44581 transcrits différents par patients, soit une
-    moyenne de NaN variants par individus (\textbf{Figure :
+    moyenne de 3107 variants par individus (\textbf{Figure :
     }\ref{fig:plotfilternonpertinanttr}).
   \end{enumerate}
   
@@ -815,28 +838,34 @@ class (for LaTeX) and the R bookdown package, in general.
   \tightlist
   \item
     \textbf{Fréquence des variants :} La fréquence d'un variant dans la
-    population générale est un moyen rapide d'avoir un avis sur l'effet
-    délétère de celui-ci. En effet, il est peu probable qu'un retrouvé
-    fréquemment dans la population générale soit causal d'une pathologie
-    sévère. Ainsi nous avons filtré pour l'ensemble de nos patients
-    l'ensemble des variants ayant une fréquence \(\ge\) 0.01 dans l'une
-    des trois bases de données que sont ExAC, ESP et 1KG.\\
+    population générale est un moyen rapide d'avoir une prédiction fiable
+    de l'effet délétère ou non de celui-ci. En effet, il est peu probable
+    qu'un variant retrouvé fréquemment dans la population générale soit
+    causal d'une pathologie sévère. Ainsi nous avons filtré pour
+    l'ensemble de nos patients l'ensemble des variants ayant une fréquence
+    \(\ge\) 0.01 dans l'une des trois bases de données que sont ExAC, ESP
+    et 1KG.\\
   \item
     \textbf{Présence des variants dans la cohorte contrôle :} Au cours de
-    nos différentes études, nous avons été amenés à séquencé 134.
-    L'ensemble de ces individus peuvent être soit sains soit présenter
-    l'un des 6 phénotypes étudié au cours de nos différentes études
+    nos différentes études, nous avons été amenés à séquencé un total de
+    134 un des 6 phénotypes étudiés au cours de nos différentes études
     (\textbf{Table : }\ref{tab:TODO}). Ces phénotypes étant très
-    différent, il n'est pas aberrant d'émettre l'hypothèse qu'ils que
-    leurs causes génétiques le soient également. De même, les variants
-    recherchés étant rares, il est peu probable qu'un individu porte les
-    variants de deux phénotypes différents. Ainsi, pour chacune des 6
-    familles, nous avons pu constituer une cohorte contrôle composée dans
-    l'ensemble des patients précédemment analysés et ne présentant pas le
-    même phénotype que celui étudié dans la famille (\textbf{Figure :}
+    différent, on peut émettre l'hypothèse que leurs causes génétiques
+    soient également différentes. De même, les variants recherchés étant
+    rares, il est peu probable qu'un individu porte les variants de deux
+    phénotypes différents. Ainsi, pour chacune des 6 familles, nous avons
+    pu constituer une cohorte contrôle composée dans l'ensemble des
+    patients précédemment analysés et ne présentant pas le même phénotype
+    que celui étudié dans la famille (\textbf{Figure :}
     \ref{fig:plotsamplectrl}). Dès lors, nous avons pu filtrer l'ensemble
     des variants retrouvés à la fois chez nos patients et observés à
-    l'état homozygote dans la cohorte contrôle.
+    l'état homozygote dans la cohorte contrôle. Cette cohorte contrôle
+    présente ainsi le même rôle que les bases de données publiques. Sont
+    intéret principale par rapport à celles-ci est que les individus qui
+    la composent ont pour la plupart la même origine ethnico-géographique
+    que nos patients. De plus ceux-ci ont été séquencés en même temps dans
+    les mêmes centres permettant ainsi d'identifier les artefacts dûs aux
+    protocols de séquençage.
   \end{enumerate}
   
   \begin{figure}
@@ -876,10 +905,10 @@ class (for LaTeX) and the R bookdown package, in general.
   chaque filtre révèle une information partielle. En effet, dans ce cas de
   figure, on observe la quantité de variant éliminé par chaque filtre
   indépendamment les uns des autres. Ainsi, un même variant peut donc être
-  filtrer par plusieurs filtres. Dès lors, il faut également analyser la
+  filtré par plusieurs filtres. Dès lors, il faut également analyser la
   quantité de variants filtrés \textbf{spécifiquement} par chaque filtre.
   Ainsi, on peut constater que le classement des filtres en fonctions de
-  leur stringeance reste quasi identique (\textbf{Figure :}
+  leur stringance reste quasiment identique (\textbf{Figure :}
   \ref{fig:plotcomparefilter} - \textbf{B}) il est tout de même
   intéressant de noter que désormais le filtre ``Variant impact'' apparait
   moins efficace que les filtres ``Ctrl'' et ``Genotype'' en filtrant
@@ -901,7 +930,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Comparaison de l'efficacité de chacun des six filtres utilisés]{Comparaison de l'efficacité de chacun des six filtres utilisés : **A** : Comparaison du pourcentage de variants filtrés par chacun des six filtres indépendamment les uns des autres pour chaque patient (représenté par les points. Dès lors, un même variants peut être filtré par plusieurs filtres. **B** : Comparaison du nombre de variant filtrés spécifiquement par chacun des filtres. Ici, un variant ne peut-être filtré que par un seul filtre}\label{fig:plotcomparefilter}
+  \caption[Comparaison de l'efficacité de chacun des six filtres utilisés]{Comparaison de l'efficacité de chacun des six filtres utilisés : **A** : Comparaison du pourcentage de variants filtrés par chacun des six filtres indépendamment les uns des autres pour chaque patient (représenté par les points. Dès lors, un même variant peut être filtré par plusieurs filtres. **B** : Comparaison du nombre de variant filtrés spécifiquement par chacun des filtres. Ici, un variant ne peut-être filtré que par un seul filtre}\label{fig:plotcomparefilter}
   \end{figure}
   
   \newpage
@@ -942,18 +971,35 @@ class (for LaTeX) and the R bookdown package, in general.
     \textbf{Famille FF} : Pour cette famille, le gène
     \emph{PLC}\(\zeta 1\) a passé l'ensemble des filtres. Nos
     connaissances sur la fonction de se gène et notamment son rôle dans
-    l'activation ovocytaire (TODO: REF) on fait de ce gène le candidat
-    idéal pour expliquer le phénotype de ces deux frères.\\
+    l'activation ovocytaire (TODO: REF) ainsi que sa forte expression
+    testiculaire ont fait de ce gène le candidat idéal pour expliquer le
+    phénotype de ces deux frères (\textbf{Figure :
+    }\ref{fig:plotexpplcz1}).
+  \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotexpplcz1-1} 
+  
+  }
+  
+  \caption[Expression tissulaire du gène *PLCZ1*]{Expression tissulaire du gène *PLCZ1* : D'après les données du Illumina BodyMap}\label{fig:plotexpplcz1}
+  \end{figure}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
   \item
     \textbf{Famille MMAF1} : L'analyse bibliographique des 2 gènes ayant
-    passé l'ensemble des filtres n'a ici pu nous permettre de d'affirmer
+    passé l'ensemble des filtres n'a pas pu nous permettre de d'affirmer
     que l'un de ces gènes étaient responsable du phénotype MMAF de ces 2
     frères.\\
   \item
     \textbf{Famille MMAF2} : À l'issue des filtres, 2 gènes ressortaient
     chez ces deux frères : \emph{MYH11} et \emph{DNAH1}. Or, notre équipe
-    ayant déjà, il y a quelques années établit le lien entre des mutations
-    du gène \emph{DNAH1} et le syndrome MMAF (Ben Khelifa et al.,
+    ayant déjà établit le lien entre des mutations du gène \emph{DNAH1} et
+    le syndrome MMAF (Ben Khelifa et al.,
     \protect\hyperlink{ref-BenKhelifa2014}{2014}) ce gène s'est révélé
     être un candidat idéal pour expliquer le phénotype de ces 2 frères. De
     plus, l'implication de \emph{MYH11} dans le phénotype de dissection
@@ -961,7 +1007,7 @@ class (for LaTeX) and the R bookdown package, in general.
     écarté des candidats pour le phénotype MMAF.\\
   \item
     \textbf{Famille MMAF3} : Comme pour les gènes de la famille MMAF2,
-    l'analyse bibliographique des 5 gènes ayant ici passé les filtres de
+    l'analyse bibliographique des 7 gènes ayant ici passé les filtres de
     même que l'étude de leurs expressions ne nous a pas permis de conclure
     que l'un d'entre eux étaient responsable du phénotype MMAF de ces 2
     frères.
@@ -984,25 +1030,25 @@ class (for LaTeX) and the R bookdown package, in general.
     \textbf{Famille MMAF4} : Seul le gène \emph{TGIF2} a passé l'ensemble
     des filtres pour la famille MMAF4. L'expression ubiquitaire de ce gène
     n'en font pas un candidat idéal. Cependant une étude de 2011 effectuée
-    sur le wallaby décrit que la protéine TGIF2 localise spécifiquement
-    dans le cytoplasme du spermatide, ainsi que dans le corps résiduel et
-    la pièce intermédiaire du flagelle du spermatozoïde mature (Hu, Yu,
-    Shaw, Renfree, \& Pask, \protect\hyperlink{ref-Hu2011}{2011}). Ces
-    données pourraient corréler avec le phénotype MMAF de ces 3 frères.
+    sur le wallaby décrit que la protéine TGIF2 est localisée
+    spécifiquement dans le cytoplasme du spermatide, ainsi que dans le
+    corps résiduel et la pièce intermédiaire du flagelle du spermatozoïde
+    mature (Hu, Yu, Shaw, Renfree, \& Pask,
+    \protect\hyperlink{ref-Hu2011}{2011}). Ces données pourraient corréler
+    avec le phénotype MMAF de ces 3 frères bien que l'expression de ce
+    gène soit ubiquitaire (\textbf{Figure : }\ref{fig:plotexptgif2}).
   \end{enumerate}
   
-  \begin{longtable}[t]{llllll}
-  \caption{\label{tab:tablegene}Liste des gènes ayant passé l'ensemble des filtres pour chaque famille}\\
-  \toprule
-  AZ & FF & MMAF1 & MMAF2 & MMAF3 & MMAF4\\
-  \midrule
-  SPINK2 & PLCZ1 & PLA2G4B & MYH11 & PCSK5 & TGIF2\\
-  GUF1 &  & JMJD7-PLA2G4B & DNAH1 & WEE2 & \\
-   &  &  &  & GBP2 & \\
-   &  &  &  & FCGR3A & \\
-   &  &  &  & ZFYVE28 & \\
-  \bottomrule
-  \end{longtable}
+  \newpage 
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotexptgif2-1} 
+  
+  }
+  
+  \caption[Expression tissulaire du gène *TGIF2*]{Expression tissulaire du gène *TGIF2* : D'après les données du Illumina BodyMap}\label{fig:plotexptgif2}
+  \end{figure}
   
   \newpage
   
@@ -1023,16 +1069,17 @@ class (for LaTeX) and the R bookdown package, in general.
     heterozygotes and azoospermia in homozygotes}} : Dans cet article j'ai
     effectué non seulement l'intégralité des analyses bioinformatiques des
     données d'exomes de deux frères infertiles présentant un phénotype
-    d'azoospermie mais aussi séquencer en Sanger les séquences codantes du
-    gène \emph{SPINK2} pour une partie des 611 individus analyser ainsi
-    que contribué à l'extraction de l'ARN testiculaire des souris pour
-    l'analyse fonctionnelle du gène \emph{Spink2} sur le modèle murin.\\
+    d'azoospermie mais j'ai aussi séquencé en Sanger les séquences
+    codantes du gène \emph{SPINK2} pour une partie des 611 individus
+    analysés ainsi que contribué à l'extraction de l'ARN testiculaire des
+    souris pour l'analyse fonctionnelle du gène \emph{Spink2} sur le
+    modèle murin.\\
   \item
     \textbf{Famille FF} : \protect\hyperlink{plcz}{\textbf{Homozygous
     mutation of PLCZ1 leads to defective human oocyte activation and
     infertility that is not rescued by the WW-binding protein PAWP}} :
     Dans cet article j'ai, effectué l'intégralité des analyses
-    bioinformatiques des données d'exomes effectués sur deux frères
+    bioinformatiques des données d'exomes effectuées sur deux frères
     infertiles présentant des échecs de fécondation.\\
   \item
     \textbf{Famille MMAF2} :
@@ -1040,7 +1087,7 @@ class (for LaTeX) and the R bookdown package, in general.
     familial cases of multiple morphological abnormalities of the sperm
     flagella (MMAF) reveals new DNAH1 mutations}} : Dans cet article j'ai,
     comme précédemment, effectué l'ensemble des analyses bioinformatiques
-    des données d'exomes effectués sur deux frères infertiles présentant
+    des données d'exomes effectuées sur deux frères infertiles présentant
     des échecs de fécondation.
   \end{enumerate}
   
@@ -1049,6 +1096,12 @@ class (for LaTeX) and the R bookdown package, in general.
   caractérisation de ce gène afin de savoir s'il peut effectivement
   expliquer le phénotype MMAF de cette famille (\textbf{Figure :
   }\ref{fig:plotremaininggenes}).
+  
+  TODO : Il faut aller plus loin dans l'analyse et les arguments pour
+  convaincre qu'il s'agit d'un bon candidat : quel type de mutation, ce
+  gène est-il bien conservé, son expression n'est pas spécifique au
+  testicule et ce gène serait impliqué dans un phénotype
+  d'holoproencephaly\ldots{}
   
   Pour les 2 familles restantes, aucun variant n'a pu pour l'instant
   expliquer leur phénotype. L'explication la plus vraisemblable est que le
@@ -1073,6 +1126,29 @@ class (for LaTeX) and the R bookdown package, in general.
   deux allèles différents, cela pourrait-être la signature de variants
   hétérozygotes composites. C'est donc sur ces analyses que se concentre
   actuellement notre équipe.
+  
+  \begin{longtable}[t]{lll}
+  \caption{\label{tab:tablegene}Récapitulatif des variants ayant passé l'ensemble des filtres pour chaque famille}\\
+  \toprule
+  Family & Gene & Impact\\
+  \midrule
+  MMAF4 & TGIF2 & missense\\
+  MMAF3 & PCSK5 & missense\\
+  MMAF3 & WEE2 & missense\\
+  MMAF2 & MYH11 & missense\\
+  MMAF2 & DNAH1 & splice acceptor\\
+  \addlinespace
+  MMAF3 & GBP2 & missense\\
+  FF & PLCZ1 & missense\\
+  MMAF3 & FCGR3A & missense\\
+  MMAF1 & PLA2G4B & splice region\\
+  MMAF1 & JMJD7-PLA2G4B & splice region\\
+  \addlinespace
+  AZ & SPINK2 & splice region\\
+  AZ & GUF1 & missense\\
+  MMAF3 & ZFYVE28 & missense\\
+  \bottomrule
+  \end{longtable}
   
   \begin{figure}
   
@@ -1173,10 +1249,10 @@ class (for LaTeX) and the R bookdown package, in general.
   l'exception du filtre n°1
   \protect\hyperlink{filterdescription}{``Union''} puisqu'ici nous avons
   uniquement des individus non apparentés, nous avons pu obtenir une liste
-  de 1568 variants différents composés de 1359 SNVs et 209 indels et
-  impactant un total de 1306 gènes distincts. Ces variants étant répartis
-  sur l'ensemble de nos 62 patients ceux-ci portaient en moyenne 25 SNVS
-  et 4 indels, de sorte que chacun d'entre eux avaient entre 1 et 73 gènes
+  de 1711 variants différents composés de 1470 SNVs et 241 indels et
+  impactant un total de 1432 gènes distincts. Ces variants étant répartis
+  sur l'ensemble de nos 62 patients ceux-ci portaient en moyenne 27 SNVS
+  et 5 indels, de sorte que chacun d'entre eux avaient entre 1 et 86 gènes
   impactés par au moins un variants homozygote (\textbf{Figure :
   }\ref{fig:plotfilterbigmmaf} - \textbf{A} et \textbf{B}).
   
@@ -1214,16 +1290,16 @@ class (for LaTeX) and the R bookdown package, in general.
   deux allèles \textbf{différents} mutés sur le même gène. Pour cela, nous
   avons recenser l'ensemble des patients portant au moins deux variants
   hétérozygotes différents sur le gène \emph{DNAH1}. Cette stratégie nous
-  a ainsi permis de découvrir 6 nouveaux patients pour lesquels le gène
+  a ainsi permis de découvrir 8 nouveaux patients pour lesquels le gène
   \emph{DNAH1} serait responsable du phénotype MMAF. Il faut tout de même
   noter, qu'en raison de la non connaissance du phasage des variants dans
-  le cas de séquençage WES, le génotype de ces 6 patients est à confirmer
+  le cas de séquençage WES, le génotype de ces 8 patients est à confirmer
   de sorte à être certains que les deux variants se situent bien sur deux
   allèles différents de \emph{DNAH1}, un sur celui provenant du père et un
   autre sur celui provenant de la mère.
   
   Néanmoins, les mutations du gène \emph{DNAH1} seraient ainsi
-  responsables du phénotype MMAF de 15 \% des individus de notre cohorte.
+  responsables du phénotype MMAF de 18 \% des individus de notre cohorte.
   Bien que ce pourcentage soit en deçà des 40\% (TODO: à confirmer!)
   observés dans notre étude précédente (Ben Khelifa et al.,
   \protect\hyperlink{ref-BenKhelifa2014}{2014}), ces résultats tendent à
@@ -1232,9 +1308,9 @@ class (for LaTeX) and the R bookdown package, in general.
   MMAF.
   
   La cause génétique expliquant le phénotype MMAF ayant été identifié avec
-  certitude chez au moins 3 de ces 9, l'intégralité de leurs variants
+  certitude chez au moins 3 de ces 11, l'intégralité de leurs variants
   spécifiques (retrouvés chez aucun autre patients) fut retirer de notre
-  liste réduisant celle-ci à 1458 variants impactant 1221 gènes
+  liste réduisant celle-ci à 1595 variants impactant 1342 gènes
   différents.
   
   \newpage
@@ -1250,18 +1326,25 @@ class (for LaTeX) and the R bookdown package, in general.
   Ghs90 & 3-52382922-T-C & Homozygous & missense & DNAH1\\
   Ghs95 & 3-52422540-C-G & Homozygous & missense & DNAH1\\
   \addlinespace
+  Ghs126 & 3-52398707-G-A & Heterozygous & synonymous & DNAH1\\
+  Ghs126 & 3-52417940-A-G & Heterozygous & missense & DNAH1\\
   Ghs129 & 3-52409423-T-A & Heterozygous & missense & DNAH1\\
   Ghs129 & 3-52423486-C-G & Heterozygous & missense & DNAH1\\
   Ghs28 & 3-52361911-A-G & Heterozygous & missense & DNAH1\\
-  Ghs28 & 3-52366296-A-G & Heterozygous & missense & DNAH1\\
-  Ghs36 & 3-52362004-T-G & Heterozygous & missense & DNAH1\\
   \addlinespace
+  Ghs28 & 3-52366296-A-G & Heterozygous & missense & DNAH1\\
+  Ghs33 & 3-52387600-G-A & Heterozygous & missense & DNAH1\\
+  Ghs33 & 3-52387601-C-T & Heterozygous & synonymous & DNAH1\\
+  Ghs36 & 3-52362004-T-G & Heterozygous & missense & DNAH1\\
   Ghs36 & 3-52391702-C-T & Heterozygous & stop gained & DNAH1\\
+  \addlinespace
+  Ghs36 & 3-52403861-G-A & Heterozygous & synonymous & DNAH1\\
   Ghs42 & 3-52407000-G-A & Heterozygous & missense & DNAH1\\
   Ghs42 & 3-52417872-C-G & Heterozygous & splice region & DNAH1\\
   Ghs87 & 3-52387600-G-A & Heterozygous & missense & DNAH1\\
-  Ghs87 & 3-52420751-A-C & Heterozygous & missense & DNAH1\\
+  Ghs87 & 3-52387601-C-T & Heterozygous & synonymous & DNAH1\\
   \addlinespace
+  Ghs87 & 3-52420751-A-C & Heterozygous & missense & DNAH1\\
   Ghs88 & 3-52383006-G-A & Heterozygous & missense & DNAH1\\
   Ghs88 & 3-52391648-G-A & Heterozygous & missense & DNAH1\\
   \bottomrule
@@ -1291,8 +1374,8 @@ class (for LaTeX) and the R bookdown package, in general.
   371 gènes classés dans trois catégories en fonction de la qualité de la
   preuve permettant de définir le gène comme appartenant au cilliome :
   
-  Ainsi, 28 de nos 1221 gènes retenus faisaient partis de cette liste dont
-  17 présentaient des preuves fortes de leur appartenance au cilliome. Il
+  Ainsi, 30 de nos 1342 gènes retenus faisaient partis de cette liste dont
+  19 présentaient des preuves fortes de leur appartenance au cilliome. Il
   faut tout de même noter que bien que cette liste soit un bon outil pour
   orienter les recherches et prioriser certains gènes, elle ne peut
   constituer un critère suffisant pour filtrer les gènes n'en faisant pas
@@ -1306,7 +1389,7 @@ class (for LaTeX) and the R bookdown package, in general.
   entrainant un phénotype MMAF chez le plus grand nombre d'individus, nous
   avons sélectionnés ceux sur lesquels plusieurs patients portaient au
   moins un variant ayant passé l'ensemble des filtres nous permettant
-  alors d'obtenir une liste de 180 gènes dont 127 (soit 71 \%) étaient
+  alors d'obtenir une liste de 206 gènes dont 142 (soit 69 \%) étaient
   retrouvés variants chez uniquement 2 patients (\textbf{Figure :
   }\ref{fig:plotfilterbigmmaf2} - \textbf{B}).
   
@@ -1320,6 +1403,238 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \caption[Expression tissulaire du gène *DNAH1*]{Expression tissulaire du gène *DNAH1* : D'après les données du Illumina BodyMap}\label{fig:expdnah1}
   \end{figure}
+  
+  \newpage
+  
+  Afin de nous concentrer dans un premier temps sur les gènes ayant le
+  plus de risque d'être responsable du phénotype, nous avons tout d'abord
+  séléctionner ceux présent dans la liste des gènes du ciliome sur
+  lesquels au moins 2 patients portaient une mutation homozygote ayant un
+  effet tronquant sur la protéine. Nous sommes ainsi arrivé à une liste de
+  4 gènes différents : TTC29, CFAP44, CCDC146, ARMC2 présentant tous une
+  forte expression testiculaire (\textbf{Table : }\ref{tab:tabcilhigh},
+  \textbf{Figure : }\ref{fig:plotgrp1high}).
+  
+  Parmi ces gènes, on peut noter que \emph{CCDC146} codant pour la
+  protéine CCDC146 avait déjà été décrit comme composant du centrosome
+  spermatique, un organite ayant un rôle dans l'orientation des cellules
+  et étant à l'origine des cils et des flagelles (Firat-Karalar, Sante,
+  Elliott, \& Stearns, \protect\hyperlink{ref-Firat-Karalar2014}{2014})
+  reforçant ainsi les arguments de l'implication de ce gène dans le
+  phénotype MMAF. L'analyse bibliographique des 3 autres gènes n'a
+  cependant rien révélés ceux-ci étant jusqu'à présent peu étudié.
+  
+  Après avoir identifié ces gènes, nous avons étendu notre champs de
+  recherche en cherchant si d'autre patients portaient des variants
+  homozygotes sur l'un d'eux en ne se limitant pas cette fois-ci aux
+  variants tronquant. Nous avons ainsi pu identifier 2 nouveaux patients
+  présentant tout deux des variants faux-sens homozygote, l'un sur le gène
+  \emph{ARMC2}, l'autre sur \emph{CFAP44}. On peut noter que ces deux
+  variants faux-sens sont prédit comme délétère par au moins 1 des deux
+  logiciels de prédiction utilisés (SIFT et PolyPhen).
+  
+  Pour finir avec ce premier lot de gènes, nous avons comme précédemment
+  cherché des patients potentiellement hétérozygotes composites, c'est à
+  dire portant au moins deux variants hétérozygotes, tronquant ou non.
+  Cependant, aucun de nos patients restant ne remplissaient ces critères
+  
+  Pour résumer, cette première analyse nous a permis de mettre en évidence
+  2 gènes dont différents plusieurs preuves laissent supposer leur
+  implication dans le phénotype MMAF de 10 de nos patients. Pamis ceux-ci,
+  p\_run\_high\_evidence \% portent un variant tronquant à l'état
+  homozygote nous donnant ainsi une grande confiance dans le fait que le
+  variant soit effectivement à l'origine du phénotype. Pour l'ensemble des
+  (100 - p\_run\_high\_evidence) \% restant, les variants faux-sens portés
+  par ces patients laisse planer un doute, cependant, le fait que
+  \ldots{}\ldots{}\ldots{}..
+  
+  La cause génétique responsable du phénotype de ces 10 patients ayant été
+  identifiés, nous avons comme précédemment avec les patients \emph{DNAH1}
+  retirer l'intégralité de leurs variants des analyses ulterieures afin de
+  réduire à nouveau la liste des variants et des gènes à analyser
+  facilitant ainsi les analyses. Ainsi, \ldots{} variants sur \ldots{}
+  gènes.
+  
+  \newpage
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotgrp1high-1} 
+  
+  }
+  
+  \caption[Expression tissulaire des gènes retenus]{Expression tissulaire des gènes retenus : Ici les gènes retenus sont les gènes présents dans la liste ciliome sur lesquels au moins deux patients portent un variant tronquant à l'état homozygote}\label{fig:plotgrp1high}
+  \end{figure}
+  
+  \newpage
+  
+  \begin{longtable}[t]{llll}
+  \caption{\label{tab:tabgrp1high}List des gènes sur lesquels au moins deux patients portent une mutation tronquante présents dans la liste ciliome }\\
+  \toprule
+  Gene & Patient & Consequence & Ciliome\\
+  \midrule
+  ARMC2 & Ghs37 & frameshift & Novel\\
+  ARMC2 & Ghs93 & splice donor & Novel\\
+  CCDC146 & Ghs32 & stop gained & Strong\\
+  CCDC146 & Ghs35 & frameshift & Strong\\
+  CFAP44 & Ghs22 & stop gained & Strong\\
+  \addlinespace
+  CFAP44 & Ghs34 & splice donor & Strong\\
+  TTC29 & Ghs19 & splice donor & Strong\\
+  TTC29 & Ghs26 & splice donor & Strong\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabgrp1}Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO}\\
+  \toprule
+  Gene & Patient & Consequence & SIFT & PolyPhen\\
+  \midrule
+  CFAP44 & Ghs89 & missense & tolerated & damaging\\
+  ARMC2 & Ghs107 & missense & deleterious & damaging\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{longtable}[t]{lrrr}
+  \caption{\label{tab:unnamed-chunk-9}Résumé des gènes identifiés dans cette analyse}\\
+  \toprule
+  Gene & High evidence & Moderate evidence & Total\\
+  \midrule
+  ARMC2 & 2 & 1 & 3\\
+  CCDC146 & 2 & 0 & 2\\
+  CFAP44 & 2 & 1 & 5\\
+  TTC29 & 2 & 0 & 2\\
+  \bottomrule
+  \end{longtable}
+  
+  \newpage
+  
+  Suite à cela, nous avons procéder de la même manière avec les patients
+  restant, cette fois-ci sans nous limiter au gènes présent dans la liste
+  ciliome. Nous avons ainsi pu identifier 23 gènes sur lesquels au moins 2
+  de nos patients restant et jusqu'à 5 portaient un variant homozygote
+  ayant un effet tronquant sur la protéine. Cela nous a permis d'obtenir
+  une liste de 17 nouveaux patients avec un candidat potentiel
+  (\textbf{Table :} \ref{tab:tabgrp2}, \textbf{Figure :}
+  \ref{fig:plotgrp2} - \textbf{A}).
+  
+  Parmis les gènes identifié, 3 se démarquent avec une forte expression
+  testiculaire : \emph{CFAP43}, \emph{FSIP2} et \emph{CCDC129}
+  respectivement retrouvés mutés chez 5, 2, et 2 des 17 patients
+  séléctionnés. C'est pourquoi nous avons focalisé nos analyses sur
+  ceux-ci. (\textbf{Table : }\ref{tab:tabgrp2}, \textbf{Figure :}
+  \ref{fig:plotgrp2} - \textbf{B}).
+  
+  L'analyse bibliographique du gène \emph{FSIP2} révèle qu'une équipe a
+  démontré en 2003 l'implication de ce gène dans la structure de la gaine
+  fibreuse su flagelle spermatique confirmant que ce gène est un bon
+  candidat pour expliquer le phénotype MMAF des 2 patients portant un
+  variant homozygote sur celui-ci (Brown, Miki, Harper, \& Eddy,
+  \protect\hyperlink{ref-Brown2003}{2003}).
+  
+  Ensuite, comme précédemment, nous avons rechercher les patients portant
+  des variants non tronquant sur ces 3 gènes ainsi que ceux portant au
+  moins deux variants hétérozygotes tronquant ou non. Nous permettant
+  ainsi d'identifier 2 + 7 nouveaux patients.
+  
+  \newpage  
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotgrp2-1} 
+  
+  }
+  
+  \caption[TODOOOOOOOOOOOOOOOOOO]{TODOOOOOOOOOOOOOOOOOO : Dans ces deux graphiques, chaque couleur représente un gène. **A** : Quantification du nombre d'individus présentant un variant homozygote ayant un effet tronquant pour chacun des gènes retrouvés présent dans la liste des gènes du ciliome et retouvés avec un variant tronquant homozygote chez au moins deux patients. **B** : Expression tissulaire des gènes précédents d'après les données du projet de transcriptome Illumina bodyMap}\label{fig:plotgrp2}
+  \end{figure}
+  
+  \newpage  
+  
+  \begin{longtable}[t]{lll}
+  \caption{\label{tab:tabgrp2high}List des gènes sur lesquels au moins deux patients portent une mutation tronquante non présents dans la liste ciliome }\\
+  \toprule
+  Gene & Patient & Consequence\\
+  \midrule
+  BAZ1A & Ghs18 & frameshift\\
+  BAZ1A & Ghs94 & frameshift\\
+  CCDC129 & Ghs91 & frameshift\\
+  CCDC129 & Ghs132 & frameshift\\
+  CFAP43 & Ghs17 & stop gained\\
+  \addlinespace
+  CFAP43 & Ghs41 & stop gained\\
+  CFAP43 & Ghs102 & frameshift\\
+  CFAP43 & Ghs105 & splice acceptor\\
+  CFAP43 & Ghs126 & stop gained\\
+  FSIP2 & Ghs20 & frameshift\\
+  \addlinespace
+  FSIP2 & Ghs21 & frameshift\\
+  ICA1 & Ghs17 & frameshift\\
+  ICA1 & Ghs40 & frameshift\\
+  ICA1 & Ghs105 & frameshift\\
+  NACA & Ghs39 & frameshift\\
+  \addlinespace
+  NACA & Ghs41 & frameshift\\
+  SART3 & Ghs31 & splice donor\\
+  SART3 & Ghs38 & splice donor\\
+  SART3 & Ghs40 & splice donor\\
+  SART3 & Ghs41 & splice donor\\
+  \addlinespace
+  TRAV26-1 & Ghs40 & frameshift\\
+  TRAV26-1 & Ghs43 & frameshift\\
+  TRAV26-1 & Ghs55 & frameshift\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabgrp2moderate}Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO}\\
+  \toprule
+  Gene & Patient & Consequence & SIFT & PolyPhen\\
+  \midrule
+  CFAP43 & Ghs25 & splice region &  & No prediction\\
+  FSIP2 & Ghs131 & missense &  & benign\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabgrp2low}Liste des patients portantau moins deux variants hétérozygotes sur un des gènes suivant : TODOOOOOO}\\
+  \toprule
+  Gene & Patient & Consequence & SIFT & PolyPhen\\
+  \midrule
+  CCDC129 & Ghs27 & synonymous & No prediction & No prediction\\
+  CCDC129 & Ghs27 & synonymous & No prediction & No prediction\\
+  FSIP2 & Ghs40 & missense & No prediction & benign\\
+  FSIP2 & Ghs40 & synonymous & No prediction & No prediction\\
+  FSIP2 & Ghs40 & missense & No prediction & probably damaging\\
+  \addlinespace
+  FSIP2 & Ghs40 & missense & No prediction & benign\\
+  FSIP2 & Ghs40 & synonymous & No prediction & No prediction\\
+  FSIP2 & Ghs41 & synonymous & No prediction & No prediction\\
+  FSIP2 & Ghs41 & missense & No prediction & probably damaging\\
+  FSIP2 & Ghs92 & missense & No prediction & benign\\
+  \addlinespace
+  FSIP2 & Ghs92 & synonymous & No prediction & No prediction\\
+  FSIP2 & Ghs92 & missense & No prediction & benign\\
+  FSIP2 & Ghs92 & synonymous & No prediction & No prediction\\
+  FSIP2 & Ghs101 & missense & No prediction & unknown\\
+  FSIP2 & Ghs101 & missense & No prediction & benign\\
+  \addlinespace
+  CFAP43 & Ghs132 & frameshift & No prediction & No prediction\\
+  CFAP43 & Ghs132 & missense & tolerated & possibly damaging\\
+  FSIP2 & Ghs134 & synonymous & No prediction & No prediction\\
+  FSIP2 & Ghs134 & missense & No prediction & benign\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{longtable}[t]{lrrrr}
+  \caption{\label{tab:tabresumegrp2}Résumé des gènes identifiés dans cette analyse}\\
+  \toprule
+  Gene & High evidence & Moderate evidence & Low Evidence & Total\\
+  \midrule
+  CCDC129 & 2 & 0 & 1 & 3\\
+  CFAP43 & 5 & 1 & 1 & 7\\
+  FSIP2 & 2 & 1 & 1 & 4\\
+  \bottomrule
+  \end{longtable}
   
   \newpage
   
@@ -1350,7 +1665,7 @@ class (for LaTeX) and the R bookdown package, in general.
     été le premier à être identifié. En effet, malgrès une expression
     ubiquitaire (\textbf{Figure : }\ref{figb:plotexpcandidat}), ce gène
     fait partie des gènes prédit avec des preuves fortes comme étant
-    impliqué dans le cilliome humain. De plus, 3 de nos patients portaient
+    impliqué dans le cilliome humain. De plus, 0 de nos patients portaient
     des variants homozygotes sur ce gène, tous ayant un effet tronquant
     sur la protéine. La recherche d'hétérozygotes composites sur ce gène
     s'est cependant révélées négatives puisqu'aucun de nos patients ne
@@ -1361,10 +1676,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption{\label{tab:tabwdr52}liste des variants passant les filtres et chevauchant le gène *WDR52*}\\
   \toprule
   Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
-  \midrule
-  Ghs22 & 3-113063450-G-A & Homozygous & stop gained & WDR52\\
-  Ghs34 & 3-113114596-C-T & Homozygous & splice donor & WDR52\\
-  Ghs89 & 3-113119409-G-A & Homozygous & missense & WDR52\\
+  
+  
   \bottomrule
   \end{longtable}
   
@@ -1406,6 +1719,11 @@ class (for LaTeX) and the R bookdown package, in general.
   Ghs18 & 22-43924750-G-A & Heterozygous & missense & EFCAB6\\
   \addlinespace
   Ghs18 & 22-44083352-TA-T & Heterozygous & frameshift & EFCAB6\\
+  Ghs34 & 22-43950949-G-A & Heterozygous & missense & EFCAB6\\
+  Ghs34 & 22-44028087-C-T & Heterozygous & synonymous & EFCAB6\\
+  Ghs88 & 22-43936003-T-G & Heterozygous & splice region & EFCAB6\\
+  Ghs88 & 22-44028078-A-G & Heterozygous & synonymous & EFCAB6\\
+  \addlinespace
   Ghs19 & 4-147858745-C-T & Homozygous & splice donor & TTC29\\
   Ghs26 & 4-147858745-C-T & Homozygous & splice donor & TTC29\\
   Ghs32 & 7-76891535-C-T & Homozygous & stop gained & CCDC146\\
@@ -1476,8 +1794,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     \textbf{\emph{ANKRD20A3}} : Ce gène sur lequel 8 de nos patients
     portent un variant homozygote (7 d'entre eux portent le même variant
-    faux-sens) et 9 au moins deux variants hétérozygotes ne fait pas parti
-    de la liste des gènes du cilliome. Cependant sa forte et quasi
+    faux-sens) et 10 au moins deux variants hétérozygotes ne fait pas
+    parti de la liste des gènes du cilliome. Cependant sa forte et quasi
     exclusive expression testiculaire fait tout de même de ce gène un très
     bon candidat (\textbf{Table : }\ref{tab:tabankrd20a3}).
   \end{enumerate}
@@ -1499,41 +1817,62 @@ class (for LaTeX) and the R bookdown package, in general.
   Ghs31 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
   Ghs31 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
   \addlinespace
+  Ghs31 & 9-43129604-G-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs31 & 9-43129615-C-A & Heterozygous & missense & ANKRD20A3\\
   Ghs31 & 9-43129647-G-A & Heterozygous & splice region & ANKRD20A3\\
   Ghs32 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
   Ghs32 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
-  Ghs32 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
   \addlinespace
+  Ghs32 & 9-43129602-C-A & Heterozygous & synonymous & ANKRD20A3\\
+  Ghs32 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
   Ghs32 & 9-43129647-G-A & Heterozygous & splice region & ANKRD20A3\\
   Ghs34 & 9-43129571-CC-C & Heterozygous & frameshift & ANKRD20A3\\
   Ghs34 & 9-43129578-G-GG & Heterozygous & frameshift & ANKRD20A3\\
+  \addlinespace
   Ghs34 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
   Ghs34 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
-  \addlinespace
+  Ghs34 & 9-43129602-C-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs34 & 9-43129647-G-A & Heterozygous & splice region & ANKRD20A3\\
   Ghs36 & 9-43129586-T-G & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
   Ghs36 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
+  Ghs36 & 9-43129602-C-A & Heterozygous & synonymous & ANKRD20A3\\
+  Ghs36 & 9-43129604-G-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs36 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
   Ghs37 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
   \addlinespace
+  Ghs37 & 9-43129602-C-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs37 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
   Ghs38 & 9-43129571-CC-C & Heterozygous & frameshift & ANKRD20A3\\
   Ghs38 & 9-43129578-G-GG & Heterozygous & frameshift & ANKRD20A3\\
+  Ghs38 & 9-43129584-A-G & Heterozygous & synonymous & ANKRD20A3\\
+  \addlinespace
   Ghs38 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
   Ghs38 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
-  \addlinespace
+  Ghs38 & 9-43129602-C-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs38 & 9-43129603-AG-A & Heterozygous & frameshift & ANKRD20A3\\
+  Ghs38 & 9-43129604-G-A & Heterozygous & synonymous & ANKRD20A3\\
+  \addlinespace
   Ghs38 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
   Ghs38 & 9-43129613-C-A & Heterozygous & missense & ANKRD20A3\\
+  Ghs39 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
+  Ghs39 & 9-43129604-G-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs40 & 9-43129586-T-G & Heterozygous & missense & ANKRD20A3\\
-  Ghs40 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
   \addlinespace
+  Ghs40 & 9-43129593-A-T & Heterozygous & missense & ANKRD20A3\\
   Ghs40 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  Ghs40 & 9-43129602-C-A & Heterozygous & synonymous & ANKRD20A3\\
+  Ghs40 & 9-43129604-G-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs40 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
   Ghs41 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  Ghs41 & 9-43129602-C-A & Heterozygous & synonymous & ANKRD20A3\\
+  Ghs41 & 9-43129604-G-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs41 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
   Ghs42 & 9-43129597-T-C & Heterozygous & missense & ANKRD20A3\\
+  \addlinespace
+  Ghs42 & 9-43129602-C-A & Heterozygous & synonymous & ANKRD20A3\\
+  Ghs42 & 9-43129604-G-A & Heterozygous & synonymous & ANKRD20A3\\
   Ghs42 & 9-43129607-T-A & Heterozygous & missense & ANKRD20A3\\
   \bottomrule
   \end{longtable}
@@ -1546,12 +1885,12 @@ class (for LaTeX) and the R bookdown package, in general.
     \textbf{\emph{WDR96}} : Ce gène non plus ne fait pas parti de la liste
     de gène cilliome, cependant, comme \emph{ANKRD20A3} sa forte
     expression spécifique au testicule font de lui un bon candidat. Au
-    sein de notre cohorte, 6 patients ont été identifiés car ils portaient
-    un variant homozygote sur ce gène. Parmi eux, 5 portaient une mutation
-    tronquante, le dernier portait un variant intronique proche de la zone
-    d'épissage. En plus de ceux-ci, 1 portait deux variant hétérozygotes
-    dont un causait un décalage du cadre de lecture l'autre entrainant un
-    faux-sens (\textbf{Table : }\ref{tab:tabwdr96}).
+    sein de notre cohorte, 0 patients ont été identifiés car ils portaient
+    un variant homozygote sur ce gène. Parmi eux, -1 portaient une
+    mutation tronquante, le dernier portait un variant intronique proche
+    de la zone d'épissage. En plus de ceux-ci, 0 portait deux variant
+    hétérozygotes dont un causait un décalage du cadre de lecture l'autre
+    entrainant un faux-sens (\textbf{Table : }\ref{tab:tabwdr96}).
   \end{enumerate}
   
   \newpage
@@ -1560,16 +1899,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption{\label{tab:tabwdr96}liste des variants passant les filtres et chevauchant le gène *WDR96*}\\
   \toprule
   Run ID & Variant coordinates & Genotype & Consequence & Gene symbol\\
-  \midrule
-  Ghs102 & 10-105905296-TT-T & Homozygous & frameshift & WDR96\\
-  Ghs105 & 10-105912486-T-G & Homozygous & splice acceptor & WDR96\\
-  Ghs126 & 10-105921781-G-A & Homozygous & stop gained & WDR96\\
-  Ghs17 & 10-105928535-C-T & Homozygous & stop gained & WDR96\\
-  Ghs25 & 10-105944769-C-T & Homozygous & splice region & WDR96\\
-  \addlinespace
-  Ghs41 & 10-105928513-G-A & Homozygous & stop gained & WDR96\\
-  Ghs132 & 10-105953765-A-AA & Heterozygous & frameshift & WDR96\\
-  Ghs132 & 10-105963485-A-G & Heterozygous & missense & WDR96\\
+  
+  
   \bottomrule
   \end{longtable}
   
@@ -1581,13 +1912,13 @@ class (for LaTeX) and the R bookdown package, in general.
     \textbf{\emph{FSIP2}} : Bien que ce gène ne soit lui non plus pas
     inclus dans la liste des gène du cilliome, une équipe a démontré en
     2003 l'implication de ce gène dans la structure de la gaine fibreuse
-    su flagelle spermatique (Brown, Miki, Harper, \& Eddy,
+    su flagelle spermatique (Brown et al.,
     \protect\hyperlink{ref-Brown2003}{2003}) faisant également de ce gène
     un excellent candidat dans l'explication du phénotype MMAF de 3
     patients portant respectivement à l'état homozygote deux indels
     différents induisant un décalage du cadre de lecture et un variant
     faux-sens. De même, les doubles ou triples variants faux-sens
-    retrouvés à l'état hétérozygotes chez 3 de nos patients pourraient
+    retrouvés à l'état hétérozygotes chez 6 de nos patients pourraient
     aussi expliquer leur phénotype MMAF (\textbf{Table :
     }\ref{tab:tabfsip2}.
   \end{enumerate}
@@ -1603,11 +1934,23 @@ class (for LaTeX) and the R bookdown package, in general.
   Ghs101 & 2-186603536-T-C & Heterozygous & missense & FSIP2\\
   Ghs101 & 2-186611436-C-T & Heterozygous & missense & FSIP2\\
   \addlinespace
+  Ghs134 & 2-186659576-T-C & Heterozygous & synonymous & FSIP2\\
+  Ghs134 & 2-186671231-A-T & Heterozygous & missense & FSIP2\\
+  Ghs32 & 2-186626721-A-T & Heterozygous & missense & FSIP2\\
+  Ghs32 & 2-186673485-C-T & Heterozygous & synonymous & FSIP2\\
   Ghs40 & 2-186626721-A-T & Heterozygous & missense & FSIP2\\
+  \addlinespace
+  Ghs40 & 2-186659576-T-C & Heterozygous & synonymous & FSIP2\\
   Ghs40 & 2-186660476-A-G & Heterozygous & missense & FSIP2\\
   Ghs40 & 2-186671231-A-T & Heterozygous & missense & FSIP2\\
+  Ghs40 & 2-186673485-C-T & Heterozygous & synonymous & FSIP2\\
+  Ghs41 & 2-186659402-C-T & Heterozygous & synonymous & FSIP2\\
+  \addlinespace
+  Ghs41 & 2-186666026-T-A & Heterozygous & missense & FSIP2\\
   Ghs92 & 2-186626721-A-T & Heterozygous & missense & FSIP2\\
+  Ghs92 & 2-186659576-T-C & Heterozygous & synonymous & FSIP2\\
   Ghs92 & 2-186671231-A-T & Heterozygous & missense & FSIP2\\
+  Ghs92 & 2-186673485-C-T & Heterozygous & synonymous & FSIP2\\
   \bottomrule
   \end{longtable}
   
@@ -1628,21 +1971,21 @@ class (for LaTeX) and the R bookdown package, in general.
   
   L'analyse de cette cohorte de 62 patients MMAF nous dans un premier
   temps permis de confirmer l'importance de l'implication du gène
-  \emph{DNAH1} dans ce phénotype grâce à 9 patients présentant des
+  \emph{DNAH1} dans ce phénotype grâce à 11 patients présentant des
   variants sur ce gène dont 3 à l'état homozygote. Elle nous a également
-  permis d'identifier 9 nouveaux gène candidats pouvant expliquer le
-  phénotype de 40 de nos patients soit 65 \% de la cohorte. parmi ceux-ci,
+  permis d'identifier 7 nouveaux gène candidats pouvant expliquer le
+  phénotype de 37 de nos patients soit 60 \% de la cohorte. parmi ceux-ci,
   \ldots{} portaient au moins un variant homozygote sur un de ces gènes.
   Pour les autres des études sont nécessaires afin de déterminer si les
   différents variants hétérozygotes qu'ils portent sont situés sur leurs
   deux allèles différents faisant d'eux des hétérozygotes composites
   (\textbf{Figure : }\ref{fig:plotresumebigmmaf} - \textbf{A}).
   
-  Parmi cet ensemble de patients, il faut noter que 11 d'entre eux porte
+  Parmi cet ensemble de patients, il faut noter que 9 d'entre eux porte
   des variants pouvant expliquer leur phénotype sur plusieurs des gènes
-  candidats que nous avons identifiés. En effet, 10 de nos patients
-  portent des variants sur deux de nos gènes candidats et 1 sur 3 d'entre
-  eux (\textbf{Figure : }\ref{tab:tabresumebigmmaf} - \textbf{B}).
+  candidats que nous avons identifiés. En effet, 6 de nos patients portent
+  des variants sur deux de nos gènes candidats et 3 sur 3 d'entre eux
+  (\textbf{Figure : }\ref{tab:tabresumebigmmaf} - \textbf{B}).
   
   Cependant, parmi ces différents variants certains semblent plus
   probables pour expliquer le phénotype (\textbf{Table :
@@ -1680,7 +2023,7 @@ class (for LaTeX) and the R bookdown package, in general.
   que des analyses complémentaires soient nécessaires.
   
   Ainsi, cette analyse révèle l'efficacité de notre pipeline puisqu'elle a
-  permis d'identifier au moins un gène candidat pour 65 \% de nos
+  permis d'identifier au moins un gène candidat pour 60 \% de nos
   patients. Pour les autres des analyses individuelles complémentaires
   sont nécessaires afin d'identifier la cause génétique responsable de
   leur phénotype.
@@ -1859,6 +2202,12 @@ class (for LaTeX) and the R bookdown package, in general.
   discovery and genotyping using next-generation DNA sequencing data.
   \emph{Nature Genetics}, \emph{43}(5), 491--498.
   \url{http://doi.org/10.1038/ng.806}
+  
+  \hypertarget{ref-Firat-Karalar2014}{}
+  Firat-Karalar, E. N., Sante, J., Elliott, S., \& Stearns, T. (2014).
+  Proteomic analysis of mammalian sperm cells identifies new components of
+  the centrosome. \emph{Journal of Cell Science}, \emph{127}(Pt 19),
+  4128--33. \url{http://doi.org/10.1242/jcs.157008}
   
   \hypertarget{ref-Hu2011}{}
   Hu, Y., Yu, H., Shaw, G., Renfree, M. B., \& Pask, A. J. (2011).
