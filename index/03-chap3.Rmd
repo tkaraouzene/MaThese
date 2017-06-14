@@ -43,6 +43,51 @@ knitr::opts_chunk$set(fig.align='center',echo=FALSE)
 
 ```
 
+```{r localfunction, cache=TRUE}
+
+open_ctrl <- function(file, pheno = "none") {
+  
+  fread(file, sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
+    gather(RUN, CALL, starts_with("Ghs")) %>%
+    filter(CALL %in% c(3, "c")) %>%
+    mutate(N_CTRL = n_distinct(RUN),
+           PHENO = pheno)  %>%
+    select(-CALL) %>% 
+    distinct(CHR, POSITION, REF, ALT, N_CTRL, PHENO)
+}
+
+`%tin%` <- function(x, y) {
+    mapply(assign, as.character(substitute(x)[-1]), y,
+      MoreArgs = list(envir = parent.frame()))
+    invisible()
+}
+
+tab_gene <- function(df, gene) {
+  
+  tab_gene <- df %>% 
+    filter(SYMBOL == gene) %>% 
+    mutate(VARIANT = paste(CHR,POSITION,REF,ALT, sep = "-"),
+           Consequence = sapply(strsplit(Consequence, "_variant", fixed = TRUE),"[[",1),
+           Consequence = gsub("_", " ", Consequence)) %>%
+    distinct(RUN, VARIANT, CALL, Consequence, SYMBOL) %>% 
+    arrange(desc(CALL), RUN)
+  
+  run_homo <- tab_gene %>% filter(CALL == "Homozygous") %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+  run_het <- tab_gene %>% filter(CALL == "Heterozygous") %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+
+  n_run_homo <- run_homo %>% length
+  n_run_het <- run_het %>% length
+  list(tab_gene, run_homo, run_het, n_run_homo, n_run_het)
+}
+
+na.replace <- function (x, char = "") {
+    x[is.na(x)] <- char
+    return(x)
+}
+
+```
+
+
 ## Intro  
 
 <!-- Comme vu précédemment, l'émergence du séquençage haut débit, avec notamment le WGS et le WES, a révolutionné les méthodes de recherche dans le cadre d'étude phénotype-génotype en permettant de manière rapide et à moindre coup le séquençage de la quasi totalité des gènes humains. Les causes de plusieurs centaines de pathologies ont pu être identifiées grâce à ces technique depuis leur premier succès pubilié en 2010 [@Ng].  Dès lors, l'analyse des données issues du séquençage est devenu la clef dans la réussite de ces études.  -->
@@ -767,17 +812,6 @@ gc()
 
 ```{r ctrldata, include=FALSE, cache=TRUE}
 
-open_ctrl <- function(file, pheno = "none") {
-  
-  fread(file, sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
-    gather(RUN, CALL, starts_with("Ghs")) %>%
-    filter(CALL %in% c(3, "c")) %>%
-    mutate(N_CTRL = n_distinct(RUN),
-           PHENO = pheno)  %>%
-    select(-CALL) %>% 
-    distinct(CHR, POSITION, REF, ALT, N_CTRL, PHENO)
-}
-
 ctrl_file <- "results/all_ctrl.rds"
 sample_ctrl_file <- "results/sample_ctrl.rds" 
 
@@ -1392,6 +1426,9 @@ df_rvis <- fread("data/RVIS_Unpublished_ExAC_May2015.txt",sep = "\t",header = TR
 df_cilliome_gene <- fread("data/ciliome.csv",sep = "\t",header = TRUE, data.table = FALSE) %>% 
   select(SYMBOL = Symbol, EVIDENCE = `Novelty category`, LOCALISATION = `Immunostaining of cilia`) %>% 
   mutate(EVIDENCE = substring(EVIDENCE, 4),
+         EVIDENCE = if_else(is.na(EVIDENCE), "Not in the list",
+                            if_else(grepl("Strong", EVIDENCE), "Strong",
+                                    if_else(grepl("Weak", EVIDENCE), "Weak", "Novel"))),
          LOCALISATION = substring(LOCALISATION, 4))
 
 n_cilliome_gene <- df_cilliome_gene %>% nrow
@@ -1534,7 +1571,7 @@ plot_grid(pA,row2, ncol = 1, rel_heights = c(.45,.55), labels = c("A",""))
 
 #### Analyse des listes de gènes  
 
-```{r filterbigmmaf, dependson="bigmmafcall", cache=TRUE}
+```{r filterbigmmaf, dependson=c("bigmmafcall","extradata"), cache=TRUE}
 
 maf_cutoff <- .01
 
@@ -1553,7 +1590,10 @@ df_bigmmaf_filter <- df_bigmmaf_call %>%
   select(-STRAND) %>%
   filter_genotype(het = FALSE) %>% 
   variant_join(df_distinct_filter, mode = "inner") %>% 
-  select(-Allele)
+  select(-Allele) %>% 
+  mutate(SYMBOL = if_else(SYMBOL == "WDR52", "CFAP44", 
+                          if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL))) %>%
+  ungroup()
   
 
 df_bigmmaf_filter_stat <- df_bigmmaf_filter %>% 
@@ -1584,7 +1624,25 @@ df_bigmmaf_filter_het <- df_bigmmaf_call %>%
   mutate(N_VAR_PER_RUN_PER_GENE = n()) %>% 
   filter(N_VAR_PER_RUN_PER_GENE > 1) %>% 
   group_by(SYMBOL) %>%
-  mutate(N_RUN_PER_GENE = n_distinct(RUN))
+  mutate(N_RUN_PER_GENE = n_distinct(RUN)) %>%
+  ungroup() %>%
+  mutate(SYMBOL = if_else(SYMBOL == "WDR52", "CFAP44", 
+                          if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL)))
+
+```
+
+
+```{r}
+# Pierre Ray 
+
+# bind_rows(df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "12") %>% inner_join(df_bigmmaf_filter),
+#           df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "12") %>% inner_join(df_bigmmaf_filter_het)) %>% 
+#   
+#   inner_join(df_canonical_transcripts) %>% 
+#   select(-N_VAR_PER_RUN_PER_GENE, -N_RUN_PER_GENE) %>% 
+#   add_exp() %>% 
+#   write.table("~/Bureau/canonical_variants_homo_het_16IF93.csv", sep = "\t", row.names = FALSE)
+
 
 ```
 
@@ -1656,40 +1714,16 @@ plot_grid(pA,pB, rel_heights = c(.33,.67), ncol = 1, labels = c("A","B"))
 \newpage
 
 
+Afin de déterminer parmi cette ensemble de gènes ceux responsables du phénotype de nos patients, nous avons procédés en trois étapes : 
+
+1. **Étape n°1** : Cette étape consiste à séléctionner uniquement les variants ayant un effet tronquant sur la protéine comme un décalage du cadre de lecture, l'apparition d'un codon stop prématuré ou encore une perturbation des sites accepteurs / donneur d'épissage. Une analyse de l'expression testiculaire des gènes retenus ainsi qu'une étude bibliographique nous permet ensuite de séléctionner tout ou partie de ceux-ci. Du fait des effets extremement délétères de ces variants, les patients ressortant de cette première étape sont considérés comme de confience élevée (*High trust*).   
+2. **Étape n°2** : Pour l'ensemble des gènes retenus dans l'étape n°1, nous recherchons ensuite des patients portant, toujours à l'état homozygote, des variant aux effet non tronquant tel que des variants faux-sens ou encore des variants intronique situés proches des sites d'épissage. Dans le cas des variants faux-sens, les logiciels SIFT et PolyPhen sont ensuite utilisés afin de nous orienter quant à l'effet délétère du variant, bien que comme nous l'avons déjà vu, ces logiciels son contredisent regulièrement [TODO : ref!!!]. Au vus de la difficulté à déterminer l'effet délétère de ces variants, les patients identifiés au cours de cette étape sont marqués comme de confience modérée (*Moderate trust*).    
+3. **Étape n°3** : Cette étape consiste à recherchere des patients éventuellement hétérozygotes composites, c'est à dire des patients portant deux variants hétérozygotes différents sur chacun des deux allèles d'un même gène. Malheuresement, dans le cadre de séquençage WES WGS, il est impossible de connaitre le "phasage" des variants, c'est à dire que l'on ne peut déterminer si deux variants hétérozygotes sont situés sur le même allèles ou sur deux allèles différents. Pour cela, des analyses de biologie moléculaire sont nécéssaire. C'est pour cette raison que les patients identifier au cours de cette étape sont labellisés comme étant de faible confience (*Low trust*).  
+4. **Étape n°4** : Les données des patients pour lesquels les étapes 1 à 3 ont permis d'identifier un ou plusieurs variants causaux **avec certitude** sont ensuite retirées pour les analyses ulterieures, allegeant ainsi le nombre de variant et donc de gène à analyser.  
+
+\newpage  
+
 ##### *DNAH1*, un acteur primordial dans le phénotype MMAF   
-
-```{r localfunction, cache=TRUE}
-
-`%tin%` <- function(x, y) {
-    mapply(assign, as.character(substitute(x)[-1]), y,
-      MoreArgs = list(envir = parent.frame()))
-    invisible()
-}
-
-tab_gene <- function(df, gene) {
-  
-  tab_gene <- df %>% 
-    filter(SYMBOL == gene) %>% 
-    mutate(VARIANT = paste(CHR,POSITION,REF,ALT, sep = "-"),
-           Consequence = sapply(strsplit(Consequence, "_variant", fixed = TRUE),"[[",1),
-           Consequence = gsub("_", " ", Consequence)) %>%
-    distinct(RUN, VARIANT, CALL, Consequence, SYMBOL) %>% 
-    arrange(desc(CALL), RUN)
-  
-  run_homo <- tab_gene %>% filter(CALL == "Homozygous") %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
-  run_het <- tab_gene %>% filter(CALL == "Heterozygous") %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
-
-  n_run_homo <- run_homo %>% length
-  n_run_het <- run_het %>% length
-  list(tab_gene, run_homo, run_het, n_run_homo, n_run_het)
-}
-
-na.replace <- function (x, char = "") {
-    x[is.na(x)] <- char
-    return(x)
-}
-
-```
 
 ```{r dnah1, dependson=c("localfunction","filterbigmmaf"), cache=TRUE}
 
@@ -1701,67 +1735,177 @@ df_bigmmaf_filter_homo_het <- df_bigmmaf_filter_het %>%
   filter(sum(ONE_HOMO) > 0) %>%
   ungroup()
 
-c(tabdnah1, run_homo_dnah1, run_het_dnah1, n_run_homo_dnah1, n_run_het_dnah1) %tin% (df_bigmmaf_filter_homo_het %>% tab_gene("DNAH1"))
-p_run_tot_dnah1 <- ((n_run_homo_dnah1 + n_run_het_dnah1) / n_run_bigmmaf) %>% round(2) * 100
+```
+
+```{r dfdnah1high}
+
+df_dnah1_high <- df_bigmmaf_filter %>% 
+  filter(SYMBOL == "DNAH1",
+         IMPACT == "HIGH") %>%
+  ungroup()
 
 ```
 
+```{r vardnah1high}
+
+run_dnah1_high <- df_dnah1_high %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_dnah1_high <- run_dnah1_high %>% length
+
+```
+
+```{r dfdnah1moderate}
+
+df_dnah1_moderate <-  df_bigmmaf_filter %>% 
+  filter(SYMBOL == "DNAH1",
+         IMPACT != "HIGH")
+
+```
+
+```{r vardnah1moderate}
+
+run_dnah1_moderate <- df_dnah1_moderate %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_dnah1_moderate <- run_dnah1_moderate %>% length
+
+p_run_dnah1_homo <- ((n_run_dnah1_high + n_run_dnah1_moderate) / n_run_bigmmaf) %>% round(2) * 100
+
+
+```
+
+```{r dfdnah1low}
+
+df_dnah1_low <-  df_bigmmaf_filter_het %>% 
+  filter(SYMBOL == "DNAH1",
+         N_VAR_PER_RUN_PER_GENE > 1)
+
+```
+
+```{r vardnah1low}
+
+
+run_dnah1_low <- df_dnah1_low %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_dnah1_low <- run_dnah1_low %>% length
+
+p_run_dnah1_tot <- ((n_run_dnah1_high + n_run_dnah1_moderate + n_run_dnah1_low) / n_run_bigmmaf) %>% round(2) * 100
+
+
+```
+
+
+```{r resumednah1, cache=TRUE}
+
+
+df_resume_dnah1 <- bind_rows(df_dnah1_high %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
+                             df_dnah1_moderate %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Moderate"),
+                             df_dnah1_low %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Low")) %>% 
+  group_by(TRUST, SYMBOL) %>%
+  summarise(N_RUN = n_distinct(RUN)) %>% 
+  select(SYMBOL, N_RUN, TRUST) %>%
+  group_by(SYMBOL) %>% 
+  mutate(TOT = sum(N_RUN)) %>% 
+  spread(TRUST, N_RUN) %>%
+  mutate(Moderate = na.replace(Moderate, 0),
+         Low = na.replace(Low, 0)) 
+
+```
+
+
 ```{r removednah1, dependson="filterbigmmaf", cache=TRUE}
 
-run_found <- c(run_homo_dnah1)
+run_found <- c(run_dnah1_high, run_dnah1_moderate)
+
 df_bigmmaf_filter2 <- df_bigmmaf_filter %>% 
-  filter(!(RUN %in% run_found)) %>%
-    mutate(EVIDENCE = if_else(is.na(EVIDENCE), "Not in the list",
-                            if_else(grepl("Strong", EVIDENCE), "Strong",
-                                    if_else(grepl("Weak", EVIDENCE), "Weak", "Novel"))),
-           SYMBOL = if_else(SYMBOL == "WDR52", "CFAP44", 
-                            if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL)))
-  
+  filter(!(RUN %in% run_found)) 
   
 df_bigmmaf_filter_het2 <- df_bigmmaf_filter_het %>% 
-  ungroup() %>%
-  mutate(SYMBOL = if_else(SYMBOL == "WDR52", "CFAP44", 
-                          if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL))) %>%
-  
-  filter(!(RUN %in% run_found))
+  filter(!(RUN %in% run_found))  
+
+df_bigmmaf_genes_distinct2 <- df_bigmmaf_filter2  %>% 
+  group_by(SYMBOL, EVIDENCE, LOCALISATION) %>% 
+  distinct(RUN) %>%
+  mutate(N_RUN = n()) %>% 
+  distinct(N_RUN) 
+
+df_bigmmaf_genes_resume2 <- df_bigmmaf_genes_distinct2 %>% 
+  distinct(N_RUN) %>% 
+  group_by(N_RUN, EVIDENCE, LOCALISATION) %>% 
+  summarise(N_GENE = n()) %>% 
+  filter(N_RUN > 1) 
+
+```
+
+```{r varremovednah1, cache=TRUE}
 
 n_found <- run_found %>% length
-
-df_bigmmaf_genes2 <- df_bigmmaf_filter2  %>% 
-
-  group_by(SYMBOL, EVIDENCE, LOCALISATION) %>% 
-  distinct(RUN) %>% mutate(N_RUN = n()) 
-
-df_bigmmaf_genes_distinct2 <- df_bigmmaf_genes2 %>% distinct(N_RUN)
-df_bigmmaf_genes_resume2 <- df_bigmmaf_genes_distinct2 %>% distinct(N_RUN) %>% group_by(N_RUN, EVIDENCE, LOCALISATION) %>% summarise(N_GENE = n()) %>% filter(N_RUN > 1) 
-
-
-n_distinct_var2 <- df_bigmmaf_filter2 %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
+n_distinct_var2 <- df_bigmmaf_filter2 %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
 n_distinct_gene2 <- df_bigmmaf_genes_distinct2 %>% nrow
 
 ```
 
-Parmi l'ensemble de nos patients, `r n_run_homo_dnah1` révélèrent porter au moins un variant passant l'ensemble des filtres sur le gène *DNAH1*, candidat évident pour ce phénotype. Ainsi, le patient Ghs90 porte 3 variants successifs induisant 3 variation faux-sens, le patient Ghs95 porte lui un seul variant entrainant lui aussi un faux-sens et le patient Ghs122 porte un indel entrainant un décalage du cadre de lecture (**Table : **\@ref(tab:tabdnah1)).  
+Au moment de nos analyses, le gène *DNAH1* était encore le seul décrit comme responsable du phénotype MMAF faisant de lui un candidat évident pour expliquer le phénotype MMAF de nos patients malgrés on expression non spécifique au testicule (**Figure : **\@ref(fig:plotdnah1) - **A**). C'est pourquoi nous avons appliquer les 3 étapes précédement décrites en ciblant spécifiquement les patients ayant des variants chevauchant les gène *DNAH1*.  
 
-Ainsi, au vu de ces premières analyses, des variants dans le gène *DNAH1* seraient responsables du phénotype MMAF de `r n_run_homo_dnah1` patients. 
-Cependant, comme nous l'avons vu précédemment, bien que la stratégie consistant à filtrer l'ensemble des variants hétérozygotes chez les individus apparentés, celle-ci peut dans le cas d'individus non apparentés entrainer le filtrage du / des variants responsables du phénotype. Ces pourquoi nous avons ensuite cherché des patients potentiellement composites, c'est à dire des patients portant au moins deux allèles **différents** mutés sur le même gène. Pour cela, nous avons recenser l'ensemble des patients portant au moins deux variants hétérozygotes différents sur le gène *DNAH1*. Cette stratégie nous a ainsi permis de découvrir `r n_run_het_dnah1` nouveaux patients pour lesquels le gène *DNAH1* serait responsable du phénotype MMAF. Il faut tout de même noter, qu'en raison de la non connaissance du phasage des variants dans le cas de séquençage WES, le génotype de ces `r n_run_het_dnah1` patients est à confirmer de sorte à être certains que les deux variants se situent bien sur deux allèles différents de *DNAH1*, un sur celui provenant du père et un autre sur celui provenant de la mère.   
+Ainsi, nous avons pu identifier `r n_run_dnah1_high + n_run_dnah1_moderate` de nos patients portant au moins un variant homozygote sur le gène *DNAH1* dont `r n_run_dnah1_high` portant un indel entrainant un décalage du cadre de lecture ayant ainsi un effet tronquant sur la protéine. Pour les `r n_run_dnah1_moderate` autres, le patient Ghs90 porte 3 variants successifs induisant 3 variation faux-sens, le patient Ghs95 porte lui un seul variant entrainant lui aussi un faux-sens. On peut noter que SIFT ne propose aucune prédiction pour aucun de ces trois faux-sens faux-sens tandis que PolyPhen les prédit tous comme *benign*. Cependant, l'implication déjà bien connue de ce gène dans le phénotype MMAF (**Table : **\@ref(tab:tabdnah1)).  
 
-Néanmoins, les mutations du gène *DNAH1* seraient ainsi responsables du phénotype MMAF de `r p_run_tot_dnah1` % des individus de notre cohorte. Bien que ce pourcentage soit en deçà des 40% (TODO: à confirmer!) observés dans notre étude précédente [@BenKhelifa2014], ces résultats tendent à confirmer le rôle primordial de la protéine DNAH1 dans la structure du flagelle et l'implication majeure du gène *DNAH1* dans le phénotype MMAF.   
+La recherche d'hétérozygotes composites nous a permis d'identifier `r n_run_dnah1_low` autres patients. Parmis ceux-ci, on peut noter le patients Ghs36 portant à la fois un faux-sens prédit comme *probably damaging* par PolyPhen (pas de prédiction pour SIFT) ainsi qu'un second entrainant la formation d'un codon stop prématuré. Pour les `r n_run_dnah1_low - 1` autres, les variant entrainent pour la plupart des mutations faux-sens (**Table : **\@ref(tab:tabdnah1)).  
 
-La cause génétique expliquant le phénotype MMAF ayant été identifié avec certitude chez au moins `r n_run_homo_dnah1` de ces `r n_run_homo_dnah1 + n_run_het_dnah1`, l'intégralité de leurs variants spécifiques (retrouvés chez aucun autre patients) fut retirer de notre liste réduisant celle-ci à `r n_distinct_var2` variants impactant `r n_distinct_gene2` gènes différents.  
+Ainsi, cette première analyse nous a permis de révéler que `r n_run_dnah1_high + n_run_dnah1_moderate + n_run_dnah1_low` des `r n_run_bigmmaf` patients de notre cohorte portaient au moins 1 variant sur le gène *DNAH1* et que pour `r n_run_dnah1_high + n_run_dnah1_moderate` d'entre eux ce(s) variants étaient présents à l'état homozygote. Ainsi, les mutations du gène *DNAH1* seraient ainsi responsables du phénotype MMAF de `r p_run_dnah1_homo` % si l'on ne considère que les patients portant un variant homozygote à `r p_run_dnah1_tot` % si l'on compte égallement les patients potentiellement héérozygotes composites (**Figure : **\@ref(fig:plotdnah1) - **B**).  
+
+Bien que ce pourcentage soit en deçà des 40% (TODO: à confirmer!) observés dans notre étude précédente [@BenKhelifa2014], ces résultats confirment néanmoins le rôle primordial de la protéine DNAH1 dans la structure du flagelle et l'implication majeure du gène *DNAH1* dans le phénotype MMAF.   
+La cause génétique expliquant le phénotype MMAF ayant été identifié avec certitude chez au moins `r n_run_dnah1_high + n_run_dnah1_moderate` des patients (ceux portant un variant homozygotes), l'intégralité de leurs variants spécifiques (retrouvés chez aucun autre patients) fut retirée de notre liste réduisant celle-ci à `r n_distinct_var2` variants impactant `r n_distinct_gene2` gènes différents.  
 
 \newpage
 
-```{r tabdnah1, dependson="removednah1", cache=TRUE}
+```{r plotdnah1, fig.cap=fig_info, fig.height=8, fig.scap=fig_name, cache=TRUE}
 
-kable(tabdnah1, 
-      booktabs = TRUE,
-      longtable = TRUE,
-      col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-      caption = "liste des variants passant les filtres et chevauchant le gène *DNAH1*")
+fig_name <- "Analyse du gène *DNAH1*"
+
+
+
+fig_description_A <- "Expression tissulaire du gène *DNAH1* d'après les données du projet Illumina BodyMap"
+fig_description_B <- "Quantification du nombre de patients portant au moins un variant sur le gène *DNAH1* pour chacun des 3 niveau de confiance"
+
+fig_description <- paste(fig_description_A, fig_description_B, fig_description_C, sep = ". ")
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+pA <- plot_expression("dnah1", "percent", TRUE) +
+  xlab("") + 
+  theme(legend.position = c(1,.5),
+        legend.justification = c(1,.5))
+
+
+pB <- ggplot(df_resume_dnah1 %>% 
+               gather(TRUST,NB,High:Moderate) %>%
+               mutate(TRUST = factor(TRUST, levels = c("High","Moderate","Low"))),
+             aes(TRUST, NB)) +
+  geom_col(aes(fill = TRUST)) + 
+  scale_fill_manual(guide = "none", values = c("#4DAF4A","#FF7F00","#E41A1C")) + 
+facet_wrap(~SYMBOL) + 
+  ylab("Nb of individuals") + 
+  xlab("")
+
+plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
+
 
 ```
 
+\newpage
+
+```{r tabdnah1, cache=TRUE}
+
+
+kable(bind_rows(df_dnah1_high %>% mutate(TRUST = "High"),
+                df_dnah1_moderate %>% mutate(TRUST = "Moderate"),
+                df_dnah1_low %>% mutate(TRUST = "Low")) %>% 
+        inner_join(df_canonical_transcripts, by = "Feature") %>% 
+        mutate(SIFT = na.replace(SIFT, "No prediction"), 
+               PolyPhen = na.replace(PolyPhen, "No prediction"),
+               TRUST = factor(TRUST, levels = c("High","Moderate","Low"))) %>% 
+        arrange(TRUST, RUN) %>%
+        select(Patient = RUN, Trust = TRUST, Consequence, Genotype = CALL, SIFT, PolyPhen),
+      booktabs = TRUE,
+      longtable = TRUE,
+      caption = "Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO")
+
+```
 
 \newpage
 
@@ -1813,18 +1957,6 @@ Ainsi, `r n_gene_cil` de nos `r n_distinct_gene2` gènes retenus faisaient parti
 
 Suite à cela, afin de nous concentrer en priorité sur les gènes entrainant un phénotype MMAF chez le plus grand nombre d'individus, nous avons sélectionnés ceux sur lesquels plusieurs patients portaient au moins un variant ayant passé l'ensemble des filtres nous permettant alors d'obtenir une liste de `r n_gene_more1` gènes dont `r n_gene_2` (soit `r p_gene_2` %) étaient retrouvés variants chez uniquement 2 patients (**Figure : **\@ref(fig:plotfilterbigmmaf2) - **B**). 
 
-\newpage
-```{r expdnah1, fig.cap=fig_info, fig.height=7, fig.scap=fig_name, cache=TRUE}
-
-fig_name <- "Expression tissulaire du gène *DNAH1*"
-fig_info <- paste0(fig_name, " : D'après les données du Illumina BodyMap")
-
-plot_expression("dnah1", "percent", TRUE) +
-  xlab("") + 
-  theme(legend.position = c(1,.5),
-        legend.justification = c(1,.5))
-
-```
 
 \newpage
 
@@ -1862,22 +1994,19 @@ n_gene_cil_high <- df_distinct_cil_high %>% nrow
 
 ```{r dfgrp1moderate, dependson="removednah1", cache=TRUE}
 
-df_bigmmaf_gene_grp1 <- df_bigmmaf_filter2 %>% 
+df_grp1_moderate <- df_bigmmaf_filter2 %>% 
   filter(SYMBOL %in% gene_cil_high,
          IMPACT != "HIGH") %>%
   group_by(SYMBOL, Feature) %>%
   mutate(N_RUN = n_distinct(RUN)) %>% 
-  group_by(SYMBOL) %>% 
-  mutate(N_RUN = max(N_RUN)) %>% 
-  group_by(RUN, SYMBOL) %>%
-  distinct(Consequence, SIFT, PolyPhen, EVIDENCE)
+  ungroup()
 
 ```
 
 ```{r vargrp1moderate, dependson="dfgrp1moderate", cache=TRUE}
 
-n_gene_grp1 <- df_bigmmaf_gene_grp1 %>% ungroup() %>% distinct(SYMBOL) %>% nrow
-run_grp1 <- df_bigmmaf_gene_grp1 %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_gene_grp1 <- df_grp1_moderate %>% ungroup() %>% distinct(SYMBOL) %>% nrow
+run_grp1 <- df_grp1_moderate %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
 n_run_grp1 <- run_grp1 %>% length 
 
 ```
@@ -1891,18 +2020,17 @@ df_grp1_low <- df_bigmmaf_filter_het2 %>%
   mutate(N_RUN = n_distinct(RUN)) %>% 
   group_by(SYMBOL) %>% 
   mutate(N_RUN = max(N_RUN)) %>% 
-  group_by(RUN, SYMBOL) %>%
-  mutate(PolyPhen = if_else(grepl("damaging", PolyPhen), "damaging", PolyPhen))
+  group_by(RUN, SYMBOL) 
 
 ```
 
 ```{r dfresumegrp1, dependson=c("dfgrp1high","dfgrp1moderate","dfgrp1low"), cache=TRUE}
 
-df_bigmmaf_resume_grp1 <- bind_rows(df_distinct_cil_high %>%
+df_resume_grp1 <- bind_rows(df_distinct_cil_high %>%
                                       select(-EVIDENCE) %>%
                                       mutate(TRUST = "High"),
                                     
-                                    df_bigmmaf_gene_grp1 %>%
+                                    df_grp1_moderate %>%
                                       select(-EVIDENCE) %>%
                                       group_by(SYMBOL) %>%
                                       summarise(N_RUN = n_distinct(RUN), TRUST = "Moderate"),
@@ -1921,7 +2049,7 @@ df_bigmmaf_resume_grp1 <- bind_rows(df_distinct_cil_high %>%
 
 ```{r varresumegrp1, dependson="dfresumegrp1", cache=TRUE}
 
-p_run_high_evidence <- df_bigmmaf_resume_grp1 %>% ungroup() %>% summarise(P = sum(High)/ sum(TOT)) %>% collect() %>% .[["P"]] * 100
+p_run_high_evidence <- df_resume_grp1 %>% ungroup() %>% summarise(P = sum(High)/ sum(TOT)) %>% collect() %>% .[["P"]] * 100
 
 ```
 
@@ -1972,7 +2100,8 @@ kable(df_bigmmaf_high %>%
 
 ```{r tabgrp1, dependson="bigmmafgrp1", cache=TRUE}
 
-kable(df_bigmmaf_gene_grp1 %>%
+kable(df_grp1_moderate %>% inner_join(df_canonical_transcripts, by = "Feature") %>% 
+        arrange(SYMBOL) %>%
         select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen),
       booktabs = TRUE,
       longtable = TRUE,
@@ -1982,7 +2111,7 @@ kable(df_bigmmaf_gene_grp1 %>%
 
 ```{r, dependson="dfresumegrp1", cache=TRUE}
 
-kable(df_bigmmaf_resume_grp1 %>%
+kable(df_resume_grp1 %>%
         select(Gene = SYMBOL, `High evidence` = High, `Moderate evidence` = Moderate, Total = TOT),
       booktabs = TRUE,
       longtable = TRUE,
@@ -1993,7 +2122,7 @@ kable(df_bigmmaf_resume_grp1 %>%
 
 \newpage
 
-```{r dfgrp2high, dependson="removednah1", cache=TRUE}
+```{r removegrp1, cache=TRUE}
 
 run_found <- c(run_found, run_cil_high, run_grp1)
 
@@ -2004,27 +2133,30 @@ df_bigmmaf_filter_het3 <- df_bigmmaf_filter_het2 %>%
   filter(!(RUN %in% run_found))
 
 
+```
+
+```{r dfgrp2high, dependson="removegrp1", cache=TRUE}
+
+
 df_grp2_high <- df_bigmmaf_filter3 %>% 
   filter(IMPACT == "HIGH") %>%
   group_by(SYMBOL, Feature) %>%
-  mutate(Consequence = sapply(strsplit(Consequence, "_variant", fixed = TRUE),"[[",1),
-         Consequence = gsub("_", " ", Consequence),
-         N_RUN = n_distinct(RUN)) %>% 
-  filter(N_RUN > 1) %>% group_by(SYMBOL) %>% mutate(N_RUN = max(N_RUN)) %>% 
-  group_by(RUN, SYMBOL) %>%
-  distinct(Consequence, N_RUN) %>%
-  filter(SYMBOL != "hsa-mir-150")
+  mutate(N_RUN = n_distinct(RUN)) %>% 
+  filter(N_RUN > 1) %>% 
+  filter(SYMBOL != "hsa-mir-150") %>% 
+  ungroup()
 
-df_distinct_gene_grp2_high <- df_grp2_high %>% ungroup() %>% distinct(SYMBOL, N_RUN)
-# df_bigmmaf_grp2 %>% View
-# df_distinct_gene_grp2 %>% View
+
+df_distinct_gene_grp2_high <- df_grp2_high %>%
+  distinct(SYMBOL, N_RUN)
+
 
 
 ```
 
 ```{r vargrp2high, dependson="dfgrp2high", cache=TRUE}
 
-gene_grp2 <- df_grp2_high %>% collect() %>% .[["SYMBOL"]]
+gene_grp2 <- df_grp2_high %>% ungroup() %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
 n_gene_grp2 <- gene_grp2 %>% length
 
 
@@ -2048,13 +2180,19 @@ df_grp2_high_reduce <- df_grp2_high %>%
 
 ```
 
+```{r vargrp2reduce, cache=TRUE, dependson="dfgrp2reduce"}
+
+run_grp2_reduce <- df_grp2_high_reduce %>% ungroup %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_grp2_reduce <- run_grp2_reduce %>% length 
+n_gene_grp2_reduce <- gene_grp2_reduce %>% length
+
+```
 
 ```{r dfgrp2moderate, dependson="dfgrp2high",cache=TRUE}
 
 df_grp2_moderate <- df_bigmmaf_filter3 %>% 
   filter(IMPACT != "HIGH",
          SYMBOL %in% gene_grp2_reduce) %>%
-  inner_join(df_canonical_transcripts, by = "Feature") %>%
   group_by(SYMBOL) %>%
   mutate(N_RUN = n_distinct(RUN))
 
@@ -2063,7 +2201,6 @@ df_grp2_moderate <- df_bigmmaf_filter3 %>%
 ```{r vargrp2moderate, dependson="dfgrp2moderate", cache=TRUE}
 
 n_run_grp2_moderate <- df_grp2_moderate %>% ungroup() %>% distinct(RUN) %>% nrow
-
 
 ```
 
@@ -2074,9 +2211,7 @@ df_grp2_low <- df_bigmmaf_filter_het3 %>%
     N_VAR_PER_RUN_PER_GENE > 1) %>% 
          group_by(SYMBOL, Feature) %>% 
   mutate(N_RUN = n_distinct(RUN)) %>% 
-  group_by(SYMBOL) %>% 
-  distinct(CHR, POSITION, REF, ALT, RUN, Feature, Consequence, N_RUN, SIFT, PolyPhen) %>% 
-  inner_join(df_canonical_transcripts, by = "Feature")
+  ungroup()
 
 ```
 
@@ -2090,9 +2225,9 @@ n_run_grp2_low <- df_grp2_low %>% ungroup() %>% distinct(RUN) %>% nrow
 
 ```{r dfresumegrp2, dependson=c("dfgrp2highreduce","dfgrp2moderate","dfgrp2low"), cache=TRUE}
 
-df_bigmmaf_resume_grp2 <- bind_rows(df_grp2_high_reduce %>% summarise(TRUST = "High"),
-                                    df_grp2_moderate %>% summarise(TRUST = "Moderate"),
-                                    df_grp2_low %>% summarise(TRUST = "Low")) %>% 
+df_resume_grp2 <- bind_rows(df_grp2_high_reduce %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
+                                    df_grp2_moderate %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Moderate"),
+                                    df_grp2_low %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Low")) %>% 
   group_by(TRUST, SYMBOL) %>%
   summarise(N_RUN = n_distinct(RUN)) %>% 
   select(SYMBOL, N_RUN, TRUST) %>%
@@ -2104,13 +2239,42 @@ df_bigmmaf_resume_grp2 <- bind_rows(df_grp2_high_reduce %>% summarise(TRUST = "H
 
 ```
 
+
+```{r removegrp2}
+
+
+run_found <- c(run_found, run_grp2_reduce)
+
+df_bigmmaf_filter4 <- df_bigmmaf_filter3 %>% 
+  filter(!(RUN %in% run_found))
+   
+df_bigmmaf_filter_het4 <- df_bigmmaf_filter_het3 %>% 
+  filter(!(RUN %in% run_found))
+
+```
+
+```{r varremovegrp2}
+
+n_var_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow()
+n_gene_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(SYMBOL) %>% nrow()
+n_run_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(RUN) %>% nrow()
+
+
+```
+
+
 Suite à cela, nous avons procéder de la même manière avec les patients restant, cette fois-ci sans nous limiter au gènes présent dans la liste ciliome. Nous avons ainsi pu identifier `r n_gene_grp2` gènes sur lesquels au moins 2 de nos patients restant et jusqu'à `r n_run_max_grp2` portaient un variant homozygote ayant un effet tronquant sur la protéine. Cela nous a permis d'obtenir une liste de `r n_run_grp2` nouveaux patients avec un candidat potentiel (**Table :** \@ref(tab:tabgrp2), **Figure :** \@ref(fig:plotgrp2) - **A**).  
 
-Parmis les gènes identifié, 3 se démarquent avec une forte expression testiculaire : *CFAP43*, *FSIP2* et *CCDC129* respectivement retrouvés mutés chez `r  n_run_cfap43`, `r n_run_fsip2`, et `r n_run_ccdc129` des `r n_run_grp2` patients séléctionnés. C'est pourquoi nous avons focalisé nos analyses sur ceux-ci. (**Table : **\@ref(tab:tabgrp2), **Figure :** \@ref(fig:plotgrp2) - **B**).   
+Parmis les gènes identifié, 3 se démarquent avec une forte expression testiculaire : *CFAP43*, *FSIP2* et *CCDC129* respectivement retrouvés mutés chez `r  n_run_cfap43`, `r n_run_fsip2`, et `r n_run_ccdc129` des `r n_run_grp2` patients séléctionnés. C'est pourquoi nous avons focalisé nos analyses sur ceux-ci. (**Table : **\@ref(tab:tabgrp2high), **Figure :** \@ref(fig:plotgrp2) - **B**).   
 
 L'analyse bibliographique du gène *FSIP2* révèle qu'une équipe a démontré en 2003 l'implication de ce gène dans la structure de la gaine fibreuse su flagelle spermatique confirmant que ce gène est un bon candidat pour expliquer le phénotype MMAF des `r n_run_fsip2` patients portant un variant homozygote sur celui-ci [@Brown2003]. 
 
-Ensuite, comme précédemment, nous avons rechercher les patients portant des variants non tronquant sur ces 3 gènes ainsi que ceux portant au moins deux variants hétérozygotes tronquant ou non. Nous permettant ainsi d'identifier `r n_run_grp2_moderate + n_run_grp2_low` nouveaux patients. 
+Ensuite, comme précédemment, nous avons rechercher les patients portant des variants non tronquant sur ces 3 gènes ainsi que ceux portant au moins deux variants hétérozygotes tronquant ou non. Cela nous a ainsi permis d'identifier `r n_run_grp2_moderate + n_run_grp2_low` nouveaux patients. Il faut cependant noter que parmis ceux-ci, certains portent de variant pour lesquels il est difficile d'affirmer avec certitude qu'ils sont responsable du phénotype. Le patients Ghs25 par exemple porte un variant homozygote chevauchant le gènes *CFAP43*. Cependant, le variant est un variant intronique situé dans la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait egallement être sans effet, or, il est difficile de le prédire à ce stade. De même pour le patient Ghs131, dont le variant faux-sens chevauchant le gène *FSIP2* qu'il porte est prédit comme *benign* par PolyPhen alors que SIFT ne fournit aucune prédiction pour celui-ci. Pour les patients Ghs40, Ghs92 et Ghs101, au delà du fait qu'il nous est impossible de savoir à ce stade si les deux variants hétérozygotes qu'ils portent impacte le même allèle ou bien deux allèles différents, tous portent des variant faux-sens sur le gène *FSIP2* là encore prédit pour la plupart comme sans effet par SIFT et / ou PolyPhen. Le patient Ghs132 en revanche semble plus intéréssant, en effet celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalege du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT (**Tables : **\@ref(tab:tabgrp2moderate) et \@ref(tab:tabgrp2low)).
+
+En séléctionnant les gènes sur lesquels au moins deux patients portaient au moins un variant tronquant homozygote nous avons identifié `r n_gene_grp2` gènes différents. En nous limitant à ceux ayant une forte expreesion testiculaire nous avons conservé de cette liste seulement `r n_gene_grp2_reduce` d'entre eux retrouvés mutés chez `r n_run_grp2_reduce` de nos patients. En élargissant ensuite nos recherches aux patients portant des variants homozygotes non tronquant et au moins deux hétérozygote tronquant ou non sur au moins un de ces `r n_gene_grp2_reduce` gène, nous avons pu identifier `r n_run_grp2_moderate + n_run_grp2_low` nouveaux patients. Cependant, au vus de l'insertitude du lien  entre les variants de ces `r n_run_grp2_moderate + n_run_grp2_low` derniers patients et leur phénotype, des analyses complémentaires sont nécéssaires (**Table : **\@ref(tab:tabresumegrp2)).
+
+La cause génétique du phénotype MMAF ayant cependant été déterminée pour `r n_run_grp2_reduce` des patiens grâce à ce `r n_gene_grp2_reduce` gènes, leurs données aussi furent retirée des analyses ulterieure réduisant ainsi notre liste à `r n_var_after_grp2` variants différents chevauchant `r n_gene_after_grp2` gènes chez `r n_run_after_grp2` patients. Les données des `r n_run_grp2_moderate + n_run_grp2_low` patients pour lesquels la cause est incertaine furent conservés afin de voir si un meilleur candidat pouvait ressortir par la suite.
+
 
 \newpage  
 
@@ -2155,8 +2319,9 @@ kable(df_grp2_high %>%
 ```{r tabgrp2moderate, dependson="dfgrp2moderate", cache=TRUE}
 
 kable(df_grp2_moderate %>% 
-      select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
-        mutate(SIFT = na.replace(SIFT),
+        inner_join(df_canonical_transcripts, by = "Feature") %>%
+        select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
+        mutate(SIFT = na.replace(SIFT, "No prediction"),
                PolyPhen = na.replace(PolyPhen, "No prediction")),
       booktabs = TRUE,
       longtable = TRUE,
@@ -2165,10 +2330,13 @@ kable(df_grp2_moderate %>%
 
 ```
 
+\newpage
+
 ```{r tabgrp2low, dependson="dfgrp2low", cache=TRUE}
 
 kable(df_grp2_low %>% 
-      select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
+        inner_join(df_canonical_transcripts, by = "Feature") %>%
+        select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
         mutate(SIFT = na.replace(SIFT, "No prediction"),
                PolyPhen = na.replace(PolyPhen, "No prediction")),
       booktabs = TRUE,
@@ -2177,9 +2345,10 @@ kable(df_grp2_low %>%
 
 
 ```
+
 ```{r tabresumegrp2, dependson="dfresumegrp2", cache=TRUE}
 
-kable(df_bigmmaf_resume_grp2 %>%
+kable(df_resume_grp2 %>%
         select(Gene = SYMBOL, `High evidence` = High, `Moderate evidence` = Moderate,`Low Evidence` = Low, Total = TOT),
       booktabs = TRUE,
       longtable = TRUE,
@@ -2192,17 +2361,230 @@ kable(df_bigmmaf_resume_grp2 %>%
 
 
 
+```{r dfgrp3high, cache=TRUE}
+
+
+df_grp3_high <- df_bigmmaf_filter4 %>% 
+  group_by(SYMBOL, Feature) %>%
+  mutate(N_RUN = n_distinct(RUN)) %>% 
+  filter(N_RUN == 1) %>% 
+  filter(IMPACT == "HIGH",
+         !is.na(EVIDENCE)) %>% 
+  ungroup()
+
+```
+
+```{r vargrp3high}
+
+gene_grp3 <- df_grp3_high %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
+n_gene_grp3 <- gene_grp3 %>% length
+
+run_grp3_high <- df_grp3_high %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_grp3_high <- run_grp3_high %>% length
+
+```
+
+```{r dfgrp3reduce, dependson="dfgrp3high", cache=TRUE}
+
+gene_grp3_reduce <- c("CCDC65", "C6orf118")
+
+df_grp3_high_reduce <- df_grp3_high %>%
+  filter(SYMBOL %in% gene_grp3_reduce)
+
+```
+
+```{r vargrp3reduce}
+
+n_gene_grp3_reduce <- gene_grp3_reduce %>% length
+run_grp3_reduce <- df_grp3_high_reduce %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_grp3_reduce <- run_grp3_reduce %>% length
+
+
+```
+
+```{r dfgrp3moderate, cache=TRUE}
+
+
+df_grp3_moderate <- df_bigmmaf_filter4 %>% 
+  filter(IMPACT != "HIGH",
+    SYMBOL %in% gene_grp3_reduce) %>% 
+  ungroup()
+
+```
+
+```{r vargrp3moderate}
+
+n_run_grp3_moderate <- df_grp3_moderate %>% distinct(RUN) %>% nrow
+
+
+```
+
+
+```{r dfgrp3low, cache=TRUE}
+
+
+df_grp3_low <- df_bigmmaf_filter_het4 %>% 
+  filter(N_VAR_PER_RUN_PER_GENE > 1,
+         SYMBOL %in% gene_grp3_reduce) %>% 
+  ungroup()
+
+```
+
+```{r vargrp3low, cache=TRUE}
+
+n_run_grp3_low <- df_grp3_low %>% distinct(RUN) %>% nrow
+gene_grp3_low <- df_grp3_low %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]] 
 
 
 
+```
+
+```{r dfresumegrp3, dependson=c("dfgrp3highreduce","dfgrp3moderate","dfgrp3low"), cache=TRUE}
+
+df_resume_grp3 <- bind_rows(df_grp3_high_reduce %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
+                            df_grp3_moderate %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Moderate"),
+                            df_grp3_low %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Low")) %>% 
+  group_by(TRUST, SYMBOL) %>%
+  summarise(N_RUN = n_distinct(RUN)) %>% 
+  select(SYMBOL, N_RUN, TRUST) %>%
+  group_by(SYMBOL) %>% 
+  mutate(TOT = sum(N_RUN)) %>% 
+  spread(TRUST, N_RUN) %>%
+  mutate(Low = na.replace(Low, 0))
+
+```
+
+```{r removegrp3}
+
+run_found <- c(run_found, run_grp3_reduce)
+
+df_bigmmaf_filter5 <- df_bigmmaf_filter4 %>% 
+  filter(!(RUN %in% run_found))
+   
+df_bigmmaf_filter_het5 <- df_bigmmaf_filter_het4 %>% 
+  filter(!(RUN %in% run_found))
+
+```
+
+```{r varremovegrp3}
+
+n_var_after_grp3 <- df_bigmmaf_filter5 %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow()
+n_gene_after_grp3 <- df_bigmmaf_filter5 %>% ungroup() %>% distinct(SYMBOL) %>% nrow()
+n_run_after_grp3 <- df_bigmmaf_filter5 %>% ungroup() %>% distinct(RUN) %>% nrow()
+
+
+```
+
+En procédent de la même manière que les fois précédente, nous avons cette fois isolé les gènes présent dans la base de données ciliome sur lesquels *un seul* patient portait une mutation homozygote tronquante. Nous avons ainsi identifié `r n_run_grp3_high` patients tous porteurs d'un variant homozygote tronquant sur un des `r n_gene_grp3` gène suivant : `r gene_grp3`.  Cependant, l'analyse de l'expression testiculaire de ces gènes nous a insiter à n'en garder que `r gene_grp3_reduce` d'entre eux : `r gene_grp3_reduce` (**Table :** \@ref(tab:tabgrp3high), **Figure :** \@ref(fig:plotgrp3)).
+
+En effet, *CCDC65* présente une forte et quasi exclusive expression testiculaire de plus, la protéine NYD-SP28 (ancien nom de CCDC65) avait déjà caractérisé comme faisant partie du flagelle spermatique [@Zheng2006]. En revanche *C6orf118* présente une forte expression à la fois dans le testicule mais égallement dans le poumoun de plus, ce gène a récemment été décrit comme étant associé au phénotype de tuberculose pulmonaire [@Hong2017]. Cependant cela n'est en rien contradictoire avec le phénotype MMAF du patient, le poumon comprenant de nombreuse cellules ciliées, notamment au niveau de l'épithélium respiratoire, il n'est donc pas surprenant que des gènes du flagelle aient égallement une fonction au sein d'autres organes ciliés.
+
+Nous avons ensuite cherché si des patients présentaient des variants homozygotes non tronquants sur au moins 1 de ces `r n_gene_grp3_reduce` gènes cependant aucun ne remplissait ces critères. En revanche, `r n_run_grp3_low` de nos patients portait deux variants sur le gene *C6orf118* à l'état hétérozygote. Ces deux variants étant des faux-sens, le premier étant prédit *probably damaging* par PolyPhen et *tolerated low confidence
+* par SIFT tandis que le second est prédit *possibly damaging* et *tolerated*, il est dificile de se prononcer quant à l'effet délétère de ces deux variants (**Table :** \@ref(tab:tabgrp3low)). 
+
+Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait un variant tronquant à l'état homozygote nous a permis d'identifié `r n_gene_grp3` parmis lesquels `r n_gene_grp3_reduce` présentaient une forte expression testiculaire. L'analyse de ces `r n_gene_grp3_reduce` derniers gènes nous a permis d'identifier `r n_run_grp3_reduce` patients chacun portant un variant tronquant homozygote sur l'un de ces `r n_gene_grp3_reduce` gènes. Étendre notre recherche à la fois aux variants tronquant ainsi qu'aux hétérozygote composites nous a permis d'identifier `r n_run_grp3_moderate + n_run_grp3_low` patient pour qui deux faux-sens hétérozygotes sur le gène *C6orf118* pourraient expliquer le phénotype. Cependent, compte tenu de l'insertitude de ....., les données de ce patient ont été gardées dans les analyses ulterieures contrairement à celles des `r n_gene_grp3_reduce` patients ayant des variants homozygotes tronquant.  
+
+\newpage  
+
+
+```{r plotgrp3, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.5, dependson="dfgrp2", cache=TRUE}
+
+fig_name <- 'Epression tissulaire des gènes : TODO'
+fig_description <- "D'après les données du projet de transcriptome Illumina bodyMap"
+
+fig_info <- paste0(fig_name, " : ", fig_description)
+plot_expression(gene_grp3,"percent",TRUE) +
+  xlab("") +
+  theme(legend.position = c(1,0),
+        legend.justification = c(1,0))
 
 
 
+```
+
+\newpage
+
+```{r tabgrp3high, dependson="dfgrp3", cache=TRUE}
+
+kable(df_grp3_high %>% 
+        arrange(SYMBOL) %>%
+        inner_join(df_canonical_transcripts, by = "Feature") %>%
+        select(Gene = SYMBOL, Patient = RUN, Consequence),
+      booktabs = TRUE,
+      longtable = TRUE,
+      caption = "List des gènes sur lesquels au moins deux patients portent une mutation tronquante non présents dans la liste ciliome ")
+
+```
+
+```{r tabgrp3low, dependson="dfgrp3low", cache=TRUE}
+
+kable(df_grp3_low %>% 
+        inner_join(df_canonical_transcripts, by = "Feature") %>%
+        select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
+        mutate(SIFT = na.replace(SIFT, "No prediction"),
+               PolyPhen = na.replace(PolyPhen, "No prediction")),
+      booktabs = TRUE,
+      longtable = TRUE,
+      caption = "Liste des patients portantau moins deux variants hétérozygotes sur un des gènes suivant : TODOOOOOO")
 
 
+```
+
+```{r tabresumegrp3, dependson="dfresumegrp3", cache=TRUE}
+
+kable(df_resume_grp3 %>%
+        select(Gene = SYMBOL, `High evidence` = High, `Low Evidence` = Low, Total = TOT),
+      booktabs = TRUE,
+      longtable = TRUE,
+      caption = "Résumé des gènes identifiés dans cette analyse")
 
 
+```
 
+\newpage
+
+```{r dfgrp4high, cache=TRUE}
+
+
+df_grp4_high <- df_bigmmaf_filter5 %>% 
+    group_by(SYMBOL, Feature) %>%
+  mutate(N_RUN = n_distinct(RUN)) %>% 
+  filter(N_RUN == 1,
+    IMPACT == "HIGH",
+         is.na(EVIDENCE)) %>% 
+  ungroup()
+
+```
+
+```{r vargrp4high}
+
+gene_grp4 <- df_grp4_high %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
+n_gene_grp4 <- gene_grp4 %>% length
+
+run_grp4_high <- df_grp4_high %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_grp4_high <- run_grp4_high %>% length
+
+```
+
+```{r dfgrp4reduce, dependson="dfgrp3high", cache=TRUE}
+# 
+# gene_grp_reduce <- c("CCDC65", "C6orf118")
+# 
+# df_grp3_high_reduce <- df_grp3_high %>%
+#   filter(SYMBOL %in% gene_grp3_reduce)
+
+```
+
+```{r vargrp4reduce}
+# 
+# n_gene_grp3_reduce <- gene_grp3_reduce %>% length
+# run_grp3_reduce <- df_grp3_high_reduce %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+# n_run_grp3_reduce <- run_grp3_reduce %>% length
+# 
+
+```
+
+\newpage
 
 ```{r plotfilterbigmmaf2, warning=FALSE, fig.height=7, fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
 
@@ -2245,7 +2627,7 @@ pB <- ggplot(df_bigmmaf_genes_resume2, aes(N_RUN, N_GENE)) +
   scale_fill_manual(name = "Evidence", limits = order_B, values = fill_B, breaks = order_B) + 
   theme(legend.position = "bottom")
 
-plot_grid(pA, pB, labels = c("A","B"), ncol = 1)
+# plot_grid(pA, pB, labels = c("A","B"), ncol = 1)
 
 ```
 
@@ -2257,11 +2639,11 @@ Cette approche nous a permis de rapidement identifier ... nouveaux acteurs poten
 
 ```{r tabwdr52, dependson="newcandidats"}
 
-kable(tabwdr52,
-      booktabs = TRUE,
-      longtable = TRUE,
-      col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-      caption = "liste des variants passant les filtres et chevauchant le gène *WDR52*")
+# kable(tabwdr52,
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
+#       caption = "liste des variants passant les filtres et chevauchant le gène *WDR52*")
 
 ```
 
@@ -2270,11 +2652,11 @@ kable(tabwdr52,
 
 ```{r tabefcab6ttc29ccdc146, dependson="newcandidats"}
 
-kable(bind_rows(tabefcab6, tabttc29, tabccdc146),
-      booktabs = TRUE,
-      longtable = TRUE,
-      col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-      caption = "liste des variants passant les filtres et chevauchant les gène *EFCAB6*, *TTC26* et *CCDC146*")
+# kable(bind_rows(tabefcab6, tabttc29, tabccdc146),
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
+#       caption = "liste des variants passant les filtres et chevauchant les gène *EFCAB6*, *TTC26* et *CCDC146*")
 
 ```
 
@@ -2282,11 +2664,11 @@ kable(bind_rows(tabefcab6, tabttc29, tabccdc146),
 
 ```{r tablrrc43, dependson="newcandidats"}
 
-kable(tablrrc43,
-      booktabs = TRUE,
-      longtable = TRUE,
-      col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-      caption = "liste des variants passant les filtres et chevauchant le gène *LRRC43*")
+# kable(tablrrc43,
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
+#       caption = "liste des variants passant les filtres et chevauchant le gène *LRRC43*")
 
 ```
 
@@ -2294,11 +2676,11 @@ kable(tablrrc43,
 
 ```{r tabarmc2, dependson="newcandidats"}
 
-kable(tabarmc2,
-      booktabs = TRUE,
-      longtable = TRUE,
-      col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-      caption = "liste des variants passant les filtres et chevauchant le gène *ARMC2*")
+# kable(tabarmc2,
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
+#       caption = "liste des variants passant les filtres et chevauchant le gène *ARMC2*")
 
 ```
 
@@ -2306,11 +2688,11 @@ kable(tabarmc2,
 
 ```{r tabankrd20a3, dependson="newcandidats"}
 
-kable(tabankrd20a3,
-      booktabs = TRUE,
-      longtable = TRUE,
-      col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-      caption = "liste des variants passant les filtres et chevauchant le gène *ANKRD20A3*")
+# kable(tabankrd20a3,
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
+#       caption = "liste des variants passant les filtres et chevauchant le gène *ANKRD20A3*")
 
 ```
 
@@ -2321,11 +2703,11 @@ kable(tabankrd20a3,
 
 ```{r tabwdr96, dependson="newcandidats"}
 
-kable(tabwdr96,
-      booktabs = TRUE,
-      longtable = TRUE,
-      col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-      caption = "liste des variants passant les filtres et chevauchant le gène *WDR96*")
+# kable(tabwdr96,
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
+#       caption = "liste des variants passant les filtres et chevauchant le gène *WDR96*")
 
 ```
 
@@ -2333,11 +2715,11 @@ kable(tabwdr96,
 
 ```{r tabfsip2, dependson="newcandidats"}
 
-kable(tabfsip2,
-      booktabs = TRUE,
-      longtable = TRUE,
-      col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-      caption = "liste des variants passant les filtres et chevauchant le gène *FSIP2*")
+# kable(tabfsip2,
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
+#       caption = "liste des variants passant les filtres et chevauchant le gène *FSIP2*")
 
 ```
 
@@ -2352,7 +2734,6 @@ resume_bigmmaf <- bind_rows(tablrrc43,tabarmc2) %>%
   bind_rows(tabfsip2) %>% 
   bind_rows(tabccdc146) %>% 
   bind_rows(tabttc29) %>% 
-  bind_rows(tabdnah1) %>% 
   bind_rows(tabefcab6) %>% 
   bind_rows(tabarmc2) %>%
   right_join(df_runs_mmaf, by = "RUN") %>% 
@@ -2401,7 +2782,7 @@ plot_expression(candidat_gene, "percent", TRUE) +
 
 #### Discussion  
 
-L'analyse de cette cohorte de `r n_run_bigmmaf` patients MMAF nous dans un premier temps permis de confirmer l'importance de l'implication du gène *DNAH1* dans ce phénotype grâce à `r n_run_homo_dnah1 + n_run_het_dnah1` patients présentant des variants sur ce gène dont `r n_run_homo_dnah1` à l'état homozygote. Elle nous a également permis d'identifier `r n_candidat_gene` nouveaux gène candidats pouvant expliquer le phénotype de `r n_run_bigmmaf_found` de nos patients soit `r p_run_bigmmaf_found` % de la cohorte. parmi ceux-ci, ... portaient au moins un variant homozygote sur un de ces gènes. Pour les autres des études sont nécessaires afin de déterminer si les différents variants hétérozygotes qu'ils portent sont situés sur leurs deux allèles différents faisant d'eux des hétérozygotes composites (**Figure : **\@ref(fig:plotresumebigmmaf) - **A**).
+L'analyse de cette cohorte de `r n_run_bigmmaf` patients MMAF nous dans un premier temps permis de confirmer l'importance de l'implication du gène *DNAH1* dans ce phénotype grâce à ... patients présentant des variants sur ce gène dont ... à l'état homozygote. Elle nous a également permis d'identifier `r n_candidat_gene` nouveaux gène candidats pouvant expliquer le phénotype de `r n_run_bigmmaf_found` de nos patients soit `r p_run_bigmmaf_found` % de la cohorte. parmi ceux-ci, ... portaient au moins un variant homozygote sur un de ces gènes. Pour les autres des études sont nécessaires afin de déterminer si les différents variants hétérozygotes qu'ils portent sont situés sur leurs deux allèles différents faisant d'eux des hétérozygotes composites (**Figure : **\@ref(fig:plotresumebigmmaf) - **A**).
 
 Parmi cet ensemble de patients, il faut noter que `r n_run_several_candidat` d'entre eux porte des variants pouvant expliquer leur phénotype sur plusieurs des gènes candidats que nous avons identifiés. En effet, `r n_run_2_candidat` de nos patients portent des variants sur deux de nos gènes candidats et `r n_run_3_candidat` sur 3 d'entre eux (**Figure : **\@ref(tab:tabresumebigmmaf) - **B**).
 
@@ -2470,15 +2851,15 @@ plot_grid(pA, pB, labels = c("A","B"), rel_heights = c(.55,.45), ncol = 1)
 
 ```{r tabresumebigmmaf, cache=TRUE}
 
-resume_bigmmaf %>% 
-               filter(!is.na(CALL)) %>% 
-  filter(N_CANDIDAT > 1) %>% 
-  select(RUN:SYMBOL) %>% 
-  arrange(RUN, SYMBOL, desc(CALL)) %>%
-  kable(booktabs = TRUE,
-        longtable = TRUE,
-        col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-        caption = "Liste des patients pour lesquels plusieurs gènes candidats ont été identifiés")
+# resume_bigmmaf %>% 
+#                filter(!is.na(CALL)) %>% 
+#   filter(N_CANDIDAT > 1) %>% 
+#   select(RUN:SYMBOL) %>% 
+#   arrange(RUN, SYMBOL, desc(CALL)) %>%
+#   kable(booktabs = TRUE,
+#         longtable = TRUE,
+#         col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
+#         caption = "Liste des patients pour lesquels plusieurs gènes candidats ont été identifiés")
 
 
 ```
@@ -2489,3 +2870,13 @@ resume_bigmmaf %>%
 
 Au cours de ces différentes études nous avons pu identifier les variants pouvant expliquer les phénotypes de ... des différents patients que nous avons analysé que ce soit au sein d'études familiales ou bien au sein de plus large cohorte composés d'individus non apparentés. Bien que ces résultats soient satisfaisant, il faut noter que pour ... patients, soit ... % d'entre eux aucun candidat n'a pu à ce jour être identifié. Pour ces patients, le WES permets désormais de nouvelles approches permettant d'identifier de larges variants structuraux (insertion ou délétions) pouvant eux aussi être responsable du phénotype qui ne sont pas détectés par les analyses classiques. Néanmoins, il semble clair que des avancés soient encore nécessaires afin d'améliorer l'efficacité de ce genre d'étude notamment en créant de nouveaux filtres permettant ainsi d'épurer les listes de variants facilitant ainsi l'identification des gènes candidats.  
 
+
+
+
+
+
+
+
+
+
+\newpage  

@@ -12,3 +12,4 @@ scales
 cowplot
 stringr
 foreach
+bindrcpp
