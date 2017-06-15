@@ -132,8 +132,9 @@ tab_high <- function(df) {
 
 tab_modelow <- function(df) {
   
-  df %>% 
-    select(Patient = RUN, Gene = SYMBOL, Evidence = EVIDENCE, Consequence, SIFT, PolyPhen, ESP, `1KG`, ExAC = ExAC_AF) %>%
+  df %>% ungroup() %>%
+    select(Patient = RUN, Gene = SYMBOL, Consequence, SIFT, PolyPhen, ESP, `1KG`, ExAC = ExAC_AF) %>%
+    distinct() %>% 
     mutate(ESP = na.replace(ESP, "none"),
            `1KG` = na.replace(`1KG`, "none"),
            ExAC = na.replace(ExAC, "none"),
@@ -1530,7 +1531,7 @@ bigmmaf_call_file <- "results/bigmmaf_call.rds"
 
 if (!file.exists(bigmmaf_call_file)) {
   
-  df_bigmmaf_call <- fread("data/genotype_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
+  df_bigmmaf_call <- fread("data/genotype_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
     gather(RUN, CALL, starts_with("Ghs")) %>%
     filter(CALL %in% c(0, 2, 3, "b", "c"),
            !(RUN %in% run_mmaf_fam),
@@ -1540,6 +1541,7 @@ if (!file.exists(bigmmaf_call_file)) {
       TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"),
            CALL = if_else(CALL == 0, "None",
                           if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous")))
+
   saveRDS(df_bigmmaf_call, bigmmaf_call_file)
   
 } else {
@@ -1715,7 +1717,6 @@ df_bigmmaf_filter_het <- df_bigmmaf_call %>%
 
 ```{r dfbigmmafhomohet, dependson=c("localfunction","filterbigmmaf"), cache=TRUE}
 
-
 df_bigmmaf_filter_homo_het <- df_bigmmaf_filter_het %>%
   bind_rows(df_bigmmaf_filter) %>%
   mutate(ONE_HOMO = if_else(CALL == "Homozygous", 1, 0)) %>%
@@ -1883,9 +1884,11 @@ df_resume_dnah1 <- bind_rows(df_dnah1_high %>% group_by(RUN, SYMBOL) %>% summari
 run_found <- c(run_dnah1_high)
 
 df_bigmmaf_filter2 <- df_bigmmaf_filter %>% 
-  filter(!(RUN %in% run_found)) 
+  ungroup() %>%
+  filter(!(RUN %in% run_found))  
   
 df_bigmmaf_filter_het2 <- df_bigmmaf_filter_het %>% 
+  ungroup() %>%
   filter(!(RUN %in% run_found))  
 
 ```
@@ -1894,7 +1897,7 @@ df_bigmmaf_filter_het2 <- df_bigmmaf_filter_het %>%
 
 n_found <- run_found %>% length
 n_distinct_var2 <- df_bigmmaf_filter2 %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
-n_distinct_gene2 <- df_bigmmaf_genes_distinct2 %>% nrow
+n_distinct_gene2 <- df_bigmmaf_filter2  %>% distinct(SYMBOL) %>% nrow
 
 ```
 
@@ -1945,12 +1948,10 @@ kable(tab_high(df_dnah1_high),
       longtable = TRUE,
       caption = "Liste des patients portant au moins un variant homozygote tronquant sur le gène *DNAH1*")
       
-
 ```
 
 
 ```{r}
-
 
 kable(tab_modelow(df_dnah1_moderate),
       booktabs = TRUE,
@@ -1961,34 +1962,10 @@ kable(tab_modelow(df_dnah1_moderate),
 
 ```{r}
 
-
 kable(tab_modelow(df_dnah1_low),
       booktabs = TRUE,
       longtable = TRUE,
       caption = "Liste des patients portant au moins deux variant hétérozygotes sur le gène *DNAH1*")
-
-
-```
-
-
-
-
-
-```{r tabdnah1, cache=TRUE}
-
-
-# kable(bind_rows(df_dnah1_high %>% mutate(TRUST = "High"),
-#                 df_dnah1_moderate %>% mutate(TRUST = "Moderate"),
-#                 df_dnah1_low %>% mutate(TRUST = "Low")) %>% 
-#         inner_join(df_canonical_transcripts, by = "Feature") %>% 
-#         mutate(SIFT = na.replace(SIFT, "No prediction"), 
-#                PolyPhen = na.replace(PolyPhen, "No prediction"),
-#                TRUST = factor(TRUST, levels = c("High","Moderate","Low"))) %>% 
-#         arrange(TRUST, RUN) %>%
-#         select(Patient = RUN, Trust = TRUST, Consequence, Genotype = CALL, SIFT, PolyPhen),
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       
 
 ```
 
@@ -1997,7 +1974,6 @@ kable(tab_modelow(df_dnah1_low),
 ##### Les nouveaux acteurs    
 
 ```{r}
-
 
 df_bigmmaf_genes_distinct2 <- df_bigmmaf_filter2  %>% 
   group_by(SYMBOL, EVIDENCE, LOCALISATION) %>% 
@@ -2155,6 +2131,9 @@ n_run_cfap44_high <- run_cfap44_high %>% length
 run_ccdc146_high <- gene_to_run(df_grp1_high, "CCDC146")
 n_run_ccdc146_high <- run_ccdc146_high %>% length
 
+run_ttc29_high <- gene_to_run(df_grp1_high, "TTC29")
+n_run_ttc29_high <- run_ttc29_high %>% length
+
 ```
 
 ```{r dfgrp1moderate, dependson="removednah1", cache=TRUE}
@@ -2185,7 +2164,7 @@ n_run_cfap44_moderate <- run_cfap44_moderate %>% length
 ```{r dfgrp1low, cache=TRUE}
 
 df_grp1_low <- df_bigmmaf_filter_het2 %>% 
-  filter(SYMBOL %in% gene_cil_high,
+  filter(SYMBOL %in% gene_grp1_high,
            N_VAR_PER_RUN_PER_GENE > 1) %>% 
          group_by(SYMBOL, Feature) %>%
   mutate(N_RUN = n_distinct(RUN)) %>% 
@@ -2218,12 +2197,6 @@ df_resume_grp1 <- bind_rows(df_grp1_high %>%
 
 ```
 
-```{r varresumegrp1, dependson="dfresumegrp1", cache=TRUE}
-# 
-# p_run_high_evidence <- df_resume_grp1 %>% ungroup() %>% summarise(P = sum(High)/ sum(TOT)) %>% collect() %>% .[["P"]] * 100
-
-```
-
 ```{r removegrp1, cache=TRUE}
 
 run_found <- c(run_found, run_grp1_high)
@@ -2238,12 +2211,12 @@ df_bigmmaf_filter_het3 <- df_bigmmaf_filter_het2 %>%
 
 ```{r varremovegrp1, dependson="removegrp1", cache=TRUE}
 
+n_found <- run_found %>% length
 n_var_distinct3 <- df_bigmmaf_filter3 %>% ungroup %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
 n_gene_distinct3 <- df_bigmmaf_filter3 %>% ungroup %>% distinct(SYMBOL) %>% nrow
 n_run_distinct3 <- df_bigmmaf_filter3 %>% ungroup %>% distinct(RUN) %>% nrow
 
 ```
-
 
 
 Comme dit précédemment, dans cette analyse nous nous sommes concentrés sur les gènes **présents dans la liste cilliome** sur lesquels **au moins deux** de nos patients présentaient au moins 1 variant **homozygote** ayant un effet tronquant sur la protéine. Nous avons ainsi pu identifier les `r n_gene_grp1_high` gènes suivants : `r paste_vector(gene_grp1_high)` : 
@@ -2258,7 +2231,9 @@ protéine tronquée. Le premier de ces variants est retrouvé à une fréquence 
 
 4. **_TTC29_** : Sur ce gène, les patients `r run_ttc29_high %>% paste_vector("itallic")` portent la même variation retrouvée à très faible fréquence dans les trois base de données et impactant un site donneur d’épissage du transcrit induisant la production d’une protéine aberrante. Ce gène à très forte expression testiculaire avait déjà été décrit en 2014 comme localisant au niveau de l'axonème du flagelle et qu'un *knock-down* entrainait des defauts de la cilliogénèse [@Chung2014] (**Table : **\@ref(tab:tabgrp1high) et \@ref(tab:tabgrp1moderate), **Figure : **\@ref(fig:plotgrp1high) - **B**).
 
-Cette première analyse au cours de laquelle nous avons sélectioné les gènes retrouvés présents dans la liste cilliome et sur lesquels au moins deux de nos patients présentaient au moins 1 variant homozygote ayant un effet tronquant sur la protéine nous a permis de mettre en évidence `rn_gene_grp1_high` nouveaux gènes candidats : `r gene_grp1_high %>% paste_vector("itallic")` retrouvés mutés à l'état homozygote chez `r n_run_grp1_high + n_run_grp1_moderate` de nos patients dont `r n_run_grp1_high` avec des variants tronquants soit `r (n_run_grp1_high / (n_run_bigmmaf - length(n_found))) %>% round(3) * 100` % des patients resant dans notre cohorte. Pour les `r n_run_grp1_moderate` autres, des analyses fonctionelles sont nécéssaires afin de pouvoir être sûr ce leurs variants sont bien responsables de leur phénotype. La cause génétique responsable du phénotype des patients `r run_grp1_high %>% paste_vector("itallic")` ayant été identifiées avec certitude, l'ensemble de leur données de variants sont retirées de nos liste réduisant ainsi celle-ci à `r n_var_distinct3` chevauchant `r n_gene_distinct3` et répartis sur `r n_run_distinct3`. Les données des patients `r run_grp1_moderate %>% paste_vector("italli")` sont elle conservées afin de voir si un meilleur candidat pourrait expliquer le phénotype de ces patients.    
+Cette première analyse au cours de laquelle nous avons sélectioné les gènes retrouvés présents dans la liste cilliome et sur lesquels au moins deux de nos patients présentaient au moins 1 variant homozygote ayant un effet tronquant sur la protéine nous a permis de mettre en évidence `rn_gene_grp1_high` nouveaux gènes candidats : `r gene_grp1_high %>% paste_vector("itallic")` retrouvés mutés à l'état homozygote chez `r n_run_grp1_high + n_run_grp1_moderate` de nos patients dont `r n_run_grp1_high` avec des variants tronquants soit `r (n_run_grp1_high / (n_run_bigmmaf - length(n_found))) %>% round(3) * 100` % des patients resant dans notre cohorte. Pour les `r n_run_grp1_moderate` autres, des analyses fonctionelles sont nécéssaires afin de pouvoir être sûr ce leurs variants sont bien responsables de leur phénotype. La cause génétique responsable du phénotype des patients `r run_grp1_high %>% paste_vector("itallic")` ayant été identifiées avec certitude, l'ensemble de leur données de variants sont retirées de nos liste réduisant ainsi celle-ci à `r n_var_distinct3` chevauchant `r n_gene_distinct3` et répartis sur `r n_run_distinct3`. Les données des patients `r run_grp1_moderate %>% paste_vector("italli")` sont elle conservées afin de voir si un meilleur candidat pourrait expliquer le phénotype de ces patients. 
+
+\newpage
 
 ```{r plotgrp1high, fig.height=7.2, dependson=c("vargrp1","dfresumegrp1","localfunction"), fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
 
@@ -2268,9 +2243,7 @@ fig_description_B <- "Résumé de l'Analyse 1, quantification du nombre de patie
 fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
 fig_info <- paste0(fig_name, " : ", fig_description)
 
-
 pA <- plot_resume_analysis(df_resume_grp1)
-
 
 pB <- plot_expression(gene_grp1_high, mode = "percent", flip = TRUE) + 
   xlab("") + 
@@ -2278,8 +2251,6 @@ pB <- plot_expression(gene_grp1_high, mode = "percent", flip = TRUE) +
         legend.justification = c(1,.5))
 
 plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
-
-
 
 ```
 
@@ -2312,7 +2283,6 @@ kable(tab_modelow(df_grp1_moderate),
 
 ```{r dfgrp2high, dependson="removegrp1", cache=TRUE}
 
-
 df_grp2_high <- df_bigmmaf_filter3 %>% 
   filter(IMPACT == "HIGH") %>%
   group_by(SYMBOL, Feature) %>%
@@ -2321,11 +2291,8 @@ df_grp2_high <- df_bigmmaf_filter3 %>%
   filter(SYMBOL != "hsa-mir-150") %>% 
   ungroup()
 
-
 df_distinct_gene_grp2_high <- df_grp2_high %>%
   distinct(SYMBOL, N_RUN)
-
-
 
 ```
 
@@ -2334,15 +2301,18 @@ df_distinct_gene_grp2_high <- df_grp2_high %>%
 gene_grp2 <- df_grp2_high %>% ungroup() %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
 n_gene_grp2 <- gene_grp2 %>% length
 
-
-run_grp2 <- df_grp2_high %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
-n_run_grp2 <- run_grp2 %>% length
+run_grp2_high <- df_grp2_high %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_grp2_high <- run_grp2_high %>% length
 
 n_run_max_grp2 <- df_distinct_gene_grp2_high %>% collect() %>% .[["N_RUN"]] %>% max
 
-n_run_cfap43 <- df_grp2_high %>% filter(SYMBOL == "CFAP43") %>% nrow
-n_run_fsip2 <- df_grp2_high %>% filter(SYMBOL == "FSIP2") %>% nrow
-n_run_ccdc129 <- df_grp2_high %>% filter(SYMBOL == "CCDC129") %>% nrow
+run_cfap43_high <- df_grp2_high %>% gene_to_run("CFAP43")
+run_fsip2_high <- df_grp2_high %>% gene_to_run("FSIP2")
+run_ccdc129_high <- df_grp2_high %>% gene_to_run("CCDC129")
+
+n_run_cfap43_high <- run_cfap43_high %>% length
+n_run_fsip2_high <- run_fsip2_high %>% length
+n_run_ccdc129_high <- run_ccdc129_high %>% length
 
 ```
 
@@ -2358,7 +2328,7 @@ df_grp2_high_reduce <- df_grp2_high %>%
 ```{r vargrp2reduce, cache=TRUE, dependson="dfgrp2reduce"}
 
 run_grp2_reduce <- df_grp2_high_reduce %>% ungroup %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
-n_run_grp2_reduce <- run_grp2_reduce %>% length 
+n_run_grp2_reduce <- run_grp2_reduce %>% length
 n_gene_grp2_reduce <- gene_grp2_reduce %>% length
 
 ```
@@ -2367,7 +2337,7 @@ n_gene_grp2_reduce <- gene_grp2_reduce %>% length
 
 df_grp2_moderate <- df_bigmmaf_filter3 %>% 
   filter(IMPACT != "HIGH",
-         SYMBOL %in% gene_grp2_reduce) %>%
+         SYMBOL %in% gene_grp2) %>%
   group_by(SYMBOL) %>%
   mutate(N_RUN = n_distinct(RUN))
 
@@ -2377,12 +2347,15 @@ df_grp2_moderate <- df_bigmmaf_filter3 %>%
 
 n_run_grp2_moderate <- df_grp2_moderate %>% ungroup() %>% distinct(RUN) %>% nrow
 
+run_cfap43_moderate <- df_grp2_moderate %>% gene_to_run("CFAP43")
+n_run_cfap43_moderate <- run_cfap43_moderate %>% length
+
 ```
 
 ```{r dfgrp2low, cache=TRUE}
 
 df_grp2_low <- df_bigmmaf_filter_het3 %>% 
-  filter(SYMBOL %in% gene_grp2_reduce,
+  filter(SYMBOL %in% gene_grp2,
     N_VAR_PER_RUN_PER_GENE > 1) %>% 
          group_by(SYMBOL, Feature) %>% 
   mutate(N_RUN = n_distinct(RUN)) %>% 
@@ -2394,13 +2367,21 @@ df_grp2_low <- df_bigmmaf_filter_het3 %>%
 
 n_run_grp2_low <- df_grp2_low %>% ungroup() %>% distinct(RUN) %>% nrow
 
+run_cfap43_low <- df_grp2_low %>% gene_to_run("CFAP43")
+n_run_cfap43_low <- run_cfap43_low %>% length
 
 ```
 
 
+
+
+
+
+
+
 ```{r dfresumegrp2, dependson=c("dfgrp2highreduce","dfgrp2moderate","dfgrp2low"), cache=TRUE}
 
-df_resume_grp2 <- bind_rows(df_grp2_high_reduce %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
+df_resume_grp2 <- bind_rows(df_grp2_high %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
                                     df_grp2_moderate %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Moderate"),
                                     df_grp2_low %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Low")) %>% 
   group_by(TRUST, SYMBOL) %>%
@@ -2436,11 +2417,24 @@ n_run_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(RUN) %>% nrow(
 
 
 
-Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents dans la liste cilliome**  mais sur lesquls on trouvait toujours **au moins deux** de nos patients présentant au moins 1 variant tronquant à l'état **homozygote**.
+Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents dans la liste cilliome**  mais sur lesqules on trouvait toujours **au moins deux** de nos patients présentant au moins 1 variant tronquant à l'état **homozygote**. `r n_run_grp2_high` patients différents portaient ainsi au moins un variant homozygote tronquant sur l'un des `r n_gene_grp2` gènes suivants : `r gene_grp2 %>% paste_vector("itallic")`.
 
-1. **Étape n°1** : Nous avons ainsi pu identifier `r n_gene_grp2` gènes sur lesquels au moins 2 de nos patients restant et jusqu'à `r n_run_max_grp2` portaient un variant homozygote ayant un effet tronquant sur la protéine. Cela nous a permis d'obtenir une liste de `r n_run_grp2` nouveaux patients avec un candidat potentiel (**Table :** \@ref(tab:tabgrp2), **Figure :** \@ref(fig:plotgrp2) - **A**).  Parmis les gènes identifié, 3 se démarquent avec une forte expression testiculaire : *CFAP43*, *FSIP2* et *CCDC129* respectivement retrouvés mutés chez `r  n_run_cfap43`, `r n_run_fsip2`, et `r n_run_ccdc129` des `r n_run_grp2` patients séléctionnés. C'est pourquoi nous avons focalisé nos analyses sur ceux-ci. (**Table : **\@ref(tab:tabgrp2high), **Figure :** \@ref(fig:plotgrp2) - **B**). L'analyse bibliographique du gène *FSIP2* révèle qu'une équipe a démontré en 2003 l'implication de ce gène dans la structure de la gaine fibreuse du flagelle spermatique confirmant que ce gène est un bon candidat pour expliquer le phénotype MMAF des `r n_run_fsip2` patients portant un variant homozygote sur celui-ci [@Brown2003]. 
+1. **_CFAP43_** : `r n_run_cfap43_high + n_run_cfap43_moderate + n_run_cfap43_low` patients portent au moins 1 variant sur le gène *CFAP43*. Parmis ceux-ci, les patients `r run_cfap43_high %>% paste_vector("itallic")` portent une mutation tronquante à l'état homozygote soit absente des bases de données soit présentent avec une très faible fréquence. Le patient `r run_cfap43_moderate %>% paste_vector("itallic")` lui porte un variant homozygote intronique au situé au sein de la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait également être sans effet, or, il est difficile de le prédire à ce stade. (TODO :: faire tourner un algo de prédiction). Le patient `r run_cfap43_low %>% paste_vector("itallic")` en revanche semble plus intéréssant, puisque celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalage du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT. Malgré une expression ubiquitaire (**Figure : **\@ref(fig:plotgrp2) - **B**), le nombre important de patients portant des variant sur celui_ci, notamment `r n_run_cfap43_high` potant des variants tronquants homozygote font de ce gène un bon candidat.  
+2. **_FSIP2_** :  L'analyse bibliographique du gène *FSIP2* révèle qu'une équipe a démontré en 2003 l'implication de ce gène dans la structure de la gaine fibreuse du flagelle spermatique confirmant que ce gène est un bon candidat pour expliquer le phénotype MMAF des `r n_run_fsip2_high` patients portant un variant homozygote sur celui-ci [@Brown2003].   
+3. **_SART3_** :  
+4. **_ICA1_** :  
+5. **_TRAV26-1_** :  
+6. **_BAZ1A_** :  
+7. **_CCDC129_** :  
+8. **_NACA_** :  
 
-2. **Étapes n°2 et n°3** : La recherche de patients portant des variants homozygotes non tronquant sur ces 3 gènes ainsi que ceux portant au moins deux variants hétérozygotes tronquant ou non nous a permis d'identifier `r n_run_grp2_moderate + n_run_grp2_low` nouveaux patients. Il faut cependant noter que parmis ceux-ci, certains portent de variant pour lesquels il est difficile d'affirmer avec certitude qu'ils sont responsables du phénotype. Le patients Ghs25 par exemple porte un variant homozygote chevauchant le gènes *CFAP43*. Cependant, le variant est un variant intronique situé dans la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait également être sans effet, or, il est difficile de le prédire à ce stade. De même pour le patient Ghs131, dont le variant faux-sens chevauchant le gène *FSIP2* qu'il porte est prédit comme *benign* par PolyPhen alors que SIFT ne fournit aucune prédiction pour celui-ci. Pour les patients Ghs40, Ghs92 et Ghs101, au delà du fait qu'il nous est impossible de savoir à ce stade si les deux variants hétérozygotes qu'ils portent impacte le même allèle ou bien deux allèles différents, tous portent des variant faux-sens sur le gène *FSIP2* là encore prédit pour la plupart comme sans effet par SIFT et / ou PolyPhen. Le patient Ghs132 en revanche semble plus intéréssant, puisque celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalage du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT (**Tables : **\@ref(tab:tabgrp2moderate) et \@ref(tab:tabgrp2low)).
+
+
+
+
+1. **Étape n°1** : Nous avons ainsi pu identifier `r n_gene_grp2` gènes sur lesquels au moins 2 de nos patients restant et jusqu'à `r n_run_max_grp2` portaient un variant homozygote ayant un effet tronquant sur la protéine. Cela nous a permis d'obtenir une liste de `r n_run_grp2_high` nouveaux patients avec un candidat potentiel (**Table :** \@ref(tab:tabgrp2), **Figure :** \@ref(fig:plotgrp2) - **A**).  Parmis les gènes identifié, 3 se démarquent avec une forte expression testiculaire : *CFAP43*, *FSIP2* et *CCDC129* respectivement retrouvés mutés chez `r  n_run_cfap43_high`, `r n_run_fsip2_high`, et `r n_run_ccdc129_high` des `r n_run_grp2_high` patients séléctionnés. C'est pourquoi nous avons focalisé nos analyses sur ceux-ci. (**Table : **\@ref(tab:tabgrp2high), **Figure :** \@ref(fig:plotgrp2) - **B**).
+
+2. **Étapes n°2 et n°3** : La recherche de patients portant des variants homozygotes non tronquant sur ces 3 gènes ainsi que ceux portant au moins deux variants hétérozygotes tronquant ou non nous a permis d'identifier `r n_run_grp2_moderate + n_run_grp2_low` nouveaux patients. Il faut cependant noter que parmis ceux-ci, certains portent de variant pour lesquels il est difficile d'affirmer avec certitude qu'ils sont responsables du phénotype. Le patients Ghs25 par exemple porte un variant homozygote chevauchant le gènes *CFAP43*. Cependant, le variant est un variant intronique situé dans la région d'épissage De même pour le patient Ghs131, dont le variant faux-sens chevauchant le gène *FSIP2* qu'il porte est prédit comme *benign* par PolyPhen alors que SIFT ne fournit aucune prédiction pour celui-ci. Pour les patients Ghs40, Ghs92 et Ghs101, au delà du fait qu'il nous est impossible de savoir à ce stade si les deux variants hétérozygotes qu'ils portent impacte le même allèle ou bien deux allèles différents, tous portent des variant faux-sens sur le gène *FSIP2* là encore prédit pour la plupart comme sans effet par SIFT et / ou PolyPhen. (**Tables : **\@ref(tab:tabgrp2moderate) et \@ref(tab:tabgrp2low)).
 
 3. **Étape n°4** : Dans cette analyse seuls `r n_run_grp2_reduce` les patients identifiés au cours de l'étape n°1 présentaient des arguments génétique suffisement convaiquant pour affirmer avec certitude qu'ils étaient responsables de leur phénotype MMAF. Ainsi, seuls leurs données furent retirées pour les analyses ulterieures. POur les `r n_run_grp2_moderate + n_run_grp2_low` des analyses de biologie moléculaire sont nécéssaires afin de pouvoir déterminés siles variants mis en évidences dans les étape n°3 et 4 sont bien responsable de leur phénotype. En attendant, leurs données sont conservés afin de voir si les analyses ulterieures ne permettraient pas d'identifier un meilleur candidat pour ces patients.  
 
@@ -2448,37 +2442,55 @@ Dans cette Analyse, nous avons pu déterminer avec certitude la cause génétiqu
 
 \newpage  
 
-```{r plotgrp2, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.5, dependson="dfgrp2", cache=TRUE}
 
-fig_name <- 'TODOOOOOOOOOOOOOOOOOO'
-fig_description_general <- "Dans ces deux graphiques, chaque couleur représente un gène"
-fig_description_A <- "**A** : Quantification du nombre d'individus présentant un variant homozygote ayant un effet tronquant pour chacun des gènes retrouvés présent dans la liste des gènes du ciliome et retouvés avec un variant tronquant homozygote chez au moins deux patients"
-fig_description_B <- "**B** : Expression tissulaire des gènes précédents d'après les données du projet de transcriptome Illumina bodyMap"
-fig_description <- paste(fig_description_general, fig_description_A, fig_description_B, sep = ". ")
+```{r plotgrp2, fig.height=7.2, dependson=c("vargrp2","dfresumegrp2","localfunction"), fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
 
+fig_name <- "Analyse des gènes séléctionnés dans l'Analyse n°2"
+fig_description_A <- "Expression tissulaire des gènes retenus d'après les données du projet de transcriptome Illumina bodyMap"
+fig_description_B <- "Résumé de l'Analyse 2, quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique"
+fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
 fig_info <- paste0(fig_name, " : ", fig_description)
 
-pA <- ggplot(df_distinct_gene_grp2_high, aes(reorder(SYMBOL, -N_RUN), N_RUN)) + 
-  geom_col(aes(fill = SYMBOL)) + 
-  theme(axis.title.x = element_blank()) +
-  scale_fill_brewer(palette = "Set1", guide = "none") + 
-  ylab("Nb of individuals")
+pA <- plot_resume_analysis(df_resume_grp2)
 
-pB <- plot_expression(gene_grp2,"percent",TRUE) + 
-  xlab("") +
-  theme(legend.position = c(1,0),
-        legend.justification = c(1,0))
+pB <- plot_expression(gene_grp2, mode = "percent", flip = TRUE) + 
+  xlab("") + 
+  theme(legend.position = c(1,.5),
+        legend.justification = c(1,.5))
 
-plot_grid(pA,pB, rel_heights = c(.4,.6), labels = c("A","B"), ncol = 1)
+plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
+
+```
+
+```{r plotgrp22, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.5, dependson="dfgrp2", cache=TRUE}
+
+# fig_name <- 'TODOOOOOOOOOOOOOOOOOO'
+# fig_description_general <- "Dans ces deux graphiques, chaque couleur représente un gène"
+# fig_description_A <- "**A** : Quantification du nombre d'individus présentant un variant homozygote ayant un effet tronquant pour chacun des gènes retrouvés présent dans la liste des gènes du ciliome et retouvés avec un variant tronquant homozygote chez au moins deux patients"
+# fig_description_B <- "**B** : Expression tissulaire des gènes précédents d'après les données du projet de transcriptome Illumina bodyMap"
+# fig_description <- paste(fig_description_general, fig_description_A, fig_description_B, sep = ". ")
+# 
+# fig_info <- paste0(fig_name, " : ", fig_description)
+# 
+# pA <- ggplot(df_distinct_gene_grp2_high, aes(reorder(SYMBOL, -N_RUN), N_RUN)) + 
+#   geom_col(aes(fill = SYMBOL)) + 
+#   theme(axis.title.x = element_blank()) +
+#   scale_fill_brewer(palette = "Set1", guide = "none") + 
+#   ylab("Nb of individuals")
+# 
+# pB <- plot_expression(gene_grp2,"percent",TRUE) + 
+#   xlab("") +
+#   theme(legend.position = c(1,0),
+#         legend.justification = c(1,0))
+# 
+# plot_grid(pA,pB, rel_heights = c(.4,.6), labels = c("A","B"), ncol = 1)
 ```
 
 \newpage  
 
 ```{r tabgrp2high, dependson="dfgrp2", cache=TRUE}
 
-kable(df_grp2_high %>% 
-        arrange(SYMBOL) %>%
-        select(Gene = SYMBOL, Patient = RUN, Consequence),
+kable(tab_high(df_grp2_high) %>% select(-Evidence),
       booktabs = TRUE,
       longtable = TRUE,
       caption = "List des gènes sur lesquels au moins deux patients portent une mutation tronquante non présents dans la liste ciliome ")
@@ -2499,8 +2511,6 @@ kable(df_grp2_moderate %>%
 
 ```
 
-\newpage
-
 ```{r tabgrp2low, dependson="dfgrp2low", cache=TRUE}
 
 kable(df_grp2_low %>% 
@@ -2510,7 +2520,23 @@ kable(df_grp2_low %>%
                PolyPhen = na.replace(PolyPhen, "No prediction")),
       booktabs = TRUE,
       longtable = TRUE,
-      caption = "Liste des patients portantau moins deux variants hétérozygotes sur un des gènes suivant : TODOOOOOO")
+      caption = "Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO")
+
+
+```
+
+\newpage
+
+```{r tabgrp2low22, dependson="dfgrp2low", cache=TRUE}
+
+# kable(df_grp2_low %>% 
+#         inner_join(df_canonical_transcripts, by = "Feature") %>%
+#         select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
+#         mutate(SIFT = na.replace(SIFT, "No prediction"),
+#                PolyPhen = na.replace(PolyPhen, "No prediction")),
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       caption = "Liste des patients portantau moins deux variants hétérozygotes sur un des gènes suivant : TODOOOOOO")
 
 
 ```
