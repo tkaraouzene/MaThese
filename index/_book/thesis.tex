@@ -54,6 +54,10 @@
 \usepackage{lscape}
 \newcommand{\blandscape}{\begin{landscape}}
 \newcommand{\elandscape}{\end{landscape}}
+\usepackage[utf8]{inputenc}
+
+
+
 
 % Next line commented out by CII
 %%% \usepackage{natbib}
@@ -1426,46 +1430,46 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  \begin{longtable}[t]{llllll}
+  \begin{longtable}[t]{lllllll}
   \caption{\label{tab:tabdnah1high}Liste des patients portant au moins un variant homozygote tronquant sur le gène *DNAH1*}\\
   \toprule
-  Gene & Patient & Consequence & ESP & 1KG & ExAC\\
+  Patient & Gene & Evidence & Consequence & ESP & 1KG & ExAC\\
   \midrule
-  DNAH1 & Ghs122 & frameshift & none & none & none\\
+  Ghs122 & DNAH1 & Not in the list & frameshift & none & none & none\\
   \bottomrule
   \end{longtable}
   
-  \begin{longtable}[t]{llllllll}
+  \begin{longtable}[t]{lllllllll}
   \caption{\label{tab:unnamed-chunk-8}Liste des patients portant au moins un variant homozygote non tronquant sur le gène *DNAH1*}\\
   \toprule
-  Gene & Patient & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
+  Patient & Gene & Evidence & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  DNAH1 & Ghs90 & missense & none & benign & none & none & none\\
-  DNAH1 & Ghs90 & missense & none & benign & none & none & none\\
-  DNAH1 & Ghs90 & missense & none & benign & none & none & none\\
-  DNAH1 & Ghs95 & missense & none & benign & none & none & none\\
+  Ghs90 & DNAH1 & Not in the list & missense & none & benign & none & none & none\\
+  Ghs90 & DNAH1 & Not in the list & missense & none & benign & none & none & none\\
+  Ghs90 & DNAH1 & Not in the list & missense & none & benign & none & none & none\\
+  Ghs95 & DNAH1 & Not in the list & missense & none & benign & none & none & none\\
   \bottomrule
   \end{longtable}
   
-  \begin{longtable}[t]{llllllll}
+  \begin{longtable}[t]{lllllllll}
   \caption{\label{tab:unnamed-chunk-9}Liste des patients portant au moins deux variant hétérozygotes sur le gène *DNAH1*}\\
   \toprule
-  Gene & Patient & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
+  Patient & Gene & Evidence & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  DNAH1 & Ghs28 & missense & none & benign & 1e-04 & none & 1.65e-05\\
-  DNAH1 & Ghs28 & missense & none & benign & 0.0027 & 0.0019 & 0.00233\\
-  DNAH1 & Ghs36 & missense & none & probably damaging & none & none & none\\
-  DNAH1 & Ghs36 & stop gained & none & none & none & none & 8.29e-06\\
-  DNAH1 & Ghs42 & missense & none & probably damaging & none & none & none\\
+  Ghs28 & DNAH1 & Not in the list & missense & none & benign & 1e-04 & none & 1.65e-05\\
+  Ghs28 & DNAH1 & Not in the list & missense & none & benign & 0.0027 & 0.0019 & 0.00233\\
+  Ghs36 & DNAH1 & Not in the list & missense & none & probably damaging & none & none & none\\
+  Ghs36 & DNAH1 & Not in the list & stop gained & none & none & none & none & 8.29e-06\\
+  Ghs42 & DNAH1 & Not in the list & missense & none & probably damaging & none & none & none\\
   \addlinespace
-  DNAH1 & Ghs42 & splice region & none & none & none & none & none\\
-  DNAH1 & Ghs87 & missense & none & benign & none & none & 0.00024\\
-  DNAH1 & Ghs87 & missense & none & probably damaging & 7e-04 & 5e-04 & 0.000457\\
-  DNAH1 & Ghs88 & missense & none & benign & 1e-04 & none & 0.000115\\
-  DNAH1 & Ghs88 & missense & none & benign & 1e-04 & 0.0019 & 0.000149\\
+  Ghs42 & DNAH1 & Not in the list & splice region & none & none & none & none & none\\
+  Ghs87 & DNAH1 & Not in the list & missense & none & benign & none & none & 0.00024\\
+  Ghs87 & DNAH1 & Not in the list & missense & none & probably damaging & 7e-04 & 5e-04 & 0.000457\\
+  Ghs88 & DNAH1 & Not in the list & missense & none & benign & 1e-04 & none & 0.000115\\
+  Ghs88 & DNAH1 & Not in the list & missense & none & benign & 1e-04 & 0.0019 & 0.000149\\
   \addlinespace
-  DNAH1 & Ghs129 & missense & none & probably damaging & none & none & none\\
-  DNAH1 & Ghs129 & missense & none & probably damaging & none & none & 8.26e-06\\
+  Ghs129 & DNAH1 & Not in the list & missense & none & probably damaging & none & none & none\\
+  Ghs129 & DNAH1 & Not in the list & missense & none & probably damaging & none & none & 8.26e-06\\
   \bottomrule
   \end{longtable}
   
@@ -1570,17 +1574,82 @@ class (for LaTeX) and the R bookdown package, in general.
   Comme dit précédemment, dans cette analyse nous nous sommes concentrés
   sur les gènes \textbf{présents dans la liste cilliome} sur lesquels
   \textbf{au moins deux} de nos patients présentaient au moins 1 variant
-  \textbf{homozygote} ayant un effet tronquant sur la protéine.
+  \textbf{homozygote} ayant un effet tronquant sur la protéine. Nous avons
+  ainsi pu identifier les 4 gènes suivants : ARMC2, CCDC146, CFAP44 et
+  TTC29 :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    \textbf{\emph{ARMC2}} : Sur ce gène, 2 patients portent un variant
+    homozygote tronquant : \emph{Ghs37} et \emph{Ghs93}. Le patient et
+    \emph{Ghs37} portent un indel créant un décalage du cadre de lecture
+    tandis que et \emph{Ghs93} porte un variant créant un codon stop
+    prématuré (\textbf{Table : }\ref{tab:tabgrp1high}). Le patient et
+    \emph{Ghs107} porte quant à lui un variant faux-sens prédit comme
+    \emph{deleterious} par SIFT et \emph{probably damaging} par PolyPhen.
+    Nous pouvons également noter qu'aucun des variants portés par ces 3
+    sont absents des 3 bases de données. Les arguments génétiques
+    mentionnés couplés à la forte expression testiculaire de ce gène
+    (\textbf{Figure : }\ref{fig:plotgrp1high} - \textbf{B}) font de
+    celui-ci un très bon candidat pour expliquer le phénotype de ces 3
+    bien que des analyses fonctionnelles soient nécéssaires pour 1 d'entre
+    eux.
+  \item
+    \textbf{\emph{CFAP44}} : Comme \emph{ARMC2}, 2 patients portent un
+    variant homozygote tronquant et 1 porte un variant homozygote non
+    tronquant. et \emph{Ghs22} porte un variant stop et et \emph{Ghs34} un
+    variant affectant un site donneur d'épissage. Le fait qu'aucun de ces
+    variant ne soir répertorié dans aucune des bases de données laisse
+    supposer qu'ils sont tout deux très rares. Le patient et \emph{Ghs89}
+    porte un variant faux-sens prédit comme \emph{tolerated} par SIFT et
+    \emph{possibly damaging} par PolyPhen. Les preuves fortes impliquant
+    ce gène dans le cilliome humain ainsi que les effets délétères
+    retrouvé chez 2 des 3 portant des mutations sur ce gène font de
+    \emph{CFAP44} un autre très bon candidat malgré son expression non
+    spécifique au testicule (\textbf{Table : }\ref{tab:tabgrp1high} et
+    \ref{tab:tabgrp1moderate}, \textbf{Figure : }\ref{fig:plotgrp1high} -
+    \textbf{B}).
+  \item
+    \textbf{\emph{CCDC146}} : Sur ce gène, seuls les patients \emph{Ghs32}
+    et \emph{Ghs35} sont retrouvés mutés. Cependant, ces deux patients
+    portent respectivement un variant induisant un codon stop prématuré et
+    un décalage du cadre de lecture entrainant tout deux la production
+    d'une protéine tronquée. Le premier de ces variants est retrouvé à une
+    fréquence très faible à la fois dans ESP et ExaC, tandis que le second
+    est totalement absent de l'ensemble des bases de donnés. On peut
+    égallement ajouter que ce gène décrit comme faisant partie du cilliome
+    humain avec de fortes preuves présente égallement une expression
+    testiculaire relativement élevée. Pour finir, la protéine CCDC146
+    codée par le gène \emph{CCDC146} avait déjà été décrite comme
+    composant du centrosome spermatique, un organite ayant un rôle dans
+    l'orientation des cellules et étant à l'origine des cils et des
+    flagelles (Firat-Karalar, Sante, Elliott, \& Stearns,
+    \protect\hyperlink{ref-Firat-Karalar2014}{2014}) reforçant ainsi les
+    arguments de l'implication de ce gène dans le phénotype MMAF nous
+    permettent ainsi d'affirmer que ces variants sont responsables du
+    phénotype MMAF de ces 2 patients (\textbf{Table :
+    }\ref{tab:tabgrp1high} et \ref{tab:tabgrp1moderate}, \textbf{Figure :
+    }\ref{fig:plotgrp1high} - \textbf{B}).
+  \item
+    \textbf{\emph{TTC29}} :
+  \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotgrp1high-1} 
+  
+  }
+  
+  \caption[Analyse des gènes séléctionnés dans l'Analyse n°1]{Analyse des gènes séléctionnés dans l'Analyse n°1 : Expression tissulaire des gènes retenus d'après les données du projet de transcriptome Illumina bodyMap. Résumé de l'Analyse 1, quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique}\label{fig:plotgrp1high}
+  \end{figure}
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \item
     \textbf{Étape n°1} : Nous sommes ainsi arrivé à une liste de 4 gènes
     différents : TTC29, CFAP44, CCDC146, ARMC2 retrouvés mutés à l'état
-    homozygote chez 8 de nos patients. Parmis eux, les patients
-    \emph{Ghs37} et \emph{Ghs93} portent respectivement un indel créant un
-    décalage du cadre de lecture et un variant stop affectant le gène
-    \emph{ARMC2} dont aucun n'est retrouvé dans les bases de données.
+    homozygote chez 8 de nos patients.
   \item
     \textbf{Étape n°2} : Nous avons ensuite étendu notre champs de
     recherche aux patients portant des variants homozygotes sur l'un d'eux
@@ -1621,75 +1690,49 @@ class (for LaTeX) and the R bookdown package, in general.
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    \textbf{\emph{ARMC2}} : Le gène \emph{ARMC2} est classé dans la
-    catégorie \emph{No evidence from previous studies} des gènes du
-    cilliome de notre liste. Cependant son expression testiculaire forte
-    et exclusive font de lui un bon candidat pour expliquer le phénotype
-    MMAF de 3 portant respectivement à l'état homozygote un variant
-    faux-sens, un impactant le site d'épissage et l'autre entrainant un
-    décalage du cadre de lecture
+    \textbf{\emph{ARMC2}} : Le gène \emph{ARMC2} est Cependant son
+    expression testiculaire forte et exclusive font de lui un bon candidat
+    pour expliquer le phénotype MMAF de 3 portant respectivement à l'état
+    homozygote un variant faux-sens, un impactant le site d'épissage et
+    l'autre entrainant un décalage du cadre de lecture
   \end{enumerate}
   
   présentant tous une forte expression testiculaire (\textbf{Table :
   }\ref{tab:tabgrp1high}, \textbf{Figure : }\ref{fig:plotgrp1high} -
-  \textbf{A}). Parmi ces gènes, on peut noter que \emph{CCDC146} codant
-  pour la protéine CCDC146 avait déjà été décrit comme composant du
-  centrosome spermatique, un organite ayant un rôle dans l'orientation des
-  cellules et étant à l'origine des cils et des flagelles (Firat-Karalar,
-  Sante, Elliott, \& Stearns,
-  \protect\hyperlink{ref-Firat-Karalar2014}{2014}) reforçant ainsi les
-  arguments de l'implication de ce gène dans le phénotype MMAF. L'analyse
-  bibliographique des 3 autres gènes n'a cependant rien révélés ceux-ci
-  étant jusqu'à présent peu étudiés.
+  \textbf{A}). Parmi ces gènes, on L'analyse bibliographique des 3 autres
+  gènes n'a cependant rien révélés ceux-ci étant jusqu'à présent peu
+  étudiés.
   
   \newpage
   
-  \begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/plotgrp1high-1} 
-  
-  }
-  
-  \caption[Analyse des gènes séléctionnés dans l'Analyse n°1]{Analyse des gènes séléctionnés dans l'Analyse n°1 : Expression tissulaire des gènes retenus d'après les données du projet de transcriptome Illumina bodyMap. Résumé de l'Analyse 1, quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique}\label{fig:plotgrp1high}
-  \end{figure}
-  
   \newpage
   
-  \begin{longtable}[t]{llllll}
+  \begin{longtable}[t]{lllllll}
   \caption{\label{tab:tabgrp1high}List des gènes présents dans la liste ciliome sur lesquels au moins deux patients portent une mutation tronquante homozygote}\\
   \toprule
-  Gene & Patient & Consequence & ESP & 1KG & ExAC\\
+  Patient & Gene & Evidence & Consequence & ESP & 1KG & ExAC\\
   \midrule
-  ARMC2 & Ghs37 & frameshift & none & none & none\\
-  ARMC2 & Ghs93 & splice donor & none & none & none\\
-  CCDC146 & Ghs32 & stop gained & 1e-04 & none & 2.47e-05\\
-  CCDC146 & Ghs35 & frameshift & none & none & none\\
-  CFAP44 & Ghs22 & stop gained & none & none & none\\
+  Ghs37 & ARMC2 & Novel & frameshift & none & none & none\\
+  Ghs93 & ARMC2 & Novel & splice donor & none & none & none\\
+  Ghs32 & CCDC146 & Strong & stop gained & 1e-04 & none & 2.47e-05\\
+  Ghs35 & CCDC146 & Strong & frameshift & none & none & none\\
+  Ghs22 & CFAP44 & Strong & stop gained & none & none & none\\
   \addlinespace
-  CFAP44 & Ghs34 & splice donor & none & none & none\\
-  TTC29 & Ghs19 & splice donor & 0.0012 & 5e-04 & 0.000158\\
-  TTC29 & Ghs26 & splice donor & 0.0012 & 5e-04 & 0.000158\\
+  Ghs34 & CFAP44 & Strong & splice donor & none & none & none\\
+  Ghs19 & TTC29 & Strong & splice donor & 0.0012 & 5e-04 & 0.000158\\
+  Ghs26 & TTC29 & Strong & splice donor & 0.0012 & 5e-04 & 0.000158\\
   \bottomrule
   \end{longtable}
   
-  \begin{longtable}[t]{llllllll}
-  \caption{\label{tab:unnamed-chunk-14}Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : ARMC2, CCDC146, CFAP44  et  TTC29}\\
+  \begin{longtable}[t]{lllllllll}
+  \caption{\label{tab:tabgrp1moderate}Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : ARMC2, CCDC146, CFAP44  et  TTC29}\\
   \toprule
-  Gene & Patient & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
+  Patient & Gene & Evidence & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  CFAP44 & Ghs89 & missense & tolerated & possibly damaging & 0.0012 & 0.0014 & 0.000692\\
-  CFAP44 & Ghs89 & missense & tolerated & probably damaging & 0.0012 & 0.0014 & 0.000692\\
-  ARMC2 & Ghs107 & missense & deleterious & probably damaging & none & none & none\\
-  ARMC2 & Ghs107 & missense & deleterious & probably damaging & none & none & none\\
-  \bottomrule
-  \end{longtable}
-  
-  \begin{longtable}[t]{llllllll}
-  \caption{\label{tab:unnamed-chunk-15}Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : ARMC2, CCDC146, CFAP44  et  TTC29}\\
-  \toprule
-  Gene & Patient & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
-  
-  
+  Ghs89 & CFAP44 & Strong & missense & tolerated & possibly damaging & 0.0012 & 0.0014 & 0.000692\\
+  Ghs89 & CFAP44 & Strong & missense & tolerated & probably damaging & 0.0012 & 0.0014 & 0.000692\\
+  Ghs107 & ARMC2 & Novel & missense & deleterious & probably damaging & none & none & none\\
+  Ghs107 & ARMC2 & Novel & missense & deleterious & probably damaging & none & none & none\\
   \bottomrule
   \end{longtable}
   
@@ -2131,7 +2174,7 @@ class (for LaTeX) and the R bookdown package, in general.
   ## coercing into character vector
   \end{verbatim}
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-19-1} \end{center}
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-15-1} \end{center}
   
   \newpage 
   

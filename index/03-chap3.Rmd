@@ -121,7 +121,7 @@ plot_resume_analysis <- function(df) {
 tab_high <- function(df) {
   
   df %>% ungroup() %>% 
-    select(Gene = SYMBOL, Patient = RUN, Consequence, ESP, `1KG`, ExAC = ExAC_AF) %>%
+    select(Patient = RUN, Gene = SYMBOL, Evidence = EVIDENCE, Consequence, ESP, `1KG`, ExAC = ExAC_AF) %>%
     distinct() %>% 
     arrange(Gene) %>% 
     mutate(ESP = na.replace(ESP, "none"),
@@ -133,7 +133,7 @@ tab_high <- function(df) {
 tab_modelow <- function(df) {
   
   df %>% 
-    select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen, ESP, `1KG`, ExAC = ExAC_AF) %>%
+    select(Patient = RUN, Gene = SYMBOL, Evidence = EVIDENCE, Consequence, SIFT, PolyPhen, ESP, `1KG`, ExAC = ExAC_AF) %>%
     mutate(ESP = na.replace(ESP, "none"),
            `1KG` = na.replace(`1KG`, "none"),
            ExAC = na.replace(ExAC, "none"),
@@ -142,14 +142,29 @@ tab_modelow <- function(df) {
 }
 
 
-paste_vector <- function(v, sep = ", ", last = " et ") {
+paste_vector <- function(v, style = "none", sep = ", ", last = " et ") {
   
-  v_head <- v %>% sort %>% head(-1) %>% paste(collapse = sep)
+  v <- v %>% sort
   
-  v_tail <- v %>% sort %>% tail(1)
+  if (style == "itallic") {
+
+    v <- paste0("*",v,"*")
+  }
+  
+  v_head <- v %>% head(-1) %>% paste(collapse = sep)
+  
+  v_tail <- v %>% tail(1)
   
   paste(v_head, last , v_tail)
 }
+
+
+gene_to_run <- function(df, genes) {
+  
+  df %>% ungroup() %>% filter(SYMBOL %in% genes) %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+  
+}
+                                    
 
 
 ```
@@ -2111,10 +2126,6 @@ plot_grid(pA, pB, labels = c("A","B"), ncol = 1)
 
 ###### Analyse n°1  
 
-```{r}
-
-```
-
 ```{r dfgrp1high, dependson="removednah1", cache=TRUE}
 
 df_grp1_high <- df_bigmmaf_filter2 %>% 
@@ -2135,6 +2146,14 @@ n_gene_grp1_high <- gene_grp1_high %>% length
 run_grp1_high <- df_grp1_high %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
 n_run_grp1_high <- run_grp1_high %>% length 
 
+run_armc2_high <- gene_to_run(df_grp1_high, "ARMC2") 
+n_run_armc2_high <- run_armc2_high %>% length
+
+run_cfap44_high <- gene_to_run(df_grp1_high, "CFAP44")
+n_run_cfap44_high <- run_cfap44_high %>% length
+
+run_ccdc146_high <- gene_to_run(df_grp1_high, "CCDC146")
+n_run_ccdc146_high <- run_ccdc146_high %>% length
 
 ```
 
@@ -2154,6 +2173,12 @@ df_grp1_moderate <- df_bigmmaf_filter2 %>%
 n_gene_grp1 <- df_grp1_moderate %>% ungroup() %>% distinct(SYMBOL) %>% nrow
 run_grp1_moderate <- df_grp1_moderate %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
 n_run_grp1_moderate <- run_grp1_moderate %>% length 
+
+run_armc2_moderate <- gene_to_run(df_grp1_moderate, "ARMC2")
+n_run_armc2_moderate <- run_armc2_moderate %>% length
+
+run_cfap44_moderate <- gene_to_run(df_grp1_moderate, "CFAP44") 
+n_run_cfap44_moderate <- run_cfap44_moderate %>% length
 
 ```
 
@@ -2201,7 +2226,7 @@ df_resume_grp1 <- bind_rows(df_grp1_high %>%
 
 ```{r removegrp1, cache=TRUE}
 
-run_found <- c(run_found, run_cil_high)
+run_found <- c(run_found, run_grp1_high)
 
 df_bigmmaf_filter3 <- df_bigmmaf_filter2 %>% 
   filter(!(RUN %in% run_found))
@@ -2209,47 +2234,31 @@ df_bigmmaf_filter3 <- df_bigmmaf_filter2 %>%
 df_bigmmaf_filter_het3 <- df_bigmmaf_filter_het2 %>% 
   filter(!(RUN %in% run_found))
 
+```
+
+```{r varremovegrp1, dependson="removegrp1", cache=TRUE}
+
+n_var_distinct3 <- df_bigmmaf_filter3 %>% ungroup %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
+n_gene_distinct3 <- df_bigmmaf_filter3 %>% ungroup %>% distinct(SYMBOL) %>% nrow
+n_run_distinct3 <- df_bigmmaf_filter3 %>% ungroup %>% distinct(RUN) %>% nrow
 
 ```
 
 
-Comme dit précédemment, dans cette analyse nous nous sommes concentrés sur les gènes **présents dans la liste cilliome** sur lesquels **au moins deux** de nos patients présentaient au moins 1 variant **homozygote** ayant un effet tronquant sur la protéine.  
 
-1. **Étape n°1** : Nous sommes ainsi arrivé à une liste de `r n_gene_grp1_high` gènes différents : `r gene_grp1_high` retrouvés mutés à l'état homozygote chez `r n_run_grp1_high` de nos patients. Parmis eux, les patients *Ghs37* et *Ghs93* portent respectivement un indel créant un décalage du cadre de lecture et un variant stop affectant le gène *ARMC2* dont aucun n'est retrouvé dans les bases de données.     
-
+Comme dit précédemment, dans cette analyse nous nous sommes concentrés sur les gènes **présents dans la liste cilliome** sur lesquels **au moins deux** de nos patients présentaient au moins 1 variant **homozygote** ayant un effet tronquant sur la protéine. Nous avons ainsi pu identifier les `r n_gene_grp1_high` gènes suivants : `r paste_vector(gene_grp1_high)` : 
 
 
-2. **Étape n°2** : Nous avons ensuite étendu notre champs de recherche aux  patients portant des variants homozygotes sur l'un d'eux en ne se limitant pas cette fois-ci aux variants tronquant. Nous avons ainsi pu identifier `r n_run_grp1_moderate` nouveaux patients présentant tout deux des variants faux-sens homozygote, l'un sur le gène *ARMC2*, l'autre sur *CFAP44*. On peut noter que ces deux variants faux-sens sont prédit comme délétères par au moins 1 des deux logiciels de prédiction utilisés (SIFT et PolyPhen).
+1. **_ARMC2_** : Sur ce gène, `r n_run_armc2_high` patients portent un variant homozygote tronquant : `r run_armc2_high %>% paste_vector("itallic")`. Le patient `r run_armc2_high[1] %>% paste_vector("itallic")` portent un indel créant un décalage du cadre de lecture tandis que `r run_armc2_high[2] %>% paste_vector("itallic")` porte un variant créant un codon stop prématuré (**Table : **\@ref(tab:tabgrp1high)). Le patient`r run_armc2_moderate %>% paste_vector("itallic")` porte quant à lui un variant faux-sens prédit comme *deleterious* par SIFT et *probably damaging* par PolyPhen. Nous pouvons également noter qu'aucun des variants portés par ces `r n_run_armc2_high + n_run_armc2_moderate` sont absents des 3 bases de données. Les arguments génétiques mentionnés couplés à la forte expression testiculaire de ce gène (**Figure : **\@ref(fig:plotgrp1high) - **B**) font de celui-ci un très bon candidat pour expliquer le phénotype de ces `r n_run_armc2_high + n_run_armc2_moderate` bien que des analyses fonctionnelles soient nécéssaires pour `r run_armc2_moderate %>% length` d'entre eux.  
 
-3. **Étape n°3** : Pour finir avec ce premier lot de gènes, nous avons comme précédemment cherché des patients potentiellement hétérozygotes composites, c'est à dire portant au moins deux variants hétérozygotes, tronquant ou non. Cependant, aucun de nos patients restant ne remplissaient ces critères
+2. **_CFAP44_** : Comme *ARMC2*, `r n_run_cfap44_high` patients portent un variant homozygote tronquant et `r n_run_cfap44_moderate` porte un variant homozygote non tronquant. `r run_cfap44_high[1] %>% paste_vector("itallic")` porte un variant stop et `r run_cfap44_high[2] %>% paste_vector("itallic")` un variant affectant un site donneur d'épissage. Le fait qu'aucun de ces variant ne soir répertorié dans aucune des bases de données laisse supposer qu'ils sont tout deux très rares. Le patient `r run_cfap44_moderate[1] %>% paste_vector("itallic")` porte un variant faux-sens prédit comme *tolerated* par SIFT et *possibly damaging* par PolyPhen. Les preuves fortes impliquant ce gène dans le cilliome humain ainsi que les effets délétères retrouvé chez `r n_run_cfap44_high` des `r n_run_cfap44_high +  n_run_cfap44_moderate` portant des mutations sur ce gène font de *CFAP44* un autre très bon candidat malgré son expression non spécifique au testicule (**Table : **\@ref(tab:tabgrp1high) et \@ref(tab:tabgrp1moderate), **Figure : **\@ref(fig:plotgrp1high) - **B**).      
 
+3. **_CCDC146_** : Sur ce gène, seuls les patients `r run_ccdc146_high %>% paste_vector("itallic")` sont retrouvés mutés. Cependant, ces deux patients portent respectivement un variant induisant un codon stop prématuré et un décalage du cadre de lecture entrainant tout deux la production d’une
+protéine tronquée. Le premier de ces variants est retrouvé à une fréquence très faible à la fois dans ESP et ExaC, tandis que le second est totalement absent de l'ensemble des bases de donnés. On peut égallement ajouter que ce gène décrit comme faisant partie du cilliome humain avec de fortes preuves présente égallement une expression testiculaire relativement élevée. Pour finir, la protéine CCDC146 codée par le gène *CCDC146* avait déjà été décrite comme composant du centrosome spermatique, un organite ayant un rôle dans l'orientation des cellules et étant à l'origine des cils et des flagelles [@Firat-Karalar2014] reforçant ainsi les arguments de l'implication de ce gène dans le phénotype MMAF nous permettent ainsi d'affirmer que ces variants sont responsables du phénotype MMAF de ces `r n_run_ccdc146_high` patients (**Table : **\@ref(tab:tabgrp1high) et \@ref(tab:tabgrp1moderate), **Figure : **\@ref(fig:plotgrp1high) - **B**).    
 
+4. **_TTC29_** : Sur ce gène, les patients `r run_ttc29_high %>% paste_vector("itallic")` portent la même variation retrouvée à très faible fréquence dans les trois base de données et impactant un site donneur d’épissage du transcrit induisant la production d’une protéine aberrante. Ce gène à très forte expression testiculaire avait déjà été décrit en 2014 comme localisant au niveau de l'axonème du flagelle et qu'un *knock-down* entrainait des defauts de la cilliogénèse [@Chung2014] (**Table : **\@ref(tab:tabgrp1high) et \@ref(tab:tabgrp1moderate), **Figure : **\@ref(fig:plotgrp1high) - **B**).
 
-
-
-
-
-
-
-4. **Étape n°4** : Cette première analyse explique potentiellement la cause génétique responsable du phénotype MMAF de `r n_run_grp1_high + n_run_grp1_moderate` patients. Cependant pour `r n_run_grp1_moderate` d'entre eux,  Les données de ces patients sont alors retirées de notre liste de variants , nous avons comme précédemment avec les patients *DNAH1* retirer l'intégralité de leurs variants des analyses ulterieures afin de réduire à nouveau la liste des variants et des gènes à analyser facilitant ainsi les analyses. Ainsi, ... variants sur ... gènes.     
-
-Pour résumer, cette première analyse nous a permis de mettre en évidence `r n_gene_grp1` gènes dont différents plusieurs preuves laissent supposer leur implication dans le phénotype MMAF de `r n_run_grp1_high + n_run_grp1_moderate` de nos patients. Pamis ceux-ci, `r n_run_grp1_high` portent un variant tronquant à l'état homozygote nous donnant ainsi une grande confiance dans le fait que le variant soit effectivement à l'origine du phénotype. Pour les `r n_run_grp1_moderate` autres patients, les variants faux-sens portés par ces patients laisse planer un doute, cependant, le fait que ........... (**Figure : **\@ref(fig:plotgrp1high) - **B**)
-
-
-
-
-1. **_ARMC2_** : Le gène *ARMC2* est classé dans la catégorie *No evidence from previous studies* des gènes du cilliome de notre liste. Cependant son expression testiculaire forte et exclusive font de lui un bon candidat pour expliquer le
-phénotype MMAF de 3 portant respectivement à l’état homozygote un variant
-faux-sens, un impactant le site d’épissage et l’autre entrainant un décalage du
-cadre de lecture
-
-
-
-présentant tous une forte expression testiculaire (**Table : **\@ref(tab:tabgrp1high), **Figure : **\@ref(fig:plotgrp1high) - **A**). Parmi ces gènes, on peut noter que *CCDC146* codant pour la protéine CCDC146 avait déjà été décrit comme composant du centrosome spermatique, un organite ayant un rôle dans l'orientation des cellules et étant à l'origine des cils et des flagelles [@Firat-Karalar2014] reforçant ainsi les arguments de l'implication de ce gène dans le phénotype MMAF. L'analyse bibliographique des `r n_gene_grp1_high - 1`  autres gènes n'a cependant rien révélés ceux-ci étant jusqu'à présent peu étudiés.
-
-
-
-\newpage
+Cette première analyse au cours de laquelle nous avons sélectioné les gènes retrouvés présents dans la liste cilliome et sur lesquels au moins deux de nos patients présentaient au moins 1 variant homozygote ayant un effet tronquant sur la protéine nous a permis de mettre en évidence `rn_gene_grp1_high` nouveaux gènes candidats : `r gene_grp1_high %>% paste_vector("itallic")` retrouvés mutés à l'état homozygote chez `r n_run_grp1_high + n_run_grp1_moderate` de nos patients dont `r n_run_grp1_high` avec des variants tronquants soit `r (n_run_grp1_high / (n_run_bigmmaf - length(n_found))) %>% round(3) * 100` % des patients resant dans notre cohorte. Pour les `r n_run_grp1_moderate` autres, des analyses fonctionelles sont nécéssaires afin de pouvoir être sûr ce leurs variants sont bien responsables de leur phénotype. La cause génétique responsable du phénotype des patients `r run_grp1_high %>% paste_vector("itallic")` ayant été identifiées avec certitude, l'ensemble de leur données de variants sont retirées de nos liste réduisant ainsi celle-ci à `r n_var_distinct3` chevauchant `r n_gene_distinct3` et répartis sur `r n_run_distinct3`. Les données des patients `r run_grp1_moderate %>% paste_vector("italli")` sont elle conservées afin de voir si un meilleur candidat pourrait expliquer le phénotype de ces patients.    
 
 ```{r plotgrp1high, fig.height=7.2, dependson=c("vargrp1","dfresumegrp1","localfunction"), fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
 
@@ -2259,14 +2268,18 @@ fig_description_B <- "Résumé de l'Analyse 1, quantification du nombre de patie
 fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
 fig_info <- paste0(fig_name, " : ", fig_description)
 
-pA <- plot_expression(gene_grp1_high, mode = "percent", flip = TRUE) + 
+
+pA <- plot_resume_analysis(df_resume_grp1)
+
+
+pB <- plot_expression(gene_grp1_high, mode = "percent", flip = TRUE) + 
   xlab("") + 
   theme(legend.position = c(1,.5),
         legend.justification = c(1,.5))
 
-pB <- plot_resume_analysis(df_resume_grp1)
-
 plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
+
+
 
 ```
 
@@ -2281,7 +2294,7 @@ kable(tab_high(df_grp1_high),
 
 ```
 
-```{r, dependson="localfunction", cache=TRUE}
+```{r tabgrp1moderate, dependson="localfunction", cache=TRUE}
 
 gene1 <- paste_vector(gene_grp1_high)
 cap <- paste0("Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : ", gene1)
