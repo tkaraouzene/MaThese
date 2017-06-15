@@ -2350,6 +2350,11 @@ n_run_grp2_moderate <- df_grp2_moderate %>% ungroup() %>% distinct(RUN) %>% nrow
 run_cfap43_moderate <- df_grp2_moderate %>% gene_to_run("CFAP43")
 n_run_cfap43_moderate <- run_cfap43_moderate %>% length
 
+
+run_fsip2_moderate <- df_grp2_moderate %>% gene_to_run("FSIP2")
+n_run_fsip2_moderate <- run_fsip2_moderate %>% length
+
+
 ```
 
 ```{r dfgrp2low, cache=TRUE}
@@ -2369,6 +2374,9 @@ n_run_grp2_low <- df_grp2_low %>% ungroup() %>% distinct(RUN) %>% nrow
 
 run_cfap43_low <- df_grp2_low %>% gene_to_run("CFAP43")
 n_run_cfap43_low <- run_cfap43_low %>% length
+
+run_fsip2_low <- df_grp2_low %>% gene_to_run("FSIP2")
+n_run_fsip2_low <- run_fsip2_low %>% length
 
 ```
 
@@ -2419,8 +2427,9 @@ n_run_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(RUN) %>% nrow(
 
 Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents dans la liste cilliome**  mais sur lesqules on trouvait toujours **au moins deux** de nos patients présentant au moins 1 variant tronquant à l'état **homozygote**. `r n_run_grp2_high` patients différents portaient ainsi au moins un variant homozygote tronquant sur l'un des `r n_gene_grp2` gènes suivants : `r gene_grp2 %>% paste_vector("itallic")`.
 
-1. **_CFAP43_** : `r n_run_cfap43_high + n_run_cfap43_moderate + n_run_cfap43_low` patients portent au moins 1 variant sur le gène *CFAP43*. Parmis ceux-ci, les patients `r run_cfap43_high %>% paste_vector("itallic")` portent une mutation tronquante à l'état homozygote soit absente des bases de données soit présentent avec une très faible fréquence. Le patient `r run_cfap43_moderate %>% paste_vector("itallic")` lui porte un variant homozygote intronique au situé au sein de la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait également être sans effet, or, il est difficile de le prédire à ce stade. (TODO :: faire tourner un algo de prédiction). Le patient `r run_cfap43_low %>% paste_vector("itallic")` en revanche semble plus intéréssant, puisque celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalage du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT. Malgré une expression ubiquitaire (**Figure : **\@ref(fig:plotgrp2) - **B**), le nombre important de patients portant des variant sur celui_ci, notamment `r n_run_cfap43_high` potant des variants tronquants homozygote font de ce gène un bon candidat.  
-2. **_FSIP2_** :  L'analyse bibliographique du gène *FSIP2* révèle qu'une équipe a démontré en 2003 l'implication de ce gène dans la structure de la gaine fibreuse du flagelle spermatique confirmant que ce gène est un bon candidat pour expliquer le phénotype MMAF des `r n_run_fsip2_high` patients portant un variant homozygote sur celui-ci [@Brown2003].   
+1. **_CFAP43_** : `r n_run_cfap43_high + n_run_cfap43_moderate + n_run_cfap43_low` patients portent au moins 1 variant sur le gène *CFAP43*. Parmis ceux-ci, les patients `r run_cfap43_high %>% paste_vector("itallic")` portent une mutation tronquante à l'état homozygote soit absente des bases de données soit présentent avec une très faible fréquence. Le patient `r run_cfap43_moderate %>% paste_vector("itallic")` lui porte un variant homozygote intronique au situé au sein de la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait également être sans effet, or, il est difficile de le prédire à ce stade. (TODO :: faire tourner un algo de prédiction). Le patient `r run_cfap43_low %>% paste_vector("itallic")` en revanche semble plus intéréssant, puisque celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalage du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT. Malgré une expression ubiquitaire (**Figure : **\@ref(fig:plotgrp2) - **B**), le nombre important de patients portant des variant sur celui-ci, notamment `r n_run_cfap43_high` potant des variants tronquants homozygote font de ce gène un bon candidat.  
+2. **_FSIP2_** :  Comme pour le gène *CFAP43*, `r n_run_cfap43_high + n_run_cfap43_moderate + n_run_cfap43_low` de nos patients portaient 1 variant sur le gène *FSIP2* cependant pour seulement `r n_run_fsip2_high` d'entre eux ce variant était tronquant à l'état homozygote.  En effet, les patients `r run_fsip2_high %>% paste_vector("itallic")` porte tout deux un indel entrainant un décalage du cadre de lecture dont aucun n'est répertorié dans les bases de données. Le patient `r run_fsip2_moderate %>% paste_vector("itallic")` porte lui un faux-sens homozygote prédit comme *benign* par PolyPhen. `r n_run_fsip2_low` autres patients portent au moins deux variants hétérozygote sur ce gène, cependant la plupart sont des faux-sens prédit égallement comme *benign* par PolyPhen. Bien que l'effet sur la protéine des variants portés par `r n_run_fsip2_moderate + n_run_fsip2_low` des `r n_run_fsip2_high + n_run_fsip2_moderate + n_run_fsip2_low` patients portant au moins un variant sur ce gène soit incertains, les variants tronquant portés par les patients `r run_fsip2_high %>% paste_vector("itallic")` ainsi que saforte expression testiculaire et le fait que son implication dans la structure de la gaine fibreuse du flagelle spermatique ait été montrée en 2003 [@Brown2003] font de ce gène un excellent candidat pour expliquer le phénotype d'au moins `r n_run_fsip2_high` patients. Pour les autres, des analyses fonctionelles seront nécéssaires.  
+
 3. **_SART3_** :  
 4. **_ICA1_** :  
 5. **_TRAV26-1_** :  
@@ -2499,11 +2508,7 @@ kable(tab_high(df_grp2_high) %>% select(-Evidence),
 
 ```{r tabgrp2moderate, dependson="dfgrp2moderate", cache=TRUE}
 
-kable(df_grp2_moderate %>% 
-        inner_join(df_canonical_transcripts, by = "Feature") %>%
-        select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
-        mutate(SIFT = na.replace(SIFT, "No prediction"),
-               PolyPhen = na.replace(PolyPhen, "No prediction")),
+kable(tab_modelow(df_grp2_moderate),
       booktabs = TRUE,
       longtable = TRUE,
       caption = "Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO")
@@ -2511,13 +2516,10 @@ kable(df_grp2_moderate %>%
 
 ```
 
+
 ```{r tabgrp2low, dependson="dfgrp2low", cache=TRUE}
 
-kable(df_grp2_low %>% 
-        inner_join(df_canonical_transcripts, by = "Feature") %>%
-        select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
-        mutate(SIFT = na.replace(SIFT, "No prediction"),
-               PolyPhen = na.replace(PolyPhen, "No prediction")),
+kable(tab_modelow(df_grp2_low),
       booktabs = TRUE,
       longtable = TRUE,
       caption = "Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO")

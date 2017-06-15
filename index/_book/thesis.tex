@@ -1733,16 +1733,29 @@ class (for LaTeX) and the R bookdown package, in general.
     prédit comme \emph{possibly damaging} par Polyphen, bien qu'il soit
     annoté \emph{tolerated} par SIFT. Malgré une expression ubiquitaire
     (\textbf{Figure : }\ref{fig:plotgrp2} - \textbf{B}), le nombre
-    important de patients portant des variant sur celui\_ci, notamment 5
+    important de patients portant des variant sur celui-ci, notamment 5
     potant des variants tronquants homozygote font de ce gène un bon
     candidat.\\
   \item
-    \textbf{\emph{FSIP2}} : L'analyse bibliographique du gène \emph{FSIP2}
-    révèle qu'une équipe a démontré en 2003 l'implication de ce gène dans
-    la structure de la gaine fibreuse du flagelle spermatique confirmant
-    que ce gène est un bon candidat pour expliquer le phénotype MMAF des 2
-    patients portant un variant homozygote sur celui-ci (Brown, Miki,
-    Harper, \& Eddy, \protect\hyperlink{ref-Brown2003}{2003}).\\
+    \textbf{\emph{FSIP2}} : Comme pour le gène \emph{CFAP43}, 7 de nos
+    patients portaient 1 variant sur le gène \emph{FSIP2} cependant pour
+    seulement 2 d'entre eux ce variant était tronquant à l'état
+    homozygote. En effet, les patients \emph{Ghs20} et \emph{Ghs21} porte
+    tout deux un indel entrainant un décalage du cadre de lecture dont
+    aucun n'est répertorié dans les bases de données. Le patient et
+    \emph{Ghs131} porte lui un faux-sens homozygote prédit comme
+    \emph{benign} par PolyPhen. 4 autres patients portent au moins deux
+    variants hétérozygote sur ce gène, cependant la plupart sont des
+    faux-sens prédit égallement comme \emph{benign} par PolyPhen. Bien que
+    l'effet sur la protéine des variants portés par 5 des 7 patients
+    portant au moins un variant sur ce gène soit incertains, les variants
+    tronquant portés par les patients \emph{Ghs20} et \emph{Ghs21} ainsi
+    que saforte expression testiculaire et le fait que son implication
+    dans la structure de la gaine fibreuse du flagelle spermatique ait été
+    montrée en 2003 (Brown, Miki, Harper, \& Eddy,
+    \protect\hyperlink{ref-Brown2003}{2003}) font de ce gène un excellent
+    candidat pour expliquer le phénotype d'au moins 2 patients. Pour les
+    autres, des analyses fonctionelles seront nécéssaires.
   \item
     \textbf{\emph{SART3}} :\\
   \item
@@ -1855,33 +1868,37 @@ class (for LaTeX) and the R bookdown package, in general.
   \bottomrule
   \end{longtable}
   
-  \begin{longtable}[t]{lllll}
+  \begin{longtable}[t]{llllllll}
   \caption{\label{tab:tabgrp2moderate}Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO}\\
   \toprule
-  Gene & Patient & Consequence & SIFT & PolyPhen\\
+  Patient & Gene & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  CFAP43 & Ghs25 & splice region & No prediction & No prediction\\
-  FSIP2 & Ghs131 & missense & No prediction & benign\\
+  Ghs25 & CFAP43 & splice region & none & none & none & none & none\\
+  Ghs131 & FSIP2 & missense & none & benign & none & none & 0.00121\\
   \bottomrule
   \end{longtable}
   
-  \begin{longtable}[t]{lllll}
+  \begin{longtable}[t]{llllllll}
   \caption{\label{tab:tabgrp2low}Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO}\\
   \toprule
-  Gene & Patient & Consequence & SIFT & PolyPhen\\
+  Patient & Gene & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  FSIP2 & Ghs40 & missense & No prediction & benign\\
-  FSIP2 & Ghs40 & missense & No prediction & probably damaging\\
-  FSIP2 & Ghs40 & missense & No prediction & benign\\
-  FSIP2 & Ghs92 & missense & No prediction & benign\\
-  FSIP2 & Ghs92 & missense & No prediction & benign\\
+  Ghs40 & FSIP2 & missense & none & benign & none & 0.0056 & 0.00157\\
+  Ghs40 & FSIP2 & missense & none & probably damaging & none & none & none\\
+  Ghs40 & FSIP2 & missense & none & benign & none & none & none\\
+  Ghs40 & FSIP2 & missense & none & benign & 0.0034 & 0.0056 & 0.0019\\
+  Ghs92 & FSIP2 & missense & none & benign & none & 0.0056 & 0.00157\\
   \addlinespace
-  FSIP2 & Ghs95 & missense & No prediction & benign\\
-  FSIP2 & Ghs95 & missense & No prediction & benign\\
-  FSIP2 & Ghs101 & missense & No prediction & unknown\\
-  FSIP2 & Ghs101 & missense & No prediction & benign\\
-  CFAP43 & Ghs132 & frameshift & No prediction & No prediction\\
-  CFAP43 & Ghs132 & missense & tolerated & possibly damaging\\
+  Ghs92 & FSIP2 & missense & none & benign & 0.0034 & 0.0056 & 0.0019\\
+  Ghs95 & FSIP2 & missense & none & benign & none & 0.0056 & 0.00157\\
+  Ghs95 & FSIP2 & missense & none & benign & 0.0034 & 0.0056 & 0.0019\\
+  Ghs101 & FSIP2 & missense & none & unknown & none & none & none\\
+  Ghs101 & FSIP2 & missense & none & benign & none & none & none\\
+  \addlinespace
+  Ghs132 & CFAP43 & frameshift & none & none & none & none & none\\
+  Ghs132 & CFAP43 & missense & deleterious & probably damaging & 2e-04 & none & 7.41e-05\\
+  Ghs132 & CFAP43 & missense & none & benign & 2e-04 & none & 7.41e-05\\
+  Ghs132 & CFAP43 & missense & tolerated & possibly damaging & 2e-04 & none & 7.41e-05\\
   \bottomrule
   \end{longtable}
   
