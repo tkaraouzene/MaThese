@@ -85,6 +85,29 @@ na.replace <- function (x, char = "") {
     return(x)
 }
 
+
+
+plot_resume_analysis <- function(df) {
+  
+  
+  levels <- c("High","Moderate","Low")
+  
+  df <- df %>% 
+    gather(TRUST,NB, -SYMBOL, -TOT) %>%
+    mutate(TRUST = factor(TRUST, levels = levels))
+  
+  break_max <- df$NB %>% max
+  
+  ggplot(df, aes(TRUST, NB)) +
+    geom_col(aes(fill = TRUST)) + 
+    scale_fill_manual(guide = "none", limits = c("High","Moderate","Low"), values = c("#4DAF4A","#FF7F00","#E41A1C")) + 
+    scale_y_continuous(breaks = c(0:break_max)) +
+    facet_wrap(~SYMBOL) + 
+    ylab("Nb of individuals") + 
+    xlab("")
+  
+}
+
 ```
 
 
@@ -1426,9 +1449,8 @@ df_rvis <- fread("data/RVIS_Unpublished_ExAC_May2015.txt",sep = "\t",header = TR
 df_cilliome_gene <- fread("data/ciliome.csv",sep = "\t",header = TRUE, data.table = FALSE) %>% 
   select(SYMBOL = Symbol, EVIDENCE = `Novelty category`, LOCALISATION = `Immunostaining of cilia`) %>% 
   mutate(EVIDENCE = substring(EVIDENCE, 4),
-         EVIDENCE = if_else(is.na(EVIDENCE), "Not in the list",
-                            if_else(grepl("Strong", EVIDENCE), "Strong",
-                                    if_else(grepl("Weak", EVIDENCE), "Weak", "Novel"))),
+         EVIDENCE = if_else(grepl("Strong", EVIDENCE), "Strong",
+                            if_else(grepl("Weak", EVIDENCE), "Weak", "Novel")),
          LOCALISATION = substring(LOCALISATION, 4))
 
 n_cilliome_gene <- df_cilliome_gene %>% nrow
@@ -1584,7 +1606,9 @@ df_distinct_filter <- df_distinct_call %>%
          !grepl("NMD transcript", Consequence),
          !grepl("non coding transcript", Consequence)) %>%
   left_join(df_rvis, by = "SYMBOL") %>%
-  left_join(df_cilliome_gene, by = "SYMBOL")
+  left_join(df_cilliome_gene, by = "SYMBOL") %>%
+  mutate(EVIDENCE = if_else(is.na(EVIDENCE), "Not in the list", EVIDENCE))
+  
 
 df_bigmmaf_filter <- df_bigmmaf_call %>%  
   select(-STRAND) %>%
@@ -1606,7 +1630,6 @@ df_bigmmaf_filter_stat <- df_bigmmaf_filter %>%
   mutate(N_VAR_TOT = sum(N_VAR_PER_TYPE)) %>%
   right_join(df_runs_mmaf, by = "RUN") 
   
-
 df_bigmmaf_genes <- df_bigmmaf_filter %>% group_by(SYMBOL, EVIDENCE, LOCALISATION) %>% distinct(RUN) %>% mutate(N_RUN = n()) 
 df_bigmmaf_genes_distinct <- df_bigmmaf_genes %>% distinct(N_RUN)
 df_bigmmaf_genes_resume <- df_bigmmaf_genes_distinct %>% distinct(N_RUN) %>% group_by(N_RUN) %>% summarise(N_GENE = n()) 
@@ -1706,8 +1729,6 @@ pB <- ggplot(df_bigmmaf_filter_stat %>% group_by(RUN) %>% summarise(N_GENE = mea
         axis.ticks.x = element_blank()) 
 
 plot_grid(pA,pB, rel_heights = c(.33,.67), ncol = 1, labels = c("A","B"))
-
-# plot_grid(row1, pC, ncol = 1, rel_heights = c(.55,.45), labels = c("","C"))
 
 ```
 
@@ -1809,7 +1830,7 @@ df_resume_dnah1 <- bind_rows(df_dnah1_high %>% group_by(RUN, SYMBOL) %>% summari
 ```
 
 
-```{r removednah1, dependson="filterbigmmaf", cache=TRUE}
+```{r removednah1, dependson=c("extradata","filterbigmmaf"), cache=TRUE}
 
 run_found <- c(run_dnah1_high, run_dnah1_moderate)
 
@@ -1828,8 +1849,8 @@ df_bigmmaf_genes_distinct2 <- df_bigmmaf_filter2  %>%
 df_bigmmaf_genes_resume2 <- df_bigmmaf_genes_distinct2 %>% 
   distinct(N_RUN) %>% 
   group_by(N_RUN, EVIDENCE, LOCALISATION) %>% 
-  summarise(N_GENE = n()) %>% 
-  filter(N_RUN > 1) 
+  summarise(N_GENE = n()) %>%
+  mutate(MORE_1_RUN = if_else(N_RUN == 1, "One signle run", "Several runs"))
 
 ```
 
@@ -1857,13 +1878,10 @@ La cause génétique expliquant le phénotype MMAF ayant été identifié avec c
 ```{r plotdnah1, fig.cap=fig_info, fig.height=8, fig.scap=fig_name, cache=TRUE}
 
 fig_name <- "Analyse du gène *DNAH1*"
-
-
-
 fig_description_A <- "Expression tissulaire du gène *DNAH1* d'après les données du projet Illumina BodyMap"
 fig_description_B <- "Quantification du nombre de patients portant au moins un variant sur le gène *DNAH1* pour chacun des 3 niveau de confiance"
 
-fig_description <- paste(fig_description_A, fig_description_B, fig_description_C, sep = ". ")
+fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
 fig_info <- paste0(fig_name, " : ", fig_description)
 
 pA <- plot_expression("dnah1", "percent", TRUE) +
@@ -1903,7 +1921,7 @@ kable(bind_rows(df_dnah1_high %>% mutate(TRUST = "High"),
         select(Patient = RUN, Trust = TRUST, Consequence, Genotype = CALL, SIFT, PolyPhen),
       booktabs = TRUE,
       longtable = TRUE,
-      caption = "Liste des patients portant un variant non troquant homozygote sur un des gènes suivant : TODOOOOOO")
+      caption = "Liste des patients portant au moins un variant homozygote ou deux variants hétérozygotes sur le gène *DNAH1*")
 
 ```
 
@@ -1951,18 +1969,82 @@ c(tabankrd20a3, run_homo_ankrd20a3, run_het_ankrd20a3, n_run_homo_ankrd20a3, n_r
 
 ```
 
-Ensuite, afin de nous orienter dans nos recherches, nous nous sommes basés sur une étude de 2012 qui établissait une liste des gènes humains pouvant être impliqués dans cilliome, c'est à dire (todo def cilliome) [@Ivliev2012]. La constitution de cette liste se basait à la fois sur les données de CilDB [ref ? ] et de MEDLINE [ ref ? ] mais aussi des analyse *in silico* permettant d'effectuer des prédiction. Ainsi, chaque gène était classé dans l'une des ... catégories suivantes en fonction des preuves déjà existante (au moment de l'étude) permettant de lier un gène au cilliome humain : **Strong evidence from previous studies** (Strong), **Weak evidence from previous studies** (Weak) et **No evidence from previous studies** (Novel). L'utilisation de cette liste afin d'ajouter une nouvelle annotation à nos gènes est pertinente puisque le spermatozoïde humain est une cellule ciliée, et le flagelle en est le cil. Nous pouvons donc attendre à ce qu'une partie des gènes responsables du phénotype MMAF soit présents dans cette liste recensant `r n_cilliome_gene` gènes classés dans trois catégories en fonction de la qualité de la preuve permettant de définir le gène comme appartenant au cilliome : 
+Comme dit à l'instant, la recherche de variants sur le gène *DNAH1* nous permettrait d'expliquer jusqu'à `r p_run_dnah1_tot` % des phénotypes des patients de notre cohorte. Cela signifie donc que pour au moins `r 100 - p_run_dnah1_tot` % d'entre eux, la cause génétique du phénotype MMAF est donc expliquée par d'autres facteurs.  
+
+Afin de nous orienter dans nos recherches, nous nous sommes basés sur une étude de 2012 qui établissait une liste des gènes humains pouvant être impliqués dans cilliome, c'est à dire (todo def cilliome) [@Ivliev2012]. La constitution de cette liste se basait à la fois sur les données de CilDB [ref ? ] et de MEDLINE [ ref ? ] mais aussi des analyse *in silico* permettant d'effectuer des prédiction. Ainsi, chaque gène était classé dans l'une des 3 catégories suivantes en fonction des preuves déjà existante (au moment de l'étude) permettant de lier un gène au cilliome humain : **Strong evidence from previous studies** (Strong), **Weak evidence from previous studies** (Weak) et **No evidence from previous studies** (Novel). L'utilisation de cette liste nous a permis d'ajouter une nouvelle annotation pertinente à nos gènes. En effet, le spermatozoïde humain est une cellule ciliée, et le flagelle en est le cil. Nous pouvons donc attendre à ce qu'une partie des gènes responsables du phénotype MMAF soit présents dans cette liste de `r n_cilliome_gene` gènes. 
 
 Ainsi, `r n_gene_cil` de nos `r n_distinct_gene2` gènes retenus faisaient partis de cette liste dont `r n_gene_cil_strong` présentaient des preuves fortes de leur appartenance au cilliome. Il faut tout de même noter que bien que cette liste soit un bon outil pour orienter les recherches et prioriser certains gènes, elle ne peut constituer un critère suffisant pour filtrer les gènes n'en faisant pas partie. Par exemple le gène *DNAH1*, de par son expression ubiquitaire n'a pas été intégré à cette liste (**Figure : **\@ref(fig:expdnah1), or on connait désormais son implication dans le phénotype MMAF (**Figure : **\@ref(fig:plotfilterbigmmaf2) - **A**).  
 
 Suite à cela, afin de nous concentrer en priorité sur les gènes entrainant un phénotype MMAF chez le plus grand nombre d'individus, nous avons sélectionnés ceux sur lesquels plusieurs patients portaient au moins un variant ayant passé l'ensemble des filtres nous permettant alors d'obtenir une liste de `r n_gene_more1` gènes dont `r n_gene_2` (soit `r p_gene_2` %) étaient retrouvés variants chez uniquement 2 patients (**Figure : **\@ref(fig:plotfilterbigmmaf2) - **B**). 
 
+Ces deux informations nous ont ensuite permis de *designer* 4 analyses que nous avons effectué de manière successives nous permettant ainsi de séléctionner dans un premier temps les gènes candidats les plus évidents nous permettant ainsi d'épurer  progressivement notre liste de variants rendant ainsi plus facile l'identification des candidats les moins évidents.
+
+1. **Analyse n°1** : Dans un permier temps, nous avons étudié uniquement les gènes **présents dans la liste cilliome** sur lesquels **au moins deux** de nos patients présentaient au moins 1 variant tronquant à l'état **homozygote**.  
+
+2. **Analyse n°2** : Ensuite, nous avons étudié les gènes **absents dans la liste cilliome**  mais sur lesquls on trouvait toujours **au moins deux** de nos patients présentant au moins 1 variant tronquant à l'état **homozygote**.  
+
+3. **Analyse n°3** : Dans un troisième temps nous sommes revenus à étudier les gènes **présents dans la liste cilliome** en considérant cette fois-ci les gènes sur lesquels **un seul** de nos patients présentaient au moins 1 variant tronquant à l'état **homozygote**.  
+
+4. **Analyse n°4** : Pour finir nous avons étudié les gènes **absents dans la liste cilliome** sur lesquels **un seul** de nos patients présentaient au moins 1 variant tronquant à l'état **homozygote**.
+
+Il faut noter qu'au sein des chacun de ces 4 analyses nous avons appliquer les étapes n°1-4 décrites précédemment. 
+
 
 \newpage
 
+```{r plotcil, warning=FALSE, fig.height=7, fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
+
+fig_name <- 'TODOOOOOOOOOOOOOOOOOO'
+fig_description_general <- "Chaque couleur définit une classe de la liste des gènes du cilliome décrit dans [@Ivliev2012]. Vert = *Strong evidence from previous studies* (*Strong*), Orange = *Weak evidence from previous studies* (*Weak*), rouge = *No evidence from previous studies* (*Novel*), bleu = Non présent dans la liste"
+fig_description_A <- "**A** : Quantification du nombre de gène ayant passé les filtres au sein des 3 classes de la liste des gènes du cilliome"
+fig_description_B <- "**B** : TODOOOOOO : Besoin d'aide pour le nom de l'axe des Y !!!!!"
+
+fig_description <- paste(fig_description_general, fig_description_A, fig_description_B, sep = ". ")
+
+
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+# color from Set1 palette : 
+# #4DAF4A = Green
+# #FF7F00 = Orange
+# #E41A1C = Red
+# #377EB8 = Blue
+
+fill_A <- c("#4DAF4A", "#FF7F00", "#E41A1C")
+order_A <- c("Strong", "Weak", "Novel")
+
+fill_B <- c("#4DAF4A", "#FF7F00", "#E41A1C", "#377EB8")
+order_B <- c("Strong", "Weak", "Novel", "Not in the list")
+
+pA <- ggplot(df_bigmmaf_genes_distinct2, aes(EVIDENCE)) +
+  geom_bar(aes(fill = EVIDENCE)) +
+    scale_x_discrete(limits = order_A) + 
+  geom_text(stat='count',aes(label= ..count..), size = 5, vjust = -.25) +
+  ylab("Nb of gene") +
+  xlab("Evidence") +
+  scale_fill_manual(guide = "none", limits = order_A, values = fill_A, breaks = order_A)  +
+  theme(axis.title.x = element_blank())
+
+pB <- ggplot(df_bigmmaf_genes_resume2, aes(N_RUN, N_GENE)) + 
+  geom_col(aes(fill = factor(EVIDENCE, levels = (order_B)))) +
+  scale_x_reverse(breaks = c(1:15)) + 
+  ylab("Nb of gene") + 
+  # xlab("") +
+  coord_flip() +
+  scale_fill_manual(name = "Evidence", limits = order_B, values = fill_B, breaks = order_B) + 
+  theme(legend.position = "bottom")
+
+plot_grid(pA, pB, labels = c("A","B"), ncol = 1)
+
+```
+
+\newpage
+
+##### Analyse n°1  
+
 ```{r dfgrp1high, dependson="removednah1", cache=TRUE}
 
-df_bigmmaf_high <- df_bigmmaf_filter2 %>% 
+df_grp1_high <- df_bigmmaf_filter2 %>% 
   filter(IMPACT == "HIGH") %>%
   group_by(SYMBOL, Feature) %>%
   mutate(N_RUN = n_distinct(RUN)) %>% 
@@ -1972,7 +2054,7 @@ df_bigmmaf_high <- df_bigmmaf_filter2 %>%
   group_by(RUN, SYMBOL) %>%
   distinct(Consequence, N_RUN, EVIDENCE)
 
-df_distinct_high <- df_bigmmaf_high %>% 
+df_distinct_high <- df_grp1_high %>% 
   ungroup() %>% 
   distinct(SYMBOL, EVIDENCE, N_RUN)
 
@@ -1986,7 +2068,7 @@ df_distinct_cil_high <- df_distinct_high %>%
 n_gene_high <- df_distinct_high %>% nrow
 gene_cil_high <- df_distinct_cil_high %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
 
-run_cil_high <- df_bigmmaf_high %>% filter(EVIDENCE != "Not in the list") %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+run_cil_high <- df_grp1_high %>% filter(EVIDENCE != "Not in the list") %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
 n_run_cil_high <- df_distinct_cil_high %>% summarise(N_TOT = sum(N_RUN)) %>% collect() %>% .[["N_TOT"]] 
 n_gene_cil_high <- df_distinct_cil_high %>% nrow
 
@@ -2006,8 +2088,8 @@ df_grp1_moderate <- df_bigmmaf_filter2 %>%
 ```{r vargrp1moderate, dependson="dfgrp1moderate", cache=TRUE}
 
 n_gene_grp1 <- df_grp1_moderate %>% ungroup() %>% distinct(SYMBOL) %>% nrow
-run_grp1 <- df_grp1_moderate %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
-n_run_grp1 <- run_grp1 %>% length 
+run_grp1_moderate <- df_grp1_moderate %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_grp1_moderate <- run_grp1_moderate %>% length 
 
 ```
 
@@ -2053,34 +2135,51 @@ p_run_high_evidence <- df_resume_grp1 %>% ungroup() %>% summarise(P = sum(High)/
 
 ```
 
+```{r removegrp1, cache=TRUE}
 
-Afin de nous concentrer dans un premier temps sur les gènes ayant le plus de risque d'être responsable du phénotype, nous avons tout d'abord séléctionner ceux présent dans la liste des gènes du ciliome sur lesquels au moins 2 patients portaient une mutation homozygote ayant un effet tronquant sur la protéine. Nous sommes ainsi arrivé à une liste de `r n_gene_cil_high` gènes différents : `r gene_cil_high` présentant tous une forte expression testiculaire (**Table : **\@ref(tab:tabcilhigh), **Figure : **\@ref(fig:plotgrp1high)).
+run_found <- c(run_found, run_cil_high, run_grp1_moderate)
 
-Parmi ces gènes, on peut noter que *CCDC146* codant pour la protéine CCDC146 avait déjà été décrit comme composant du centrosome spermatique, un organite ayant un rôle dans l'orientation des cellules et étant à l'origine des cils et des flagelles [@Firat-Karalar2014] reforçant ainsi les arguments de l'implication de ce gène dans le phénotype MMAF. L'analyse bibliographique des `r n_gene_cil_high - 1`  autres gènes n'a cependant rien révélés ceux-ci étant jusqu'à présent peu étudié.  
+df_bigmmaf_filter3 <- df_bigmmaf_filter2 %>% 
+  filter(!(RUN %in% run_found))
+   
+df_bigmmaf_filter_het3 <- df_bigmmaf_filter_het2 %>% 
+  filter(!(RUN %in% run_found))
 
-Après avoir identifié ces gènes, nous avons étendu notre champs de recherche en cherchant si d'autre patients portaient des variants homozygotes sur l'un d'eux en ne se limitant pas cette fois-ci aux variants tronquant. Nous avons ainsi pu identifier `r n_run_grp1` nouveaux patients présentant tout deux des variants faux-sens homozygote, l'un sur le gène *ARMC2*, l'autre sur *CFAP44*. On peut noter que ces deux variants faux-sens sont prédit comme délétère par au moins 1 des deux logiciels de prédiction utilisés (SIFT et PolyPhen).
 
-Pour finir avec ce premier lot de gènes, nous avons comme précédemment cherché des patients potentiellement hétérozygotes composites, c'est à dire portant au moins deux variants hétérozygotes, tronquant ou non. Cependant, aucun de nos patients restant ne remplissaient ces critères
+```
 
-Pour résumer, cette première analyse nous a permis de mettre en évidence `r n_gene_grp1` gènes dont différents plusieurs preuves laissent supposer leur implication dans le phénotype MMAF de `r n_run_cil_high + n_run_grp1` de nos patients. Pamis ceux-ci, p_run_high_evidence % portent un variant tronquant à l'état homozygote nous donnant ainsi une grande confiance dans le fait que le variant soit effectivement à l'origine du phénotype. Pour l'ensemble des (100 - p_run_high_evidence) % restant, les variants faux-sens portés par ces patients laisse planer un doute, cependant, le fait que ...........
 
-La cause génétique responsable du phénotype de ces `r n_run_cil_high + n_run_grp1` patients ayant été identifiés, nous avons comme précédemment avec les patients *DNAH1* retirer l'intégralité de leurs variants des analyses ulterieures afin de réduire à nouveau la liste des variants et des gènes à analyser facilitant ainsi les analyses. Ainsi, ... variants sur ... gènes.     
+Comme dit précédemment, dans cette analyse nous nous sommes concentrés sur les gènes **présents dans la liste cilliome** sur lesquels **au moins deux** de nos patients présentaient au moins 1 variant **homozygote** ayant un effet tronquant sur la protéine.  
+
+1. **Étape n°1** : Nous sommes ainsi arrivé à une liste de `r n_gene_cil_high` gènes différents : `r gene_cil_high` présentant tous une forte expression testiculaire (**Table : **\@ref(tab:tabgrp1high), **Figure : **\@ref(fig:plotgrp1high) - **A**). Parmi ces gènes, on peut noter que *CCDC146* codant pour la protéine CCDC146 avait déjà été décrit comme composant du centrosome spermatique, un organite ayant un rôle dans l'orientation des cellules et étant à l'origine des cils et des flagelles [@Firat-Karalar2014] reforçant ainsi les arguments de l'implication de ce gène dans le phénotype MMAF. L'analyse bibliographique des `r n_gene_cil_high - 1`  autres gènes n'a cependant rien révélés ceux-ci étant jusqu'à présent peu étudiés.  
+
+2. **Étape n°2** : Après avoir identifié ces gènes, nous sommes passés à l'étape n°2 de notre analyse, c'est à dire que nous avons étendu notre champs de recherche aux  patients portant des variants homozygotes sur l'un d'eux en ne se limitant pas cette fois-ci aux variants tronquant. Nous avons ainsi pu identifier `r n_run_grp1_moderate` nouveaux patients présentant tout deux des variants faux-sens homozygote, l'un sur le gène *ARMC2*, l'autre sur *CFAP44*. On peut noter que ces deux variants faux-sens sont prédit comme délétères par au moins 1 des deux logiciels de prédiction utilisés (SIFT et PolyPhen).
+
+3. **Étape n°3** : Pour finir avec ce premier lot de gènes, nous avons comme précédemment cherché des patients potentiellement hétérozygotes composites, c'est à dire portant au moins deux variants hétérozygotes, tronquant ou non. Cependant, aucun de nos patients restant ne remplissaient ces critères
+
+4. **Étape n°4** : La cause génétique responsable du phénotype de ces `r n_run_cil_high + n_run_grp1_moderate` patients ayant été identifiés, nous avons comme précédemment avec les patients *DNAH1* retirer l'intégralité de leurs variants des analyses ulterieures afin de réduire à nouveau la liste des variants et des gènes à analyser facilitant ainsi les analyses. Ainsi, ... variants sur ... gènes.     
+
+Pour résumer, cette première analyse nous a permis de mettre en évidence `r n_gene_grp1` gènes dont différents plusieurs preuves laissent supposer leur implication dans le phénotype MMAF de `r n_run_cil_high + n_run_grp1_moderate` de nos patients. Pamis ceux-ci, `r n_run_cil_high` portent un variant tronquant à l'état homozygote nous donnant ainsi une grande confiance dans le fait que le variant soit effectivement à l'origine du phénotype. Pour les `r n_run_grp1_moderate` autres patients, les variants faux-sens portés par ces patients laisse planer un doute, cependant, le fait que ........... (**Figure : **\@ref(fig:plotgrp1high) - **B**)
+
 
 \newpage
 
+```{r plotgrp1high, fig.height=7.2, dependson=c("vargrp1","localfunction"), fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
 
-```{r plotgrp1high, dependson="vargrp1", fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
-
-fig_name <- 'Expression tissulaire des gènes retenus'
-fig_description <- "Ici les gènes retenus sont les gènes présents dans la liste ciliome sur lesquels au moins deux patients portent un variant tronquant à l'état homozygote"
-
-
+fig_name <- "Analyse des gènes séléctionnés dans l'Analyse n°1"
+fig_description_A <- "Expression tissulaire des gènes retenus d'après les données du projet de transcriptome Illumina bodyMap"
+fig_description_B <- "Résumé de l'Analyse 1, quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique"
+fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
 fig_info <- paste0(fig_name, " : ", fig_description)
 
-plot_expression(gene_cil_high, mode = "percent", flip = TRUE) + 
+pA <- plot_expression(gene_cil_high, mode = "percent", flip = TRUE) + 
   xlab("") + 
   theme(legend.position = c(1,.5),
         legend.justification = c(1,.5))
+
+pB <- plot_resume_analysis(df_resume_grp1)
+
+plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
 
 
 ```
@@ -2089,7 +2188,7 @@ plot_expression(gene_cil_high, mode = "percent", flip = TRUE) +
 
 ```{r tabgrp1high, dependson="dfgrp1high", cache=TRUE}
 
-kable(df_bigmmaf_high %>% 
+kable(df_grp1_high %>% 
         filter(EVIDENCE != "Not in the list") %>% arrange(SYMBOL) %>%
         select(Gene = SYMBOL, Patient = RUN, Consequence, Ciliome = EVIDENCE),
       booktabs = TRUE,
@@ -2111,29 +2210,18 @@ kable(df_grp1_moderate %>% inner_join(df_canonical_transcripts, by = "Feature") 
 
 ```{r, dependson="dfresumegrp1", cache=TRUE}
 
-kable(df_resume_grp1 %>%
-        select(Gene = SYMBOL, `High evidence` = High, `Moderate evidence` = Moderate, Total = TOT),
-      booktabs = TRUE,
-      longtable = TRUE,
-      caption = "Résumé des gènes identifiés dans cette analyse")
-
+# kable(df_resume_grp1 %>%
+#         select(Gene = SYMBOL, `High evidence` = High, `Moderate evidence` = Moderate, Total = TOT),
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       caption = "Résumé des gènes identifiés dans cette analyse")
+# 
 
 ```
 
 \newpage
 
-```{r removegrp1, cache=TRUE}
-
-run_found <- c(run_found, run_cil_high, run_grp1)
-
-df_bigmmaf_filter3 <- df_bigmmaf_filter2 %>% 
-  filter(!(RUN %in% run_found))
-   
-df_bigmmaf_filter_het3 <- df_bigmmaf_filter_het2 %>% 
-  filter(!(RUN %in% run_found))
-
-
-```
+###### Analyse n° 2  
 
 ```{r dfgrp2high, dependson="removegrp1", cache=TRUE}
 
@@ -2263,21 +2351,18 @@ n_run_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(RUN) %>% nrow(
 ```
 
 
-Suite à cela, nous avons procéder de la même manière avec les patients restant, cette fois-ci sans nous limiter au gènes présent dans la liste ciliome. Nous avons ainsi pu identifier `r n_gene_grp2` gènes sur lesquels au moins 2 de nos patients restant et jusqu'à `r n_run_max_grp2` portaient un variant homozygote ayant un effet tronquant sur la protéine. Cela nous a permis d'obtenir une liste de `r n_run_grp2` nouveaux patients avec un candidat potentiel (**Table :** \@ref(tab:tabgrp2), **Figure :** \@ref(fig:plotgrp2) - **A**).  
 
-Parmis les gènes identifié, 3 se démarquent avec une forte expression testiculaire : *CFAP43*, *FSIP2* et *CCDC129* respectivement retrouvés mutés chez `r  n_run_cfap43`, `r n_run_fsip2`, et `r n_run_ccdc129` des `r n_run_grp2` patients séléctionnés. C'est pourquoi nous avons focalisé nos analyses sur ceux-ci. (**Table : **\@ref(tab:tabgrp2high), **Figure :** \@ref(fig:plotgrp2) - **B**).   
+Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents dans la liste cilliome**  mais sur lesquls on trouvait toujours **au moins deux** de nos patients présentant au moins 1 variant tronquant à l'état **homozygote**.
 
-L'analyse bibliographique du gène *FSIP2* révèle qu'une équipe a démontré en 2003 l'implication de ce gène dans la structure de la gaine fibreuse su flagelle spermatique confirmant que ce gène est un bon candidat pour expliquer le phénotype MMAF des `r n_run_fsip2` patients portant un variant homozygote sur celui-ci [@Brown2003]. 
+1. **Étape n°1** : Nous avons ainsi pu identifier `r n_gene_grp2` gènes sur lesquels au moins 2 de nos patients restant et jusqu'à `r n_run_max_grp2` portaient un variant homozygote ayant un effet tronquant sur la protéine. Cela nous a permis d'obtenir une liste de `r n_run_grp2` nouveaux patients avec un candidat potentiel (**Table :** \@ref(tab:tabgrp2), **Figure :** \@ref(fig:plotgrp2) - **A**).  Parmis les gènes identifié, 3 se démarquent avec une forte expression testiculaire : *CFAP43*, *FSIP2* et *CCDC129* respectivement retrouvés mutés chez `r  n_run_cfap43`, `r n_run_fsip2`, et `r n_run_ccdc129` des `r n_run_grp2` patients séléctionnés. C'est pourquoi nous avons focalisé nos analyses sur ceux-ci. (**Table : **\@ref(tab:tabgrp2high), **Figure :** \@ref(fig:plotgrp2) - **B**). L'analyse bibliographique du gène *FSIP2* révèle qu'une équipe a démontré en 2003 l'implication de ce gène dans la structure de la gaine fibreuse du flagelle spermatique confirmant que ce gène est un bon candidat pour expliquer le phénotype MMAF des `r n_run_fsip2` patients portant un variant homozygote sur celui-ci [@Brown2003]. 
 
-Ensuite, comme précédemment, nous avons rechercher les patients portant des variants non tronquant sur ces 3 gènes ainsi que ceux portant au moins deux variants hétérozygotes tronquant ou non. Cela nous a ainsi permis d'identifier `r n_run_grp2_moderate + n_run_grp2_low` nouveaux patients. Il faut cependant noter que parmis ceux-ci, certains portent de variant pour lesquels il est difficile d'affirmer avec certitude qu'ils sont responsable du phénotype. Le patients Ghs25 par exemple porte un variant homozygote chevauchant le gènes *CFAP43*. Cependant, le variant est un variant intronique situé dans la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait egallement être sans effet, or, il est difficile de le prédire à ce stade. De même pour le patient Ghs131, dont le variant faux-sens chevauchant le gène *FSIP2* qu'il porte est prédit comme *benign* par PolyPhen alors que SIFT ne fournit aucune prédiction pour celui-ci. Pour les patients Ghs40, Ghs92 et Ghs101, au delà du fait qu'il nous est impossible de savoir à ce stade si les deux variants hétérozygotes qu'ils portent impacte le même allèle ou bien deux allèles différents, tous portent des variant faux-sens sur le gène *FSIP2* là encore prédit pour la plupart comme sans effet par SIFT et / ou PolyPhen. Le patient Ghs132 en revanche semble plus intéréssant, en effet celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalege du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT (**Tables : **\@ref(tab:tabgrp2moderate) et \@ref(tab:tabgrp2low)).
+2. **Étapes n°2 et n°3** : La recherche de patients portant des variants homozygotes non tronquant sur ces 3 gènes ainsi que ceux portant au moins deux variants hétérozygotes tronquant ou non nous a permis d'identifier `r n_run_grp2_moderate + n_run_grp2_low` nouveaux patients. Il faut cependant noter que parmis ceux-ci, certains portent de variant pour lesquels il est difficile d'affirmer avec certitude qu'ils sont responsables du phénotype. Le patients Ghs25 par exemple porte un variant homozygote chevauchant le gènes *CFAP43*. Cependant, le variant est un variant intronique situé dans la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait également être sans effet, or, il est difficile de le prédire à ce stade. De même pour le patient Ghs131, dont le variant faux-sens chevauchant le gène *FSIP2* qu'il porte est prédit comme *benign* par PolyPhen alors que SIFT ne fournit aucune prédiction pour celui-ci. Pour les patients Ghs40, Ghs92 et Ghs101, au delà du fait qu'il nous est impossible de savoir à ce stade si les deux variants hétérozygotes qu'ils portent impacte le même allèle ou bien deux allèles différents, tous portent des variant faux-sens sur le gène *FSIP2* là encore prédit pour la plupart comme sans effet par SIFT et / ou PolyPhen. Le patient Ghs132 en revanche semble plus intéréssant, puisque celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalage du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT (**Tables : **\@ref(tab:tabgrp2moderate) et \@ref(tab:tabgrp2low)).
 
-En séléctionnant les gènes sur lesquels au moins deux patients portaient au moins un variant tronquant homozygote nous avons identifié `r n_gene_grp2` gènes différents. En nous limitant à ceux ayant une forte expreesion testiculaire nous avons conservé de cette liste seulement `r n_gene_grp2_reduce` d'entre eux retrouvés mutés chez `r n_run_grp2_reduce` de nos patients. En élargissant ensuite nos recherches aux patients portant des variants homozygotes non tronquant et au moins deux hétérozygote tronquant ou non sur au moins un de ces `r n_gene_grp2_reduce` gène, nous avons pu identifier `r n_run_grp2_moderate + n_run_grp2_low` nouveaux patients. Cependant, au vus de l'insertitude du lien  entre les variants de ces `r n_run_grp2_moderate + n_run_grp2_low` derniers patients et leur phénotype, des analyses complémentaires sont nécéssaires (**Table : **\@ref(tab:tabresumegrp2)).
+3. **Étape n°4** : Dans cette analyse seuls `r n_run_grp2_reduce` les patients identifiés au cours de l'étape n°1 présentaient des arguments génétique suffisement convaiquant pour affirmer avec certitude qu'ils étaient responsables de leur phénotype MMAF. Ainsi, seuls leurs données furent retirées pour les analyses ulterieures. POur les `r n_run_grp2_moderate + n_run_grp2_low` des analyses de biologie moléculaire sont nécéssaires afin de pouvoir déterminés siles variants mis en évidences dans les étape n°3 et 4 sont bien responsable de leur phénotype. En attendant, leurs données sont conservés afin de voir si les analyses ulterieures ne permettraient pas d'identifier un meilleur candidat pour ces patients.  
 
-La cause génétique du phénotype MMAF ayant cependant été déterminée pour `r n_run_grp2_reduce` des patiens grâce à ce `r n_gene_grp2_reduce` gènes, leurs données aussi furent retirée des analyses ulterieure réduisant ainsi notre liste à `r n_var_after_grp2` variants différents chevauchant `r n_gene_after_grp2` gènes chez `r n_run_after_grp2` patients. Les données des `r n_run_grp2_moderate + n_run_grp2_low` patients pour lesquels la cause est incertaine furent conservés afin de voir si un meilleur candidat pouvait ressortir par la suite.
-
+Dans cette Analyse, nous avons pu déterminer avec certitude la cause génétique du phénotype MMAF de seulement `r n_run_grp2_reduce` patients, c'est à dire ceux identifiés au cours de l'étape n°1. Pour `r n_run_grp2_moderate + n_run_grp2_low` autres patients des analyses complémentaires sont nécéssaires. Cela nous a tout de même permis de pouvoir impliquer `r n_gene_grp2_reduce` nouveaux gènes au phénotype MMAF (**Figure :** \@ref(fig:plotresumegrp2)). 
 
 \newpage  
-
 
 ```{r plotgrp2, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.5, dependson="dfgrp2", cache=TRUE}
 
@@ -2346,19 +2431,23 @@ kable(df_grp2_low %>%
 
 ```
 
-```{r tabresumegrp2, dependson="dfresumegrp2", cache=TRUE}
 
-kable(df_resume_grp2 %>%
-        select(Gene = SYMBOL, `High evidence` = High, `Moderate evidence` = Moderate,`Low Evidence` = Low, Total = TOT),
-      booktabs = TRUE,
-      longtable = TRUE,
-      caption = "Résumé des gènes identifiés dans cette analyse")
+
+
+```{r plotresumegrp2, fig.cap=fig_info,fig.scap=fig_name, fig.height=5, dependson="dfgrp2", cache=TRUE}
+
+fig_name <- "Résumé des gènes identifiés au cours de l'analyse n°2"
+fig_description <- "Quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique"
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+plot_resume_analysis(df_resume_grp2)
 
 
 ```
 
 \newpage
 
+###### Analyse n°3  
 
 
 ```{r dfgrp3high, cache=TRUE}
@@ -2374,7 +2463,7 @@ df_grp3_high <- df_bigmmaf_filter4 %>%
 
 ```
 
-```{r vargrp3high}
+```{r vargrp3high, cache=TRUE, dependson="dfgrp3high"}
 
 gene_grp3 <- df_grp3_high %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
 n_gene_grp3 <- gene_grp3 %>% length
@@ -2418,7 +2507,6 @@ n_run_grp3_moderate <- df_grp3_moderate %>% distinct(RUN) %>% nrow
 
 
 ```
-
 
 ```{r dfgrp3low, cache=TRUE}
 
@@ -2475,41 +2563,49 @@ n_run_after_grp3 <- df_bigmmaf_filter5 %>% ungroup() %>% distinct(RUN) %>% nrow(
 
 ```
 
-En procédent de la même manière que les fois précédente, nous avons cette fois isolé les gènes présent dans la base de données ciliome sur lesquels *un seul* patient portait une mutation homozygote tronquante. Nous avons ainsi identifié `r n_run_grp3_high` patients tous porteurs d'un variant homozygote tronquant sur un des `r n_gene_grp3` gène suivant : `r gene_grp3`.  Cependant, l'analyse de l'expression testiculaire de ces gènes nous a insiter à n'en garder que `r gene_grp3_reduce` d'entre eux : `r gene_grp3_reduce` (**Table :** \@ref(tab:tabgrp3high), **Figure :** \@ref(fig:plotgrp3)).
+Dans cette un troisième analyse,  nous avons séléctionné à nouveau les gènes **présents dans la liste cilliome** en conservanrt cett fois-ci ceux sur lesquels **un seul** de nos patients présentaient au moins 1 variant tronquant à l'état **homozygote**.  
 
-En effet, *CCDC65* présente une forte et quasi exclusive expression testiculaire de plus, la protéine NYD-SP28 (ancien nom de CCDC65) avait déjà caractérisé comme faisant partie du flagelle spermatique [@Zheng2006]. En revanche *C6orf118* présente une forte expression à la fois dans le testicule mais égallement dans le poumoun de plus, ce gène a récemment été décrit comme étant associé au phénotype de tuberculose pulmonaire [@Hong2017]. Cependant cela n'est en rien contradictoire avec le phénotype MMAF du patient, le poumon comprenant de nombreuse cellules ciliées, notamment au niveau de l'épithélium respiratoire, il n'est donc pas surprenant que des gènes du flagelle aient égallement une fonction au sein d'autres organes ciliés.
+1. **Étape n°1** : La recherche de variants homozygote tronquant nous a permis d'identifier `r n_run_grp3_high` patients d'un variant sur un des `r n_gene_grp3` gène suivant : `r gene_grp3`.  Cependant, l'analyse de l'expression testiculaire de ces gènes nous a insitée à n'en garder que `r gene_grp3_reduce` d'entre eux : `r gene_grp3_reduce` (**Table :** \@ref(tab:tabgrp3high), **Figure :** \@ref(fig:plotgrp3) - **A**). En effet, *CCDC65* présente une forte et quasi exclusive expression testiculaire de plus, la protéine NYD-SP28 (ancien nom de CCDC65) avait déjà caractérisé comme faisant partie du flagelle spermatique [@Zheng2006]. En revanche *C6orf118* présente une forte expression à la fois dans le testicule mais égallement dans le poumoun de plus, ce gène a récemment été décrit comme étant associé au phénotype de tuberculose pulmonaire [@Hong2017]. Cependant cela n'est en rien contradictoire avec le phénotype MMAF du patient, le poumon comprenant de nombreuse cellules ciliées, notamment au niveau de l'épithélium respiratoire, il n'est donc pas surprenant que des gènes du flagelle aient égallement une fonction au sein d'autres organes ciliés.  
 
-Nous avons ensuite cherché si des patients présentaient des variants homozygotes non tronquants sur au moins 1 de ces `r n_gene_grp3_reduce` gènes cependant aucun ne remplissait ces critères. En revanche, `r n_run_grp3_low` de nos patients portait deux variants sur le gene *C6orf118* à l'état hétérozygote. Ces deux variants étant des faux-sens, le premier étant prédit *probably damaging* par PolyPhen et *tolerated low confidence
-* par SIFT tandis que le second est prédit *possibly damaging* et *tolerated*, il est dificile de se prononcer quant à l'effet délétère de ces deux variants (**Table :** \@ref(tab:tabgrp3low)). 
+2. **Étape n°2** : Nous avons ensuite cherché si des patients présentaient des variants homozygotes non tronquants sur au moins 1 de ces `r n_gene_grp3_reduce` gènes cependant aucun ne remplissait ces critères.  
 
-Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait un variant tronquant à l'état homozygote nous a permis d'identifié `r n_gene_grp3` parmis lesquels `r n_gene_grp3_reduce` présentaient une forte expression testiculaire. L'analyse de ces `r n_gene_grp3_reduce` derniers gènes nous a permis d'identifier `r n_run_grp3_reduce` patients chacun portant un variant tronquant homozygote sur l'un de ces `r n_gene_grp3_reduce` gènes. Étendre notre recherche à la fois aux variants tronquant ainsi qu'aux hétérozygote composites nous a permis d'identifier `r n_run_grp3_moderate + n_run_grp3_low` patient pour qui deux faux-sens hétérozygotes sur le gène *C6orf118* pourraient expliquer le phénotype. Cependent, compte tenu de l'insertitude de ....., les données de ce patient ont été gardées dans les analyses ulterieures contrairement à celles des `r n_gene_grp3_reduce` patients ayant des variants homozygotes tronquant.  
+3. **Étape n°3** : La recherche de potentiels hétérozygotes composites s'est elle révélée plus fructueuse puisque `r n_run_grp3_low` de nos patients portait deux variants faux-sens sur le gene *C6orf118* à l'état hétérozygote. Le premier de ces variants étant prédit *probably damaging* par PolyPhen et *tolerated low confidence* par SIFT tandis que le second est prédit *possibly damaging* et *tolerated*, il est dificile de se prononcer quant à l'effet délétère de ces deux variants (**Table :** \@ref(tab:tabgrp3low)). 
+
+4. **Étape n°4** : Comme pour l'analyse n°2, nous avons ici décidé de ne retirer de notre liste de variant que ceux présents chez les patients identifiés au cours de l'étape n°1.  Cela nous a ainsi permis de réduire à nouveau cette liste arrivant ainsi à `r n_var_after_grp3` variants cheveauchant `r n_gene_after_grp3` gènes différents.  
+
+Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait un variant tronquant à l'état homozygote nous a permis d'identifié `r n_gene_grp3` parmis lesquels `r n_gene_grp3_reduce` présentaient une forte expression testiculaire. L'analyse de ces `r n_gene_grp3_reduce` derniers gènes nous a permis d'identifier `r n_run_grp3_reduce` patients chacun portant un variant tronquant homozygote sur l'un de ces `r n_gene_grp3_reduce` gènes. Étendre notre recherche à la fois aux variants tronquant ainsi qu'aux hétérozygote composites nous a permis d'identifier `r n_run_grp3_moderate + n_run_grp3_low` patient pour qui deux faux-sens hétérozygotes sur le gène *C6orf118* pourraient expliquer le phénotype (**Figure :** \@ref(fig:plotgrp3) - **B**).   
 
 \newpage  
 
 
-```{r plotgrp3, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.5, dependson="dfgrp2", cache=TRUE}
+```{r plotgrp3, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.2, dependson=c("localfunction","vargrp3high"), cache=TRUE}
 
-fig_name <- 'Epression tissulaire des gènes : TODO'
-fig_description <- "D'après les données du projet de transcriptome Illumina bodyMap"
-
+fig_name <- "Analyse des gènes séléctionnés dans l'Analyse n°3"
+fig_description_A <- "Expression tissulaire des gènes retenus dans cette analyse d'après les données du projet de transcriptome Illumina bodyMap"
+fig_description_B <- "Résumé de l'Analyse 3, quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique"
+fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
 fig_info <- paste0(fig_name, " : ", fig_description)
-plot_expression(gene_grp3,"percent",TRUE) +
+
+
+pA <- plot_expression(gene_grp3,"percent",TRUE) +
   xlab("") +
   theme(legend.position = c(1,0),
         legend.justification = c(1,0))
 
+pB <- plot_resume_analysis(df_resume_grp3)
 
+plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
 
 ```
 
 \newpage
 
-```{r tabgrp3high, dependson="dfgrp3", cache=TRUE}
+```{r tabgrp3high, dependson="dfgrp3high", cache=TRUE}
 
 kable(df_grp3_high %>% 
         arrange(SYMBOL) %>%
-        inner_join(df_canonical_transcripts, by = "Feature") %>%
-        select(Gene = SYMBOL, Patient = RUN, Consequence),
+        select(Gene = SYMBOL, Patient = RUN, Consequence) %>%
+          distinct(Gene, Patient, Consequence),
       booktabs = TRUE,
       longtable = TRUE,
       caption = "List des gènes sur lesquels au moins deux patients portent une mutation tronquante non présents dans la liste ciliome ")
@@ -2532,33 +2628,43 @@ kable(df_grp3_low %>%
 
 ```{r tabresumegrp3, dependson="dfresumegrp3", cache=TRUE}
 
-kable(df_resume_grp3 %>%
-        select(Gene = SYMBOL, `High evidence` = High, `Low Evidence` = Low, Total = TOT),
-      booktabs = TRUE,
-      longtable = TRUE,
-      caption = "Résumé des gènes identifiés dans cette analyse")
+# kable(df_resume_grp3 %>%
+#         select(Gene = SYMBOL, `High evidence` = High, `Low Evidence` = Low, Total = TOT),
+#       booktabs = TRUE,
+#       longtable = TRUE,
+#       caption = "Résumé des gènes identifiés dans cette analyse")
 
 
 ```
 
 \newpage
 
+###### Analyse n°4  
+
 ```{r dfgrp4high, cache=TRUE}
 
 
 df_grp4_high <- df_bigmmaf_filter5 %>% 
-    group_by(SYMBOL, Feature) %>%
+  inner_join(df_canonical_transcripts, by = "Feature") %>%
+  group_by(SYMBOL, Feature) %>%
   mutate(N_RUN = n_distinct(RUN)) %>% 
   filter(N_RUN == 1,
     IMPACT == "HIGH",
          is.na(EVIDENCE)) %>% 
-  ungroup()
+  ungroup() 
+  mutate(SPLIT = (row_number() / 9) %>% floor) 
+
+
+
+
+retrieve_exp(gene_grp4)%>% filter(Tissues == "testis") %>% arrange(desc(P_Expression)) %>% View
+
 
 ```
 
 ```{r vargrp4high}
 
-gene_grp4 <- df_grp4_high %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
+gene_grp4 <- df_grp4_high %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]] 
 n_gene_grp4 <- gene_grp4 %>% length
 
 run_grp4_high <- df_grp4_high %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
@@ -2586,52 +2692,18 @@ n_run_grp4_high <- run_grp4_high %>% length
 
 \newpage
 
-```{r plotfilterbigmmaf2, warning=FALSE, fig.height=7, fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
-
-fig_name <- 'TODOOOOOOOOOOOOOOOOOO'
-fig_description_general <- "Chaque couleur définit une classe de la liste des gènes du cilliome décrit dans [@Ivliev2012]. Vert = *Strong evidence from previous studies* (*Strong*), Orange = *Weak evidence from previous studies* (*Weak*), rouge = *No evidence from previous studies* (*Novel*), bleu = Non présent dans la liste"
-fig_description_A <- "**A** : Quantification du nombre de gène ayant passé les filtres au sein des 3 classes de la liste des gènes du cilliome"
-fig_description_B <- "**B** : TODOOOOOO : Besoin d'aide pour le nom de l'axe des Y !!!!!"
-
-fig_description <- paste(fig_description_general, fig_description_A, fig_description_B, sep = ". ")
+Pour finir nous avons dans cette analyse 
 
 
-fig_info <- paste0(fig_name, " : ", fig_description)
 
-# color from Set1 palette : 
-# #4DAF4A = Green
-# #FF7F00 = Orange
-# #E41A1C = Red
-# #377EB8 = Blue
 
-fill_A <- c("#4DAF4A", "#FF7F00", "#E41A1C")
-order_A <- c("Strong", "Weak", "Novel")
 
-fill_B <- c("#4DAF4A", "#FF7F00", "#E41A1C", "#377EB8")
-order_B <- c("Strong", "Weak", "Novel", "Not in the list")
-
-pA <- ggplot(df_bigmmaf_genes_distinct2, aes(EVIDENCE)) +
-  geom_bar(aes(fill = EVIDENCE)) +
-  geom_text(stat='count',aes(label= ..count..), size = 5, vjust = -.25) + 
-  scale_x_discrete(limits = order_A) + 
-  ylab("Nb of gene") + 
-  xlab("Evidence") + 
-  scale_fill_manual(guide = "none", limits = order_A, values = fill_A, breaks = order_A)  +
-  theme(axis.title.x = element_blank())
-
-pB <- ggplot(df_bigmmaf_genes_resume2, aes(N_RUN, N_GENE)) + 
-  geom_col(aes(fill = factor(EVIDENCE, levels = (order_B)))) +
-  scale_x_reverse(breaks = c(2:15)) + 
-  ylab("Nb of gene") + 
-  coord_flip() + 
-  scale_fill_manual(name = "Evidence", limits = order_B, values = fill_B, breaks = order_B) + 
-  theme(legend.position = "bottom")
-
-# plot_grid(pA, pB, labels = c("A","B"), ncol = 1)
-
-```
 
 \newpage
+
+
+
+
 
 Cette approche nous a permis de rapidement identifier ... nouveaux acteurs potentiels pour le phénotype MMAF impliquant ... de nos patients qui portaient tous au moins une mutation homozygote sur l'un de ces gènes. Comme précédemment nous avons ensuite cherché des éventuels hétérozygotes composites nous permettant ainsi mettant ainsi en évidence ... patients portant au moins deux variants hétérozygotes différents sur un de ces gènes. 
 
