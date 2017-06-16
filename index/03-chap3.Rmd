@@ -2312,6 +2312,7 @@ run_ica1_high <- df_grp2_high %>% gene_to_run("ICA1")
 run_trav26_high <- df_grp2_high %>% gene_to_run("TRAV26-1")
 run_ica1_trav26_high <- df_grp2_high %>% gene_to_run(c("ICA1", "TRAV261"))
 run_baz1a_high <- df_grp2_high %>% gene_to_run("BAZ1A")
+run_naca_high <- df_grp2_high %>% gene_to_run("NACA")
 
 n_run_cfap43_high <- run_cfap43_high %>% length
 n_run_fsip2_high <- run_fsip2_high %>% length
@@ -2321,6 +2322,7 @@ n_run_ica1_high <- run_ica1_high %>% length
 n_run_trav26_high <- run_trav26_high %>% length
 n_run_ica1_trav26_high <- run_ica1_trav26_high %>% length
 n_run_baz1a_high <- run_baz1a_high %>% length
+n_run_naca_high <- run_naca_high %>% length
 
 ```
 
@@ -2435,8 +2437,7 @@ Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents
 
 6. **_CCDC129_** : Ce gène est retrouvé muté à l'état homozygote chez `r n_run_ccdc129_high` patients porteur du même indel, non repertorié dans les bases de données, causant un décalage du cadre de lecture. On peut égallement constate que ce gène possède une expression testiculaire forte et exclusive faisant ainsi de ce gène un bon candidat malgré une littérature pauvre à son sujet.   
 
-
-7. **_NACA_** :  
+7. **_NACA_** : `r n_run_naca_high` patients paratagent le même variant homozygote causant un décalage du cadre de lecture sur le gène *NACA*. On peut noter que les patient *Ghs37*  et *Ghs37* portaient porteur respectifs de variant homozygote tronquant sur les gène *CCDC146* et *ARMC2* portaient égallement ce même variant. L'ensemble de ces patients provenant du même projet de séquençage (Strasbourg 2012), cela laisse supposer que comme pour *SART3*, ce variant est artefactuel. On peut dailleur noter que le patient *Ghs41* était lui aussi porteur du variant sur *SART3* renforçant ainsi l'hypothèse de l'erreur de séquençage. Pour ces raison, ce gène n'a pas été retenu en tant que candidat.
 
 
 
