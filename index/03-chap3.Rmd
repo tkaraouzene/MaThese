@@ -2313,7 +2313,7 @@ run_ccdc129_high <- df_grp2_high %>% gene_to_run("CCDC129")
 n_run_cfap43_high <- run_cfap43_high %>% length
 n_run_fsip2_high <- run_fsip2_high %>% length
 n_run_ccdc129_high <- run_ccdc129_high %>% length
-
+n_run_sart3_high <- df_grp2_high %>% gene_to_run("SART3") %>% length
 ```
 
 ```{r dfgrp2reduce, dependson="dfgrp2high", cache=TRUE}
@@ -2380,13 +2380,6 @@ n_run_fsip2_low <- run_fsip2_low %>% length
 
 ```
 
-
-
-
-
-
-
-
 ```{r dfresumegrp2, dependson=c("dfgrp2highreduce","dfgrp2moderate","dfgrp2low"), cache=TRUE}
 
 df_resume_grp2 <- bind_rows(df_grp2_high %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
@@ -2430,12 +2423,13 @@ Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents
 1. **_CFAP43_** : `r n_run_cfap43_high + n_run_cfap43_moderate + n_run_cfap43_low` patients portent au moins 1 variant sur le gène *CFAP43*. Parmis ceux-ci, les patients `r run_cfap43_high %>% paste_vector("itallic")` portent une mutation tronquante à l'état homozygote soit absente des bases de données soit présentent avec une très faible fréquence. Le patient `r run_cfap43_moderate %>% paste_vector("itallic")` lui porte un variant homozygote intronique au situé au sein de la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait également être sans effet, or, il est difficile de le prédire à ce stade. (TODO :: faire tourner un algo de prédiction). Le patient `r run_cfap43_low %>% paste_vector("itallic")` en revanche semble plus intéréssant, puisque celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalage du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT. Malgré une expression ubiquitaire (**Figure : **\@ref(fig:plotgrp2) - **B**), le nombre important de patients portant des variant sur celui-ci, notamment `r n_run_cfap43_high` potant des variants tronquants homozygote font de ce gène un bon candidat.  
 2. **_FSIP2_** :  Comme pour le gène *CFAP43*, `r n_run_cfap43_high + n_run_cfap43_moderate + n_run_cfap43_low` de nos patients portaient 1 variant sur le gène *FSIP2* cependant pour seulement `r n_run_fsip2_high` d'entre eux ce variant était tronquant à l'état homozygote.  En effet, les patients `r run_fsip2_high %>% paste_vector("itallic")` porte tout deux un indel entrainant un décalage du cadre de lecture dont aucun n'est répertorié dans les bases de données. Le patient `r run_fsip2_moderate %>% paste_vector("itallic")` porte lui un faux-sens homozygote prédit comme *benign* par PolyPhen. `r n_run_fsip2_low` autres patients portent au moins deux variants hétérozygote sur ce gène, cependant la plupart sont des faux-sens prédit égallement comme *benign* par PolyPhen. Bien que l'effet sur la protéine des variants portés par `r n_run_fsip2_moderate + n_run_fsip2_low` des `r n_run_fsip2_high + n_run_fsip2_moderate + n_run_fsip2_low` patients portant au moins un variant sur ce gène soit incertains, les variants tronquant portés par les patients `r run_fsip2_high %>% paste_vector("itallic")` ainsi que saforte expression testiculaire et le fait que son implication dans la structure de la gaine fibreuse du flagelle spermatique ait été montrée en 2003 [@Brown2003] font de ce gène un excellent candidat pour expliquer le phénotype d'au moins `r n_run_fsip2_high` patients. Pour les autres, des analyses fonctionelles seront nécéssaires.  
 
-3. **_SART3_** :  
+3. **_SART3_** : Un total de `r n_run_sart3_high` patients portaient **le même** variants homozygote. Ces patients étant tous issus du même projet de séquençage (Strasbourg 2012) ce variant pourrait parfaitement être un artefact dû au protocol de séquençage. Cette hypothèse est d'autant plus probable que l'ensemble des patients séquencés dans ce projet présentaient un phénotype MMAF, ainsi, aucun des individus de notre cohorte contrôle n'a donc pu servir à filtrer les variants artefactuels issus de ce projet. De plus, on peut constater que l'expression tissulaire de ce gène est ubiquitaire. Pour ces différentes raisons, ce gène n'a pas été retenu comme candidat dans nos analyses.
 4. **_ICA1_** :  
 5. **_TRAV26-1_** :  
 6. **_BAZ1A_** :  
 7. **_CCDC129_** :  
 8. **_NACA_** :  
+
 
 
 
