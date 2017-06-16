@@ -2386,7 +2386,6 @@ df_resume_grp2 <- bind_rows(df_grp2_high %>% group_by(RUN, SYMBOL) %>% summarise
 
 ```
 
-
 ```{r dfgrp2retained, dependson="dfgrp2high", cache=TRUE}
 
 gene_grp2_retained <- c("CFAP43", "CCDC129","FSIP2","BAZ1A")
@@ -2402,7 +2401,7 @@ df_grp2_low_retained <- df_grp2_low %>%
 
 ```
 
-```{r vargrp2reduce, cache=TRUE, dependson="dfgrp2reduce"}
+```{r vargrp2reduce, cache=TRUE, dependson="dfgrp2retained"}
 
 n_gene_grp2_retained <- gene_grp2_retained %>% length
 
@@ -2417,7 +2416,7 @@ n_run_grp2_low_retained <- run_grp2_low_retained %>% length
 
 ```
 
-```{r removegrp2}
+```{r removegrp2, cache=TRUE, dependson="dfgrp2retained"}
 
 run_found <- c(run_found, run_grp2_high_retained)
 
@@ -2476,30 +2475,6 @@ plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
 
 ```
 
-```{r plotgrp22, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.5, dependson="dfgrp2", cache=TRUE}
-
-# fig_name <- 'TODOOOOOOOOOOOOOOOOOO'
-# fig_description_general <- "Dans ces deux graphiques, chaque couleur représente un gène"
-# fig_description_A <- "**A** : Quantification du nombre d'individus présentant un variant homozygote ayant un effet tronquant pour chacun des gènes retrouvés présent dans la liste des gènes du ciliome et retouvés avec un variant tronquant homozygote chez au moins deux patients"
-# fig_description_B <- "**B** : Expression tissulaire des gènes précédents d'après les données du projet de transcriptome Illumina bodyMap"
-# fig_description <- paste(fig_description_general, fig_description_A, fig_description_B, sep = ". ")
-# 
-# fig_info <- paste0(fig_name, " : ", fig_description)
-# 
-# pA <- ggplot(df_distinct_gene_grp2_high, aes(reorder(SYMBOL, -N_RUN), N_RUN)) + 
-#   geom_col(aes(fill = SYMBOL)) + 
-#   theme(axis.title.x = element_blank()) +
-#   scale_fill_brewer(palette = "Set1", guide = "none") + 
-#   ylab("Nb of individuals")
-# 
-# pB <- plot_expression(gene_grp2,"percent",TRUE) + 
-#   xlab("") +
-#   theme(legend.position = c(1,0),
-#         legend.justification = c(1,0))
-# 
-# plot_grid(pA,pB, rel_heights = c(.4,.6), labels = c("A","B"), ncol = 1)
-```
-
 \newpage  
 
 ```{r tabgrp2high, dependson="dfgrp2", cache=TRUE}
@@ -2521,6 +2496,9 @@ kable(tab_modelow(df_grp2_moderate),
 
 ```
 
+\newpage
+
+\blandscape
 
 ```{r tabgrp2low, dependson="dfgrp2low", cache=TRUE}
 
@@ -2532,50 +2510,20 @@ kable(tab_modelow(df_grp2_low),
 
 ```
 
-\newpage
-
-```{r tabgrp2low22, dependson="dfgrp2low", cache=TRUE}
-
-# kable(df_grp2_low %>% 
-#         inner_join(df_canonical_transcripts, by = "Feature") %>%
-#         select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
-#         mutate(SIFT = na.replace(SIFT, "No prediction"),
-#                PolyPhen = na.replace(PolyPhen, "No prediction")),
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       caption = "Liste des patients portantau moins deux variants hétérozygotes sur un des gènes suivant : TODOOOOOO")
-
-
-```
-
-
-
-
-```{r plotresumegrp2, fig.cap=fig_info,fig.scap=fig_name, fig.height=5, dependson="dfgrp2", cache=TRUE}
-
-fig_name <- "Résumé des gènes identifiés au cours de l'analyse n°2"
-fig_description <- "Quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique"
-fig_info <- paste0(fig_name, " : ", fig_description)
-
-plot_resume_analysis(df_resume_grp2)
-
-
-```
+\elandscape
 
 \newpage
 
 ###### Analyse n°3  
 
-
-```{r dfgrp3high, cache=TRUE}
-
+```{r dfgrp3high, dependson="removegrp2", cache=TRUE}
 
 df_grp3_high <- df_bigmmaf_filter4 %>% 
   group_by(SYMBOL, Feature) %>%
   mutate(N_RUN = n_distinct(RUN)) %>% 
   filter(N_RUN == 1) %>% 
   filter(IMPACT == "HIGH",
-         !is.na(EVIDENCE)) %>% 
+         EVIDENCE != "Not in the list") %>% 
   ungroup()
 
 ```
@@ -2587,6 +2535,11 @@ n_gene_grp3 <- gene_grp3 %>% length
 
 run_grp3_high <- df_grp3_high %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
 n_run_grp3_high <- run_grp3_high %>% length
+
+
+run_c6orf118_high <- df_grp3_high %>% gene_to_run("C6orf118")
+n_run_c6orf118_high <- run_c6orf118_high %>% length
+
 
 ```
 
@@ -2605,40 +2558,42 @@ n_gene_grp3_reduce <- gene_grp3_reduce %>% length
 run_grp3_reduce <- df_grp3_high_reduce %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
 n_run_grp3_reduce <- run_grp3_reduce %>% length
 
-
 ```
 
-```{r dfgrp3moderate, cache=TRUE}
+```{r dfgrp3moderate, dependson="removegrp2", cache=TRUE}
 
 
 df_grp3_moderate <- df_bigmmaf_filter4 %>% 
   filter(IMPACT != "HIGH",
-    SYMBOL %in% gene_grp3_reduce) %>% 
+         SYMBOL %in% gene_grp3) %>% 
   ungroup()
 
 ```
 
-```{r vargrp3moderate}
+```{r vargrp3moderate, dependson="dfgrp3moderate", cache=TRUE}
 
 n_run_grp3_moderate <- df_grp3_moderate %>% distinct(RUN) %>% nrow
 
 
 ```
 
-```{r dfgrp3low, cache=TRUE}
-
+```{r dfgrp3low, dependson="removegrp2", cache=TRUE}
 
 df_grp3_low <- df_bigmmaf_filter_het4 %>% 
   filter(N_VAR_PER_RUN_PER_GENE > 1,
-         SYMBOL %in% gene_grp3_reduce) %>% 
+         SYMBOL %in% gene_grp3) %>% 
   ungroup()
 
 ```
 
-```{r vargrp3low, cache=TRUE}
+```{r vargrp3low, dependson="dfgrp3low", cache=TRUE}
 
 n_run_grp3_low <- df_grp3_low %>% distinct(RUN) %>% nrow
 gene_grp3_low <- df_grp3_low %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]] 
+
+
+run_c6orf118_low <- df_grp3_low %>% gene_to_run("C6orf118")
+n_run_c6orf118_low <- run_c6orf118_low %>% length
 
 
 
@@ -2646,7 +2601,7 @@ gene_grp3_low <- df_grp3_low %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]
 
 ```{r dfresumegrp3, dependson=c("dfgrp3highreduce","dfgrp3moderate","dfgrp3low"), cache=TRUE}
 
-df_resume_grp3 <- bind_rows(df_grp3_high_reduce %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
+df_resume_grp3 <- bind_rows(df_grp3_high %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
                             df_grp3_moderate %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Moderate"),
                             df_grp3_low %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Low")) %>% 
   group_by(TRUST, SYMBOL) %>%
@@ -2677,11 +2632,21 @@ n_run_after_grp3 <- df_bigmmaf_filter5 %>% ungroup() %>% distinct(RUN) %>% nrow(
 
 ```
 
-Dans cette un troisième analyse,  nous avons séléctionné à nouveau les gènes **présents dans la liste cilliome** en conservanrt cett fois-ci ceux sur lesquels **un seul** de nos patients présentaient au moins 1 variant tronquant à l'état **homozygote**.  
+Dans cette un troisième analyse,  nous avons séléctionné à nouveau les gènes **présents dans la liste cilliome** en conservanrt cett efois-ci ceux sur lesquels **un seul** de nos patients présentaient au moins 1 variant tronquant à l'état **homozygote**. Les `r n_gene_grp3` gènes suivant correspondaient à ces critères : `r gene_grp3 %>% paste_vector("itallic")` tous présentant de fortes preuves indiquant leur appartenancez au ciliome humain. 
 
-1. **Étape n°1** : La recherche de variants homozygote tronquant nous a permis d'identifier `r n_run_grp3_high` patients d'un variant sur un des `r n_gene_grp3` gène suivant : `r gene_grp3`.  Cependant, l'analyse de l'expression testiculaire de ces gènes nous a insitée à n'en garder que `r gene_grp3_reduce` d'entre eux : `r gene_grp3_reduce` (**Table :** \@ref(tab:tabgrp3high), **Figure :** \@ref(fig:plotgrp3) - **A**). En effet, *CCDC65* présente une forte et quasi exclusive expression testiculaire de plus, la protéine NYD-SP28 (ancien nom de CCDC65) avait déjà caractérisé comme faisant partie du flagelle spermatique [@Zheng2006]. En revanche *C6orf118* présente une forte expression à la fois dans le testicule mais égallement dans le poumoun de plus, ce gène a récemment été décrit comme étant associé au phénotype de tuberculose pulmonaire [@Hong2017]. Cependant cela n'est en rien contradictoire avec le phénotype MMAF du patient, le poumon comprenant de nombreuse cellules ciliées, notamment au niveau de l'épithélium respiratoire, il n'est donc pas surprenant que des gènes du flagelle aient égallement une fonction au sein d'autres organes ciliés.  
+1. **_C6orf118_** :  Ce gène a été retrouvémuté à l'état homozygote chez le patient `r run_c6orf118_high %>% paste_vector("itallic")` qui portait une substitution entrainant la formation d'un codon stop prématuré. Il faut noter que ce même patient portait égallement des variants homozygotes tronquant sur les gènes *SART3*, *TRAV26-1*, et *ICA1* cependant la forte expression testiculaire de ce gène en fait un meilleur candidat. Le patient `r run_c6orf118_low %>% paste_vector("itallic")` quant à lui porte deux variants faux-sens hétérozygote Le premier étant prédit probably *damaging* par PolyPhen et *tolerated low confidence* par SIFT tandis que le second est prédit *possibly damaging* et *tolerated*, il est dificile de se prononcer quant à l’effet délétère de ces deux variants sans effectuer d'analyses fonctionelles. Il faut noter que *C6orf118* présente une forte expression dans le poumoun. De plus, ce gène a récemment été décrit comme étant associé au phénotype de tuberculose pulmonaire [@Hong2017]. Cependant cela n'est en rien contradictoire avec le phénotype MMAF de ces `r n_run_c6orf118_high + n_run_c6orf118_low` patients, le poumon comprenant de nombreuse cellules ciliées, notamment au niveau de l'épithélium respiratoire, il n'est donc pas surprenant que des gènes du flagelle aient égallement une fonction au sein d'autres organes ciliés.
 
-2. **Étape n°2** : Nous avons ensuite cherché si des patients présentaient des variants homozygotes non tronquants sur au moins 1 de ces `r n_gene_grp3_reduce` gènes cependant aucun ne remplissait ces critères.  
+
+
+2. **_C21orf59_** :  
+3. **_CCDC65_** :  En effet, *CCDC65* présente une forte et quasi exclusive expression testiculaire de plus, la protéine NYD-SP28 (ancien nom de CCDC65) avait déjà caractérisé comme faisant partie du flagelle spermatique [@Zheng2006]  
+4. **_SPEF2_** :  
+
+
+
+
+
+1. **Étape n°1** : La recherche de variants homozygote tronquant nous a permis d'identifier `r n_run_grp3_high` patients d'un variant sur un des `r n_gene_grp3` gène suivant : `r gene_grp3`.  Cependant, l'analyse de l'expression testiculaire de ces gènes nous a insitée à n'en garder que `r gene_grp3_reduce` d'entre eux : `r gene_grp3_reduce` (**Table :** \@ref(tab:tabgrp3high), **Figure :** \@ref(fig:plotgrp3) - **A**). . En revanche .  
 
 3. **Étape n°3** : La recherche de potentiels hétérozygotes composites s'est elle révélée plus fructueuse puisque `r n_run_grp3_low` de nos patients portait deux variants faux-sens sur le gene *C6orf118* à l'état hétérozygote. Le premier de ces variants étant prédit *probably damaging* par PolyPhen et *tolerated low confidence* par SIFT tandis que le second est prédit *possibly damaging* et *tolerated*, il est dificile de se prononcer quant à l'effet délétère de ces deux variants (**Table :** \@ref(tab:tabgrp3low)). 
 
@@ -2691,12 +2656,11 @@ Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait u
 
 \newpage  
 
-
-```{r plotgrp3, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.2, dependson=c("localfunction","vargrp3high"), cache=TRUE}
+```{r plotgrp3, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.2, dependson=c("dfresumegrp3","localfunction","vargrp3high"), cache=TRUE}
 
 fig_name <- "Analyse des gènes séléctionnés dans l'Analyse n°3"
-fig_description_A <- "Expression tissulaire des gènes retenus dans cette analyse d'après les données du projet de transcriptome Illumina bodyMap"
-fig_description_B <- "Résumé de l'Analyse 3, quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique"
+fig_description_A <- "**A** : Expression tissulaire des gènes retenus dans cette analyse d'après les données du projet de transcriptome Illumina bodyMap"
+fig_description_B <- "**B** : Résumé de l'Analyse 3, quantification du nombre de patients retrouvés mutés sur chacun des gènes retenus ainsi que du degré de confiance accordé à la cause génétique"
 fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
 fig_info <- paste0(fig_name, " : ", fig_description)
 
@@ -2716,37 +2680,19 @@ plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
 
 ```{r tabgrp3high, dependson="dfgrp3high", cache=TRUE}
 
-kable(df_grp3_high %>% 
-        arrange(SYMBOL) %>%
-        select(Gene = SYMBOL, Patient = RUN, Consequence) %>%
-          distinct(Gene, Patient, Consequence),
+kable(tab_high(df_grp3_high),
       booktabs = TRUE,
       longtable = TRUE,
-      caption = "List des gènes sur lesquels au moins deux patients portent une mutation tronquante non présents dans la liste ciliome ")
+      caption = "Analyse n°3 : List des gènes présents dans la liste ciliome sur lesquels un seul patient portent une mutation homozygote tronquante")
 
 ```
 
 ```{r tabgrp3low, dependson="dfgrp3low", cache=TRUE}
 
-kable(df_grp3_low %>% 
-        inner_join(df_canonical_transcripts, by = "Feature") %>%
-        select(Gene = SYMBOL, Patient = RUN, Consequence, SIFT, PolyPhen) %>%
-        mutate(SIFT = na.replace(SIFT, "No prediction"),
-               PolyPhen = na.replace(PolyPhen, "No prediction")),
+kable(tab_modelow(df_grp3_low),
       booktabs = TRUE,
       longtable = TRUE,
-      caption = "Liste des patients portantau moins deux variants hétérozygotes sur un des gènes suivant : TODOOOOOO")
-
-
-```
-
-```{r tabresumegrp3, dependson="dfresumegrp3", cache=TRUE}
-
-# kable(df_resume_grp3 %>%
-#         select(Gene = SYMBOL, `High evidence` = High, `Low Evidence` = Low, Total = TOT),
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       caption = "Résumé des gènes identifiés dans cette analyse")
+      caption = paste0("Analyse n°3 : Liste des patients portant au moins deux variants hétérozygotes sur un des gènes suivant : ",paste_vector(gene_grp3,"itallic")))
 
 
 ```
