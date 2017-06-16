@@ -2326,10 +2326,10 @@ n_run_baz1a_high <- run_baz1a_high %>% length
 
 ```{r dfgrp2reduce, dependson="dfgrp2high", cache=TRUE}
 
-gene_grp2_reduce <- c("CFAP43", "CCDC129","FSIP2")
+gene_grp2_reduce <- c("CFAP43", "CCDC129","FSIP2","BAZ1A")
 
 df_grp2_high_reduce <- df_grp2_high %>%
-  filter(SYMBOL %in% gene_grp2_reduce)
+  filter(SYMBOL %in% gene_grp2_reduce) 
 
 ```
 
@@ -2433,8 +2433,9 @@ Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents
 
 5. **_BAZ1A_** : Sur ce gène, les patient `r run_baz1a_high %>% paste_vector("itallic")` portent tout deux le même indel à l'état homozygote. Celui-ci entrainant un décalage du cadre de lecture induit la formation d'une protéine abérente. l'absence de cette indel dans les trois bases de données laisse supposer que une faible fréquence de ce variant dans la population générale. Bien que ce gène présente une faible expression testiculaire, une étude de 2013 effectuée chez la souris a démontré son rôle majeur dans la spermatogénèse, les souris *KO* *Baz1a*^{-/-} présentaient de nombreeux defauts tel que  des des spermatozoïdes non motiles, présentant une morphologie de la tête et du flagelle abérante [@Dowdle2013] faisant ainsi de ce gène un bon candidat pour expliquer le phénotype de ces `r n_run_baz1a_high` patients. 
 
+6. **_CCDC129_** : Ce gène est retrouvé muté à l'état homozygote chez `r n_run_ccdc129_high` patients porteur du même indel, non repertorié dans les bases de données, causant un décalage du cadre de lecture. On peut égallement constate que ce gène possède une expression testiculaire forte et exclusive faisant ainsi de ce gène un bon candidat malgré une littérature pauvre à son sujet.   
 
-6. **_CCDC129_** :  
+
 7. **_NACA_** :  
 
 
