@@ -143,15 +143,14 @@ tab_modelow <- function(df) {
 }
 
 
-paste_vector <- function(v, style = "none", sep = ", ", last = " et ") {
+paste_vector <- function(v, style = "none", sep = ", ", last = " et ", sort = TRUE) {
   
-  v <- v %>% sort
+  if (sort == TRUE) v <- v %>% sort
   
-  if (style == "itallic") {
+  if (style == "bold") v <- paste0("**",v,"**")
+  if (style == "itallic") v <- paste0("*",v,"*")
+  if (style == "both") v <- paste0("**_",v,"_**")
 
-    v <- paste0("*",v,"*")
-  }
-  
   v_head <- v %>% head(-1) %>% paste(collapse = sep)
   
   v_tail <- v %>% tail(1)
@@ -2309,11 +2308,17 @@ n_run_max_grp2 <- df_distinct_gene_grp2_high %>% collect() %>% .[["N_RUN"]] %>% 
 run_cfap43_high <- df_grp2_high %>% gene_to_run("CFAP43")
 run_fsip2_high <- df_grp2_high %>% gene_to_run("FSIP2")
 run_ccdc129_high <- df_grp2_high %>% gene_to_run("CCDC129")
+run_ica1_high <- df_grp2_high %>% gene_to_run("ICA1")
+run_trav26_high <- df_grp2_high %>% gene_to_run("TRAV26-1")
+run_ica1_trav26_high <- df_grp2_high %>% gene_to_run(c("ICA1", "TRAV261"))
 
 n_run_cfap43_high <- run_cfap43_high %>% length
 n_run_fsip2_high <- run_fsip2_high %>% length
 n_run_ccdc129_high <- run_ccdc129_high %>% length
 n_run_sart3_high <- df_grp2_high %>% gene_to_run("SART3") %>% length
+n_run_ica1_high <- run_ica1_high %>% length
+n_run_trav26_high <- run_trav26_high %>% length
+n_run_ica1_trav26_high <- run_ica1_trav26_high %>% length
 ```
 
 ```{r dfgrp2reduce, dependson="dfgrp2high", cache=TRUE}
@@ -2393,9 +2398,7 @@ df_resume_grp2 <- bind_rows(df_grp2_high %>% group_by(RUN, SYMBOL) %>% summarise
 
 ```
 
-
 ```{r removegrp2}
-
 
 run_found <- c(run_found, run_grp2_reduce)
 
@@ -2413,22 +2416,21 @@ n_var_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(CHR, POSITION,
 n_gene_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(SYMBOL) %>% nrow()
 n_run_after_grp2 <- df_bigmmaf_filter4 %>% ungroup() %>% distinct(RUN) %>% nrow()
 
-
 ```
-
-
 
 Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents dans la liste cilliome**  mais sur lesqules on trouvait toujours **au moins deux** de nos patients présentant au moins 1 variant tronquant à l'état **homozygote**. `r n_run_grp2_high` patients différents portaient ainsi au moins un variant homozygote tronquant sur l'un des `r n_gene_grp2` gènes suivants : `r gene_grp2 %>% paste_vector("itallic")`.
 
 1. **_CFAP43_** : `r n_run_cfap43_high + n_run_cfap43_moderate + n_run_cfap43_low` patients portent au moins 1 variant sur le gène *CFAP43*. Parmis ceux-ci, les patients `r run_cfap43_high %>% paste_vector("itallic")` portent une mutation tronquante à l'état homozygote soit absente des bases de données soit présentent avec une très faible fréquence. Le patient `r run_cfap43_moderate %>% paste_vector("itallic")` lui porte un variant homozygote intronique au situé au sein de la région d'épissage (et non sur un site donneur ou accepteur). Bien que ce type de variants puissent effectivement avoir un impact sur l'epissage, il pourrait également être sans effet, or, il est difficile de le prédire à ce stade. (TODO :: faire tourner un algo de prédiction). Le patient `r run_cfap43_low %>% paste_vector("itallic")` en revanche semble plus intéréssant, puisque celui-ci porte deux variant hétérozygotes sur le gène *CFAP43* parmis lesquels un est un indel entrainant un décalage du cadre de lecture tandis que l'autre est un faux-sens prédit comme *possibly damaging* par Polyphen, bien qu'il soit annoté *tolerated* par SIFT. Malgré une expression ubiquitaire (**Figure : **\@ref(fig:plotgrp2) - **B**), le nombre important de patients portant des variant sur celui-ci, notamment `r n_run_cfap43_high` potant des variants tronquants homozygote font de ce gène un bon candidat.  
+
 2. **_FSIP2_** :  Comme pour le gène *CFAP43*, `r n_run_cfap43_high + n_run_cfap43_moderate + n_run_cfap43_low` de nos patients portaient 1 variant sur le gène *FSIP2* cependant pour seulement `r n_run_fsip2_high` d'entre eux ce variant était tronquant à l'état homozygote.  En effet, les patients `r run_fsip2_high %>% paste_vector("itallic")` porte tout deux un indel entrainant un décalage du cadre de lecture dont aucun n'est répertorié dans les bases de données. Le patient `r run_fsip2_moderate %>% paste_vector("itallic")` porte lui un faux-sens homozygote prédit comme *benign* par PolyPhen. `r n_run_fsip2_low` autres patients portent au moins deux variants hétérozygote sur ce gène, cependant la plupart sont des faux-sens prédit égallement comme *benign* par PolyPhen. Bien que l'effet sur la protéine des variants portés par `r n_run_fsip2_moderate + n_run_fsip2_low` des `r n_run_fsip2_high + n_run_fsip2_moderate + n_run_fsip2_low` patients portant au moins un variant sur ce gène soit incertains, les variants tronquant portés par les patients `r run_fsip2_high %>% paste_vector("itallic")` ainsi que saforte expression testiculaire et le fait que son implication dans la structure de la gaine fibreuse du flagelle spermatique ait été montrée en 2003 [@Brown2003] font de ce gène un excellent candidat pour expliquer le phénotype d'au moins `r n_run_fsip2_high` patients. Pour les autres, des analyses fonctionelles seront nécéssaires.  
 
 3. **_SART3_** : Un total de `r n_run_sart3_high` patients portaient **le même** variants homozygote. Ces patients étant tous issus du même projet de séquençage (Strasbourg 2012) ce variant pourrait parfaitement être un artefact dû au protocol de séquençage. Cette hypothèse est d'autant plus probable que l'ensemble des patients séquencés dans ce projet présentaient un phénotype MMAF, ainsi, aucun des individus de notre cohorte contrôle n'a donc pu servir à filtrer les variants artefactuels issus de ce projet. De plus, on peut constater que l'expression tissulaire de ce gène est ubiquitaire. Pour ces différentes raisons, ce gène n'a pas été retenu comme candidat dans nos analyses.
-4. **_ICA1_** :  
-5. **_TRAV26-1_** :  
-6. **_BAZ1A_** :  
-7. **_CCDC129_** :  
-8. **_NACA_** :  
+
+4. **_ICA1_ et _TRAV26-1_** :  Ces deux gènes sont chacun retrouvés présentant des variants homozygotes tronquant chez `r c(n_run_ica1_high + n_run_trav26_high) %>% mean` de nos patients. Pour chaque gène on peut noter que c'est à chaque fois le même variant qui est partagé par les trois patients ce qui est asses étonnant étant doné le fait que ces patients ne sont pas apparentés et n'on pas été séquencé lors du même projet de séquençage. De plus, on peut observer que le patient `r run_ica1_high[2] %>% paste_vector("itallic")` porte un variant sur chacun de ces deux gènes, de même qu'il en portait également un sur le gène *SART3*. L'expression testiculaire de ces deux gènes apparait elle aussi très faible. La bibliographie du gène *ICA1* révèle que celui-ci est principalement exprimé dans le pancréas [@Mally1996, @Stassi1997] et que celui-ci serait à la fois lié au diabète de type 1 [@Martin1995, @Gaedigk1994, @Martin1996] et au syndrome de Gougerot-Sjögren [@Winer2002]. Malgré le nombre important de patients présentant des variants homozygotes tronquant sur ces deux gènes, ceux-ci n'ont pas été retenus comme candidat pour expliquer le phénotype MMAF de ces `r n_run_ica1_trav26_high` patients.  
+
+5. **_BAZ1A_** :  
+6. **_CCDC129_** :  
+7. **_NACA_** :  
 
 
 
@@ -2444,7 +2446,6 @@ Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents
 Dans cette Analyse, nous avons pu déterminer avec certitude la cause génétique du phénotype MMAF de seulement `r n_run_grp2_reduce` patients, c'est à dire ceux identifiés au cours de l'étape n°1. Pour `r n_run_grp2_moderate + n_run_grp2_low` autres patients des analyses complémentaires sont nécéssaires. Cela nous a tout de même permis de pouvoir impliquer `r n_gene_grp2_reduce` nouveaux gènes au phénotype MMAF (**Figure :** \@ref(fig:plotresumegrp2)). 
 
 \newpage  
-
 
 ```{r plotgrp2, fig.height=7.2, dependson=c("vargrp2","dfresumegrp2","localfunction"), fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
 
@@ -3083,7 +3084,7 @@ pB <- ggplot(resume_bigmmaf %>%
   ylab("Nb of individual") + 
   xlab("Nb of potential candidat gene") 
 
-plot_grid(pA, pB, labels = c("A","B"), rel_heights = c(.55,.45), ncol = 1)
+# plot_grid(pA, pB, labels = c("A","B"), rel_heights = c(.55,.45), ncol = 1)
 
 ```
 
