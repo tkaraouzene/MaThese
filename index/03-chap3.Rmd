@@ -2642,17 +2642,6 @@ Dans cette un troisième analyse,  nous avons séléctionné à nouveau les gèn
 4. **_SPEF2_** :  
 
 
-
-
-
-1. **Étape n°1** : La recherche de variants homozygote tronquant nous a permis d'identifier `r n_run_grp3_high` patients d'un variant sur un des `r n_gene_grp3` gène suivant : `r gene_grp3`.  Cependant, l'analyse de l'expression testiculaire de ces gènes nous a insitée à n'en garder que `r gene_grp3_retained` d'entre eux : `r gene_grp3_retained` (**Table :** \@ref(tab:tabgrp3high), **Figure :** \@ref(fig:plotgrp3) - **A**). . En revanche .  
-
-3. **Étape n°3** : La recherche de potentiels hétérozygotes composites s'est elle révélée plus fructueuse puisque `r n_run_grp3_low` de nos patients portait deux variants faux-sens sur le gene *C6orf118* à l'état hétérozygote. Le premier de ces variants étant prédit *probably damaging* par PolyPhen et *tolerated low confidence* par SIFT tandis que le second est prédit *possibly damaging* et *tolerated*, il est dificile de se prononcer quant à l'effet délétère de ces deux variants (**Table :** \@ref(tab:tabgrp3low)). 
-
-4. **Étape n°4** : Comme pour l'analyse n°2, nous avons ici décidé de ne retirer de notre liste de variant que ceux présents chez les patients identifiés au cours de l'étape n°1.  Cela nous a ainsi permis de réduire à nouveau cette liste arrivant ainsi à `r n_var_after_grp3` variants cheveauchant `r n_gene_after_grp3` gènes différents.  
-
-Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait un variant tronquant à l'état homozygote nous a permis d'identifié `r n_gene_grp3` parmis lesquels `r n_gene_grp3_retained` présentaient une forte expression testiculaire. L'analyse de ces `r n_gene_grp3_retained` derniers gènes nous a permis d'identifier `r n_run_grp3_retained` patients chacun portant un variant tronquant homozygote sur l'un de ces `r n_gene_grp3_retained` gènes. Étendre notre recherche à la fois aux variants tronquant ainsi qu'aux hétérozygote composites nous a permis d'identifier `r n_run_grp3_moderate + n_run_grp3_low` patient pour qui deux faux-sens hétérozygotes sur le gène *C6orf118* pourraient expliquer le phénotype (**Figure :** \@ref(fig:plotgrp3) - **B**).   
-
 \newpage  
 
 ```{r plotgrp3, fig.cap=fig_info,fig.scap=fig_name, fig.height=7.2, dependson=c("dfresumegrp3","localfunction","vargrp3high"), cache=TRUE}
