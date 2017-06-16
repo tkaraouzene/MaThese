@@ -2311,6 +2311,7 @@ run_ccdc129_high <- df_grp2_high %>% gene_to_run("CCDC129")
 run_ica1_high <- df_grp2_high %>% gene_to_run("ICA1")
 run_trav26_high <- df_grp2_high %>% gene_to_run("TRAV26-1")
 run_ica1_trav26_high <- df_grp2_high %>% gene_to_run(c("ICA1", "TRAV261"))
+run_baz1a_high <- df_grp2_high %>% gene_to_run("BAZ1A")
 
 n_run_cfap43_high <- run_cfap43_high %>% length
 n_run_fsip2_high <- run_fsip2_high %>% length
@@ -2319,6 +2320,8 @@ n_run_sart3_high <- df_grp2_high %>% gene_to_run("SART3") %>% length
 n_run_ica1_high <- run_ica1_high %>% length
 n_run_trav26_high <- run_trav26_high %>% length
 n_run_ica1_trav26_high <- run_ica1_trav26_high %>% length
+n_run_baz1a_high <- run_baz1a_high %>% length
+
 ```
 
 ```{r dfgrp2reduce, dependson="dfgrp2high", cache=TRUE}
@@ -2428,7 +2431,9 @@ Pour rappel, au cours de cette analyse, nous avons étudié les gènes **absents
 
 4. **_ICA1_ et _TRAV26-1_** :  Ces deux gènes sont chacun retrouvés présentant des variants homozygotes tronquant chez `r c(n_run_ica1_high + n_run_trav26_high) %>% mean` de nos patients. Pour chaque gène on peut noter que c'est à chaque fois le même variant qui est partagé par les trois patients ce qui est asses étonnant étant doné le fait que ces patients ne sont pas apparentés et n'on pas été séquencé lors du même projet de séquençage. De plus, on peut observer que le patient `r run_ica1_high[2] %>% paste_vector("itallic")` porte un variant sur chacun de ces deux gènes, de même qu'il en portait également un sur le gène *SART3*. L'expression testiculaire de ces deux gènes apparait elle aussi très faible. La bibliographie du gène *ICA1* révèle que celui-ci est principalement exprimé dans le pancréas [@Mally1996, @Stassi1997] et que celui-ci serait à la fois lié au diabète de type 1 [@Martin1995, @Gaedigk1994, @Martin1996] et au syndrome de Gougerot-Sjögren [@Winer2002]. Malgré le nombre important de patients présentant des variants homozygotes tronquant sur ces deux gènes, ceux-ci n'ont pas été retenus comme candidat pour expliquer le phénotype MMAF de ces `r n_run_ica1_trav26_high` patients.  
 
-5. **_BAZ1A_** :  
+5. **_BAZ1A_** : Sur ce gène, les patient `r run_baz1a_high %>% paste_vector("itallic")` portent tout deux le même indel à l'état homozygote. Celui-ci entrainant un décalage du cadre de lecture induit la formation d'une protéine abérente. l'absence de cette indel dans les trois bases de données laisse supposer que une faible fréquence de ce variant dans la population générale. Bien que ce gène présente une faible expression testiculaire, une étude de 2013 effectuée chez la souris a démontré son rôle majeur dans la spermatogénèse, les souris *KO* *Baz1a*^{-/-} présentaient de nombreeux defauts tel que  des des spermatozoïdes non motiles, présentant une morphologie de la tête et du flagelle abérante [@Dowdle2013] faisant ainsi de ce gène un bon candidat pour expliquer le phénotype de ces `r n_run_baz1a_high` patients. 
+
+
 6. **_CCDC129_** :  
 7. **_NACA_** :  
 
