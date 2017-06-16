@@ -2536,27 +2536,28 @@ n_gene_grp3 <- gene_grp3 %>% length
 run_grp3_high <- df_grp3_high %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
 n_run_grp3_high <- run_grp3_high %>% length
 
-
 run_c6orf118_high <- df_grp3_high %>% gene_to_run("C6orf118")
 n_run_c6orf118_high <- run_c6orf118_high %>% length
 
+run_c21orf59_ccdc65_high <- df_grp3_high %>% gene_to_run(c("C21orf59","CCDC65"))
+n_run_c21orf59_ccdc65_high <- run_c21orf59_ccdc65_high %>% length
 
 ```
 
 ```{r dfgrp3reduce, dependson="dfgrp3high", cache=TRUE}
 
-gene_grp3_reduce <- c("CCDC65", "C6orf118")
+gene_grp3_retained <- c("CCDC65", "C6orf118","C21orf59")
 
 df_grp3_high_reduce <- df_grp3_high %>%
-  filter(SYMBOL %in% gene_grp3_reduce)
+  filter(SYMBOL %in% gene_grp3_retained)
 
 ```
 
 ```{r vargrp3reduce}
 
-n_gene_grp3_reduce <- gene_grp3_reduce %>% length
-run_grp3_reduce <- df_grp3_high_reduce %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
-n_run_grp3_reduce <- run_grp3_reduce %>% length
+n_gene_grp3_retained <- gene_grp3_retained %>% length
+run_grp3_retained <- df_grp3_high_reduce %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_grp3_retained <- run_grp3_retained %>% length
 
 ```
 
@@ -2613,7 +2614,7 @@ df_resume_grp3 <- bind_rows(df_grp3_high %>% group_by(RUN, SYMBOL) %>% summarise
 
 ```{r removegrp3}
 
-run_found <- c(run_found, run_grp3_reduce)
+run_found <- c(run_found, run_grp3_retained)
 
 df_bigmmaf_filter5 <- df_bigmmaf_filter4 %>% 
   filter(!(RUN %in% run_found))
@@ -2636,23 +2637,21 @@ Dans cette un troisième analyse,  nous avons séléctionné à nouveau les gèn
 
 1. **_C6orf118_** :  Ce gène a été retrouvémuté à l'état homozygote chez le patient `r run_c6orf118_high %>% paste_vector("itallic")` qui portait une substitution entrainant la formation d'un codon stop prématuré. Il faut noter que ce même patient portait égallement des variants homozygotes tronquant sur les gènes *SART3*, *TRAV26-1*, et *ICA1* cependant la forte expression testiculaire de ce gène en fait un meilleur candidat. Le patient `r run_c6orf118_low %>% paste_vector("itallic")` quant à lui porte deux variants faux-sens hétérozygote Le premier étant prédit probably *damaging* par PolyPhen et *tolerated low confidence* par SIFT tandis que le second est prédit *possibly damaging* et *tolerated*, il est dificile de se prononcer quant à l’effet délétère de ces deux variants sans effectuer d'analyses fonctionelles. Il faut noter que *C6orf118* présente une forte expression dans le poumoun. De plus, ce gène a récemment été décrit comme étant associé au phénotype de tuberculose pulmonaire [@Hong2017]. Cependant cela n'est en rien contradictoire avec le phénotype MMAF de ces `r n_run_c6orf118_high + n_run_c6orf118_low` patients, le poumon comprenant de nombreuse cellules ciliées, notamment au niveau de l'épithélium respiratoire, il n'est donc pas surprenant que des gènes du flagelle aient égallement une fonction au sein d'autres organes ciliés.
 
+2. **_C21orf59_ et _CCDC65_** :  Les patients `r run_c21orf59_ccdc65_high %>% paste_vector("itallic")` porte tout deux des indels induisant un décalage du cadre de lecture, le premier sur le gène *C21orf59*, le second sur *CCDC65* deux gènes déjà connu pour être impliqué dans la formations des cils. En effet, la protéine NYD-SP28 (ancien nom de CCDC65) avait déjà caractérisé comme faisant partie du flagelle spermatique [@Zheng2006] alors que *C21orf59* controllerait à la fois la mobilité et la polarisation des cils chez *zebrafish* [@Jaffe2016]. On note aussi que ces deux gènes on été associés à des pathologies cilliaires chez le *zebrafish*, *Chlamydomonas* ainsi que chez l'humain, pouvant entrainer un phénotype de dyskinési cilliaire primaire, de même, la protéine FBB18 du gène orthologue de C21orf59 régulereait la motilitée du flagelle chez *Chlamydomonas* [@Austin-Tse2013]. Ainsi, les arguments génétiques associés aux implication déjà avéré de ces 2 gènes dans la ciliogénèse font de *CCDC65* et *c21orf59* des excellents candidat pour expliquer les phénotype MMAF de nos `r n_run_c21orf59_ccdc65_high` patients malgré l'expession non spécifique au testicule du gène *C21orf59*.     
 
-
-2. **_C21orf59_** :  
-3. **_CCDC65_** :  En effet, *CCDC65* présente une forte et quasi exclusive expression testiculaire de plus, la protéine NYD-SP28 (ancien nom de CCDC65) avait déjà caractérisé comme faisant partie du flagelle spermatique [@Zheng2006]  
 4. **_SPEF2_** :  
 
 
 
 
 
-1. **Étape n°1** : La recherche de variants homozygote tronquant nous a permis d'identifier `r n_run_grp3_high` patients d'un variant sur un des `r n_gene_grp3` gène suivant : `r gene_grp3`.  Cependant, l'analyse de l'expression testiculaire de ces gènes nous a insitée à n'en garder que `r gene_grp3_reduce` d'entre eux : `r gene_grp3_reduce` (**Table :** \@ref(tab:tabgrp3high), **Figure :** \@ref(fig:plotgrp3) - **A**). . En revanche .  
+1. **Étape n°1** : La recherche de variants homozygote tronquant nous a permis d'identifier `r n_run_grp3_high` patients d'un variant sur un des `r n_gene_grp3` gène suivant : `r gene_grp3`.  Cependant, l'analyse de l'expression testiculaire de ces gènes nous a insitée à n'en garder que `r gene_grp3_retained` d'entre eux : `r gene_grp3_retained` (**Table :** \@ref(tab:tabgrp3high), **Figure :** \@ref(fig:plotgrp3) - **A**). . En revanche .  
 
 3. **Étape n°3** : La recherche de potentiels hétérozygotes composites s'est elle révélée plus fructueuse puisque `r n_run_grp3_low` de nos patients portait deux variants faux-sens sur le gene *C6orf118* à l'état hétérozygote. Le premier de ces variants étant prédit *probably damaging* par PolyPhen et *tolerated low confidence* par SIFT tandis que le second est prédit *possibly damaging* et *tolerated*, il est dificile de se prononcer quant à l'effet délétère de ces deux variants (**Table :** \@ref(tab:tabgrp3low)). 
 
 4. **Étape n°4** : Comme pour l'analyse n°2, nous avons ici décidé de ne retirer de notre liste de variant que ceux présents chez les patients identifiés au cours de l'étape n°1.  Cela nous a ainsi permis de réduire à nouveau cette liste arrivant ainsi à `r n_var_after_grp3` variants cheveauchant `r n_gene_after_grp3` gènes différents.  
 
-Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait un variant tronquant à l'état homozygote nous a permis d'identifié `r n_gene_grp3` parmis lesquels `r n_gene_grp3_reduce` présentaient une forte expression testiculaire. L'analyse de ces `r n_gene_grp3_reduce` derniers gènes nous a permis d'identifier `r n_run_grp3_reduce` patients chacun portant un variant tronquant homozygote sur l'un de ces `r n_gene_grp3_reduce` gènes. Étendre notre recherche à la fois aux variants tronquant ainsi qu'aux hétérozygote composites nous a permis d'identifier `r n_run_grp3_moderate + n_run_grp3_low` patient pour qui deux faux-sens hétérozygotes sur le gène *C6orf118* pourraient expliquer le phénotype (**Figure :** \@ref(fig:plotgrp3) - **B**).   
+Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait un variant tronquant à l'état homozygote nous a permis d'identifié `r n_gene_grp3` parmis lesquels `r n_gene_grp3_retained` présentaient une forte expression testiculaire. L'analyse de ces `r n_gene_grp3_retained` derniers gènes nous a permis d'identifier `r n_run_grp3_retained` patients chacun portant un variant tronquant homozygote sur l'un de ces `r n_gene_grp3_retained` gènes. Étendre notre recherche à la fois aux variants tronquant ainsi qu'aux hétérozygote composites nous a permis d'identifier `r n_run_grp3_moderate + n_run_grp3_low` patient pour qui deux faux-sens hétérozygotes sur le gène *C6orf118* pourraient expliquer le phénotype (**Figure :** \@ref(fig:plotgrp3) - **B**).   
 
 \newpage  
 
