@@ -2963,114 +2963,6 @@ ggplot(df_resume_bigmmaf, aes(reorder(SYMBOL, N_TOT), N_RUN)) +
 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-\newpage 
-
-
-
-
-
-Cette approche nous a permis de rapidement identifier ... nouveaux acteurs potentiels pour le phénotype MMAF impliquant ... de nos patients qui portaient tous au moins une mutation homozygote sur l'un de ces gènes. Comme précédemment nous avons ensuite cherché des éventuels hétérozygotes composites nous permettant ainsi mettant ainsi en évidence ... patients portant au moins deux variants hétérozygotes différents sur un de ces gènes. 
-
-1. **_WDR52_** : Ce gène (récemment renommé *CFAP44*) a été le premier à être identifié. En effet, malgrès une expression ubiquitaire (**Figure : **\@ref(figb:plotexpcandidat)),  ce gène fait partie des gènes prédit avec des preuves fortes comme étant impliqué dans le cilliome humain. De plus, `r n_run_homo_wdr52` de nos patients portaient des variants homozygotes sur ce gène, tous ayant un effet tronquant sur la protéine. La recherche d'hétérozygotes composites sur ce gène s'est cependant révélées négatives puisqu'aucun de nos patients ne correspondaient aux critères (**Table : **\@ref(tab:tabwdr52)).  
-
-```{r tabwdr52, dependson="newcandidats"}
-
-# kable(tabwdr52,
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-#       caption = "liste des variants passant les filtres et chevauchant le gène *WDR52*")
-
-```
-
-2. **_EFCAB6_**, **_TTC29_**, **_CCDC146_** :  Ces trois gènes ont ensuite été identifié simultanément puisque pour tous trois deux patients sont retrouvés avec un variant homozygote. Pour *TTC29* les deux patients portent la même variation impactant un site donneur d'épissage pouvant donc altérer l'épissage du transcrit induisant à la production d'une protéine aberrante. Les deux patients *CCDC146* portent chacun un variant induisant respectivement un codon stop prématuré et un décalage du cadre de lecture. Ces deux entrainant la production d'une protéine tronquée. Et enfin, deux variants faux-sens différents sont portés par les patients *EFCAB6*. De plus ces trois gènes sont présents dans notre liste des gènes du cilliome avec de fortes preuves et les bases de données publiques indiquent que ces trois gènes ont une forte (et quasi exclusive) expression testiculaire. La recherche d'e potentiels hétérozygotes composites s'est en revanche avérées négatives pour les gènes *TTC29* et *CCDC146*. Cependant, un patient portait deux variants hétérozygotes sur *EFCAB6*, l'un induisant un décalage du cadre de lecture et l'autre un faux-sens (**Table : **\@ref(tab:tabefcab6ttc29ccdc146)).
-\newpage
-
-```{r tabefcab6ttc29ccdc146, dependson="newcandidats"}
-
-# kable(bind_rows(tabefcab6, tabttc29, tabccdc146),
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-#       caption = "liste des variants passant les filtres et chevauchant les gène *EFCAB6*, *TTC26* et *CCDC146*")
-
-```
-
-3. **_LRRC43_** :  En poursuivant nos analyses, nous avons identifié le gène *LRRC43* sur lequel `r n_run_homo_lrrc43` portaient le même variant faux-sens à l'état homozygote. De plus, un autre patient portait ce même variant à l'état hétérozygote couplé à un second variant faux-sens hétérozygote lui aussi. Ce gène est également connu pour avoir une forte expression et exclusive testiculaire. De plus, ce gène est inclus dans notre liste de gène du cilliome bien qu'il soit classé dans la catégorie *No evidence from previous studies* (**Table : **\@ref(tab:tablrrc43)).
-
-```{r tablrrc43, dependson="newcandidats"}
-
-# kable(tablrrc43,
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-#       caption = "liste des variants passant les filtres et chevauchant le gène *LRRC43*")
-
-```
-
-4. **_ARMC2_** :  Comme *LRRC43*, *ARMC2* est classé dans la catégorie *No evidence from previous studies* des gènes du cilliome de notre liste. Cependant son expression testiculaire forte et exclusive font de lui un bon candidat pour expliquer le phénotype MMAF de `r n_run_homo_armc2` portant respectivement à l'état homozygote un variant faux-sens, un impactant le site d'épissage et l'autre entrainant un décalage du cadre de lecture (**Table : **\@ref(tab:tabarmc2)).
-
-```{r tabarmc2, dependson="newcandidats"}
-
-# kable(tabarmc2,
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-#       caption = "liste des variants passant les filtres et chevauchant le gène *ARMC2*")
-
-```
-
-5. **_ANKRD20A3_** : Ce gène sur lequel `r n_run_homo_ankrd20a3` de nos patients portent un variant homozygote (7 d'entre eux portent le même variant faux-sens) et `r n_run_het_ankrd20a3` au moins deux variants hétérozygotes ne fait pas parti de la liste des gènes du cilliome. Cependant sa forte et quasi exclusive expression testiculaire fait tout de même de ce gène un très bon candidat (**Table : **\@ref(tab:tabankrd20a3)).  
-
-```{r tabankrd20a3, dependson="newcandidats"}
-
-# kable(tabankrd20a3,
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-#       caption = "liste des variants passant les filtres et chevauchant le gène *ANKRD20A3*")
-
-```
-
-6. **_WDR96_** : Ce gène non plus ne fait pas parti de la liste de gène cilliome, cependant, comme  *ANKRD20A3* sa forte expression spécifique au testicule font de lui un bon candidat. Au sein de notre cohorte, `r n_run_homo_wdr96` patients ont été identifiés car ils portaient un variant homozygote sur ce gène. Parmi eux, `r n_run_homo_wdr96 - 1` portaient une mutation tronquante, le dernier portait un variant intronique proche de la zone d'épissage. En plus de ceux-ci, `r n_run_het_wdr96` portait deux variant hétérozygotes dont un causait un décalage du cadre de lecture l'autre entrainant un faux-sens (**Table : **\@ref(tab:tabwdr96)).  
-
-\newpage
-
-
-```{r tabwdr96, dependson="newcandidats"}
-
-# kable(tabwdr96,
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-#       caption = "liste des variants passant les filtres et chevauchant le gène *WDR96*")
-
-```
-
-7. **_FSIP2_** : Bien que ce gène ne soit lui non plus pas inclus dans la liste des gène du cilliome, une équipe a démontré en 2003 l'implication de ce gène dans la structure de la gaine fibreuse su flagelle spermatique [@Brown2003] faisant également de ce gène un excellent candidat dans l'explication du phénotype MMAF de `r n_run_homo_fsip2` patients portant respectivement à l'état homozygote deux indels différents induisant un décalage du cadre de lecture et un variant faux-sens. De même, les doubles ou triples variants faux-sens retrouvés à l'état hétérozygotes chez `r n_run_het_fsip2` de nos patients pourraient aussi expliquer leur phénotype MMAF (**Table : **\@ref(tab:tabfsip2).
-
-```{r tabfsip2, dependson="newcandidats"}
-
-# kable(tabfsip2,
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       col.names = c("Run ID","Variant coordinates", "Genotype", "Consequence", "Gene symbol"),
-#       caption = "liste des variants passant les filtres et chevauchant le gène *FSIP2*")
-
-```
-
 \newpage
 
 ```{r resumebigmmaf}
@@ -3117,10 +3009,10 @@ fig_name <- "Expression tissulaire des gènes gènes candidats retenus"
 fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
 fig_info <- paste0(fig_name, " : ", fig_description)
 
-plot_expression(candidat_gene, "percent", TRUE) + 
-  xlab("") +
-  theme(legend.position = c(1,0),
-        legend.justification = c(1,0))
+# plot_expression(candidat_gene, "percent", TRUE) + 
+#   xlab("") +
+#   theme(legend.position = c(1,0),
+#         legend.justification = c(1,0))
 
 
 
