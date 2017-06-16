@@ -2546,23 +2546,6 @@ run_spef2_high <- df_grp3_high %>% gene_to_run("SPEF2")
 
 ```
 
-```{r dfgrp3reduce, dependson="dfgrp3high", cache=TRUE}
-
-gene_grp3_retained <- c("CCDC65", "C6orf118","C21orf59")
-
-df_grp3_high_reduce <- df_grp3_high %>%
-  filter(SYMBOL %in% gene_grp3_retained)
-
-```
-
-```{r vargrp3reduce}
-
-n_gene_grp3_retained <- gene_grp3_retained %>% length
-run_grp3_retained <- df_grp3_high_reduce %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
-n_run_grp3_retained <- run_grp3_retained %>% length
-
-```
-
 ```{r dfgrp3moderate, dependson="removegrp2", cache=TRUE}
 
 
@@ -2591,7 +2574,9 @@ df_grp3_low <- df_bigmmaf_filter_het4 %>%
 
 ```{r vargrp3low, dependson="dfgrp3low", cache=TRUE}
 
-n_run_grp3_low <- df_grp3_low %>% distinct(RUN) %>% nrow
+
+run_grp3_low <- df_grp3_low %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+n_run_grp3_low <- run_grp3_low %>% length
 gene_grp3_low <- df_grp3_low %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]] 
 
 
@@ -2602,7 +2587,7 @@ n_run_c6orf118_low <- run_c6orf118_low %>% length
 
 ```
 
-```{r dfresumegrp3, dependson=c("dfgrp3highreduce","dfgrp3moderate","dfgrp3low"), cache=TRUE}
+```{r dfresumegrp3, dependson=c("dfgrp3high","dfgrp3moderate","dfgrp3low"), cache=TRUE}
 
 df_resume_grp3 <- bind_rows(df_grp3_high %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "High"),
                             df_grp3_moderate %>% group_by(RUN, SYMBOL) %>% summarise(TRUST = "Moderate"),
@@ -2612,11 +2597,12 @@ df_resume_grp3 <- bind_rows(df_grp3_high %>% group_by(RUN, SYMBOL) %>% summarise
   select(SYMBOL, N_RUN, TRUST) %>%
   group_by(SYMBOL) %>% 
   mutate(TOT = sum(N_RUN))
+
 ```
 
-```{r removegrp3}
+```{r removegrp3, cache=TRUE, dependson=c("vargrp3high","removegrp2")}
 
-run_found <- c(run_found, run_grp3_retained)
+run_found <- c(run_found, run_grp3_high)
 
 df_bigmmaf_filter5 <- df_bigmmaf_filter4 %>% 
   filter(!(RUN %in% run_found))
@@ -2626,7 +2612,7 @@ df_bigmmaf_filter_het5 <- df_bigmmaf_filter_het4 %>%
 
 ```
 
-```{r varremovegrp3}
+```{r varremovegrp3, cache=TRUE, dependson="removegrp3"}
 
 n_var_after_grp3 <- df_bigmmaf_filter5 %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow()
 n_gene_after_grp3 <- df_bigmmaf_filter5 %>% ungroup() %>% distinct(SYMBOL) %>% nrow()
@@ -2643,8 +2629,7 @@ Dans cette un troisième analyse,  nous avons séléctionné à nouveau les gèn
   
 4. **_SPEF2_** :  Ce gène est retrouvé muté à l'état homozygote chez le patient `r run_spef2_high %>% paste_vector("itallic")` qui porte un indel créant un décalage du cadre de lecture. Malgré son expression non spécifique au testicule, plusieurs études on démontré le rôle important de la portéine SPEF2 chez la souris dans la formation et la structuredu flagelle spermatique de même que l'abscence de cette protéine entrainait la formationd'un flagelle court et désorganisé [@Sironen2010, @Sironen2011] faisant ainsi de ce gène un excelletn candidat pour le phénotype MMAF du patient `r run_spef2_high %>% paste_vector("itallic")`.
 
-
-Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait un variant tronquant à l'état homozygote nous a permis d'identifié `r n_gene_grp3` parmis lesquels `r n_gene_grp3_retained` présentaient une forte expression testiculaire. L'analyse de ces `r n_gene_grp3_retained` derniers gènes nous a permis d'identifier `r n_run_grp3_retained` patients chacun portant un variant tronquant homozygote sur l'un de ces `r n_gene_grp3_retained` gènes. Étendre notre recherche à la fois aux variants tronquant ainsi qu'aux hétérozygote composites nous a permis d'identifier `r n_run_grp3_moderate + n_run_grp3_low` patient pour qui deux faux-sens hétérozygotes sur le gène *C6orf118* pourraient expliquer le phénotype (**Figure :** \@ref(fig:plotgrp3) - **B**).   
+Analyser les gènes de la liste ciliome sur lesquels *un seul* patient portait un variant tronquant à l'état homozygote nous a permis d'identifier `r n_gene_grp3` nouveaux gènes : `r gene_grp3 %>% paste_vector("itallic")`. Ainsi, `r n_run_grp3_high` patients portaient un variant homozygote tronquant sur l'un d'eux tandis qu'un autre patient portait deux variant faux-sens hétérozygotes sur le gène *C6orf118*. Parmis ces `r n_gene_grp3`, seuls *CCDC65* et *C6orf118* présentaient une forte expression testiculaire, cependant tous aveait déjà été associés à la formation du cil chez l'humain ou chez une autre espèce animal. Bien que des analyses supplémentaires soient nécéssaires afin de pouvoir afirmer que les deux variants hétérozygotes portés par le patients `r run_grp3_low %>% paste_vector("itallic")` sont bien responsables de son phénotype, les arguments génétiques ainsi que les informations fournies par la literature nous ont permis d'affirmer que ces gènes sont responsables des phénotypes des patients `r run_grp3_high %>% paste_vector("itallic")`. Les données de variants de ces derniers ont ainsi été retirés réduisant à nouveau notre liste à  `r n_var_after_grp3` variants et `r n_gene_after_grp3` gènes différents.  
 
 \newpage  
 
@@ -2693,7 +2678,7 @@ kable(tab_modelow(df_grp3_low),
 
 ###### Analyse n°4  
 
-```{r dfgrp4high, cache=TRUE}
+```{r dfgrp4high, dependson="removegrp3", cache=TRUE}
 
 df_grp4_high <- df_bigmmaf_filter5 %>% 
   inner_join(df_canonical_transcripts, by = "Feature") %>%
@@ -2713,7 +2698,7 @@ df_grp4_high <- df_bigmmaf_filter5 %>%
 
 ```
 
-```{r vargrp4high}
+```{r vargrp4high, cache=TRUE, dependson="dfgrp4high"}
 
 gene_grp4 <- df_grp4_high %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]] 
 n_gene_grp4 <- gene_grp4 %>% length
@@ -2723,8 +2708,7 @@ n_run_grp4_high <- run_grp4_high %>% length
 
 ```
 
-```{r dfgrp4moderate, cache=TRUE}
-
+```{r dfgrp4moderate, dependson="removegrp3", cache=TRUE}
 
 df_grp4_moderate <- df_bigmmaf_filter5 %>% 
   filter(IMPACT != "HIGH",
@@ -2733,8 +2717,7 @@ df_grp4_moderate <- df_bigmmaf_filter5 %>%
 
 ```
 
-```{r vargrp4moderate}
-
+```{r vargrp4moderate, cache=TRUE, dependson="dfgrp4moderate"}
 
 n_run_grp4_moderate <- df_grp4_moderate %>% distinct(RUN) %>% nrow
 gene_grp4_moderate <- df_grp4_moderate %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
@@ -2767,7 +2750,7 @@ df_grp4_high_reduce <- df_grp4_high %>%
 
 ```
 
-```{r dfgrp4low, cache=TRUE}
+```{r dfgrp4low, dependson="removegrp3", cache=TRUE}
 
 
 df_grp4_low <- df_bigmmaf_filter_het5 %>% 
@@ -2777,7 +2760,7 @@ df_grp4_low <- df_bigmmaf_filter_het5 %>%
 
 ```
 
-```{r vargrp4low, cache=TRUE}
+```{r vargrp4low, dependson="dfgrp4low", cache=TRUE}
 
 n_run_grp4_low <- df_grp4_low %>% distinct(RUN) %>% nrow
 gene_grp4_low <- df_grp4_low %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]] 
