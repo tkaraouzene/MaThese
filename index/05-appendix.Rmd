@@ -9,6 +9,9 @@ If you feel it necessary to include an appendix, it goes here.
 
 # The First Appendix
 
+
+sfsdg dsfqsd sdertf dsdfqsdt dwxdfsgh 
+
 <!-- This first appendix includes all of the R chunks of code that were hidden throughout the document (using the `include = FALSE` chunk tag) to help with readibility and/or setup. -->
 
 **In the main Rmd file**
@@ -18,8 +21,22 @@ If you feel it necessary to include an appendix, it goes here.
 
 **In Chapter \@ref(ref-labels):**
 
-```{r ref.label='include_packages_2', results='hide', echo = TRUE}
+## testttttt {#sssdd}
+
+```{r testdfdd}
+
   
+
+kable(df_bigmmaf_filter5 %>% filter(IMPACT == "HIGH") %>%
+  mutate(Coordinates = paste0(CHR,":",POSITION,":",REF,"->",ALT)) %>%
+  distinct(RUN, Coordinates, SYMBOL, Consequence) %>%
+    select(Patient = RUN, Coordinates, Gene = SYMBOL, Consequence) %>% 
+    arrange(Gene),
+  booktabs = TRUE,
+  longtable = TRUE, 
+  caption = "aaaaaaaaaa")
+
+
 ```
 
 # The Second Appendix, for Fun

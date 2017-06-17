@@ -1276,74 +1276,144 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  Afin de déterminer parmi cette ensemble de gènes ceux responsables du
-  phénotype de nos patients, nous avons procédés en trois étapes :
+  Afin de nous orienter dans nos recherches, nous nous sommes basés sur
+  une étude de 2012 qui établissait une liste des gènes humains pouvant
+  être impliqués dans cilliome, c'est à dire (todo def cilliome) (Ivliev,
+  't Hoen, Roon-Mom, Peters, \& Sergeeva,
+  \protect\hyperlink{ref-Ivliev2012}{2012}). La constitution de cette
+  liste se basait à la fois sur les données de CilDB {[}ref ? {]} et de
+  MEDLINE {[} ref ? {]} mais aussi des analyse \emph{in silico} permettant
+  d'effectuer des prédiction. Ainsi, chaque gène était classé dans l'une
+  des 3 catégories suivantes en fonction des preuves déjà existante (au
+  moment de l'étude) permettant de lier un gène au cilliome humain :
+  \textbf{Strong evidence from previous studies} (Strong), \textbf{Weak
+  evidence from previous studies} (Weak) et \textbf{No evidence from
+  previous studies} (Novel). L'utilisation de cette liste nous a permis
+  d'ajouter une nouvelle annotation pertinente à nos gènes. En effet, le
+  spermatozoïde humain est une cellule ciliée, et le flagelle en est le
+  cil. Nous pouvons donc attendre à ce qu'une partie des gènes
+  responsables du phénotype MMAF soit présents dans cette liste de 371
+  gènes.
+  
+  Ainsi, 33 de nos 1432 gènes retenus faisaient partis de cette liste dont
+  22 présentaient des preuves fortes de leur appartenance au cilliome. Il
+  faut tout de même noter que bien que cette liste soit un bon outil pour
+  orienter les recherches et prioriser certains gènes, elle ne peut
+  constituer un critère suffisant pour filtrer les gènes n'en faisant pas
+  partie. Par exemple le gène \emph{DNAH1}, de par son expression
+  ubiquitaire n'a pas été intégré à cette liste (\textbf{Figure :
+  }\ref{fig:expdnah1}, or on connait désormais son implication dans le
+  phénotype MMAF (\textbf{Figure : }\ref{fig:plotfilterbigmmaf2} -
+  \textbf{A}).
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotcil-1} 
+  
+  }
+  
+  \caption[Répartition des gènes retrouvés mutéschez nos patients dans les classes de la liste du cilliome]{Répartition des gènes retrouvés mutéschez nos patients dans les classes de la liste du cilliome : Chaque couleur définit une classe de la liste des gènes du cilliome décrit dans [@Ivliev2012]. Vert = *Strong evidence from previous studies* (*Strong*), Orange = *Weak evidence from previous studies* (*Weak*), rouge = *No evidence from previous studies* (*Novel*), bleu = Non présent dans la liste. **A** : Quantification du nombre de gène ayant passé les filtres au sein des 3 classes de la liste des gènes du cilliome. **B** : TODOOOOOO : Besoin d'aide pour le nom de l'axe des Y !!!!!}\label{fig:plotcil}
+  \end{figure}
+  
+  \newpage  
+  
+  Nous avons ensuite \emph{designer} 5 analyses fonctionnant de manière
+  pyramidales. C'est à dire que la première analyse permet d'identifier
+  les candidats candidats le plus évidents tandis que la cinquième ceux
+  pour lesquels il y a moins d'indices. L'interet de ce fonctionnement est
+  qu'à chacune des analyses, l'ensemble des variants portés par les
+  patients pour lesquels un candidat a put être déterminer avec certitudes
+  seront retirés dans analyses suivantes. Ce procédés nous permettra ainsi
+  après chacune de ces 5 analyses d'alléger notre liste de variants, et
+  donc de gènes, rendant l'analyse suivante plus simple :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
-  \tightlist
   \item
-    \textbf{Étape n°1} : Cette étape consiste à séléctionner uniquement
-    les variants ayant un effet tronquant sur la protéine comme un
-    décalage du cadre de lecture, l'apparition d'un codon stop prématuré
-    ou encore une perturbation des sites accepteurs / donneur d'épissage.
-    Une analyse de l'expression testiculaire des gènes retenus ainsi
-    qu'une étude bibliographique nous permet ensuite de séléctionner tout
-    ou partie de ceux-ci. Du fait des effets extremement délétères de ces
-    variants, les patients ressortant de cette première étape sont
-    considérés comme de confience élevée (\emph{High trust}).\\
+    \textbf{Analyse n°1} : Au moment de nos analyses, le gène \emph{DNAH1}
+    était encore le seul décrit comme responsable du phénotype MMAF
+    faisant de lui un candidat évident pour expliquer le phénotype MMAF de
+    nos patients malgrés on expression non spécifique au testicule
+    (\textbf{Figure : }\ref{fig:plotdnah1} - \textbf{A}). C'est pourquoi
+    nous avons rechercher en priorité des patients portant des variants
+    tronquants homozygotes sur ce gène.
+  \item
+    \textbf{Analyse n°2} : Dans second temps, nous avons séléctionné
+    uniquement les gènes \textbf{présents dans la liste cilliome} sur
+    lesquels \textbf{au moins deux} de nos patients présentaient au moins
+    1 variant tronquant à l'état \textbf{homozygote}.
+  \item
+    \textbf{Analyse n°3} : Ensuite, nous avons étudié les gènes
+    \textbf{absents dans la liste cilliome} mais sur lesquls on trouvait
+    toujours \textbf{au moins deux} de nos patients présentant au moins 1
+    variant tronquant à l'état \textbf{homozygote}.
+  \item
+    \textbf{Analyse n°4} : Dans un troisième temps nous sommes revenus à
+    étudier les gènes \textbf{présents dans la liste cilliome} en
+    considérant cette fois-ci les gènes sur lesquels \textbf{un seul} de
+    nos patients présentaient au moins 1 variant tronquant à l'état
+    \textbf{homozygote}.
+  \item
+    \textbf{Analyse n°5} : Pour finir nous avons étudié les gènes
+    \textbf{absents dans la liste cilliome} sur lesquels \textbf{un seul}
+    de nos patients présentaient au moins 1 variant tronquant à l'état
+    \textbf{homozygote}.
+  \end{enumerate}
+  
+  Chacune de ces analyses s'est ensuite déroulée en 6 étapes :
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    \textbf{Étape n°1} : Cette première étape consistait à récupérer
+    l'ensemble des patients répondant aux critères de l'analyse en
+    question, par exemple : l'ensemble des patients portant un variant
+    homozygote sur le gène \emph{DNAH1} dans le cas de l'analyse n°1. Au
+    vu de l'effet délétère des variants séléctionés au cours de cette
+    étape, les preuves génétiques seront considéré comme de forte
+    confiance (\emph{High trust}).
   \item
     \textbf{Étape n°2} : Pour l'ensemble des gènes retenus dans l'étape
-    n°1, nous recherchons ensuite des patients portant, toujours à l'état
-    homozygote, des variant aux effet non tronquant tel que des variants
-    faux-sens ou encore des variants intronique situés proches des sites
-    d'épissage. Dans le cas des variants faux-sens, les logiciels SIFT et
-    PolyPhen sont ensuite utilisés afin de nous orienter quant à l'effet
-    délétère du variant, bien que comme nous l'avons déjà vu, ces
-    logiciels son contredisent regulièrement {[}TODO : ref!!!{]}. Au vus
-    de la difficulté à déterminer l'effet délétère de ces variants, les
-    patients identifiés au cours de cette étape sont marqués comme de
-    confience modérée (\emph{Moderate trust}).\\
+    n°1, nous recherchons ensuite des patients portant, \textbf{toujours à
+    l'état homozygote}, des variant aux effets \textbf{non tronquants} tel
+    que des variants faux-sens ou encore des variants intronique situés
+    proches des sites d'épissage. Dans le cas des variants faux-sens, les
+    logiciels SIFT et PolyPhen sont ensuite utilisés afin de nous orienter
+    quant à l'effet délétère du variant, bien que comme nous l'avons déjà
+    vu, ces logiciels son contredisent regulièrement {[}TODO : ref!!!{]}.
+    Au vus de la difficulté à déterminer l'effet délétère de ces variants,
+    les preuves génétiques seront considéré comme de confience modérée
+    (\emph{Moderate trust}).
   \item
     \textbf{Étape n°3} : Cette étape consiste à recherchere des patients
     éventuellement hétérozygotes composites, c'est à dire des patients
     portant deux variants hétérozygotes différents sur chacun des deux
-    allèles d'un même gène. Malheuresement, dans le cadre de séquençage
-    WES WGS, il est impossible de connaitre le ``phasage'' des variants,
-    c'est à dire que l'on ne peut déterminer si deux variants
+    allèles d'un même gène. Malheuresement, dans le cadre des séquençages
+    WES et WGS, il est impossible de connaitre le ``phasage'' des
+    variants, c'est à dire que l'on ne peut déterminer si deux variants
     hétérozygotes sont situés sur le même allèles ou sur deux allèles
     différents. Pour cela, des analyses de biologie moléculaire sont
-    nécéssaire. C'est pour cette raison que les patients identifier au
-    cours de cette étape sont labellisés comme étant de faible confience
-    (\emph{Low trust}).
+    nécéssaire. C'est pour cette raison que ces preuves génétiques seront
+    considérées comme étant de faible confience (\emph{Low trust}).
   \item
-    \textbf{Étape n°4} : Cette étape a pour but d'alleger le nombre de
-    variant et donc de gène restant à analyser. Pour cela, nous retirons
-    les données des patients pour lesquels la cause génétique a pu être
-    déterminée \textbf{avec certitude}, c'est à dire ceux portant des
-    variants homozygotes tronquants (c'est à dire ceux identifiés lors de
-    l'étape n°1). En effet, la plupart des variants ressortant de l'étape
-    n°2 sont des variants faux-sens, or, malgré les prédiction de SIFT et
-    PolyPhen, il est impossible d'affirmer avec certitude que ces variants
-    ont un réel impact sur la protéine sans effectuer d'analyses
-    fonctionelles. De même pour les patients identifiés lors de l'étape
-    n°3 pour lesquels il est impossible sans analyses de moléculaire de
-    déterminer si les deux variants hétérozygotes affectent le même allèle
-    ou bien deux allèles différents.\\
-    \newpage  
+    \textbf{Étape n°4} : Au cours de cette étape, nous allons étudier
+    chacun des gènes séléctionnés et déterminer auvus des différentes
+    preuves génétiques, des données d'expressions de ces gènes mais aussi
+    des informations disponibles dans la litterature, si ceux-ci sont de
+    bons candidats pour expliquer le phénotype MMAF de nos patients. Il
+    est à noter que \textbf{cette étape est la seul à ne pas être
+    automatisée}.
+  \item
+    \textbf{Étape n°5} : Pour finir, les données des patients pour
+    lesquels un gène candidat a été identifié et dont les preuves
+    génétiques sont considérée comme de forte confiance (c'est à dire les
+    patients identifiés lors de l'étape n°1) sont retirés de notre liste
+    de variants allégeant ainsi celle-ci pour les analyses suivante.
   \end{enumerate}
   
-  \paragraph{\texorpdfstring{\emph{DNAH1}, un acteur primordial dans le
-  phénotype
-  MMAF}{DNAH1, un acteur primordial dans le phénotype MMAF}}\label{dnah1-un-acteur-primordial-dans-le-phenotype-mmaf}
+  \newpage  
   
-  Au moment de nos analyses, le gène \emph{DNAH1} était encore le seul
-  décrit comme responsable du phénotype MMAF faisant de lui un candidat
-  évident pour expliquer le phénotype MMAF de nos patients malgrés on
-  expression non spécifique au testicule (\textbf{Figure :
-  }\ref{fig:plotdnah1} - \textbf{A}). C'est pourquoi nous avons appliquer
-  les 3 étapes précédement décrites en ciblant spécifiquement les patients
-  ayant des variants chevauchant les gène \emph{DNAH1}.
+  \paragraph{Analyse n°1 :}\label{analyse-n1}
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1440,7 +1510,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \end{longtable}
   
   \begin{longtable}[t]{llllllll}
-  \caption{\label{tab:unnamed-chunk-8}Liste des patients portant au moins un variant homozygote non tronquant sur le gène *DNAH1*}\\
+  \caption{\label{tab:unnamed-chunk-9}Liste des patients portant au moins un variant homozygote non tronquant sur le gène *DNAH1*}\\
   \toprule
   Patient & Gene & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
@@ -1450,7 +1520,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \end{longtable}
   
   \begin{longtable}[t]{llllllll}
-  \caption{\label{tab:unnamed-chunk-9}Liste des patients portant au moins deux variant hétérozygotes sur le gène *DNAH1*}\\
+  \caption{\label{tab:unnamed-chunk-10}Liste des patients portant au moins deux variant hétérozygotes sur le gène *DNAH1*}\\
   \toprule
   Patient & Gene & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
@@ -1473,101 +1543,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  \paragraph{Les nouveaux acteurs}\label{les-nouveaux-acteurs}
-  
-  Comme dit à l'instant, la recherche de variants sur le gène \emph{DNAH1}
-  nous permettrait d'expliquer jusqu'à 15 \% des phénotypes des patients
-  de notre cohorte. Cela signifie donc que pour au moins 85 \% d'entre
-  eux, la cause génétique du phénotype MMAF est donc expliquée par
-  d'autres facteurs.
-  
-  Afin de nous orienter dans nos recherches, nous nous sommes basés sur
-  une étude de 2012 qui établissait une liste des gènes humains pouvant
-  être impliqués dans cilliome, c'est à dire (todo def cilliome) (Ivliev,
-  't Hoen, Roon-Mom, Peters, \& Sergeeva,
-  \protect\hyperlink{ref-Ivliev2012}{2012}). La constitution de cette
-  liste se basait à la fois sur les données de CilDB {[}ref ? {]} et de
-  MEDLINE {[} ref ? {]} mais aussi des analyse \emph{in silico} permettant
-  d'effectuer des prédiction. Ainsi, chaque gène était classé dans l'une
-  des 3 catégories suivantes en fonction des preuves déjà existante (au
-  moment de l'étude) permettant de lier un gène au cilliome humain :
-  \textbf{Strong evidence from previous studies} (Strong), \textbf{Weak
-  evidence from previous studies} (Weak) et \textbf{No evidence from
-  previous studies} (Novel). L'utilisation de cette liste nous a permis
-  d'ajouter une nouvelle annotation pertinente à nos gènes. En effet, le
-  spermatozoïde humain est une cellule ciliée, et le flagelle en est le
-  cil. Nous pouvons donc attendre à ce qu'une partie des gènes
-  responsables du phénotype MMAF soit présents dans cette liste de 371
-  gènes.
-  
-  Ainsi, 32 de nos 1395 gènes retenus faisaient partis de cette liste dont
-  21 présentaient des preuves fortes de leur appartenance au cilliome. Il
-  faut tout de même noter que bien que cette liste soit un bon outil pour
-  orienter les recherches et prioriser certains gènes, elle ne peut
-  constituer un critère suffisant pour filtrer les gènes n'en faisant pas
-  partie. Par exemple le gène \emph{DNAH1}, de par son expression
-  ubiquitaire n'a pas été intégré à cette liste (\textbf{Figure :
-  }\ref{fig:expdnah1}, or on connait désormais son implication dans le
-  phénotype MMAF (\textbf{Figure : }\ref{fig:plotfilterbigmmaf2} -
-  \textbf{A}).
-  
-  Suite à cela, afin de nous concentrer en priorité sur les gènes
-  entrainant un phénotype MMAF chez le plus grand nombre d'individus, nous
-  avons sélectionnés ceux sur lesquels plusieurs patients portaient au
-  moins un variant ayant passé l'ensemble des filtres nous permettant
-  alors d'obtenir une liste de 212 gènes dont 145 (soit 68 \%) étaient
-  retrouvés variants chez uniquement 2 patients (\textbf{Figure :
-  }\ref{fig:plotfilterbigmmaf2} - \textbf{B}).
-  
-  Ces deux informations nous ont ensuite permis de \emph{designer} 4
-  analyses que nous avons effectué de manière successives nous permettant
-  ainsi de séléctionner dans un premier temps les gènes candidats les plus
-  évidents nous permettant ainsi d'épurer progressivement notre liste de
-  variants rendant ainsi plus facile l'identification des candidats les
-  moins évidents.
-  
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item
-    \textbf{Analyse n°1} : Dans un permier temps, nous avons étudié
-    uniquement les gènes \textbf{présents dans la liste cilliome} sur
-    lesquels \textbf{au moins deux} de nos patients présentaient au moins
-    1 variant tronquant à l'état \textbf{homozygote}.
-  \item
-    \textbf{Analyse n°2} : Ensuite, nous avons étudié les gènes
-    \textbf{absents dans la liste cilliome} mais sur lesquls on trouvait
-    toujours \textbf{au moins deux} de nos patients présentant au moins 1
-    variant tronquant à l'état \textbf{homozygote}.
-  \item
-    \textbf{Analyse n°3} : Dans un troisième temps nous sommes revenus à
-    étudier les gènes \textbf{présents dans la liste cilliome} en
-    considérant cette fois-ci les gènes sur lesquels \textbf{un seul} de
-    nos patients présentaient au moins 1 variant tronquant à l'état
-    \textbf{homozygote}.
-  \item
-    \textbf{Analyse n°4} : Pour finir nous avons étudié les gènes
-    \textbf{absents dans la liste cilliome} sur lesquels \textbf{un seul}
-    de nos patients présentaient au moins 1 variant tronquant à l'état
-    \textbf{homozygote}.
-  \end{enumerate}
-  
-  Il faut noter qu'au sein des chacun de ces 4 analyses nous avons
-  appliquer les étapes n°1-4 décrites précédemment.
-  
-  \newpage
-  
-  \begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/plotcil-1} 
-  
-  }
-  
-  \caption[TODOOOOOOOOOOOOOOOOOO]{TODOOOOOOOOOOOOOOOOOO : Chaque couleur définit une classe de la liste des gènes du cilliome décrit dans [@Ivliev2012]. Vert = *Strong evidence from previous studies* (*Strong*), Orange = *Weak evidence from previous studies* (*Weak*), rouge = *No evidence from previous studies* (*Novel*), bleu = Non présent dans la liste. **A** : Quantification du nombre de gène ayant passé les filtres au sein des 3 classes de la liste des gènes du cilliome. **B** : TODOOOOOO : Besoin d'aide pour le nom de l'axe des Y !!!!!}\label{fig:plotcil}
-  \end{figure}
-  
-  \newpage
-  
-  \subparagraph{Analyse n°1}\label{analyse-n1}
+  \paragraph{Analyse n° 2}\label{analyse-n-2}
   
   Comme dit précédemment, dans cette analyse nous nous sommes concentrés
   sur les gènes \textbf{présents dans la liste cilliome} sur lesquels
@@ -1703,7 +1679,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  \subparagraph{Analyse n° 2}\label{analyse-n-2}
+  \paragraph{Analyse n° 3}\label{analyse-n-3}
   
   Pour rappel, au cours de cette analyse, nous avons étudié les gènes
   \textbf{absents dans la liste cilliome} mais sur lesqules on trouvait
@@ -1937,7 +1913,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  \subparagraph{Analyse n°3}\label{analyse-n3}
+  \paragraph{Analyse n°4}\label{analyse-n4}
   
   Dans cette un troisième analyse, nous avons séléctionné à nouveau les
   gènes \textbf{présents dans la liste cilliome} en conservanrt cett
@@ -2061,20 +2037,27 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  \subparagraph{Analyse n°4}\label{analyse-n4}
-  
-  \begin{center}\includegraphics{thesis_files/figure-latex/dfresumegrp4-1} \end{center}
-  
-  \begin{center}\includegraphics{thesis_files/figure-latex/dfresumegrp4-2} \end{center}
-  
-  \newpage
+  \paragraph{Analyse n°5}\label{analyse-n5}
   
   Pour finir nous avons dans cette analyse séléctionné l'ensemble des
   variants chevauchant des gènes \textbf{absents dans la liste cilliome}
   sur lesquels \textbf{un seul} de nos patients présentaient au moins 1
   variant tronquant à l'état \textbf{homozygote}. Cela nous a permis
-  d'obtenir une liste de 0 gènes différents retrouvés mutés chez 0 de nos
-  patients.
+  d'obtenir une liste de 59 gènes différents retrouvés mutés chez 30 de
+  nos patients.
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \emph{CCDC66} : \url{https://www.ncbi.nlm.nih.gov/pubmed/28235840}
+  \end{enumerate}
+  
+  \begin{verbatim}
+  ## Warning: Removed 1 rows containing missing values (position_stack).
+  \end{verbatim}
+  
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-11-1} \end{center}
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -2084,9 +2067,13 @@ class (for LaTeX) and the R bookdown package, in general.
     ces critères\\
   \item
     \textbf{Étape n°2} : Nous avons donc cherché des patients portant au
-    moins 1 variant homozygote non tronquant sur l'un de ces 0. Nous avons
-    ainsi pu identifier 0
+    moins 1 variant homozygote non tronquant sur l'un de ces 59. Nous
+    avons ainsi pu identifier 7
   \end{enumerate}
+  
+  \newpage
+  
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-12-1} \end{center}
   
   \newpage
   
@@ -2109,7 +2096,7 @@ class (for LaTeX) and the R bookdown package, in general.
   ## coercing into character vector
   \end{verbatim}
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-15-1} \end{center}
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-13-1} \end{center}
   
   \newpage
   
@@ -2117,23 +2104,26 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Discussion}\label{discussion-1}
   
+  ceci est un test \ref{tab:testdfdd}
+  
   L'analyse de cette cohorte de 62 patients MMAF nous dans un premier
   temps permis de confirmer l'importance de l'implication du gène
   \emph{DNAH1} dans ce phénotype grâce à \ldots{} patients présentant des
   variants sur ce gène dont \ldots{} à l'état homozygote. Elle nous a
-  également permis d'identifier 7 nouveaux gène candidats pouvant
-  expliquer le phénotype de 29 de nos patients soit 47 \% de la cohorte.
-  parmi ceux-ci, \ldots{} portaient au moins un variant homozygote sur un
-  de ces gènes. Pour les autres des études sont nécessaires afin de
-  déterminer si les différents variants hétérozygotes qu'ils portent sont
-  situés sur leurs deux allèles différents faisant d'eux des hétérozygotes
-  composites (\textbf{Figure : }\ref{fig:plotresumebigmmaf} - \textbf{A}).
+  également permis d'identifier \ldots{} nouveaux gène candidats pouvant
+  expliquer le phénotype de 9 de nos patients soit \% de la cohorte. parmi
+  ceux-ci, \ldots{} portaient au moins un variant homozygote sur un de ces
+  gènes. Pour les autres des études sont nécessaires afin de déterminer si
+  les différents variants hétérozygotes qu'ils portent sont situés sur
+  leurs deux allèles différents faisant d'eux des hétérozygotes composites
+  (\textbf{Figure : }\ref{fig:plotresumebigmmaf} - \textbf{A}).
   
-  Parmi cet ensemble de patients, il faut noter que 5 d'entre eux porte
-  des variants pouvant expliquer leur phénotype sur plusieurs des gènes
-  candidats que nous avons identifiés. En effet, 5 de nos patients portent
-  des variants sur deux de nos gènes candidats et 0 sur 3 d'entre eux
-  (\textbf{Figure : }\ref{tab:tabresumebigmmaf} - \textbf{B}).
+  Parmi cet ensemble de patients, il faut noter que d'entre eux porte des
+  variants pouvant expliquer leur phénotype sur plusieurs des gènes
+  candidats que nous avons identifiés. En effet, n\_run\_2\_candidat de
+  nos patients portent des variants sur deux de nos gènes candidats et
+  n\_run\_3\_candidat sur 3 d'entre eux (\textbf{Figure :
+  }\ref{tab:tabresumebigmmaf} - \textbf{B}).
   
   Cependant, parmi ces différents variants certains semblent plus
   probables pour expliquer le phénotype (\textbf{Table :
@@ -2171,10 +2161,10 @@ class (for LaTeX) and the R bookdown package, in general.
   que des analyses complémentaires soient nécessaires.
   
   Ainsi, cette analyse révèle l'efficacité de notre pipeline puisqu'elle a
-  permis d'identifier au moins un gène candidat pour 47 \% de nos
-  patients. Pour les autres des analyses individuelles complémentaires
-  sont nécessaires afin d'identifier la cause génétique responsable de
-  leur phénotype.
+  permis d'identifier au moins un gène candidat pour
+  p\_run\_bigmmaf\_found \% de nos patients. Pour les autres des analyses
+  individuelles complémentaires sont nécessaires afin d'identifier la
+  cause génétique responsable de leur phénotype.
   
   Une partie de ces différents résultats ont déjà été publiés dans deux
   articles dont je suis co-auteur :

@@ -13,3 +13,5 @@ cowplot
 stringr
 foreach
 bindrcpp
+magrittr
+ggpubr
