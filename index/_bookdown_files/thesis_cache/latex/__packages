@@ -1,10 +1,11 @@
 base
 devtools
+bookdown
 dplyr
 ggplot2
-bookdown
 knitr
 thesisdown
+pander
 tidyr
 data.table
 stringi
@@ -12,6 +13,7 @@ scales
 cowplot
 stringr
 foreach
+viridisLite
+viridis
 bindrcpp
-magrittr
-ggpubr
+kableExtra
