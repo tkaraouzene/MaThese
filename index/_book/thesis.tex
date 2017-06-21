@@ -213,31 +213,31 @@ class (for LaTeX) and the R bookdown package, in general.
   exomiques -- application en recherche
   clinique}\label{mise-en-place-dune-strategie-pour-lanalyse-des-donnees-exomiques-application-en-recherche-clinique}
   
+  \newpage
+  
   \section{Intro}\label{intro}
   
-  Les causes de plusieurs centaines de pathologies ont pu être identifiées
-  grâce à ces technique depuis leur premier succès pubilié en 2010 (S. B.
-  Ng et al., n.d.).
-  
   En 2011, les bases moléculaires d'environ 3700 pathologies à
-  transmission Mendelienne avaient été élucidé cependant, pour une
+  transmission Mendelienne avaient été élucidées cependant, pour une
   quantité équivalente de pathologies Mendeliennes (ou suspectées de
   l'être) cette cause reste un mystère (Amberger, Bocchini, \& Hamosh,
-  \protect\hyperlink{ref-Amberger2011}{2011}). Depuis leur emmergence, les
-  séquençages WGS et WES ont révolutionnés les méthodes de recherche dans
-  le cadre d'étude phénotype-génotype en permettant de manière rapide et à
-  moindre coup le séquençage de la quasi totalité des gènes humains. Dès
-  lors, le défis de ces analyses n'est plus le séquençage de l'ADN mais
-  l'interprétation des données massives produites. En effet, l'un des plus
-  grand challenge des analyses phénotype-génotype réalisées par WES réside
-  dans la quantité importante de variant portés par chaque individu
-  s'élevant à plusieurs dizaine de milliers lorsque l'on compare avec le
-  génome de référence. Même après avoir retiré les variants retrouvés
-  fréquemment dans la population générale, des méthodes additionnelles
-  sont nécéssaires pour prédire, parmis les variants restant, lesquels
-  induisent des conséquences fonctionnelles serieuses afin de le prioriser
-  (Pelak et al., \protect\hyperlink{ref-Pelak2010}{2010}). De nombreux
-  logiciels tel que Variant effect predictor (W. McLaren et al.,
+  \protect\hyperlink{ref-Amberger2011}{2011}). Avec plusieurs centaines de
+  pathologies caractérisées depuis 2010 (S. B. Ng et al., n.d.), les
+  séquençages WGS et WES ont, depuis leur emmergence, révolutionnés les
+  méthodes de recherche dans le cadre d'étude phénotype-génotype en
+  permettant de manière rapide et à moindre coup le séquençage de la quasi
+  totalité des gènes humains. Dès lors, le défis de ces analyses n'est
+  plus le séquençage de l'ADN mais l'interprétation des données massives
+  produites. En effet, l'un des plus grand challenge des analyses
+  phénotype-génotype réalisées par WES réside dans la quantité importante
+  de variant portés par chaque individu s'élevant à plusieurs dizaine de
+  milliers lorsque l'on compare avec le génome de référence. Même après
+  avoir retiré les variants retrouvés fréquemment dans la population
+  générale, des méthodes additionnelles sont nécéssaires pour prédire,
+  parmis les variants restant, lesquels induisent des conséquences
+  fonctionnelles serieuses afin de le prioriser (Pelak et al.,
+  \protect\hyperlink{ref-Pelak2010}{2010}). De nombreux logiciels tel que
+  Variant effect predictor (W. McLaren et al.,
   \protect\hyperlink{ref-McLaren2016}{2016}), snpEFF ou encore Annovar
   permettent d'identifier quels sont les variants qui ont un effet
   tronquant sur la protéine. Cependant, avec en moyenne 165 variants
@@ -245,44 +245,42 @@ class (for LaTeX) and the R bookdown package, in general.
   chaque exomes (Pelak et al., \protect\hyperlink{ref-Pelak2010}{2010})
   ces méthodes, bien qu'efficaces sont souvent insuffisantes.
   
-  Il existe de nombreux logiciels qui à partir des variants appelés
-  effectuent les étapes d'annotation et de filtrage. C'est par exemple le
-  cas d'Exomiser {[}TODO: insert ref and Exomiser describtion{]} ou encore
-  de {[}TODO: insert at least one other soft{]}. La plupart de ces
-  logiciels fonctionnent très bien, cependant tous prennent pour point de
-  départ des variants appelés en amont. Ils ne contrôlent donc en aucune
-  manière les étapes d'alignement et d'appel des variants. Or, comme il a
-  été dit plus tôt, ces deux étapes constituent la bases de l'analyse
-  {[}TODO insert ref{]} et les résultats
+  D'autres logiciels tel que Exomiser vont, a partir d'une liste de
+  variant \textbf{déjà} appelés effectuer les étapes d'annotation, de
+  filtrage et de priorisation. Malgré l'efficacité de ces logiciels, aucun
+  d'entre eux ne couvrent l'ensemble des étapes allant de l'alignement des
+  \emph{reads} à la priorisation des variants. La plupart ayant pour point
+  de départ une liste de variants appelés en amont. Ils ne contrôlent donc
+  en aucune manière les étapes d'alignement et d'appel des variants. Or,
+  comme il a été dit plus tôt, ces deux étapes constituent la bases de
+  l'analyse {[}{]}.
   
-  Ce chapitre décrit la constitution et l'utilisation d'un pipeline
-  d'analyse des données de séquençage exomique et son utilisation dans le
-  cadre de la recherche de mutations entrainant différents phénotypes
-  d'infertilité. La difficulté des études génétiques visant à identifier
-  des gènes pathogènes vient de l'abondance de variants rares chez tout un
-  chacun et de la difficulté d'effectuer des tris efficaces et justes pour
-  ne retenir que la ou les mutations causales. Thomas développe un
-  pipeline se basant sur des outils existant mais permettant d'effectuer
-  des tris successifs efficaces et pertinents
+  Ce chapitre décrit à la fois la constitution d'un pipeline d'analyse des
+  données de séquençage exomique et son utilisation dans le cadre de la
+  recherche de mutations entrainant différents phénotypes d'infertilité
+  d'une part de cas familiaux composés de duos ou trio et pour finir d'une
+  large cohorte d'individus non apparentés présentant tous le même
+  phénotyype.
   
   \newpage
   
   \section{Résultats}\label{resultats}
   
-  Dans cette partie, nous allons détailler les résultats de l'analyse des
-  données de WES de 75 patients tous atteins d'un phénotype d'infertilité.
-  Ces études seront séparées en deux parties distinctes, la première se
-  concentrera sur l'études de \ldots{} familles incluant 13 de ces
-  patients. Le seconde portera sur l'analyse des 62 patients restant étant
-  tous non-apparentés et présentant un phénotype MMAF.
+  Dans cette partie, nous allons, après avoir décrit notre pipeline,
+  détailler les résultats de l'analyse des données de WES de 75 patients
+  tous atteins d'un phénotype d'infertilité. Ces études seront séparées en
+  deux parties distinctes, la première se concentrera sur l'études de 6
+  familles incluant 13 de ces patients. Le seconde portera sur l'analyse
+  des 62 patients restant étant tous non-apparentés et présentant un
+  phénotype MMAF.
   
   \subsection{Description de la
   pipeline}\label{description-de-la-pipeline}
   
-  Après avoir été séquencés les données receuillies pour ces patients sont
-  procéssés au sein de la même pipeline d'analyse qui comprend quatre
-  étapes allant de l'alignement des \emph{reads} au filtrage des variants
-  :
+  Après avoir été séquencés, les données receuillies pour ces patients
+  sont procéssées au sein de la même pipeline d'analyse qui comprend
+  quatre étapes allant de l'alignement des \emph{reads} au filtrage des
+  variants :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -339,19 +337,23 @@ class (for LaTeX) and the R bookdown package, in general.
     séquence codante de l'ensemble des transcrits Ensembl qu'il chevauche
     (\textbf{Figure : }\ref{fig:figvepcsq}) (\textbf{Table :
     }\ref{tab:tabvepcsq}). Ensite, nous ajoutons récuperons pour chaque
-    gène son expression tissulaire en nous basant sur le projet Illumina
-    BodyMap {[}TODO ref{]} qui recanse les données RNAseq des gènes
+    gène son expression tissulaire en nous basant sur les données Ensembl
+    (Aken et al., \protect\hyperlink{ref-Aken2017}{2017}) générées par le
+    projet Illumina BodyMap qui recanse les données RNAseq des gènes
     humains pour 16 tissus différents. Suite à cela nous ajoutons, lorsque
     celle-ci est disponible, la fréquence du variant dans les bases de
     données ExAC (Lek et al., \protect\hyperlink{ref-Lek2016}{2016}),
-    ESP600 {[}TODO{]} et 1000Genomes {[}TODO{]} donnant ainsi une
-    estimation de sa fréquence dans la population générale. De même, la
-    particularité de ce pipeline est qu'elle conserve l'ensemble des
-    variants identifiés dans les études effectuées précédemment permettant
-    d'ajouter aux annotations la fréquence d'un variant chez les individus
-    déjà séquencé et donc la fréquence d'un variant dans chaque phénotype
-    étudié créant ainsi une base de données interne qui pourra servir de
-    contrôle dans les études ultérieur.
+    ESP600 (\href{http://evs.gs.washington.edu/EVS/}{Exome Variant Server,
+    NHLBI GO Exome Sequencing Project (ESP), Seattle, WA}) et 1000Genomes
+    (1000 Genomes Project Consortium et al.,
+    \protect\hyperlink{ref-1000GenomesProjectConsortium2015}{2015})
+    donnant ainsi une estimation de sa fréquence dans la population
+    générale. De même, la particularité de ce pipeline est qu'elle
+    conserve l'ensemble des variants identifiés dans les études effectuées
+    précédemment permettant d'ajouter aux annotations la fréquence d'un
+    variant chez les individus déjà séquencé et donc la fréquence d'un
+    variant dans chaque phénotype étudié créant ainsi une base de données
+    interne qui pourra servir de contrôle dans les études ultérieur.
   \end{enumerate}
   
   \begin{figure}
@@ -372,7 +374,7 @@ class (for LaTeX) and the R bookdown package, in general.
     extrêmement importante si l'on souhaite analyser de manière efficace
     les données provenant de WES. C'est pourquoi elle occupe une place
     importante dans notre pipeline. L'intégralité des paramètres de cette
-    étape peuvent être modifier par l'utilisateur de sorte à faire
+    étape peuvent être modifiés par l'utilisateur de sorte à faire
     correspondre les critères de filtre aux besoins de l'étude. Afin de
     rendre son utilisation le plus efficace possible, nous avons souhaité
     définir des paramètres par défauts pertinent dans la plupart des
@@ -382,8 +384,8 @@ class (for LaTeX) and the R bookdown package, in general.
     affectant les séquences UTRs sont filtrés ainsi que les variants ayant
     une fréquence \(\ge\) 1\% dans les bases dans l'une des bases données
     (ExAC, ESP6500 ou 1KH). Aussi, pour un phénotype donné, l'ensemble des
-    variants observés chez les individus étudiés présentant un phénotype
-    différent sont de même enlevés de la liste finale.
+    variants homozygotes observés chez les individus étudiés présentant un
+    phénotype différent sont de même enlevés de la liste finale.
   \end{enumerate}
   
   \newpage
@@ -534,8 +536,6 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsection{Utilisation du pipeline dans des cas familiaux
   :}\label{utilisation-du-pipeline-dans-des-cas-familiaux}
   
-  \subsubsection{Description des familles}\label{description-des-familles}
-  
   Dans cette partie, je me concentre sur l'analyse bioinformatique des
   résultats des séquençages exomiques effectués entre 2012 et 2014 de 13
   individus infertiles provenant de 6 familles différentes. Parmi
@@ -559,20 +559,19 @@ class (for LaTeX) and the R bookdown package, in general.
     atteins par une mosaïque d'anomalie morphologique du flagelle.
   \end{enumerate}
   
-  Parmi ces 6 chacune composée de 2 à 3 frères, 3 d'entre elles présentent
-  un historique de consanguinité, les parents étant soit cousins germains,
-  pour les familles \ldots{} et \ldots{}, soit cousins au second degré,
-  pour la famille \ldots{} . La consanguinité favorisant la transmission
-  de variants à l'état homozygote, nous avons décidé, dans un premiers
-  temps de concentrer nos analyses uniquement sur les variants (SNVs et
-  indels) homozygotes pour l'ensemble des familles. Pour les 3 familles
-  n'ayant pas d'historique de consanguinité, ce choix nous permet de
-  réduire la liste des variants candidats de sorte à faciliter les
-  analyses. L'études des variants hétérozygotes sera effectuée \emph{a
-  posteriori} pour les familles dont la cause génétique du phénotype n'a
-  pas pu être identifiée en se limitant aux variants homozygotes. Un
-  récapitulatif des familles et de leur phénotype est disponible dans la
-  table \ref{tab:tabrecapfam}.
+  Parmi ces 6 chacune composée de 2 à 3 frères, les familles AZ, FF et
+  MMAF2 présentent un historique de consanguinité, les parents étant soit
+  cousins germains, soit cousins au second degré. La consanguinité
+  favorisant la transmission de variants à l'état homozygote, nous avons
+  décidé, dans un premiers temps de concentrer nos analyses uniquement sur
+  les variants (SNVs et indels) homozygotes pour l'ensemble des familles.
+  Pour les 3 familles n'ayant pas d'historique de consanguinité, ce choix
+  nous permet de réduire la liste des variants candidats de sorte à
+  faciliter les analyses. L'études des variants hétérozygotes sera
+  effectuée \emph{a posteriori} pour les familles dont la cause génétique
+  du phénotype n'a pas pu être identifiée en se limitant aux variants
+  homozygotes. Un récapitulatif des familles et de leur phénotype est
+  disponible dans la table \ref{tab:tabrecapfam}.
   
   \newpage
   
@@ -673,10 +672,6 @@ class (for LaTeX) and the R bookdown package, in general.
   \paragraph{Résultat de l'appel des
   variants}\label{resultat-de-lappel-des-variants}
   
-  \begin{verbatim}
-  ## [1] 34331
-  \end{verbatim}
-  
   Comme dit précédemment, l'appel des variants fait suite à l'alignement
   et consiste à comparer la séquence d'un individu avec celle d'un génome
   de référence afin d'en relever les différences. La particularité de
@@ -712,11 +707,11 @@ class (for LaTeX) and the R bookdown package, in general.
   l'importance de ces appels, nous avons fait le choix de les conserver
   afin de ne pas filtrer une quantité trop importante de données. Ces
   appels seront cependant considérés comme étant de faible qualité, de
-  fait, leurs analyses et interprétation seront plus précautionneuses En
+  fait, leurs analyses et interprétation seront plus précautionneuses. En
   revanche, au vus de la trop grande incertitude de l'appel des variants
   NS, ceux-ci sont systématiquement filtrés éliminant ainsi entre 10.3 et
-  18.7 \% des positions appelées (\textbf{Figure : }\ref{fig:plotvarcall}
-  - \textbf{A}).
+  18.7 \% des positions appelées pour chaque patient (\textbf{Figure :
+  }\ref{fig:plotvarcall} - \textbf{A}).
   
   Un second filtre est appliqué aux variants ayant été précédemment
   appelés DS. Celui-ci consiste à comparer les appels effectués
@@ -763,47 +758,35 @@ class (for LaTeX) and the R bookdown package, in general.
   d'informations sur les variants. Ces informations seront ensuite
   utilisées afin de filtrer et / ou prioriser les variants. Dans ces
   analyses nous avons utilisé le logiciel \emph{Variant Effect Predictor}
-  (VEP) (W. McLaren et al., \protect\hyperlink{ref-McLaren2016}{2016}) qui
-  va à la fois prédire l'effet qu'auront ces variants sur l'ensemble des
-  transcrits (et gènes) qu'ils chevauchent, ajouter, lorsqu'elle est
-  disponible, la fréquence de chacun de ces variants dans les bases de
-  données ExAC, 1000Genomes (1KG) et ESP6500. Pour finir VEP nous
-  permettra de connaitre les prédictions de pathogénicités fournies par
-  SIFT et PolyPhen pour les variants faux-sens.
+  (VEP) (W. McLaren et al., \protect\hyperlink{ref-McLaren2016}{2016}) va
+  prédire l'effet qu'auront ces variants sur l'ensemble des transcrits (et
+  gènes) qu'ils chevauchent. Dans le cas de substitution faux-sens, c'est
+  à dire entrainant le changement d'un seul acide-aminé de la séquence
+  protéique, nous utiliserpns les prédictions fournies par SIFT et
+  PolyPhen afin d'estimer leur pathogénicité. Pour finir nous ajoutons,
+  lorsqu'elle est disponible, la fréquence de chacun de ces variants dans
+  les bases de données ExAC, 1000Genomes (1KG) et ESP6500.
   
-  Après avoir annoté nos variants par VEP, nous avons pu constater que
-  pour chaque patient 24975 gènes sont en moyenne affecté par au moins un
-  variant pour en moyenne 122735 transcrits (soit environ 5 transcrits par
-  gènes). Il faut noter que parmi ces gènes se trouvent à la fois des
-  gènes codant pour des protéine \textbf{et} d'autres non codant
-  (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{A}).
+  Après avoir annoté nos variants, nous avons pu constater que pour chaque
+  patient 24975 gènes sont en moyenne affecté par au moins un variant pour
+  en moyenne 122735 transcrits (soit environ 5 transcrits par gènes). Il
+  faut noter que parmi ces gènes se trouvent à la fois des gènes codant
+  pour des protéine \textbf{et} d'autres non codant (\textbf{Figure :
+  }\ref{fig:plotvarannotation} - \textbf{A}).
   
   Chaque variant affectera l'ensemble des transcrits qu'il chevauche,
   ainsi un même variant pourra impacter plusieurs transcrits. Ces impacts
   sont ensuite classés par VEP en quatre catégories qui sont, de la plus
-  délétère à la moins délétère : HIGH, MODERATE, LOW, MODIFIER
-  (\textbf{Table :}\ref{tab:tabvepcsq}). Comme attendu, les variants ayant
-  un impact tronquant se retrouvent être les moins fréquent chez chacun de
-  nos patients. Ceci est d'autant plus flagrant pour l'impact HIGH qui
-  regroupe, entre autres, les variants créant un codon stop ou encore ceux
-  causant un décalage du cadre de lecture (\textbf{Table
-  :}\ref{tab:tabvepcsq}), se retrouvent en quantité extrêmement faible
-  puisqu'ils ne représentent en moyenne que 0.15 \% des variants, soit une
-  moyenne de 466 hétérozygotes et 370 homozygotes par patient)
-  (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{B}).
-  
-  Parmi ces variants, certains étaient déjà recensés dans une des trois
-  base donnée (ExAC, ESP et 1KG). Ainsi, on peut observer qu'entre 38.6 et
-  55.5 \% de nos variant étaient listés dans ExAC et entre 33.1 et 43.8 \%
-  dans ESP. En revanche environ 87.1 \% d'entre eux sont recensés dans 1KG
-  (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{C}) (À discuter
-  !!!!!).
-  
-  (À discuter !!!!!) (\textbf{Figure : }\ref{fig:plotvarannotation} -
-  \textbf{D})
-  
-  LES FIGURES SUR LA FRÉQUENCE SONT À DISCUTER CAR LEUR INTERPRÉTATION ME
-  LAISSE PERPLEX (SURTOUT LA PROPORTION DE NOS VARIANTS PRÉSENTS DANS 1KG)
+  délétère à la moins délétère : \emph{HIGH}, \emph{MODERATE}, \emph{LOW},
+  \emph{MODIFIER} (\textbf{Table :}\ref{tab:tabvepcsq}). Comme attendu,
+  les variants ayant un impact tronquant se retrouvent être les moins
+  fréquent chez chacun de nos patients. Ceci est d'autant plus flagrant
+  pour l'impact \emph{HIGH} qui regroupe, entre autres, les variants
+  créant un codon stop ou encore ceux causant un décalage du cadre de
+  lecture (\textbf{Table :}\ref{tab:tabvepcsq}), se retrouvent en quantité
+  extrêmement faible puisqu'ils ne représentent en moyenne que 0.15 \% des
+  variants, soit une moyenne de 466 hétérozygotes et 370 homozygotes par
+  patient) (\textbf{Figure : }\ref{fig:plotvarannotation} - \textbf{B}).
   
   \newpage
   
@@ -813,7 +796,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Annotation des variants par VEP]{Annotation des variants par VEP : **A** : Quantification du nombre de gènes (en bleu) / transcrits (en rose) impactés par au moins un variant pour chaque patient chacun représentés par une barre. **B** : Distribution des impacts HIGH MODERATE LOW et MODIFIER en fonction des patients et du génotype du variant. **C** : Pourcentage des variants retrouvés au sein des trois bases de données : ExAC, ESP et 1KG. **D** : Distribution des fréquences de nos variants au sein des trois bases de données : ExAC, ESP et 1KG}\label{fig:plotvarannotation}
+  \caption[Annotation des variants]{Annotation des variants : **A** : Quantification du nombre de gènes (en bleu) / transcrits (en rose) impactés par au moins un variant pour chaque patient chacun représentés par une barre. **B** : Distribution des impacts HIGH MODERATE LOW et MODIFIER en fonction des patients et du génotype du variant}\label{fig:plotvarannotation}
   \end{figure}
   
   \newpage
@@ -894,7 +877,6 @@ class (for LaTeX) and the R bookdown package, in general.
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \setcounter{enumi}{4}
-  \tightlist
   \item
     \textbf{Fréquence des variants :} La fréquence d'un variant dans la
     population générale est un moyen rapide d'avoir une prédiction fiable
@@ -903,11 +885,11 @@ class (for LaTeX) and the R bookdown package, in general.
     causal d'une pathologie sévère. Ainsi nous avons filtré pour
     l'ensemble de nos patients l'ensemble des variants ayant une fréquence
     \(\ge\) 0.01 dans l'une des trois bases de données que sont ExAC, ESP
-    et 1KG.\\
+    et 1KG.
   \item
     \textbf{Présence des variants dans la cohorte contrôle :} Au cours de
     nos différentes études, nous avons été amenés à séquencé un total de
-    134 un des 6 phénotypes étudiés au cours de nos différentes études
+    134 individus présentant un des 6 phénotypes que nous avons étudié
     (\textbf{Table : }\ref{tab:TODO}). Ces phénotypes étant très
     différent, on peut émettre l'hypothèse que leurs causes génétiques
     soient également différentes. De même, les variants recherchés étant
@@ -941,24 +923,20 @@ class (for LaTeX) and the R bookdown package, in general.
   \newpage
   
   Comme on pouvait s'y attendre, ces six filtres ont un pouvoir
-  discriminant extrêmement différent (\textbf{Figure :}
-  \ref{fig:plotcomparefilter}). En effet, tandis que le filtre
+  discriminant extrêmement différent. En effet, tandis que le filtre
   ``Transcript relevance'' (filtre n°4) éliminer en moyenne 3.9 \% des
-  variants de chaque individu tandis que le filtre ``Variant impact''
-  (filtre n° 3) élimine jusqu'à 90.1 \% de ces mêmes variants
-  (\textbf{Figure :} \ref{fig:plotcomparefilter} - \textbf{A}). Cette
-  différence n'est pas surprenante. En effet, comme nous l'avions vu plus
-  tôt, les variants de la catégorie VEP MODIFIER qui regroupe entre autres
-  les variants chevauchant les séquences UTRs et introniques
-  (\textbf{Table :} \ref{fig:tabvepcsq}) représentent en moyenne \ldots{}
-  \% des variants de nos patients (\textbf{Figure :}
-  \ref{fig:plotvarannotation} - \textbf{A}). Ceux-ci étant tous filtrés,
-  on s'attendait donc à une valeur aussi élevée. On peut également
-  constater l'importance de la cohorte contrôle qui, je le rappelle,
-  permet de filtrer l'ensemble des variants homozygotes observés en son
-  sein, puisque ce filtre permet retirer entre 76.5 et 88.4\% des variants
-  de chaque individus (\textbf{Figure :} \ref{fig:plotvarannotation} -
-  \textbf{A}).
+  variants de chaque individu, le filtre ``Variant impact'' (filtre n° 3)
+  élimine jusqu'à 90.1 \% de ces mêmes variants. Cette différence n'est
+  pas surprenante. En effet, comme nous l'avions vu plus tôt, les variants
+  de la catégorie VEP \emph{MODIFIER} qui regroupe entre autres les
+  variants chevauchant les séquences UTRs et introniques (\textbf{Table :}
+  \ref{tab:tabvepcsq}) représentent en moyenne 88\% des variants de nos
+  patients. Ceux-ci étant tous filtrés, on s'attendait donc à une valeur
+  aussi élevée. On peut également constater l'importance de la cohorte
+  contrôle qui, je le rappelle, permet de filtrer l'ensemble des variants
+  homozygotes observés en son sein, puisque ce filtre permet retirer entre
+  76.5 et 88.4\% des variants de chaque individus (\textbf{Figure :}
+  \ref{fig:plotcomparefilter} - \textbf{A}).
   
   Cependant, regarder uniquement le pourcentage de variants filtrés par
   chaque filtre révèle une information partielle. En effet, dans ce cas de
@@ -967,8 +945,7 @@ class (for LaTeX) and the R bookdown package, in general.
   filtré par plusieurs filtres. Dès lors, il faut également analyser la
   quantité de variants filtrés \textbf{spécifiquement} par chaque filtre.
   Ainsi, on peut constater que le classement des filtres en fonctions de
-  leur stringance reste quasiment identique (\textbf{Figure :}
-  \ref{fig:plotcomparefilter} - \textbf{B}) il est tout de même
+  leur stringance reste quasiment identique. Il est tout de même
   intéressant de noter que désormais le filtre ``Variant impact'' apparait
   moins efficace que les filtres ``Ctrl'' et ``Genotype'' en filtrant
   spécifiquement une moyenne de 253 variants par individu contre 423 pour
@@ -996,14 +973,43 @@ class (for LaTeX) and the R bookdown package, in general.
   
   Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants
   subsistent nous permettant d'obtenir une liste de gènes restreinte pour
-  chaque famille (\textbf{Table : }\ref{tab:tablegene}) et ainsi de tirer
-  des conclusions quant au variant responsable du phénotype.
+  chaque famille et ainsi de tirer des conclusions quant au variant
+  responsable du phénotype de chacune d'entre elles (\textbf{Table :
+  }\ref{tab:tablegene}).
+  
+  \newpage
+  
+  \begin{landscape}
+  \begin{longtable}[t]{lllllllll}
+  \caption{\label{tab:tablegene}Récapitulatif des variants ayant passé l'ensemble des filtres pour chaque famille}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{4}{c}{Variant impact} & \multicolumn{3}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
+  Family & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC & ESP & 1KG\\
+  \midrule
+  AZ & GUF1 & c.443A>T ; p.Ser148Ile & missense & deleterious & proba damaging & 0.00207 & 0.0028 & 9e-04\\
+  AZ & SPINK2 & c.56-3C>G ; . & splice region & . & . & . & . & .\\
+  FF & PLCZ1 & c.1465G>T ; p.Ile489Phe & missense & deleterious & possib damaging & 8.24e-06 & . & .\\
+  MMAF1 & PLA2G4B & c.1710-6delA ; . & splice region & . & . & . & . & .\\
+  MMAF2 & DNAH1 & . ; . & splice acceptor & . & . & . & . & .\\
+  \addlinespace
+  MMAF2 & MYH11 & c.4625G>A ; p.Arg1542Gln & missense & . & proba damaging & 0.00234 & 0.0016 & 5e-04\\
+  MMAF3 & WEE2 & . ; p.Pro92Leu & missense & deleterious & benign & 0.000372 & 2e-04 & .\\
+  MMAF3 & ZFYVE28 & c.1729C>A ; p.Val577Met & missense & deleterious & benign & 0.000998 & 2e-04 & .\\
+  MMAF3 & FCGR3A & c.133T>C ; p.Ala45Pro & missense & deleterious & proba damaging & . & . & .\\
+  MMAF3 & GBP2 & c.412T>A ; p.Ala138Thr & missense & deleterious & proba damaging & 0.00176 & 0.0012 & 5e-04\\
+  MMAF4 & TGIF2 & c.496C>A ; p.Leu166Met & missense & tolerated & proba damaging & . & . & .\\
+  \bottomrule
+  \end{longtable}
+  \end{landscape}
+  
+  \newpage
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    \textbf{Famille AZ} : Parmi les 8 gènes restant pour cette famille,
+    \textbf{Famille AZ} : Parmi les 2 gènes restant pour cette famille,
     \emph{SPINK2} est apparu comme étant un candidat évident. Notamment
     son expression étant spécifique au testicule tandis que celle de
     \emph{GUF1} est ubiquitaire (\textbf{Figure :
@@ -1027,13 +1033,14 @@ class (for LaTeX) and the R bookdown package, in general.
   \setcounter{enumi}{1}
   \tightlist
   \item
-    \textbf{Famille FF} : Pour cette famille, le gène
+    \textbf{Famille FF} : Pour cette famille, seul le gène
     \emph{PLC}\(\zeta 1\) a passé l'ensemble des filtres. Nos
     connaissances sur la fonction de se gène et notamment son rôle dans
-    l'activation ovocytaire (TODO: REF) ainsi que sa forte expression
-    testiculaire ont fait de ce gène le candidat idéal pour expliquer le
-    phénotype de ces deux frères (\textbf{Figure :
-    }\ref{fig:plotexpplcz1}).
+    l'activation ovocytaire (Amdani, Jones, \& Coward,
+    \protect\hyperlink{ref-Amdani2013}{2013}) ainsi que sa forte
+    expression testiculaire ont fait de ce gène le candidat idéal pour
+    expliquer le phénotype d'échec de fécondation de ces deux frères
+    (\textbf{Figure : }\ref{fig:plotexpplcz1}).
   \end{enumerate}
   
   \begin{figure}
@@ -1050,12 +1057,12 @@ class (for LaTeX) and the R bookdown package, in general.
   \setcounter{enumi}{2}
   \tightlist
   \item
-    \textbf{Famille MMAF1} : L'analyse bibliographique des 4 gènes ayant
+    \textbf{Famille MMAF1} : L'analyse bibliographique des 1 gènes ayant
     passé l'ensemble des filtres n'a pas pu nous permettre de d'affirmer
     que l'un de ces gènes étaient responsable du phénotype MMAF de ces 2
     frères.\\
   \item
-    \textbf{Famille MMAF2} : À l'issue des filtres, 4 gènes ressortaient
+    \textbf{Famille MMAF2} : À l'issue des filtres, 2 gènes ressortaient
     chez ces deux frères : \emph{MYH11} et \emph{DNAH1}. Or, notre équipe
     ayant déjà établit le lien entre des mutations du gène \emph{DNAH1} et
     le syndrome MMAF (Ben Khelifa et al.,
@@ -1066,7 +1073,7 @@ class (for LaTeX) and the R bookdown package, in general.
     écarté des candidats pour le phénotype MMAF.\\
   \item
     \textbf{Famille MMAF3} : Comme pour les gènes de la famille MMAF2,
-    l'analyse bibliographique des 8 gènes ayant ici passé les filtres de
+    l'analyse bibliographique des 4 gènes ayant ici passé les filtres de
     même que l'étude de leurs expressions ne nous a pas permis de conclure
     que l'un d'entre eux étaient responsable du phénotype MMAF de ces 2
     frères. \newpage
@@ -1188,30 +1195,6 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  \begin{landscape}
-  \begin{longtable}[t]{lllllllll}
-  \caption{\label{tab:tablegene}Récapitulatif des variants ayant passé l'ensemble des filtres pour chaque famille}\\
-  \toprule
-  Family & Gene & Variant & Impact & SIFT & PolyPhen & ExAC & ESP & 1KG\\
-  \midrule
-  AZ & GUF1 & c.443A>T, p.Ser148Ile & missense & deleterious & proba damaging & 0.00207 & 0.0028 & 9e-04\\
-  AZ & SPINK2 & c.56-3C>G & splice region & . & . & . & . & .\\
-  FF & PLCZ1 & c.1465G>T, p.Ile489Phe & missense & deleterious & possib damaging & 8.24e-06 & . & .\\
-  MMAF1 & PLA2G4B & c.1710-6delA & splice region & . & . & . & . & .\\
-  MMAF2 & DNAH1 & . & splice acceptor & . & . & . & . & .\\
-  \addlinespace
-  MMAF2 & MYH11 & c.4625G>A, p.Arg1542Gln & missense & . & proba damaging & 0.00234 & 0.0016 & 5e-04\\
-  MMAF3 & WEE2 & p.Pro92Leu & missense & deleterious & benign & 0.000372 & 2e-04 & .\\
-  MMAF3 & ZFYVE28 & c.1729C>A, p.Val577Met & missense & deleterious & benign & 0.000998 & 2e-04 & .\\
-  MMAF3 & FCGR3A & c.133T>C, p.Ala45Pro & missense & deleterious & proba damaging & . & . & .\\
-  MMAF3 & GBP2 & c.412T>A, p.Ala138Thr & missense & deleterious & proba damaging & 0.00176 & 0.0012 & 5e-04\\
-  MMAF4 & TGIF2 & c.496C>A, p.Leu166Met & missense & tolerated & proba damaging & . & . & .\\
-  \bottomrule
-  \end{longtable}
-  \end{landscape}
-  
-  \newpage
-  
   \begin{figure}
   
   {\centering \includegraphics{thesis_files/figure-latex/plotremaininggenes-1} 
@@ -1229,14 +1212,13 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsubsection{Description de la
   cohorte}\label{description-de-la-cohorte}
   
-  Historique : après avoir mis en évidence l'implication du gène
-  \emph{DNAH1} dans le phénotype MMAF notre équipe s'est en partie
-  spécialisé dans la caractérisation ce syndrome. Ainsi, entre 2012 et
-  2015, notre équipe a effectué le séquençage de 62 individus présentant
-  tous ce phénotype afin d'en établir la cause génétique. ces séquençage
-  ont été effectué dans 3 centres diférents que sont Genoscope, MountSinai
-  et Strasbourg et sur une seule plateforme plateforme de séquençage, le
-  Illumina HiSeq2000.
+  Après avoir mis en évidence l'implication du gène \emph{DNAH1} dans le
+  phénotype MMAF notre équipe s'est en partie spécialisé dans la
+  caractérisation ce syndrome. Ainsi, entre 2012 et 2015, notre équipe a
+  effectué le séquençage de 62 individus présentant tous ce phénotype afin
+  d'en établir la cause génétique. ces séquençage ont été effectué dans 3
+  centres diférents que sont Genoscope, MountSinai et Strasbourg et sur
+  une seule plateforme plateforme de séquençage, le Illumina HiSeq2000.
   
   \begin{longtable}[t]{lrlr}
   \caption{\label{tab:tabcohort}Liste des différents projets de séquençages effectués}\\
@@ -1355,14 +1337,20 @@ class (for LaTeX) and the R bookdown package, in general.
   constituer un critère suffisant pour filtrer les gènes n'en faisant pas
   partie. Par exemple le gène \emph{DNAH1}, de par son expression
   ubiquitaire n'a pas été intégré à cette liste (\textbf{Figure :
-  }\ref{fig:expdnah1}, or on connait désormais son implication dans le
-  phénotype MMAF (\textbf{Figure : }\ref{fig:plotfilterbigmmaf2} -
-  \textbf{A}).
+  }\ref{fig:plotdnah1} - \textbf{A}), or on connait désormais son
+  implication dans le phénotype MMAF (\textbf{Table :} \ref{tab:tabcil},
+  \textbf{Figure : }\ref{fig:plotcil} - \textbf{A}).
   
-  TODO !!! discuter le fait que la plupart des gènes retrouvés muté homo
-  ne le sont que chez \textbf{1 seul} patient ainsi, considerer en
-  priorité les gènes retrouvé homo chez au moins deux patient permet de
-  réduire considérablement la liste.
+  Parmis l'ensemble des gènes retrouvés mutés, on peut constater que
+  \ldots{} d'ente eux, soit \ldots{}\%, ne sont observés muté, à l'état
+  homozygote, uniquement chez unseul de nos patients tandis que \ldots{}
+  sont retrouvés muté à l'état homozygote chez au moins 2 patients. Ainsi,
+  analyser en priorité ces \ldots{} gènes permet à la fois de réduire
+  considérablement notre liste, et donc de faciliter les analyses, mais
+  aussi de pouvoir identifier en priorité les gènes affectant le plus
+  grand nombre de patient et donc probablement les principaux ac teurs du
+  impliqués dans le phénotype MMAF (\textbf{Figure : }\ref{fig:plotcil} -
+  \textbf{B}).
   
   \newpage 
   
@@ -1372,10 +1360,59 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Répartition des gènes retrouvés mutéschez nos patients dans les classes de la liste du cilliome]{Répartition des gènes retrouvés mutéschez nos patients dans les classes de la liste du cilliome : Chaque couleur définit une classe de la liste des gènes du cilliome décrit dans [@Ivliev2012]. Vert = *Strong evidence from previous studies* (*Strong*), Orange = *Weak evidence from previous studies* (*Weak*), rouge = *No evidence from previous studies* (*Novel*), bleu = Non présent dans la liste. **A** : Quantification du nombre de gène ayant passé les filtres au sein des 3 classes de la liste des gènes du cilliome. **B** : TODOOOOOO : Besoin d'aide pour le nom de l'axe des Y !!!!!}\label{fig:plotcil}
+  \caption[Répartition des gènes retrouvés mutés chez nos patients dans les différentes classes de la liste du cilliome]{Répartition des gènes retrouvés mutés chez nos patients dans les différentes classes de la liste du cilliome : Chaque couleur définit une classe de la liste des gènes du cilliome décrit dans [@Ivliev2012]. Vert = *Strong evidence from previous studies* (*Strong*), Orange = *Weak evidence from previous studies* (*Weak*), rouge = *No evidence from previous studies* (*Novel*), bleu = Non présent dans la liste. **A** : Quantification du nombre de gène ayant passé les filtres au sein des 3 classes de la liste des gènes du cilliome. **B** : Quantification pour chacun des gènes du nombre d'individus présentant un variant homozygotes ayant passé l'ensemble des filtres}\label{fig:plotcil}
   \end{figure}
   
   \newpage  
+  
+  \begin{longtable}[t]{ll}
+  \caption{\label{tab:tabcil}Liste des gènes prédits comme faisant partie du ciliome humain retrouvés mutés à l'état homozygote chez nos patients}\\
+  \toprule
+  Ciliome evidence & Gene\\
+  \midrule
+  Strong & AK7\\
+  Strong & C21orf59\\
+  Strong & C6orf118\\
+  Strong & CCDC146\\
+  Strong & CCDC147\\
+  \addlinespace
+  Strong & CCDC65\\
+  Strong & CFAP44\\
+  Strong & DLEC1\\
+  Strong & EFCAB6\\
+  Strong & FAM81B\\
+  \addlinespace
+  Strong & HYDIN\\
+  Strong & KIF6\\
+  Strong & KIF9\\
+  Strong & NPHP1\\
+  Strong & PROM1\\
+  \addlinespace
+  Strong & RSPH9\\
+  Strong & SPEF2\\
+  Strong & STK33\\
+  Strong & TTC26\\
+  Strong & TTC29\\
+  \addlinespace
+  Strong & WDR16\\
+  Strong & ZMYND10\\
+  Weak & C6\\
+  Weak & FBXO15\\
+  Weak & MIPEP\\
+  \addlinespace
+  Weak & SLFN13\\
+  Weak & SPAG17\\
+  Novel & ACYP1\\
+  Novel & ARMC2\\
+  Novel & C21orf58\\
+  \addlinespace
+  Novel & KIAA0319\\
+  Novel & KIAA0556\\
+  Novel & LRRC43\\
+  \bottomrule
+  \end{longtable}
+  
+  \newpage
   
   Nous avons ensuite \emph{designer} 5 analyses fonctionnant de manière
   pyramidales. C'est à dire que la première analyse permet d'identifier
@@ -1464,7 +1501,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Représentation schématique des ....TODO]{Nombre d'individus composant la cohorte contrôle de chaque famille : Un variant est dit homozygote lesque le **même** variant est présents sur les deux allèle d'un gène et hétérozygote lorsqu'il est présent sur **un seul** des deux allèles. On parlera d'hétérozygotes *cis* lorsque deux variants hétérozygote diffrérents seront positionnés sur **le même** allèle et d'hétérozygote *trans* (ou composite) lorsque ces deux hétérozygote seront positionés sur **deux allèles différents**. En WES et en WGS il est impossible de différentié les hétérozygotes *cis* des hétérozygotes *trans*}\label{fig:compositehet}
+  \caption[Représentation schématique des ....TODO]{Filtrage des transcrits jugés "non pertinents" et des variants les chevauchant : Un variant est dit homozygote lesque le **même** variant est présents sur les deux allèle d'un gène et hétérozygote lorsqu'il est présent sur **un seul** des deux allèles. On parlera d'hétérozygotes *cis* lorsque deux variants hétérozygote diffrérents seront positionnés sur **le même** allèle et d'hétérozygote *trans* (ou composite) lorsque ces deux hétérozygote seront positionés sur **deux allèles différents**. En WES et en WGS il est impossible de différentié les hétérozygotes *cis* des hétérozygotes *trans*}\label{fig:compositehet}
   \end{figure}
   
   \begin{enumerate}
@@ -1566,7 +1603,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){4-5} \cmidrule(l{2pt}r{2pt}){6-8}
   Patient & Gene & Evidence & HGVSc, HGVSp & Consequence & ESP & 1KG & ExAC\\
   \midrule
-  Ghs122 & DNAH1 & Not in the list & c.7533delC, p.Gln2511HisfsTer27 & frameshift & . & . & .\\
+  Ghs122 & DNAH1 & Not in the list & c.7533delC ; p.Gln2511HisfsTer27 & frameshift & . & . & .\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -1579,10 +1616,10 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
   Patient & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  Ghs90 & DNAH1 & c.2122G>C, p.Ile708Leu & missense & . & benign & . & . & .\\
-  Ghs90 & DNAH1 & c.2123A>C, p.Ile708Thr & missense & . & benign & . & . & .\\
-  Ghs90 & DNAH1 & c.2125A>C, p.Phe709Leu & missense & . & benign & . & . & .\\
-  Ghs95 & DNAH1 & c.9278C>G, p.Ala3093Gly & missense & . & benign & . & . & .\\
+  Ghs90 & DNAH1 & c.2122G>C ; p.Ile708Leu & missense & . & benign & . & . & .\\
+  Ghs90 & DNAH1 & c.2123A>C ; p.Ile708Thr & missense & . & benign & . & . & .\\
+  Ghs90 & DNAH1 & c.2125A>C ; p.Phe709Leu & missense & . & benign & . & . & .\\
+  Ghs95 & DNAH1 & c.9278C>G ; p.Ala3093Gly & missense & . & benign & . & . & .\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -1597,20 +1634,20 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
   Patient & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  Ghs28 & DNAH1 & c.752C>G, p.Glu251Gly & missense & . & benign & 1e-04 & . & 1.65e-05\\
-  Ghs28 & DNAH1 & c.1172A>G, p.Tyr391Cys & missense & . & benign & 0.0027 & 0.0019 & 0.00233\\
-  Ghs36 & DNAH1 & c.845A>G, p.Leu282Trp & missense & . & proba damaging & . & . & .\\
-  Ghs36 & DNAH1 & c.3931G>T, p.Gln1311Ter & stop gained & . & . & . & . & 8.29e-06\\
-  Ghs42 & DNAH1 & c.6916G>A, p.Ala2306Thr & missense & . & proba damaging & . & . & .\\
+  Ghs28 & DNAH1 & c.752C>G ; p.Glu251Gly & missense & . & benign & 1e-04 & . & 1.65e-05\\
+  Ghs28 & DNAH1 & c.1172A>G ; p.Tyr391Cys & missense & . & benign & 0.0027 & 0.0019 & 0.00233\\
+  Ghs36 & DNAH1 & c.845A>G ; p.Leu282Trp & missense & . & proba damaging & . & . & .\\
+  Ghs36 & DNAH1 & c.3931G>T ; p.Gln1311Ter & stop gained & . & . & . & . & 8.29e-06\\
+  Ghs42 & DNAH1 & c.6916G>A ; p.Ala2306Thr & missense & . & proba damaging & . & . & .\\
   \addlinespace
-  Ghs42 & DNAH1 & ., . & splice region & . & . & . & . & .\\
-  Ghs87 & DNAH1 & c.3431C>A, p.Ser1144Asn & missense & . & benign & . & . & 0.00024\\
-  Ghs87 & DNAH1 & c.8885G>C, p.Lys2962Thr & missense & . & proba damaging & 7e-04 & 5e-04 & 0.000457\\
-  Ghs88 & DNAH1 & c.2209C>A, p.Val737Met & missense & . & benign & 1e-04 & . & 0.000115\\
-  Ghs88 & DNAH1 & c.3877T>A, p.Asp1293Asn & missense & . & benign & 1e-04 & 0.0019 & 0.000149\\
+  Ghs42 & DNAH1 & . ; . & splice region & . & . & . & . & .\\
+  Ghs87 & DNAH1 & c.3431C>A ; p.Ser1144Asn & missense & . & benign & . & . & 0.00024\\
+  Ghs87 & DNAH1 & c.8885G>C ; p.Lys2962Thr & missense & . & proba damaging & 7e-04 & 5e-04 & 0.000457\\
+  Ghs88 & DNAH1 & c.2209C>A ; p.Val737Met & missense & . & benign & 1e-04 & . & 0.000115\\
+  Ghs88 & DNAH1 & c.3877T>A ; p.Asp1293Asn & missense & . & benign & 1e-04 & 0.0019 & 0.000149\\
   \addlinespace
-  Ghs129 & DNAH1 & c.7153G>A, p.Trp2385Arg & missense & . & proba damaging & . & . & .\\
-  Ghs129 & DNAH1 & ., p.Arg3169Gly & missense & . & proba damaging & . & . & 8.26e-06\\
+  Ghs129 & DNAH1 & c.7153G>A ; p.Trp2385Arg & missense & . & proba damaging & . & . & .\\
+  Ghs129 & DNAH1 & . ; p.Arg3169Gly & missense & . & proba damaging & . & . & 8.26e-06\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -1731,15 +1768,15 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){4-5} \cmidrule(l{2pt}r{2pt}){6-8}
   Patient & Gene & Evidence & HGVSc, HGVSp & Consequence & ESP & 1KG & ExAC\\
   \midrule
-  Ghs37 & ARMC2 & Novel & c.2353\_2354delTA, p.Leu785MetfsTer5 & frameshift & . & . & .\\
-  Ghs93 & ARMC2 & Novel & c.1023+1G>A, . & splice donor & . & . & .\\
-  Ghs32 & CCDC146 & Strong & c.1084G>T, p.Arg362Ter & stop gained & 1e-04 & . & 2.47e-05\\
-  Ghs35 & CCDC146 & Strong & c.2112delT, p.Arg704SerfsTer7 & frameshift & . & . & .\\
-  Ghs22 & CFAP44 & Strong & ., p.Arg1059Ter & stop gained & . & . & .\\
+  Ghs37 & ARMC2 & Novel & c.2353\_2354delTA ; p.Leu785MetfsTer5 & frameshift & . & . & .\\
+  Ghs93 & ARMC2 & Novel & c.1023+1G>A ; . & splice donor & . & . & .\\
+  Ghs32 & CCDC146 & Strong & c.1084G>T ; p.Arg362Ter & stop gained & 1e-04 & . & 2.47e-05\\
+  Ghs35 & CCDC146 & Strong & c.2112delT ; p.Arg704SerfsTer7 & frameshift & . & . & .\\
+  Ghs22 & CFAP44 & Strong & . ; p.Arg1059Ter & stop gained & . & . & .\\
   \addlinespace
-  Ghs34 & CFAP44 & Strong & ., . & splice donor & . & . & .\\
-  Ghs19 & TTC29 & Strong & c.176+1T>A, . & splice donor & 0.0012 & 5e-04 & 0.000158\\
-  Ghs26 & TTC29 & Strong & c.176+1T>A, . & splice donor & 0.0012 & 5e-04 & 0.000158\\
+  Ghs34 & CFAP44 & Strong & . ; . & splice donor & . & . & .\\
+  Ghs19 & TTC29 & Strong & c.176+1T>A ; . & splice donor & 0.0012 & 5e-04 & 0.000158\\
+  Ghs26 & TTC29 & Strong & c.176+1T>A ; . & splice donor & 0.0012 & 5e-04 & 0.000158\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -1752,8 +1789,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
   Patient & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  Ghs89 & CFAP44 & c.1457A>T, p.Ala486Val & missense & tolerated & possib damaging & 0.0012 & 0.0014 & 0.000692\\
-  Ghs107 & ARMC2 & c.2279G>A, p.Ile760Asn & missense & deleterious & proba damaging & . & . & .\\
+  Ghs89 & CFAP44 & c.1457A>T ; p.Ala486Val & missense & tolerated & possib damaging & 0.0012 & 0.0014 & 0.000692\\
+  Ghs107 & ARMC2 & c.2279G>A ; p.Ile760Asn & missense & deleterious & proba damaging & . & . & .\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -1840,12 +1877,12 @@ class (for LaTeX) and the R bookdown package, in general.
     pancréas (Mally, Cirulli, Hayek, \& Otonkoski,
     \protect\hyperlink{ref-Mally1996}{1996}, Stassi, Schloot, \&
     Pietropaolo (\protect\hyperlink{ref-Stassi1997}{1997})) et que
-    celui-ci serait à la fois lié au diabète de type 1 (Martin et al.,
+    celui-ci serait à la fois lié au diabète de type 1 (S. Martin et al.,
     \protect\hyperlink{ref-Martin1995}{1995}, R. Gaedigk, Duncan,
     Miyazaki, Robinson, \& Dosch
-    (\protect\hyperlink{ref-Gaedigk1994}{1994}), Martin, Lampasona, Dosch,
-    \& Pietropaolo (\protect\hyperlink{ref-Martin1996}{1996})) et au
-    syndrome de Gougerot-Sjögren (S. Winer et al.,
+    (\protect\hyperlink{ref-Gaedigk1994}{1994}), S. Martin, Lampasona,
+    Dosch, \& Pietropaolo (\protect\hyperlink{ref-Martin1996}{1996})) et
+    au syndrome de Gougerot-Sjögren (S. Winer et al.,
     \protect\hyperlink{ref-Winer2002}{2002}). Malgré le nombre important
     de patients présentant des variants homozygotes tronquant sur ces deux
     gènes, ceux-ci n'ont pas été retenus comme candidat pour expliquer le
@@ -1925,20 +1962,20 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-7}
   Patient & Gene & HGVSc, HGVSp & Consequence & ESP & 1KG & ExAC\\
   \midrule
-  Ghs91 & CCDC129 & ., . & frameshift & . & . & .\\
-  Ghs132 & CCDC129 & ., . & frameshift & . & . & .\\
-  Ghs17 & CFAP43 & c.2658G>A, p.Trp886Ter & stop gained & 2e-04 & . & 9.88e-05\\
-  Ghs41 & CFAP43 & c.2680C>T, p.Arg894Ter & stop gained & . & . & 8.24e-06\\
-  Ghs102 & CFAP43 & c.3882delA, p.Glu1294AspfsTer47 & frameshift & . & . & .\\
+  Ghs91 & CCDC129 & . ; . & frameshift & . & . & .\\
+  Ghs132 & CCDC129 & . ; . & frameshift & . & . & .\\
+  Ghs17 & CFAP43 & c.2658G>A ; p.Trp886Ter & stop gained & 2e-04 & . & 9.88e-05\\
+  Ghs41 & CFAP43 & c.2680C>T ; p.Arg894Ter & stop gained & . & . & 8.24e-06\\
+  Ghs102 & CFAP43 & c.3882delA ; p.Glu1294AspfsTer47 & frameshift & . & . & .\\
   \addlinespace
-  Ghs105 & CFAP43 & c.3541-2A>C, . & splice acceptor & . & . & .\\
-  Ghs126 & CFAP43 & c.3352C>T, p.Arg1118Ter & stop gained & . & . & 3.29e-05\\
-  Ghs20 & FSIP2 & c.2549\_2550insA, p.Asn850LysfsTer4 & frameshift & . & . & .\\
-  Ghs21 & FSIP2 & c.1177delG, p.Gln393LysfsTer13 & frameshift & . & . & .\\
-  Ghs40 & TRAV26-1 & c.75\_76insC, p.Ser26LeufsTer6 & frameshift & . & . & .\\
+  Ghs105 & CFAP43 & c.3541-2A>C ; . & splice acceptor & . & . & .\\
+  Ghs126 & CFAP43 & c.3352C>T ; p.Arg1118Ter & stop gained & . & . & 3.29e-05\\
+  Ghs20 & FSIP2 & c.2549\_2550insA ; p.Asn850LysfsTer4 & frameshift & . & . & .\\
+  Ghs21 & FSIP2 & c.1177delG ; p.Gln393LysfsTer13 & frameshift & . & . & .\\
+  Ghs40 & TRAV26-1 & c.75\_76insC ; p.Ser26LeufsTer6 & frameshift & . & . & .\\
   \addlinespace
-  Ghs43 & TRAV26-1 & c.75\_76insC, p.Ser26LeufsTer6 & frameshift & . & . & .\\
-  Ghs55 & TRAV26-1 & c.75\_76insC, p.Ser26LeufsTer6 & frameshift & . & . & .\\
+  Ghs43 & TRAV26-1 & c.75\_76insC ; p.Ser26LeufsTer6 & frameshift & . & . & .\\
+  Ghs55 & TRAV26-1 & c.75\_76insC ; p.Ser26LeufsTer6 & frameshift & . & . & .\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -1953,8 +1990,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
   Patient & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  Ghs25 & CFAP43 & c.2141+5T>A, . & splice region & . & . & . & . & .\\
-  Ghs131 & FSIP2 & ., p.Ala86Val & missense & . & benign & . & . & 0.00121\\
+  Ghs25 & CFAP43 & c.2141+5T>A ; . & splice region & . & . & . & . & .\\
+  Ghs131 & FSIP2 & . ; p.Ala86Val & missense & . & benign & . & . & 0.00121\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -1972,18 +2009,18 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
   Patient & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  Ghs40 & FSIP2 & ., p.Asn495Ile & missense & . & benign & . & 0.0056 & 0.00157\\
-  Ghs40 & FSIP2 & ., p.Ile2960Met & missense & . & proba damaging & . & . & .\\
-  Ghs40 & FSIP2 & ., p.Lys5822Ile & missense & . & benign & 0.0034 & 0.0056 & 0.0019\\
-  Ghs92 & FSIP2 & ., p.Asn495Ile & missense & . & benign & . & 0.0056 & 0.00157\\
-  Ghs92 & FSIP2 & ., p.Lys5822Ile & missense & . & benign & 0.0034 & 0.0056 & 0.0019\\
+  Ghs40 & FSIP2 & . ; p.Asn495Ile & missense & . & benign & . & 0.0056 & 0.00157\\
+  Ghs40 & FSIP2 & . ; p.Ile2960Met & missense & . & proba damaging & . & . & .\\
+  Ghs40 & FSIP2 & . ; p.Lys5822Ile & missense & . & benign & 0.0034 & 0.0056 & 0.0019\\
+  Ghs92 & FSIP2 & . ; p.Asn495Ile & missense & . & benign & . & 0.0056 & 0.00157\\
+  Ghs92 & FSIP2 & . ; p.Lys5822Ile & missense & . & benign & 0.0034 & 0.0056 & 0.0019\\
   \addlinespace
-  Ghs95 & FSIP2 & ., p.Asn495Ile & missense & . & benign & . & 0.0056 & 0.00157\\
-  Ghs95 & FSIP2 & ., p.Lys5822Ile & missense & . & benign & 0.0034 & 0.0056 & 0.0019\\
-  Ghs101 & FSIP2 & c.182T>C, p.Leu61Pro & missense & . & unknown & . & . & .\\
-  Ghs101 & FSIP2 & c.925A>T, p.Arg309Cys & missense & . & benign & . & . & .\\
-  Ghs132 & CFAP43 & c.1300\_1301insT, p.Leu435SerfsTer26 & frameshift & . & . & . & . & .\\
-  Ghs132 & CFAP43 & c.1040G>C, p.Val347Ala & missense & tolerated & possib damaging & 2e-04 & . & 7.41e-05\\
+  Ghs95 & FSIP2 & . ; p.Asn495Ile & missense & . & benign & . & 0.0056 & 0.00157\\
+  Ghs95 & FSIP2 & . ; p.Lys5822Ile & missense & . & benign & 0.0034 & 0.0056 & 0.0019\\
+  Ghs101 & FSIP2 & c.182T>C ; p.Leu61Pro & missense & . & unknown & . & . & .\\
+  Ghs101 & FSIP2 & c.925A>T ; p.Arg309Cys & missense & . & benign & . & . & .\\
+  Ghs132 & CFAP43 & c.1300\_1301insT ; p.Leu435SerfsTer26 & frameshift & . & . & . & . & .\\
+  Ghs132 & CFAP43 & c.1040G>C ; p.Val347Ala & missense & tolerated & possib damaging & 2e-04 & . & 7.41e-05\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -2098,9 +2135,9 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){4-5} \cmidrule(l{2pt}r{2pt}){6-8}
   Patient & Gene & Evidence & HGVSc, HGVSp & Consequence & ESP & 1KG & ExAC\\
   \midrule
-  Ghs40 & C6orf118 & Strong & c.1114C>T, p.Arg372Ter & stop gained & . & . & 8.24e-06\\
-  Ghs127 & CCDC65 & Strong & c.1208delG, p.Asn403IlefsTer9 & frameshift & . & . & .\\
-  Ghs131 & SPEF2 & Strong & c.3240delG, p.Phe1080LeufsTer2 & frameshift & . & . & .\\
+  Ghs40 & C6orf118 & Strong & c.1114C>T ; p.Arg372Ter & stop gained & . & . & 8.24e-06\\
+  Ghs127 & CCDC65 & Strong & c.1208delG ; p.Asn403IlefsTer9 & frameshift & . & . & .\\
+  Ghs131 & SPEF2 & Strong & c.3240delG ; p.Phe1080LeufsTer2 & frameshift & . & . & .\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -2113,8 +2150,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
   Patient & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  Ghs27 & C6orf118 & c.1372G>C, p.Tyr458His & missense & tolerated & proba damaging & 8e-04 & 0.0042 & 0.000297\\
-  Ghs27 & C6orf118 & c.98C>T, p.Pro33Leu & missense & tolerated & possib damaging & 0.0038 & 9e-04 & 0.000684\\
+  Ghs27 & C6orf118 & c.1372G>C ; p.Tyr458His & missense & tolerated & proba damaging & 8e-04 & 0.0042 & 0.000297\\
+  Ghs27 & C6orf118 & c.98C>T ; p.Pro33Leu & missense & tolerated & possib damaging & 0.0038 & 9e-04 & 0.000684\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -2158,11 +2195,11 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \newpage
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-7-1} \end{center}
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-8-1} \end{center}
   
   \newpage
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-8-1} \end{center}
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-9-1} \end{center}
   
   \newpage
   
@@ -2174,53 +2211,53 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-7}
   Patient & Gene & HGVSc, HGVSp & Consequence & ESP & 1KG & ExAC\\
   \midrule
-  Ghs95 & ABCA10 & c.1356\_1357delGG, p.Ile453LeufsTer2 & frameshift & . & . & .\\
-  Ghs52 & ACSBG2 & ., . & splice acceptor & 0.0028 & 0.0019 & 0.00084\\
-  Ghs92 & ALDOA & c.124\_125delAG, p.Gln42AspfsTer30 & frameshift & . & . & .\\
-  Ghs47 & CCDC9 & c.720+2C>G, . & splice donor & . & . & 0.00343\\
-  Ghs96 & CFHR1 & c.790+1T>A, . & splice donor & 0.0093 & 0.0042 & 0.00231\\
+  Ghs95 & ABCA10 & c.1356\_1357delGG ; p.Ile453LeufsTer2 & frameshift & . & . & .\\
+  Ghs52 & ACSBG2 & . ; . & splice acceptor & 0.0028 & 0.0019 & 0.00084\\
+  Ghs92 & ALDOA & c.124\_125delAG ; p.Gln42AspfsTer30 & frameshift & . & . & .\\
+  Ghs47 & CCDC9 & c.720+2C>G ; . & splice donor & . & . & 0.00343\\
+  Ghs96 & CFHR1 & c.790+1T>A ; . & splice donor & 0.0093 & 0.0042 & 0.00231\\
   \addlinespace
-  Ghs38 & CHST4 & c.247C>T, p.Lys83Ter & stop gained & . & . & 1.65e-05\\
-  Ghs87 & CLEC12A & c.121+1T>A, . & splice donor & 0.0013 & 5e-04 & 0.00119\\
-  Ghs42 & CNTLN & c.3115-2delT, . & splice acceptor & . & . & .\\
-  Ghs28 & DPY19L2P2 & ., . & splice acceptor & . & . & .\\
-  Ghs55 & EPB41L4A-AS2 & c.378delG, p.Arg127GlyfsTer172 & frameshift & . & . & .\\
+  Ghs38 & CHST4 & c.247C>T ; p.Lys83Ter & stop gained & . & . & 1.65e-05\\
+  Ghs87 & CLEC12A & c.121+1T>A ; . & splice donor & 0.0013 & 5e-04 & 0.00119\\
+  Ghs42 & CNTLN & c.3115-2delT ; . & splice acceptor & . & . & .\\
+  Ghs28 & DPY19L2P2 & . ; . & splice acceptor & . & . & .\\
+  Ghs55 & EPB41L4A-AS2 & c.378delG ; p.Arg127GlyfsTer172 & frameshift & . & . & .\\
   \addlinespace
-  Ghs42 & FCN3 & c.347delA, p.Leu117SerfsTer65 & frameshift & . & . & .\\
-  Ghs134 & GPR142 & c.215delG, p.Pro72HisfsTer29 & frameshift & . & . & .\\
-  Ghs133 & HIST1H4J & c.78dupA, p.Ile27AsnfsTer85 & frameshift & . & . & .\\
-  Ghs25 & HOGA1 & c.208A>T, p.Arg70Ter & stop gained & . & . & 2.47e-05\\
-  Ghs87 & KRT74 & c.748-2T>G, . & splice acceptor & 0.0017 & 0.0014 & 0.000997\\
+  Ghs42 & FCN3 & c.347delA ; p.Leu117SerfsTer65 & frameshift & . & . & .\\
+  Ghs134 & GPR142 & c.215delG ; p.Pro72HisfsTer29 & frameshift & . & . & .\\
+  Ghs133 & HIST1H4J & c.78dupA ; p.Ile27AsnfsTer85 & frameshift & . & . & .\\
+  Ghs25 & HOGA1 & c.208A>T ; p.Arg70Ter & stop gained & . & . & 2.47e-05\\
+  Ghs87 & KRT74 & c.748-2T>G ; . & splice acceptor & 0.0017 & 0.0014 & 0.000997\\
   \addlinespace
-  Ghs55 & LRRC9 & c.3256A>T, p.Arg1086Ter & stop gained & . & . & .\\
-  Ghs134 & MCPH1 & c.2221G>T, p.Arg741Ter & stop gained & 1e-04 & . & 2.48e-05\\
-  Ghs38 & MTCH1 & c.28delT, p.Trp11GlyfsTer82 & frameshift & . & . & .\\
-  Ghs96 & NAT16 & c.808delT, p.Ser270AlafsTer87 & frameshift & . & . & .\\
-  Ghs125 & OR13A1 & c.804dupT, p.Tyr269LeufsTer66 & frameshift & . & . & .\\
+  Ghs55 & LRRC9 & c.3256A>T ; p.Arg1086Ter & stop gained & . & . & .\\
+  Ghs134 & MCPH1 & c.2221G>T ; p.Arg741Ter & stop gained & 1e-04 & . & 2.48e-05\\
+  Ghs38 & MTCH1 & c.28delT ; p.Trp11GlyfsTer82 & frameshift & . & . & .\\
+  Ghs96 & NAT16 & c.808delT ; p.Ser270AlafsTer87 & frameshift & . & . & .\\
+  Ghs125 & OR13A1 & c.804dupT ; p.Tyr269LeufsTer66 & frameshift & . & . & .\\
   \addlinespace
-  Ghs90 & OR51H1P & c.89delG, p.Leu33TrpfsTer16 & frameshift & . & . & .\\
-  Ghs25 & PI4K2A & ., p.Arg70Ter & stop gained & . & . & 2.47e-05\\
-  Ghs24 & PLA2R1 & c.1953delA, p.Ala653GlnfsTer35 & frameshift & . & . & .\\
-  Ghs31 & PPFIBP2 & ., . & frameshift & . & . & 2.47e-05\\
-  Ghs33 & PSG4 & c.931C>T, p.Glu311Ter & stop gained & 0.0024 & 0.0014 & 0.0054\\
+  Ghs90 & OR51H1P & c.89delG ; p.Leu33TrpfsTer16 & frameshift & . & . & .\\
+  Ghs25 & PI4K2A & . ; p.Arg70Ter & stop gained & . & . & 2.47e-05\\
+  Ghs24 & PLA2R1 & c.1953delA ; p.Ala653GlnfsTer35 & frameshift & . & . & .\\
+  Ghs31 & PPFIBP2 & . ; . & frameshift & . & . & 2.47e-05\\
+  Ghs33 & PSG4 & c.931C>T ; p.Glu311Ter & stop gained & 0.0024 & 0.0014 & 0.0054\\
   \addlinespace
-  Ghs51 & PSPHP1 & ., . & splice donor & . & 0.0051 & .\\
-  Ghs87 & PTGR1 & ., . & splice donor & . & . & 0.000231\\
-  Ghs43 & RP6-206I17.1 & n.211-2N>G, . & splice acceptor & . & . & .\\
-  Ghs128 & RYK & c.56\_57insC, p.Arg20GlnfsTer59 & frameshift & . & . & .\\
-  Ghs87 & SDHAP2 & n.777+1C>A, . & splice donor & . & . & 0.00896\\
+  Ghs51 & PSPHP1 & . ; . & splice donor & . & 0.0051 & .\\
+  Ghs87 & PTGR1 & . ; . & splice donor & . & . & 0.000231\\
+  Ghs43 & RP6-206I17.1 & n.211-2N>G ; . & splice acceptor & . & . & .\\
+  Ghs128 & RYK & c.56\_57insC ; p.Arg20GlnfsTer59 & frameshift & . & . & .\\
+  Ghs87 & SDHAP2 & n.777+1C>A ; . & splice donor & . & . & 0.00896\\
   \addlinespace
-  Ghs92 & SDSL & c.685delT, p.Leu229TrpfsTer30 & frameshift & . & . & .\\
-  Ghs97 & SERPINA10 & c.262G>T, p.Arg88Ter & stop gained & 0.0053 & 0.0032 & 0.00749\\
-  Ghs23 & SIGLECL1 & c.141delG, p.Val48TrpfsTer10 & frameshift & . & . & .\\
-  Ghs96 & SLC2A8 & c.802G>T, p.Gln268Ter & stop gained & 7e-04 & 9e-04 & 0.000948\\
-  Ghs90 & TRAP1 & c.139G>T, p.Arg47Ter & stop gained & 1e-04 & . & 8.24e-05\\
+  Ghs92 & SDSL & c.685delT ; p.Leu229TrpfsTer30 & frameshift & . & . & .\\
+  Ghs97 & SERPINA10 & c.262G>T ; p.Arg88Ter & stop gained & 0.0053 & 0.0032 & 0.00749\\
+  Ghs23 & SIGLECL1 & c.141delG ; p.Val48TrpfsTer10 & frameshift & . & . & .\\
+  Ghs96 & SLC2A8 & c.802G>T ; p.Gln268Ter & stop gained & 7e-04 & 9e-04 & 0.000948\\
+  Ghs90 & TRAP1 & c.139G>T ; p.Arg47Ter & stop gained & 1e-04 & . & 8.24e-05\\
   \addlinespace
-  Ghs87 & TTLL2 & c.47+1T>C, . & splice donor & . & . & .\\
-  Ghs107 & UNC93A & c.676C>T, p.Arg226Ter & stop gained & 0.0024 & 0.0028 & 0.00236\\
-  Ghs87 & ZNF438 & c.244dupT, p.Met83AspfsTer33 & frameshift & . & . & .\\
-  Ghs23 & ZNF528 & c.381delG, p.Ile129PhefsTer32 & frameshift & . & . & .\\
-  Ghs38 & ZNF862 & ., . & splice donor & . & . & .\\
+  Ghs87 & TTLL2 & c.47+1T>C ; . & splice donor & . & . & .\\
+  Ghs107 & UNC93A & c.676C>T ; p.Arg226Ter & stop gained & 0.0024 & 0.0028 & 0.00236\\
+  Ghs87 & ZNF438 & c.244dupT ; p.Met83AspfsTer33 & frameshift & . & . & .\\
+  Ghs23 & ZNF528 & c.381delG ; p.Ile129PhefsTer32 & frameshift & . & . & .\\
+  Ghs38 & ZNF862 & . ; . & splice donor & . & . & .\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -2233,10 +2270,10 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
   Patient & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ESP & 1KG & ExAC\\
   \midrule
-  Ghs28 & DPY19L2P2 & n.3419-4\_3419-3insGC, . & splice region & . & . & . & . & .\\
-  Ghs28 & DPY19L2P2 & n.3419-5\_3419-4insAT, . & splice region & . & . & . & . & .\\
-  Ghs36 & CCL3L3 & c.272G>C, p.Leu91Pro & missense & deleterious & benign & . & . & .\\
-  Ghs90 & CCDC66 & c.11+6T>G, . & splice region & . & . & . & . & 4.03e-05\\
+  Ghs28 & DPY19L2P2 & n.3419-4\_3419-3insGC ; . & splice region & . & . & . & . & .\\
+  Ghs28 & DPY19L2P2 & n.3419-5\_3419-4insAT ; . & splice region & . & . & . & . & .\\
+  Ghs36 & CCL3L3 & c.272G>C ; p.Leu91Pro & missense & deleterious & benign & . & . & .\\
+  Ghs90 & CCDC66 & c.11+6T>G ; . & splice region & . & . & . & . & 4.03e-05\\
   \bottomrule
   \end{longtable}
   \end{landscape}
@@ -2371,17 +2408,35 @@ class (for LaTeX) and the R bookdown package, in general.
   \addcontentsline{toc}{chapter}{References}
   
   \hypertarget{refs}{}
+  \hypertarget{ref-1000GenomesProjectConsortium2015}{}
+  1000 Genomes Project Consortium, T. 1. G. P., Auton, A., Brooks, L. D.,
+  Durbin, R. M., Garrison, E. P., Kang, H. M., \ldots{} Abecasis, G. R.
+  (2015). A global reference for human genetic variation. \emph{Nature},
+  \emph{526}(7571), 68--74. \url{http://doi.org/10.1038/nature15393}
+  
   \hypertarget{ref-Adzhubei2010}{}
   Adzhubei, I. A., Schmidt, S., Peshkin, L., Ramensky, V. E., Gerasimova,
   A., Bork, P., \ldots{} Sunyaev, S. R. (2010). A method and server for
   predicting damaging missense mutations. \emph{Nature Methods},
   \emph{7}(4), 248--9. \url{http://doi.org/10.1038/nmeth0410-248}
   
+  \hypertarget{ref-Aken2017}{}
+  Aken, B. L., Achuthan, P., Akanni, W., Amode, M. R., Bernsdorff, F.,
+  Bhai, J., \ldots{} Flicek, P. (2017). Ensembl 2017. \emph{Nucleic Acids
+  Research}, \emph{45}(D1), D635--D642.
+  \url{http://doi.org/10.1093/nar/gkw1104}
+  
   \hypertarget{ref-Amberger2011}{}
   Amberger, J., Bocchini, C., \& Hamosh, A. (2011). A new face and new
   challenges for Online Mendelian Inheritance in Man (OMIM). \emph{Human
   Mutation}, \emph{32}(5), 564--567.
   \url{http://doi.org/10.1002/humu.21466}
+  
+  \hypertarget{ref-Amdani2013}{}
+  Amdani, S. N., Jones, C., \& Coward, K. (2013). Phospholipase C zeta
+  (PLC\(\zeta\)): Oocyte activation and clinical links to male factor
+  infertility. \emph{Advances in Biological Regulation}, \emph{53}(3),
+  292--308. \url{http://doi.org/10.1016/j.jbior.2013.07.005}
   
   \hypertarget{ref-Arnaiz2015}{}
   Arnaiz, O., Cohen, J., Tassin, A., \& Koll, F. (2015). Remodeling Cildb,
