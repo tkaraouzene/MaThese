@@ -4,35 +4,89 @@
 
 # Tables des analyses d'exomes {#sssdd}
 
-\blandscape
-
-
-```{r annexetabafterdnah1}
-
-# kable(tab_modelow(df_bigmmaf_filter2) %>% arrange(Patient, Gene),
-#       caption = "Liste des variants restant après avoir retirée ceux impactant spécifiquement le patient ...",
-#       longtable = TRUE,
-#       booktabs = TRUE)
-
-```
-
-\elandscape
 \newpage
 
-```{r testdfdd}
-# 
-#   
-# 
-# kable(df_bigmmaf_filter5 %>% filter(IMPACT == "HIGH") %>%
-#   mutate(Coordinates = paste0(CHR,":",POSITION,":",REF,"->",ALT)) %>%
-#   distinct(RUN, Coordinates, SYMBOL, Consequence) %>%
-#     select(Patient = RUN, Coordinates, Gene = SYMBOL, Consequence) %>% 
-#     arrange(Gene),
-#   booktabs = TRUE,
-#   longtable = TRUE, 
-#   caption = "aaaaaaaaaa")
+```{r, message=FALSE, warning=FALSE}
+
+tab_annexe <- function(df_homo, df_het, cap = "") {
+  
+  df_high <- df_homo %>% 
+    filter(CANONICAL == "YES", 
+           IMPACT == "HIGH") %>%
+    group_by(SYMBOL, EVIDENCE, Feature) %>% 
+    summarise(N_HIGH = n_distinct(RUN))
+  
+  df_not_high <- df_homo %>% 
+    filter(CANONICAL == "YES", 
+           IMPACT != "HIGH") %>%
+    group_by(SYMBOL, EVIDENCE, Feature) %>% 
+    summarise(N_NOT_HIGH = n_distinct(RUN))
+  
+  df_het <- df_het %>% filter(CANONICAL == "YES") %>% 
+    group_by(SYMBOL, EVIDENCE, Feature) %>% 
+    summarise(N_COMP_HET = n_distinct(RUN))
+  
+  
+  df_all <- df_high %>%
+    left_join(df_not_high) %>%
+    left_join(df_het)
+  
+  df_all %>% 
+    mutate(N_NOT_HIGH = na.replace(N_NOT_HIGH, 0),
+           N_COMP_HET = na.replace(N_COMP_HET, 0),
+           N_TOT = N_HIGH + N_NOT_HIGH + N_COMP_HET) %>%
+    arrange(desc(EVIDENCE), desc(N_HIGH), desc(N_TOT), SYMBOL) %>%
+    select(Gene = SYMBOL, `Ciliome evidence` = EVIDENCE, `Tronquant` = N_HIGH, `Non tronquant` = N_NOT_HIGH,`>= 2 variants` = N_COMP_HET) %>%
+  kable(format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = cap) %>%
+    add_header_above(c(rep(" ", 2), "Homozygous" = 2, "Heterozygous" = 1)) %>%
+    
+    add_header_above(c(rep(" ", 2), "Nb of patient with : " = 3))
+}
 
 
 ```
 
-# The Second Appendix, for Fun
+
+
+```{r annexetabinit, message=FALSE, warning=FALSE}
+
+tab_annexe(df_bigmmaf_filter, df_bigmmaf_filter_het)
+
+```
+
+\newpage
+
+
+```{r annexetabafterdnah1, message=FALSE, warning=FALSE}
+
+tab_annexe(df_bigmmaf_filter2, df_bigmmaf_filter_het2)
+
+```
+
+\newpage
+
+```{r annexetabaftergrp1, message=FALSE, warning=FALSE}
+
+tab_annexe(df_bigmmaf_filter3, df_bigmmaf_filter_het3)
+
+```
+
+\newpage
+
+```{r annexetabaftergrp2, message=FALSE, warning=FALSE}
+
+tab_annexe(df_bigmmaf_filter4, df_bigmmaf_filter_het4)
+
+```
+
+\newpage
+
+```{r annexetabaftergrp3, message=FALSE, warning=FALSE}
+
+tab_annexe(df_bigmmaf_filter5, df_bigmmaf_filter_het5)
+
+```
+
