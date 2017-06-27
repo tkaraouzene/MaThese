@@ -20,6 +20,10 @@ library(data.table)
 library(scales)
 library(tidyr)
 library(ggpubr)
+library(cowplot)
+
+theme_set(theme_gray()) # otherwise use cowplot default theme
+# theme_set(theme_bw()) # otherwise use cowplot default theme
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
@@ -27,86 +31,34 @@ knitr::opts_chunk$set(fig.align='center',echo=FALSE)
 
 knitr::opts_knit$set(kable.force.latex = TRUE)
 
-# Multiple plot function
-#
-# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
-# - cols:   Number of columns in layout
-# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
-#
-# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
-# then plot 1 will go in the upper left, 2 will go in the upper right, and
-# 3 will go all the way across the bottom.
-#
-multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
-  library(grid)
-
-  # Make a list from the ... arguments and plotlist
-  plots <- c(list(...), plotlist)
-
-  numPlots = length(plots)
-
-  # If layout is NULL, then use 'cols' to determine layout
-  if (is.null(layout)) {
-    # Make the panel
-    # ncol: Number of columns of plots
-    # nrow: Number of rows needed, calculated from # of cols
-    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
-                    ncol = cols, nrow = ceiling(numPlots/cols))
-  }
-
- if (numPlots==1) {
-    print(plots[[1]])
-
-  } else {
-    # Set up the page
-    grid.newpage()
-    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
-
-    # Make each plot, in the correct location
-    for (i in 1:numPlots) {
-      # Get the i,j matrix positions of the regions that contain this subplot
-      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
-
-      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
-                                      layout.pos.col = matchidx$col))
-    }
-  }
-}
-
-
 ```
 
 ## Introduction sur la globozoospermie  
 
-Comme expliqué précédemment, La globozoospermie est phénotype rare (< 0.1% des patients infertiles) mais néanmoins sévère [@Sen2009] de teratozoospermie menant à l'infertilité masculine. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh, @Pedersen1974] (**Figure : **\@ref(fig:globospz)). En plus des anomalies morphologiques, les spermatozoïdes globozoocéphales présentent également des désorganisations au niveau moléculaire. Par exemple, le facteur spermatique PLC$\zeta$ requit pour l'activation ovocitaire, est absent ou en quantité infime dans les spermatozoïdes globozoocéphales [@Heytens2009, @Taylor2010, @Yoon2008] compromettant ainsi l'activation ovocytaire et expliquant le faible taux de fécondation observés en IVF (*in vitro* fertilization) et en ICSI (intra cytoplasmic sperm injection) [@Dam2006]. On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultante de plusieurs facteurs, les premières études présentant des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphologiques très typiques des spermatozoïdes laissaient penser à une cause monogénique. En 2007, une étude portant sur une famille juive ashkénaze comprenant six frères dont trois atteins a pu lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysé, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gène n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients analysés [@Harbuz2011]. Les études effectuées ultérieurement sur ce phénotype ont ensuite pu montrer que les altérations du gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011, @ElInati2012].  
+Comme expliqué précédemment, La globozoospermie est un phénotype rare (< 0.1% des patients infertiles) mais néanmoins sévère [@Sen2009] de teratozoospermie menant à l'infertilité masculine. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh, @Pedersen1974] (**Figure : **\@ref(fig:globospz)). En plus des anomalies morphologiques, les spermatozoïdes globozoocéphales présentent également des désorganisations au niveau moléculaire. Par exemple, le facteur spermatique PLC$\zeta$ requit pour l'activation ovocitaire, est absent ou en quantité infime dans les spermatozoïdes globozoocéphales [@Heytens2009, @Taylor2010, @Yoon2008] compromettant ainsi l'activation ovocytaire et expliquant le faible taux de fécondation observés en IVF (*in vitro* fertilization) et en ICSI (intra cytoplasmic sperm injection) [@Dam2006]. On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultante de plusieurs facteurs, les premières études présentant des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphologiques très typiques des spermatozoïdes laissaient penser à une cause monogénique. En 2007, une étude portant sur une famille juive ashkénaze comprenant six frères dont trois atteins a pu lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysés, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gène n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients analysés [@Harbuz2011]. Les études effectuées ultérieurement sur ce phénotype ont ensuite pu montrer que les altérations du gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011, @ElInati2012].  
 
-```{r globospz,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.50"}
+```{r globospz,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.50"}
 
-fig.name <- "Observation au microscope à balayage d'un spermatozoïde normal (**A**) et d'un spermatozoïde globozoocéphale (**B**) (changer les photos avec celles sur lesquelles on voit l'acrosome colorés)"
+fig_name <- "Observation au microscope à balayage d'un spermatozoïde normal (**A**) et d'un spermatozoïde globozoocéphale (**B**) (changer les photos avec celles sur lesquelles on voit l'acrosome colorés)"
 fig.from <- "[@Harbuz2011]"
-fig.info <- paste0(fig.name," adapté d'après ",fig.from)
+fig_info <- paste0(fig_name," adapté d'après ",fig.from)
 
 include_graphics(path = "figure/globo_normal_spz.png")
 
 ```
 
-En 2012, le développement d'un modèle murin KO *Dpy19l2*$^{-/-}$ a permis de mieux comprendre les mécanismes moléculaires impliqué dans la globozoospermie causée par la délétion du gène *DPY19L2* chez l'humain [@Pierre2012]. Tout d'abord car ce modèle de souris KO présentait les mêmes caractéristiques que les patients humains. Tout d'abord, ces souris étaient infertiles et présentaient des spermatozoïdes globozoocéphales (**Figure : **\@ref(fig:mouseglobo)) mais aussi et surtout, l'ensembles des autres dysfonctionnements étaient retrouvés, c'est à dire : l'absence de l'acrosome, les défauts morphologiques du noyau, de l'enveloppe nucléaire et de l'acroplaxome ainsi que le mauvais positionnement de la manchette [@Pierre2012]. Ainsi il a pu être démontré que la protéine Dpy19l2 étaient principalement exprimé dans le spermatides et plus spécifiquement dans la membrane nucléaire interne faisant face à la vésicule acrosomale et que l'absence de cette protéine entrainait la déstabilisation à la fois de la lamine nucléaire, de la jonction entre l'acroplaxome et l'enveloppe nucléaire [@Pierre2012]. 
+En 2012, le développement d'un modèle murin KO *Dpy19l2*$^{-/-}$ a permis de mieux comprendre les mécanismes moléculaires impliqués dans la globozoospermie causée par la délétion du gène *DPY19L2* chez l'humain [@Pierre2012]. Ce modèle de souris KO présentant les mêmes caractéristiques que les patients humains ; Tout d'abord, ces souris étaient infertiles et présentaient des spermatozoïdes globozoocéphales (**Figure : **\@ref(fig:mouseglobo)) mais aussi et surtout, l'ensembles des autres dysfonctionnements étaient retrouvés, c'est à dire : l'absence de l'acrosome, les défauts morphologiques du noyau, de l'enveloppe nucléaire et de l'acroplaxome ainsi que le mauvais positionnement de la manchette [@Pierre2012]. Ainsi il a pu être démontré que la protéine Dpy19l2 étaient principalement exprimée dans le spermatide et plus spécifiquement dans la membrane nucléaire interne faisant face à la vésicule acrosomale et que l'absence de cette protéine entrainait la déstabilisation à la fois de la lamine nucléaire, de la jonction entre l'acroplaxome et l'enveloppe nucléaire [@Pierre2012]. 
 
-```{r mouseglobo,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.8"}
+```{r mouseglobo,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.8"}
 
-fig.name <- "Comparaison entre les spermatozoïdes des souris *Dpy19l2*$^{-/-}$ (à gauche) et les souris sauvages *Dpy19l2*$^{+/+}$ (à droite)"
+fig_name <- "Comparaison entre les spermatozoïdes des souris *Dpy19l2*$^{-/-}$ (à gauche) et les souris sauvages *Dpy19l2*$^{+/+}$ (à droite)"
 fig.from <- "[@Pierre2012]"
-fig.info <- paste0(fig.name," d'après ",fig.from)
+fig_info <- paste0(fig_name," d'après ",fig.from)
 
 include_graphics(path = "figure/mouse_globo_spz.png")
 
 
 ```
-
-Dans ce chapitre je détaillerai les résultats de trois articles dont je suis co-auteur : 
-
-1. [**Fine Characterisation of a Recombination Hotspot at the DPY19L2 Locus and Resolution of the Paradoxical Excess of Duplications over Deletions in the General Population**](#mecamut) : au cours de cette étude j'ai participé à divers manipulation de biologie moléculaire tel que l'extraction d'ADN spermatique, quantification des délétions / duplications *de novo*. De même, j'ai pu contribuer au divers analyses statistiques.  
-2. [**Comparative testicular transcriptome of wild type and globozoospermic Dpy19l2 knock out mice**](#transcriptome) : Dans cette étude j'ai pu effectuer l'intégralité des manipulation de biomoléculaire (extraction de l'ARN testiculaire de souris et analyse sur puce) de même que l'intégralité de l'analyse bioinformatique des résultats.  
 
 \newpage
 
@@ -116,15 +68,17 @@ Dans ce chapitre je détaillerai les résultats de trois articles dont je suis c
 
 #### Confirmation de l'excès de délétion 
 
-Chez les mammifères il existe trois paralogues de *DPY19L2* de fonction encore inconnue et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplications de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaison homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gène tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
+Chez les mammifères il existe trois paralogues de *DPY19L2* de fonctions encore inconnues et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb (**Figure : **\@ref(fig:nahr) - **1**). Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003, @Bailey2002] et vont, de par leur homologie favoriser les duplications de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003, @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaisons homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène (**Figure : **\@ref(fig:nahr) - **2**) soit à un allèle possédant deux copies du gène tandis que l'autre n'en possède aucune (**Figure : **\@ref(fig:nahr) - **3**).  
 
-Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèles délétés que d'allèles dupliqués puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de donnée [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) (DGV) [@MacDonald2014] indique un excès de duplication puisque sur un total de 6575 individus analysés, 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à la ré-analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés coroborant les données fournies par DGV et confirmant ainsi l'excès de l'allèle dupliqué dans la population générale.  
+Ainsi, le mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèles délétés que d'allèles dupliqués puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué. Cependant, les données mises à disposition par la base de données [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) (DGV) [@MacDonald2014] indiquent un excès de duplication puisque sur un total de 6575 individus analysés, 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*. Afin de confirmer ces résultats et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006] notre équipe a procedé à la ré-analyse du locus de *DPY19L2* de 1699 individus par CGHarray. Un total de 15 duplication et de 3 délétions hétérozygotes furent observés coroborant les données fournies par DGV et confirmant ainsi l'excès de l'allèle dupliqué dans la population générale.  
 
-```{r nahr,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.5"}
+\newpage
 
-fig.name <- "Représentation schématique du mécanisme de NAHR causé par les séquences LCR flanquant le gène *DPY19L2*"
-fig.description <- "**1** : Le gène *DPY19L2* est entouré par les séquences LCR1 et LCR2 qui correspondent respectivement au LCR centromérique et télomérique. Ces LCRs sont séparés par environs 200kb et chacun d'eux mesurent approximativement 28kb. **2** : NAHR résultant du mauvais alignement des LCRs 1 et 2 du même chromatide entrainant la formation d'un allèle délété (a) et d'un ADN circulaire comprenant le gène *DPY19L2*. Cet ADN circulaire sera éliminé au cours du cycle cellulaire. **3** : NAHR résultant du mauvais alignement des LCRs 1 et 2 provenant de deux chromatides différents conduisant à la formation d'un allèle délété (a) et d'un allèle dupliqué (b)"
-fig.info <- paste0(fig.name," : ",fig.description)
+```{r nahr,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.5"}
+
+fig_name <- "Représentation schématique du mécanisme de NAHR causé par les séquences LCR flanquant le gène *DPY19L2*"
+fig_description <- "**1** : Le gène *DPY19L2* est entouré par les séquences LCR1 et LCR2 qui correspondent respectivement au LCR centromérique et télomérique. Ces LCRs sont séparés par environs 200kb et chacun d'eux mesurent approximativement 28kb. **2** : NAHR résultant du mauvais alignement des LCRs 1 et 2 du même chromatide entrainant la formation d'un allèle délété (a) et d'un ADN circulaire comprenant le gène *DPY19L2*. Cet ADN circulaire sera éliminé au cours du cycle cellulaire. **3** : NAHR résultant du mauvais alignement des LCRs 1 et 2 provenant de deux chromatides différents conduisant à la formation d'un allèle délété (a) et d'un allèle dupliqué (b)"
+fig_info <- paste0(fig_name," : ",fig_description)
 
 include_graphics(path = "figure/dpy_nahr.png")
 
@@ -132,7 +86,7 @@ include_graphics(path = "figure/dpy_nahr.png")
 
 #### Détermination du taux de recombinaison *de novo* de *DPY19L2*  
 
-Alors que les résultats précédents confirment un excès de l'allèle dupliqué de *DPY19L2* dans la population générale, nous avons par la suite cherché à déterminer les fréquences de duplications / délétions *de novo* de ce même locus. Ceci ayant pour but de déterminer si cet exces est dû à une séléction de l'allèle dupliqué ou au fait que celui-ci était effectivement produit plus fréquement que l'allèle délété. Pour ce faire nous avons quantifié le taux d'apparition de ces événements génétiques à partir d'ADN spermatique. Les spermatozoïdes étant le produits direct de la méiose, ils sont donc les reflets d'haplotypes produits *de novo*. Pour cela, nous avons analysé par PCR digitale l'ADN spermatique de trois donneurs ainsi que l'ADN spermatique constitué d'un mix provenant de ces trois donneurs. Leur ADN a tout d'abor été dilué en série de sorte à ce qu'environ 25% des 96 puits de la PCR contiennent un événement (délétion ou duplication). Ainsi, en acceptant qu'un génome haploïde humain représente 3pg, 50ng d'ADN spermatique furent déposés dans chaque puit pour la PCR spécifique à la délétion, et 100ng dans chaque puit spécifiques à a duplication. Chaque puit contient donc une partie de cette charge d'ADN initiale. La distribution de cette charge d'ADN au sein des 96 puits peut donc s'apparier à un tirage sans remise, la probabilité qu'un puit soit positif pour un événement chromosomique (duplication ou délétion) peut donc être modélisé par une loi hypergéométrique (**Équation** : \@ref(eq:hypergeo)). Nous permettant ainsi d'estimer la fréquence duplication / délétion $\lambda$ pour chaque donneur (**Équation** : \@ref(eq:lambda)) (**Figure : **\@ref(fig:dupdelrate)).  
+Alors que les résultats précédents confirment un excès de l'allèle dupliqué de *DPY19L2* dans la population générale, nous avons par la suite cherché à déterminer les fréquences de duplications / délétions *de novo* de ce même locus. Ceci ayant pour but de déterminer si cet exces est dû à une séléction de l'allèle dupliqué ou au fait que celui-ci était effectivement produit plus fréquement que l'allèle délété. Pour ce faire nous avons quantifié le taux d'apparition de ces événements génétiques à partir d'ADN spermatique. Les spermatozoïdes étant le produits direct de la méiose, ils sont donc les reflets d'haplotypes produits *de novo*. Pour cela, nous avons analysé par PCR digitale l'ADN spermatique de trois donneurs ainsi que l'ADN spermatique constitué d'un mix provenant de ces trois donneurs. Leur ADN a tout d'abor été dilué en série de sorte à ce qu'environ 25% des 96 puits de la PCR contiennent un événement (délétion ou duplication). Ainsi, en acceptant qu'un génome haploïde humain représente 3pg, 50ng d'ADN spermatique furent déposés dans chaque puit pour la PCR spécifique à la délétion, et 100ng dans chaque puit spécifiques à a duplication. Chaque puit contient donc une partie de cette charge d'ADN initiale. La distribution de cette charge d'ADN au sein des 96 puits peut donc s'apparier à un tirage sans remise, la probabilité qu'un puit soit positif pour un événement chromosomique (duplication ou délétion) peut donc être modélisé par une loi hypergéométrique (**Équation** : \@ref(eq:hypergeo)). Nous permettant ainsi d'estimer la fréquence duplication / délétion $\lambda$ pour chaque donneur (**Équation** : \@ref(eq:lambda), **Figure : **\@ref(fig:dupdelrate)).  
 
 \begin{equation} 
 \frac{\frac{(N - R)!}{W!(N-R-W)!}}{\frac{N!}{W!(N-W)!}} = \frac{(N-R)!(N-W)!}{N!(N-W-R)!} = \prod_{i=0}^{R-1}{\frac{N-W-i}{N-i}}
@@ -151,51 +105,33 @@ Où :
 
 L'interval de confiance (IC) à 95% est ensuite calculé grâce à une loi binomiale de sorte à modéliser la dilution initiale pour obtenir l'ADN d'*entrée*. Le puit contenant le *pool* des trois ADN spermatique est donc celui ayant les résultats les plus robustes, l'IC étant le plus resséré (**Figure : **\@ref(fig:dupdelrate)), et permet donc d'établir le taux de délétion *de novo* à 1.8 x 10$^{-5}$ (IC 95% : 1.4x 10$^{-6}$; 2.2x 10$^{-6}$) tandis que le taux de duplication *de novo* est estimé à 7.7 x 10$^{-6}$ (IC 95% : 6.1 x 10$^{-6}$; 9.7 x 10$^{-6}$) montrant un enrichisement environ deux fois supperieur des délétion par rapport aux duplications sur le site de *DPY19L2* (**Figure : **\@ref(fig:dupdelrate)).  
 
-```{r dupdelrate,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.38"}
+Ainsi, de manière paradoxale, les délétion *de novo* apparaitraient, au cours de la méïose, deux fois plus fréquement que les dupliquation *de novo* tandis que l'allèle dupliqué est trois fois plus fréquent que l'allèle délété dans la population générale. Cet effet pourrait en partie être due aux effets de séléction naturelle. En effet, Bien qu'à notre connaissance, les femmes portant l'allèle délété à l'état homozygote ne soient caractérisées par aucun phénotype, les hommes, eux sont 100% infertiles tandis que l'allèle dupliqué ne subirait aucune séléction.   
 
-fig.name <- "Ratio des délétions / duplications *de novo* observées au locus *DPY19L2* déterminé par PCR digital à partir d'ADN spermatique de trois donneurs"
-fig.description <- "[TODO]"
-fig.info <- paste0(fig.name," : ",fig.description)
+```{r dupdelrate,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.38"}
+
+fig_name <- "Ratio des délétions / duplications *de novo* observées au locus *DPY19L2* déterminé par PCR digital à partir d'ADN spermatique de trois donneurs"
+fig_description <- "[TODO]"
+fig_info <- paste0(fig_name," : ",fig_description)
 
 include_graphics(path = "figure/globo_du_del_rate.png")
 
 ```
 
-[TODO: expliquer brievement notre hpothèse expliquant ce phénomène] 
-
-
 #### Autres résultats  
 
-<!-- Séquençage de *PRDM9* chez les trois donneurs.   -->
-<!-- Analyse approfondie des LCRs 1 et 2, déterminaison des points de cassures   -->
+Cette étude a également été pour notre équipe l'occasion d'effectuer une étude plus approfondie des LCRs flanquant le locus de *DPY19L2*. Ainsi, nous avons pu mettre en évidence que les LCRs 1 et 2 contenaient 5 répétitions du site de reconnaissance consensus de PRDM9 (CCNCCNTNNCCNC), une  protéine connue pour son rôle central dans l'activation de la transcription dans les premères phases de la prophase méiotique  ainsi que pour être à impliqué dans les mécanismes de recombinaisons chromosomique au cours de la méiose chez l'humain et la souris [@Parvanov2010, @Baudat2010]. De même, nous avons pu mettre en évidence que les recombinaisons s'effectuaient le long de 5 points de cassures distincts répartis le long des LCRs 1 et 2.  
 
-Cette étude a également été pour notre équipe l'occasion d'effectuer une étude plus approfondie des LCRs flanquant le locus de *DPY19L2*. Ainsi, nous avons pu mettre en évidence que les LCRs 1 et 2 contenaient 5 répétitions du site de reconnaissance consensus de PRDM9 (CCNCCNTNNCCNC), une  protéine connue pour [TODO : décrire le rôle de PRDM9]. De même, nous avons pu mettre en évidence que les recombinaisons s'effectuaient le long de 5 points de cassures distincts répartis le long des LCRs 1 et 2 et que comme attendu, l'incidence des points de cassures dans les recombinaisons du locus *DPY19L2* était proportionelle à la taille des régions [TODO : expliquer mieux].  
-
-<!-- Ainsi, nous avons pu déterminer que les événements de recombinaison occurant à ce locus s'effectuaient par le biais de 5 points de cassures (BP) -->
-<!-- ### Les anomalies épigénétiques : (PLCzeta, compaction, fragmentation) -->
+\newpage
 
 ### La transcriptomique {#transcriptome}
 
+<!-- \begin{flushleft}  -->
+<!-- \includegraphics[width=7.5in]{/home/karaout/MaThese/index/bib/12610_2013_Article_8.pdf} -->
+<!-- \newpage -->
+<!-- \end{flushleft}   -->
 
-\begin{flushleft} 
-\includegraphics[width=7.5in]{/home/karaout/MaThese/index/bib/12610_2013_Article_8.pdf}
-\newpage
-\end{flushleft}  
 
-Dans des études précédentes, notre équipe à réussit à démontrer que la protéine *DPY19L2* était localisée dans la membrane interne des noyaux des spermatides pendant la spermatogénèse et qu’elle est nécessaire pour fixer l’acrosome au noyau [TODO: insert ref]. De même, nous avons pu mettre en évidence que dans des cellules HEK cette protéine colocalisait avec la protéine SUN5 et que *Dpy19l2* pourrait être un partenaire de SUN5[@Pierre2012].  nous avons cherché à observer si, comme la protéine SUN5. Chez la souris, la protéine Sun1 est elle aussi nécéssaire à la gamétogénèse et est connue pour permettre l'intéraction entre le noyau et les télomères [@Ding2007]. Dans cette étude nous avons donc chercher à savoir si l'absence de la protéine Dpy19l2 pouvait entrainer des dérèglement transcriptionelle qui pourrait, entre autre, expliquer l'absence de la protéine PLC$\zeta$ dans les spermatozoïdes globozoocéphales.  De plus, au cours de l'elevage des souris *Dpy19l2* KO au sei de notre laboratoir nous avons pu observé un excès de naissance de souris mâle lorsque l'on croisait deux sours *Dpy19l*$^{+/-}$ [TODO: insérer tableau et figure montrant le biais de sexe].  
-Afin de tenter d'expliquer ces observations, nous avons effectué une analyse comparative du transcriptome testiculaire de deux souris *Dpy19l2*$^{+/+}$ (S1+ et S2+) et deux souris *Dpy19l2*$^{-/-}$ (S1- et S2-) ayant pour but de mettre en évidence d'eventuels dereglement transcriptionels chez la souris KO. 
-Pour effectuer ces analyses, nous avons donc extrait l'ARN testiculaire des 4 souris que nous avons ensuite hybridé sur des puces à ADN Affymetrix GeneChip® Mouse Exon 1.0 contenant des sondes pour 35.557 gènes murins. Cette étape nous a alors permi d'obtenir pour chacune des 4 souris les valeurs d'expression testiculaire de l'ensemble de leurs gènes. Pour chacun de ces gènes, nous avons donc chercher à soivoir s'ils étaient différentiellement exprimés chez les sours S1- et S2- lorsqu'on comparait leur expression avec celle des souris S1+ et S2+. Pour cela, nous avons calculé quatre ratios (R1, R2, R3 et R4) (**Équation** : \@ref(eq:micerate)). Les gènes pour lesquels au moins 3 de leurs ratio étaient $\ge$ 1,7 furent considérés comme sur-exprimés tandis que ceux pour lesquels 3 de leurs ratio étaient $\le$ 0,58 ($\frac{1}{1,7}$) furent considérés comme sous-exprimés.    
-\begin{equation} 
-\begin{split}
-\forall gene \in & \ \{genes\ in\ array\}: \\
-\\
-& R1_{gene} = \frac{exp_{gene}(S1-)}{exp_{gene}(S1+)} \ \ \ \ R2_{gene} = \frac{exp_{gene}(S2-)}{exp_{gene}(S1+)} \\
-& R3_{gene} = \frac{exp_{gene}(S1-)}{exp_{gene}(S2+)} \ \ \ \ R4_{gene} = \frac{exp_{gene}(S2-)}{exp_{gene}(S2+)} 
-(\#eq:micerate)
-\end{split}
-\end{equation}
-
-```{r, warning=FALSE}
+```{r dfborn, cache=TRUE, warning=FALSE}
 
 df_born <- fread("data/souris_dpy_naissance_male_femelle.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   mutate(Birth_id = paste(`issu de`,"_",`né le`)) %>%
@@ -212,102 +148,129 @@ df_born <- fread("data/souris_dpy_naissance_male_femelle.csv", sep = "\t", heade
          p_tot = prop.test(unlist(SF), unlist(ST), alternative = "less")$p.value) %>%
   gather(Sex, Nb, Fem:Mal)
 
-ggplot(df_born,aes(Birth_id,Nb)) + 
+df_born_without_last <- df_born %>% group_by(Sex) %>% 
+  filter(!grepl("cage4", Birth_id)) %>%
+  summarise(Nb = sum(Nb)) %>% spread(Sex, Nb) %>%  
+  mutate(p_value = prop.test(Fem, Fem + Mal, alternative = "less")$p.value) 
+
+```
+
+```{r varborn, cache=TRUE, dependson="dfborn"}
+
+n_male_all <- df_born %>% ungroup %>% filter(Sex == "Mal") %>% summarise(Nb = sum(Nb)) %>% collect() %>% .[["Nb"]]
+n_female_all <- df_born %>% ungroup %>% filter(Sex == "Fem") %>% summarise(Nb = sum(Nb)) %>% collect() %>% .[["Nb"]]
+
+n_male_last <- df_born %>% ungroup %>% filter(Sex == "Mal", grepl("cage4", Birth_id)) %>% summarise(Nb = sum(Nb)) %>% collect() %>% .[["Nb"]]
+n_female_last <- df_born %>% ungroup %>% filter(Sex == "Fem", grepl("cage4", Birth_id)) %>% summarise(Nb = sum(Nb)) %>% collect() %>% .[["Nb"]]
+
+p_test_without_last <- prop.test(n_female_all - n_female_last, (n_female_all + n_male_all) - (n_male_last + n_female_last), alternative = "less")$p.value 
+p_test_all <- prop.test(n_female_all, n_female_all + n_male_all, alternative = "less")$p.value 
+
+```
+
+Dans des études précédentes, notre équipe à réussit à démontrer que la protéine *DPY19L2* était localisée dans la membrane interne des noyaux des spermatides pendant la spermatogénèse et qu’elle est nécessaire pour fixer l’acrosome au noyau [TODO: insert ref]. De même, nous avons pu mettre en évidence que dans des cellules HEK cette protéine colocalisait avec la protéine SUN5 et que *Dpy19l2* pourrait être un partenaire de SUN5[@Pierre2012].  Nous avons cherché à observer si, comme la protéine SUN5. Chez la souris, la protéine Sun1 est elle aussi nécéssaire à la gamétogénèse et est connue pour permettre l'intéraction entre le noyau et les télomères [@Ding2007]. Dans cette étude nous avons donc chercher à savoir si l'absence de la protéine Dpy19l2 pouvait entrainer des dérèglement transcriptionelle qui pourrait, entre autre, expliquer l'absence de la protéine PLC$\zeta$ dans les spermatozoïdes globozoocéphales.   
+De plus, au cours de l'elevage des souris *Dpy19l2* KO au sein de notre laboratoir nous avons pu observé un excès de naissance de souris mâle lorsque l'on croisait deux souris *Dpy19l*$^{+/-}$. 
+Ainsi, en comparant les sexes des souris obtenues lors de 6 premières naissances (*Birth 1-6*) on observe un total de `r n_male_all - n_male_last` souris mâles pour `r n_female_all - n_female_last` souris femelles. La p-valeur obtenue en effectuant un test de $\chi^2$ comparant ces deux effectifs était égale à `r p_test_without_last` laissant supposé l'existence d'un réel, bien que faible, enrichissement en souris mâles. 
+
+```{r plotborn, fig.height=3.6, fig.cap=fig_info,fig.scap=fig_name, cache=TRUE, dependson="dfborn"}
+
+fig_name <- "Quantification des sexes des souris observées lors de chaque naissances issues d'un croisement de deux souris hétérozygotes *Dpy19l2* +/-"
+fig_info <- fig_name
+
+ggplot(df_born %>% filter(!(grepl("cage4", Birth_id))),aes(Birth_id,Nb)) + 
   geom_bar(stat = "identity", position = position_dodge(), aes(fill = Sex)) +
-  scale_x_discrete(labels = paste0("B",c(1:7))) 
-
-
-    # xxx <- df_born %>% group_by(Birth_id) %>% mutate(MAX = max(Nb)) %>% select(Birth_id,p_value,MAX) %>% distinct(Birth_id,p_value,MAX)
-  
+  scale_x_discrete(labels = paste0("Birth ",c(1:7))) +
+  scale_fill_brewer(palette = "Set1") + 
+  xlab("") +
+  ylab("Nb of mice")
 
 ```
 
 
-```{r}
+\newpage
+
+C'est donc afin d'expliquer ces observations que sont l'abscence de la protéine *Plc*$\zeta$ dans les spermatozoïdes des souris *Dpy19l2*$^{-/-}$ ainsi que l'enrichissement en souris mâle dans les naissances issues d'accouplement de souris *Dpy19l2*$^{+/-}$ que nous avons effectué une analyse comparative du transcriptome testiculaire de deux souris *Dpy19l2*$^{+/+}$ (S1^+^ et S2^+^) et deux souris *Dpy19l2*$^{-/-}$ (S1^-^ et S2^-^) ayant pour but de mettre en évidence d'eventuels dereglement transcriptionels chez la souris KO. 
+Pour effectuer ces analyses, nous avons donc extrait l'ARN testiculaire des 4 souris que nous avons ensuite hybridé sur des puces à ADN Affymetrix GeneChip® Mouse Exon 1.0 contenant des sondes pour 35.557 gènes murins. Cette étape nous a alors permi d'obtenir pour chacune des 4 souris les valeurs d'expression testiculaire de l'ensemble de leurs gènes. Pour chacun de ces gènes, nous avons donc chercher à savoir s'ils étaient différentiellement exprimés chez les sours S1^-^ et S2^-^ lorsqu'on comparait leur expression avec celle des souris S1^+^ et S2^+^. Pour cela, nous avons calculé quatre ratios (R1, R2, R3 et R4) (**Équation** : \@ref(eq:micerate)). Les gènes pour lesquels au moins 3 de leurs ratio étaient $\ge$ 1,7 furent considérés comme sur-exprimés tandis que ceux pour lesquels 3 de leurs ratio étaient $\le$ 0,58 ($\frac{1}{1,7}$) furent considérés comme sous-exprimés.    
+\begin{equation} 
+\begin{split}
+\forall gene \in & \ \{genes\ in\ array\}: \\
+\\
+& R1_{gene} = \frac{exp_{gene}(S1^-)}{exp_{gene}(S1^+)} \ \ \ \ R2_{gene} = \frac{exp_{gene}(S2^-)}{exp_{gene}(S1^+)} \\
+& R3_{gene} = \frac{exp_{gene}(S1^-)}{exp_{gene}(S2^+)} \ \ \ \ R4_{gene} = \frac{exp_{gene}(S2^-)}{exp_{gene}(S2^+)} 
+(\#eq:micerate)
+\end{split}
+\end{equation}  
+
+```{r dfmolfunction, cache=TRUE}
 
 df_mol_function <- fread("data/data_globo_loecular_fuc.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
   within(`Molecular functions` <- factor(`Molecular functions`,
                                          levels = names(sort(table(`Molecular functions`), 
-                                                        decreasing = TRUE))))
+                                                             decreasing = TRUE)))) %>%
+  filter(!is.na(Target))
 
 
 df_mol_function_simple <- df_mol_function %>%
   group_by(`Molecular functions`) %>%
   mutate(NN = n()) %>%
   group_by(`Molecular functions`, Target) %>%
-  mutate(N = n()) %>%
+  mutate(Ngene = n()) %>%
   select(-Gene) %>%
-  distinct(N,NN)
+  distinct(Ngene,NN)
+
+```
+
+
+```{r varmolfunction, cache=TRUE, dependson="dfmolfunction"}
 
 nn <- df_mol_function_simple %>% ungroup() %>% filter(Target == "Nucleic acid") %>% collect() %>% .[["NN"]]
 n <- df_mol_function_simple %>% ungroup() %>% filter(Target == "Nucleic acid") %>% collect() %>% .[["N"]]
 
 ```
 
-Ainsi cette étude a pu mettre en évidence la sous-expression de 6 gènes (incluant *Dpy19l2*) et la sur-expression de 70 gènes chez les souris *Dpy19l2*$^{-/-}$. Parmi ces gènes, nous ne figurait pas *Plc*$\zeta$ indiquant que l'absence de cette protéine chez les spermatozoïdes globozoocéphales n'étaient pas directement dûe à un dysfonctionnement transcriptionel. Afin de prédire les fonction moléculaire dans lesquels étaient impliqués ces gènes, nous nous sommes servi du logiciel PANTHER [@Mi2017]. Ainsi, nous avons pu constater que `r nn` gènes codant pour des protéines de liaison étaient dérégulés (**Figure : **\@ref(fig:molfunc)), dont `r n` sont des protéines de liaison aux acides nucléiques (**Figure : **\@ref(fig:piemol)) suggérant que *Dpy19l2* pourrait effectivement intéragir avec l'ADN. D'autre fonctions moléculaires telles que l'activité catalytique, la régulation de la transcription et des protéines ayant des fonctions structurelles étaient égallement dérégulées chez les souris KO. Ces derniers sont particulièrement intéréssant lorsque l'on sait que les spermatozoïdes globozoocéphales sont caractérisés par plusieurs défauts structurels.   
+Ainsi cette étude a pu mettre en évidence la sous-expression de 6 gènes (incluant *Dpy19l2*) et la sur-expression de 70 gènes chez les souris *Dpy19l2*$^{-/-}$. Parmi ces gènes, nous ne figurait pas *Plc*$\zeta$ indiquant que l'absence de cette protéine chez les spermatozoïdes globozoocéphales n'étaient pas directement dûe à un dysfonctionnement transcriptionel. Afin de prédire les fonction moléculaire dans lesquels étaient impliqués ces gènes, nous nous sommes servi du logiciel PANTHER [@Mi2017]. Ainsi, nous avons pu constater que `r nn` gènes codant pour des protéines de liaison étaient dérégulés (**Figure : **\@ref(fig:plotmolfunction) - **A**), dont `r n` sont des protéines de liaison aux acides nucléiques (**Figure : **\@ref(fig:plotmolfunction) - **B**) suggérant que *Dpy19l2* pourrait effectivement intéragir avec l'ADN. D'autre fonctions moléculaires telles que l'activité catalytique, la régulation de la transcription et des protéines ayant des fonctions structurelles étaient égallement dérégulées chez les souris KO. Ces derniers sont particulièrement intéréssant lorsque l'on sait que les spermatozoïdes globozoocéphales sont caractérisés par plusieurs défauts structurels.   
 
-```{r molfunc, fig.cap=fig.info,fig.scap=fig.name,fig.asp=0.5}
+```{r plotmolfunction, cache=TRUE, dependson="dfmolfunction", warning=FALSE, message=FALSE, fig.height=8, fig.width=6.5, fig.cap=fig_info,fig.scap=fig_name}
 
-fig.name <- "Fonctions moléculaires affectées par au moins un gène dérégulé"
-fig.description <- "Bndn = Binding, Ctly = Catalytic, Trnsc = Transcription, Strm = Structural molecule, Enzr = Enzyme regulator, Rcpt = Receptor, Motr = Motor"
-fig.info <- paste(fig.name," : ",fig.description)
+fig_name <- "Principales fonctions moléculaires affectées chez les souris *Dpy19l2* KO"
+fig_description_A <- "**A** : Liste des fonctions moléculaires affectées : Bndn = Binding, Ctly = Catalytic, Trnsc = Transcription, Strm = Structural molecule, Rcpt = Receptor"
+fig_description_B <- "**B** : Détails des fonctions moléculaires affectées par les gènes dérégulés"
+fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
+fig_info <- paste(fig_name," : ",fig_description)
 
-ggplot(df_mol_function,aes(`Molecular functions`)) +
-  geom_bar() +
-  scale_x_discrete(labels = abbreviate)
+pA <- ggplot(df_mol_function, aes(`Molecular functions`)) +
+  geom_bar(aes(fill = `Molecular functions` )) +
+  scale_x_discrete(labels = abbreviate) + 
+  ylab("Nb of gene") +
+  scale_fill_brewer(palette = "Set1", guide = "none")
+
+ break_max <- df_mol_function_simple$Ngene %>% max
+  
+ pB <- ggplot(df_mol_function_simple, aes(reorder(Target, -Ngene), Ngene, fill = `Molecular functions`)) +
+   geom_col() +
+   facet_wrap(~`Molecular functions`, scales = "free") +
+   scale_y_continuous(breaks = c(0:break_max)) + 
+   scale_fill_brewer(guide = "none", palette="Set1") + 
+   ylab("Nb of gene") + 
+   xlab("") + 
+   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+ plot_grid(pA,pB, ncol = 1, rel_heights = c(.3,.7), labels = c("A","B"))
 
 ```
 
-```{r piemol, fig.cap=fig.info,fig.scap=fig.name,fig.asp=.55}
+\newpage 
 
-fig.name <- "Détails des sites ciblés par les gènes dérégulés ayant la fonction moléculaire\"Binding\""
-fig.description <- "Les nombres présent au milieu des parts indiquent la quantité de gène impliqués dans cette fonction moléculaire"
-fig.info <- paste(fig.name," : ",fig.description)
+Cette étude a pour nous été l'occasion de mieux caractérisé la protéine *Dpy19l2* chez la souris. Nous avons ainsi pu montrer que les souris *Dpy19l2*$^{-/-}$ présentaient des déréglements transcriptionels affectant plusieurs fonctions moléculaires pouvant ainsi expliquer, du moins en partie, les nombreux défauts morphologiques caractérisant les spermatozoïdes globozoocéphales. De même, nous avons pu observer un déréglement de nombreux gènes impliqués dans la liaison d'acide nucléique et de protéine pouvant ainsi expliquer les défauts d'ancrage de l'acrosome au noyau chez les spermatozoïdes globozoocéphales.
 
-my_pie <- function(df, title = "") {
-  
-  pie_chart_theme <- theme(axis.title.x=element_blank(),
-                           axis.text.x=element_blank(),
-                           axis.title.y = element_blank(),
-                           axis.ticks.x=element_blank(),
-                           axis.ticks.y=element_blank(),
-                           panel.grid=element_blank())
-  
-  ggpie(df,
-        x = "Ngene", 
-        label = "Ngene",
-        fill = "Target",
-        lab.font = "black",
-        color = "white",
-        lab.pos = "in") + 
-    ggtitle(title) +
-    pie_chart_theme + 
-    scale_fill_brewer(palette="Set1")
-  
-}
-
-df_binding <- df_mol_function_simple %>% ungroup() %>% filter(`Molecular functions` == "Binding") %>% select(Target, Ngene = N) %>% as.data.frame()
-df_catalytic <- df_mol_function_simple %>% ungroup() %>% filter(`Molecular functions` == "Catalytic") %>% select(Target, Ngene = N) %>% as.data.frame()
-df_transcription <- df_mol_function_simple %>% ungroup() %>% filter(`Molecular functions` == "Transcription") %>% select(Target, Ngene = N) %>% as.data.frame()
-df_structural_mol <- df_mol_function_simple %>% filter(`Molecular functions` == "Structural molecule") %>% select(Target, Ngene = N) %>% as.data.frame()
-
-p_binding <- my_pie(df_binding, title = "Binding")
-p_catalytic <- my_pie(df_catalytic, title = "Catalytic")
-p_transcription <- my_pie(df_transcription, title = "Transcription")
-p_structural_mol <- my_pie(df_structural_mol, title = "Structural molecule")
-
-p_binding
-
-```
-```{r}
-
-
-
-
-      
-```
-
-Au cours de cette étude nous n'avons pas pu mettre en évidence la cause expliquant le biais de sexe observé dans les naissance des souris. De même aucune dérégulation dans l'expression du gène *Plc*$\zeta$ n'a pu être observé.  Cependant, et que ceux-ci soient modestes, nous avons montrés que les souris *Dpy19l2*$^{-/-}$ présentaient des déréglements transcriptionels affectant plusieurs fonctions moléculaires pouvant ainsi expliquer, du moins en partie, les nombreux défauts morphologiques caractérisant les spermatozoïdes globozoocéphales. De même, nous avons pu observer un déréglement de nombreux gènes impliqués dans la liaison d'acide nucléique et de protéine pouvant ainsi expliquer les défauts d'ancrage de l'acrosome au noyau chez les spermatozoïdes globozoocéphales.
+Ces résultats ne nous ont cependant pas permis d'expliquer l'abscence de la protéine Plc$\zeta$ dans le spermatozoïde globocéphale murin l'expression du gène *Plc*$\zeta$ n'ayant montré aucune dérugulation chez la souris *Dpy19l2*^-/-^. De même, aucun des gèes retrouvés comme dérégulé ne nous a permis d'expliquer le biais de sexe que nous avions observés. Cela n'a pas été une surprise pour nous puisque après avoir entamé notre étude, une dernière portée issues d'un croisement de souris *Dpy19l2*^+/-^ a vus le jours. Celle-ci état composée de `r n_male_last` souriceaux mâles et de `r n_female_last` souriceaux femelles. Ainsi, avec un total de `r n_male_all` souris mâles pour `r n_female_all` souris femelles, la p-valeur de notre test du $\chi^2$ à `r p_test_all` laissant cete fois-ci supposer la non-existence d'un biais de sexe dans les naissances issues d'un croisement de souris *Dpy19l2*^-/-^.
 
 ## Conclusion  
+
+Ces deux études nous ont permis d'aquérir une meilleure compréhension des fonctions moléculaires de la protéine impliquant la protéine DPY19L2 dont la délétion du gène *DPY19L2* codant pour celle-ci est la principale cause de globozoospermie chez l'homme.  
+
+Les résultats de ces études ont été publiés dans deux articles dont je suis respectivement 3^ième^ et 1^ier^ auteur : 
+
+1. [**Fine Characterisation of a Recombination Hotspot at the DPY19L2 Locus and Resolution of the Paradoxical Excess of Duplications over Deletions in the General Population**](#mecamut) : au cours de cette étude j'ai participé à divers manipulation de biologie moléculaire tel que l'extraction d'ADN spermatique, quantification des délétions / duplications *de novo*. De même, j'ai pu contribuer au divers analyses statistiques.  
+2. [**Comparative testicular transcriptome of wild type and globozoospermic Dpy19l2 knock out mice**](#transcriptome) : Dans cette étude j'ai pu effectuer l'intégralité des manipulation de biomoléculaire (extraction de l'ARN testiculaire de souris et analyse sur puce) de même que l'intégralité de l'analyse bioinformatique des résultats.  
 
