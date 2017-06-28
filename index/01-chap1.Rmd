@@ -2,7 +2,7 @@
 
 ## La spermatogénèse  
 
-La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés [@Gnessi1997, @KIERSZENBAUM1994], **Sharpe1994 à trouver !!!**. C'est au cours de celle-ci qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la [méiose](#meiose)) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continu dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et implique trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïde s'élève environ à 45 million par testicules [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes du cycle spermatogénétique a une durée fixe et constante selon les espèces (**Table : **\@ref(tab:spermatotime)).   
+La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés [@Gnessi1997, @Sharpe1994, @KIERSZENBAUM1994]. C'est au cours de celle-ci qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : La phase de multiplication, la phase de division (appelée la [méiose](#meiose)) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continu dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et impliquent trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïde s'élève environ à 45 million par testicules [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes du cycle spermatogénétique a une durée fixe et constante selon les espèces (**Table : **\@ref(tab:spermatotime)).   
 
 ```{r spermatotime}
 
@@ -12,13 +12,19 @@ duree_de_vie <- c("16-18","7.5-9","23","1","1")
 
 t <- data.frame(cellules_germinales,duree_de_vie)
 
-kable(t, col.names = c("Cellules germinales","Durée de vie moyenne (jours)"),caption = tab.name)
+kable(t, 
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Cellules germinales","Durée de vie moyenne (jours)"),
+      caption = tab.name)
 
 ```
 
+\newpage
+
 ### Rappels sur le testicule  
 
-Les testicules sont les organes sexuels masculins. Ils possèdent deux fonctions principales (plus ou moins exprimés selon les périodes de la vie de l'individu) : une fonction endocrine caractérisée par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, le testicule présente une forme ovoïde ayant un volume moyen de 18 cm3. Chez l’homme, comme chez la plupart des mammifères terrestres, ils sont localisés sous le pénis dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps nécessaire à la spermatogenèse.  
+Les testicules sont les organes sexuels masculins. Ils possèdent deux fonctions principales plus ou moins exprimés selon les périodes de la vie de l'individu : une fonction endocrine caractérisée par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, le testicule présente une forme ovoïde ayant un volume moyen de 18 cm^3^. Chez l’homme, comme chez la plupart des mammifères terrestres, ils sont localisés sous le pénis dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps nécessaire à la spermatogenèse.  
 L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)). C'est le long des parois du tube séminifère que se déroulera l'ensemble des étapes de la spermatogenèse.    
 
 ```{r testicule, fig.cap=fig.info,out.extra="scale=0.65"}
@@ -31,15 +37,15 @@ include_graphics(path = "figure/coupe_testicule2.jpg")
 
 ```
 
+\newpage
+
 ### La phase de multiplication  
 
-La phase de multiplication est la phase au cours de laquelle les spermatogonies se divisent par mitoses pour aboutir au stade de spermatocytes primaires. Les spermatogonies sont des cellules diploïdes à l'origine de l’ensemble des autres cellules germinales humaines. Pour cela, elles vont s'auto-renouveler par mitoses successives afin de maintenir une production continue de spermatozoïdes tout au long de la vie de l'individu. Ces cellules sont localisées dans le compartiment basal des tubes séminifères. Les analyses histologiques ont permi de distinguer trois types de spermatogonies en fonction de leur contenu en hétérochromatine [@Clermont1963, @Clermont1966, @Goossens2013] :  
-
-1. Les spermatogonies de type A dark (ou Ad)  
-2. Les spermatogonies de type A pale (ou Ap)  
-3. Les spermatogonies de type B  
+La phase de multiplication est la phase au cours de laquelle les spermatogonies se divisent par mitoses pour aboutir au stade de spermatocytes primaires. Les spermatogonies sont des cellules diploïdes à l'origine de l’ensemble des autres cellules germinales humaines. Pour cela, elles vont s'auto-renouveler par mitoses successives afin de maintenir une production continue de spermatozoïdes tout au long de la vie de l'individu. Ces cellules sont localisées dans le compartiment basal des tubes séminifères. Les analyses histologiques ont permi de distinguer trois types de spermatogonies en fonction de leur contenu en hétérochromatine [@Clermont1963, @Clermont1966, @Goossens2013] :  Les spermatogonies de type A dark (ou Ad), les spermatogonies de type A pale (ou Ap)  et les spermatogonies de type B.  
   
 Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogénèse et servent de réserve. Elles vont au cours d'une première mitose former une spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenese)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la régénération de la population de cellules germinales au sein de l'épithélium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tous les 16 jours. Les cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la [spermiogénèse](#spermiogenese) ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonie Ap va, lorsqu'elle se divise par mitose, former deux spermatogonies B qui elles-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenese)).  
+
+\newpage
 
 ```{r spermatogenese,fig.cap=fig.info,out.extra="scale=0.35"}
 
@@ -52,9 +58,14 @@ include_graphics(path = "figure/spermatogenese2.jpg")
 
 ```
 
+\newpage 
+
 ### La méiose  {#meiose}
 
 La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaires (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:meiose)) appelée respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son non *réductionnelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:crossingover)).
+
+La méiose est initiée dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 et 4 jours. Au cours de cette phase a lieu la réplication de l'ADN. Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliées entre elles par le centromère, le matériel génétique de chaque cellule ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distinctes (**Figure : **\@ref(fig:meiose)) : 
+
 
 ```{r meiose,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.33"}
 
@@ -67,59 +78,29 @@ include_graphics(path = "figure/Meiosis_Stages.png")
 
 ```
 
-La méiose est initiée dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'ils vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 et 4 jours. Au cours de cette phase a lieu la réplication de l'ADN. Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliées entre elles par le centromère, le matériel génétique de chaque cellule ayant donc été multiplié par 2. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composées de 4 étapes distinctes (**Figure : **\@ref(fig:meiose)) : 
+\newpage
 
 1. **Méiose réductionnelle** : (**Figure : **\@ref(fig:meiosei))
     a. **La prophase I** : Cette longue étape dure 23 jours chez l'homme et peut être subdivisée en 5 phases successives : leptotène, zygotène, pachytène, diplotène et diacinèse.  
         i. **Leptotène** : condensation de la chromatine et formation des chromosomes.  
         ii. **Zygotène** : Appariement des chromosomes homologues par paires appelées bivalents grâce l’intermédiaire d’une structure multi-protéique : le complexe synaptonémal.  
-        iii. **Pachytène** : Ce stade dure 16 jours et est le plus long de la prophase I. C'est au cours de celui-ci qu'à lieu l’échange de matériel génétique par le biais des crossing-over (**Figure : **\@ref(fig:crossingover)) entre les chromatides non-sœurs appelés nodules de recombinaison.  
+        iii. **Pachytène** : Ce stade dure 16 jours et est le plus long de la prophase I. C'est au cours de celui-ci qu'à lieu l’échange de matériel génétique par le biais des crossing-over entre les chromatides non-sœurs appelés nodules de recombinaison (**Figure : **\@ref(fig:crossingover)).  
         iv. **Diplotène** : La dissociation du complexe synaptonémal va permettre aux chromosomes homologues d'initier leur séparation. Certains sites d’appariement étroits nommés chiasmas demeurent néanmoins liés permettant une séparation plus progressive des chromosomes et réduisant ainsi le risque d’aneuploïdies (nombre anormal de chromosomes) [@Handyside2012].  
         v. **Diacinèse** : Cette étape marque la fin de la méiose I et fait office de transition avec la méiose II. Elle est caractérisée par une condensation maximale des chromosomes et la disparition de la membrane nucléaire et du nucléole. Le fuseau méiotique commence à s’assembler, les centromères des chromosomes homologues s’éloignent et les chiasmas glissent progressivement vers les télomères.  
-    b. **La métaphase I** : phase au cours de laquelle les chromosomes vont s'aligner à l'équateur de la cellule pour former la plaque équatoriale. 
+    b. **La métaphase I** : phase au cours de laquelle les chromosomes vont s'aligner à l'équateur de la cellule pour former la plaque équatoriale.  
+    
     c. **L'anaphase I** : les chromatides sœurs (ou les chromosomes homologues en fonction de la phase méiotique) vont se séparer et migrer aux pôles opposés de la cellule.      
     d. **La télophase I** : qui est l'étape finale, les chromosomes se décondensent et l'enveloppe nucléaire se reforme autours des chromosomes. La cellule mère se sépare alors en deux cellules filles appelées spermatocytes secondaires.   
 
-```{r meiosei,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.43"}
+\newpage
 
-fig.name <- "Les différentes étapes de la première division méiotique masculine adapté"
-fig.description <- "**TROUVER LA FIGURE D4ORIGINE ET CHANGER LE WIKI [TODO]**"
-fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
-fig.info <- paste0(fig.name," d'après ",fig.from)
-
-include_graphics(path = "figure/MeiosisI.png")
-
-```
-    
-2. **Méiose équationnelle** : (**Figure : **\@ref(fig:meioseii)) La MII est similaire à une division mitotique, 
+2. **Méiose équationnelle** : (**Figure : **\@ref(fig:meioseii)) La MII est similaire à une division mitotique et peut se décomposer en 4 parties distinctes :  
     a. **La prophase II** : Contrairement à la prophase I, la prophase II est très courte. Les chromosomes alors formés de deux chromatides sœurs se dirigent vers la plaque équatoriale.  
     b. **La métaphase II** :  À ce stade, les chromosomes sont alignés le long de la plaque équatoriale au niveau de leur centromère.  
     c. **L'anaphase II** : Les centromères de chaque chromosome se séparent permettant aux chromatides sœurs de se diriger vers les pôles opposés des spermatocytes II.  
     d. **La télophase II** : Comme en télophase I, les cellules mères se séparent en deux cellules filles haploïdes appelées spermatides, contenant chacune n
 chromosomes.  
 
-```{r meioseii,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.43"}
-
-fig.name <- "Les différentes étapes de la deuxième division méiotique masculine adapté"
-fig.description <- "**TROUVER LA FIGURE D4ORIGINE ET CHANGER LE WIKI [TODO]**"
-fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
-fig.info <- paste0(fig.name," d'après ",fig.from)
-
-include_graphics(path = "figure/MeiosisII.png")
-
-```
-```{r mitose,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
-
-# # link <- '[larousse](http://www.larousse.fr/encyclopedie/images/Phases_de_la_mitose/1009782)'
-# fig.name <- "Les différentes phases de la division cellulaire"
-# fig.description <- "De la prophase (à gauche) à la télophase (à droite)"
-# fig.info <- paste(fig.name,fig.description,sep = " : ")
-# 
-# include_graphics(path = "figure/phases_mitose.jpg") 
-
-```
-
-La première division méiotique aboutit à la formation des spermatocytes secondaires (spermatocytes II). À ce stade, les cellules sont haploïdes et chaque chromosome est composé de deux chromatides sœurs. Après, cette brève étape (environ 1 jour) ainsi qu'une très courte interphase sans réplication de l'ADN, les spermatocytes II vont entrer en deuxième division méiotique. Cette deuxième division est très semblable à une division mitotique. La prophase II, à la différence de la prophase I, est très courte. Lors de cette étape, les chromosomes constitués de chromatides sœurs se dirigent vers la plaque équatoriale. En métaphase II, les chromosomes s’alignent au niveau de leurs centromères. En anaphase II, les chromatides sœurs se séparent l’une de l’autre et migrent vers les pôles opposés des spermatocytes II. Lors de la télophase II, on observe la formation de cellules filles haploïdes appelées spermatides, contenant chacune n chromosomes.  
 
 ```{r crossingover,fig.cap=fig.info, out.extra="scale=0.35"}
 
@@ -131,14 +112,44 @@ include_graphics(path = "figure/crossingover.jpg")
 
 ```
 
+
+
+\newpage 
+
+```{r meiosei,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.43"}
+
+fig.name <- "Les différentes étapes de la première division méiotique masculine adapté"
+fig.description <- "**TROUVER LA FIGURE D4ORIGINE ET CHANGER LE WIKI [TODO]**"
+fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
+fig.info <- paste0(fig.name," d'après ",fig.from)
+
+include_graphics(path = "figure/MeiosisI.png")
+
+```
+
+```{r meioseii,fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=0.43"}
+
+fig.name <- "Les différentes étapes de la deuxième division méiotique masculine adapté"
+fig.description <- "**TROUVER LA FIGURE D4ORIGINE ET CHANGER LE WIKI [TODO]**"
+fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
+fig.info <- paste0(fig.name," d'après ",fig.from)
+
+include_graphics(path = "figure/MeiosisII.png")
+
+```
+
+\newpage
+
 ### La spermiogénèse  {#spermiogenese}
 
-La spermiogénèse est la phase finale de la spermatogénèse. Elle dure environ 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **\@ref(fig:spermiogenese)). La spermiogénèse définie la cytodifférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologiques et fonctionnelles du spermatozoïde seront déterminées (Clermont & Oko 1993 à trouver !!!). Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commencent au niveau des spermatides rondes [@Escalier1991]. Pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
+La spermiogénèse est la phase finale de la spermatogénèse. Elle dure environ 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **\@ref(fig:spermiogenese)). La spermiogénèse définie la cytodifférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologiques et fonctionnelles du spermatozoïde seront déterminées [@YvesClermontRichardOko1993]. Elle est caractérisée par 3 évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commencent au niveau des spermatides rondes [@Escalier1991]. Pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
 Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10  $\upmu$m) que l’on peut schématiquement diviser en trois classes :  
 
-1. **Les spermatides rondes** (**Figure : **\@ref(fig:spermiogenese) 1-2) : L'identification de ces cellules représente une difficulté technique. Elles ont cependant pu être décrites en détail par différentes techniques de coloration sous microscope optique [@Clermont1963, @Papic, @Schenck, @Adelman1989, @WorldHealthOrganization1992]. Plusieurs études animales ont pu démontrées le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, [@Ogura1994], @Kimura1995, @Sasagawa], la même chose ayant été également observée plus récemment chez l'homme [@Tanaka2015] bien que le taux de fécondation et d'implantation soit extrêmement faible [@Asimakopoulos2003]. Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
-2. **Les spermatides en élongation** (**Figure : **\@ref(fig:spermiogenese) 3-4) : Ils peuvent aussi permettre la fécondation et d’initier des grossesses avec un meilleur taux que les spermatides rondes et engendreraient théoriquement moins de risques d'anomalies génétiques [@Asimakopoulos2003]. **A completer**  
-3. **Les spermatides en condensation** (**Figure : **\@ref(fig:spermiogenese) 5-7) : C'est le stade final de la différentiation de la spermatide en spermatozoïde. À ce stade le noyau est très allongé, avec une partie caudale globulaire et une partie antérieure saillante. La chromatine est sombre et condensée. L’axonème va continuer à s’allonger pour former le flagelle mature. Les différentes organelles inutiles pour la physiologique spermatique et l’excès de cytoplasme vont former la gouttelette cytoplasmique qui va se détacher et donner le corps résiduel qui va ensuite être phagocyté par les cellules de Sertoli [@Hermo2010].  
+1. **Les spermatides rondes** (**Figure : **\@ref(fig:spermiogenese) - **1** et **2**) : L'identification de ces cellules représente une difficulté technique. Elles ont cependant pu être décrites en détail par différentes techniques de coloration sous microscope optique [@Clermont1963, @Papic, @Schenck, @Adelman1989, @WorldHealthOrganization1992]. Plusieurs études animales ont pu démontrer le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, [@Ogura1994, @Kimura1995, @Sasagawa], la même chose ayant été également observée plus récemment chez l'homme [@Tanaka2015] bien que le taux de fécondation et d'implantation soit extrêmement faible [@Asimakopoulos2003]. Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
+
+2. **Les spermatides en élongation** (**Figure : **\@ref(fig:spermiogenese) - **3** et **4**) : À ce stade, l'acrosome va s'étendre le long du noyau lui donnant une forme plus allongée et la chromatine devient plus sombre. Un réseau de microtubule se forment autours du noyau créant ainsi la manchette qui participera également à l'allongement de la tête du spermatozoïde et permettra la migration des mitochondries vers la pièce intermédiaire du flagelle former le manchon de mitochondries [@Moreno2006]. Les spermatides en élongation peuvent aussi permettre la fécondation et d’initier des grossesses avec un meilleur taux que les spermatides rondes et engendreraient théoriquement moins de risques d'anomalies génétiques [@Asimakopoulos2003].  
+
+3. **Les spermatides en condensation** (**Figure : **\@ref(fig:spermiogenese) - **5** et **7**) : C'est le stade final de la différentiation de la spermatide en spermatozoïde. À ce stade le noyau est très allongé, avec une partie caudale globulaire et une partie antérieure saillante. La chromatine est sombre et condensée. L’axonème va continuer à s’allonger pour former le flagelle mature. Les différentes organelles inutiles pour la physiologique spermatique et l’excès de cytoplasme vont former la gouttelette cytoplasmique qui va se détacher et donner le corps résiduel qui va ensuite être phagocyté par les cellules de Sertoli [@Hermo2010].  
 
 Une fois ces étapes de différentiation finies, les spermatides sont relâchées en tant que spermatozoïdes dans la lumière du tube séminifère. Ce procédé est appelé spermiation.  
 
@@ -160,9 +171,7 @@ include_graphics(path = "figure/spermiogenese.png")
 
 ## Structure et fonction du spermatozoïde 
 
-### Anatomie du spermatozoïde  
-
-Le spermatozoïde est une cellule hautement différenciée dont la taille, l'orientation et la symétrie sont déterminées. La morphologie générale du spermatozoïde éjaculé est similaire à celle du spermatozoïde testiculaire. Le spermatozoïde humain normal mature mesure environ 60 $\upmu$m de long et est essentiellement constitué de deux parties : la tête et le flagelle (**Figure : **\@ref(fig:spz)).
+Le spermatozoïde est une cellule hautement différenciée dont la taille, l'orientation et la symétrie sont déterminées. La morphologie générale du spermatozoïde éjaculé est similaire à celle du spermatozoïde testiculaire. Le spermatozoïde humain normal mature mesure environ 60 $\upmu$m de long et est essentiellement constitué de deux parties : la tête et le flagelle (**Figure : **\@ref(fig:spz)). En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène. La fécondation d'un ovocyte par un spermatozoïde formera un zygote diploïde qui pourrase développer ensuite en embryon dans l'uterus féminin.
 
 ```{r spz,fig.cap=fig.name,fig.scap=fig.name,out.extra="scale=.75"}
 
@@ -176,11 +185,15 @@ include_graphics(path = "figure/sperm_anatomy.png")
 
 ```
 
-#### La tête  
+\newpage
+
+### La tête  
 
 1. **L'acrosome** : C'est une vésicule de sécrétion géante située dans la moitié supérieure de la tête du spermatozoïde. Elle se développe à partir de l'appareil de Golgi lors de la spermiogénèse. Au cours de sa formation, l'acrosome forme tout d'abord un granule sphérique qui se colle sur la partie apicale du noyau. En s'aplatissant contre celui-ci, l'acrosome va prendre une forme hémisphérique recouvrant la membrane nucléaire formant la coiffe céphalique. Le rôle de l'acrosome est fondamental dans le processus de fécondation puisqu'il permet d'excréter notamment l'acrosine, une enzyme de digestion permettant au spermatozoïde de traverser la zone pellucide qui entoure les ovocytes. Ce processus de relargage est appelé réaction acrosomale.     
 2.  **L'acroplaxome** : L'acroplaxome est une structure cytosquelette composée de microfilaments d’actine (F- actine) et de kératine 5. Cette structure est positionnée en face de l’appareil de golgi et contre le noyau et sert de point d'attachement ainsi que de guide aux vésicules pro-acrosomales [@Kierszenbaum2004]. C’est une structure transitoire qui disparaît pour être remplacée par la thèque périnucléaire dans le spermatozoïde mature.     
 3.  **Le noyau** : C'est une structure cellulaire présente dans la majorité des cellules eucaryotes. Il contient l'essentiel du matériel génétique. Le noyau du spermatozoïde est caractérisé par une compaction extrêmement importante de l’ADN. Dans les cellules somatiques l’ADN est enroulé par unité de 146 paires de bases autour d’un octamère d’histones dit de cœur (H2A, H2B, H3 et H4) afin d’organiser les 3 milliards de paires de bases du génome humain dans un noyau de quelques microns (**Figure : **\@ref(fig:noyau)). L’ADN des spermatides va subir une réorganisation chromatinienne plus importante au cours de la spermatogénèse afin d’augmenter sa compaction. Ainsi, les octamères d'histones présents dans les cellules somatiques sont remplacés par les protéines de transition (TPN1, TPN2) puis par les protamines (PRM1, PRM2) deux protéines riches en arginine et en cystéine (**Figure : **\@ref(fig:noyau)). L'intégrité des deux protéines composant ce dimère est nécessaire pour la procréation [@Cho2001]. Cette compaction extrême permet de réduire la taille du noyau, mais aussi de protéger l’ADN d’agents de dégradation comme l’oxydation des bases. Parallèlement à cette condensation chromatinienne se produit un arrêt des processus de transcription cellulaire [@Kierszenbaum1978]. Le noyau du spermatozoïde est donc un noyau au repos, transcriptionnellement inactif [@Ward1994]
+
+\newpage
 
 ```{r noyau,fig.cap=fig.description,fig.scap=fig.name,out.extra="scale=.55"}
 
@@ -192,7 +205,9 @@ include_graphics(path = "figure/noyau.png")
 
 ```
 
-#### Le flagelle  
+\newpage
+
+### Le flagelle  
 
 Le flagelle représente la queue du spermatozoïde. Celui-ci permet, par mouvement d'oscillation à haute vitesse, le déplacement du spermatozoïde. Cette mobilité est générée par un cytosquelette interne extrêmement conservé durant l'évolution appelé l'axonème. Celui-ci est composé de neuf doublets de microtubules périphériques et de deux doublets internes [@Inaba2003] (**Figure : **\@ref(fig:axoneme)), on parle alors de structure "9 + 2". Les doublets externes sont reliés entre eux par des ponts de nexine et au doublet central par des ponts radiaires. Les doublets externes sont également reliés entre eux par les complexes protéiques qui forment les dynéines externes et internes. Ce sont ces protéines qui en exerçant une contraction alternée permettent le mouvement du spermatozoïde.  
 
@@ -212,6 +227,8 @@ include_graphics(path = "figure/axoneme.png")
 Le flagelle du spermatozoïde peut être divisé en trois partie distinctes (**Figure : **\@ref(fig:flagelle)) : 
 
 1. **La pièce intermédiaire** : Elle fait jonction avec la tête du spermatozoïde et est composée de la gaine de mitochondrie qui fournira une partie de de l'énergie nécessaire au battement flagellaire (grâce à la phosphorylation oxydative qui produit de l’ATP). L’axonème qui se prolonge dans la pièce principale et un ensemble de neuf faisceaux de fibres denses.    
+
+\newpage
 2. **La pièce principale** : Ici, la gaine de mitochondrie a disparue ainsi que deux des faisceaux de fibres denses présents dans la pièce intermédiaire. On note cependant la présence d'une structure supplémentaire, la gaine fibreuse. Cette gaine entoure l'axonème et comporte deux épaississements diamétralement opposés, appelés colonnes longitudinales sur lesquelles s'insèrent les fibres denses 3 et 8. C'est le long de la gaine fibreuse qu'est produit la majorité de l’énergie nécessaire au glissement des microtubules [@Eddy2007].    
 3. **La pièce terminale** : Elle est située au niveau de l’extrémité distale du flagelle et ne contient que l’axonème [@Inaba2003].  
 
@@ -230,22 +247,17 @@ include_graphics(path = "figure/sperm2.png")
 
 ```
 
-### Fonction du spermatozoïde  
-
-En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène.  
-
-
-\newpage  
+\newpage
 
 ## L'infertilité masculine  
 
-L'organisation mondiale de la santé définie l'infertilité comme étant : "*une pathologie du système reproductif définie par l’échec d'une grossesse clinique après 12 mois ou plus de rapports sexuels réguliers non protégés*" ([```Who.int. 2013-03-19. Retrieved 2013-06-17```](http://www.who.int/reproductivehealth/topics/infertility/definitions/en/)). L'étude de l'infertilité représente un des enjeux scientifique et médical majeur de ces dernières années. On estime qu'environ 10 à 15% des couples humains font face à des problèmes d'infertilité soit plus de 70 millions de personnes dans le monde [@Boivin2007a]. Dans la moitié des cas, la cause sous-jacente serait masculine. On estime que  les facteurs causaux sous-jacents de l'infertilité masculine peuvent être attribués à des toxines environnementales, des troubles systémiques tels que la maladie hypothalamo-hypophysaire, les cancers testiculaires et l'aplasie des cellules germinales. Les facteurs génétiques, y compris les aneuploïdies et les mutations de gènes uniques, contribuent également à l'infertilité masculine. Cependant, aucune cause n'est identifiée dans près de la moitié des cas. Comme nous avons pu le voir, la spermatogénèse est une succession de processus complexes qui s'effectue de manière coordonnée, de fait la moindre altération génétique affectant une seule de ces étapes est susceptible d'entrainer un phénotype d'infertilité (Barratt, 1995 **A TROUVER**). 
-
-<!-- Barratt, C.L.R. (1995) Spermatogenesis. In Grudzinsky, J.G. and Yovich, J.L. (eds) Gametes: the spermatozoon. Cambridge University Press, Cambridge   -->
+L'organisation mondiale de la santé définie l'infertilité comme étant : "*une pathologie du système reproductif définie par l’échec d'une grossesse clinique après 12 mois ou plus de rapports sexuels réguliers non protégés*" ([```Who.int. 2013-03-19. Retrieved 2013-06-17```](http://www.who.int/reproductivehealth/topics/infertility/definitions/en/)). L'étude de l'infertilité représente un des enjeux scientifique et médical majeur de ces dernières années. On estime qu'environ 10 à 15% des couples humains font face à des problèmes d'infertilité soit plus de 70 millions de personnes dans le monde [@Boivin2007a]. Dans la moitié des cas, la cause sous-jacente serait masculine. On estime que  les facteurs causaux sous-jacents de l'infertilité masculine peuvent être attribués à des toxines environnementales, des troubles systémiques tels que la maladie hypothalamo-hypophysaire, les cancers testiculaires et l'aplasie des cellules germinales. Les facteurs génétiques, y compris les aneuploïdies et les mutations de gènes uniques, contribuent également à l'infertilité masculine. Cependant, aucune cause n'est identifiée dans près de la moitié des cas. Comme nous avons pu le voir, la spermatogénèse est une succession de processus complexes qui s'effectue de manière coordonnée, de fait la moindre altération génétique affectant une seule de ces étapes est susceptible d'entrainer un phénotype d'infertilité [@Grudzinskas1995]. 
 
 ### Les différents phénotypes d'infertilité masculine  
 
 Chez l'homme, l'infertilité est associée à une altération quantitative et / ou qualitative des spermatozoïdes présents dans l'éjaculat. L'ensemble de ces altérations peuvent être détectées et quantifiées dans des laboratoires spécialisés par réalisation d'un spermogramme. Au cours de celui-ci, plusieurs critères tels que le volume de sperme sécrété, son pH, la quantité et la vitalité des spermatozoïdes qu'il contient seront évalués. La proportion de cellules immatures sera elle aussi analysée. Ces cellules rondes, se retrouvent à la fois dans l'éjaculat des individus ayant une quantité de spermatozoïdes "normale" [@Michael1937,@Tomlinson1993a], chez les individus présentant une quantité basse de spermatozoïdes [@MacLeod1970, @Tomlinson1993] ou en étant dépourvu [@Kurilo]. Cependant, leur nombre augmente tandis que la quantité de spermatozoïde diminue [@SPERLING1971].  
+
+\newpage
 
 #### Anomalies liées à la quantité spermatique {#infquant}  
 
@@ -262,15 +274,16 @@ Ces anomalies sont observables en effectuant un spermocytogramme. Plusieurs clas
 ```{r anomaliemorphosperm, fig.cap=tab.info,fig.scap=tab.name,out.extra="scale=.75"}
 
 # récupérer le tableau Adapté d’Auger, 2010.
-
+# https://stackoverflow.com/questions/25106481/add-an-image-to-a-table-like-output-in-r
 tab.name <- "Différentes anomalies morphologiques du spermatozoïde selon la classification de David modifiée adapté... TABLEAU à adapter et à insérer !!!!!"
 tab.from <- "[@Auger2010]"
 tab.info <- paste0(tab.name," d'après ",tab.from)
-
 include_graphics(path = "figure/sperm_morpho_abnormalities.png")
 
 
 ```
+
+\newpage
 
 #### Anomalies liées à la mobilité  
 
@@ -283,6 +296,8 @@ Comme il a déjà été dit, il est estimé que 10 à 15% des couples humain fon
 #### Les causes fréquentes  
 
 1. **Les microdélétions du chromosome Y** : Le chromosome Y est un petit chromosome atteignant une taille d'environ 53 Mb et est porteur de 78 gènes principalement impliqués dans la différentiation sexuelle masculine et la spermatogénèse [@Skaletsky2003]. De fait, le chromosome Y représente une région d'intérêt évidente dans l'étude de facteur génétique liés à l'infertilité masculine. L'évolution des technologies a permis de mettre en évidence des délétions invisibles au caryotype dans la région du facteur AZF (*Azoospermia Factor*). Cette région peut être subdivisée en trois sous-parties, AZFa, AZFb et AZFc (**Figure :** \@ref(fig:chry)). Depuis plusieurs années, de nombreuses séries de patients azoospermiques ou oligozoospermiques ont été étudiées et publiées et tendent à montrer que les microdélétions du chromosome Y seraient responsables de 10% des cas d'azoospermie non-obstructive et chez 5% des cas d'oligozoospermie sévère (<5 millions de spermatozoïdes/ml) [@Hotaling2014].  
+
+\newpage
 
 ```{r chry,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.45"}
 
@@ -297,31 +312,44 @@ include_graphics(path = "figure/chromozomeY.png")
 
 2. **Anomalies chromosomiques** : Des anomalies chromosomiques de nombre ou de structure impliquant les autosomes ou, le plus souvent, les gonosomes, peuvent être impliquées dans des cas d'infertilité masculine. Le pourcentage d'individus concernés varie entre 2 et 8% et peut atteindre 15% pour les patients azoospermiques soit 10 à 20 fois la fréquence retrouvée dans la population générale [@Ravel2006].
     a. **Syndrome de Klinefelter** : Le syndrome de Klinefelter (ou 46, XXY) fut décrit pour la première fois en 1942 par Harry F. Klinefelter et décrit une affection due à la présence d’un chromosome X supplémentaire suite à une erreur de ségrégation des chromosomes au moment de la méiose. Sa prévalence dans la population générale est estimée à environ 1 sur 1200 (1 homme sur 600) [@Bojesen2011] mais elle est environ 50 fois supérieure chez les patients infertiles azoospermiques [@Gekas2001].  
+    
     b. **Les anomalies de structure** :  Les translocations et les inversions sont les anomalies de structures retrouvées le plus fréquemment chez les patients infertiles. 
-        i. La translocation est définie comme l'échange de matériel génétique entre deux chromosomes non homologues. On en distingue deux types, les translocations réciproques et les translocations robertsonniennes [**TODO: définir ces deux types de translocation**]. Les premières sont retrouvées 4 à 10 fois plus fréquemment chez les patients infertiles que dans la population générale [@Elliott1997], les secondes sont retrouvées chez 1.6% des patients oligozoospermiques et 0.09% des patients azoospermiques [@OFlynnOBrien2010].  
+        i. La translocation est définie comme l'échange de matériel génétique entre deux chromosomes non homologues. On en distingue deux types, les translocations réciproques et les translocations robertsonniennes. Les premières (**Figure :** \@ref(fig:figtranslocation) - **A**) décrivent un échange équilibré entre deux mêmes segments chromosomiques de deux chromosomes différents. Elles sont retrouvées 4 à 10 fois plus fréquemment chez les patients infertiles que dans la population générale [@Elliott1997]. Les secondes (**Figure :** \@ref(fig:figtranslocation) - **B**) impliquent deux chromosomes acrocentriques et sont caractérisées par la fusion entre les brins longs de deux chromosomes, les brins courts étant perdus. Elles sont retrouvées chez 1.6% des patients oligozoospermiques et 0.09% des patients azoospermiques [@OFlynnOBrien2010].  
+       
+```{r figtranslocation, fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.55"}
+
+fig.name <- "Les différents types de translocation."
+fig.from <- "[embryology.ch](http://www.embryology.ch/francais/kchromaber/abweichende03.html)"
+fig.description <- " **A** : La translocation réciproque. **B** : La translocation robertsonniènne"
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+
+include_graphics(path = "figure/translocation.png")
+
+```
+
+ 
         ii. Les inversions chromosomiques caractérisent le mécanisme de cassure d'un fragment de chromosome suivi de son retournement à 180° et sa réintégration à la même position. Ces inversions vont gêner l’appariement des chromosomes homologues (formation d’une boucle d’inversion) pendant la méiose et sont, comme les translocations, retrouvées plus fréquemment chez les patients infertiles que dans la population générale [@Krausz2000].  
+    
     c. **Autres anomalies chromosomiques** : Parmi les anomalies chromosomiques responsables d'infertilité masculine, on peut par exemple citer les hommes de formule 46,XX. Ces patients sont généralement totalement infertiles et présentent une azoospermie par absence des sous- régions AZF a, b et c [@Vorona2007] bien qu'ils aient un phénotype masculin normal. Ces anomalies sont souvent le fait de la translocation du gène SRY sur un des chromosomes X du patient.  
 
 3. **Mutations du gène *CFTR* **:  L'identification du gène *CFTR* (*Cystic Fibrosis Transmembrane conductance Regulator*) chez les patients atteints de mucoviscidose  et présentant une agénésie bilatérale des canaux déférents (ABCD) a permis d'associer ce gène au phénotype d'azoospermie obstructive. Cette malformation serait responsable de 2% des cas d'infertilité masculine et de 25% des cas d'azoospermie obstructive [@Yu2012].  
 
-Bien que la prévalence de ces anomalies génétiques varie en fonction du phénotype concerné, il est estimé que ces défauts soient seulement retrouvés chez 5% des cas d'infertilité masculine tous phénotypes confondus. Cette observation suggère fortement l'implication de nombreux autres gènes encore inconnus dans les différents phénotypes d’infertilité masculine (**Nieschlag et al., 2010 A trouver**).    
+Bien que la prévalence de ces anomalies génétiques varie en fonction du phénotype concerné, il est estimé que ces défauts soient seulement retrouvés chez 5% des cas d'infertilité masculine tous phénotypes confondus. Cette observation suggère fortement l'implication de nombreux autres gènes encore inconnus dans les différents phénotypes d’infertilité masculine. 
+
+\newpage
 
 #### Les nouveaux gènes  
 
-<!-- A familial study of azoospermic men identifies three novel causative mutations in three new human azoospermia genes -->
-
-<!-- cf http://onlinelibrary.wiley.com/doi/10.1111/cge.12905/full -->
-
-<!-- 1. **Les anomalies quantitatives** :  une analyse de trois familles par séquençage [haut-débit](#ngs) a permit d'identifier trois gènes *MEIOB*, *TEX14* et *DNAH6* impliqué dans un phénotype d'azoospermie, de même une étude de 2016 démentre l'association de trois variants dans la séquence codante du gène *RAD21L* en se basant sur une étude statistique effectuée sur 38 japonnais présentant un arret de la fertilité et 200 contrôles [@Minase2017].   -->
-
-1. **Les anomalies morphologiques liées à la tête du spermatozoïde** :  
-    a. **La macrozoospermie** :  Ce phénotype d'infertilité masculine rare est caractérisé par la présence de 100% des spermatozoïdes de l'éjaculat présentant une tête anormalement grosse ainsi que plusieurs flagelles. Il fut observé pour la première fois en 1978 [@Nistal], mais ce n'est qu'en 2007 qu'une explication génétique fut enfin trouvée. Une étude portant sur 14 patients nord Africains a permis d'identifier la délétion c144delC du gène *AURKC* (*Aurora kinase C*) comme responsable du phénotype de l'ensemble des individus de l'étude [@Dieterich2007]. Depuis, d'autres études ont permis d'associer d'autre variants sur ce même gène à ce phénotype [INSERT REF]. Des anomalies du gène *AURKC* seraient ainsi responsables d'environ 83.7% des cas macrozoospermie chez des patients non apparentés [INSERT REF]. Le gène AURKC, étant impliqué dans la méiose, conduit lorsqu'il est muté à un blocage de la première division méiotique entrainant la production de spermatozoïdes tétraploïdes, c'est à dire, portant une quantité de matériel génétique quatre fois supérieure à la normale [INSERT Dieterich 2009].    
+1. **Les anomalies quantitatives** :  une analyse de trois familles par séquençage [haut-débit](#ngs) a permit d'identifier trois gènes *MEIOB*, *TEX14* et *DNAH6* impliqué dans un phénotype d'azoospermie, de même une étude de 2016 démentre l'association de trois variants dans la séquence codante du gène *RAD21L* en se basant sur une étude statistique effectuée sur 38 japonnais présentant un arret de la fertilité et 200 contrôles [@Minase2017]. De même, plusieurs variants dans le gène *TEX111* et *SYC1* on été décrit comme entrainant un arret de la méiose [@Yatsenko2015, @Yang2015, @Maor-Sagie2015].   
+  
+2. **Les anomalies morphologiques liées à la tête du spermatozoïde** :  
+    a. **La macrozoospermie** :  Ce phénotype d'infertilité masculine rare est caractérisé par la présence de 100% des spermatozoïdes de l'éjaculat présentant une tête anormalement grosse ainsi que plusieurs flagelles. Il fut observé pour la première fois en 1978 [@Nistal], mais ce n'est qu'en 2007 qu'une explication génétique fut enfin trouvée. Une étude portant sur 14 patients nord Africains a permis d'identifier la délétion c144delC du gène *AURKC* (*Aurora kinase C*) comme responsable du phénotype de l'ensemble des individus de l'étude [@Dieterich2007]. Depuis, d'autres études ont permis d'associer d'autre variants sur ce même gène à ce phénotype [@BenKhelifa2011]. Des anomalies du gène *AURKC* seraient ainsi responsables d'environ 83.7% des cas macrozoospermie chez des patients non apparentés [INSERT REF]. Le gène AURKC, étant impliqué dans la méiose, conduit lorsqu'il est muté à un blocage de la première division méiotique entrainant la production de spermatozoïdes tétraploïdes, c'est à dire, portant une quantité de matériel génétique quatre fois supérieure à la normale [@Dieterich2009].    
     b. **La globozoospermie** : La globozoospermie est aussi un phénotype rare d'infertilité dont la prévalence est estimée à de 0,1%. Il fut dentifié pour la première fois en 1971 et est caractérisé par la présence dans l'éjaculat d'une majorité de spermatozoïde dépourvue d'acrosome empêchant ainsi le spermatozoïde de franchir la zone pellucide de l'ovocyte et compromettant ainsi la fécondation [@Dam2006, @Sen2009, @Holstein1973]. En 2007, une étude familiale a permis de lier ce phénotype à la mutation c.848G>A dans le gène *SPATA16* (*spermatogenesis-associated protein 16*) [@Dam2007a] dont la protéine va, au cours de la spermatogénèse fusionner avec les vésicules proacrosomales pour former l'acrosome [@Dam2007a, @Lu2006]. Plus tard, en 2011, une étude portant sur 20 patients tunisiens permit d'identifier une délétion homozygote de 200 kb emportant la totalité du gène *DPY19L2* (*Dpy-19 Like 2*) chez 15 des 20 patients [@Harbuz2011]. cf [globo](#globo)  
     c. **Spermatozoïdes acéphaliques** :  Ce phénotype rapporté plusieurs fois [@Chemes2010, @Panidis2001, @Chemes1987] caractérise les patients présentant des spermatozoïdes dépourvus de tête dans leur éjaculat. Une étude récente a pu lier ce phénotype à une mutation c.824C>T homozygote ainsi qu'à deux variants hétérozygotes composites c.1006C>T et c.485T>A dans le gène *SUN5* [@Zhu2016] qui avait précédemment été décrit comme localisant à la jonction noyau / flagelle du spermatozoïde [@Yassine2015].    
-2. **Les anomalies liées au flagelle et à la motilité** :  
-    <!-- a. **Asthenozoospermia** :   -->
-    a. **Phénotype MMAF** :  Le phénotype MMAF (*Multiple morphological abnormalities of the sperm flagella*) décrit les patients atteints d'asthenozoospermie dont les spermatozoïdes présentent de multiples anomalies morphologiques touchant en particulier les flagelles. Plus précisément, ce phénotype décrit les asthenozoospermie résultant d'une mosaïque d'anormalies morphologiques au niveau du flagelle tel que l'absence totale de flagelle, des flagelles enroulés, courts, anguleux... [@Coutton2015, @BenKhelifa2014]. Récemment, le gène *DNAH1* (*Dynein Axonemal Heavy Chain 1*) codant pour une dynéine de la chaine lourde de l'axonème a été retrouvé muté chez près d'un patient sur trois dans sa cohorte comportant 18 patients [@BenKhelifa2014]. Deux autres études ont retrouvé des mutations dans le gène *DNAH1* chez des patients venant de Chine, d'Iran et d'Italie, laissant suggérer que ce gène est l'un des acteurs majeurs dans le syndrome MMAF [@Wang2017, @Amiri-Yekta2016].  
-3. **Les échecs de fécondation du spermatozoïde** :  Au moment de la fécondation, l'activation ovocytaire repose sur le relargage par le spermatozoïde de "facteurs spermatiques" qui déclenchent un signal de calcium, constitué d'oscillations Ca$^{2+}$. Ce processus est médié par une protéine spécifique du spermatozoïde, *la  phospholipase C Zeta 1* (PLC$\zeta 1$) codée par le gène *PLCZ1* [@Nomikos2013, @Amdani2013]. Plusieurs cas d'échec d'activation ovocytaire ont été liés à l'absence ou la mauvaise localisation de la protéine PLC$\zeta1$. Malgré cela, aucune preuve génétique directe n'avait été reportée jusque récemment où deux mutations au sein du gène *PLC*$\zeta$*1* furent retrouvés chez un patient [@Heytens2009] et un peu plus tard une mutation homozygote chez deux frères consanguins [@Escoffier2016].  
+
+3. **Le phénotype MMAF** : Le phénotype MMAF (*Multiple morphological abnormalities of the sperm flagella*) décrit les patients atteints d'asthenozoospermie dont les spermatozoïdes présentent de multiples anomalies morphologiques touchant en particulier les flagelles. Plus précisément, ce phénotype décrit les asthenozoospermie résultant d'une mosaïque d'anormalies morphologiques au niveau du flagelle tel que l'absence totale de flagelle, des flagelles enroulés, courts, anguleux... [@Coutton2015, @BenKhelifa2014]. Récemment, le gène *DNAH1* (*Dynein Axonemal Heavy Chain 1*) codant pour une dynéine de la chaine lourde de l'axonème a été retrouvé muté chez près d'un patient sur trois dans sa cohorte comportant 18 patients [@BenKhelifa2014]. Deux autres études ont retrouvé des mutations dans le gène *DNAH1* chez des patients venant de Chine, d'Iran et d'Italie, laissant suggérer que ce gène est l'un des acteurs majeurs dans le syndrome MMAF [@Wang2017, @Amiri-Yekta2016].  
+
+4. **Les échecs de fécondation du spermatozoïde** :  Au moment de la fécondation, l'activation ovocytaire repose sur le relargage par le spermatozoïde de "facteurs spermatiques" qui déclenchent un signal de calcium, constitué d'oscillations Ca$^{2+}$. Ce processus est médié par une protéine spécifique du spermatozoïde, *la  phospholipase C Zeta 1* (PLC$\zeta 1$) codée par le gène *PLCZ1* [@Nomikos2013, @Amdani2013]. Plusieurs cas d'échec d'activation ovocytaire ont été liés à l'absence ou la mauvaise localisation de la protéine PLC$\zeta1$. Malgré cela, aucune preuve génétique directe n'avait été reportée jusque récemment où deux mutations au sein du gène *PLC*$\zeta$*1* furent retrouvés chez un patient [@Heytens2009] et un peu plus tard une mutation homozygote chez deux frères consanguins [@Escoffier2016].  
 
 \newpage  
 
@@ -331,7 +359,7 @@ L'acide désoxyribonucléique (ADN) a été identifié comme étant le porteur d
 
 ### Approche "gènes candidats"  
 
-L’approche gène candidat consiste à rechercher des mutations chez un patient dans un gène cible. Le choix du gène cible se fera en fonction de plusieurs critères. Le premier d’entre eux est l’étude de gènes reliés à des phénotypes proche du phénotype étudié dans différents modèles animaux et notamment murins. Dans ce cas, les mutations seront recherchées sur le gène orthologue humain [@DeBoer2015]. Une autre possibilité consiste à rechercher des variants dans des gènes paralogues à un gène précédemment identifié avec l'idée sous-jacente que leur structure proche implique une fonction similaire. Enfin la dernière méthode consiste à étudier des gènes connus comme étant des partenaires de gènes déjà identifiés dans cette pathologie en supposant que si un variant dans un gène donné entraîne une pathologie, un variant dans un partenaire de ce gène pourrait entrainer le même phénotype. Cette approche est bien souvent infructueuse dû en grande partie à l'hétérogénéité génétique des phénotypes étudiés, au nombre limité de patients testés (Elinati et al., 2012) et aux connaissances souvent incomplètes sur le phénotype. De fait, cette approche a quasiment disparu au profit des méthodes à haut débit que sont les puces et le séquençage nouvelle génération (NGS), néanmoins, cette méthode compte à son actif plusieurs succès retentissants [INSERT PETITE LISTE].  
+L’approche gène candidat consiste à rechercher des mutations chez un patient dans un gène cible. Le choix du gène cible se fera en fonction de plusieurs critères. Le premier d’entre eux est l’étude de gènes reliés à des phénotypes proche du phénotype étudié dans différents modèles animaux et notamment murins. Dans ce cas, les mutations seront recherchées sur le gène orthologue humain [@DeBoer2015]. Une autre possibilité consiste à rechercher des variants dans des gènes paralogues à un gène précédemment identifié avec l'idée sous-jacente que leur structure proche implique une fonction similaire. Enfin la dernière méthode consiste à étudier des gènes connus comme étant des partenaires de gènes déjà identifiés dans cette pathologie en supposant que si un variant dans un gène donné entraîne une pathologie, un variant dans un partenaire de ce gène pourrait entrainer le même phénotype. Cette approche est bien souvent infructueuse dû en grande partie à l'hétérogénéité génétique des phénotypes étudiés, au nombre limité de patients testés (Elinati et al., 2012) et aux connaissances souvent incomplètes sur le phénotype. De fait, cette approche a quasiment disparu au profit des méthodes à haut débit que sont les puces et le séquençage nouvelle génération (NGS), néanmoins, cette méthode compte à son actif plusieurs succès retentissants avec notamment les gènes *SYCP3*, *SOHLH1* et *NR5A1* entrainant tout trois un phénotype d'azoospermie [@Miyamoto2003, @Yatsenko2006, @Bashamboo2010].  
 
 ### Les puces  
 
