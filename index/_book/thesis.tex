@@ -551,6 +551,14 @@ class (for LaTeX) and the R bookdown package, in general.
     grossesses avec un meilleur taux que les spermatides rondes et
     engendreraient théoriquement moins de risques d'anomalies génétiques
     (Asimakopoulos, \protect\hyperlink{ref-Asimakopoulos2003}{2003}).
+  \end{enumerate}
+  
+  \newpage
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
   \item
     \textbf{Les spermatides en condensation} (\textbf{Figure :
     }\ref{fig:spermiogenese} - \textbf{5} et \textbf{7}) : C'est le stade
@@ -1189,31 +1197,34 @@ class (for LaTeX) and the R bookdown package, in general.
   candidats''}{Approche gènes candidats}}\label{approche-genes-candidats}
   
   L'approche gène candidat consiste à rechercher des mutations chez un
-  patient dans un gène cible. Le choix du gène cible se fera en fonction
-  de plusieurs critères. Le premier d'entre eux est l'étude de gènes
-  reliés à des phénotypes proche du phénotype étudié dans différents
-  modèles animaux et notamment murins. Dans ce cas, les mutations seront
-  recherchées sur le gène orthologue humain (Boer, Vries, \& Ramos,
-  \protect\hyperlink{ref-DeBoer2015}{2015}). Une autre possibilité
-  consiste à rechercher des variants dans des gènes paralogues à un gène
-  précédemment identifié avec l'idée sous-jacente que leur structure
-  proche implique une fonction similaire. Enfin la dernière méthode
-  consiste à étudier des gènes connus comme étant des partenaires de gènes
-  déjà identifiés dans cette pathologie en supposant que si un variant
-  dans un gène donné entraîne une pathologie, un variant dans un
+  patient dans un ou plusieurs gènes cibles. Le choix des gènes cibles se
+  fera en fonction de plusieurs critères. Le premier d'entre eux est
+  l'étude de gènes reliés à des phénotypes proche du phénotype étudié dans
+  différents modèles animaux et notamment murins. Dans ce cas, les
+  mutations seront recherchées sur le gène orthologue humain (Boer, Vries,
+  \& Ramos, \protect\hyperlink{ref-DeBoer2015}{2015}). Une autre
+  possibilité consiste à rechercher des variants dans des gènes paralogues
+  à un gène précédemment identifié avec l'idée sous-jacente que leur
+  structure proche implique une fonction similaire. Enfin la dernière
+  méthode consiste à étudier des gènes connus comme étant des partenaires
+  de gènes déjà identifiés dans cette pathologie en supposant que si un
+  variant dans un gène donné entraîne une pathologie, un variant dans un
   partenaire de ce gène pourrait entrainer le même phénotype. Cette
   approche est bien souvent infructueuse dû en grande partie à
   l'hétérogénéité génétique des phénotypes étudiés, au nombre limité de
-  patients testés (Elinati et al., 2012) et aux connaissances souvent
+  patients testés (ElInati et al.,
+  \protect\hyperlink{ref-ElInati2012}{2012}) et aux connaissances souvent
   incomplètes sur le phénotype. De fait, cette approche a quasiment
   disparu au profit des méthodes à haut débit que sont les puces et le
   séquençage nouvelle génération (NGS), néanmoins, cette méthode compte à
-  son actif plusieurs succès retentissants avec notamment les gènes
-  \emph{SYCP3}, \emph{SOHLH1} et \emph{NR5A1} entrainant tout trois un
-  phénotype d'azoospermie (Miyamoto et al.,
-  \protect\hyperlink{ref-Miyamoto2003}{2003}, A. N. Yatsenko et al.
-  (\protect\hyperlink{ref-Yatsenko2006}{2006}), Bashamboo et al.
+  son actif plusieurs succès retentissants avec dans le domaine de
+  l'infertilité masculine, les gènes \emph{SYCP3}, \emph{SOHLH1} et
+  \emph{NR5A1} entrainant tout trois un phénotype d'azoospermie (Miyamoto
+  et al., \protect\hyperlink{ref-Miyamoto2003}{2003}, A. N. Yatsenko et
+  al. (\protect\hyperlink{ref-Yatsenko2006}{2006}), Bashamboo et al.
   (\protect\hyperlink{ref-Bashamboo2010}{2010})).
+  
+  \newpage
   
   \subsection{Les puces}\label{les-puces}
   
@@ -1274,6 +1285,8 @@ class (for LaTeX) and the R bookdown package, in general.
   expression, les gènes qui n'ont pas encore été annotés risques de ne pas
   être représenté sur la puce.
   
+  \newpage
+  
   \hypertarget{ngs}{\subsection{Le séquençage NGS}\label{ngs}}
   
   Le terme séquençage de l'ADN fait référence à l'ensemble des techniques
@@ -1295,14 +1308,14 @@ class (for LaTeX) and the R bookdown package, in general.
   Morgan, \& Patrinos, \protect\hyperlink{ref-Collins2003}{2003}).
   
   Contrairement à la méthode Sanger, le NGS ``\emph{lit}'' des fragments
-  d'ADN, provenant d'un génome entier, de manière aléatoire. On parle
-  alors de séquençage de génomes entiers ou \emph{whole genome sequencing}
-  (WGS). Pour cela, la molécule d'ADN est ``coupée'' en plusieurs
-  fragments d'une taille donnée. Ce sont ensuite ces fragments qui seront,
-  après une étape d'amplification spécifique aux différentes plateformes,
-  séquencés simultanément. C'est pourquoi on parle souvent de séquençage
-  parallèle massif pour décrire le NGS. Le produit de ce séquençage est
-  appelé \emph{read}. Cette technologie est avantageuse de par la masse de
+  d'ADN, provenant d'un génome \textbf{entier}. On parle alors de
+  séquençage de génomes entiers ou \emph{whole genome sequencing} (WGS).
+  Pour cela, la molécule d'ADN est ``coupée'' en plusieurs fragments d'une
+  taille donnée. Ce sont ensuite ces fragments qui seront, après une étape
+  d'amplification spécifique aux différentes plateformes, séquencés
+  simultanément. C'est pourquoi on parle souvent de séquençage parallèle
+  massif pour décrire le NGS. Le produit de ce séquençage est appelé
+  \emph{read}. Cette technologie est avantageuse de par la masse de
   \emph{reads} qu'elle produit et par son faible coût par bases séquencées
   (Metzker, \protect\hyperlink{ref-Metzker2010}{2010}). Ces
   caractéristiques ont permis au séquençage Haut-débit d'être couramment
@@ -1325,6 +1338,8 @@ class (for LaTeX) and the R bookdown package, in general.
   les autres au sein d'une région génomique spécifique. Par exemple, une
   couverture de 30x pour le gène XXXX signifie que chaque nucléotide de ce
   gène est chevauché par au moins 30 \emph{reads} distincts.
+  
+  \newpage
   
   \begin{figure}
   
@@ -1350,7 +1365,7 @@ class (for LaTeX) and the R bookdown package, in general.
   importantes à stocker et à analyser. En effet, l'ensemble de l'exome ne
   représente qu'environ 1\% du génome entier. On considère cependant que
   ces parties codantes contiennent plus de 90\% des anomalies responsables
-  de pathologies génétiques chez l'homme. Pour ces raisons, le WES
+  de pathologies génétiques chez l'homme. Pour ces raisons, le WES est
   considéré comme le standard dans le cadre de recherche sur des
   pathologies génétiques et révèle être un outil puissant pour
   l'identification de variants associés à des pathologies (S. B. Ng et
@@ -1370,10 +1385,10 @@ class (for LaTeX) and the R bookdown package, in general.
   à séquencer et à la sélection des kits de capture utilisés (Meienberg et
   al., \protect\hyperlink{ref-Meienberg2016}{2016}). Ainsi, bien que le
   WES soit encore à l'heure actuelle le choix privilégié dans la majorité
-  des études (citation\ldots{}), la réduction des coûts de séquençage et
-  du stockage des données, pourraient permettre prochainement au WGS de
-  remplacer totalement le WES ainsi que l'ensemble des techniques
-  impliquant la capture de séquences ciblées (Meienberg et al.,
+  des études, la réduction des coûts de séquençage et du stockage des
+  données, pourraient permettre prochainement au WGS de remplacer
+  totalement le WES ainsi que l'ensemble des techniques impliquant la
+  capture de séquences ciblées (Meienberg et al.,
   \protect\hyperlink{ref-Meienberg2016}{2016}).
   
   \subsubsection{L'amplification}\label{lamplification}
@@ -1449,6 +1464,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption[Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS]{Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS d'après [@Goodwin2016] : **a** : PCR en émulsion. **b** : amplification par pont. **c** : Amplification par modèle mobile. **d** : }\label{fig:ngsampli}
   \end{figure}
   
+  \newpage
+  
   \subsubsection{La réaction de séquence}\label{la-reaction-de-sequence}
   
   La réaction de séquence est l'étape suivant l'amplification et consiste
@@ -1491,12 +1508,14 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \begin{figure}
   
-  {\centering \includegraphics[scale=.28]{figure/CRT_seq_illumina} 
+  {\centering \includegraphics[scale=.24]{figure/CRT_seq_illumina} 
   
   }
   
-  \caption[Exemple de séquençage CRT tel qu'il est effectué par Illumina]{Exemple de séquençage CRT tel qu'il est effectué par Illumina d'après [@Goodwin2016] : **a** : ajout d'un dNTP labellisé par un fluorophore et 3'-bloqué. **b** : identification du dNTP ajouté grâce au fluorophore. **c** : le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'élongation}\label{fig:crtSeq}
+  \caption[Séquençage CRT tel qu'il est effectué par Illumina]{Séquençage CRT tel qu'il est effectué par Illumina d'après [@Goodwin2016] : **a** : Ajout d'un dNTP labellisé par un fluorophore 3'-bloqué. **b** : Identification du dNTP ajouté grâce au fluorophore. **c** : Le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'élongation}\label{fig:crtSeq}
   \end{figure}
+  
+  \newpage
   
   \begin{enumerate}
   \def\labelenumi{\alph{enumi}.}
@@ -1525,8 +1544,10 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent]{Exemple de séquençage SNA tel qu'il est effectué par Ion Torrent d'après [@Goodwin2016] : **a** : Mise en présence du patron d'ADN à séquencer avec un mix contenant un seul type de dNTP, si le dNTP est complémentaire au patron, il se fixe et libère un proton permettant d'identifier la liaison. **b** : Dans le cas d'homopolymère, autant de proton sont relâchés de bases constituant l'homopolymère, le signal émit est donc plus fort permettant d'identifier le nombre des dNTPs liés}\label{fig:snaSeq}
+  \caption[Séquençage SNA tel qu'il est effectué par Ion Torrent]{Séquençage SNA tel qu'il est effectué par Ion Torrent d'après [@Goodwin2016] : **a** : Mise en présence du patron d'ADN à séquencer avec un mix contenant un seul type de dNTP, si le dNTP est complémentaire au patron, il se fixe et libère un proton permettant d'identifier la liaison. **b** : Dans le cas d'homopolymère, autant de proton sont relâchés de bases constituant l'homopolymère, le signal émit est donc plus fort permettant d'identifier le nombre des dNTPs liés}\label{fig:snaSeq}
   \end{figure}
+  
+  \newpage
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1552,7 +1573,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Exemple de séquençage SBL tel qu'il est effectué par SOLiD]{Exemple de séquençage SBL tel qu'il est effectué par SOLiD d'après [@Goodwin2016] : }\label{fig:sblSeq}
+  \caption[Séquençage SBL tel qu'il est effectué par SOLiD]{Séquençage SBL tel qu'il est effectué par SOLiD d'après [@Goodwin2016] : }\label{fig:sblSeq}
   \end{figure}
   
   \newpage  
@@ -1615,6 +1636,8 @@ class (for LaTeX) and the R bookdown package, in general.
   de mettre en évidence des variants structuraux (Korbel et al.,
   \protect\hyperlink{ref-Korbel2009}{2009}).
   
+  \newpage
+  
   \subsubsection{Le format FASTQ}\label{fastq}
   
   Le format FASTQ (\textbf{Figure : }\ref{fig:fastqformat}) est
@@ -1648,6 +1671,8 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \caption[présentation d'un fichier FASTQ (FIGURE A CHANGER)]{présentation d'un fichier FASTQ (FIGURE A CHANGER) : **a** : identifiant du *read*. **b** : séquence du *read*. **c** : score de qualité associé}\label{fig:fastqformat}
   \end{figure}
+  
+  \newpage
   
   \hypertarget{lalignement}{\subsection{L'alignement}\label{lalignement}}
   
@@ -1690,6 +1715,8 @@ class (for LaTeX) and the R bookdown package, in general.
   Nookaew (\protect\hyperlink{ref-Thankaswamy-Kosalai2017}{2017}), S. Bao
   et al. (\protect\hyperlink{ref-Bao2011}{2011})).
   
+  \newpage
+  
   \subsection{L'appel des variants}\label{varcall}
   
   L'appel des variants, ou \emph{variant calling}, fait référence à
@@ -1727,9 +1754,9 @@ class (for LaTeX) and the R bookdown package, in general.
   Kim, Lee, \& Marcotte, \protect\hyperlink{ref-Hwang2015}{2015}), c'est
   pourquoi il convient d'adapter le logiciel d'appel en fonction de la
   plateforme de séquençage utilisée préalablement. Les erreurs d'appel
-  sont généralement classées en deux catégories principales et certains
-  aligneurs auront tendance à être plus sujets à l'un de ces types
-  d'erreur qu'à l'autre (\textbf{Figure : }\ref{fig:snperror}) :
+  sont généralement classées en trois catégories et certains aligneurs
+  auront tendance à être plus sujets à l'un de ces types d'erreur qu'à
+  l'autre (\textbf{Figure : }\ref{fig:snperror}) :
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1744,7 +1771,12 @@ class (for LaTeX) and the R bookdown package, in general.
     reference allele}) : représente un variant appelé hétérozygote composé
     de l'allèle de référence et d'un allèle variant correspondant en
     réalité à un variant homozygote composé de deux allèles variants.\\
+  \item
+    Autres : incluent l'ensemble des autres types d'appel érronés
+    indépendamment de l'allèle de référence
   \end{enumerate}
+  
+  \newpage
   
   \begin{figure}
   
@@ -1775,6 +1807,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{callers} et 57,4\% des variants n'étaient appelés que par un seul
   des \emph{callers} (Hwang et al.,
   \protect\hyperlink{ref-Hwang2015}{2015}).
+  
+  \newpage
   
   \subsection{L'annotation des variants, filtrage et
   priorisation}\label{lannotation-des-variants-filtrage-et-priorisation}
@@ -1818,11 +1852,14 @@ class (for LaTeX) and the R bookdown package, in general.
     \item
       \textbf{La fréquence du variant dans la population générale} :
       l'émergence du séquençage haut-débit a permis de de gros consortium
-      tel que ESP6500 {[}CITATION{]}, 1KG {[}CITATION{]}. Ces consortiums
-      ont pu mettre à disposition du public de données de séquençage
-      exomique de 6503 individus pour ESP et de 2504 pour la phase 3 du
-      1000Genomes. On peut également noter l'\emph{Exome Aggregate
-      Consortium} (ExAC) (Lek et al.,
+      tel que ESP6500 (\href{http://evs.gs.washington.edu/EVS/}{Exome
+      Variant Server, NHLBI GO Exome Sequencing Project (ESP), Seattle,
+      WA}), 1KG (1000 Genomes Project Consortium et al.,
+      \protect\hyperlink{ref-1000GenomesProjectConsortium2015}{2015}). Ces
+      consortiums ont pu mettre à disposition du public de données de
+      séquençage exomique de 6503 individus pour ESP et de 2504 pour la
+      phase 3 du 1000Genomes. On peut également noter l'\emph{Exome
+      Aggregate Consortium} (ExAC) (Lek et al.,
       \protect\hyperlink{ref-Lek2016}{2016}) qui n'a effectué aucun
       séquençage mais qui a regroupé les données de plusieurs gros jeux
       (notamment 1000Genome et ESP) afin de leur appliquer la même analyse
@@ -1831,29 +1868,38 @@ class (for LaTeX) and the R bookdown package, in general.
       faire une idée de la fréquence d'un variant dans la population
       générale et même au sein de sous population humaine. On considère
       qu'un variant fréquent ne peut pas être délétère, sinon il aurait
-      été contre-sélectionné au cours de l'évolution.\\
-    \item
-      \textbf{Son impact sur le transcrit} : Dans la plupart des analyses
-      phénotype-génotype, les chercheurs se limitent aux variants
-      chevauchant des transcrits codants pour une protéine. Il est donc
-      important de savoir l'impact d'un variant sur ce transcrit, c'est à
-      dire si le variant va causer une mutation synonyme, un faux-sens ou
-      une mutation tronquante. Des logiciels tel que \emph{Variant Effect
-      Predictor} (VEP) (W. McLaren et al.,
-      \protect\hyperlink{ref-McLaren2016}{2016}), SnpEff (Cingolani et
-      al., \protect\hyperlink{ref-Cingolani2012}{2012}) ou encore ANNOVAR
-      {[}@{]} vont prédire l'impact qu'aura un variant sur les différents
-      transcrits qu'il chevauche. D'autres logiciels tel que SIFT (P.
-      Kumar, Henikoff, \& Ng, \protect\hyperlink{ref-Kumar2009}{2009}),
-      PROVEAN (Y. Choi, Sims, Murphy, Miller, \& Chan,
-      \protect\hyperlink{ref-Choi2012}{2012}), Polyphen2, ou encore CADD
-      vont eux chercher à prédire la pathogénicité de ce variant, c'est à
-      dire la probabilité que ce variant soit délétère pour la fonction de
-      la protéine. Bien que cette information soit important, elle est à
-      pondérer étant donné le peu de concordance qu'il existe entre les
-      prédictions de ces différents logiciel (\textbf{Figure :}
-      \ref{fig:vennpred}).
+      été contre-sélectionné au cours de l'évolution.
     \end{enumerate}
+  \end{enumerate}
+  
+  \newpage
+  
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    \textbf{Son impact sur le transcrit} : Dans la plupart des analyses
+    phénotype-génotype, les chercheurs se limitent aux variants
+    chevauchant des transcrits codants pour une protéine. Il est donc
+    important de savoir l'impact d'un variant sur ce transcrit, c'est à
+    dire si le variant va causer une mutation synonyme, un faux-sens ou
+    une mutation tronquante. Des logiciels tel que \emph{Variant Effect
+    Predictor} (VEP) (W. McLaren et al.,
+    \protect\hyperlink{ref-McLaren2016}{2016}), SnpEff (Cingolani et al.,
+    \protect\hyperlink{ref-Cingolani2012}{2012}) ou encore ANNOVAR (K.
+    Wang, Li, \& Hakonarson, \protect\hyperlink{ref-Wang2010}{2010}) vont
+    prédire l'impact qu'aura un variant sur les différents transcrits
+    qu'il chevauche. D'autres logiciels tel que SIFT (P. Kumar, Henikoff,
+    \& Ng, \protect\hyperlink{ref-Kumar2009}{2009}), PROVEAN (Y. Choi,
+    Sims, Murphy, Miller, \& Chan,
+    \protect\hyperlink{ref-Choi2012}{2012}), Polyphen2, ou encore CADD
+    vont eux chercher à prédire la pathogénicité de ce variant, c'est à
+    dire la probabilité que ce variant soit délétère pour la fonction de
+    la protéine. Bien que cette information soit important, elle est à
+    pondérer étant donné le peu de concordance qu'il existe entre les
+    prédictions de ces différents logiciel (\textbf{Figure :}
+    \ref{fig:vennpred}).
   \end{enumerate}
   
   \begin{figure}
@@ -1864,6 +1910,8 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \caption[Diagramme de Venn des prédictions de pathogénicités de six logiciels]{Diagramme de Venn des prédictions de pathogénicités de six logiciels d'après [@Salgado2016] : }\label{fig:vennpred}
   \end{figure}
+  
+  \newpage
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -1919,6 +1967,8 @@ class (for LaTeX) and the R bookdown package, in general.
   des logiciels de prédiction utilisés (D. J. McCarthy et al.,
   \protect\hyperlink{ref-McCarthy2014}{2014}, Salgado, Bellgard,
   Desvignes, \& B??roud (\protect\hyperlink{ref-Salgado2016}{2016})).
+  
+  \newpage
   
   \subsection{Conclusion NGS}\label{conclusion-ngs}
   
@@ -1980,6 +2030,12 @@ class (for LaTeX) and the R bookdown package, in general.
   \setlength{\parskip}{8pt}
   
   \hypertarget{refs}{}
+  \hypertarget{ref-1000GenomesProjectConsortium2015}{}
+  1000 Genomes Project Consortium, T. 1. G. P., Auton, A., Brooks, L. D.,
+  Durbin, R. M., Garrison, E. P., Kang, H. M., \ldots{} Abecasis, G. R.
+  (2015). A global reference for human genetic variation. \emph{Nature},
+  \emph{526}(7571), 68--74. \url{http://doi.org/10.1038/nature15393}
+  
   \hypertarget{ref-Adelman1989}{}
   Adelman, M. M., \& Cahill, E. M. (1989). \emph{Atlas of sperm
   morphology} (p. 123). ASCP Press.
@@ -2200,6 +2256,13 @@ class (for LaTeX) and the R bookdown package, in general.
   Eddy, E. M. (2007). The scaffold role of the fibrous sheath.
   \emph{Society of Reproduction and Fertility Supplement}, \emph{65},
   45--62. Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/17644954}
+  
+  \hypertarget{ref-ElInati2012}{}
+  ElInati, E., Kuentz, P., Redin, C., Jaber, S., Vanden Meerschaut, F.,
+  Makarian, J., \ldots{} Viville, S. (2012). Globozoospermia is mainly due
+  to DPY19L2 deletion via non-allelic homologous recombination involving
+  two recombination hotspots. \emph{Human Molecular Genetics},
+  \emph{21}(16), 3695--3702. \url{http://doi.org/10.1093/hmg/dds200}
   
   \hypertarget{ref-Elliott1997}{}
   Elliott, D. J., \& Cooke, H. J. (1997). The molecular genetics of male
@@ -2815,6 +2878,12 @@ class (for LaTeX) and the R bookdown package, in general.
   Male Syndrome, Compared with 47,XXY Klinefelter Patients. \emph{The
   Journal of Clinical Endocrinology \& Metabolism}, \emph{92}(9),
   3458--3465. \url{http://doi.org/10.1210/jc.2007-0447}
+  
+  \hypertarget{ref-Wang2010}{}
+  Wang, K., Li, M., \& Hakonarson, H. (2010). ANNOVAR: functional
+  annotation of genetic variants from high-throughput sequencing data.
+  \emph{Nucleic Acids Research}, \emph{38}(16), e164--e164.
+  \url{http://doi.org/10.1093/nar/gkq603}
   
   \hypertarget{ref-Wang2017}{}
   Wang, X., Jin, H., Han, F., Cui, Y., Chen, J., Yang, C., \ldots{} Gao,
