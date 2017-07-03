@@ -367,42 +367,58 @@ L’approche gène candidat consiste à rechercher des mutations chez un patient
 
 ### Les puces  
 
-Les puces à ADN / ARN ont 
+Les puces à ADN furent initiallement conçues dans le but de mesurer le niveau de transcription des transcrits provenant de plusieurs milliers de gènes lors d'une seule et unique experience. Cette technologie a ainsi permis de des patterns d'expression de gènes à un statu phisyologique donné. L'analyse des "signatures" d'expression a ainsi permis de caractériser plusieurs cancer [@Alon1999, @Wang2000, @Singh2002, @VantVeer2002], mais aussi la réponse physiologique à plusieurs type de stimulis tel que la prise de certains médicaments [@Brachat2002].  
 
+Suite à cela, l'usage des puces à ADN dans le domaine biomédical s'est étendu pour ne plus êtree limité à la simple quantification de l'expression génique. Ainsi, cette technologie a également été utilisé afin de détecter des *single nucleotide polymorphisms* (SNPs) au sein de notre génome permettant notamment l'émmergence du Hap Map project qui recense les SNPs de plusieurs milliers d'individus [@Cutler2001]. De même, l'utilisation des puces à ADN a permis la détéction de *copy number variation* (CNVs).      
 
-1. Bref historique de la technologie  
-2. A quoi ça sert 
-3. Comment ça marche  
+Pendant plus de 10 ans, la grande qualité des puces, l'existence de protocoles d'hybridation standardisés ainsi que des algorithmes d'analyses robustes ont fait des puces à ADN l'outil d'analyse génomique le plus puissant avant l'arrivée du [séquençage haut débit](#ngs) 
 
-#### Les puces à SNP, le génotypage... (titre à revoir)  
-
-Depuis leur emmergence, les puces à ADN ont largement été utilisé comme platforme de génotypage pour les SNP connus. 
-
-
-
-#### Les puces à indels 
-
-1. MLPA  
-2. CGHarray  
+\newpage
 
 #### Les puces à expression   
 
 L'utilisation principale des puces à ADN a été de mesuré l'expression des gènes dans un tissus donné. Dans cette application, l'ARN est extrait des cellules d'interet puis est générallement convertit en ADNc. L'ADNc est ensuite hybridé à la puce qui subira ensuite une étape de lavage. L'intensité de fluoresence est ensuite mesurée à chaque spot de la puce. l'intensité du signal sera ensuite le reflet du niveau d'expression d'un gène.  
 
 
+```{r figexparray, fig.cap=fig.info,fig.scap=fig.name}
+
+fig.name <- "Représentation schématique des méthodes d'analyse d'expression génique par puce à ADN"
+fig.from <- "[@Trevino2007]"
+fig.description <- "Présentation des méthodes à double et à simbple colorant, respectivement à gauche et à droite. Dans lme cas des analyses à double colorant,une seule puce et nécéssaire, les échantillon de la référence et du test sont mis en compétition sur la même puce, un signal de sortie vert indiquera une sur-expression chez le test tandis qu'un signal rouge indiquera une sous-expression.  Dans le cas d'analyses à simple colorant, deux puces sont nécessaires, une première pour la référence et une seconde pour le test. Les données des deux puces sont ensuite comparées pour déterminé quels sont les gènes différentiellement exprimés. Dans le cas de la CGH array, le principe est similaire, en remplacant simplement l'ARNm par de l'ADNg."
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+
+include_graphics(path = "figure/expression_array.jpg")
+
+```
+
+\newpage
+
+#### Les puces à SNP, plateformee génotypage  
+
+Bien que leur utilité principale ait été d'analyser l'expression des gènes, les puces à ADN ont également été extêmement utilisées comme moyen de génotyper les SNP (*single-nucleotide-polymorphism*). De nombreuses méthodes ont été mises en place pour cela, cependant la plus employée est la méthode de discrimination allélique par hybridation telle qu'elle est utilisée par Affymetrix [@Wang1998] malgré le "bruit de fond" causé par l'hybridation non spécifique dont elle souffre (**Figure :** \@ref(fig:figallelicdisc)). 
+
+```{r figallelicdisc, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=.7"}
+
+fig.name <- "Méthode de génotypage par discrimination allélique par hybridation"
+fig.from <- "[@Bumgarner2013]"
+fig.description <- "Des sondes complémentaires à chacun des allèles sont positionées sur la puce. L'ADN génomique fragmenté et labbelisé est mis en contact de la puce. Après néttoyage de la puce, l'analyse du signal émis par l'ADN génomique permettra de déterminé si l'individu est homozygote pour cette allèle (hybridation à une seule des deux sondes) ou bien hétérozygote pour cette allèle (hybridation aux deux sondes)"
+fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
+
+include_graphics(path = "figure/allelic_discrimination.png")
+
+```
+
+\newpage
+
+#### Les puces à indels 
+
+L'implication de réarangement génomique tel que des duplications, translocations ou délétions dans divers pathologies est bien connu. C'est afin de détécter ces réarengements, que la *Comparative Genomic Hybridization array* (CGH array) a été développée dès 1999 [@Brown1999]. Son principe est très similaire à celui utilisé dans les puces à expression (**Figure :** \@ref(fig:figexparray)) en remplaçant simplement l'ARN messager (ARNm) par de l'ADN génomique (ADNg). Ainsi, la présence d'un CNV sera facilement détéctée en comparant le signal émmis par par un individu test avec celui émmis par un contrôle.  
+
 #### Limitation
 
+Bien que cette technologie ait été largement utilisée dans divers champs d'applications, elle présente deux limitations principales. La première est que pour les génome complexes (tel que les mammifères), il est difficile, si ce n'est impossible de *designer* un puce ne permettant pas de l'hybridation non spécifique. En effet, la séquencve d'une puce prévue pour détécter le gène "A" pourra égallement détécter les gènes "B", "C" et "D" si ceux-ci présentent une forte homologie avec "A" Ce qui est particulieremlent porblématique dans le cas d'analyse de gènes d'une même famille.  
 
-Bien quelles aient été extremement utiles dans un champ d'application varié, cette technologie présente plusieurs limitations. La première est que la mesure que la puce renvoie 
-
-pour les génomes complexes tel que le génome humain, il est extrêmement difficile (voir impossible) de ne pas 
-
-
-En effet, les puces à ADN peuvent détecter uniquement ce pourquoi elles ont été. Ainsi, si la solution que l'on hybride sur la puce contient des séquence d'ADN ou d'ARN pour lesquelles il n'y a aucune sonde complémentaire sur la puce, celles-ci ne seront pas détectées. Cela peut avoir de grandes répercutions puisque par exemple dans le cas des à expression, les gènes qui n'ont pas encore été annotés risques de ne pas être représenté sur la puce.   
-
-<!-- Avant l'emmergence des technologie de séquençage haut débit, les puces à ADN complémentaire (ADNc) était considérées comme étant l'outil le plus puissant pour mesurer l'expression d'un gène dans un tissus. -->
-<!-- Alors que l'être humain possède environs 25.000 gènes différents, l'ensembles de ces gènes n'est pas exprimer au  -->
-<!-- L'emmergence de cette technologie a permis pour la première fois de caractériser le profil d'exprression des -->
+Pour finir, la plus grande de ses limitations est que les puces détectent uniquement ce pour quoi elles ont été *designer*. Ainsi, si la solution que l'on hybride sur la puce contient des séquence d'ADN ou d'ARN pour lesquelles il n'y a aucune sonde complémentaire sur la puce, celles-ci ne seront pas détectées. Cela peut avoir de grandes répercutions puisque par exemple dans le cas des à expression, les gènes qui n'ont pas encore été annotés risques de ne pas être représenté sur la puce.   
 
 \newpage
 

@@ -1228,35 +1228,36 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsection{Les puces}\label{les-puces}
   
-  Les puces à ADN / ARN ont
+  Les puces à ADN furent initiallement conçues dans le but de mesurer le
+  niveau de transcription des transcrits provenant de plusieurs milliers
+  de gènes lors d'une seule et unique experience. Cette technologie a
+  ainsi permis de des patterns d'expression de gènes à un statu
+  phisyologique donné. L'analyse des ``signatures'' d'expression a ainsi
+  permis de caractériser plusieurs cancer (Alon et al.,
+  \protect\hyperlink{ref-Alon1999}{1999}, T. Wang et al.
+  (\protect\hyperlink{ref-Wang2000}{2000}), Singh et al.
+  (\protect\hyperlink{ref-Singh2002}{2002}), van 't Veer et al.
+  (\protect\hyperlink{ref-VantVeer2002}{2002})), mais aussi la réponse
+  physiologique à plusieurs type de stimulis tel que la prise de certains
+  médicaments (Brachat et al., \protect\hyperlink{ref-Brachat2002}{2002}).
   
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Bref historique de la technologie\\
-  \item
-    A quoi ça sert
-  \item
-    Comment ça marche
-  \end{enumerate}
+  Suite à cela, l'usage des puces à ADN dans le domaine biomédical s'est
+  étendu pour ne plus êtree limité à la simple quantification de
+  l'expression génique. Ainsi, cette technologie a également été utilisé
+  afin de détecter des \emph{single nucleotide polymorphisms} (SNPs) au
+  sein de notre génome permettant notamment l'émmergence du Hap Map
+  project qui recense les SNPs de plusieurs milliers d'individus (Cutler
+  et al., \protect\hyperlink{ref-Cutler2001}{2001}). De même,
+  l'utilisation des puces à ADN a permis la détéction de \emph{copy number
+  variation} (CNVs).
   
-  \subsubsection{Les puces à SNP, le génotypage\ldots{} (titre à
-  revoir)}\label{les-puces-a-snp-le-genotypage-titre-a-revoir}
+  Pendant plus de 10 ans, la grande qualité des puces, l'existence de
+  protocoles d'hybridation standardisés ainsi que des algorithmes
+  d'analyses robustes ont fait des puces à ADN l'outil d'analyse génomique
+  le plus puissant avant l'arrivée du \protect\hyperlink{ngs}{séquençage
+  haut débit}
   
-  Depuis leur emmergence, les puces à ADN ont largement été utilisé comme
-  platforme de génotypage pour les SNP connus.
-  
-  \subsubsection{Les puces à indels}\label{les-puces-a-indels}
-  
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    MLPA\\
-  \item
-    CGHarray
-  \end{enumerate}
+  \newpage
   
   \subsubsection{Les puces à expression}\label{les-puces-a-expression}
   
@@ -1268,22 +1269,74 @@ class (for LaTeX) and the R bookdown package, in general.
   la puce. l'intensité du signal sera ensuite le reflet du niveau
   d'expression d'un gène.
   
+  \begin{figure}
+  
+  {\centering \includegraphics{figure/expression_array} 
+  
+  }
+  
+  \caption[Représentation schématique des méthodes d'analyse d'expression génique par puce à ADN]{Représentation schématique des méthodes d'analyse d'expression génique par puce à ADN d'après [@Trevino2007] : Présentation des méthodes à double et à simbple colorant, respectivement à gauche et à droite. Dans lme cas des analyses à double colorant,une seule puce et nécéssaire, les échantillon de la référence et du test sont mis en compétition sur la même puce, un signal de sortie vert indiquera une sur-expression chez le test tandis qu'un signal rouge indiquera une sous-expression.  Dans le cas d'analyses à simple colorant, deux puces sont nécessaires, une première pour la référence et une seconde pour le test. Les données des deux puces sont ensuite comparées pour déterminé quels sont les gènes différentiellement exprimés. Dans le cas de la CGH array, le principe est similaire, en remplacant simplement l'ARNm par de l'ADNg.}\label{fig:figexparray}
+  \end{figure}
+  
+  \newpage
+  
+  \subsubsection{Les puces à SNP, plateformee
+  génotypage}\label{les-puces-a-snp-plateformee-genotypage}
+  
+  Bien que leur utilité principale ait été d'analyser l'expression des
+  gènes, les puces à ADN ont également été extêmement utilisées comme
+  moyen de génotyper les SNP (\emph{single-nucleotide-polymorphism}). De
+  nombreuses méthodes ont été mises en place pour cela, cependant la plus
+  employée est la méthode de discrimination allélique par hybridation
+  telle qu'elle est utilisée par Affymetrix (D. G. Wang et al.,
+  \protect\hyperlink{ref-Wang1998}{1998}) malgré le ``bruit de fond''
+  causé par l'hybridation non spécifique dont elle souffre (\textbf{Figure
+  :} \ref{fig:figallelicdisc}).
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.7]{figure/allelic_discrimination} 
+  
+  }
+  
+  \caption[Méthode de génotypage par discrimination allélique par hybridation]{Méthode de génotypage par discrimination allélique par hybridation d'après [@Bumgarner2013] : Des sondes complémentaires à chacun des allèles sont positionées sur la puce. L'ADN génomique fragmenté et labbelisé est mis en contact de la puce. Après néttoyage de la puce, l'analyse du signal émis par l'ADN génomique permettra de déterminé si l'individu est homozygote pour cette allèle (hybridation à une seule des deux sondes) ou bien hétérozygote pour cette allèle (hybridation aux deux sondes)}\label{fig:figallelicdisc}
+  \end{figure}
+  
+  \newpage
+  
+  \subsubsection{Les puces à indels}\label{les-puces-a-indels}
+  
+  L'implication de réarangement génomique tel que des duplications,
+  translocations ou délétions dans divers pathologies est bien connu.
+  C'est afin de détécter ces réarengements, que la \emph{Comparative
+  Genomic Hybridization array} (CGH array) a été développée dès 1999 (P.
+  O. Brown et al., \protect\hyperlink{ref-Brown1999}{1999}). Son principe
+  est très similaire à celui utilisé dans les puces à expression
+  (\textbf{Figure :} \ref{fig:figexparray}) en remplaçant simplement l'ARN
+  messager (ARNm) par de l'ADN génomique (ADNg). Ainsi, la présence d'un
+  CNV sera facilement détéctée en comparant le signal émmis par par un
+  individu test avec celui émmis par un contrôle.
+  
   \subsubsection{Limitation}\label{limitation}
   
-  Bien quelles aient été extremement utiles dans un champ d'application
-  varié, cette technologie présente plusieurs limitations. La première est
-  que la mesure que la puce renvoie
+  Bien que cette technologie ait été largement utilisée dans divers champs
+  d'applications, elle présente deux limitations principales. La première
+  est que pour les génome complexes (tel que les mammifères), il est
+  difficile, si ce n'est impossible de \emph{designer} un puce ne
+  permettant pas de l'hybridation non spécifique. En effet, la séquencve
+  d'une puce prévue pour détécter le gène ``A'' pourra égallement détécter
+  les gènes ``B'', ``C'' et ``D'' si ceux-ci présentent une forte
+  homologie avec ``A'' Ce qui est particulieremlent porblématique dans le
+  cas d'analyse de gènes d'une même famille.
   
-  pour les génomes complexes tel que le génome humain, il est extrêmement
-  difficile (voir impossible) de ne pas
-  
-  En effet, les puces à ADN peuvent détecter uniquement ce pourquoi elles
-  ont été. Ainsi, si la solution que l'on hybride sur la puce contient des
-  séquence d'ADN ou d'ARN pour lesquelles il n'y a aucune sonde
-  complémentaire sur la puce, celles-ci ne seront pas détectées. Cela peut
-  avoir de grandes répercutions puisque par exemple dans le cas des à
-  expression, les gènes qui n'ont pas encore été annotés risques de ne pas
-  être représenté sur la puce.
+  Pour finir, la plus grande de ses limitations est que les puces
+  détectent uniquement ce pour quoi elles ont été \emph{designer}. Ainsi,
+  si la solution que l'on hybride sur la puce contient des séquence d'ADN
+  ou d'ARN pour lesquelles il n'y a aucune sonde complémentaire sur la
+  puce, celles-ci ne seront pas détectées. Cela peut avoir de grandes
+  répercutions puisque par exemple dans le cas des à expression, les gènes
+  qui n'ont pas encore été annotés risques de ne pas être représenté sur
+  la puce.
   
   \newpage
   
@@ -2054,6 +2107,15 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{Nature Genetics}, \emph{41}(10), 1061--1067.
   \url{http://doi.org/10.1038/ng.437.Personalized}
   
+  \hypertarget{ref-Alon1999}{}
+  Alon, U., Barkai, N., Notterman, D. A., Gish, K., Ybarra, S., Mack, D.,
+  \& Levine, A. J. (1999). Broad patterns of gene expression revealed by
+  clustering analysis of tumor and normal colon tissues probed by
+  oligonucleotide arrays. \emph{Proceedings of the National Academy of
+  Sciences of the United States of America}, \emph{96}(12), 6745--50.
+  Retrieved from
+  \href{http://www.ncbi.nlm.nih.gov/pubmed/10359783\%20http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC21986}{http://www.ncbi.nlm.nih.gov/pubmed/10359783 http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC21986}
+  
   \hypertarget{ref-Amberger2011}{}
   Amberger, J., Bocchini, C., \& Hamosh, A. (2011). A new face and new
   challenges for Online Mendelian Inheritance in Man (OMIM). \emph{Human
@@ -2147,6 +2209,19 @@ class (for LaTeX) and the R bookdown package, in general.
   Klinefelter syndrome (47,XXY). \emph{Acta Paediatrica}, \emph{100}(6),
   807--813. \url{http://doi.org/10.1111/j.1651-2227.2011.02274.x}
   
+  \hypertarget{ref-Brachat2002}{}
+  Brachat, A., Pierrat, B., Xynos, A., Brecht, K., Simonen, M., Brüngger,
+  A., \& Heim, J. (2002). A microarray-based, integrated approach to
+  identify novel regulators of cancer drug response and apoptosis.
+  \emph{Oncogene}, \emph{21}(54), 8361--8371.
+  \url{http://doi.org/10.1038/sj.onc.1206016}
+  
+  \hypertarget{ref-Brown1999}{}
+  Brown, P. O., Pollack, J. R., Perou, C. M., Alizadeh, A. A., Eisen, M.
+  B., Pergamenschikov, A., \ldots{} Botstein, D. (1999). Genome-wide
+  analysis of DNA copy-number changes using cDNA microarrays. \emph{Nature
+  Genetics}, \emph{23}(1), 41--46. \url{http://doi.org/10.1038/12640}
+  
   \hypertarget{ref-Chemes2010}{}
   Chemes, H. E., \& Rawe, V. Y. (2010). The making of abnormal
   spermatozoa: cellular and molecular mechanisms underlying pathological
@@ -2217,6 +2292,13 @@ class (for LaTeX) and the R bookdown package, in general.
   (2015). Teratozoospermia: spotlight on the main genetic actors in the
   human. \emph{Human Reproduction Update}, \emph{21}(4), 455--485.
   \url{http://doi.org/10.1093/humupd/dmv020}
+  
+  \hypertarget{ref-Cutler2001}{}
+  Cutler, D. J., Zwick, M. E., Carrasquillo, M. M., Yohn, C. T., Tobin, K.
+  P., Kashuk, C., \ldots{} Chakravarti, A. (2001). High-throughput
+  variation detection and genotyping using microarrays. \emph{Genome
+  Research}, \emph{11}(11), 1913--25.
+  \url{http://doi.org/10.1101/gr.197201}
   
   \hypertarget{ref-Dam2007a}{}
   Dam, A. H., Koscinski, I., Kremer, J. A., Moutou, C., Jaeger, A.-S.,
@@ -2778,6 +2860,12 @@ class (for LaTeX) and the R bookdown package, in general.
   analyses. \emph{Nature Reviews. Genetics}, \emph{15}(2), 121--32.
   \url{http://doi.org/10.1038/nrg3642}
   
+  \hypertarget{ref-Singh2002}{}
+  Singh, D., Febbo, P. G., Ross, K., Jackson, D. G., Manola, J., Ladd, C.,
+  \ldots{} Sellers, W. R. (2002). Gene expression correlates of clinical
+  prostate cancer behavior. \emph{Cancer Cell}, \emph{1}(2), 203--9.
+  Retrieved from \url{http://www.ncbi.nlm.nih.gov/pubmed/12086878}
+  
   \hypertarget{ref-Skaletsky2003}{}
   Skaletsky, H., Kuroda-Kawaguchi, T., Minx, P. J., Cordum, H. S.,
   Hillier, L., Brown, L. G., \ldots{} Page, D. C. (2003). The
@@ -2872,6 +2960,12 @@ class (for LaTeX) and the R bookdown package, in general.
   representation libraries. \emph{Nature Methods}, \emph{5}(3), 247--252.
   \url{http://doi.org/10.1038/nmeth.1185}
   
+  \hypertarget{ref-VantVeer2002}{}
+  van 't Veer, L. J., Dai, H., Vijver, M. J. van de, He, Y. D., Hart, A.
+  A. M., Mao, M., \ldots{} Friend, S. H. (2002). Gene expression profiling
+  predicts clinical outcome of breast cancer. \emph{Nature},
+  \emph{415}(6871), 530--536. \url{http://doi.org/10.1038/415530a}
+  
   \hypertarget{ref-Vorona2007}{}
   Vorona, E., Zitzmann, M., Gromoll, J., Schüring, A. N., \& Nieschlag, E.
   (2007). Clinical, Endocrinological, and Epigenetic Features of the 46,XX
@@ -2879,11 +2973,25 @@ class (for LaTeX) and the R bookdown package, in general.
   Journal of Clinical Endocrinology \& Metabolism}, \emph{92}(9),
   3458--3465. \url{http://doi.org/10.1210/jc.2007-0447}
   
+  \hypertarget{ref-Wang1998}{}
+  Wang, D. G., Fan, J. B., Siao, C. J., Berno, A., Young, P., Sapolsky,
+  R., \ldots{} Lander, E. S. (1998). Large-scale identification, mapping,
+  and genotyping of single-nucleotide polymorphisms in the human genome.
+  \emph{Science (New York, N.Y.)}, \emph{280}(5366), 1077--82. Retrieved
+  from \url{http://www.ncbi.nlm.nih.gov/pubmed/9582121}
+  
   \hypertarget{ref-Wang2010}{}
   Wang, K., Li, M., \& Hakonarson, H. (2010). ANNOVAR: functional
   annotation of genetic variants from high-throughput sequencing data.
   \emph{Nucleic Acids Research}, \emph{38}(16), e164--e164.
   \url{http://doi.org/10.1093/nar/gkq603}
+  
+  \hypertarget{ref-Wang2000}{}
+  Wang, T., Hopkins, D., Schmidt, C., Silva, S., Houghton, R., Takita, H.,
+  \ldots{} Reed, S. G. (2000). Identification of genes differentially
+  over-expressed in lung squamous cell carcinoma using combination of cDNA
+  subtraction and microarray analysis. \emph{Oncogene}, \emph{19}(12),
+  1519--1528. \url{http://doi.org/10.1038/sj.onc.1203457}
   
   \hypertarget{ref-Wang2017}{}
   Wang, X., Jin, H., Han, F., Cui, Y., Chen, J., Yang, C., \ldots{} Gao,
