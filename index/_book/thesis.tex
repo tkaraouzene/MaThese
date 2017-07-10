@@ -198,71 +198,290 @@ class (for LaTeX) and the R bookdown package, in general.
   \chapter{Delete line 6 if you only have one
   advisor}\label{delete-line-6-if-you-only-have-one-advisor}
   
-  \chapter*{Résumé}\label{resume}
-  \addcontentsline{toc}{chapter}{Résumé}
+  \chapter*{Conclusion et discussion}\label{conclusion-et-discussion}
+  \addcontentsline{toc}{chapter}{Conclusion et discussion}
+  
+  Répétition de chiffre sur l'infertilité masculine redéfinition de la
+  globo\\
+  identification de \emph{DPY19L2} comme principal responsable (énnoner et
+  décrire la méthode utilisée, carto)\\
+  Résultats des différentes études (tailles des LCR, point de cassure,
+  dérégulation de certains gènes) Remise en cause des techniques utilisées
+  (puce), introduction au NGS
+  
+  C'est pourquoi nous avons
   
   \newpage
   
-  L'infertilité mascline est définie comme étant l'incapacité d'aboutir à
-  une grossesse après 12 mois ou plus de rapports sexuels réguliers non
-  protégés. 10 à 15\% des couples humains font face à des problèmes
-  d'infertilité soit plus de 70 millions de personnes dans le monde
-  faisant de cette pathologie un véritable enjeux de santé publique. Bien
-  que multifactorielle, l'infertilité masculine a une composante génétique
-  importante et encore peu explorée.
+  Entre \ldots{} et \ldots{}, notre équipe a effectué le séquençage
+  exomique de \ldots{} hommes infertiles. Parmi ces hommes, ,deux frères
+  présentaient un phénotype d'échec de fécondation de l'ovocyte, deux
+  autres frères étaient azoospermiques et quatre autre familles étaient
+  composées d'individus présentant un phénotype MMAF. Les \ldots{}
+  patients résetent présentaient eux aussi tous un phénotype MMAF
+  maisétaient cette fois-ci non apparentés. Bien que le séquençage de ces
+  patients ait été effectués dans 5 centres différents, l'analyse
+  bioinformatique des données obtenues à quant à elle été homogène puisque
+  elle a été effectué au sein de notre laboratoire par le pipeline
+  d'analyse que nous avons spécifiquement dévelopé. Celui-ci,
+  contrairement à la plupart des pipelines d'analyse de données WES
+  existant tel que \ldots{} et \ldots{} prend en charge l'ensemble des
+  étapes de l'analyse allant de l'alignement des \emph{short-reads} sur le
+  génome de référence jusqu'à la priorisation des variants en passant bien
+  évidemment par l'appel des variants et leur annotation. L'alignements
+  des \emph{reads} est effectué par le logiciel MAGIc tandis que l'appel
+  des variant est effectué par un algorithme développé dans notre
+  laboratoir soécifiquement concu pour analyser les informations fournies
+  par MAGIC. Pour l'annotation des variants nous utilisons plusieurs
+  ressources exterieurs tel que le logiciel Variant Effect Predictor qui
+  va nous informer de l'effet d'un variant sur 'ensemble des transcrits
+  qu'il chevauche. De même, les bases de données ExAC ESP6500 ou encore
+  1KG nous donne une indication de la fréquence des différents variants
+  observés dans la population générale. Afin de ne conserver que les
+  variants ayant le plus de risque d'être responsable de la pathologie du
+  patient nous avons mis en place une succession de filtre s'appuyant à la
+  fois sur les critères qualité des résultats de séquençage, le génotype
+  des variants ou encore son l'impact sur la protéine.
   
-  L'objectif de mon travail a donc été de contribuer à la caractérisation
-  du gène \emph{DPY19L2} dont la délétion homozygote est responsable du
-  majeure partie des cas de globozoospermie, un phénotype d'infertilité
-  masculine, chez l'humain. Cette délétion récurrente étant causée par des
-  séquençes présentant de fortes homologies de séquences flanquant ce gène
-  et entrainant, au cours de la méiose des recombinaisons homologues
-  non-alléliques (NAHRs). Les caractéristiques mécaniques de ces
-  recombinaisons entrainent à la fois la formation d'allèles dupliqués
-  mais aussi celle d'allèles délétés avec, en théorie, un excès de ces
-  dernières. Cependant les données fournies par les bases de données
-  publique révèlent un excès de duplication au locus de \emph{DPY19L2}.
-  Nous avons donc dans un premiers temps réanalysé les données de CGH
-  array de près de 1700 individus afin de confirmer les donées fournies
-  dans les bases de données. Nous avons ensuite montré que cet exès
-  n'était pas présent au niveau spermatique indiquant un événement de
-  séléction purifiante opérant au locus de \emph{DPY19L2}. Toujours afin
-  de mieux caractériser les processus moléculaire impliquant ce gène, nous
-  avons effectué une analyse comparative des transcriptomes de souris
-  sauvages \emph{Dpy19l2}\textsuperscript{+/+} et de souris KO
-  \emph{Dpy19l2}\textsuperscript{-/-} métant ainsi en évidence une
-  dérégulation de plusieurs gènes chez la souris KO pouvant en partie
-  expliqué le faible taux de réussite des fécondation \emph{in vitro}
-  effectuées avec des spermatozoïdes globozoocéphales, même dans les cas
-  où celle-ci est effectuée par \emph{intra cytoplasmic sperm injection}
-  (ICSI).
+  Dans le cas des analyses familiales, un autre filtre consistant à
+  conserver uniquement l'intersections des variants ayant passé l'ensemble
+  des précédents filtres chez l'ensemble des membr'e d'une même famille a
+  également été appliqué. Ainsi, dans le cas des analyses familiales, un
+  gène candidat a pu être identifié dans la moitié des familles. Parmi ces
+  gènes on peut noter le gène \emph{DNAH1} responsable du phénotype MMAF
+  d'une de nos 6 familles confirmant ainsi l'importance de l'implication
+  de ce gène dans les pathologies flagellaires. De la même manière, la des
+  mutations dans le gène \emph{PLC}\(\zeta\)\emph{1} ont pu être reliées
+  au phénotype des frères subissant échecs de fécondations confirmant
+  l'importance de la protéine PLC\(\zeta 1\) dans le processus
+  d'activation ovocytaire. L'étude de la famille azoosperme a permi elle
+  de mettre en évidence le gène \emph{SPINK2} jusqu'à présent jamais relié
+  à la spermatogénèse chez l'humain bien que ce phénotype avait déjà été
+  observé chez les souris KO \emph{SPINK2}\textsuperscript{-/-}.
   
-  Dans un second temps, l'emmergence du séquençage nouvelle génération
-  (NGS) nous a permis d'étudier les exomes de larges cohortes d'individus.
-  Cependant la masse de données générées par ces méthodes entrainent de
-  nouvelles problématiques notamment liées à l'analyse et au filtrage des
-  variants mis en évidence. C'est pourquoi nous avons mis en place un
-  pipeline d'analyse de données d'exomes que nous avons appliqué à la fois
-  à des cas familiaux présentant divers phénotypes d'infertilité
-  masculine, mais aussi à une cohorte composée de \ldots{} patients
-  présentant tous des anomalies multiples au niveau du flagelle
-  spermatique. Ainsi nous avons pu à la fois confirmer l'importance de
-  l'implication de certains gènes dans certains phénotype, mais aussi
-  mettre en évidence de nouveaux gènes.
+  L'analyse de notre cohorte de \ldots{} patients MMAF non apparentés nous
+  a, enraison du nombre important de variants ayant passé les filtres chez
+  au moins 1 patient, contraint à mettre en place une stratégie visant à
+  prioriser es gènes ayant la plus forte probabilité d'être responsables
+  du phénotype MMAF de ces patients. Les gènes candidats identifiés ont
+  ensuite pu être classé en fonction d'un niveau de confiance à 3 degrés :
+  \emph{High} pour les variants homozygotes ayant un effet tronquant sur
+  la protéine, \emph{Moderate} pour les variants homozygotes n'ayant
+  \textbf{pas} un effet tronquant et \emph{Low}, pour les gènes sur
+  lesquels le patients portait au moins deux variants hétérozygotes. Les
+  différentes analyses effectuées nous on ainsi permis de trouver un gène
+  candidat pour \ldots{} de nos patients parmi lesquels \ldots{} avait un
+  niveau de confiance \emph{High}, \ldots{} \emph{Moderate} et \ldots{}
+  \emph{Low}. Parmi l'ensemble de nos patients, il y en a \ldots{} pour
+  lesquels deux gènes candidats ont été identifiés, cependant, en nous
+  fiant au niveaux de confiance que nous avons instauré, il nous a
+  toujours été possible d'en faire ressortir un ayant plus de risque
+  d'être le \textbf{vrai} responsable du phénotype. L'étude de cette
+  cohorte nous a ainsi permis d'identifier \ldots{} nouveaux gènes
+  candidats pour le phénotype MMAF que sont : \ldots{} . De même, nous
+  avons également pu retrouver des variants dans le gènes \emph{DNAH1} sur
+  lequel \ldots{} de nos patients portent un variant tronquant homozygote,
+  \ldots{} un variant homozygote et \ldots{} au moins deux variants
+  hétérozygotes. Ainsi, notre pipeline d'analyse nous a permis
+  d'identifier un candidat pour \ldots{} de nos patients parmis lesquels
+  \ldots{} présentaient des preuves génétiques de forte confiance
+  démontrant ainsi son efficacité.
+  
+  Ces résultats sont cependant à relativiser puisque pour \ldots{} de nos
+  patients, aucun candidat n'a pu être identifié soit \ldots{} \% de nos
+  patients. Plusieurs raison peuvent expliquer cela. Tout d'abord, au
+  cours des analyses décrites dans ce manuscrits nous nous concentrons
+  uniquements sur les SNPs et les indels. Cependant de nombreux logiciels
+  tel que \ldots{}, \ldots{} ou encore \ldots{} permettent de détecter des
+  CNVs à partir de données WES et / ou WGS. Les stratégies de prédictions
+  de ces logiciels pouvant être êxtremement différents, le profil des CNVs
+  détécté ou non le sera aussi {[}ref {]}. Ainsi, dans des analyses non
+  décrites ici, notre équipe a cherchée à identifier des CNVs à partir de
+  nos données d'exome à l'aide du logiciel ExomeDepth. Cette approche a
+  été extrêmement concluante puisqu'elle a permi d'identifier une délétion
+  homozygote sur les gène \emph{WDR66} de \ldots{} de nos patiens pour
+  lesquels aucun candidat n'avait été alors identifié. Ces délétions ont
+  ensuite pu être confirmées par PCR et la caractérisation de ce gène est
+  actuellement en coursq au sein de notre équipe. Au vu de cette réussite,
+  il est désormai prévu d'intégrer ce genre d'analyse de manière
+  automatique et systématique au sein de notre pipeline. Ensuite, il est
+  possible que le choix de la stratégie d'un séquençage exomique plutôt
+  que du génome entier ait masqué la cause génétique du phénotype de
+  certains de nos patients. En effet, dans ces analyses, nous nous sommes
+  concentrés sur l'analyse des variants situés dans les parties codantes
+  \textbf{uniquement}. Ainsi les variants situés par exemple dans les
+  microARN n'ont pu être observés. Or, les microARN jouent un rôle
+  important dans la régulation génique principalement en influant sur la
+  stabilité d'ARNm cibles et sont présent en grande quantité au sein des
+  cellules germinales et leur importance dans la spermatogénèse a déjà été
+  démontrée chez la souris (Comazzetto et al.,
+  \protect\hyperlink{ref-Comazzetto2014}{2014}) ainsi que plus récemment
+  chez d'autres mammifères dont l'Humain (Chen, Li, Guo, Zhang, \& Zeng,
+  \protect\hyperlink{ref-Chen2017}{2017}) laissant penser que des defauts
+  altérants ces microARN pourraient entrainer des dysfonctionnement de la
+  spermatogénèse. Aussi, il faut noter que les analyses WES \textbf{et}
+  WGS ne permettent pas d'observer les défauts épigénétiques, or, ceux-ci
+  représentent une part croissante des causes impliquées dans les cas
+  d'infertilité masculine (Carrell \& Aston,
+  \protect\hyperlink{ref-Carrell2011}{2011}, R Dada, Shamsi, \& Kumar
+  (\protect\hyperlink{ref-Dada2011}{2011}), Rima Dada et al.
+  (\protect\hyperlink{ref-Dada2012}{2012})). Aussi, au vus du grand nombre
+  de gène impliqué dans la spermatogénèse il est très possible que les
+  causes génétique responsables d'un même phénotype puissent être très
+  hétérogène. Or, à la suite de nos \ldots{} analyses effectués dans
+  l'étude de la cohorte MMAF, \ldots{} variants différents étaient
+  observés chez les \ldots{} patients pour lesquels aucun candidat n'était
+  identifié. Ces variants impactaient \ldots{} gènes différents parmi
+  lesquels \ldots{} étaient retrouvé muté chez uniquement 1 seul de ces
+  patients. Au vu de se nombre important de gène, il est très compliqué
+  d'effectué des analyses poussées sur l'ensemble d'entre eux mettant
+  ainsi en évidence la nécéssité de créer de nouveaux filtres afin de
+  pouvoir réduire encore cette liste.
+  
+  C'est dans ce but que notre équipe travail actuellement au développement
+  du score MutaScript. Ce score a pour but de classer l'ensemble des
+  transcrit codant en fonction de leur charge mutationnelle avec l'idée
+  sous-jacente que les transcrits les plus mutés dans la population
+  générale ne sont probablement pas impliqués dans des pathologies sévères
+  à transmission Mendélienne, \emph{a contrario} ceux retrouvés comme
+  n'étant pas / peu mutés le sont probablement. Pour ce faire, le score
+  MutaScript repose sur trois (\ldots{}). La première étant le jeu de
+  transcrit fournit par Ensembl (Aken et al.,
+  \protect\hyperlink{ref-Aken2017}{2017}). Afin de connaitre la charge
+  mutationnelle de ces transcrits, nous nous sommes basées sur les
+  variants mis à disposition par ExAC (Lek et al.,
+  \protect\hyperlink{ref-Lek2016}{2016}) qui réunit les données d'exome de
+  60.706 individus non apparentés que nous avons ensuite annoté grâce au
+  logiciel \emph{variant effect predictor} (VEP) (McLaren et al.,
+  \protect\hyperlink{ref-McLaren2016}{2016}) afin de prédire l'impact de
+  chaque variant sur l'ensemble des transcrits qu'ils chevauchent de sorte
+  à ce que les variants ayant un impact prédit comme étant délétère aient
+  une plus grosse contribution au score MutaScript que ceux ayant un
+  impact faible. Ces dernières années, des scores tel que le
+  \emph{residual variance intolerance score} (RVIS) (Petrovski et al.,
+  \protect\hyperlink{ref-Petrovski2013}{2013}) ou encore \emph{the the
+  Probability of loss-of-function Incoherency} (pLI) (Lek et al.,
+  \protect\hyperlink{ref-Lek2016}{2016}) ont vu le jour. MutaScript se
+  présente comme une alternative à ces derniers scores et, bien que sa
+  fonction soit similaire, il diffère de ceux-ci sur de nombreux points.
+  Tout d'abord, MutaScript donne un score à l'ensemble des transcrits
+  codant pour une protéine là où pLI donne un score seulement au transcrit
+  consensus de chaque gène et RVIS qui agrège les séquences codantes de
+  l'ensemble des transcrits d'un même gène créant ainsi un transcrit
+  ``chimérique''. Ce procédé, bien qu'il facilite l'interprétation du
+  score, engendre une perte d'information puisque l'on se retrouve avec un
+  seul score par gène et non par transcrits. De plus, dans la conception
+  de leur score, RVIS et pLI ne considère que les variants dit
+  \emph{loss-of-function} (LoF), c'est à dire les variants impactant
+  l'épissage, engendrant un codon stop ou un décalage du cadre de lecture.
+  Cependant, ces variants ne représentent que \ldots{}\% des variants
+  fournit par la base de données ExAC. C'est pourquoi, MutaScript prend en
+  compte l'ensemble des variants, peu importe leur impact sur les
+  différents transcrits qu'ils chevauchent, et leur attribue un poids en
+  fonction de cet impact de sorte à ce que les variants délétères
+  contribuent plus au score d'un transcrits que les autres. Aussi, l'étude
+  des scores RVIS et pLI nous a permis de mettre en évidence une
+  corrélation forte entre le score qu'ils attribuent à un gène et la
+  taille de la séquence codante (CDS) de ce même gène. Cette corrélation
+  étant due à un biais causé par leur manière de calculer leur score et
+  non à une réalité biologique, MutaScript fut construit de sorte à éviter
+  cette corrélation qui peut mener à des erreurs d'interprétations. Le
+  développement de ce score étant encore
+  
+  La Science et le Technique, ont pendant de nombreuses années été
+  considérées comme des disiplines distinctes pratiquées, dans la grande
+  majorité des cas, des activités de manière indépendantes l'une de
+  l'autre et surtout par des personnes différentes n'entretennant aucune
+  intéraction. Bien que la distinction entre Science et Technique soit
+  réelle, la première pouvant être définit comme la quête de la
+  connaissance et de la compréhension du monde tandis que la seconde met
+  en oeuvre un ensemble de moyen afin de modifier celui-ci d'une manière
+  déterminée à l'avance. Désormais, l'interdépendance entre ces deux
+  notions n'a jamais été aussi forte de sorte qu'elles sont souvent
+  confondues \ldots{}.. Ainsi, si la Science n'est pas la Technique, elle
+  est dans de nombreux cas dépendante de celle-ci. En effet, comme nous
+  avons pu le voir, l'étude et la connaissance du génome ont du attendre
+  les progrès techniques permettant le séquençage de l'ADN. La Technique,
+  elle, n'a pas nécessairement besoin de savoirs scientifiques pour être
+  conçue : des savoirs empiriquement acquis suffisent à l'application
+  d'une technique. En effet, bien qu'ils n'aient eu aucune conscience des
+  mécanismes scientifiques sous-jacent, les premiers Hommes ont su
+  maitriser la technique de la production et de l'entretien du feu.
+  Cependant la Technique utilise de plus en plus des connaissances
+  scientifiques et a ainsi finit par beaucoup dépendre d'Elle donnant
+  ainsi naissance à la Technologie qui met en application des découvertes
+  scientifiques. Les travaux décrits dans ce manuscrits illustre
+  parfaitement cette relation d'interdépendance entre la Science et le
+  Technique / Technologie. En effet, la connaissance du génome a été
+  permis par l'émmergence des différentes techniques de séquençage qui
+  s'appuies elles aussi sur de nombreuses connaissances scientifiques. On
+  peut dès lors s'attendre à ce que Science et la Techniques continuent
+  d'évoluer de manière concomitantes en s'entre allimentant permettant aux
+  prochains progrès technologiques d'êtres à l'origine de découvertes
+  scientifiques qui serviront elles même à la fois de socle mais aussi de
+  guide aux évolutions technologiques futures.
   
   \newpage
   
-  \chapter*{Abstract}\label{abstract}
-  \addcontentsline{toc}{chapter}{Abstract}
+  Petit essai sur technologie et recherche
   
-  \newpage
+  \hypertarget{refs}{}
+  \hypertarget{ref-Aken2017}{}
+  Aken, B. L., Achuthan, P., Akanni, W., Amode, M. R., Bernsdorff, F.,
+  Bhai, J., \ldots{} Flicek, P. (2017). Ensembl 2017. \emph{Nucleic Acids
+  Research}, \emph{45}(D1), D635--D642.
+  \url{http://doi.org/10.1093/nar/gkw1104}
   
-  Même chose en anglais
+  \hypertarget{ref-Carrell2011}{}
+  Carrell, D. T., \& Aston, K. I. (2011). The search for SNPs, CNVs, and
+  epigenetic variants associated with the complex disease of male
+  infertility. \emph{Systems Biology in Reproductive Medicine},
+  \emph{57}(1-2), 17--26.
+  \url{http://doi.org/10.3109/19396368.2010.521615}
   
-  \chapter{Introduction}\label{introInf}
+  \hypertarget{ref-Chen2017}{}
+  Chen, X., Li, X., Guo, J., Zhang, P., \& Zeng, W. (2017). The roles of
+  microRNAs in regulation of mammalian spermatogenesis. \emph{Journal of
+  Animal Science and Biotechnology}, \emph{8}, 35.
+  \url{http://doi.org/10.1186/s40104-017-0166-4}
   
-  \chapter*{References}\label{references}
-  \addcontentsline{toc}{chapter}{References}
+  \hypertarget{ref-Comazzetto2014}{}
+  Comazzetto, S., Di Giacomo, M., Rasmussen, K. D., Much, C., Azzi, C.,
+  Perlas, E., \ldots{} O'Carroll, D. (2014). Oligoasthenoteratozoospermia
+  and Infertility in Mice Deficient for miR-34b/c and miR-449 Loci.
+  \emph{PLoS Genetics}, \emph{10}(10), e1004597.
+  \url{http://doi.org/10.1371/journal.pgen.1004597}
+  
+  \hypertarget{ref-Dada2012}{}
+  Dada, R., Kumar, M., Jesudasan, R., Fernández, J. L., Gosálvez, J., \&
+  Agarwal, A. (2012). Epigenetics and its role in male infertility.
+  \emph{Journal of Assisted Reproduction and Genetics}, \emph{29}(3),
+  213--223. \url{http://doi.org/10.1007/s10815-012-9715-0}
+  
+  \hypertarget{ref-Dada2011}{}
+  Dada, R., Shamsi, M., \& Kumar, K. (2011). Genetic and epigenetic
+  factors: Role in male infertility. \emph{Indian Journal of Urology},
+  \emph{27}(1), 110. \url{http://doi.org/10.4103/0970-1591.78436}
+  
+  \hypertarget{ref-Lek2016}{}
+  Lek, M., Karczewski, K. J., Minikel, E. V., Samocha, K. E., Banks, E.,
+  Fennell, T., \ldots{} Exome Aggregation Consortium, D. G. (2016).
+  Analysis of protein-coding genetic variation in 60,706 humans.
+  \emph{Nature}, \emph{536}(7616), 285--91.
+  \url{http://doi.org/10.1038/nature19057}
+  
+  \hypertarget{ref-McLaren2016}{}
+  McLaren, W., Gil, L., Hunt, S. E., Riat, H. S., Ritchie, G. R. S.,
+  Thormann, A., \ldots{} Cunningham, F. (2016). The Ensembl Variant Effect
+  Predictor. \emph{Genome Biology}, \emph{17}(1), 122.
+  \url{http://doi.org/10.1186/s13059-016-0974-4}
+  
+  \hypertarget{ref-Petrovski2013}{}
+  Petrovski, S., Wang, Q., Heinzen, E. L., Allen, A. S., Goldstein, D. B.,
+  Davydov, E., \ldots{} Lisacek, F. (2013). Genic Intolerance to
+  Functional Variation and the Interpretation of Personal Genomes.
+  \emph{PLoS Genetics}, \emph{9}(8), e1003709.
+  \url{http://doi.org/10.1371/journal.pgen.1003709}
 
 
   % Index?

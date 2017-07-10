@@ -41,7 +41,7 @@ include_graphics(path = "figure/coupe_testicule2.jpg")
 
 ### La phase de multiplication  
 
-La phase de multiplication est la phase au cours de laquelle les spermatogonies se divisent par mitoses pour aboutir au stade de spermatocytes primaires. Les spermatogonies sont des cellules diploïdes à l'origine de l’ensemble des autres cellules germinales humaines. Pour cela, elles vont s'auto-renouveler par mitoses successives afin de maintenir une production continue de spermatozoïdes tout au long de la vie de l'individu. Ces cellules sont localisées dans le compartiment basal des tubes séminifères. Les analyses histologiques ont permi de distinguer trois types de spermatogonies en fonction de leur contenu en hétérochromatine [@Clermont1963, @Clermont1966, @Goossens2013] :  Les spermatogonies de type A dark (ou Ad), les spermatogonies de type A pale (ou Ap)  et les spermatogonies de type B.  
+La phase de multiplication est la phase au cours de laquelle les spermatogonies se divisent par mitoses pour aboutir au stade de spermatocytes primaires. Les spermatogonies sont des cellules diploïdes à l'origine de l’ensemble des autres cellules germinales humaines. Pour cela, elles vont s'auto-renouveler par mitoses successives afin de maintenir une production continue de spermatozoïdes tout au long de la vie de l'individu. Ces cellules sont localisées dans le compartiment basal des tubes séminifères. Les analyses histologiques ont permis de distinguer trois types de spermatogonies en fonction de leur contenu en hétérochromatine [@Clermont1963, @Clermont1966, @Goossens2013] :  Les spermatogonies de type A dark (ou Ad), les spermatogonies de type A pale (ou Ap)  et les spermatogonies de type B.  
   
 Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la spermatogénèse et servent de réserve. Elles vont au cours d'une première mitose former une spermatogonie Ad et un spermatogonie Ap (**Figure :** \@ref(fig:spermatogenese)). Cette propriété permet à la fois de se différencier en spermatocytes tout en constituant un compartiment de réserve de spermatogonies Ad pour la régénération de la population de cellules germinales au sein de l'épithélium séminifère. L'entrée en division des spermatogonies Ap se fait par groupes cellulaire tous les 16 jours. Les cellules d'une même génération maintiennent entre elles des ponts cytoplasmiques jusqu'à la [spermiogénèse](#spermiogenese) ce qui permet la synchronisation parfaite du développement gamétique de toutes les cellules filles issues d'un groupe de spermatogonies Ap. Ce phénomène est appelé onde spermatogénétique. Chaque spermatogonie Ap va, lorsqu'elle se divise par mitose, former deux spermatogonies B qui elles-mêmes se diviseront en deux spermatocytes primaires diploïdes (**Figure :** \@ref(fig:spermatogenese)).  
 
@@ -272,15 +272,14 @@ Chez l'humain, l'arrêt de la spermatogénèse est défini comme l'incapacité d
 
 Ces anomalies sont observables en effectuant un spermocytogramme. Plusieurs classifications ont été établies, cependant, c'est la classification de David modifiée (**Table :** \@ref(fig:anomaliemorphosperm)) qui est la plus rependue en France. Pour ce faire, on procède généralement à une observation de 100 spermatozoïdes au cours de laquelle l'ensemble des anomalies observées sont relevées et quantifiées permettant ainsi de définir un index d’anomalies multiple (nombre total d’anomalies/nombre de spermatozoïdes anormaux) révélant le nombre moyen d’anomalies par spermatozoïdes.
 
+\newpage  
 
 ```{r anomaliemorphosperm, fig.cap=tab.info,fig.scap=tab.name,out.extra="scale=.75"}
 
-# récupérer le tableau Adapté d’Auger, 2010.
-# https://stackoverflow.com/questions/25106481/add-an-image-to-a-table-like-output-in-r
-tab.name <- "Différentes anomalies morphologiques du spermatozoïde selon la classification de David modifiée adapté... TABLEAU à adapter et à insérer !!!!!"
-tab.from <- "[@Auger2010]"
+tab.name <- "Classification morphologique de spermatozoïdes humains normaux et anormaux adapté"
+tab.from <- "[@Auger2001]"
 tab.info <- paste0(tab.name," d'après ",tab.from)
-include_graphics(path = "figure/sperm_morpho_abnormalities.png")
+include_graphics(path = "figure/tab_sperm_defect.png")
 
 
 ```
@@ -342,14 +341,14 @@ Bien que la prévalence de ces anomalies génétiques varie en fonction du phén
 
 #### Les nouveaux gènes  
 
-1. **Les anomalies quantitatives** :  une analyse de trois familles par séquençage [haut-débit](#ngs) a permit d'identifier trois gènes *MEIOB*, *TEX14* et *DNAH6* impliqué dans un phénotype d'azoospermie, de même une étude de 2016 démentre l'association de trois variants dans la séquence codante du gène *RAD21L* en se basant sur une étude statistique effectuée sur 38 japonnais présentant un arret de la fertilité et 200 contrôles [@Minase2017]. De même, plusieurs variants dans le gène *TEX111* et *SYC1* on été décrit comme entrainant un arret de la méiose [@Yatsenko2015, @Yang2015, @Maor-Sagie2015].   
+1. **Les anomalies quantitatives** :  une analyse de trois familles par séquençage [haut-débit](#ngs) a permit d'identifier trois gènes *MEIOB*, *TEX14* et *DNAH6* impliqué dans un phénotype d'azoospermie, de même une étude de 2016 démontre l'association de trois variants dans la séquence codante du gène *RAD21L* en se basant sur une étude statistique effectuée sur 38 japonais présentant un arrêt de la fertilité et 200 contrôles [@Minase2017]. De même, plusieurs variants dans le gène *TEX111* et *SYC1* on été décrit comme entrainant un arret de la méiose [@Yatsenko2015, @Yang2015, @Maor-Sagie2015].   
   
 2. **Les anomalies morphologiques liées à la tête du spermatozoïde** :  
     a. **La macrozoospermie** :  Ce phénotype d'infertilité masculine rare est caractérisé par la présence de 100% des spermatozoïdes de l'éjaculat présentant une tête anormalement grosse ainsi que plusieurs flagelles. Il fut observé pour la première fois en 1978 [@Nistal], mais ce n'est qu'en 2007 qu'une explication génétique fut enfin trouvée. Une étude portant sur 14 patients nord Africains a permis d'identifier la délétion c144delC du gène *AURKC* (*Aurora kinase C*) comme responsable du phénotype de l'ensemble des individus de l'étude [@Dieterich2007]. Depuis, d'autres études ont permis d'associer d'autre variants sur ce même gène à ce phénotype [@BenKhelifa2011]. Des anomalies du gène *AURKC* seraient ainsi responsables d'environ 83.7% des cas macrozoospermie chez des patients non apparentés [INSERT REF]. Le gène AURKC, étant impliqué dans la méiose, conduit lorsqu'il est muté à un blocage de la première division méiotique entrainant la production de spermatozoïdes tétraploïdes, c'est à dire, portant une quantité de matériel génétique quatre fois supérieure à la normale [@Dieterich2009].    
     b. **La globozoospermie** : La globozoospermie est aussi un phénotype rare d'infertilité dont la prévalence est estimée à de 0,1%. Il fut dentifié pour la première fois en 1971 et est caractérisé par la présence dans l'éjaculat d'une majorité de spermatozoïde dépourvue d'acrosome empêchant ainsi le spermatozoïde de franchir la zone pellucide de l'ovocyte et compromettant ainsi la fécondation [@Dam2006, @Sen2009, @Holstein1973]. En 2007, une étude familiale a permis de lier ce phénotype à la mutation c.848G>A dans le gène *SPATA16* (*spermatogenesis-associated protein 16*) [@Dam2007a] dont la protéine va, au cours de la spermatogénèse fusionner avec les vésicules proacrosomales pour former l'acrosome [@Dam2007a, @Lu2006]. Plus tard, en 2011, une étude portant sur 20 patients tunisiens permit d'identifier une délétion homozygote de 200 kb emportant la totalité du gène *DPY19L2* (*Dpy-19 Like 2*) chez 15 des 20 patients [@Harbuz2011]. cf [globo](#globo)  
     c. **Spermatozoïdes acéphaliques** :  Ce phénotype rapporté plusieurs fois [@Chemes2010, @Panidis2001, @Chemes1987] caractérise les patients présentant des spermatozoïdes dépourvus de tête dans leur éjaculat. Une étude récente a pu lier ce phénotype à une mutation c.824C>T homozygote ainsi qu'à deux variants hétérozygotes composites c.1006C>T et c.485T>A dans le gène *SUN5* [@Zhu2016] qui avait précédemment été décrit comme localisant à la jonction noyau / flagelle du spermatozoïde [@Yassine2015].    
 
-3. **Le phénotype MMAF** : Le phénotype MMAF (*Multiple morphological abnormalities of the sperm flagella*) décrit les patients atteints d'asthenozoospermie dont les spermatozoïdes présentent de multiples anomalies morphologiques touchant en particulier les flagelles. Plus précisément, ce phénotype décrit les asthenozoospermie résultant d'une mosaïque d'anormalies morphologiques au niveau du flagelle tel que l'absence totale de flagelle, des flagelles enroulés, courts, anguleux... [@Coutton2015, @BenKhelifa2014]. Récemment, le gène *DNAH1* (*Dynein Axonemal Heavy Chain 1*) codant pour une dynéine de la chaine lourde de l'axonème a été retrouvé muté chez près d'un patient sur trois dans sa cohorte comportant 18 patients [@BenKhelifa2014]. Deux autres études ont retrouvé des mutations dans le gène *DNAH1* chez des patients venant de Chine, d'Iran et d'Italie, laissant suggérer que ce gène est l'un des acteurs majeurs dans le syndrome MMAF [@Wang2017, @Amiri-Yekta2016].  
+3. **Le phénotype MMAF** : Le phénotype MMAF (*Multiple morphological abnormalities of the sperm flagella*) décrit les patients atteints d'asthenozoospermie dont les spermatozoïdes présentent de multiples anomalies morphologiques touchant en particulier les flagelles. Plus précisément, ce phénotype décrit les asthenozoospermie résultant d'une mosaïque d'anomalies morphologiques au niveau du flagelle tel que l'absence totale de flagelle, des flagelles enroulés, courts, anguleux... [@Coutton2015, @BenKhelifa2014]. Récemment, le gène *DNAH1* (*Dynein Axonemal Heavy Chain 1*) codant pour une dynéine de la chaine lourde de l'axonème a été retrouvé muté chez près d'un patient sur trois dans sa cohorte comportant 18 patients [@BenKhelifa2014]. Deux autres études ont retrouvé des mutations dans le gène *DNAH1* chez des patients venant de Chine, d'Iran et d'Italie, laissant suggérer que ce gène est l'un des acteurs majeurs dans le syndrome MMAF [@Wang2017, @Amiri-Yekta2016].  
 
 4. **Les échecs de fécondation du spermatozoïde** :  Au moment de la fécondation, l'activation ovocytaire repose sur le relargage par le spermatozoïde de "facteurs spermatiques" qui déclenchent un signal de calcium, constitué d'oscillations Ca$^{2+}$. Ce processus est médié par une protéine spécifique du spermatozoïde, *la  phospholipase C Zeta 1* (PLC$\zeta 1$) codée par le gène *PLCZ1* [@Nomikos2013, @Amdani2013]. Plusieurs cas d'échec d'activation ovocytaire ont été liés à l'absence ou la mauvaise localisation de la protéine PLC$\zeta1$. Malgré cela, aucune preuve génétique directe n'avait été reportée jusque récemment où deux mutations au sein du gène *PLC*$\zeta$*1* furent retrouvés chez un patient [@Heytens2009] et un peu plus tard une mutation homozygote chez deux frères consanguins [@Escoffier2016].  
 
@@ -367,9 +366,9 @@ L’approche gène candidat consiste à rechercher des mutations chez un patient
 
 ### Les puces  
 
-Les puces à ADN furent initiallement conçues dans le but de mesurer le niveau de transcription des transcrits provenant de plusieurs milliers de gènes lors d'une seule et unique experience. Cette technologie a ainsi permis de des patterns d'expression de gènes à un statu phisyologique donné. L'analyse des "signatures" d'expression a ainsi permis de caractériser plusieurs cancer [@Alon1999, @Wang2000, @Singh2002, @VantVeer2002], mais aussi la réponse physiologique à plusieurs type de stimulis tel que la prise de certains médicaments [@Brachat2002].  
+Les puces à ADN furent initialement conçues dans le but de mesurer le niveau de transcription des transcrits provenant de plusieurs milliers de gènes lors d'une seule et unique expérience. Cette technologie a ainsi permis de des patterns d'expression de gènes à un statu physiologique donné. L'analyse des "signatures" d'expression a ainsi permis de caractériser plusieurs cancer [@Alon1999, @Wang2000, @Singh2002, @VantVeer2002], mais aussi la réponse physiologique à plusieurs type de stimuli tel que la prise de certains médicaments [@Brachat2002].  
 
-Suite à cela, l'usage des puces à ADN dans le domaine biomédical s'est étendu pour ne plus êtree limité à la simple quantification de l'expression génique. Ainsi, cette technologie a également été utilisé afin de détecter des *single nucleotide polymorphisms* (SNPs) au sein de notre génome permettant notamment l'émmergence du Hap Map project qui recense les SNPs de plusieurs milliers d'individus [@Cutler2001]. De même, l'utilisation des puces à ADN a permis la détéction de *copy number variation* (CNVs).      
+Suite à cela, l'usage des puces à ADN dans le domaine biomédical s'est étendu pour ne plus être limité à la simple quantification de l'expression génique. Ainsi, cette technologie a également été utilisé afin de détecter des *single nucleotide polymorphisms* (SNPs) au sein de notre génome permettant notamment l'émergence du Hap Map project qui recense les SNPs de plusieurs milliers d'individus [@Cutler2001]. De même, l'utilisation des puces à ADN a permis la détection de *copy number variation* (CNVs).      
 
 Pendant plus de 10 ans, la grande qualité des puces, l'existence de protocoles d'hybridation standardisés ainsi que des algorithmes d'analyses robustes ont fait des puces à ADN l'outil d'analyse génomique le plus puissant avant l'arrivée du [séquençage haut débit](#ngs) 
 
@@ -377,14 +376,14 @@ Pendant plus de 10 ans, la grande qualité des puces, l'existence de protocoles 
 
 #### Les puces à expression   
 
-L'utilisation principale des puces à ADN a été de mesuré l'expression des gènes dans un tissus donné. Dans cette application, l'ARN est extrait des cellules d'interet puis est générallement convertit en ADNc. L'ADNc est ensuite hybridé à la puce qui subira ensuite une étape de lavage. L'intensité de fluoresence est ensuite mesurée à chaque spot de la puce. l'intensité du signal sera ensuite le reflet du niveau d'expression d'un gène.  
+L'utilisation principale des puces à ADN a été de mesuré l'expression des gènes dans un tissus donné. Dans cette application, l'ARN est extrait des cellules d'intérêt puis est généralement convertit en ADNc. L'ADNc est ensuite hybridé à la puce qui subira ensuite une étape de lavage. L'intensité de fluorescence est ensuite mesurée à chaque spot de la puce. l'intensité du signal sera ensuite le reflet du niveau d'expression d'un gène.  
 
 
-```{r figexparray, fig.cap=fig.info,fig.scap=fig.name}
+```{r figexparray, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=.9"}
 
 fig.name <- "Représentation schématique des méthodes d'analyse d'expression génique par puce à ADN"
 fig.from <- "[@Trevino2007]"
-fig.description <- "Présentation des méthodes à double et à simbple colorant, respectivement à gauche et à droite. Dans lme cas des analyses à double colorant,une seule puce et nécéssaire, les échantillon de la référence et du test sont mis en compétition sur la même puce, un signal de sortie vert indiquera une sur-expression chez le test tandis qu'un signal rouge indiquera une sous-expression.  Dans le cas d'analyses à simple colorant, deux puces sont nécessaires, une première pour la référence et une seconde pour le test. Les données des deux puces sont ensuite comparées pour déterminé quels sont les gènes différentiellement exprimés. Dans le cas de la CGH array, le principe est similaire, en remplacant simplement l'ARNm par de l'ADNg."
+fig.description <- "Présentation des méthodes à double et à simple colorant, respectivement à gauche et à droite. Pour les analyses à double colorant, une seule puce et nécessaire, les échantillon de la référence et du test sont mis en compétition sur la même puce, un signal de sortie vert indiquera une surexpression chez le test tandis qu'un signal rouge indiquera une sous-expression. Pour celles à simple colorant, deux puces sont nécessaires, une première pour la référence et une seconde pour le test. Les données des deux puces sont ensuite comparées pour déterminé quels sont les gènes différentiellement exprimés. Dans le cas de la CGH array, le principe est similaire, en remplaçant simplement l'ARNm par de l'ADNg"
 fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
 include_graphics(path = "figure/expression_array.jpg")
@@ -393,15 +392,15 @@ include_graphics(path = "figure/expression_array.jpg")
 
 \newpage
 
-#### Les puces à SNP, plateformee génotypage  
+#### Les puces à SNP, plateforme génotypage  
 
-Bien que leur utilité principale ait été d'analyser l'expression des gènes, les puces à ADN ont également été extêmement utilisées comme moyen de génotyper les SNP (*single-nucleotide-polymorphism*). De nombreuses méthodes ont été mises en place pour cela, cependant la plus employée est la méthode de discrimination allélique par hybridation telle qu'elle est utilisée par Affymetrix [@Wang1998] malgré le "bruit de fond" causé par l'hybridation non spécifique dont elle souffre (**Figure :** \@ref(fig:figallelicdisc)). 
+Bien que leur utilité principale ait été d'analyser l'expression des gènes, les puces à ADN ont également été extrêmement utilisées comme moyen de génotyper les SNP (*single-nucleotide-polymorphism*). De nombreuses méthodes ont été mises en place pour cela, cependant la plus employée est la méthode de discrimination allélique par hybridation telle qu'elle est utilisée par Affymetrix [@Wang1998] malgré le "bruit de fond" causé par l'hybridation non spécifique dont elle souffre (**Figure :** \@ref(fig:figallelicdisc)). 
 
 ```{r figallelicdisc, fig.cap=fig.info,fig.scap=fig.name, out.extra="scale=.7"}
 
 fig.name <- "Méthode de génotypage par discrimination allélique par hybridation"
 fig.from <- "[@Bumgarner2013]"
-fig.description <- "Des sondes complémentaires à chacun des allèles sont positionées sur la puce. L'ADN génomique fragmenté et labbelisé est mis en contact de la puce. Après néttoyage de la puce, l'analyse du signal émis par l'ADN génomique permettra de déterminé si l'individu est homozygote pour cette allèle (hybridation à une seule des deux sondes) ou bien hétérozygote pour cette allèle (hybridation aux deux sondes)"
+fig.description <- "Des sondes complémentaires à chacun des allèles sont positionnées sur la puce. L'ADN génomique fragmenté et labélisé est mis en contact de la puce. Après nettoyage de la puce, l'analyse du signal émis par l'ADN génomique permettra de déterminé si l'individu est homozygote pour cette allèle (hybridation à une seule des deux sondes) ou bien hétérozygote pour cette allèle (hybridation aux deux sondes) ."
 fig.info <- paste0(fig.name," d'après ",fig.from," : ",fig.description)
 
 include_graphics(path = "figure/allelic_discrimination.png")
@@ -412,11 +411,11 @@ include_graphics(path = "figure/allelic_discrimination.png")
 
 #### Les puces à indels 
 
-L'implication de réarangement génomique tel que des duplications, translocations ou délétions dans divers pathologies est bien connu. C'est afin de détécter ces réarengements, que la *Comparative Genomic Hybridization array* (CGH array) a été développée dès 1999 [@Brown1999]. Son principe est très similaire à celui utilisé dans les puces à expression (**Figure :** \@ref(fig:figexparray)) en remplaçant simplement l'ARN messager (ARNm) par de l'ADN génomique (ADNg). Ainsi, la présence d'un CNV sera facilement détéctée en comparant le signal émmis par par un individu test avec celui émmis par un contrôle.  
+L'implication de réarrangements génomiques tel que des duplications, translocations ou délétions dans divers pathologies est bien connu. C'est afin de détecter ces réarrangements que la *Comparative Genomic Hybridization array* (CGH array) a été développée dès 1999 [@Brown1999]. Son principe est très similaire à celui utilisé dans les puces à expression (**Figure :** \@ref(fig:figexparray)) en remplaçant simplement l'ARN messager (ARNm) par de l'ADN génomique (ADNg). Ainsi, la présence d'un CNV sera facilement détectée en comparant le signal émis par un individu test avec celui émis par un contrôle.  
 
 #### Limitation
 
-Bien que cette technologie ait été largement utilisée dans divers champs d'applications, elle présente deux limitations principales. La première est que pour les génome complexes (tel que les mammifères), il est difficile, si ce n'est impossible de *designer* un puce ne permettant pas de l'hybridation non spécifique. En effet, la séquencve d'une puce prévue pour détécter le gène "A" pourra égallement détécter les gènes "B", "C" et "D" si ceux-ci présentent une forte homologie avec "A" Ce qui est particulieremlent porblématique dans le cas d'analyse de gènes d'une même famille.  
+Bien que cette technologie ait été largement utilisée dans divers champs d'applications, elle présente deux limitations principales. La première est que pour les génome complexes (tel que les mammifères), il est difficile, si ce n'est impossible de *designer* un puce ne permettant pas de l'hybridation non spécifique. En effet, la séquence d'une puce prévue pour détecter le gène "A" pourra également détecter les gènes "B", "C" et "D" si ceux-ci présentent une forte homologie avec "A" Ce qui est particulièrement problématique dans le cas d'analyse de gènes d'une même famille.    
 
 Pour finir, la plus grande de ses limitations est que les puces détectent uniquement ce pour quoi elles ont été *designer*. Ainsi, si la solution que l'on hybride sur la puce contient des séquence d'ADN ou d'ARN pour lesquelles il n'y a aucune sonde complémentaire sur la puce, celles-ci ne seront pas détectées. Cela peut avoir de grandes répercutions puisque par exemple dans le cas des à expression, les gènes qui n'ont pas encore été annotés risques de ne pas être représenté sur la puce.   
 
@@ -527,7 +526,7 @@ include_graphics(path = "figure/SNA_seq_ionTorrent.png")
 
 \newpage
 
-2. **Séquençage par ligation** (SBL) : Par définition, cette méthode est basée sur l'hybridation et la ligation de l'ADN  à une sonde liée à un fluorophore [@Tomkinson2006]. Ce processus utilise les caractéristiques de la ligase, une enzyme qui a pour fonction de catalyser la liaison de deux brins d'ADNs par des liaisons phosphodiester. La sonde est constituée d'une ou deux bases connues, on parle alors de *one-base-encoded probes* ou de *two-bases-encoded probes* suivis d'une succession de bases "dégénérées" ou universelle, c'est à dire, des bases capables de s’apparier avec n’importe laquelle des quatre bases de l’ADN.   
+2. **Séquençage par ligation** (SBL) : Par définition, cette méthode est basée sur l'hybridation et la ligation de l'ADN  à une sonde liée à un fluorophore [@Tomkinson2006]. Ce processus utilise les caractéristiques de la ligase, une enzyme qui a pour fonction de catalyser la liaison de deux brins d'ADN par des liaisons phosphodiester. La sonde est constituée d'une ou deux bases connues, on parle alors de *one-base-encoded probes* ou de *two-bases-encoded probes* suivis d'une succession de bases "dégénérées" ou universelle, c'est à dire, des bases capables de s’apparier avec n’importe laquelle des quatre bases de l’ADN.   
 
 ```{r sblSeq,fig.cap=fig.info,fig.scap=fig.name,out.extra="scale=.26"}
 
@@ -587,7 +586,7 @@ L'appel des variants, ou *variant calling*, fait référence à l'ensemble des m
 
 1. Oubli de l'allèle  de référence (**IR**, *ignore the reference allele*) :  représente un variant appelé homozygote correspondant en réalité à un variant hétérozygote composé de l'allèle de référence et d'un allèle variant.      
 2. Ajout de l'allèle de référence (**AR**, *adding the reference allele*) : représente un variant appelé hétérozygote composé de l'allèle de référence et d'un allèle variant correspondant en réalité à un variant homozygote composé de deux allèles variants.    
-3. Autres : incluent l'ensemble des autres types d'appel érronés indépendamment de l'allèle de référence  
+3. Autres : incluent l'ensemble des autres types d'appel erronés indépendamment de l'allèle de référence  
 
 \newpage
 
