@@ -157,7 +157,6 @@ tab_high <- function(df, caption = "", evidence = TRUE, landscape = FALSE) {
   
 }
 
-
 tab_modelow <- function(df, caption = "", landscape = FALSE) {
   
   kdf <- df %>% 
@@ -215,7 +214,6 @@ gene_to_run <- function(df, genes) {
 
 
 \newpage
-
 
 ## Introduction  
 
@@ -369,9 +367,7 @@ Dans cette partie, je me concentre sur l'analyse bioinformatique des résultats 
 
 Parmi ces `r n_fam` chacune composée de `r n_min_fam` à  `r n_max_fam` frères, les familles `r consanguine_fam %>% paste_vector` présentent un historique de consanguinité, les parents étant soit cousins germains, soit cousins au second degré. La consanguinité favorisant la transmission de variants à l'état homozygote, nous avons décidé, dans un premier temps de concentrer nos analyses uniquement sur les variants (SNVs et indels) homozygotes pour l'ensemble des familles. Pour les `r n_not_consanguinity_fam` familles n'ayant pas d'historique de consanguinité, ce choix nous permet de réduire la liste des variants candidats de sorte à faciliter les analyses. L'études des variants hétérozygotes sera effectuée *a posteriori* pour les familles dont la cause génétique du phénotype n'a pas pu être identifiée en se limitant aux variants homozygotes. Un récapitulatif des familles et de leur phénotype est disponible dans la table \@ref(tab:tabrecapfam).    
 
-
 \newpage
-
 
 ```{r tabrecapfam}
 
@@ -383,7 +379,7 @@ kable(df_seq %>% select(-NB),
       caption = tab.name,
       longtable = TRUE,
       booktabs = TRUE) %>%
-  landscape() %>% collapse_rows(5:6)
+  landscape() 
 
 ```
 
@@ -647,7 +643,6 @@ df_geno_all <- df_call_fam %>%
 
 ```
 
-
 ```{r}
 
 median_percent_ss <- df_strand_all %>% filter(STRAND == "SS") %>% collect() %>% .[["P"]] %>% median %>% round(3) * 100 
@@ -824,7 +819,6 @@ df_impact <- df_annotate %>%
 p_modifier_median <- df_impact %>% group_by(RUN,IMPACT) %>% summarise(N_IMPACT = sum(N)) %>% group_by(RUN) %>% mutate(P_IMPACT = (N_IMPACT / sum(N_IMPACT) * 100)) %>% filter(IMPACT == "MODIFIER") %>% collect() %>% .[["P_IMPACT"]] %>% median %>% as.integer
 
 ```
-
 
 ```{r dffreq, cache=TRUE, dependson="retrieveannotation"}
 
@@ -1093,7 +1087,6 @@ ggplot(df_filtered_tr_vr, aes(IS_FILTERED, N)) +
 
 6. **Présence des variants dans la cohorte contrôle :**  Au cours de nos différentes études, nous avons été amenés à séquencé un total de `r n_tot_runs` individus présentant un des `r n_pheno_tot` phénotypes que nous avons étudiés (**Table : **\@ref(tab:TODO)). Ces phénotypes étant très différent, on peut émettre l'hypothèse que leurs causes génétiques soient également différentes. De même, les variants recherchés étant rares, il est peu probable qu'un individu porte les variants de deux phénotypes différents. Ainsi, pour chacune des `r n_fam` familles, nous avons pu constituer une cohorte contrôle composée dans l'ensemble des patients précédemment analysés et ne présentant pas le même phénotype que celui étudié dans la famille (**Figure :** \@ref(fig:plotsamplectrl)). Dès lors, nous avons pu filtrer l'ensemble des variants retrouvés à la fois chez nos patients et observés à l'état homozygote dans la cohorte contrôle. Cette cohorte contrôle présente ainsi le même rôle que les bases de données publiques. Sont intérêt principale par rapport à celles-ci est que les individus qui la composent ont pour la plupart la même origine ethnico-géographique que nos patients. De plus ceux-ci ont été séquencés en même temps dans les mêmes centres permettant ainsi d'identifier les artefacts dus aux protocoles de séquençage.  
 
-                                                             
 ```{r plotsamplectrl, fig.cap=fig_info,fig.scap=fig_name, fig.height=4, cache=TRUE}
      
 fig_name <- "Nombre d'individus composant la cohorte contrôle de chaque famille"
@@ -1816,13 +1809,16 @@ df_bigmmaf_filter_het <- df_bigmmaf_call %>%
 
 # Pierre Ray 
 # 
-# bind_rows(df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "12") %>% inner_join(df_bigmmaf_filter),
-#           df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "12") %>% inner_join(df_bigmmaf_filter_het)) %>%
+# bind_rows(df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "BO.F") %>% inner_join(df_bigmmaf_filter),
+#           df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "BO.F") %>% inner_join(df_bigmmaf_filter_het)) %>% 
+#   filter(CANONICAL == "YES") %>%
 #   select(-CANONICAL) %>%
-#   inner_join(df_canonical_transcripts) %>%
 #   select(-N_VAR_PER_RUN_PER_GENE, -N_RUN_PER_GENE) %>%
-#   add_exp() %>% 
-#   write.table("~/Bureau/canonical_variants_homo_het_16IF93_v2.csv", sep = "\t", row.names = FALSE)
+#   add_exp() -> bo.f
+#   write.table("~/Bureau/canonical_variants_homo_het_BO.F.csv", sep = "\t", row.names = FALSE)
+# 
+# plot_expression(gene = bo.f$SYMBOL %>% unique, mode = "percent", tissues = "testis", flip = TRUE)
+#   
 
 
 ```
