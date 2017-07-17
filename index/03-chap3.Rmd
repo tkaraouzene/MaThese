@@ -389,7 +389,11 @@ EMBO Molecular Medicine, Mai 2017
 
 #### Principaux résultats
 
+
+
 #### Discussion et Perspectives
+
+\newpage
 
 ### Article n° 2
 
@@ -443,9 +447,53 @@ Human Reproduction, Octobre 2016
 
 ## Résultats 2 : Étude d'une large cohorte de patients MMAF
 
+### Article n° 4
 
+**Whole exome cohort study and analysis of mouse and Trypanosoma models demonstrate the importance of WDR proteins in flagellogenesis and male fertility** 
+
+Coutton C, Vargas A, Amiri-Yekta A, Kherraf ZE, Fourati Ben Mustapha S, Le Tanno P, Wambergue-Legrand C, **Karaouzène T**, Martinez G, Daneshipour A, Hanieh Hosseini S, Mitchell V, Halouani L, Marrakchi O, Makni M, Latrous H, Kharouf M, Deleuze JF, Boland A, Hennebicq S, Satre V, Jouk PS, Bottari SP, Thierry-Mieg N, Conne B, Dacheux-Deschamps D, Schmitt A, Stouvenel L, Lorès P, El Khouri E, Fauré J, Wolf JP, Escoffier J, Gourabi H, Robinson DR, Nef S, Dulioust E, Zouari R, Bonhivers M, Touré A, Arnoult C, Ray PF
+
+EMBO Molecular Medicine, Mai 2017
+
+\newpage
+
+#### Contexte et objectifs  
+
+\newpage
+
+\includepdf[pages=-]{bib/CFAP_2017.pdf}
+
+\newpage
+
+## Résultat 3 : Étude d'une cohorte de femmes infertiles  
+
+### Article n° 5
+
+**PATL2 Gene Mutation Causes Oocyte Meiotic Deficiency and Female Infertility** 
+
+Christou-Kent M, Amiri-Yekta A, Kherraf ZE, **Karaouzène T**, Escoffier J, Guttin A, Martinez G, Le Blévec E, Lambert E, Fourati Ben Mustapha S, Cedrin-Durnerin I, Halouani L, Marrakchi O, Makni M, Latrous H, Kharouf M, Bottari S, Thierry-Mieg N, Coutton C, Zouari R, Issartel JP, Ray PF, Arnoult C
+
+New England Journal of Medicine, 07 Juillet 2017 (soummis)
+
+\newpage
+
+#### Contexte et objectifs  
+
+\newpage
+
+\includepdf[pages=-]{bib/PATL2_2017.pdf}
+
+\newpage
+
+#### Principaux résultats
+
+
+
+#### Discussion et Perspectives
 
 \newpage  
+
+## Conclusion  
 
 
 
