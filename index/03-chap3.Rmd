@@ -1320,7 +1320,7 @@ n_gene_mmaf1 <- df_remaining_gene %>% filter(Family == "MMAF") %>% distinct(SYMB
 
 ```
 
-Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants subsistent nous permettant d'obtenir une liste de gènes restreinte pour chaque famille et ainsi de tirer des conclusions quant au variant responsable du phénotype de chacune d'entre elles (**Table : **\@ref(tab:tablegene)). 
+Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants subsistent nous permettant d'obtenir une liste de gènes restreinte pour chaque famille et ainsi de tirer des conclusions quant au variant responsable du phénotype de chacune d'entre elles. Ces travaux ont ainsi pu mener à l'écriture de trois articles dont je suis co-auteur.   
 
 \newpage
 
@@ -1340,14 +1340,6 @@ df_recap <- df_remaining_gene %>%
   select(Family, Gene = SYMBOL, HGVSc, HGVSp, `HGVSc, HGVSp`, CANONICAL, Consequence, SIFT, PolyPhen, ExAC = ExAC_AF, ESP, `1KG`) %>% 
   distinct() %>% 
   arrange(Family)
-
-kable(df_recap %>% select(-CANONICAL, -HGVSc, -HGVSp),
-      format = "latex",
-      booktabs = TRUE,
-      longtable = TRUE,
-      caption = "Récapitulatif des variants ayant passé l'ensemble des filtres pour chaque famille") %>% 
-  add_header_above(c(" ", " ", "Variant impact" = 4, "Variant frequency" = 3)) %>%
-  landscape()
 
 ```
 
@@ -1386,8 +1378,7 @@ EMBO Molecular Medicine, Mai 2017
 
 #### Contexte et objectifs   
 
-L'oligospermie, comme l'azoospermie sont des phénotypes d'infertilités masculines liées à la quantité de spermatozoïdes présent dans l'éjaculât. Les différentes études publiées ces dernières années montrent que les microdélétions du chromosome Y sont retrouvées chez 10% des hommes avec une azoospermie non-obstructives et chez 5% des patients avec une
-oligozoospermie sévères [@Hotaling2014]. Ces taux bien qu'élevé ne représente qu'une infime partie des cas d'azoospermie et d'oligospermie suggérant l'implication de nombreux autres gènes dans ce phénotype.  
+L'oligospermie, comme l'azoospermie sont des phénotypes d'infertilités masculines liées à la quantité de spermatozoïdes présent dans l'éjaculât. Les différentes études publiées ces dernières années montrent que les microdélétions du chromosome Y sont retrouvées chez 10% des hommes avec une azoospermie non-obstructives et chez 5% des patients avec une oligozoospermie sévères [@Hotaling2014]. Ces taux bien qu'élevé ne représente qu'une infime partie des cas d'azoospermie et d'oligospermie suggérant l'implication de nombreux autres gènes dans ce phénotype.  
 
 Entre 2005 et 2014 deux frères issus d'un union consanguin ont demandé des conseils médicaux auprès de différentes cliniques d'infertilité après deux ans de tentatives infructueuses de consevoir un enfant. Ces deux frères étant marriés à des femmes non-apparentées la piste de l'implication d'une cause féminine fut exclu et les recherches concentrées sur l'analyse des deux frères. Après analyse de leur éjaculât, (et de l'épydidime) ... tout deux présentèrent de sévères défauts de production de spermatozoïdes. Au vu de la similarité du phénotype et du lien de parenté les liant, l'hypothèse d'une cause génétique commune fut émmise. L'analyse de leur karyotype et du locus AZF du chromosome Y ne révélant aucune anomalie, la procédure d'un séquençage WES fut décidé.  
 
@@ -1400,7 +1391,6 @@ Dans ce contexte, l'objectif de mon travail sur l'analyse phénotype de ces deux
 \newpage
 
 #### Principaux résultats
-
 
 ```{r dfrecapaz, cache=TRUE, dependson="tablegene"}
 
@@ -1421,7 +1411,7 @@ gene_fam_az <- df_remaining_variant_az %>% collect() %>% .[["Gene"]]
 
 ```
 
-Après avoir analyser les données de séquençage des deux frères au sein de notre pipeline décrite précédement, seul `r nb_var_fam_az` variants passèrent l'ensemble des filtres. Ces deux variants impactant respectivement les gènes `r paste_vector(gene_fam_az, "itallic")`. Parmis ces deux gènes, seul *SPINK2* présentaient une forte expression testiculaire dans les données Ensembl (fig) que nous avons pu confirmer par RT-PCR dans cette étude. De plus, des mutations du gène *Spink2* chez la souris avait déjà été identifiée comme induisant des défauts de la spermatogenèse [@Lee2011]. Ces arguments ont ainsi fait de *SPINK2* le candidat évident pour expliquer le phénotype de ces deux frères. Après avoir confirmé en séquençage Sanger la mutation de ce gène à l'état homozygote pour les deux frères et hétérozygotes pour les parents, nous avons, afin de continuer nos investigations, développés un modèle murin KO *Spink2*^-/-^ confirmant une azoospermie complète pour les sours mâle spermiogenesis causé par un arret de la spermatogénèse au stage des spermatides rondes. De plus, malgré une fertilité normale, nous avons pu noter un taux élevé d'anomalies morphologiques du spermatozoïde ainsi qu'une motilité spermatique réduite chez les souris mâles hétérozygotes *Spink2*^+/-^. Les femelles, elles ne présentaient aucun phénotype apparent. L'étude de la localisation de la protéine Spink2 chez la souris et SPINK2 chez l'humain a révélés que ces deux protéines localisaient dans la vésicule acrosomale depuis le début de la biogénèse de l'acrosome jusqu'au spermatozoïde mature.  
+Après avoir analyser les données de séquençage des deux frères au sein de notre pipeline décrite précédement, seul `r nb_var_fam_az` variants passèrent l'ensemble des filtres. Ces deux variants impactant respectivement les gènes `r paste_vector(gene_fam_az, "itallic")`. Parmis ces deux gènes, seul *SPINK2* présentaient une forte expression testiculaire dans les données Ensembl (**Figure : **\@ref(fig:plotexpfamaz)) que nous avons pu confirmer par RT-PCR dans cette étude. De plus, des mutations du gène *Spink2* chez la souris avait déjà été identifiée comme induisant des défauts de la spermatogenèse [@Lee2011]. Ces arguments ont ainsi fait de *SPINK2* le candidat évident pour expliquer le phénotype de ces deux frères. Après avoir confirmé en séquençage Sanger la mutation de ce gène à l'état homozygote pour les deux frères et hétérozygotes pour les parents, nous avons, afin de continuer nos investigations, développés un modèle murin KO *Spink2*^-/-^ confirmant une azoospermie complète pour les sours mâle spermiogenesis causé par un arret de la spermatogénèse au stage des spermatides rondes. De plus, malgré une fertilité normale, nous avons pu noter un taux élevé d'anomalies morphologiques du spermatozoïde ainsi qu'une motilité spermatique réduite chez les souris mâles hétérozygotes *Spink2*^+/-^. Les femelles, elles ne présentaient aucun phénotype apparent. L'étude de la localisation de la protéine Spink2 chez la souris et SPINK2 chez l'humain a révélés que ces deux protéines localisaient dans la vésicule acrosomale depuis le début de la biogénèse de l'acrosome jusqu'au spermatozoïde mature.  
 
 Suite à cela, afin d'évaluer l'importance des variants du gène *SPINK2* dans l'infertilité humaine, nous avons effectués le séquençage Sanger de 611 patient parmi lesquels 210 étaient azoospermes, 393 oligozoospermes et 8 dont la cause n'étaient pas spécifiée. Parmi cet ensemble de patient, seul 1 (le patient p105) s'est révélé porter un variant non répertorié dans ExAC sur le gène *SPINK2*. Ce patient présentant un phénotype d'oligozoospermie porte à l'état hétérozygote un variant altérant le codon start du gène *SPINK2*. Ces résultats laissent donce supposer que chez l'homme, la présence de mutations homozygotes sur le gène *SPINK2* induit un phénotype d'azoospermie tandis que les mutation hétérozygotes entrainent, elles, un phénotype d'oligozoospermie. Cette forte séléction négative pouvant expliquer la rareté des mutations observées sur ce gènes.  
 
@@ -1430,7 +1420,7 @@ Suite à cela, afin d'évaluer l'importance des variants du gène *SPINK2* dans 
 
 caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille AZ"
 
-df_remaining_variant_az %>%
+df_remaining_variant_az %>% 
   kable(format = "latex",
         booktabs = TRUE,
         longtable = TRUE,
@@ -1441,7 +1431,7 @@ df_remaining_variant_az %>%
 
 \newpage
 
-```{r plotexpfamaz, fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
+```{r plotexpfamaz, fig.cap=fig_info,fig.scap=fig_name, dependson="varrecapaz", cache=TRUE}
 
 fig_name <- "Expression tissulaire des gènes *SPINK2* et *GUF1*"
 fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
@@ -1461,7 +1451,7 @@ plot_expression(gene_fam_az,"percent", TRUE)+
 
 ### Article n° 4
 
-#### Homozygous mutation of PLCZ1 leads to defective human oocyte activation and infertility that is not rescued by the WW-binding protein PAWP
+**Homozygous mutation of PLCZ1 leads to defective human oocyte activation and infertility that is not rescued by the WW-binding protein PAWP**
 
 Jessica Escoffier J^\*^, Lee HC^\*^, Yassine S^\*^, Zouari R, Martinez G, **Karaouzène T**, Coutton C, Kherraf ZE, Halouani L, Triki C, Nef S, Thierry-Mieg N, Savinov SN, Fissore R, Ray PF, Arnoult C  
 
@@ -1473,6 +1463,12 @@ Human Molecular Genetics, Décembre 2015
 
 #### Contexte et objectifs  
 
+L'activation ovocitaire regroupe une série de processus intervenant au cour de la fécondation d'un ovocyte par un spermatozoïde. en 1990, plusieurs études démontrèrent que chez les mamifères ces processus reposent principalement sur le relargage par le spermatozoïde de "facteurs spermatiques" qui déclenchent un signal de calcium, constitué d'oscillations Ca^2+^ [ref]. Plus tard, la protéine PLC$\zeta$ fu identifiée comme la molécule responsable de ces oscilations calciques. Cependant, en raison de l'incapacité àproduire des modèles animaux *PLC*$\zeta$ KO capable de produire des spermatozoïdes mature a empeché d'attribuer l'exclusivité de ce rôle à *PLC*$\zeta$ laissant ouverte la possibilité de la nécessité d'autres facteurs spermatiques. C'est ainsi qu'en 2014 fut proposé la protéine PAWP comme facteur spermatique alternatif ou complémentaire de PLC$\zeta$ [@Aarabi2014, @Aarabi2014a].   
+
+Les travaux ci-dessous décrivent les analyses effectuées sur deux frères issus d'un union consanguin ayant tout deux été dans l'incapacité de concevoir un enfant par voies naturelles et pour qui, malgré des paramètres spermatiques normaux, l'ensemble des procédures de reproduction assités effectuées se sont soldés par un échec d'activation ovocitaire.   
+
+Comme dans l'étude précédente, en raison de l'historique de cansanguinité de la famille des deux frères ainsi que le fait que leur femmes respectives soient non apparentées nous a permi d'exclure l'hypothèse d'une cause féminine et nous a conduit à rechercher un variant homozygote commun aux deux frères. Nous avons ainsi effectué un séquençage WES de ces deux frères. Comme précédemment, dans cette étude, j'ai été en charge de l'ensemble des analyses des données issus du séquençage des deux frères.  
+
 \newpage
 
 \includepdf[pages=-]{bib/PLCZ1_2016}
@@ -1480,6 +1476,73 @@ Human Molecular Genetics, Décembre 2015
 \newpage
 
 #### Principaux résultats
+
+```{r dfrecapff, cache=TRUE, dependson="tablegene"}
+
+df_remaining_variant_ff <- df_recap %>% 
+  ungroup() %>% 
+  filter(Family == "FF") %>% 
+  mutate(HGVSc = na.replace(HGVSc, "."),
+         HGVSp = na.replace(HGVSp, "."),
+         `HGVSc, HGVSp` = paste0(HGVSc," ; ", HGVSp)) %>% 
+  select(-Family, -CANONICAL, -HGVSc, -HGVSp, -ESP, -`1KG`)
+
+```
+
+```{r varrecapff, cache=TRUE, dependson="dfrecapff"}
+
+nb_var_fam_ff <- df_remaining_variant_ff %>% nrow
+gene_fam_ff <- df_remaining_variant_ff %>% collect() %>% .[["Gene"]]
+
+freq_var_plcz <- df_remaining_variant_ff %>% filter(Gene == "PLCZ1") %>% collect() %>% .[["ExAC"]]
+
+```
+
+
+Suite à l'analyse bioinformatique de ces deux frères, un seul variant subsistait après l'application de l'ensemble des filtres. Celui-ci était recancé uniquement dans la base de donnée ExAC avec une fréquence de `r freq_var_plcz` et entrait un faux-sens prédit comme *deleterious* par SIFT et *possibly damaging* par PolyPhen sur la séquence du gène *PLC*$\zeta 1$. La forte expression testiculaire de ce gène (**Figure : **\@ref(fig:plotexpfamff)) couplée à l'implication déjà connu de celui-ci dans l'activationn ovocitaire, ont fait de ce variant le candidat évident pour expliquer le phénotype de ces deux frères. De plus, aucun variant n'a été retrouvé sur la séquence du gène *WBP2NL* codant pour la protéine PAWP bien que l'intégralité de la séquence codante de *WBP2NL* ait une couverture $\ge$ 40x (les zones moins couvertes du début de l'exon 1 et de la fin de l'exon 6 correspondant aux régions UTR) (**Figure : **\@ref(fig:plotcovplcz)). Ces résultats suggérant une parfaite fonctionnalité de la protéine PAWP ont pu être confirmée par *Western blot*, de même, la bonne localisation de la protéine PAWP a pu être observée chez les deux patients par Immunofluorescence.  
+
+Cette étude présente le premier cas de *knock-down* de PLC$\zeta$ n'entrainant pas d'effets sur la spermatogénèse démontrant ainsi le rôle primordial de cette protéine dans l'activation ovocitaire. De plus, la parfaite localisation et fonctionnalité de la protéine PAWP la disculpe de toute implication dans le phénotype de nos patients. 
+
+```{r tabrecapff,cache=TRUE, dependson="dfrecapaz"}
+
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille FF"
+
+df_remaining_variant_ff %>% 
+  kable(format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = caption) %>%
+  add_header_above(c(" ", "Variant impact" = 4, "Variant frequency" = 1))
+
+```
+
+\newpage
+
+```{r plotexpfamff, fig.cap=fig_info,fig.scap=fig_name, fig.asp=.65, cache=TRUE}
+
+fig_name <- "Expression tissulaire du gène PLCZ1*"
+fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+plot_expression(gene_fam_ff,"percent", TRUE)+
+  xlab("") +
+  theme(legend.position = c(1, 0),
+        legend.justification = c(1,0))
+
+
+```
+
+```{r plotcovplcz, fig.cap=fig_info,fig.scap=fig_name, ,out.extra="scale=.4", cache=TRUE}
+
+fig_name <- "Couverture des 6 éxons de *WBP2NL* pour les deux frères de la famille FF"
+fig_info <- paste0(fig_name)
+
+include_graphics(path = "figure/pawp_coverage.png")
+
+```
+
+
+\newpage
 
 ### Article n° 5
 
@@ -1503,12 +1566,55 @@ Human Reproduction, Octobre 2016
 
 #### Principaux résultats
 
-#### Discussion et Perspectives  
+```{r dfrecapmmaf, cache=TRUE, dependson="tablegene"}
+
+df_remaining_variant_mmaf <- df_recap %>%
+  ungroup() %>% 
+  filter(Family == "MMAF") %>% 
+  mutate(HGVSc = na.replace(HGVSc, "."),
+         HGVSp = na.replace(HGVSp, "."),
+         `HGVSc, HGVSp` = paste0(HGVSc," ; ", HGVSp)) %>% 
+  select(-Family, -CANONICAL, -HGVSc, -HGVSp)
+
+```
+
+```{r varrecapmmaf, cache=TRUE, dependson="dfrecapmmaf"}
+
+nb_var_fam_mmaf <- df_remaining_variant_mmaf %>% nrow
+gene_fam_mmaf <- df_remaining_variant_mmaf %>% collect() %>% .[["Gene"]]
+
+```
+
+```{r tabrecapmmaf, cache=TRUE, dependson="dfrecapmmaf"}
+
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille MMAF"
+
+df_remaining_variant_mmaf %>% 
+  kable(format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = caption) %>% 
+  add_header_above(c(" ", "Variant impact" = 4, "Variant frequency" = 1))
+
+```
 
 \newpage
 
+```{r plotexpfammmaf, dependson="varrecapmmaf", fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
+
+fig_name <- "Expression tissulaire des gènes DNAH1 et MYH11"
+fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+plot_expression(gene_fam_mmaf,"percent", TRUE)+
+  xlab("") +
+  theme(legend.position = c(1, 0),
+        legend.justification = c(1,0))
 
 
+```
+
+\newpage
 
 ## Résultats 2 : Étude d'une cohorte de femmes infertiles  
 

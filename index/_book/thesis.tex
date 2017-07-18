@@ -1042,27 +1042,10 @@ class (for LaTeX) and the R bookdown package, in general.
   Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants
   subsistent nous permettant d'obtenir une liste de gènes restreinte pour
   chaque famille et ainsi de tirer des conclusions quant au variant
-  responsable du phénotype de chacune d'entre elles (\textbf{Table :
-  }\ref{tab:tablegene}).
+  responsable du phénotype de chacune d'entre elles. Ces travaux ont ainsi
+  pu mener à l'écriture de trois articles dont je suis co-auteur.
   
   \newpage
-  
-  \begin{landscape}
-  \begin{longtable}[t]{lllllllll}
-  \caption{\label{tab:tablegene}Récapitulatif des variants ayant passé l'ensemble des filtres pour chaque famille}\\
-  \toprule
-  \multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{4}{c}{Variant impact} & \multicolumn{3}{c}{Variant frequency} \\
-  \cmidrule(l{2pt}r{2pt}){3-6} \cmidrule(l{2pt}r{2pt}){7-9}
-  Family & Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC & ESP & 1KG\\
-  \midrule
-  AZ & GUF1 & c.443A>T ; p.Ser148Ile & missense & deleterious & proba damaging & 0.00207 & 0.0028 & 9e-04\\
-  AZ & SPINK2 & c.56-3C>G ; . & splice region & . & . & . & . & .\\
-  FF & PLCZ1 & c.1465G>T ; p.Ile489Phe & missense & deleterious & possib damaging & 8.24e-06 & . & .\\
-  MMAF & MYH11 & c.4625G>A ; p.Arg1542Gln & missense & . & proba damaging & 0.00234 & 0.0016 & 5e-04\\
-  MMAF & DNAH1 & . ; . & splice acceptor & . & . & . & . & .\\
-  \bottomrule
-  \end{longtable}
-  \end{landscape}
   
   \newpage  
   
@@ -1178,21 +1161,21 @@ class (for LaTeX) and the R bookdown package, in general.
   l'ensemble des filtres. Ces deux variants impactant respectivement les
   gènes \emph{GUF1} et \emph{SPINK2}. Parmis ces deux gènes, seul
   \emph{SPINK2} présentaient une forte expression testiculaire dans les
-  données Ensembl (fig) que nous avons pu confirmer par RT-PCR dans cette
-  étude. De plus, des mutations du gène \emph{Spink2} chez la souris avait
-  déjà été identifiée comme induisant des défauts de la spermatogenèse (B.
-  Lee et al., \protect\hyperlink{ref-Lee2011}{2011}). Ces arguments ont
-  ainsi fait de \emph{SPINK2} le candidat évident pour expliquer le
-  phénotype de ces deux frères. Après avoir confirmé en séquençage Sanger
-  la mutation de ce gène à l'état homozygote pour les deux frères et
-  hétérozygotes pour les parents, nous avons, afin de continuer nos
-  investigations, développés un modèle murin KO
-  \emph{Spink2}\textsuperscript{-/-} confirmant une azoospermie complète
-  pour les sours mâle spermiogenesis causé par un arret de la
-  spermatogénèse au stage des spermatides rondes. De plus, malgré une
-  fertilité normale, nous avons pu noter un taux élevé d'anomalies
-  morphologiques du spermatozoïde ainsi qu'une motilité spermatique
-  réduite chez les souris mâles hétérozygotes
+  données Ensembl (\textbf{Figure : }\ref{fig:plotexpfamaz}) que nous
+  avons pu confirmer par RT-PCR dans cette étude. De plus, des mutations
+  du gène \emph{Spink2} chez la souris avait déjà été identifiée comme
+  induisant des défauts de la spermatogenèse (B. Lee et al.,
+  \protect\hyperlink{ref-Lee2011}{2011}). Ces arguments ont ainsi fait de
+  \emph{SPINK2} le candidat évident pour expliquer le phénotype de ces
+  deux frères. Après avoir confirmé en séquençage Sanger la mutation de ce
+  gène à l'état homozygote pour les deux frères et hétérozygotes pour les
+  parents, nous avons, afin de continuer nos investigations, développés un
+  modèle murin KO \emph{Spink2}\textsuperscript{-/-} confirmant une
+  azoospermie complète pour les sours mâle spermiogenesis causé par un
+  arret de la spermatogénèse au stage des spermatides rondes. De plus,
+  malgré une fertilité normale, nous avons pu noter un taux élevé
+  d'anomalies morphologiques du spermatozoïde ainsi qu'une motilité
+  spermatique réduite chez les souris mâles hétérozygotes
   \emph{Spink2}\textsuperscript{+/-}. Les femelles, elles ne présentaient
   aucun phénotype apparent. L'étude de la localisation de la protéine
   Spink2 chez la souris et SPINK2 chez l'humain a révélés que ces deux
@@ -1240,10 +1223,9 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsection{Article n° 4}\label{article-n-4}
   
-  \subsubsection{Homozygous mutation of PLCZ1 leads to defective human
-  oocyte activation and infertility that is not rescued by the WW-binding
-  protein
-  PAWP}\label{homozygous-mutation-of-plcz1-leads-to-defective-human-oocyte-activation-and-infertility-that-is-not-rescued-by-the-ww-binding-protein-pawp}
+  \textbf{Homozygous mutation of PLCZ1 leads to defective human oocyte
+  activation and infertility that is not rescued by the WW-binding protein
+  PAWP}
   
   Jessica Escoffier J\textsuperscript{*}, Lee HC\textsuperscript{*},
   Yassine S\textsuperscript{*}, Zouari R, Martinez G, \textbf{Karaouzène
@@ -1258,6 +1240,40 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-1}
   
+  L'activation ovocitaire regroupe une série de processus intervenant au
+  cour de la fécondation d'un ovocyte par un spermatozoïde. en 1990,
+  plusieurs études démontrèrent que chez les mamifères ces processus
+  reposent principalement sur le relargage par le spermatozoïde de
+  ``facteurs spermatiques'' qui déclenchent un signal de calcium,
+  constitué d'oscillations Ca\textsuperscript{2+} {[}ref{]}. Plus tard, la
+  protéine PLC\(\zeta\) fu identifiée comme la molécule responsable de ces
+  oscilations calciques. Cependant, en raison de l'incapacité àproduire
+  des modèles animaux \emph{PLC}\(\zeta\) KO capable de produire des
+  spermatozoïdes mature a empeché d'attribuer l'exclusivité de ce rôle à
+  \emph{PLC}\(\zeta\) laissant ouverte la possibilité de la nécessité
+  d'autres facteurs spermatiques. C'est ainsi qu'en 2014 fut proposé la
+  protéine PAWP comme facteur spermatique alternatif ou complémentaire de
+  PLC\(\zeta\) (Aarabi et al.,
+  \protect\hyperlink{ref-Aarabi2014}{2014}\protect\hyperlink{ref-Aarabi2014}{a},
+  Aarabi et al.
+  (\protect\hyperlink{ref-Aarabi2014a}{2014}\protect\hyperlink{ref-Aarabi2014a}{b})).
+  
+  Les travaux ci-dessous décrivent les analyses effectuées sur deux frères
+  issus d'un union consanguin ayant tout deux été dans l'incapacité de
+  concevoir un enfant par voies naturelles et pour qui, malgré des
+  paramètres spermatiques normaux, l'ensemble des procédures de
+  reproduction assités effectuées se sont soldés par un échec d'activation
+  ovocitaire.
+  
+  Comme dans l'étude précédente, en raison de l'historique de
+  cansanguinité de la famille des deux frères ainsi que le fait que leur
+  femmes respectives soient non apparentées nous a permi d'exclure
+  l'hypothèse d'une cause féminine et nous a conduit à rechercher un
+  variant homozygote commun aux deux frères. Nous avons ainsi effectué un
+  séquençage WES de ces deux frères. Comme précédemment, dans cette étude,
+  j'ai été en charge de l'ensemble des analyses des données issus du
+  séquençage des deux frères.
+  
   \newpage
   
   \includepdf[pages=-]{bib/PLCZ1_2016}
@@ -1266,8 +1282,63 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Principaux résultats}\label{principaux-resultats-1}
   
-  \subsubsection{Discussion et
-  Perspectives}\label{discussion-et-perspectives}
+  Suite à l'analyse bioinformatique de ces deux frères, un seul variant
+  subsistait après l'application de l'ensemble des filtres. Celui-ci était
+  recancé uniquement dans la base de donnée ExAC avec une fréquence de
+  8.24e-06 et entrait un faux-sens prédit comme \emph{deleterious} par
+  SIFT et \emph{possibly damaging} par PolyPhen sur la séquence du gène
+  \emph{PLC}\(\zeta 1\). La forte expression testiculaire de ce gène
+  (\textbf{Figure : }\ref{fig:plotexpfamff}) couplée à l'implication déjà
+  connu de celui-ci dans l'activationn ovocitaire, ont fait de ce variant
+  le candidat évident pour expliquer le phénotype de ces deux frères. De
+  plus, aucun variant n'a été retrouvé sur la séquence du gène
+  \emph{WBP2NL} codant pour la protéine PAWP bien que l'intégralité de la
+  séquence codante de \emph{WBP2NL} ait une couverture \(\ge\) 40x (les
+  zones moins couvertes du début de l'exon 1 et de la fin de l'exon 6
+  correspondant aux régions UTR) (\textbf{Figure :
+  }\ref{fig:plotcovplcz}). Ces résultats suggérant une parfaite
+  fonctionnalité de la protéine PAWP ont pu être confirmée par
+  \emph{Western blot}, de même, la bonne localisation de la protéine PAWP
+  a pu être observée chez les deux patients par Immunofluorescence.
+  
+  Cette étude présente le premier cas de \emph{knock-down} de PLC\(\zeta\)
+  n'entrainant pas d'effets sur la spermatogénèse démontrant ainsi le rôle
+  primordial de cette protéine dans l'activation ovocitaire. De plus, la
+  parfaite localisation et fonctionnalité de la protéine PAWP la disculpe
+  de toute implication dans le phénotype de nos patients.
+  
+  \begin{longtable}[t]{llllllll}
+  \caption{\label{tab:tabrecapff}Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille FF}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{4}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){2-5} \cmidrule(l{2pt}r{2pt}){6-6}
+  Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC & ESP & 1KG\\
+  \midrule
+  PLCZ1 & c.1465G>T ; p.Ile489Phe & missense & deleterious & possib damaging & 8.24e-06 & . & .\\
+  \bottomrule
+  \end{longtable}
+  
+  \newpage
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotexpfamff-1} 
+  
+  }
+  
+  \caption[Expression tissulaire du gène PLCZ1*]{Expression tissulaire du gène PLCZ1* : Données provenant du projet de transcriptome Illumina bodyMap}\label{fig:plotexpfamff}
+  \end{figure}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=.4]{figure/pawp_coverage} 
+  
+  }
+  
+  \caption[Couverture des 6 éxons de *WBP2NL* pour les deux frères de la famille FF]{Couverture des 6 éxons de *WBP2NL* pour les deux frères de la famille FF}\label{fig:plotcovplcz}
+  \end{figure}
+  
+  \newpage
   
   \subsection{Article n° 5}\label{article-n-5}
   
@@ -1297,8 +1368,28 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Principaux résultats}\label{principaux-resultats-2}
   
-  \subsubsection{Discussion et
-  Perspectives}\label{discussion-et-perspectives-1}
+  \begin{longtable}[t]{llllllll}
+  \caption{\label{tab:tabrecapmmaf}Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille MMAF}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{4}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){2-5} \cmidrule(l{2pt}r{2pt}){6-6}
+  Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC & ESP & 1KG\\
+  \midrule
+  MYH11 & c.4625G>A ; p.Arg1542Gln & missense & . & proba damaging & 0.00234 & 0.0016 & 5e-04\\
+  DNAH1 & . ; . & splice acceptor & . & . & . & . & .\\
+  \bottomrule
+  \end{longtable}
+  
+  \newpage
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotexpfammmaf-1} 
+  
+  }
+  
+  \caption[Expression tissulaire des gènes DNAH1 et MYH11]{Expression tissulaire des gènes DNAH1 et MYH11 : Données provenant du projet de transcriptome Illumina bodyMap}\label{fig:plotexpfammmaf}
+  \end{figure}
   
   \newpage
   
@@ -1331,7 +1422,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \subsubsection{Principaux résultats}\label{principaux-resultats-3}
   
   \subsubsection{Discussion et
-  Perspectives}\label{discussion-et-perspectives-2}
+  Perspectives}\label{discussion-et-perspectives}
   
   \newpage  
   
@@ -1376,6 +1467,22 @@ class (for LaTeX) and the R bookdown package, in general.
   Durbin, R. M., Garrison, E. P., Kang, H. M., \ldots{} Abecasis, G. R.
   (2015). A global reference for human genetic variation. \emph{Nature},
   \emph{526}(7571), 68--74. \url{http://doi.org/10.1038/nature15393}
+  
+  \hypertarget{ref-Aarabi2014}{}
+  Aarabi, M., Balakier, H., Bashar, S., Moskovtsev, S. I., Sutovsky, P.,
+  Librach, C. L., \& Oko, R. (2014a). Sperm content of postacrosomal WW
+  binding protein is related to fertilization outcomes in patients
+  undergoing assisted reproductive technology. \emph{Fertility and
+  Sterility}, \emph{102}(2), 440--447.
+  \url{http://doi.org/10.1016/j.fertnstert.2014.05.003}
+  
+  \hypertarget{ref-Aarabi2014a}{}
+  Aarabi, M., Balakier, H., Bashar, S., Moskovtsev, S. I., Sutovsky, P.,
+  Librach, C. L., \& Oko, R. (2014b). Sperm-derived WW domain-binding
+  protein, PAWP, elicits calcium oscillations and oocyte activation in
+  humans and mice. \emph{FASEB Journal : Official Publication of the
+  Federation of American Societies for Experimental Biology},
+  \emph{28}(10), 4434--40. \url{http://doi.org/10.1096/fj.14-256495}
   
   \hypertarget{ref-Adzhubei2010}{}
   Adzhubei, I. A., Schmidt, S., Peshkin, L., Ramensky, V. E., Gerasimova,
