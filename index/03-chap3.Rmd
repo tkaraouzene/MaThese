@@ -254,7 +254,7 @@ Ainsi, le premier de ces filtres consiste à tout d'abord filtrer l'ensemble des
 
 \newpage
 
-```{r picdnamapping, fig.cap=fig_info,out.extra="scale=0.35"}
+```{r picdnamapping, fig.scap=fig_name, fig.cap=fig_info,out.extra="scale=0.35"}
 
 fig_name <- "Représentation schématique de l'alignement de *reads paired-end*"
 fig_description_A <- "**A** : Représentation du génome de référence ainsi que de *reads paired end* avant l'étape d'alignement. Les *reads paired-end* sont composés d'une extrémité *forward* (en vert) complémentaire du brin sens du génome de référence et d'une extrémité réverse (en jaune), complémentaire du brin anti-sens du génome de référence. Chacune de ces extrémités est séparées par un insert de taille connue mais de séquence inconnu"
@@ -266,7 +266,6 @@ include_graphics(path = "figure/dna_mapping.png")
 ```
 
 \newpage
-
 
 ### L'appel des variants  
 
@@ -394,7 +393,8 @@ df_fam_run <- data_frame(FAM = c("AZ","AZ","FF","FF","MMAF","MMAF"),
                      # PLATFORM = c("Illumina HiSeq2000", "Illumina HiSeq2000", "Illumina HiSeq2000"),
                      PLACE = c(rep("Mount Sinai Institut", 2), rep("Genoscope (Evry)", 4)))
 
-df_fam <- df_fam_run %>% group_by(FAM, PHENOTYPE, YEAR, PLACE) %>%
+df_fam <- df_fam_run %>% 
+  group_by(FAM, PHENOTYPE, YEAR, PLACE) %>%
   summarise(RUN = paste(RUN, collapse = ", ")) %>% 
   select(FAM, RUN, PHENOTYPE, YEAR, PLACE)
 ```
@@ -1557,6 +1557,12 @@ Human Reproduction, Octobre 2016
 \newpage
 
 #### Contexte et objectifs  
+
+Dans une étude précédente non détaillée dans ce manuscrit , notre équipe a pu identifier le gène *DNAH1* comme le premier gène codant pour une dynéine axonèmale responsable uniquement d’infertilité masculine. Dans cette première étude, ... de nos ... patients (non apparentés), soit environs ... d'entre eux, étaient porteur d'une mutation homozygote sur le gène *DNAH1* responsable de leur phénotype MMAF. Ces résultats ont ainsi démontrés l'importance de l'implication de ce gène dans ce phénotype.  
+
+Dans cette nouvelle étude, nous nous concentrons sur l'analyses des données génétiques de 5 familles iraniène et d'une famille italienne pour un total de 12 individus. Parmis eux 10 sont nés d'un union consanguain. Pour des raisons techniques et materiels, seuls deux de ces individus ont, pour l'instant, été analysés sur notre pipeline décrite précédement (famille MMAF). Pour les autres les données familles séquencés en haut débit, les variants utilisés furent ceux fournit par les centres de séquençage auxquels nous avons ensuite appliqué les même critères de filtre.  
+
+Dans ce contexte j'ai effectué les l'ensemble des analyses des deux patients patients de la familles MMAF décrites ci-dessus, mais également l'ensemble des analyses de filtrage appliqué aux données des 8 autres patients séquencés en WES.     
 
 \newpage
 
