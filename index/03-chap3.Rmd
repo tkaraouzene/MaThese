@@ -383,11 +383,22 @@ Dans le cas d'analyses de larges cohortes de patients, il arrive souvent que de 
 
 run_fam_az <- c("Ghs44", "Ghs45")
 run_fam_ff <- c("Ghs113", "Ghs117")
-run_fam_mmaf <- c("Ghs62", "Ghs130")
-run_all_fam <- c(run_fam_az, run_fam_ff, run_fam_mmaf)
+run_fam_mmaf3 <- c("Ghs62", "Ghs130")
+run_all_fam <- c(run_fam_az, run_fam_ff, run_fam_mmaf3)
 
-df_fam_run <- data_frame(FAM = c("AZ","AZ","FF","FF","MMAF","MMAF"),
-                     RUN = c(run_fam_az, run_fam_ff, run_fam_mmaf),
+
+
+# df_runs <- fread("data/exome_runs.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>%
+#   rename(Phenotype = Pathologie) %>%
+#   filter(!(Phenotype %in% c("Ovo", "Azoo"))) %>% 
+#   rename(ID = `Magic ID`) %>% 
+#   collect() %>%
+#   .[["ID"]] %>% paste_vector(sep = "\", \"",  last = "\", \"")
+# 
+
+
+df_fam_run <- data_frame(FAM = c("AZ","AZ","FF","FF","MMAF3","MMAF3"),
+                     RUN = c(run_fam_az, run_fam_ff, run_fam_mmaf3),
                      PHENOTYPE = c(rep("Azoospermia", 2), rep("Fertilization failure", 2),  rep("MMAF", 2)),
                      YEAR = c(2012, 2012, 2014, 2014,2014, 2014),
                      # PLATFORM = c("Illumina HiSeq2000", "Illumina HiSeq2000", "Illumina HiSeq2000"),
@@ -1306,17 +1317,20 @@ df_remaining_gene <- df_filter_fam %>%
   filter(CANONICAL == "YES") %>%
   mutate(CAUSAL = if_else(FAM == "AZ", "SPINK2", 
                           if_else(FAM == "FF","PLCZ1",
-                                  if_else(FAM == "MMAF","DNAH1", 
+                                  if_else(FAM == "MMAF3","DNAH1", 
                                           if_else(FAM == "MMAF4", "TGIF2?", "???")))),
          FIND_CAUSAL = if_else(CAUSAL == "???","No",
                                if_else(grepl("[?]", perl = TRUE, CAUSAL),"Maybe","Yes"))) %>%
   rename(Family = FAM) %>% 
-  filter(!(SYMBOL %in% c("NBPF13P","HLA-DRB6","JMJD7-PLA2G4B")))
-         
-         
+  
+  mutate(HGVSc = if_else(CHR == "3" & POSITION == 52420175 & REF == "G" & ALT == "A", "c.8626-1G > A", HGVSc)) %>% # DNAH1 HGVSc mutation
+  
+  
+  filter(!(SYMBOL %in% c("NBPF13P","HLA-DRB6","JMJD7-PLA2G4B"))) 
+
 n_gene_az <- df_remaining_gene %>% filter(Family == "AZ") %>% distinct(SYMBOL) %>% nrow
 n_gene_ff <- df_remaining_gene %>% filter(Family == "FF") %>% distinct(SYMBOL) %>% nrow
-n_gene_mmaf1 <- df_remaining_gene %>% filter(Family == "MMAF") %>% distinct(SYMBOL) %>% nrow
+n_gene_mmaf3 <- df_remaining_gene %>% filter(Family == "MMAF3") %>% distinct(SYMBOL) %>% nrow
 
 ```
 
@@ -1359,7 +1373,7 @@ plot_expression("plcz1", "percent", TRUE) +
 
 ```
 
-4. **Famille MMAF** : À l'issue des filtres, ` n_gene_mmaf` gènes ressortaient chez ces deux frères : *MYH11* et *DNAH1*. Or, notre équipe ayant déjà établit le lien entre des mutations du gène *DNAH1* et le syndrome MMAF [@BenKhelifa2014] ce gène s'est révélé être un candidat idéal pour expliquer le phénotype de ces 2 frères. De plus, l'implication de *MYH11* dans le phénotype de dissection aortique [@Imai2015] l'ont écarté des candidats pour le phénotype MMAF.   
+4. **Famille MMAF3** : À l'issue des filtres, ` n_gene_mmaf3` gènes ressortaient chez ces deux frères : *MYH11* et *DNAH1*. Or, notre équipe ayant déjà établit le lien entre des mutations du gène *DNAH1* et le syndrome MMAF [@BenKhelifa2014] ce gène s'est révélé être un candidat idéal pour expliquer le phénotype de ces 2 frères. De plus, l'implication de *MYH11* dans le phénotype de dissection aortique [@Imai2015] l'ont écarté des candidats pour le phénotype MMAF.   
 
 
 \newpage
@@ -1574,13 +1588,15 @@ Dans ce contexte j'ai effectué les l'ensemble des analyses des deux patients pa
 
 ```{r dfrecapmmaf, cache=TRUE, dependson="tablegene"}
 
-df_remaining_variant_mmaf <- df_recap %>%
+df_remaining_variant_mmaf <- df_recap %>% 
   ungroup() %>% 
   filter(Family == "MMAF") %>% 
   mutate(HGVSc = na.replace(HGVSc, "."),
          HGVSp = na.replace(HGVSp, "."),
          `HGVSc, HGVSp` = paste0(HGVSc," ; ", HGVSp)) %>% 
-  select(-Family, -CANONICAL, -HGVSc, -HGVSp)
+  select(-Family, -SIFT, -PolyPhen, -CANONICAL, -HGVSc, -HGVSp)
+
+
 
 ```
 
@@ -1591,16 +1607,18 @@ gene_fam_mmaf <- df_remaining_variant_mmaf %>% collect() %>% .[["Gene"]]
 
 ```
 
+Dans cette étude nous avons séquencé un total de 12 patients provenant de  6 familles différentes. Tout ces patients souffrent d'un syndrome MMAF induisant une infertilité. Parmi ceux-ci 10 ont été séquençé en WES, cependant, seulement ... d'entre eux ont été analysé au sein de notre pipeline d'analyse. Après l'aplication de l'ensemble des filtres seul ... variants subsistaient impactant respectivement les gènes ... . 
+
 ```{r tabrecapmmaf, cache=TRUE, dependson="dfrecapmmaf"}
 
-caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille MMAF"
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères P5 et P6 de la famille MMAF3"
 
-df_remaining_variant_mmaf %>% 
+df_remaining_variant_mmaf %>%
   kable(format = "latex",
         booktabs = TRUE,
         longtable = TRUE,
         caption = caption) %>% 
-  add_header_above(c(" ", "Variant impact" = 4, "Variant frequency" = 1))
+  add_header_above(c(" ", "Variant impact" = 2, "Variant frequency" = 3))
 
 ```
 
@@ -1617,12 +1635,111 @@ plot_expression(gene_fam_mmaf,"percent", TRUE)+
   theme(legend.position = c(1, 0),
         legend.justification = c(1,0))
 
-
 ```
 
 \newpage
 
 ## Résultats 2 : Étude d'une cohorte de femmes infertiles  
+
+### R
+
+##### CALL 
+```{r}
+# 
+# ovo_call_file <- "results/ovo_call.rds"
+# ovo_distinct_call_file <- "results/ovo_distinct_call.rds"
+# 
+# 
+# 
+# if (!file.exists(ovo_call_file)) {
+#   
+#   df_ovo_call <- fread("data/call_results/call_ovo.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
+#     gather(RUN, CALL, starts_with("Ghs")) %>%
+#     filter(CALL %in% c(0, 2, 3, "b", "c"),
+#            !(RUN %in% run_mmaf_fam),
+#            !is.na(REF)) %>%
+#     mutate(STRAND = if_else(CALL %in% c(2:9), "DS", 
+#                             if_else(CALL == 0, "NS", "SS")),
+#       TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"),
+#            CALL = if_else(CALL == 0, "None",
+#                           if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous")))
+# 
+#   saveRDS(df_ovo_call, ovo_call_file)
+#   
+# } else {
+#   
+#   df_ovo_call <- readRDS(ovo_call_file)
+# 
+# }
+# 
+# if (!file.exists(ovo_distinct_call_file)) {
+# 
+# df_distinct_ovo_call <- df_ovo_call %>%  
+#   filter(grepl("zygous", CALL)) %>% 
+#   distinct(CHR, POSITION, REF, ALT, TYPE) %>%
+#   mutate(CHR = as.character(CHR)) %>%
+#   # variant_join(fread("data/all_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(11,12,14:28,31:34,36:40)), mode = "left") %>%
+#   variant_join(fread("~/all_chr_var.csv",  data.table = FALSE, sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE), mode = "left") %>%
+#          mutate(PolyPhen = gsub("_", " ", str_extract(PolyPhen, "\\w+")),
+#               SIFT = gsub("_", " ", str_extract(SIFT, "\\w+")),
+#               Consequence = sapply(strsplit(Consequence, "_variant", fixed = TRUE),"[[",1),
+#               Consequence = gsub("_", " ", Consequence),
+#               HGVSc = sapply(strsplit(HGVSc, split=':', fixed=TRUE), function(x) (x[2])),
+#               HGVSp = sapply(strsplit(HGVSp, split=':', fixed=TRUE), function(x) (x[2])))
+# 
+#   saveRDS(df_distinct_ovo_call, ovo_distinct_call_file)
+# 
+# } else {
+#   
+#   df_distinct_call <- readRDS(ovo_distinct_call_file)
+#   
+# }
+
+
+# df_ovo_call_geno <- df_ovo_call %>% 
+#   filter(grepl("zygous", CALL)) %>% 
+#   group_by(RUN, TYPE, CALL) %>% 
+#   distinct(CHR, POSITION, REF, ALT) %>%
+#   count() %>%
+#   left_join(df_run_bigmmaf, by = "RUN") %>% 
+#   select(-(Project:Model))
+                       
+# df_ovo_call_strand <- df_ovo_call %>%
+#   group_by(RUN, STRAND) %>%
+#   count() %>%
+#   group_by(RUN) %>%
+#   mutate(N_ALL_STRAND = sum(n),
+#          P_STRAND = n / N_ALL_STRAND) %>%
+#   left_join(df_run_bigmmaf, by = "RUN")
+
+
+  
+  
+```
+
+##### FILTER
+
+
+```{r}
+
+# 
+# maf_cutoff <- .01
+# 
+# df_distinct_ovo_filter <- df_distinct_ovo_call %>%
+#   filter_frequence(cutoff = maf_cutoff) %>%
+#   # variant_join(df_ctrl_mmaf %>% mutate(CHR = as.character(CHR)), mode = "anti") %>%
+#   filter(Consequence != "synonymous",
+#          IMPACT != "MODIFIER",
+#          !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen)),
+#          !grepl("NMD transcript", Consequence),
+#          !grepl("non coding transcript", Consequence))
+#   # left_join(df_rvis, by = "SYMBOL") %>%
+#   # left_join(df_cilliome_gene, by = "SYMBOL") %>%
+#   # mutate(EVIDENCE = if_else(is.na(EVIDENCE), "Not in the list", EVIDENCE))
+#   
+# df_distinct_ovo_filter %>% nrow()
+
+```
 
 ### Article n° 6
 
@@ -1654,6 +1771,429 @@ New England Journal of Medicine, 07 Juillet 2017 (soummis)
 
 ## Résultats 3 : Étude d'une large cohorte de patients MMAF
 
+### Résultats des différents étapes de l'analyse  
+
+```{r extradata, cache=TRUE}
+
+df_rvis <- fread("data/RVIS_Unpublished_ExAC_May2015.txt",sep = "\t",header = TRUE,data.table = FALSE) %>%
+  select(SYMBOL = CCDS_r15,SCORE = `RVIS_ExAC_0.05%(AnyPopn)`) %>%
+  mutate(RVIS_PERCENTILE = percent_rank(SCORE)) %>%
+  select(-SCORE) %>%
+  na.omit()
+
+df_cilliome_gene <- fread("data/ciliome.csv",sep = "\t",header = TRUE, data.table = FALSE) %>% 
+  select(SYMBOL = Symbol, EVIDENCE = `Novelty category`, LOCALISATION = `Immunostaining of cilia`) %>% 
+  mutate(EVIDENCE = substring(EVIDENCE, 4),
+         EVIDENCE = if_else(grepl("Strong", EVIDENCE), "Strong",
+                            if_else(grepl("Weak", EVIDENCE), "Weak", "Novel")),
+         LOCALISATION = substring(LOCALISATION, 4))
+
+n_cilliome_gene <- df_cilliome_gene %>% nrow
+
+```
+
+```{r dfrunbigmmaf, cache=TRUE}
+
+run_az_fam <- c("Ghs44","Ghs45")
+run_ff_fam <- c("Ghs113","Ghs117")
+run_mmaf_fam <- c("Ghs56","Ghs58","Ghs62","Ghs130","Ghs63","Ghs119","Ghs59","Ghs60","Ghs61")
+
+run_all_fam <- c(run_az_fam, run_ff_fam, run_mmaf_fam)
+
+df_run_bigmmaf <- fread("data/exome_runs.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(2,3,4,10:16), data.table = FALSE) %>%
+  rename(RUN = `Magic ID`, PHENOTYPE = Pathologie, DATE = Date) %>%
+  mutate(PHENOTYPE = if_else(PHENOTYPE == "Flag", "MMAF", PHENOTYPE),
+         YEAR = as.numeric(str_sub(DATE, start= -4)),
+         PROJECT = paste0(Project," (",YEAR,")")) %>%
+  filter(!(RUN %in% run_mmaf_fam),
+         PHENOTYPE == "MMAF") %>% 
+  select(-DATE, -PHENOTYPE)
+
+```
+
+```{r varrunbigmmaf, dependson="dfrunbigmmaf", cache=TRUE}
+
+runs_bigmmaf <- df_run_bigmmaf %>% collect() %>% .[["RUN"]]
+
+min_year <- df_run_bigmmaf$YEAR %>% min
+max_year <- df_run_bigmmaf$YEAR %>% max
+
+center <- df_run_bigmmaf$Project %>% unique
+n_center <- center %>% length
+
+nb_run_bigmmaf <- df_run_bigmmaf %>% nrow
+
+```
+
+Après avoir mis en évidence l'implication du gène *DNAH1* dans le phénotype MMAF notre équipe s'est en partie spécialisé dans la caractérisation ce syndrome. Ainsi, entre `r min_year` et `r max_year`, notre équipe a effectué le séquençage de `r nb_run_bigmmaf` individus présentant tous ce phénotype afin d'en établir la cause génétique. Ces séquençages ont été effectué dans `r n_center` centres différents que sont `r center %>% paste_vector` et sur une seule plateforme de séquençage, le Illumina HiSeq2000.
+
+```{r tabrunbigmmaf, cache=TRUE, dependson="dfrunbigmmaf"}
+
+kable(df_run_bigmmaf %>% 
+        mutate(Platform = paste0(Platform, " ", Model)) %>%
+        select(-Model, -PROJECT) %>%
+        rename(Place = Project, Patient = RUN, Year = YEAR) %>% 
+        group_by(Place, Year, Platform) %>% 
+        summarise(`Nb of individuals` = n_distinct(Patient)) %>%
+        arrange(Year),
+      longtable = TRUE,
+      booktabs = TRUE, 
+      caption = "Liste des différents projets de séquençages effectués") 
+
+```
+
+##### CALL
+
+```{r dfbigmmafcall, cache=TRUE}
+
+bigmmaf_call_file <- "results/bigmmaf_call.rds"
+bigmmaf_distinct_call_file <- "results/bigmmaf_distinct_call.rds"
+
+if (!file.exists(bigmmaf_call_file)) {
+  
+  df_bigmmaf_call <- fread("data/genotype_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
+    gather(RUN, CALL, starts_with("Ghs")) %>%
+    filter(CALL %in% c(0, 2, 3, "b", "c"),
+           !(RUN %in% run_mmaf_fam),
+           !is.na(REF)) %>%
+    mutate(STRAND = if_else(CALL %in% c(2:9), "DS", 
+                            if_else(CALL == 0, "NS", "SS")),
+      TYPE = if_else(stri_length(REF) == stri_length(ALT), "SNV", "Indel"),
+           CALL = if_else(CALL == 0, "None",
+                          if_else(CALL %in% c(2, "b"), "Heterozygous", "Homozygous")))
+
+  saveRDS(df_bigmmaf_call, bigmmaf_call_file)
+  
+} else {
+  
+  df_bigmmaf_call <- readRDS(bigmmaf_call_file)
+
+}
+
+if (!file.exists(bigmmaf_distinct_call_file)) {
+
+  
+df_distinct_call <- df_bigmmaf_call %>%  
+  filter(grepl("zygous", CALL)) %>% 
+  distinct(CHR, POSITION, REF, ALT, TYPE) %>%
+  mutate(CHR = as.character(CHR)) %>%
+  # variant_join(fread("data/all_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(11,12,14:28,31:34,36:40)), mode = "left") %>%
+  variant_join(fread("~/all_chr_var.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE), mode = "left") %>%
+         mutate(PolyPhen = gsub("_", " ", str_extract(PolyPhen, "\\w+")),
+              SIFT = gsub("_", " ", str_extract(SIFT, "\\w+")),
+              Consequence = sapply(strsplit(Consequence, "_variant", fixed = TRUE),"[[",1),
+              Consequence = gsub("_", " ", Consequence),
+              HGVSc = sapply(strsplit(HGVSc, split=':', fixed=TRUE), function(x) (x[2])),
+              HGVSp = sapply(strsplit(HGVSp, split=':', fixed=TRUE), function(x) (x[2])))
+
+  saveRDS(df_distinct_call, bigmmaf_distinct_call_file)
+
+} else {
+  
+  df_distinct_call <- readRDS(bigmmaf_distinct_call_file)
+  
+}
+
+
+df_bigmmaf_call_geno <- df_bigmmaf_call %>% 
+  filter(grepl("zygous", CALL)) %>% 
+  group_by(RUN, TYPE, CALL) %>% 
+  distinct(CHR, POSITION, REF, ALT) %>%
+  count() %>%
+  left_join(df_run_bigmmaf, by = "RUN") %>% 
+  select(-(Project:Model))
+                       
+df_bigmmaf_call_strand <- df_bigmmaf_call %>%
+  group_by(RUN, STRAND) %>%
+  count() %>%
+  group_by(RUN) %>%
+  mutate(N_ALL_STRAND = sum(n),
+         P_STRAND = n / N_ALL_STRAND) %>%
+  left_join(df_run_bigmmaf, by = "RUN")
+
+
+```
+
+```{r varbigmmafcall, dependson="bigmmafcall", cache=TRUE}
+
+n_distinct_var <- df_distinct_call %>% nrow %>% as.integer
+n_distinct_snv <- df_distinct_call %>% filter(TYPE == "SNV") %>% nrow %>% as.integer
+n_distinct_indel <- df_distinct_call %>% filter(TYPE == "Indel") %>% nrow %>% as.integer
+
+n_mean_var <- df_bigmmaf_call_geno %>% group_by(RUN) %>% summarise(N = sum(n)) %>% collect() %>% .[["N"]] %>% mean %>% round(0) %>% as.integer
+n_mean_snv <- df_bigmmaf_call_geno %>% filter(TYPE == "SNV") %>% group_by(RUN) %>% summarise(N = sum(n)) %>% collect() %>% .[["N"]] %>% mean %>% round(0) %>% as.integer
+n_mean_indel <- df_bigmmaf_call_geno %>% filter(TYPE == "Indel") %>% group_by(RUN) %>% summarise(N = sum(n)) %>% collect() %>% .[["N"]] %>% mean %>% round(0) %>% as.integer
+
+n_mean_homo <- df_bigmmaf_call_geno %>% filter(CALL == "Homozygous") %>% group_by(RUN) %>% summarise(N = sum(n)) %>% collect() %>% .[["N"]] %>% mean %>% round(0) %>% as.integer
+p_mean_homo <- (n_mean_homo / n_mean_var)  %>% round(3) * 100 
+
+ns_geno_2015_mean <- df_bigmmaf_call_strand %>% filter(PROJECT == "Genoscope (2015)", STRAND == "NS") %>% collect() %>% .[["P_STRAND"]] %>% median %>% round(3) * 100
+
+```
+
+Après avoir appelé les variants de nos `r nb_run_bigmmaf` patients, nous avons obtenu un total de `r n_distinct_var` variants différents comprenant `r n_distinct_snv` SNVs et `r n_distinct_indel` indels. Ces variants étant répartit entre chaque patient qui portaient environs chacun `r n_mean_snv` SNV et `r n_mean_indel` indels dont `r p_mean_homo` % étaient homozygote. Comme on peut le voir, la proportion de chaque appel est relativement homogène lorsque l'on compare les patients ayant été séquencés dans le même centre la même année. Cependant, il est possible de noter de grandes disparités lorsque l'on compare les données provenant de différents centres ou bien du même centre avec plusieurs années de différences. Ces écarts peuvent-être causés par plusieurs facteur, tel que les différents kits de capture d'exons qui on put être utilisés puisque ... (**todo lister les différents kits de capture dans une table**) en revanche nous pouvons écarter un effet dus à la plateforme de séquençage ou encore le modèle de séquenceur puisque tous ces projets ont été réalisés sur des Illumina HiSeq2000 (**Table : **\@ref(tab:tabcohort)) (**Figure : **\@ref(fig:plotbigmmafcall) - **A**).  
+
+Le même constat peut être effectué lorsque l'on compare la qualité des appels puisque plus les projets de séquençage s'avèrent être récent, plus la proportion d'appel *Single Strand* s'avère être faible tandis que la proportion d'appel *Double Strand* (DS) est élevée. Ceci est une bonne chose, car, bien que ces deux appels soient conservés dans les analyses ultérieures, les appels DS sont de meilleure qualité que les appels SS. Cette augmentation des appels DS au cours du temps pourrait s'expliquer par une amélioration des protocoles de séquençage ainsi que des kits de capture. En revanche cela est à pondérer avec le taux croissant d'appels *No-strand* (NS) au fur et à mesure des années pour atteindre environs `r ns_geno_2015_mean` % en 2015 avec un projet réalisé au Génoscope. Ces derniers appels étant systématiquement filtrés, ils n'altèreront en rien les résultats obtenus en aval hormis le fait qu'ils réduisent la quantité des données utilisées (**Figure : **\@ref(fig:plotbigmmafcall) - **B** et **C**).
+
+\newpage
+
+```{r plotbigmmafcall, dependson="bigmmafcall", fig.cap=fig_info,fig.scap=fig_name, fig.height=7.6, cache=TRUE}
+
+fig_name <- "Résultats de l'appel des variants par individus et par projet de séquençage"
+fig_description_general <- "Chaque couleur définit un projet de séquençage caractérisé par un centre de séquençage et une année"
+fig_description_A <- "**A** : Quantification pour chaque individus (représentés par les barres) du nombre de variants (SNVs et Indels) appelés homozygotes et hétérozygotes"
+fig_description_B <- "**B** : Quantification des appels *Double Strand* (DS), *Single Strand* (SS) et *No strand* (NS) pour chaque projet de séquençage"
+fig_description_C <- "**C** : Même chose en pourcentage"
+fig_description <- paste(fig_description_general, fig_description_A, fig_description_B, fig_description_C, sep = ". ")
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+pA <- ggplot(df_bigmmaf_call_geno, aes(reorder(RUN, YEAR), n)) + 
+  geom_bar(stat = "identity", aes(fill = PROJECT)) + 
+  facet_grid(TYPE~CALL, scales = "free") +
+  scale_fill_brewer(palette = "Set1", guide = "none") +
+  ylab("Nb of called variants") + 
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+pB <- ggplot(df_bigmmaf_call_strand, aes(reorder(PROJECT, YEAR), n)) + 
+  geom_boxplot(outlier.size = -1, aes(fill = PROJECT)) + 
+  facet_wrap(~factor(STRAND, levels = c("DS", "SS", "NS")), scales = "free") +
+  ylab("Nb of call") + 
+  scale_x_discrete(limits = c("Strasbourg (2012)", "MountSinai (2012)", "Genoscope (2013)", "Genoscope (2014)", "Genoscope (2015)")) +
+   scale_fill_brewer(palette = "Set1", guide = "none") +
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+pC <- ggplot(df_bigmmaf_call_strand, aes(reorder(PROJECT, YEAR), P_STRAND)) + 
+  geom_boxplot(outlier.size = -1, aes(fill = PROJECT)) + 
+  facet_wrap(~factor(STRAND, levels = c("DS", "SS", "NS")), scales = "free") +
+  scale_x_discrete(limits = c("Strasbourg (2012)", "MountSinai (2012)", "Genoscope (2013)", "Genoscope (2014)", "Genoscope (2015)")) +
+  scale_fill_brewer(palette = "Set1", name = "Sequencing project", 
+                    breaks = c("Strasbourg (2012)", "MountSinai (2012)", "Genoscope (2013)", "Genoscope (2014)", "Genoscope (2015)")) +
+  ylab("% of call") + 
+  scale_y_continuous(labels = percent) +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+
+row2 <- plot_grid(pB,pC, ncol = 1, rel_heights = c(.43,.57), labels = c("B","C"))
+
+plot_grid(pA,row2, ncol = 1, rel_heights = c(.45,.55), labels = c("A",""))
+
+```
+
+\newpage
+
+##### FILTER
+
+
+```{r pierrerayanalysis}
+
+# Pierre Ray 
+# 
+# bind_rows(df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "BO.F") %>% inner_join(df_bigmmaf_filter),
+#           df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "BO.F") %>% inner_join(df_bigmmaf_filter_het)) %>% 
+#   filter(CANONICAL == "YES") %>%
+#   select(-CANONICAL) %>%
+#   select(-N_VAR_PER_RUN_PER_GENE, -N_RUN_PER_GENE) %>%
+#   add_exp() -> bo.f
+#   write.table("~/Bureau/canonical_variants_homo_het_BO.F.csv", sep = "\t", row.names = FALSE)
+# 
+# plot_expression(gene = bo.f$SYMBOL %>% unique, mode = "percent", tissues = "testis", flip = TRUE)
+#   
+
+
+```
+
+```{r dfbigmmaffilter, dependson= c("dfbigmmafcall", "extradate"), cache=TRUE}
+
+df_ctrl_mmaf <- open_ctrl("data/genotype_not_MMAF.csv", pheno = "MMAF")
+
+maf_cutoff <- .01
+
+df_distinct_filter <- df_distinct_call %>%
+  filter_frequence(cutoff = maf_cutoff) %>%
+  variant_join(df_ctrl_mmaf %>% mutate(CHR = as.character(CHR)), mode = "anti") %>%
+  filter(Consequence != "synonymous",
+         IMPACT != "MODIFIER",
+         !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen)),
+         !grepl("NMD transcript", Consequence),
+         !grepl("non coding transcript", Consequence)) %>%
+  left_join(df_rvis, by = "SYMBOL") %>%
+  left_join(df_cilliome_gene, by = "SYMBOL") %>%
+  mutate(EVIDENCE = if_else(is.na(EVIDENCE), "Not in the list", EVIDENCE))
+  
+
+df_bigmmaf_filter <- df_bigmmaf_call %>% 
+  mutate(CHR = as.character(CHR)) %>%
+  select(-STRAND) %>%
+  filter_genotype(het = FALSE) %>% 
+  variant_join(df_distinct_filter, mode = "inner") %>% 
+  # select(-Allele) %>% 
+  mutate(SYMBOL = if_else(SYMBOL == "WDR52", "CFAP44", 
+                          if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL))) %>%
+  ungroup()
+  
+df_bigmmaf_filter_stat <- df_bigmmaf_filter %>% 
+  group_by(RUN) %>%
+  mutate(N_GENE = n_distinct(SYMBOL)) %>%
+  group_by(RUN, TYPE, N_GENE) %>%
+  distinct(CHR, POSITION, REF, ALT) %>%
+  summarise(N_VAR_PER_TYPE = n()) %>%
+  group_by(RUN) %>%
+  mutate(N_VAR_TOT = sum(N_VAR_PER_TYPE)) %>%
+  right_join(df_run_bigmmaf, by = "RUN") 
+
+
+df_bigmmaf_filter_het <- df_bigmmaf_call %>% 
+  mutate(CHR = as.character(CHR)) %>%
+  select(-STRAND) %>% 
+  filter_genotype(homo = FALSE) %>% 
+  variant_join(df_distinct_filter, mode = "inner") %>% 
+  # select(-Allele) %>%
+  group_by(RUN, SYMBOL, Feature) %>%
+  mutate(N_VAR_PER_RUN_PER_GENE = n()) %>% 
+  filter(N_VAR_PER_RUN_PER_GENE > 1) %>% 
+  group_by(SYMBOL) %>%
+  mutate(N_RUN_PER_GENE = n_distinct(RUN)) %>%
+  ungroup() %>%
+  mutate(SYMBOL = if_else(SYMBOL == "WDR52", "CFAP44", 
+                          if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL)))
+
+  
+df_bigmmaf_genes <- df_bigmmaf_filter %>% group_by(SYMBOL, EVIDENCE, LOCALISATION) %>% distinct(RUN) %>% mutate(N_RUN = n()) 
+df_bigmmaf_genes_distinct <- df_bigmmaf_genes %>% distinct(N_RUN)
+df_bigmmaf_genes_resume <- df_bigmmaf_genes_distinct %>% distinct(N_RUN) %>% group_by(N_RUN) %>% summarise(N_GENE = n()) 
+
+```
+
+```{r varbigmmaffilter, dependson="dfbigmmaffilter", cache=TRUE}
+
+n_distinct_var <- df_bigmmaf_filter %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
+n_distinct_snv <- df_bigmmaf_filter %>% ungroup() %>% filter(TYPE == "SNV") %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
+n_distinct_indel <- df_bigmmaf_filter %>% ungroup() %>% filter(TYPE == "Indel") %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
+n_distinct_gene <- df_bigmmaf_filter %>% ungroup() %>% distinct(SYMBOL) %>% nrow
+
+n_min_var <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_VAR_TOT"]] %>% min
+n_max_var <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_VAR_TOT"]] %>% max
+
+n_mean_indel <- df_bigmmaf_filter_stat %>% filter(TYPE == "Indel") %>% collect() %>% .[["N_VAR_PER_TYPE"]] %>% mean %>% round(0)
+n_mean_snv <- df_bigmmaf_filter_stat %>% filter(TYPE == "SNV") %>% collect() %>% .[["N_VAR_PER_TYPE"]] %>% mean %>% round(0)
+
+n_min_gene <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_GENE"]] %>% min
+n_max_gene <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_GENE"]] %>% max
+
+```
+
+Après avoir appliqué les mêmes filtres que ceux décrit précédemment à l'exception du filtre n°1 ["Union"](#filterdescription) puisqu'ici nous avons uniquement des individus non apparentés, nous avons pu obtenir une liste de `r n_distinct_var` variants différents composés de `r n_distinct_snv` SNVs et `r n_distinct_indel` indels et impactant un total de `r n_distinct_gene` gènes distincts. Ces variants étant répartis sur l'ensemble de nos `r nb_run_bigmmaf` patients ceux-ci portaient en moyenne `r n_mean_snv` SNVS et `r n_mean_indel` indels, de sorte que chacun d'entre eux avaient entre `r n_min_gene` et `r n_max_gene` gènes impactés par au moins un variants homozygote (**Figure : **\@ref(fig:plotfilterbigmmaf) - **A** et **B**).  
+
+```{r plotfilterbigmmaf, dependson="dfbigmmaffilter", fig.cap=fig_info,fig.scap=fig_name, fig.height=5, cache=TRUE}
+
+fig_name <- "Résultats de l'étape de filtrage"
+fig_description_general <- "Chaque couleur définit un projet de séquençage caractérisé par un centre de séquençage et une année"
+fig_description_A <- "**A** : Quantification du nombre de SNVs et indels ayant passé l'ensemble des filtres pour chaque patient"
+fig_description_B <- "**B** : Nombre de gènes impactés par au moins un variant ayant passé les filtres pour chaque individu représenté par les barres"
+fig_description_C <- "**C** : Présentation "
+
+fig_description <- paste(fig_description_A, fig_description_B, fig_description_C, sep = ". ")
+fig_info <- paste0(fig_name, " : ", fig_description)
+
+pA <- ggplot(df_bigmmaf_filter_stat, aes("", N_VAR_PER_TYPE)) +
+  geom_boxplot(outlier.size = -1, alpha = .8, aes(fill = TYPE)) + 
+  geom_jitter(position=position_jitter(0.3)) +
+  scale_fill_brewer(guide = "none", palette = "Set1") +
+  facet_wrap(~factor(TYPE, levels = c("SNV", "Indel")), scales = "free") + 
+  ylab("Nb of remaining variants after filters") + 
+  xlab("") + 
+  coord_flip() + 
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+
+pB <- ggplot(df_bigmmaf_filter_stat %>% group_by(RUN) %>% summarise(N_GENE = mean(N_GENE)), aes(reorder(RUN, -N_GENE), N_GENE)) + 
+  geom_bar(stat = "identity", fill = "#999999") + 
+  ylab("Nb of remaining genes") +
+  xlab("Runs") + 
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) 
+
+plot_grid(pA,pB, rel_heights = c(.33,.67), ncol = 1, labels = c("A","B"))
+
+```
+
+\newpage
+
+
+Au vu du grand nombre de gène, et afin d'étudier en priorité ceux pouvant expliquer le phénotype d'un maximum de patients nous avons, dans un premier temps, limité nos recherches aux gènes sur lesquels **au moins 2 patients portaient un variant tronquant** . Ainsi nous avons obtenu une liste restreinte de ... gènes différents. Ensuite, nous avons chercher l'ensemble des patients portant des variants homozygotes **non tronquant** sur au moins un de ces gènes.  
+
+3. récupérer les patients ayant au moins deux hétérozygotes  
+
+
+```{r piccompositehet,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.35"}
+
+fig_name <- "Représentation schématique des ....TODO"
+fig_description <- "Un variant est dit homozygote lorsque le **même** variant est présents sur les deux allèles d'un gène et hétérozygote lorsqu'il est présent sur **un seul** des deux allèles. On parlera d'hétérozygotes *cis* lorsque deux variants hétérozygotes différents seront positionnés sur **le même** allèle et d'hétérozygote *trans* (ou composite) lorsque ces deux variants hétérozygotes seront positionnés sur **deux allèles différents**. En WES et en WGS il est impossible de différentié les hétérozygotes *cis* des hétérozygotes *trans*"
+fig_info <- paste(fig_name, fig_description, sep = " : ")
+
+include_graphics("figure/hetero_composites.png")
+
+```
+
+```{r, fig.height=7.5}
+
+df_bigmmaf_filter_high <- df_bigmmaf_filter %>% 
+  filter(IMPACT == "HIGH",
+         CANONICAL == "YES") %>% 
+  group_by(SYMBOL) %>%
+  summarise(High = n_distinct(RUN)) %>% 
+  filter(High > 1)
+
+df_bigmmaf_filter_moderate <- df_bigmmaf_filter %>% 
+  filter(IMPACT != "HIGH",
+         CANONICAL == "YES") %>% 
+  group_by(SYMBOL) %>%
+  summarise(Moderate = n_distinct(RUN))
+
+df_bigmmaf_filter_low <- df_bigmmaf_filter_het %>% 
+  filter(CANONICAL == "YES") %>% 
+  group_by(SYMBOL, RUN) %>%
+  filter(n() > 1) %>% 
+  group_by(SYMBOL) %>%
+  summarise(Low = n_distinct(RUN))
+  
+
+df <- df_bigmmaf_filter_high %>% 
+  left_join(df_bigmmaf_filter_moderate, by = "SYMBOL") %>%
+  left_join(df_bigmmaf_filter_low, by = "SYMBOL") %>%
+  mutate(N_HIGH = High,
+         N_MODERATE = Moderate,
+         N_LOW = Low) %>%
+  gather(EVIDENCE, N_RUN, High:Low, factor_key = TRUE) %>% 
+  group_by(SYMBOL) %>%
+  mutate(N_RUN = na.replace(N_RUN, 0),
+         N_TOT = sum(N_RUN))
+
+ggplot(df, aes(reorder(reorder(reorder(SYMBOL,N_LOW), N_MODERATE), N_HIGH), N_RUN)) + 
+  geom_col(aes(fill = EVIDENCE)) +
+  scale_fill_manual(name = "Evidence", values = c("#4DAF4A", "#FF7F00", "#E41A1C")) + 
+  scale_y_continuous(breaks = (1:max(df$N_TOT))) +
+  ylab("Nb of individuals") + 
+  xlab("") +
+  coord_flip() 
+
+
+```
+
+#####
+
+
+
+
+
 ### Article n° 7
 
 **Whole exome cohort study and analysis of mouse and Trypanosoma models demonstrate the importance of WDR proteins in flagellogenesis and male fertility** 
@@ -1665,6 +2205,13 @@ EMBO Molecular Medicine, Mai 2017
 \newpage
 
 #### Contexte et objectifs  
+
+Après avoir identifié le gène *DNAH1* comme un acteur majeur du syndrome MMAF, notre équipe s'est en partie spécialisée dans la caractérisation de ce phénotype. C'est pourquoi, entre ... et ... nous avons effectué le séquençage WES de ... individus. Parmi ceux-ci, ... ont pu être analysés au sein de notre pipeline d'analyse tandis que pour des raisons materiels, les ... autres n'ont pu l'être. Pour ces derniers nous avons donc utilisé directement les variants fournis par les centres en charge du séquençage. 
+
+
+
+
+
 
 \newpage
 

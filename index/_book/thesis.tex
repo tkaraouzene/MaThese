@@ -244,7 +244,7 @@ class (for LaTeX) and the R bookdown package, in general.
   de départ une liste de variants appelés en amont. Ils ne contrôlent donc
   en aucune manière les étapes d'alignement et d'appel des variants. Or,
   comme il a été dit plus tôt, ces deux étapes constituent la base de
-  l'analyse {[}{]}.
+  l'analyse \protect\hyperlink{section}{}.
   
   Ce chapitre décrit à la fois la constitution d'un pipeline d'analyse des
   données de séquençage exomique recouvrant l'ensemble des étapes allant
@@ -742,7 +742,7 @@ class (for LaTeX) and the R bookdown package, in general.
   \midrule
   AZ & Ghs44, Ghs45 & Azoospermia & 2012 & Mount Sinai Institut\\
   FF & Ghs113, Ghs117 & Fertilization failure & 2014 & Genoscope (Evry)\\
-  MMAF & Ghs62, Ghs130 & MMAF & 2014 & Genoscope (Evry)\\
+  MMAF3 & Ghs62, Ghs130 & MMAF & 2014 & Genoscope (Evry)\\
   \bottomrule
   \end{longtable}
   
@@ -1078,13 +1078,13 @@ class (for LaTeX) and the R bookdown package, in general.
   \setcounter{enumi}{3}
   \tightlist
   \item
-    \textbf{Famille MMAF} : À l'issue des filtres, \texttt{n\_gene\_mmaf}
-    gènes ressortaient chez ces deux frères : \emph{MYH11} et
-    \emph{DNAH1}. Or, notre équipe ayant déjà établit le lien entre des
-    mutations du gène \emph{DNAH1} et le syndrome MMAF (Ben Khelifa et
-    al., \protect\hyperlink{ref-BenKhelifa2014}{2014}) ce gène s'est
-    révélé être un candidat idéal pour expliquer le phénotype de ces 2
-    frères. De plus, l'implication de \emph{MYH11} dans le phénotype de
+    \textbf{Famille MMAF3} : À l'issue des filtres,
+    \texttt{n\_gene\_mmaf3} gènes ressortaient chez ces deux frères :
+    \emph{MYH11} et \emph{DNAH1}. Or, notre équipe ayant déjà établit le
+    lien entre des mutations du gène \emph{DNAH1} et le syndrome MMAF (Ben
+    Khelifa et al., \protect\hyperlink{ref-BenKhelifa2014}{2014}) ce gène
+    s'est révélé être un candidat idéal pour expliquer le phénotype de ces
+    2 frères. De plus, l'implication de \emph{MYH11} dans le phénotype de
     dissection aortique (Imai et al.,
     \protect\hyperlink{ref-Imai2015}{2015}) l'ont écarté des candidats
     pour le phénotype MMAF.
@@ -1307,14 +1307,14 @@ class (for LaTeX) and the R bookdown package, in general.
   parfaite localisation et fonctionnalité de la protéine PAWP la disculpe
   de toute implication dans le phénotype de nos patients.
   
-  \begin{longtable}[t]{llllllll}
+  \begin{longtable}[t]{llllll}
   \caption{\label{tab:tabrecapff}Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille FF}\\
   \toprule
   \multicolumn{1}{c}{ } & \multicolumn{4}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
   \cmidrule(l{2pt}r{2pt}){2-5} \cmidrule(l{2pt}r{2pt}){6-6}
-  Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC & ESP & 1KG\\
+  Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC\\
   \midrule
-  PLCZ1 & c.1465G>T ; p.Ile489Phe & missense & deleterious & possib damaging & 8.24e-06 & . & .\\
+  PLCZ1 & c.1465G>T ; p.Ile489Phe & missense & deleterious & possib damaging & 8.24e-06\\
   \bottomrule
   \end{longtable}
   
@@ -1381,7 +1381,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   Dans ce contexte j'ai effectué les l'ensemble des analyses des deux
   patients patients de la familles MMAF décrites ci-dessus, mais également
-  l'ensemble des analyse de filtrage appliqué aux données des 8 autres
+  l'ensemble des analyses de filtrage appliqué aux données des 8 autres
   patients séquencés en WES.
   
   \newpage
@@ -1392,15 +1392,23 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Principaux résultats}\label{principaux-resultats-2}
   
-  \begin{longtable}[t]{llllllll}
-  \caption{\label{tab:tabrecapmmaf}Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille MMAF}\\
+  Dans cette étude nous avons séquencé un total de 12 patients provenant
+  de 6 familles différentes. Tout ces patients souffrent d'un syndrome
+  MMAF induisant une infertilité. Parmi ceux-ci 10 ont été séquençé en
+  WES, cependant, seulement \ldots{} d'entre eux ont été analysé au sein
+  de notre pipeline d'analyse. Après l'aplication de l'ensemble des
+  filtres seul \ldots{} variants subsistaient impactant respectivement les
+  gènes \ldots{} .
+  
+  \begin{longtable}[t]{llllll}
+  \caption{\label{tab:tabrecapmmaf}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P5 et P6 de la famille MMAF3}\\
   \toprule
-  \multicolumn{1}{c}{ } & \multicolumn{4}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
-  \cmidrule(l{2pt}r{2pt}){2-5} \cmidrule(l{2pt}r{2pt}){6-6}
-  Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC & ESP & 1KG\\
+  \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{3}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){2-3} \cmidrule(l{2pt}r{2pt}){4-6}
+  Gene & HGVSc, HGVSp & Consequence & ExAC & ESP & 1KG\\
   \midrule
-  MYH11 & c.4625G>A ; p.Arg1542Gln & missense & . & proba damaging & 0.00234 & 0.0016 & 5e-04\\
-  DNAH1 & . ; . & splice acceptor & . & . & . & . & .\\
+  MYH11 & c.4625G>A ; p.Arg1542Gln & missense & 0.00234 & 0.0016 & 5e-04\\
+  DNAH1 & c.8626-1G > A ; . & splice acceptor & . & . & .\\
   \bottomrule
   \end{longtable}
   
@@ -1419,6 +1427,12 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \section{Résultats 2 : Étude d'une cohorte de femmes
   infertiles}\label{resultats-2-etude-dune-cohorte-de-femmes-infertiles}
+  
+  \subsection{R}\label{r}
+  
+  \paragraph{CALL}\label{call}
+  
+  \paragraph{FILTER}\label{filter}
   
   \subsection{Article n° 6}\label{article-n-6}
   
@@ -1453,6 +1467,132 @@ class (for LaTeX) and the R bookdown package, in general.
   \section{Résultats 3 : Étude d'une large cohorte de patients
   MMAF}\label{resultats-3-etude-dune-large-cohorte-de-patients-mmaf}
   
+  \subsection{Résultats des différents étapes de
+  l'analyse}\label{resultats-des-differents-etapes-de-lanalyse-1}
+  
+  Après avoir mis en évidence l'implication du gène \emph{DNAH1} dans le
+  phénotype MMAF notre équipe s'est en partie spécialisé dans la
+  caractérisation ce syndrome. Ainsi, entre 2012 et 2015, notre équipe a
+  effectué le séquençage de 62 individus présentant tous ce phénotype afin
+  d'en établir la cause génétique. Ces séquençages ont été effectué dans 3
+  centres différents que sont Genoscope, MountSinai et Strasbourg et sur
+  une seule plateforme de séquençage, le Illumina HiSeq2000.
+  
+  \begin{longtable}[t]{lrlr}
+  \caption{\label{tab:tabrunbigmmaf}Liste des différents projets de séquençages effectués}\\
+  \toprule
+  Place & Year & Platform & Nb of individuals\\
+  \midrule
+  MountSinai & 2012 & Illumina Hiseq2000 & 2\\
+  Strasbourg & 2012 & Illumina Hiseq2000 & 13\\
+  Genoscope & 2013 & Illumina Hiseq2000 & 13\\
+  Genoscope & 2014 & Illumina Hiseq2000 & 28\\
+  Genoscope & 2015 & Illumina Hiseq2000 & 6\\
+  \bottomrule
+  \end{longtable}
+  
+  \paragraph{CALL}\label{call-1}
+  
+  Après avoir appelé les variants de nos 62 patients, nous avons obtenu un
+  total de 4484558 variants différents comprenant 4160274 SNVs et 324284
+  indels. Ces variants étant répartit entre chaque patient qui portaient
+  environs chacun 81618 SNV et 5148 indels dont 42.8 \% étaient
+  homozygote. Comme on peut le voir, la proportion de chaque appel est
+  relativement homogène lorsque l'on compare les patients ayant été
+  séquencés dans le même centre la même année. Cependant, il est possible
+  de noter de grandes disparités lorsque l'on compare les données
+  provenant de différents centres ou bien du même centre avec plusieurs
+  années de différences. Ces écarts peuvent-être causés par plusieurs
+  facteur, tel que les différents kits de capture d'exons qui on put être
+  utilisés puisque \ldots{} (\textbf{todo lister les différents kits de
+  capture dans une table}) en revanche nous pouvons écarter un effet dus à
+  la plateforme de séquençage ou encore le modèle de séquenceur puisque
+  tous ces projets ont été réalisés sur des Illumina HiSeq2000
+  (\textbf{Table : }\ref{tab:tabcohort}) (\textbf{Figure :
+  }\ref{fig:plotbigmmafcall} - \textbf{A}).
+  
+  Le même constat peut être effectué lorsque l'on compare la qualité des
+  appels puisque plus les projets de séquençage s'avèrent être récent,
+  plus la proportion d'appel \emph{Single Strand} s'avère être faible
+  tandis que la proportion d'appel \emph{Double Strand} (DS) est élevée.
+  Ceci est une bonne chose, car, bien que ces deux appels soient conservés
+  dans les analyses ultérieures, les appels DS sont de meilleure qualité
+  que les appels SS. Cette augmentation des appels DS au cours du temps
+  pourrait s'expliquer par une amélioration des protocoles de séquençage
+  ainsi que des kits de capture. En revanche cela est à pondérer avec le
+  taux croissant d'appels \emph{No-strand} (NS) au fur et à mesure des
+  années pour atteindre environs 21.3 \% en 2015 avec un projet réalisé au
+  Génoscope. Ces derniers appels étant systématiquement filtrés, ils
+  n'altèreront en rien les résultats obtenus en aval hormis le fait qu'ils
+  réduisent la quantité des données utilisées (\textbf{Figure :
+  }\ref{fig:plotbigmmafcall} - \textbf{B} et \textbf{C}).
+  
+  \newpage
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotbigmmafcall-1} 
+  
+  }
+  
+  \caption[Résultats de l'appel des variants par individus et par projet de séquençage]{Résultats de l'appel des variants par individus et par projet de séquençage : Chaque couleur définit un projet de séquençage caractérisé par un centre de séquençage et une année. **A** : Quantification pour chaque individus (représentés par les barres) du nombre de variants (SNVs et Indels) appelés homozygotes et hétérozygotes. **B** : Quantification des appels *Double Strand* (DS), *Single Strand* (SS) et *No strand* (NS) pour chaque projet de séquençage. **C** : Même chose en pourcentage}\label{fig:plotbigmmafcall}
+  \end{figure}
+  
+  \newpage
+  
+  \paragraph{FILTER}\label{filter-1}
+  
+  Après avoir appliqué les mêmes filtres que ceux décrit précédemment à
+  l'exception du filtre n°1
+  \protect\hyperlink{filterdescription}{``Union''} puisqu'ici nous avons
+  uniquement des individus non apparentés, nous avons pu obtenir une liste
+  de 1711 variants différents composés de 1470 SNVs et 241 indels et
+  impactant un total de 1432 gènes distincts. Ces variants étant répartis
+  sur l'ensemble de nos 62 patients ceux-ci portaient en moyenne 27 SNVS
+  et 5 indels, de sorte que chacun d'entre eux avaient entre 1 et 86 gènes
+  impactés par au moins un variants homozygote (\textbf{Figure :
+  }\ref{fig:plotfilterbigmmaf} - \textbf{A} et \textbf{B}).
+  
+  \begin{figure}
+  
+  {\centering \includegraphics{thesis_files/figure-latex/plotfilterbigmmaf-1} 
+  
+  }
+  
+  \caption[Résultats de l'étape de filtrage]{Résultats de l'étape de filtrage : **A** : Quantification du nombre de SNVs et indels ayant passé l'ensemble des filtres pour chaque patient. **B** : Nombre de gènes impactés par au moins un variant ayant passé les filtres pour chaque individu représenté par les barres. **C** : Présentation }\label{fig:plotfilterbigmmaf}
+  \end{figure}
+  
+  \newpage
+  
+  Au vu du grand nombre de gène, et afin d'étudier en priorité ceux
+  pouvant expliquer le phénotype d'un maximum de patients nous avons, dans
+  un premier temps, limité nos recherches aux gènes sur lesquels
+  \textbf{au moins 2 patients portaient un variant tronquant} . Ainsi nous
+  avons obtenu une liste restreinte de \ldots{} gènes différents. Ensuite,
+  nous avons chercher l'ensemble des patients portant des variants
+  homozygotes \textbf{non tronquant} sur au moins un de ces gènes.
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    récupérer les patients ayant au moins deux hétérozygotes
+  \end{enumerate}
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.35]{figure/hetero_composites} 
+  
+  }
+  
+  \caption[Représentation schématique des ....TODO]{Représentation schématique des ....TODO : Un variant est dit homozygote lorsque le **même** variant est présents sur les deux allèles d'un gène et hétérozygote lorsqu'il est présent sur **un seul** des deux allèles. On parlera d'hétérozygotes *cis* lorsque deux variants hétérozygotes différents seront positionnés sur **le même** allèle et d'hétérozygote *trans* (ou composite) lorsque ces deux variants hétérozygotes seront positionnés sur **deux allèles différents**. En WES et en WGS il est impossible de différentié les hétérozygotes *cis* des hétérozygotes *trans*}\label{fig:piccompositehet}
+  \end{figure}
+  
+  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-5-1} \end{center}
+  
+  \hypertarget{section}{\paragraph{}\label{section}}
+  
   \subsection{Article n° 7}\label{article-n-7}
   
   \textbf{Whole exome cohort study and analysis of mouse and Trypanosoma
@@ -1473,6 +1613,15 @@ class (for LaTeX) and the R bookdown package, in general.
   \newpage
   
   \subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-4}
+  
+  Après avoir identifié le gène \emph{DNAH1} comme un acteur majeur du
+  syndrome MMAF, notre équipe s'est en partie spécialisée dans la
+  caractérisation de ce phénotype. C'est pourquoi, entre \ldots{} et
+  \ldots{} nous avons effectué le séquençage WES de \ldots{} individus.
+  Parmi ceux-ci, \ldots{} ont pu être analysés au sein de notre pipeline
+  d'analyse tandis que pour des raisons materiels, les \ldots{} autres
+  n'ont pu l'être. Pour ces derniers nous avons donc utilisé directement
+  les variants fournis par les centres en charge du séquençage.
   
   \newpage
   
