@@ -244,7 +244,7 @@ class (for LaTeX) and the R bookdown package, in general.
   de départ une liste de variants appelés en amont. Ils ne contrôlent donc
   en aucune manière les étapes d'alignement et d'appel des variants. Or,
   comme il a été dit plus tôt, ces deux étapes constituent la base de
-  l'analyse \protect\hyperlink{section}{}.
+  l'analyse {[}{]}.
   
   Ce chapitre décrit à la fois la constitution d'un pipeline d'analyse des
   données de séquençage exomique recouvrant l'ensemble des étapes allant
@@ -634,11 +634,38 @@ class (for LaTeX) and the R bookdown package, in general.
   \item
     \textbf{Filtre 2 : Génotype des variants :} Ce pipeline d'analyse a
     avant tout été développé pour la recherche de variant impliqué dans
-    des pathologies à transmission récessives. Ainsi, à moins que le
-    contraire ne soit spécifié, l'ensemble des variants hétérozygotes sont
-    systématiquement filtrés. .
+    des pathologies à transmission récessives. C'est pourquoi, dans le
+    cadre d'étude d'individus présentant un historique de consanguinité,
+    l'ensemble des variants hétérozygotes sont filtrés. En revanche, dans
+    le cas d'individus issus d'unions non consanguin nous procédons à la
+    recherches de variants hétérozygotes composites, c'est à dire
+    \textbf{au moins deux variants hétérozygotes différents situés sur
+    chacun des deux allèles du même gène d'un patient}. Dès lors, bien que
+    les variants soient différents, les deux allèles sont altérés rendant
+    posiible l'apparition de phénotype récessifs. Malheureusement, dans le
+    cadre des séquençages WES et WGS, il est impossible de connaitre le
+    ``phasage'' de ces variants, c'est à dire que l'on ne peut déterminer
+    si deux variants hétérozygotes sont situés sur le même allèles ou sur
+    deux allèles différents (\textbf{Figure : }\ref{fig:compositehet}).
+    Pour cela, des analyses de biologie moléculaire sont nécessaires.
+  \end{enumerate}
+  
+  \newpage
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[scale=0.35]{figure/hetero_composites} 
+  
+  }
+  
+  \caption[Représentation schématique des phasages de deux variants avec les génotypes associés]{Représentation schématique des phasages de deux variants avec les génotypes associés : Un variant est dit homozygote lorsque le **même** variant est présents sur les deux allèles d'un gène et hétérozygote lorsqu'il est présent sur **un seul** des deux allèles. On parlera d'hétérozygotes *cis* lorsque deux variants hétérozygotes différents seront positionnés sur **le même** allèle et d'hétérozygote *trans* (ou composite) lorsque ces deux variants hétérozygotes seront positionnés sur **deux allèles différents**. En WES et en WGS il est impossible de différentié les hétérozygotes *cis* des hétérozygotes *trans*}\label{fig:piccompositehet}
+  \end{figure}
+  
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
   \item
-    \textbf{Filtre 4 : Les transcrits ``non pertinents'' :} Au cours de
+    \textbf{Filtre 3 : Les transcrits ``non pertinents'' :} Au cours de
     nos analyses nous nous sommes concentré uniquement sur les transcrits
     codant pour une protéine. Ainsi, l'ensemble des transcrits annotés
     comme étant non codant furent filtrés. De même pour les transcrits
@@ -655,7 +682,7 @@ class (for LaTeX) and the R bookdown package, in general.
     impactant \textbf{uniquement} des transcrits non codant et / ou annoté
     NMD sont filtrés.
   \item
-    \textbf{Filtre 3 : Impact du variant :} Afin de ne conserver que les
+    \textbf{Filtre 4 : Impact du variant :} Afin de ne conserver que les
     variants ayant le plus probablement délétère sur la protéine, seuls
     sont conservés ceux impactant la séquence codante d'un transcrit. De
     plus les variants synonymes ne sont pas conservés (exceptés ceux se
@@ -668,24 +695,24 @@ class (for LaTeX) and the R bookdown package, in general.
     \emph{benign} par Polyphen (Adzhubei et al.,
     \protect\hyperlink{ref-Adzhubei2010}{2010}) sont filtrés.
   \item
-    \textbf{Fréquence des variants :} La fréquence d'un variant dans la
-    population générale est un moyen rapide d'avoir une prédiction fiable
-    de l'effet délétère ou non de celui-ci. En effet, il est peu probable
-    qu'un variant retrouvé fréquemment dans la population générale soit
-    causal d'une pathologie sévère. C'est pourquoi, l'ensemble des
-    variants ayant une fréquence \(\ge\) 1\% dans l'une des trois bases de
-    données que sont ExAC, ESP et 1KG sont filtrés.
+    \textbf{Filtre 5 : Fréquence des variants :} La fréquence d'un variant
+    dans la population générale est un moyen rapide d'avoir une prédiction
+    fiable de l'effet délétère ou non de celui-ci. En effet, il est peu
+    probable qu'un variant retrouvé fréquemment dans la population
+    générale soit causal d'une pathologie sévère. C'est pourquoi,
+    l'ensemble des variants ayant une fréquence \(\ge\) 1\% dans l'une des
+    trois bases de données que sont ExAC, ESP et 1KG sont filtrés.
   \item
-    \textbf{Présence des variants dans la cohorte contrôle :} Au sien de
-    notre pipeline, les données de l'ensemble des patients analysés dans
-    les études anterieures sont conservés créant ainsi une base de donnée
-    interne de variants. Dès lors, il devient possible d'utiliser chacun
-    de ces patient comme contrôle lorsqu'ils ne sont pas porteur du même
-    phénotype que celui des patients des études ulterieures. Ce filtre se
-    révèle particulièrement intéréssant lorsque plusieurs patients
-    porteurs de phénotypes différents ont subi le même protocole de
-    séquençage ainsi l'ensemble des variants faux-positifs résultant
-    d'artéfact liés au différentes étapes en amont de l'analyse
+    \textbf{Filtre 6 : Présence des variants dans la cohorte contrôle :}
+    Au sien de notre pipeline, les données de l'ensemble des patients
+    analysés dans les études anterieures sont conservés créant ainsi une
+    base de donnée interne de variants. Dès lors, il devient possible
+    d'utiliser chacun de ces patient comme contrôle lorsqu'ils ne sont pas
+    porteur du même phénotype que celui des patients des études
+    ulterieures. Ce filtre se révèle particulièrement intéréssant lorsque
+    plusieurs patients porteurs de phénotypes différents ont subi le même
+    protocole de séquençage ainsi l'ensemble des variants faux-positifs
+    résultant d'artéfact liés au différentes étapes en amont de l'analyse
     bioinformatique pourront alors être filtré. De même ce filtre permet
     de mettre en évidence les variants propores à une population lorsque
     des patients provenant de la même région géographique et ne présentant
@@ -1428,12 +1455,6 @@ class (for LaTeX) and the R bookdown package, in general.
   \section{Résultats 2 : Étude d'une cohorte de femmes
   infertiles}\label{resultats-2-etude-dune-cohorte-de-femmes-infertiles}
   
-  \subsection{R}\label{r}
-  
-  \paragraph{CALL}\label{call}
-  
-  \paragraph{FILTER}\label{filter}
-  
   \subsection{Article n° 6}\label{article-n-6}
   
   \textbf{PATL2 Gene Mutation Causes Oocyte Meiotic Deficiency and Female
@@ -1451,6 +1472,16 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-3}
   
+  Entre 2013 et 2014 notre équipe a pris en charge le diagnostique de 15
+  femmes nord africaine présentant toutes une déficience méiotique
+  ovocytaire (DMO) caractérisé par un blocquage de la méïose au stade M1
+  et unduisant une infertilité. Un séquençage exomique a été fait sur ces
+  15 femmes.
+  
+  Dans ce contexte, j'ai, au cours de ma thèse, été en charge de
+  l'ensemble des analyses bio-informatiques ayant permi l'identification
+  des variants de \ldots{} femmes ayant été séquencées en haut débit.
+  
   \newpage
   
   \includepdf[pages=-]{bib/PATL2_2017.pdf}
@@ -1459,139 +1490,57 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Principaux résultats}\label{principaux-resultats-3}
   
-  \subsubsection{Discussion et
-  Perspectives}\label{discussion-et-perspectives}
+  L'application de notre pipeline d'analyse sur les données de ces femmes
+  nous a permis d'obtenir une liste de 235 variants impactant 213 gènes
+  différents. Parmi ces variants, aucin n'impactait le gène \emph{TUBB8}.
+  Afin de restreindre à nouveau la liste de gènes, nous nous sommes
+  concentré sur ceux retrouvés mutés à l'état homozygote chez au moins 2
+  femmes. Seul 3 gènes ont passés ce nouveau critère : \emph{FAM58A},
+  \emph{MGAM} et \emph{PATL2}. Aucune investigation n'a pour l'instant été
+  effectuée sur les 210 autres. En raison de la fréquence élevée du
+  variant retrouvé sur \emph{FAM58A} et de l'impact peu délétère du
+  variant chevauchant \emph{MGAM}, ces deux gènes ont été considéré comme
+  de mauvais candidats.
+  
+  Ainsi, nous nous sommes dans un premier temps concentré sur la
+  caractérisation de \emph{PATL2} dont l'orthologue \emph{xpat1a} chez le
+  xenope a été décrit comme étant exprimé au cours du dévelopement de
+  l'ovocyte (Marnef et al., \protect\hyperlink{ref-Marnef2010}{2010},
+  Nakamura et al. (\protect\hyperlink{ref-Nakamura2010}{2010})) faisant de
+  ce gène un excellent candidat. 5 de nos patients, soit 33.3\% d'entre
+  elles, révélèrent porter une même mutation : c.478G\textgreater{}T,
+  p.Arg160Ter induisant un codon stop prématuré dans la séquence codante
+  du transcrit canonique \emph{PATL2}: ENST00000434130. Au vu de ces
+  résultats un séquençage Sanger de la séquence codante de ce gène fut
+  réalisé pour ces 5 femmes afin de confirmer cette mutation, de même que
+  sur 8 femmes supplémentaires souffrant du même phénotypes. Parmi ces
+  dernières, une s'est révélée porter la même mutation à l'état
+  homozygote.
+  
+  Dans un second temps, l'étude du modèle murin KO
+  \emph{Patl2}\textsuperscript{-/-} nous a permi de mettre en évidence une
+  subfertilité importante chez les souris femelles tandis qu'aucun
+  phénotype n'était observable chez les mâles.
+  
+  Pour finir, \emph{xpat1a}, l'orthologue de \emph{PATL2} chez le xénope,
+  ayant été décrit comme réprimant la traduction de l'ARNm dans l'ococyte
+  nous avons cherché à savoir si les souris femelles KO
+  \emph{Patl2}\textsuperscript{-/-} présentait des dérégulation de leur
+  transcriptome ovocytaire. Pour cela, nous avons procédés à une étude
+  comparative des transcriptome ovocytaires au stades GC et MII murins sur
+  puces Affymetrix mesurant les valeurs d'expression d'environ 66,000
+  transcrits différents. Ainsi, nous avons pu mettre en évidence 134
+  transcrits différentiellement exprimés au stade GV parmi lesquels 95
+  étaient sous-exprimés tandis que 39 étaient sur-exprimés. Au stade MII,
+  ces dérégulation se révélèrent être plus impréssionnantes puisque 124
+  étaient sous-exprimés et 122 sur-exprimés démontrant ainsi un forte
+  implication de \emph{Patl2} dans la transcription ovocytaire des gènes
+  murins.
   
   \newpage  
   
   \section{Résultats 3 : Étude d'une large cohorte de patients
   MMAF}\label{resultats-3-etude-dune-large-cohorte-de-patients-mmaf}
-  
-  \subsection{Résultats des différents étapes de
-  l'analyse}\label{resultats-des-differents-etapes-de-lanalyse-1}
-  
-  Après avoir mis en évidence l'implication du gène \emph{DNAH1} dans le
-  phénotype MMAF notre équipe s'est en partie spécialisé dans la
-  caractérisation ce syndrome. Ainsi, entre 2012 et 2015, notre équipe a
-  effectué le séquençage de 62 individus présentant tous ce phénotype afin
-  d'en établir la cause génétique. Ces séquençages ont été effectué dans 3
-  centres différents que sont Genoscope, MountSinai et Strasbourg et sur
-  une seule plateforme de séquençage, le Illumina HiSeq2000.
-  
-  \begin{longtable}[t]{lrlr}
-  \caption{\label{tab:tabrunbigmmaf}Liste des différents projets de séquençages effectués}\\
-  \toprule
-  Place & Year & Platform & Nb of individuals\\
-  \midrule
-  MountSinai & 2012 & Illumina Hiseq2000 & 2\\
-  Strasbourg & 2012 & Illumina Hiseq2000 & 13\\
-  Genoscope & 2013 & Illumina Hiseq2000 & 13\\
-  Genoscope & 2014 & Illumina Hiseq2000 & 28\\
-  Genoscope & 2015 & Illumina Hiseq2000 & 6\\
-  \bottomrule
-  \end{longtable}
-  
-  \paragraph{CALL}\label{call-1}
-  
-  Après avoir appelé les variants de nos 62 patients, nous avons obtenu un
-  total de 4484558 variants différents comprenant 4160274 SNVs et 324284
-  indels. Ces variants étant répartit entre chaque patient qui portaient
-  environs chacun 81618 SNV et 5148 indels dont 42.8 \% étaient
-  homozygote. Comme on peut le voir, la proportion de chaque appel est
-  relativement homogène lorsque l'on compare les patients ayant été
-  séquencés dans le même centre la même année. Cependant, il est possible
-  de noter de grandes disparités lorsque l'on compare les données
-  provenant de différents centres ou bien du même centre avec plusieurs
-  années de différences. Ces écarts peuvent-être causés par plusieurs
-  facteur, tel que les différents kits de capture d'exons qui on put être
-  utilisés puisque \ldots{} (\textbf{todo lister les différents kits de
-  capture dans une table}) en revanche nous pouvons écarter un effet dus à
-  la plateforme de séquençage ou encore le modèle de séquenceur puisque
-  tous ces projets ont été réalisés sur des Illumina HiSeq2000
-  (\textbf{Table : }\ref{tab:tabcohort}) (\textbf{Figure :
-  }\ref{fig:plotbigmmafcall} - \textbf{A}).
-  
-  Le même constat peut être effectué lorsque l'on compare la qualité des
-  appels puisque plus les projets de séquençage s'avèrent être récent,
-  plus la proportion d'appel \emph{Single Strand} s'avère être faible
-  tandis que la proportion d'appel \emph{Double Strand} (DS) est élevée.
-  Ceci est une bonne chose, car, bien que ces deux appels soient conservés
-  dans les analyses ultérieures, les appels DS sont de meilleure qualité
-  que les appels SS. Cette augmentation des appels DS au cours du temps
-  pourrait s'expliquer par une amélioration des protocoles de séquençage
-  ainsi que des kits de capture. En revanche cela est à pondérer avec le
-  taux croissant d'appels \emph{No-strand} (NS) au fur et à mesure des
-  années pour atteindre environs 21.3 \% en 2015 avec un projet réalisé au
-  Génoscope. Ces derniers appels étant systématiquement filtrés, ils
-  n'altèreront en rien les résultats obtenus en aval hormis le fait qu'ils
-  réduisent la quantité des données utilisées (\textbf{Figure :
-  }\ref{fig:plotbigmmafcall} - \textbf{B} et \textbf{C}).
-  
-  \newpage
-  
-  \begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/plotbigmmafcall-1} 
-  
-  }
-  
-  \caption[Résultats de l'appel des variants par individus et par projet de séquençage]{Résultats de l'appel des variants par individus et par projet de séquençage : Chaque couleur définit un projet de séquençage caractérisé par un centre de séquençage et une année. **A** : Quantification pour chaque individus (représentés par les barres) du nombre de variants (SNVs et Indels) appelés homozygotes et hétérozygotes. **B** : Quantification des appels *Double Strand* (DS), *Single Strand* (SS) et *No strand* (NS) pour chaque projet de séquençage. **C** : Même chose en pourcentage}\label{fig:plotbigmmafcall}
-  \end{figure}
-  
-  \newpage
-  
-  \paragraph{FILTER}\label{filter-1}
-  
-  Après avoir appliqué les mêmes filtres que ceux décrit précédemment à
-  l'exception du filtre n°1
-  \protect\hyperlink{filterdescription}{``Union''} puisqu'ici nous avons
-  uniquement des individus non apparentés, nous avons pu obtenir une liste
-  de 1711 variants différents composés de 1470 SNVs et 241 indels et
-  impactant un total de 1432 gènes distincts. Ces variants étant répartis
-  sur l'ensemble de nos 62 patients ceux-ci portaient en moyenne 27 SNVS
-  et 5 indels, de sorte que chacun d'entre eux avaient entre 1 et 86 gènes
-  impactés par au moins un variants homozygote (\textbf{Figure :
-  }\ref{fig:plotfilterbigmmaf} - \textbf{A} et \textbf{B}).
-  
-  \begin{figure}
-  
-  {\centering \includegraphics{thesis_files/figure-latex/plotfilterbigmmaf-1} 
-  
-  }
-  
-  \caption[Résultats de l'étape de filtrage]{Résultats de l'étape de filtrage : **A** : Quantification du nombre de SNVs et indels ayant passé l'ensemble des filtres pour chaque patient. **B** : Nombre de gènes impactés par au moins un variant ayant passé les filtres pour chaque individu représenté par les barres. **C** : Présentation }\label{fig:plotfilterbigmmaf}
-  \end{figure}
-  
-  \newpage
-  
-  Au vu du grand nombre de gène, et afin d'étudier en priorité ceux
-  pouvant expliquer le phénotype d'un maximum de patients nous avons, dans
-  un premier temps, limité nos recherches aux gènes sur lesquels
-  \textbf{au moins 2 patients portaient un variant tronquant} . Ainsi nous
-  avons obtenu une liste restreinte de \ldots{} gènes différents. Ensuite,
-  nous avons chercher l'ensemble des patients portant des variants
-  homozygotes \textbf{non tronquant} sur au moins un de ces gènes.
-  
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \setcounter{enumi}{2}
-  \tightlist
-  \item
-    récupérer les patients ayant au moins deux hétérozygotes
-  \end{enumerate}
-  
-  \begin{figure}
-  
-  {\centering \includegraphics[scale=0.35]{figure/hetero_composites} 
-  
-  }
-  
-  \caption[Représentation schématique des ....TODO]{Représentation schématique des ....TODO : Un variant est dit homozygote lorsque le **même** variant est présents sur les deux allèles d'un gène et hétérozygote lorsqu'il est présent sur **un seul** des deux allèles. On parlera d'hétérozygotes *cis* lorsque deux variants hétérozygotes différents seront positionnés sur **le même** allèle et d'hétérozygote *trans* (ou composite) lorsque ces deux variants hétérozygotes seront positionnés sur **deux allèles différents**. En WES et en WGS il est impossible de différentié les hétérozygotes *cis* des hétérozygotes *trans*}\label{fig:piccompositehet}
-  \end{figure}
-  
-  \begin{center}\includegraphics{thesis_files/figure-latex/unnamed-chunk-5-1} \end{center}
-  
-  \hypertarget{section}{\paragraph{}\label{section}}
   
   \subsection{Article n° 7}\label{article-n-7}
   
@@ -1614,18 +1563,78 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-4}
   
-  Après avoir identifié le gène \emph{DNAH1} comme un acteur majeur du
-  syndrome MMAF, notre équipe s'est en partie spécialisée dans la
-  caractérisation de ce phénotype. C'est pourquoi, entre \ldots{} et
-  \ldots{} nous avons effectué le séquençage WES de \ldots{} individus.
-  Parmi ceux-ci, \ldots{} ont pu être analysés au sein de notre pipeline
-  d'analyse tandis que pour des raisons materiels, les \ldots{} autres
-  n'ont pu l'être. Pour ces derniers nous avons donc utilisé directement
-  les variants fournis par les centres en charge du séquençage.
+  Après avoir mis en évidence l'implication du gène \emph{DNAH1} dans le
+  phénotype MMAF notre équipe s'est en partie spécialisé dans la
+  caractérisation ce syndrome. Ainsi, entre 2012 et 2015, notre équipe a
+  effectué le séquençage de 62 individus présentant tous ce phénotype afin
+  d'en établir la cause génétique. Ces séquençages ont été effectué dans 3
+  centres différents que sont Genoscope, MountSinai et Strasbourg et sur
+  une seule plateforme de séquençage, le Illumina HiSeq2000.
+  
+  \begin{longtable}[t]{lrlr}
+  \caption{\label{tab:tabrunbigmmaf}Liste des différents projets de séquençages effectués}\\
+  \toprule
+  Place & Year & Platform & Nb of individuals\\
+  \midrule
+  MountSinai & 2012 & Illumina Hiseq2000 & 2\\
+  Strasbourg & 2012 & Illumina Hiseq2000 & 13\\
+  Genoscope & 2013 & Illumina Hiseq2000 & 13\\
+  Genoscope & 2014 & Illumina Hiseq2000 & 28\\
+  Genoscope & 2015 & Illumina Hiseq2000 & 6\\
+  \bottomrule
+  \end{longtable}
+  
+  L'application de de notre pipeline d'analyse nous a permi d'obtenir une
+  liste de \ldots{} variant distincts avec une moyenne de \ldots{} par
+  patients (insert fig) sur lesquels nous avons appliqués les filtres
+  précédemments décrits. Ainsi, (répéter les filtres utilisés).
+  L'application de ces filtres nous a ainsi permis d'obtenir une liste
+  ``restreinte'' de \ldots{} de SNV et \ldots{} indels impactant \ldots{}
+  gènes différents. Au vu du nombre important de gène restant et afin
+  d'étudier en priorité ceux pouvant expliquer le phénotype d'un maximum
+  de patients nous avons, comme précédemment, limité nos premières
+  recherches aux gènes sur lesquels \textbf{au moins 2 patients portaient
+  un variant tronquant} réduisant à nouveaux cette liste à \ldots{} gènes
+  différents.
+  
+  À l'issus de ces résultats nous nous somme dans un premiers temps
+  concacrés à la caractérisation des gènes \emph{CFAP43} et \emph{CFAP44}
+  
+  \newpage
+  
+  \begin{center}\includegraphics{thesis_files/figure-latex/plottwohomohigh-1} \end{center}
   
   \newpage
   
   \includepdf[pages=-]{bib/CFAP_2017.pdf}
+  
+  \newpage
+  
+  \subsubsection{Principaux résultats}\label{principaux-resultats-4}
+  
+  \begin{landscape}
+  \begin{longtable}[t]{llllllll}
+  \caption{\label{tab:unnamed-chunk-3}}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{3}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){4-5} \cmidrule(l{2pt}r{2pt}){6-8}
+  Patient & Gene & Genotype & HGVSc, HGVSp & Consequence & ExAC & ESP & 1KG\\
+  \midrule
+  Ghs17 & CFAP43 & Homozygous & c.2658G>A ; p.Trp886Ter & stop gained & 9.88e-05 & 2e-04 & .\\
+  Ghs22 & CFAP44 & Homozygous & . ; p.Arg1059Ter & stop gained & . & . & .\\
+  Ghs25 & CFAP43 & Homozygous & c.2141+5T>A ; . & splice region & . & . & .\\
+  Ghs34 & CFAP44 & Homozygous & . ; . & splice donor & . & . & .\\
+  Ghs41 & CFAP43 & Homozygous & c.2680C>T ; p.Arg894Ter & stop gained & 8.24e-06 & . & .\\
+  \addlinespace
+  Ghs89 & CFAP44 & Homozygous & c.1457A>T ; p.Ala486Val & missense & 0.000692 & 0.0012 & 0.0014\\
+  Ghs102 & CFAP43 & Homozygous & c.3882delA ; p.Glu1294AspfsTer47 & frameshift & . & . & .\\
+  Ghs105 & CFAP43 & Homozygous & c.3541-2A>C ; . & splice acceptor & . & . & .\\
+  Ghs126 & CFAP43 & Homozygous & c.3352C>T ; p.Arg1118Ter & stop gained & 3.29e-05 & . & .\\
+  Ghs132 & CFAP43 & Heterozygous & c.1300\_1301insT ; p.Leu435SerfsTer26 & frameshift & . & . & .\\
+  Ghs132 & CFAP43 & Heterozygous & c.1040G>C ; p.Val347Ala & missense & 7.41e-05 & 2e-04 & .\\
+  \bottomrule
+  \end{longtable}
+  \end{landscape}
   
   \newpage
   
@@ -1753,11 +1762,23 @@ class (for LaTeX) and the R bookdown package, in general.
   Research}, \emph{21}(6), 936--939.
   \url{http://doi.org/10.1101/gr.111120.110}
   
+  \hypertarget{ref-Marnef2010}{}
+  Marnef, A., Maldonado, M., Bugaut, A., Balasubramanian, S., Kress, M.,
+  Weil, D., \& Standart, N. (2010). Distinct functions of maternal and
+  somatic Pat1 protein paralogs. \emph{RNA}, \emph{16}(11), 2094--2107.
+  \url{http://doi.org/10.1261/rna.2295410}
+  
   \hypertarget{ref-McLaren2016}{}
   McLaren, W., Gil, L., Hunt, S. E., Riat, H. S., Ritchie, G. R. S.,
   Thormann, A., \ldots{} Cunningham, F. (2016). The Ensembl Variant Effect
   Predictor. \emph{Genome Biology}, \emph{17}(1), 122.
   \url{http://doi.org/10.1186/s13059-016-0974-4}
+  
+  \hypertarget{ref-Nakamura2010}{}
+  Nakamura, Y., Tanaka, K. J., Miyauchi, M., Huang, L., Tsujimoto, M., \&
+  Matsumoto, K. (2010). Translational repression by the oocyte-specific
+  protein P100 in Xenopus. \emph{Developmental Biology}, \emph{344}(1),
+  272--83. \url{http://doi.org/10.1016/j.ydbio.2010.05.006}
   
   \hypertarget{ref-Ng}{}
   Ng, S. B., Buckingham, K. J., Lee, C., Bigham, A. W., Tabor, H. K.,
