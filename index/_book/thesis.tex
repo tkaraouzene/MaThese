@@ -436,9 +436,9 @@ class (for LaTeX) and the R bookdown package, in general.
   \protect\hyperlink{ref-McLaren2016}{2016}) qui nous indiquera pour
   chaque variant la conséquence que celui-ci aura sur la séquence codante
   de l'ensemble des transcrits Ensembl qu'il chevauche (\textbf{Figure :
-  }\ref{fig:figvepcsq}) (\textbf{Table : }\ref{tab:tabvepcsq}). Dans le
-  cas de substitution faux-sens, c'est à dire entrainant le changement
-  d'un seul acide-aminé de la séquence protéique, nous utiliserons les
+  }\ref{fig:figvepcsq}, \textbf{Table : }\ref{tab:tabvepcsq}). Dans le cas
+  de substitution faux-sens, c'est à dire entrainant le changement d'un
+  seul acide-aminé de la séquence protéique, nous utiliserons les
   prédictions fournies par SIFT et PolyPhen afin d'estimer leur
   pathogénicité. Ensuite, nous ajoutons, pour chaque gène, son expression
   tissulaire en nous basant sur les données Ensembl (Aken et al.,
@@ -1563,13 +1563,20 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-4}
   
+  \begin{verbatim}
+  ##             used   (Mb) gc trigger   (Mb)  max used   (Mb)
+  ## Ncells   3021970  161.4    4703850  251.3   4024890  215.0
+  ## Vcells 197578584 1507.5  542316923 4137.6 653051113 4982.4
+  \end{verbatim}
+  
   Après avoir mis en évidence l'implication du gène \emph{DNAH1} dans le
   phénotype MMAF notre équipe s'est en partie spécialisé dans la
   caractérisation ce syndrome. Ainsi, entre 2012 et 2015, notre équipe a
   effectué le séquençage de 62 individus présentant tous ce phénotype afin
   d'en établir la cause génétique. Ces séquençages ont été effectué dans 3
   centres différents que sont Genoscope, MountSinai et Strasbourg et sur
-  une seule plateforme de séquençage, le Illumina HiSeq2000.
+  une seule plateforme de séquençage, le Illumina HiSeq2000 (\textbf{Table
+  : }\ref{tab:tabrunbigmmaf}).
   
   \begin{longtable}[t]{lrlr}
   \caption{\label{tab:tabrunbigmmaf}Liste des différents projets de séquençages effectués}\\
@@ -1584,57 +1591,52 @@ class (for LaTeX) and the R bookdown package, in general.
   \bottomrule
   \end{longtable}
   
-  L'application de de notre pipeline d'analyse nous a permi d'obtenir une
-  liste de \ldots{} variant distincts avec une moyenne de \ldots{} par
-  patients (insert fig) sur lesquels nous avons appliqués les filtres
-  précédemments décrits. Ainsi, (répéter les filtres utilisés).
-  L'application de ces filtres nous a ainsi permis d'obtenir une liste
-  ``restreinte'' de \ldots{} de SNV et \ldots{} indels impactant \ldots{}
-  gènes différents. Au vu du nombre important de gène restant et afin
-  d'étudier en priorité ceux pouvant expliquer le phénotype d'un maximum
-  de patients nous avons, comme précédemment, limité nos premières
-  recherches aux gènes sur lesquels \textbf{au moins 2 patients portaient
-  un variant tronquant} réduisant à nouveaux cette liste à \ldots{} gènes
-  différents.
-  
-  À l'issus de ces résultats nous nous somme dans un premiers temps
-  concacrés à la caractérisation des gènes \emph{CFAP43} et \emph{CFAP44}
-  
-  \newpage
-  
-  \begin{center}\includegraphics{thesis_files/figure-latex/plottwohomohigh-1} \end{center}
-  
-  \newpage
-  
   \includepdf[pages=-]{bib/CFAP_2017.pdf}
   
   \newpage
   
   \subsubsection{Principaux résultats}\label{principaux-resultats-4}
   
-  \begin{landscape}
-  \begin{longtable}[t]{llllllll}
-  \caption{\label{tab:unnamed-chunk-3}}\\
+  \begin{longtable}[t]{lrlr}
+  \caption{\label{tab:tabcfap43}Liste des différents projets de séquençages effectués}\\
   \toprule
-  \multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{3}{c}{Variant frequency} \\
-  \cmidrule(l{2pt}r{2pt}){4-5} \cmidrule(l{2pt}r{2pt}){6-8}
-  Patient & Gene & Genotype & HGVSc, HGVSp & Consequence & ExAC & ESP & 1KG\\
+  Place & Year & Platform & Nb of individuals\\
   \midrule
-  Ghs17 & CFAP43 & Homozygous & c.2658G>A ; p.Trp886Ter & stop gained & 9.88e-05 & 2e-04 & .\\
-  Ghs22 & CFAP44 & Homozygous & . ; p.Arg1059Ter & stop gained & . & . & .\\
-  Ghs25 & CFAP43 & Homozygous & c.2141+5T>A ; . & splice region & . & . & .\\
-  Ghs34 & CFAP44 & Homozygous & . ; . & splice donor & . & . & .\\
-  Ghs41 & CFAP43 & Homozygous & c.2680C>T ; p.Arg894Ter & stop gained & 8.24e-06 & . & .\\
-  \addlinespace
-  Ghs89 & CFAP44 & Homozygous & c.1457A>T ; p.Ala486Val & missense & 0.000692 & 0.0012 & 0.0014\\
-  Ghs102 & CFAP43 & Homozygous & c.3882delA ; p.Glu1294AspfsTer47 & frameshift & . & . & .\\
-  Ghs105 & CFAP43 & Homozygous & c.3541-2A>C ; . & splice acceptor & . & . & .\\
-  Ghs126 & CFAP43 & Homozygous & c.3352C>T ; p.Arg1118Ter & stop gained & 3.29e-05 & . & .\\
-  Ghs132 & CFAP43 & Heterozygous & c.1300\_1301insT ; p.Leu435SerfsTer26 & frameshift & . & . & .\\
-  Ghs132 & CFAP43 & Heterozygous & c.1040G>C ; p.Val347Ala & missense & 7.41e-05 & 2e-04 & .\\
+  MountSinai & 2012 & Illumina Hiseq2000 & 2\\
+  Strasbourg & 2012 & Illumina Hiseq2000 & 13\\
+  Genoscope & 2013 & Illumina Hiseq2000 & 13\\
+  Genoscope & 2014 & Illumina Hiseq2000 & 28\\
+  Genoscope & 2015 & Illumina Hiseq2000 & 6\\
   \bottomrule
   \end{longtable}
-  \end{landscape}
+  
+  L'application de de notre pipeline d'analyse sur les données de ces
+  \ldots{} patients nous a permi d'obtenir une liste de \ldots{} variant
+  distincts avec une moyenne de \ldots{} par patients (insert fig) sur
+  lesquels nous avons appliqués les filtres précédemments décrits soit :
+  
+  répéter les filtres utilisés).
+  
+  L'application de ces filtres nous a ainsi permis d'obtenir une liste
+  ``restreinte'' de \ldots{} de SNV et \ldots{} indels impactant \ldots{}
+  gènes différents (liste en annexe). Au vu du nombre important de gène
+  restant et afin d'étudier en priorité ceux pouvant expliquer le
+  phénotype d'un maximum de patients nous avons, comme précédemment,
+  limité nos recherches aux gènes sur lesquels \textbf{au moins 2 patients
+  portaient un variant tronquant} réduisant à nouveaux cette liste à
+  \ldots{} gènes différents (\textbf{Figure : }\ref{fig:plottwohomohigh}).
+  
+  En raison du nombre important de patients portant des mutations
+  tronquantes sur les gènes \emph{CFAP43} et \emph{CFAP44} (\textbf{Table
+  : }\ref{tab:tabcfap43}), couplé au fait que les protéines codées par ces
+  deux gènes présentent toutes deux des motif WDR, ces gènes furent les
+  premiers que nous avons cherché à caractériser.
+  
+  \newpage
+  
+  \begin{center}\includegraphics{thesis_files/figure-latex/plottwohomohigh-1} \end{center}
+  
+  \newpage
   
   \newpage
   
