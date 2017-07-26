@@ -42,7 +42,7 @@ link-citations: true
 bibliography: bib/MaThese_bib.bib
 # Download your specific bibliography database file and refer to it in the line above.
 
-csl: csl/apa.csl
+csl: csl/biomed-research-international.csl
 # Download your specific csl file and refer to it in the line above.
 lof: true
 lot: true

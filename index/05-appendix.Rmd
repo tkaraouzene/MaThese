@@ -9,6 +9,38 @@ Article DNAH1 2014
 
 \newpage
 
+#Table des variants retrouvés sur le gène *PATL2*
+
+
+```{r tabpatl2, dependson="dfbigmmaffilter", cache=TRUE}
+
+caption <- "Table des variants retrouvés sur le gène *PATL2*"
+
+df_patl2 <- bind_rows(df_ovo_filter, df_ovo_filter_het) %>%
+  filter(SYMBOL == "PATL2") %>%
+  filter(CANONICAL == "YES") %>%
+  mutate(CALL = substr(CALL, start=1, stop=4),
+         HGVSc = na.replace(HGVSc, "."),
+         HGVSp = na.replace(HGVSp, "."),
+         ExAC_AF = na.replace(ExAC_AF, "."),
+         ESP = na.replace(ESP, "."),
+         `1KG` = na.replace(`1KG`, "."),
+         `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
+         `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
+  select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence)
+
+   kable(df_patl2  %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
+     format = "latex",
+          booktabs = TRUE,
+          longtable = TRUE,
+          caption = caption) %>%
+  add_header_above(c(" " = 2, "Variant impact" = 2))
+
+```
+
+\newpage
+
+
 # Table des variants retrouvés sur le gène *DNAH1*  
 
 ```{r tabdnah1, dependson="dfbigmmaffilter", cache=TRUE}

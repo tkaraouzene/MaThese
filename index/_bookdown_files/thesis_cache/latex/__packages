@@ -1,15 +1,15 @@
 base
 devtools
-bookdown
 dplyr
 ggplot2
+bookdown
 knitr
 thesisdown
+stringi
 kableExtra
 pander
 tidyr
 data.table
-stringi
 scales
 cowplot
 stringr
