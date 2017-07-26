@@ -2,17 +2,104 @@
 
 `r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'` 
 
-
-# Annexe n°1 : 
+#  : Article DNAH1
 
 Article DNAH1 2014
 
 
+\newpage
+
+# Table des variants retrouvés sur le gène *DNAH1*  
+
+```{r tabdnah1, dependson="dfbigmmaffilter", cache=TRUE}
+
+caption <- "Table des variants retrouvés sur le gène *DNAH1*"
+
+df_dnah1 <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
+  filter(SYMBOL == "DNAH1") %>%
+  filter(CANONICAL == "YES") %>%
+  mutate(CALL = substr(CALL, start=1, stop=4),
+         HGVSc = na.replace(HGVSc, "."),
+         HGVSp = na.replace(HGVSp, "."),
+         ExAC_AF = na.replace(ExAC_AF, "."),
+         ESP = na.replace(ESP, "."),
+         `1KG` = na.replace(`1KG`, "."),
+         `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
+         `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
+  select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`)
+
+   kable(df_dnah1  %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
+     format = "latex",
+          booktabs = TRUE,
+          longtable = TRUE,
+          caption = caption) %>%
+  landscape() %>%
+  add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
+
+```
+
+\newpage
+
+# Table des variants retrouvés sur le gène *CFAP43*  
+
+```{r tabcfap43, dependson="dfbigmmaffilter", cache=TRUE}
+
+caption <- "Table des variants retrouvés sur le gène *CFAP43*"
+
+df_dnah1 <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
+  filter(SYMBOL == "CFAP43") %>%
+  filter(CANONICAL == "YES") %>%
+  mutate(CALL = substr(CALL, start=1, stop=4),
+         HGVSc = na.replace(HGVSc, "."),
+         HGVSp = na.replace(HGVSp, "."),
+         ExAC_AF = na.replace(ExAC_AF, "."),
+         ESP = na.replace(ESP, "."),
+         `1KG` = na.replace(`1KG`, "."),
+         `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
+         `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
+  select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`)
+
+   kable(df_dnah1  %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
+     format = "latex",
+          booktabs = TRUE,
+          longtable = TRUE,
+          caption = caption) %>%
+  landscape() %>%
+  add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
+
+```
+
+\newpage
+
+# Table des variants retrouvés sur le gène *CFAP44*  
 
 
+```{r tabcfap44, dependson="dfbigmmaffilter", cache=TRUE}
 
+caption <- "Table des variants retrouvés sur le gène *CFAP44*"
 
-# Tables des analyses d'exomes {#sssdd}
+df_dnah1 <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
+  filter(SYMBOL == "CFAP44") %>%
+  filter(CANONICAL == "YES") %>%
+  mutate(CALL = substr(CALL, start=1, stop=4),
+         HGVSc = na.replace(HGVSc, "."),
+         HGVSp = na.replace(HGVSp, "."),
+         ExAC_AF = na.replace(ExAC_AF, "."),
+         ESP = na.replace(ESP, "."),
+         `1KG` = na.replace(`1KG`, "."),
+         `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
+         `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
+  select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`)
+
+   kable(df_dnah1  %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
+     format = "latex",
+          booktabs = TRUE,
+          longtable = TRUE,
+          caption = caption) %>%
+  landscape() %>%
+  add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
+
+```
 
 \newpage
 
@@ -58,45 +145,3 @@ Article DNAH1 2014
 # 
 
 ```
-
-
-
-```{r annexetabinit, message=FALSE, warning=FALSE}
-
-tab_annexe(df_bigmmaf_filter, df_bigmmaf_filter_het)
-
-```
-
-\newpage
-
-
-```{r annexetabafterdnah1, message=FALSE, warning=FALSE}
-
-tab_annexe(df_bigmmaf_filter2, df_bigmmaf_filter_het2)
-
-```
-
-\newpage
-
-```{r annexetabaftergrp1, message=FALSE, warning=FALSE}
-
-tab_annexe(df_bigmmaf_filter3, df_bigmmaf_filter_het3)
-
-```
-
-\newpage
-
-```{r annexetabaftergrp2, message=FALSE, warning=FALSE}
-
-tab_annexe(df_bigmmaf_filter4, df_bigmmaf_filter_het4)
-
-```
-
-\newpage
-
-```{r annexetabaftergrp3, message=FALSE, warning=FALSE}
-
-tab_annexe(df_bigmmaf_filter5, df_bigmmaf_filter_het5)
-
-```
-

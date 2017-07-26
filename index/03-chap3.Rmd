@@ -223,7 +223,6 @@ gene_to_run <- function(df, genes) {
 
 ```{r callfunction, cache=TRUE}
 
-
 call_to_strand <- function(call) {
   
   in_ds <- c(1:9)
@@ -1953,53 +1952,38 @@ EMBO Molecular Medicine, Mai 2017
 
 <!-- RUN -->
 
-```{r extradata, cache=TRUE}
-
-df_rvis <- fread("data/RVIS_Unpublished_ExAC_May2015.txt",sep = "\t",header = TRUE,data.table = FALSE) %>%
-  select(SYMBOL = CCDS_r15,SCORE = `RVIS_ExAC_0.05%(AnyPopn)`) %>%
-  mutate(RVIS_PERCENTILE = percent_rank(SCORE)) %>%
-  select(-SCORE) %>%
-  na.omit()
-
-df_cilliome_gene <- fread("data/ciliome.csv",sep = "\t",header = TRUE, data.table = FALSE) %>% 
-  select(SYMBOL = Symbol, EVIDENCE = `Novelty category`, LOCALISATION = `Immunostaining of cilia`) %>% 
-  mutate(EVIDENCE = substring(EVIDENCE, 4),
-         EVIDENCE = if_else(grepl("Strong", EVIDENCE), "Strong",
-                            if_else(grepl("Weak", EVIDENCE), "Weak", "Novel")),
-         LOCALISATION = substring(LOCALISATION, 4))
-
-n_cilliome_gene <- df_cilliome_gene %>% nrow
-
-```
-
 ```{r dfrunbigmmaf, cache=TRUE}
 
-run_az_fam <- c("Ghs44","Ghs45")
-run_ff_fam <- c("Ghs113","Ghs117")
 run_mmaf_fam <- c("Ghs56","Ghs58","Ghs62","Ghs130","Ghs63","Ghs119","Ghs59","Ghs60","Ghs61")
 
-
-run_bigmmaf_novogene <- c("15IF060", "15IF059", "16IF032", "10IF017", "15IF063", "15IF061", "15IF065", "16IF030", "16IF036", "15IF064")
-run_ctrl_bigmmaf_novogene <- c("s15IF014", "s15IF018", "s15IF013", "s15IF016", "s15IF012", "s15IF015", "s15IF019", "s15IF017", "s15IF011")
-
-
-
-run_all_fam <- c(run_az_fam, run_ff_fam, run_mmaf_fam)
-
-df_run_bigmmaf <- fread("data/exome_runs.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(2,3,4,10:16), data.table = FALSE) %>%
-  rename(RUN = `Magic ID`, PHENOTYPE = Pathologie, DATE = Date) %>%
-  mutate(PHENOTYPE = if_else(PHENOTYPE == "Flag", "MMAF", PHENOTYPE),
+df_run_bigmmaf <- fread("data/exome_runs_all.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(2,4,10:16), data.table = FALSE) %>% 
+  mutate(RUN = if_else(Project == "Integragen", Patient, 
+                       if_else(Project == "Novogene", paste0("s", Patient), Magic_ID)),
+         RUN2 = Magic_ID) %>%
+  select(-Magic_ID, -Patient) %>%
+  rename(PHENOTYPE = Pathologie, DATE = Date) %>%
+  mutate(PHENOTYPE = if_else(PHENOTYPE == "Flag", "MMAF", PHENOTYPE), 
          YEAR = as.numeric(str_sub(DATE, start= -4)),
          PROJECT = paste0(Project," (",YEAR,")")) %>%
   filter(!(RUN %in% run_mmaf_fam),
-         PHENOTYPE == "MMAF") %>% 
+         PHENOTYPE == "MMAF") %>%
   select(-DATE, -PHENOTYPE)
+
 
 ```
 
 ```{r varrunbigmmaf, dependson="dfrunbigmmaf", cache=TRUE}
 
 runs_bigmmaf <- df_run_bigmmaf %>% collect() %>% .[["RUN"]]
+runs_ctrl_bigmmaf <- fread("data/exome_runs_all.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(2,4,10:16), data.table = FALSE) %>% 
+    rename(PHENOTYPE = Pathologie, DATE = Date) %>%
+  mutate(RUN = if_else(Project == "Integragen", Patient, 
+                       if_else(Project == "Novogene", paste0("s", Patient), Magic_ID)),
+         PHENOTYPE = if_else(PHENOTYPE == "Flag", "MMAF", PHENOTYPE)) %>% 
+  filter(PHENOTYPE != "MMAF") %>% 
+  collect() %>%
+  .[["RUN"]]
+
 
 min_year <- df_run_bigmmaf$YEAR %>% min
 max_year <- df_run_bigmmaf$YEAR %>% max
@@ -2007,101 +1991,48 @@ max_year <- df_run_bigmmaf$YEAR %>% max
 center <- df_run_bigmmaf$Project %>% unique
 n_center <- center %>% length
 
-nb_run_bigmmaf <- df_run_bigmmaf %>% nrow
+nb_run_bigmmaf <- runs_bigmmaf %>% length
+nb_run_ctrl_bigmmaf <- runs_ctrl_bigmmaf %>% length
+
+```
+
+<!-- ### -->
+
+<!-- ANNOTATION -->
+
+```{r dfannotate, cache=TRUE}
+ 
+df_annotate <- fread("zcat data/call_results/others_novogen_integragen_distinct_var_vep81_format_no_MODIFIER.csv.gz", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE)
 
 ```
 
 <!-- CALL -->
 
-```{r dfbigmmafcall, cache=TRUE}
+```{r dfbigmmafcall, cache=TRUE, dependson=c("varrunbigmmaf","dfrunbigmmaf","callfunction")}
 
-bigmmaf_call_file <- "results/bigmmaf_call.rds"
-bigmmaf_distinct_call_file <- "results/bigmmaf_distinct_call.rds"
-df_anotate_file <- "data/call_results/annotation_old_and_novogene_variant.rds"
+df_bigmmaf_call <- fread("data/call_results/others_novogen_integragen_var_genotype.csv", 
+                         sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>% 
+  select(CHR, POSITION, REF, ALT, one_of(runs_bigmmaf)) %>%
+  gather(RUN, CALL, -(CHR:ALT)) %>% 
+  filter(CALL %in% c(0, 2, 3, "b", "c"),
+         !is.na(REF)) %>%
+  mutate(STRAND = call_to_strand(CALL),
+         TYPE = var_type(REF, ALT),
+         CALL = call_to_geno(CALL)) %>%
+  left_join(df_run_bigmmaf %>% select(RUN, RUN2), by = "RUN") %>%
+  mutate(RUN = RUN2) %>%
+  select(-RUN2)
 
-if (!file.exists(bigmmaf_call_file)) {
-  
-  df_novogene_bigmmaf_indel_call <- fread("data/call_results/novogene_patients_indel_genotype.csv", 
-                                          sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>% 
-    gather(RUN, CALL, starts_with("1")) %>%
-    filter(CALL %in% c(0, 2, 3, "b", "c"),
-           !(RUN %in% run_bigmmaf_novogene),
-           !is.na(REF)) %>%
-    mutate(STRAND = call_to_strand(CALL),
-           TYPE = var_type(RES, ALT),
-           CALL = call_to_geno(CALL))
-  
-  df_novogene_bigmmaf_snp_call <- fread("data/call_results/novogene_patients_snp_genotype.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>% 
-    gather(RUN, CALL, starts_with("1")) %>%
-    filter(CALL %in% c(0, 2, 3, "b", "c"),
-           !(RUN %in% run_bigmmaf_novogene),
-           !is.na(REF)) %>%
-    mutate(STRAND = call_to_strand(CALL),
-           TYPE = var_type(RES, ALT),
-           CALL = call_to_geno(CALL))
-  
-  df_bigmmaf_call <- fread("data/genotype_MMAF.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
-    gather(RUN, CALL, starts_with("Ghs")) %>%
-    filter(CALL %in% c(0, 2, 3, "b", "c"),
-           !(RUN %in% c(run_mmaf_fam, run_bigmmaf_novogene)),
-           !is.na(REF)) %>%
-    mutate(CHR = as.character(CHR),
-           STRAND = call_to_strand(CALL),
-           TYPE = var_type(RES, ALT),
-           CALL = call_to_geno(CALL)) %>%
-    bind_rows(df_novogene_bigmmaf_indel_call) %>%
-    bind_rows(df_novogene_bigmmaf_snp_call)
-  
-  saveRDS(df_bigmmaf_call, bigmmaf_call_file)
-  
-} else {
-  
-  df_bigmmaf_call <- readRDS(bigmmaf_call_file)
-  
-}
-
-if (!file.exists(bigmmaf_distinct_call_file)) {
-  
-  if (!file.exists(df_anotate_file)) {
-    
-    # retrieve the VEP annotation for each variants
-    df_anotate <- fread("~/all_chr_var.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE) %>% 
-      bind_rows(fread("data/call_results/novogene_patients_distinct_var_vep_format.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE)) %>%
-      arrange(CHR, POSITION, REF, ALT) %>%
-      distinct()  
-    
-    saveRDS(df_anotate, df_anotate_file)
-    
-  } else {
-    
-    df_anotate <- readRDS(df_anotate_file)
-    
-  }
-  
   df_distinct_call <- df_bigmmaf_call %>%  
     filter(grepl("zygous", CALL)) %>% 
     distinct(CHR, POSITION, REF, ALT, TYPE) %>%
-    mutate(CHR = as.character(CHR)) %>%
-    # variant_join(fread("data/all_variants_vep81.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(11,12,14:28,31:34,36:40)), mode = "left") %>%
-    variant_join(df_anotate, mode = "left") %>%
+    variant_join(df_annotate, mode = "inner") %>%
     mutate(PolyPhen = gsub("_", " ", str_extract(PolyPhen, "\\w+")),
            SIFT = gsub("_", " ", str_extract(SIFT, "\\w+")),
            Consequence = sapply(strsplit(Consequence, "_variant", fixed = TRUE),"[[",1),
            Consequence = gsub("_", " ", Consequence),
            HGVSc = sapply(strsplit(HGVSc, split=':', fixed=TRUE), function(x) (x[2])),
            HGVSp = sapply(strsplit(HGVSp, split=':', fixed=TRUE), function(x) (x[2])))
-  
-  
-  rm(df_anotate)
-  gc()
-
-  saveRDS(df_distinct_call, bigmmaf_distinct_call_file)
-  
-} else {
-  
-  df_distinct_call <- readRDS(bigmmaf_distinct_call_file)
-  
-}
 
 df_bigmmaf_call_geno <- df_bigmmaf_call %>% 
   filter(grepl("zygous", CALL)) %>% 
@@ -2119,28 +2050,23 @@ df_bigmmaf_call_strand <- df_bigmmaf_call %>%
          P_STRAND = n / N_ALL_STRAND) %>%
   left_join(df_run_bigmmaf, by = "RUN")
 
+```
+
+<!-- FILTER-->
+
+```{r dfctrlbigmmaf, cache=TRUE,  dependson= "varrunbigmmaf"}
+
+df_ctrl_mmaf <- fread("data/call_results/others_novogen_integragen_var_genotype.csv", 
+                         sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>% 
+  select(CHR, POSITION, REF, ALT, one_of(runs_ctrl_bigmmaf)) %>% 
+  gather(RUN, CALL, -(CHR:ALT)) %>% 
+  filter(CALL %in% c(3, "c"),
+         !is.na(REF)) %>%
+    distinct(CHR, POSITION, REF, ALT)
 
 ```
 
-<!-- FILTER -->
-
-```{r dfctrlbigmmaf, cache=TRUE,  dependson= c("dfbigmmafcall", "localfunction")}
-
-df_novogene_bigmmaf_indel_ctrl <- fread("data/call_results/novogene_patients_indel_genotype.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>% 
-  select(CHR:ALT,`15IF014`, `15IF018`, `15IF013`, `15IF016`, `15IF012`, `15IF015`, `15IF019`, `15IF017`, `15IF011`) %>% 
-  open_ctrl(df = ., pheno = "MMAF")
-
-df_ctrl_mmaf <- df_novogene_bigmmaf_indel_ctrl %>% 
-  bind_rows(open_ctrl("data/genotype_not_MMAF.csv", pheno = "MMAF")) %>%
-  select(-N_CTRL, -PHENO) %>%
-  distinct(CHR, POSITION, REF, ALT) 
-
-rm(df_novogene_bigmmaf_indel_ctrl)
-gc()
-
-```
-
-```{r dfbigmmaffilter, dependson= c("dfbigmmafcall", "extradate"), cache=TRUE}
+```{r dffilterbigmmaf, cache=TRUE, dependson="dfbigmmafcall"}
 
 maf_cutoff <- .01
 
@@ -2151,13 +2077,9 @@ df_distinct_filter <- df_distinct_call %>%
          IMPACT != "MODIFIER",
          !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen)),
          !grepl("NMD transcript", Consequence),
-         !grepl("non coding transcript", Consequence)) %>%
-  left_join(df_rvis, by = "SYMBOL") %>%
-  left_join(df_cilliome_gene, by = "SYMBOL") %>%
-  mutate(EVIDENCE = if_else(is.na(EVIDENCE), "Not in the list", EVIDENCE))
-  
+         !grepl("non coding transcript", Consequence))
+
 df_bigmmaf_filter <- df_bigmmaf_call %>% 
-  mutate(CHR = as.character(CHR)) %>%
   select(-STRAND) %>%
   filter_genotype(het = FALSE) %>% 
   variant_join(df_distinct_filter, mode = "inner") %>% 
@@ -2166,19 +2088,7 @@ df_bigmmaf_filter <- df_bigmmaf_call %>%
                           if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL))) %>%
   ungroup()
   
-df_bigmmaf_filter_stat <- df_bigmmaf_filter %>% 
-  group_by(RUN) %>%
-  mutate(N_GENE = n_distinct(SYMBOL)) %>%
-  group_by(RUN, TYPE, N_GENE) %>%
-  distinct(CHR, POSITION, REF, ALT) %>%
-  summarise(N_VAR_PER_TYPE = n()) %>%
-  group_by(RUN) %>%
-  mutate(N_VAR_TOT = sum(N_VAR_PER_TYPE)) %>%
-  right_join(df_run_bigmmaf, by = "RUN") 
-
-
 df_bigmmaf_filter_het <- df_bigmmaf_call %>% 
-  mutate(CHR = as.character(CHR)) %>%
   select(-STRAND) %>% 
   filter_genotype(homo = FALSE) %>% 
   variant_join(df_distinct_filter, mode = "inner") %>% 
@@ -2192,10 +2102,15 @@ df_bigmmaf_filter_het <- df_bigmmaf_call %>%
   mutate(SYMBOL = if_else(SYMBOL == "WDR52", "CFAP44", 
                           if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL)))
 
-  
-df_bigmmaf_genes <- df_bigmmaf_filter %>% group_by(SYMBOL, EVIDENCE, LOCALISATION) %>% distinct(RUN) %>% mutate(N_RUN = n()) 
-df_bigmmaf_genes_distinct <- df_bigmmaf_genes %>% distinct(N_RUN)
-df_bigmmaf_genes_resume <- df_bigmmaf_genes_distinct %>% distinct(N_RUN) %>% group_by(N_RUN) %>% summarise(N_GENE = n()) 
+df_bigmmaf_filter_stat <- df_bigmmaf_filter %>% 
+  group_by(RUN) %>%
+  mutate(N_GENE = n_distinct(SYMBOL)) %>%
+  group_by(RUN, TYPE, N_GENE) %>%
+  distinct(CHR, POSITION, REF, ALT) %>%
+  summarise(N_VAR_PER_TYPE = n()) %>%
+  group_by(RUN) %>%
+  mutate(N_VAR_TOT = sum(N_VAR_PER_TYPE)) %>%
+  right_join(df_run_bigmmaf, by = "RUN") 
 
 ```
 
@@ -2215,24 +2130,12 @@ n_mean_snv <- df_bigmmaf_filter_stat %>% filter(TYPE == "SNV") %>% collect() %>%
 n_min_gene <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_GENE"]] %>% min
 n_max_gene <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_GENE"]] %>% max
 
-```
 
-```{r pierrerayanalysis}
-
-# Pierre Ray 
-# 
-# bind_rows(df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "BO.F") %>% inner_join(df_bigmmaf_filter),
-#           df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "BO.F") %>% inner_join(df_bigmmaf_filter_het)) %>% 
-#   filter(CANONICAL == "YES") %>%
-#   select(-CANONICAL) %>%
-#   select(-N_VAR_PER_RUN_PER_GENE, -N_RUN_PER_GENE) %>%
-#   add_exp() -> bo.f
-#   write.table("~/Bureau/canonical_variants_homo_het_BO.F.csv", sep = "\t", row.names = FALSE)
-# 
-# plot_expression(gene = bo.f$SYMBOL %>% unique, mode = "percent", tissues = "testis", flip = TRUE)
-#   
-
-
+nb_run_dnah1 <- bind_rows(df_bigmmaf_filter %>% filter(SYMBOL == "DNAH1"),
+                          df_bigmmaf_filter_het %>% filter(SYMBOL == "DNAH1")) %>%
+  distinct(RUN) %>%
+  nrow
+          
 ```
 
 ```{r dftwohomohigh, cache=TRUE, dependson="dfbigmmaffilter"}
@@ -2242,7 +2145,10 @@ df_bigmmaf_filter_high <- df_bigmmaf_filter %>%
          CANONICAL == "YES") %>% 
   group_by(SYMBOL) %>%
   summarise(High = n_distinct(RUN)) %>% 
-  filter(High > 1)
+  filter(High > 2) %>%
+  filter(!(SYMBOL %in% c("AC090286.4", "AC012309.5", "RP6-206I17.1","hsa-mir-150")),
+         !grepl("HLA-", SYMBOL),
+         !grepl("RP11", SYMBOL))
 
 df_bigmmaf_filter_moderate <- df_bigmmaf_filter %>% 
   filter(IMPACT != "HIGH",
@@ -2266,13 +2172,53 @@ df_bigmmaf_filter_reduce <- df_bigmmaf_filter_high %>%
   gather(EVIDENCE, N_RUN, High:Low, factor_key = TRUE) %>% 
   group_by(SYMBOL) %>%
   mutate(N_RUN = na.replace(N_RUN, 0),
-         N_TOT = sum(N_RUN)) %>%
-  filter(!(SYMBOL %in% c("AC090286.4", "RP6-206I17.1","hsa-mir-150","HLA-DRB5")),
-         !grepl("RP11", SYMBOL))
+         N_TOT = sum(N_RUN)) 
 
 ```
 
-Après avoir mis en évidence l'implication du gène *DNAH1* dans le phénotype MMAF notre équipe s'est en partie spécialisé dans la caractérisation ce syndrome. Ainsi, entre `r min_year` et `r max_year`, notre équipe a effectué le séquençage de `r nb_run_bigmmaf` individus présentant tous ce phénotype afin d'en établir la cause génétique. Ces séquençages ont été effectué dans `r n_center` centres différents que sont `r center %>% paste_vector` et sur une seule plateforme de séquençage, le Illumina HiSeq2000 (**Table : **\@ref(tab:tabrunbigmmaf)).
+```{r vartwohomohigh, cache=TRUE, dependson="dftwohomohigh"}
+
+gene_at_least3 <- df_bigmmaf_filter_high %>% distinct(SYMBOL) %>% collect() %>% .[["SYMBOL"]]
+nb_gene_at_least3 <- gene_at_least3 %>% length
+
+nb_run_cfap43_high <- df_bigmmaf_filter_reduce %>% filter(EVIDENCE == "High", SYMBOL == "CFAP43") %>% collect() %>% .[["N_HIGH"]] 
+nb_run_cfap43_moderate <- df_bigmmaf_filter_reduce %>% filter(EVIDENCE == "Moderate", SYMBOL == "CFAP43") %>% collect() %>% .[["N_MODERATE"]] 
+nb_run_cfap43_low <- df_bigmmaf_filter_reduce %>% filter(EVIDENCE == "Low", SYMBOL == "CFAP43") %>% collect() %>% .[["N_LOW"]] 
+nb_run_cfap43 <- nb_run_cfap43_high + nb_run_cfap43_moderate + nb_run_cfap43_low 
+p_run_cfap43 <- (nb_run_cfap43 / nb_run_bigmmaf) %>% round(3) * 100   
+  
+  
+nb_run_cfap44_high <- df_bigmmaf_filter_reduce %>% filter(EVIDENCE == "High", SYMBOL == "CFAP44") %>% collect() %>% .[["N_HIGH"]] 
+nb_run_cfap44_moderate <- df_bigmmaf_filter_reduce %>% filter(EVIDENCE == "Moderate", SYMBOL == "CFAP44") %>% collect() %>% .[["N_MODERATE"]] 
+nb_run_cfap44_low <- df_bigmmaf_filter_reduce %>% filter(EVIDENCE == "Low", SYMBOL == "CFAP44") %>% collect() %>% .[["N_LOW"]] 
+nb_run_cfap44 <- nb_run_cfap44_high + nb_run_cfap44_moderate + nb_run_cfap44_low 
+p_run_cfap44 <- (nb_run_cfap44 / nb_run_bigmmaf) %>% round(3) * 100   
+
+nb_run_cfap <- df_bigmmaf_filter %>% filter(SYMBOL == "CFAP44" | SYMBOL == "CFAP43") %>% distinct(RUN) %>% nrow
+
+```
+
+```{r pierrerayanalysis}
+
+# Pierre Ray 
+# 
+# bind_rows(df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "BO.F") %>% inner_join(df_bigmmaf_filter),
+#           df_runs %>% select(RUN = `Magic ID`, Patient) %>% filter(Patient == "BO.F") %>% inner_join(df_bigmmaf_filter_het)) %>% 
+#   filter(CANONICAL == "YES") %>%
+#   select(-CANONICAL) %>%
+#   select(-N_VAR_PER_RUN_PER_GENE, -N_RUN_PER_GENE) %>%
+#   add_exp() -> bo.f
+#   write.table("~/Bureau/canonical_variants_homo_het_BO.F.csv", sep = "\t", row.names = FALSE)
+# 
+# plot_expression(gene = bo.f$SYMBOL %>% unique, mode = "percent", tissues = "testis", flip = TRUE)
+#   
+
+
+```
+
+<!-- ### -->
+
+Après avoir mis en évidence l'implication du gène *DNAH1* dans le phénotype MMAF notre équipe s'est en partie spécialisé dans la caractérisation ce syndrome. Ainsi, entre `r min_year` et `r max_year`, notre équipe a effectué le séquençage de `r nb_run_bigmmaf` individus présentant tous ce phénotype afin d'en établir la cause génétique. Ces séquençages ont été effectué dans `r n_center` centres différents que sont `r center %>% paste_vector`. La plupart de ces séquençages ont été effectués sur des Illumina HiSeq2000 exceptés les ... plus récent qui ont été effectués sur un Illumina HiSeq4000 (**Table : **\@ref(tab:tabrunbigmmaf)).
 
 ```{r tabrunbigmmaf, cache=TRUE, dependson="dfrunbigmmaf"}
 
@@ -2285,7 +2231,7 @@ kable(df_run_bigmmaf %>%
         arrange(Year),
       longtable = TRUE,
       booktabs = TRUE, 
-      caption = "Liste des différents projets de séquençages effectués") 
+      caption = "Liste des différents individus présentant un phénotype MMAF séquencés en WES") 
 
 ```
 
@@ -2295,51 +2241,36 @@ kable(df_run_bigmmaf %>%
 
 #### Principaux résultats
 
-```{r tabcfap43}
+L'application de de notre pipeline d'analyse sur les données de ces `r nb_run_bigmmaf` patients nous a permi d'obtenir une liste de `r n_distinct_var` variant distincts ayant passés l'ensemble de nos filtres (`r n_distinct_snv` SNPs et `r n_distinct_indel` indels), ceux-ci impactant un total de `r n_distinct_gene` gènes différents.  
+
+Le gène *DNAH1* étant le candidat évident, nous avons chercher en priorité l'ensemble des variants retrouvés sur ce gène. Ainsi, nous avons obtenus une liste de `r nb_run_dnah1` patients portant tous soit au moins variant homozygote sur le gène *DNAH1* soit deux variants hétérozygotes sur ce même gène (**Table : **\@ref(tab:tabdnah1)).  
+
+**décrire les variants DNAH1**
 
 
-kable(df_run_bigmmaf %>% 
-        mutate(Platform = paste0(Platform, " ", Model)) %>%
-        select(-Model, -PROJECT) %>%
-        rename(Place = Project, Patient = RUN, Year = YEAR) %>% 
-        group_by(Place, Year, Platform) %>% 
-        summarise(`Nb of individuals` = n_distinct(Patient)) %>%
-        arrange(Year),
-      longtable = TRUE,
-      booktabs = TRUE, 
-      caption = "Liste des différents projets de séquençages effectués") 
+Au vu du nombre important de gènes restant et afin d'étudier en priorité ceux pouvant expliquer le phénotype d'un maximum de patients nous avons, comme précédemment, limité nos recherches aux gènes sur lesquels **au moins 3 patients portaient un variant tronquant** réduisant à nouveaux cette liste à `r nb_gene_at_least3` gènes différents : `r gene_at_least3 %>% paste_vector("itallic")` (**Figure : **\@ref(fig:plottwohomohigh)).
 
+Cela nous a ainsi permi de mettre en évidence les gènes *CFAP43* et *CFAP44* sur lesquels des variants homozygotes tronquants ont été retrouvés chez respectivement `r nb_run_cfap43_high` et `r nb_run_cfap44_high` patiens (**Tables : **\@ref(tab:tabcfap43) et \@ref(tab:tabcfap44)). Ces deux gènes CFAP (pour *Cilia and Flagella Associated Protein*) avaient déjà été répertorié dans les bases de données publiques comme ayant une forte expression testiculaire, et comme étant probablement impliqués dans la structure et / ou fonction du flagelle spermatique [@Ivliev2012]. De plus, ces deux gènes codent tous deux pour des protéines appartenant à la famille des WDR et comportent tous deux neuf répétitions WD [@Smith2008]. Ainsi, en tenant compte du nombre important de patients portantdes variants sur un de ces deux gènes et le fait qu'ils codent tous deux pour des protéines appartenant à la même famille, nous avons décidé de nous concentrer dans un premiers temps à la caractérisation de ces deux seuls gènes, ceux-ci étant les meilleurs candidats pour expliquer le phénotype d'infertilité de `r nb_run_cfap`  de nos patients.    
 
-# 
-# caption <- "Table des variants retrouvés sur le gène *CFAP43*"
-# 
-tab_cfap43 <- fread("/home/karaout/MaThese/index/data/tab_cfap43.csv", sep = "\t", data.table = FALSE, header = TRUE, showProgress = FALSE, verbose = FALSE) %>%
-  pander()
-#   # mutate(`HGVSc ; HGVSp` = paste0(HGVSc, " ; ", HGVSp)) %>% 
-#   # select(-HGVSc, -HGVSp) %>% 
-#   # arrange(desc(Genotype), `HGVSc ; HGVSp`) %>%
-#   as.data.frame()
-# 
-# kable(tab_cfap43,
-#       format = "latex",
-#       booktabs = TRUE,
-#       longtable = TRUE,
-#       caption = caption)
+Ainsi, un total de `r nb_run_cfap43_high + nb_run_cfap43_moderate` de nos patients révélèrent porter des variants homozygotes sur le gène *CFAP43*. En méttant de cotés les `r nb_run_cfap43_high` portant un variant ayant un effet tronquant évident, les variants portés par les `r nb_run_cfap44_moderate` autres patients révélèrent eux aussi avoir un effet probablement délétère. Le premier d'entre eux est un variants intronique non listé dans ExAC et prédit par Human Splicing Finder (http://www.umd.be/HSF3) comme altérant probablement le site consensus d'épissage de l'éxon 16 de *CFAP43*. Pour le second ...   
 
-```
+**détail des variants CFAP 44 (pareil que pour *CFAP43*)**
 
+L'analyse au microscope éléctronique à transmission des celulles spermatiques d'un patient portant un variant sur *CFAP43* et d'un autre portant un variant sur *CFAP44* révéla des défauts au niveau de l'axonème ainsi qu'une gaine fibreuse désorganisée pour chacun des deux patients.  
 
-L'application de de notre pipeline d'analyse sur les données de ces ... patients nous a permi d'obtenir une liste de ... variant distincts avec une moyenne de ... par patients (insert fig) sur lesquels nous avons appliqués les filtres précédemments décrits soit : 
+Ensuite, afin de compenser l'absence d'anticorps anti-CFAP43 et anti-CFAP44 fiables chez l'humain comme chez la souris nous avons décidé de caractériser leur orthologues chez *Trypanosoma brucei* (*T. brucei*), un protozoaire flagellé utilisé comme organisme modèle dans l'études des flagelles chez qui, les protéines *Tb*CFAP43 et *Tb*CFAP44 respectivement orthologues de CFAP43 et CFAP44 avaient déjà été identifées comme des protéines du flagelles [@Broadhead2006, @Subota2014]. Ensuite, l'utilisation d'ARN interférence nous a permi de produire des organismes *knock-down* pour ces deux gènes *TbCFAP43*^RAi^ et *TbCFAP44*^RNAi^ nous permettant ainsi d'évaluer la fonction de ces deux gènes au sein du flagelle du trypanosome. Cela nous a permi d'observerun arret de la prolifération cellulaire au bout de 24h ainsi que de nombreux defauts au niveau des flagelles pour l'ensemble des lignées cellulaires *TbCFAP43*^RAi^ et *TbCFAP44*^RNAi^.   
 
-répéter les filtres utilisés). 
+Pour finir, l'impact de l'absence des protéines CFAP43 et 44 sur la spermatogénèse murine a été déterminé grâce à la génération de modèle KO utilisant la technologie CRISPR-Cas9 qui nous a permi d'obtenir des phénotype reproductible pour nos deux modèles de souris KO. Ces modèles nous ont permis d'observer que les mâles *Cfap43*^-/-^ et *Cfap44*^-/-^ présentaient tous deux de nombreuses anomalies au niveaux des flagelles tandis que les femelles *Cfap43*^-/-^ et *Cfap44*^-/-^ étaient elles parfaitement fertiles.  
 
-L'application de ces filtres nous a ainsi permis d'obtenir une liste "restreinte" de ... de SNV et ... indels impactant ... gènes différents (liste en annexe). Au vu du nombre important de gène restant et afin d'étudier en priorité ceux pouvant expliquer le phénotype d'un maximum de patients nous avons, comme précédemment, limité nos recherches aux gènes sur lesquels **au moins 2 patients portaient un variant tronquant** réduisant à nouveaux cette liste à ... gènes différents (**Figure : **\@ref(fig:plottwohomohigh)).
+Pour conclure, cette étude portant sur la caractérisation du phénotype MMAF de ... individus non apparentés. L'utilisation de notre pipeline pour l'analyse des données NGS nous a permis à la fois de confirmer l'importance du gène *DNAH1* dans la structure du flagelle et son implication dans ce phénotype, mais aussi d'identifier deux nouveaux gènes, *CFAP43* et *CFAP44* respectivement responsables du phénotype de `r nb_run_cfap43` et `r nb_run_cfap44` de nos patients soit `r p_run_cfap43` et `r p_run_cfap43`% de notre cohorte.
 
-En raison du nombre important de patients portant des mutations tronquantes sur les gènes *CFAP43* et *CFAP44* (**Table : **\@ref(tab:tabcfap43)), couplé au fait que les protéines codées par ces deux gènes présentent toutes deux des motif WDR, ces gènes furent les premiers que nous avons cherché à caractériser.  
 
 \newpage
 
-```{r plottwohomohigh, cache=TRUE, dependson="dftwohomohigh"}
+```{r plottwohomohigh, cache=FALSE, fig.cap=fig_info,fig.scap=fig_name, fig.height=6, dependson="dftwohomohigh"}
+
+fig_name <- "Listes des gènes sur lesquels un variants tronquant à l'état homozygote a été retrouvé chez au moins deux de nos patients"
+fig_info <- paste0(fig_name, " : La couleur des barres indiquent le type de variants portés par chaque patient. Vert : variant homozygote tronquant, Orange variant homozygote non tronquant et rouge au moins deux variants hétérozygotes. Les gènes sont classés dans l'ordre décroissant en fonction du nombre de variants homozygotes tronquant retrouvés parmi nos patients.")
 
 n_max <- df_bigmmaf_filter_reduce$N_TOT %>% max
 
@@ -2351,66 +2282,12 @@ ggplot(df_bigmmaf_filter_reduce, aes(reorder(reorder(reorder(SYMBOL,N_LOW), N_MO
   scale_y_continuous(breaks = (1:n_max)) +
   ylab("Nb of individuals") + 
   xlab("") +  
-  coord_flip() 
+  coord_flip()  + 
+  theme(legend.position = "bottom")
 
 ```
 
-\newpage
-
-```{r tabdnah1, dependson="dfbigmmaffilter", cache=TRUE}
-# 
-# caption <- "Table des variants retrouvés sur le gène *DNAH1*"
-# 
-# df_cfap <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
-#   filter(CANONICAL == "YES") %>%
-#   mutate(CALL = substr(CALL, start=1, stop=4),
-#          HGVSc = na.replace(HGVSc, "."),
-#          HGVSp = na.replace(HGVSp, "."),
-#          ExAC_AF = na.replace(ExAC_AF, "."),
-#          ESP = na.replace(ESP, "."),
-#          `1KG` = na.replace(`1KG`, "."),
-#          `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
-#          `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
-#   select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`) 
-# 
-#    kable(df_cfap %>% filter(Gene == "DNAH1") %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
-#      format = "latex",
-#           booktabs = TRUE,
-#           longtable = TRUE,
-#           caption = caption) %>%
-#   # landscape() %>%
-#   add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
-
-```
-
-
-```{r tabcfap44, dependson="dfbigmmaffilter", cache=TRUE}
-
-# caption <- "Table des variants retrouvés sur le gène *CFAP44*"
-# 
-# df_cfap <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
-#   filter(CANONICAL == "YES") %>%
-#   mutate(CALL = substr(CALL, start=1, stop=4),
-#          HGVSc = na.replace(HGVSc, "."),
-#          HGVSp = na.replace(HGVSp, "."),
-#          ExAC_AF = na.replace(ExAC_AF, "."),
-#          ESP = na.replace(ESP, "."),
-#          `1KG` = na.replace(`1KG`, "."),
-#          `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
-#          `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
-#   select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`) 
-# 
-#    kable(df_cfap %>% filter(Gene == "CFAP44") %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
-#      format = "latex",
-#           booktabs = TRUE,
-#           longtable = TRUE,
-#           caption = caption) %>%
-#   # landscape() %>%
-#   add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
-
-```
 
 \newpage
 
 ## Conclusion  
-

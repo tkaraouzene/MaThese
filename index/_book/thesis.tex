@@ -196,9 +196,6 @@ class (for LaTeX) and the R bookdown package, in general.
   \mainmatter % here the regular arabic numbering starts
   \pagestyle{fancyplain} % turns page numbering back on
 
-  \chapter{Delete line 6 if you only have one
-  advisor}\label{delete-line-6-if-you-only-have-one-advisor}
-  
   \chapter{Mise en place d'une stratégie pour l'analyse des données
   exomiques -- application en recherche
   clinique}\label{mise-en-place-dune-strategie-pour-lanalyse-des-donnees-exomiques-application-en-recherche-clinique}
@@ -1230,8 +1227,8 @@ class (for LaTeX) and the R bookdown package, in general.
   \cmidrule(l{2pt}r{2pt}){2-3} \cmidrule(l{2pt}r{2pt}){4-6}
   Gene & HGVSc, HGVSp & Consequence & ExAC & ESP & 1KG\\
   \midrule
-  GUF1 & c.443A>T ; p.Ser148Ile & missense & 0.00207 & 0.0028 & 9e-04\\
   SPINK2 & c.56-3C>G ; . & splice region & . & . & .\\
+  GUF1 & c.443A>T ; p.Ser148Ile & missense & 0.00207 & 0.0028 & 9e-04\\
   \bottomrule
   \end{longtable}
   
@@ -1563,31 +1560,30 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-4}
   
-  \begin{verbatim}
-  ##             used   (Mb) gc trigger   (Mb)  max used   (Mb)
-  ## Ncells   3021970  161.4    4703850  251.3   4024890  215.0
-  ## Vcells 197578584 1507.5  542316923 4137.6 653051113 4982.4
-  \end{verbatim}
-  
   Après avoir mis en évidence l'implication du gène \emph{DNAH1} dans le
   phénotype MMAF notre équipe s'est en partie spécialisé dans la
-  caractérisation ce syndrome. Ainsi, entre 2012 et 2015, notre équipe a
-  effectué le séquençage de 62 individus présentant tous ce phénotype afin
-  d'en établir la cause génétique. Ces séquençages ont été effectué dans 3
-  centres différents que sont Genoscope, MountSinai et Strasbourg et sur
-  une seule plateforme de séquençage, le Illumina HiSeq2000 (\textbf{Table
-  : }\ref{tab:tabrunbigmmaf}).
+  caractérisation ce syndrome. Ainsi, entre 2012 et 2016, notre équipe a
+  effectué le séquençage de 90 individus présentant tous ce phénotype afin
+  d'en établir la cause génétique. Ces séquençages ont été effectué dans 5
+  centres différents que sont Genoscope, Integragen, MountSinai, Novogene
+  et Strasbourg. La plupart de ces séquençages ont été effectués sur des
+  Illumina HiSeq2000 exceptés les \ldots{} plus récent qui ont été
+  effectués sur un Illumina HiSeq4000 (\textbf{Table :
+  }\ref{tab:tabrunbigmmaf}).
   
   \begin{longtable}[t]{lrlr}
-  \caption{\label{tab:tabrunbigmmaf}Liste des différents projets de séquençages effectués}\\
+  \caption{\label{tab:tabrunbigmmaf}Liste des différents individus présentant un phénotype MMAF séquencés en WES}\\
   \toprule
   Place & Year & Platform & Nb of individuals\\
   \midrule
   MountSinai & 2012 & Illumina Hiseq2000 & 2\\
   Strasbourg & 2012 & Illumina Hiseq2000 & 13\\
-  Genoscope & 2013 & Illumina Hiseq2000 & 13\\
+  Genoscope & 2013 & Illumina Hiseq2000? & 13\\
   Genoscope & 2014 & Illumina Hiseq2000 & 28\\
   Genoscope & 2015 & Illumina Hiseq2000 & 6\\
+  \addlinespace
+  Integragen & 2016 & Illumina HiSeq4000 & 18\\
+  Novogene & 2016 & Illumina HiSeq4000 & 10\\
   \bottomrule
   \end{longtable}
   
@@ -1597,53 +1593,288 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Principaux résultats}\label{principaux-resultats-4}
   
-  \begin{longtable}[t]{lrlr}
-  \caption{\label{tab:tabcfap43}Liste des différents projets de séquençages effectués}\\
-  \toprule
-  Place & Year & Platform & Nb of individuals\\
-  \midrule
-  MountSinai & 2012 & Illumina Hiseq2000 & 2\\
-  Strasbourg & 2012 & Illumina Hiseq2000 & 13\\
-  Genoscope & 2013 & Illumina Hiseq2000 & 13\\
-  Genoscope & 2014 & Illumina Hiseq2000 & 28\\
-  Genoscope & 2015 & Illumina Hiseq2000 & 6\\
-  \bottomrule
-  \end{longtable}
+  L'application de de notre pipeline d'analyse sur les données de ces 90
+  patients nous a permi d'obtenir une liste de 3955 variant distincts
+  ayant passés l'ensemble de nos filtres (3178 SNPs et 777 indels),
+  ceux-ci impactant un total de 2987 gènes différents.
   
-  L'application de de notre pipeline d'analyse sur les données de ces
-  \ldots{} patients nous a permi d'obtenir une liste de \ldots{} variant
-  distincts avec une moyenne de \ldots{} par patients (insert fig) sur
-  lesquels nous avons appliqués les filtres précédemments décrits soit :
+  Le gène \emph{DNAH1} étant le candidat évident, nous avons chercher en
+  priorité l'ensemble des variants retrouvés sur ce gène. Ainsi, nous
+  avons obtenus une liste de 20 patients portant tous soit au moins
+  variant homozygote sur le gène \emph{DNAH1} soit deux variants
+  hétérozygotes sur ce même gène (\textbf{Table : }\ref{tab:tabdnah1}).
   
-  répéter les filtres utilisés).
+  \textbf{décrire les variants DNAH1}
   
-  L'application de ces filtres nous a ainsi permis d'obtenir une liste
-  ``restreinte'' de \ldots{} de SNV et \ldots{} indels impactant \ldots{}
-  gènes différents (liste en annexe). Au vu du nombre important de gène
-  restant et afin d'étudier en priorité ceux pouvant expliquer le
-  phénotype d'un maximum de patients nous avons, comme précédemment,
-  limité nos recherches aux gènes sur lesquels \textbf{au moins 2 patients
-  portaient un variant tronquant} réduisant à nouveaux cette liste à
-  \ldots{} gènes différents (\textbf{Figure : }\ref{fig:plottwohomohigh}).
+  Au vu du nombre important de gènes restant et afin d'étudier en priorité
+  ceux pouvant expliquer le phénotype d'un maximum de patients nous avons,
+  comme précédemment, limité nos recherches aux gènes sur lesquels
+  \textbf{au moins 3 patients portaient un variant tronquant} réduisant à
+  nouveaux cette liste à 11 gènes différents : \emph{CFAP43},
+  \emph{CFAP44}, \emph{CRIPAK}, \emph{FAM58A}, \emph{NOS2P1},
+  \emph{PTCHD3}, \emph{RBMX2}, \emph{RETNLB}, \emph{TBP}, \emph{TRAV26-1}
+  et \emph{TTC29} (\textbf{Figure : }\ref{fig:plottwohomohigh}).
   
-  En raison du nombre important de patients portant des mutations
-  tronquantes sur les gènes \emph{CFAP43} et \emph{CFAP44} (\textbf{Table
-  : }\ref{tab:tabcfap43}), couplé au fait que les protéines codées par ces
-  deux gènes présentent toutes deux des motif WDR, ces gènes furent les
-  premiers que nous avons cherché à caractériser.
+  Cela nous a ainsi permi de mettre en évidence les gènes \emph{CFAP43} et
+  \emph{CFAP44} sur lesquels des variants homozygotes tronquants ont été
+  retrouvés chez respectivement 8 et 6 patiens (\textbf{Tables :
+  }\ref{tab:tabcfap43} et \ref{tab:tabcfap44}). Ces deux gènes CFAP (pour
+  \emph{Cilia and Flagella Associated Protein}) avaient déjà été
+  répertorié dans les bases de données publiques comme ayant une forte
+  expression testiculaire, et comme étant probablement impliqués dans la
+  structure et / ou fonction du flagelle spermatique (Ivliev, 't Hoen,
+  Roon-Mom, Peters, \& Sergeeva,
+  \protect\hyperlink{ref-Ivliev2012}{2012}). De plus, ces deux gènes
+  codent tous deux pour des protéines appartenant à la famille des WDR et
+  comportent tous deux neuf répétitions WD (T. F. Smith,
+  \protect\hyperlink{ref-Smith2008}{2008}). Ainsi, en tenant compte du
+  nombre important de patients portantdes variants sur un de ces deux
+  gènes et le fait qu'ils codent tous deux pour des protéines appartenant
+  à la même famille, nous avons décidé de nous concentrer dans un premiers
+  temps à la caractérisation de ces deux seuls gènes, ceux-ci étant les
+  meilleurs candidats pour expliquer le phénotype d'infertilité de 17 de
+  nos patients.
+  
+  Ainsi, un total de 9 de nos patients révélèrent porter des variants
+  homozygotes sur le gène \emph{CFAP43}. En méttant de cotés les 8 portant
+  un variant ayant un effet tronquant évident, les variants portés par les
+  1 autres patients révélèrent eux aussi avoir un effet probablement
+  délétère. Le premier d'entre eux est un variants intronique non listé
+  dans ExAC et prédit par Human Splicing Finder
+  (\url{http://www.umd.be/HSF3}) comme altérant probablement le site
+  consensus d'épissage de l'éxon 16 de \emph{CFAP43}. Pour le second
+  \ldots{}
+  
+  \textbf{détail des variants CFAP 44 (pareil que pour \emph{CFAP43})}
+  
+  L'analyse au microscope éléctronique à transmission des celulles
+  spermatiques d'un patient portant un variant sur \emph{CFAP43} et d'un
+  autre portant un variant sur \emph{CFAP44} révéla des défauts au niveau
+  de l'axonème ainsi qu'une gaine fibreuse désorganisée pour chacun des
+  deux patients.
+  
+  Ensuite, afin de compenser l'absence d'anticorps anti-CFAP43 et
+  anti-CFAP44 fiables chez l'humain comme chez la souris nous avons décidé
+  de caractériser leur orthologues chez \emph{Trypanosoma brucei}
+  (\emph{T. brucei}), un protozoaire flagellé utilisé comme organisme
+  modèle dans l'études des flagelles chez qui, les protéines
+  \emph{Tb}CFAP43 et \emph{Tb}CFAP44 respectivement orthologues de CFAP43
+  et CFAP44 avaient déjà été identifées comme des protéines du flagelles
+  (Broadhead et al., \protect\hyperlink{ref-Broadhead2006}{2006}, Subota
+  et al. (\protect\hyperlink{ref-Subota2014}{2014})). Ensuite,
+  l'utilisation d'ARN interférence nous a permi de produire des organismes
+  \emph{knock-down} pour ces deux gènes
+  \emph{TbCFAP43}\textsuperscript{RAi} et
+  \emph{TbCFAP44}\textsuperscript{RNAi} nous permettant ainsi d'évaluer la
+  fonction de ces deux gènes au sein du flagelle du trypanosome. Cela nous
+  a permi d'observerun arret de la prolifération cellulaire au bout de 24h
+  ainsi que de nombreux defauts au niveau des flagelles pour l'ensemble
+  des lignées cellulaires \emph{TbCFAP43}\textsuperscript{RAi} et
+  \emph{TbCFAP44}\textsuperscript{RNAi}.
+  
+  Pour finir, l'impact de l'absence des protéines CFAP43 et 44 sur la
+  spermatogénèse murine a été déterminé grâce à la génération de modèle KO
+  utilisant la technologie CRISPR-Cas9 qui nous a permi d'obtenir des
+  phénotype reproductible pour nos deux modèles de souris KO. Ces modèles
+  nous ont permis d'observer que les mâles
+  \emph{Cfap43}\textsuperscript{-/-} et \emph{Cfap44}\textsuperscript{-/-}
+  présentaient tous deux de nombreuses anomalies au niveaux des flagelles
+  tandis que les femelles \emph{Cfap43}\textsuperscript{-/-} et
+  \emph{Cfap44}\textsuperscript{-/-} étaient elles parfaitement fertiles.
+  
+  Pour conclure, cette étude portant sur la caractérisation du phénotype
+  MMAF de \ldots{} individus non apparentés. L'utilisation de notre
+  pipeline pour l'analyse des données NGS nous a permis à la fois de
+  confirmer l'importance du gène \emph{DNAH1} dans la structure du
+  flagelle et son implication dans ce phénotype, mais aussi d'identifier
+  deux nouveaux gènes, \emph{CFAP43} et \emph{CFAP44} respectivement
+  responsables du phénotype de 11 et 17 de nos patients soit 12.2 et
+  12.2\% de notre cohorte.
   
   \newpage
   
-  \begin{center}\includegraphics{thesis_files/figure-latex/plottwohomohigh-1} \end{center}
+  \begin{figure}
   
-  \newpage
+  {\centering \includegraphics{thesis_files/figure-latex/plottwohomohigh-1} 
+  
+  }
+  
+  \caption[Listes des gènes sur lesquels un variants tronquant à l'état homozygote a été retrouvé chez au moins deux de nos patients]{Listes des gènes sur lesquels un variants tronquant à l'état homozygote a été retrouvé chez au moins deux de nos patients : La couleur des barres indiquent le type de variants portés par chaque patient. Vert : variant homozygote tronquant, Orange variant homozygote non tronquant et rouge au moins deux variants hétérozygotes. Les gènes sont classés dans l'ordre décroissant en fonction du nombre de variants homozygotes tronquant retrouvés parmi nos patients.}\label{fig:plottwohomohigh}
+  \end{figure}
   
   \newpage
   
   \section{Conclusion}\label{conclusion}
   
+  \appendix
+  
+  \chapter{: Article DNAH1}\label{article-dnah1}
+  
+  Article DNAH1 2014
+  
+  \newpage
+  
+  \chapter{\texorpdfstring{Table des variants retrouvés sur le gène
+  \emph{DNAH1}}{Table des variants retrouvés sur le gène DNAH1}}\label{table-des-variants-retrouves-sur-le-gene-dnah1}
+  
+  \begin{landscape}
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabdnah1}Table des variants retrouvés sur le gène *DNAH1*}\\
+  \toprule
+  \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-5}
+  Patient & Geno & HGVSc, HGVSp & Consequence & ExAC ; ESP ; 1KG\\
+  \midrule
+  Ghs122 & Homo & c.7533delC ; p.Gln2511HisfsTer27 & frameshift & . ; . ; .\\
+  Ghs178 & Homo & c.4734\_4742delGATGGGTAG ; p.Pro1582\_Gly1584del & inframe deletion & . ; . ; .\\
+  Ghs90 & Homo & c.2122G>C ; p.Ile708Leu & missense & . ; . ; .\\
+  Ghs90 & Homo & c.2123A>C ; p.Ile708Thr & missense & . ; . ; .\\
+  Ghs90 & Homo & c.2125A>C ; p.Phe709Leu & missense & . ; . ; .\\
+  \addlinespace
+  Ghs90 & Homo & c.4504C>A ; p.Val1502Met & missense & 0.00733 ; . ; .\\
+  Ghs95 & Homo & c.9278C>G ; p.Ala3093Gly & missense & . ; . ; .\\
+  Ghs126 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; . ; .\\
+  Ghs126 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; 0.008 ; 0.0023\\
+  Ghs127 & Hete & . ; p.Ser1763Leu & missense & 0.0058 ; . ; .\\
+  \addlinespace
+  Ghs127 & Hete & c.9121C>T ; p.Arg3041Cys & missense & 0.00527 ; . ; .\\
+  Ghs129 & Hete & . ; p.Arg3169Gly & missense & 8.26e-06 ; . ; .\\
+  Ghs129 & Hete & c.7153G>A ; p.Trp2385Arg & missense & . ; . ; .\\
+  Ghs155 & Hete & c.3877T>A ; p.Asp1293Asn & missense & 0.000149 ; . ; .\\
+  Ghs155 & Hete & c.3877T>A ; p.Asp1293Asn & missense & 0.000149 ; 1e-04 ; 0.0019\\
+  \addlinespace
+  Ghs167 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; . ; .\\
+  Ghs167 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; 0.008 ; 0.0023\\
+  Ghs172 & Hete & . ; p.Ser1763Leu & missense & 0.0058 ; . ; .\\
+  Ghs172 & Hete & c.9121C>T ; p.Arg3041Cys & missense & 0.00527 ; . ; .\\
+  Ghs175 & Hete & . ; p.Asp3440Asn & missense & 9.91e-05 ; . ; .\\
+  \addlinespace
+  Ghs175 & Hete & . ; p.Asp3440Asn & missense & 9.91e-05 ; 2e-04 ; .\\
+  Ghs177 & Hete & c.1351A>G ; p.Lys451Glu & missense & 0.00103 ; . ; .\\
+  Ghs177 & Hete & c.4504C>A ; p.Val1502Met & missense & 0.00733 ; . ; .\\
+  Ghs26 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; . ; .\\
+  Ghs26 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; 0.008 ; 0.0023\\
+  \addlinespace
+  Ghs27 & Hete & . ; p.Ser1763Leu & missense & 0.0058 ; . ; .\\
+  Ghs27 & Hete & c.9121C>T ; p.Arg3041Cys & missense & 0.00527 ; . ; .\\
+  Ghs28 & Hete & c.1172A>G ; p.Tyr391Cys & missense & 0.00233 ; 0.0027 ; 0.0019\\
+  Ghs28 & Hete & c.752C>G ; p.Glu251Gly & missense & 1.65e-05 ; 1e-04 ; .\\
+  Ghs36 & Hete & c.3931G>T ; p.Gln1311Ter & stop gained & 8.29e-06 ; . ; .\\
+  \addlinespace
+  Ghs36 & Hete & c.845A>G ; p.Leu282Trp & missense & . ; . ; .\\
+  Ghs39 & Hete & . ; p.Asp3440Asn & missense & 9.91e-05 ; . ; .\\
+  Ghs39 & Hete & . ; p.Asp3440Asn & missense & 9.91e-05 ; 2e-04 ; .\\
+  Ghs42 & Hete & . ; . & splice region & . ; . ; .\\
+  Ghs42 & Hete & . ; . & splice region & . ; . ; .\\
+  \addlinespace
+  Ghs42 & Hete & c.6916G>A ; p.Ala2306Thr & missense & . ; . ; .\\
+  Ghs42 & Hete & c.6916G>A ; p.Ala2306Thr & missense & . ; . ; .\\
+  Ghs87 & Hete & c.3431C>A ; p.Ser1144Asn & missense & 0.00024 ; . ; .\\
+  Ghs87 & Hete & c.8885G>C ; p.Lys2962Thr & missense & 0.000457 ; 7e-04 ; 5e-04\\
+  Ghs88 & Hete & c.2209C>A ; p.Val737Met & missense & 0.000115 ; 1e-04 ; .\\
+  \addlinespace
+  Ghs88 & Hete & c.3877T>A ; p.Asp1293Asn & missense & 0.000149 ; . ; .\\
+  Ghs88 & Hete & c.3877T>A ; p.Asp1293Asn & missense & 0.000149 ; 1e-04 ; 0.0019\\
+  \bottomrule
+  \end{longtable}
+  \end{landscape}
+  
+  \newpage
+  
+  \chapter{\texorpdfstring{Table des variants retrouvés sur le gène
+  \emph{CFAP43}}{Table des variants retrouvés sur le gène CFAP43}}\label{table-des-variants-retrouves-sur-le-gene-cfap43}
+  
+  \begin{landscape}
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabcfap43}Table des variants retrouvés sur le gène *CFAP43*}\\
+  \toprule
+  \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-5}
+  Patient & Geno & HGVSc, HGVSp & Consequence & ExAC ; ESP ; 1KG\\
+  \midrule
+  Ghs102 & Homo & c.3882delA ; p.Glu1294AspfsTer47 & frameshift & . ; . ; .\\
+  Ghs105 & Homo & c.3541-2A>C ; . & splice acceptor & . ; . ; .\\
+  Ghs105 & Homo & c.3541-2A>C ; . & splice acceptor & . ; . ; .\\
+  Ghs126 & Homo & c.3352C>T ; p.Arg1118Ter & stop gained & 3.29e-05 ; . ; .\\
+  Ghs160 & Homo & c.3541-2A>C ; . & splice acceptor & . ; . ; .\\
+  \addlinespace
+  Ghs160 & Homo & c.3541-2A>C ; . & splice acceptor & . ; . ; .\\
+  Ghs162 & Homo & c.1240\_1241delGC ; p.Val414LeufsTer46 & frameshift & . ; . ; .\\
+  Ghs164 & Homo & c.1240\_1241delGC ; p.Val414LeufsTer46 & frameshift & . ; . ; .\\
+  Ghs17 & Homo & c.2658G>A ; p.Trp886Ter & stop gained & 9.88e-05 ; . ; .\\
+  Ghs17 & Homo & c.2658G>A ; p.Trp886Ter & stop gained & 9.88e-05 ; 2e-04 ; .\\
+  \addlinespace
+  Ghs25 & Homo & c.2141+5T>A ; . & splice region & . ; . ; .\\
+  Ghs41 & Homo & c.2680C>T ; p.Arg894Ter & stop gained & 8.24e-06 ; . ; .\\
+  Ghs132 & Hete & c.1040G>C ; p.Val347Ala & missense & 7.41e-05 ; 2e-04 ; .\\
+  Ghs132 & Hete & c.1300\_1301insT ; p.Leu435SerfsTer26 & frameshift & . ; . ; .\\
+  Ghs154 & Hete & c.589C>A ; p.Val197Met & missense & 0.00385 ; . ; .\\
+  Ghs154 & Hete & c.589C>A ; p.Val197Met & missense & 0.00385 ; 0.0042 ; 0.0037\\
+  \bottomrule
+  \end{longtable}
+  \end{landscape}
+  
+  \newpage
+  
+  \chapter{\texorpdfstring{Table des variants retrouvés sur le gène
+  \emph{CFAP44}}{Table des variants retrouvés sur le gène CFAP44}}\label{table-des-variants-retrouves-sur-le-gene-cfap44}
+  
+  \begin{landscape}
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabcfap44}Table des variants retrouvés sur le gène *CFAP44*}\\
+  \toprule
+  \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-5}
+  Patient & Geno & HGVSc, HGVSp & Consequence & ExAC ; ESP ; 1KG\\
+  \midrule
+  Ghs155 & Homo & . ; p.Glu463Ter & stop gained & . ; . ; .\\
+  Ghs168 & Homo & c.2818\_2819insG ; p.Glu940GlyfsTer19 & frameshift & 8.24e-06 ; . ; .\\
+  Ghs177 & Homo & . ; p.Glu463Ter & stop gained & . ; . ; .\\
+  Ghs181 & Homo & c.4767delC ; p.Ile1589MetfsTer6 & frameshift & . ; . ; .\\
+  Ghs22 & Homo & . ; p.Arg1059Ter & stop gained & . ; . ; .\\
+  \addlinespace
+  Ghs34 & Homo & . ; . & splice donor & . ; . ; .\\
+  Ghs89 & Homo & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; . ; .\\
+  Ghs89 & Homo & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; 0.0012 ; 0.0014\\
+  Ghs106 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; . ; .\\
+  Ghs106 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; 0.0015 ; 0.0014\\
+  \addlinespace
+  Ghs125 & Hete & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; . ; .\\
+  Ghs125 & Hete & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; 0.0012 ; 0.0014\\
+  Ghs126 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; . ; .\\
+  Ghs126 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; 0.0096 ; 0.007\\
+  Ghs160 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; . ; .\\
+  \addlinespace
+  Ghs160 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; 0.0096 ; 0.007\\
+  Ghs183 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; . ; .\\
+  Ghs183 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; 0.0096 ; 0.007\\
+  Ghs21 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; . ; .\\
+  Ghs21 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; 0.0015 ; 0.0014\\
+  \addlinespace
+  Ghs41 & Hete & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; . ; .\\
+  Ghs41 & Hete & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; 0.0012 ; 0.0014\\
+  Ghs43 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; . ; .\\
+  Ghs43 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; 0.0096 ; 0.007\\
+  Ghs46 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; . ; .\\
+  \addlinespace
+  Ghs46 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; 0.0015 ; 0.0014\\
+  Ghs47 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; . ; .\\
+  Ghs47 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; 0.0015 ; 0.0014\\
+  \bottomrule
+  \end{longtable}
+  \end{landscape}
+  
+  \newpage
+  
+  \backmatter
+  
   \chapter*{References}\label{references}
   \addcontentsline{toc}{chapter}{References}
+  
+  \noindent
+  
+  \setlength{\parindent}{-0.20in} \setlength{\leftskip}{0.20in}
+  \setlength{\parskip}{8pt}
   
   \hypertarget{refs}{}
   \hypertarget{ref-1000GenomesProjectConsortium2015}{}
@@ -1706,6 +1937,12 @@ class (for LaTeX) and the R bookdown package, in general.
   \emph{American Journal of Human Genetics}, \emph{94}(1), 95--104.
   \url{http://doi.org/10.1016/j.ajhg.2013.11.017}
   
+  \hypertarget{ref-Broadhead2006}{}
+  Broadhead, R., Dawe, H. R., Farr, H., Griffiths, S., Hart, S. R.,
+  Portman, N., \ldots{} Gull, K. (2006). Flagellar motility is required
+  for the viability of the bloodstream trypanosome. \emph{Nature},
+  \emph{440}(7081), 224--227. \url{http://doi.org/10.1038/nature04541}
+  
   \hypertarget{ref-Chang2007}{}
   Chang, Y.-F., Imam, J. S., \& Wilkinson, M. F. (2007). The
   Nonsense-Mediated Decay RNA Surveillance Pathway. \emph{Annual Review of
@@ -1737,6 +1974,12 @@ class (for LaTeX) and the R bookdown package, in general.
   causing familial thoracic aortic dissection in two Japanese pedigrees.
   \emph{International Journal of Cardiology}, \emph{195}, 290--292.
   \url{http://doi.org/10.1016/j.ijcard.2015.05.178}
+  
+  \hypertarget{ref-Ivliev2012}{}
+  Ivliev, A. E., 't Hoen, P. A. C., Roon-Mom, W. M. C. van, Peters, D. J.
+  M., \& Sergeeva, M. G. (2012). Exploring the Transcriptome of Ciliated
+  Cells Using In Silico Dissection of Human Tissues. \emph{PLoS ONE},
+  \emph{7}(4), e35618. \url{http://doi.org/10.1371/journal.pone.0035618}
   
   \hypertarget{ref-Kumar2009}{}
   Kumar, P., Henikoff, S., \& Ng, P. C. (2009). Predicting the effects of
@@ -1806,12 +2049,26 @@ class (for LaTeX) and the R bookdown package, in general.
   cross-species phenotype comparison. \emph{Genome Research},
   \emph{24}(2), 340--8. \url{http://doi.org/10.1101/gr.160325.113}
   
+  \hypertarget{ref-Smith2008}{}
+  Smith, T. F. (2008). Diversity of WD-Repeat proteins. In \emph{The
+  coronin family of proteins} (Vol. 48, pp. 20--30). New York, NY:
+  Springer New York. \url{http://doi.org/10.1007/978-0-387-09595-0_3}
+  
   \hypertarget{ref-Su2014}{}
   Su, Z., Łabaj, P. P., Li, S. S., Thierry-Mieg, J., Thierry-Mieg, D.,
   Shi, W., \ldots{} Shi, L. (2014). A comprehensive assessment of RNA-seq
   accuracy, reproducibility and information content by the Sequencing
   Quality Control Consortium. \emph{Nature Biotechnology}, \emph{32}(9),
   903--14. \url{http://doi.org/10.1038/nbt.2957}
+  
+  \hypertarget{ref-Subota2014}{}
+  Subota, I., Julkowska, D., Vincensini, L., Reeg, N., Buisson, J.,
+  Blisnick, T., \ldots{} Bastin, P. (2014). Proteomic Analysis of Intact
+  Flagella of Procyclic \textless{}i\textgreater{}Trypanosoma
+  brucei\textless{}/i\textgreater{} Cells Identifies Novel Flagellar
+  Proteins with Unique Sub-localization and Dynamics. \emph{Molecular \&
+  Cellular Proteomics}, \emph{13}(7), 1769--1786.
+  \url{http://doi.org/10.1074/mcp.M113.033357}
   
   \hypertarget{ref-Wang2010}{}
   Wang, K., Li, M., \& Hakonarson, H. (2010). ANNOVAR: functional

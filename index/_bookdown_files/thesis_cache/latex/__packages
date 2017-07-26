@@ -5,6 +5,7 @@ dplyr
 ggplot2
 knitr
 thesisdown
+kableExtra
 pander
 tidyr
 data.table
@@ -16,6 +17,3 @@ foreach
 viridisLite
 viridis
 bindrcpp
-kableExtra
-magrittr
-ggpubr
