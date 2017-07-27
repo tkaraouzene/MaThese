@@ -9,7 +9,86 @@ Article DNAH1 2014
 
 \newpage
 
-#Table des variants retrouvés sur le gène *PATL2*
+# Tables des variants restant après application des filtres pour les cas familliaux
+
+```{r tabmmaf1, cache=TRUE, dependson="dfrecapmmaf"}
+
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères P1 et P2 de la famille MMAF1"
+
+df_filter_fam %>% ungroup %>% mutate(`HGVSc, HGVSp` = paste0(na.replace(HGVSc, ".")," ; ", na.replace(HGVSp, "."))) %>% filter(FAM == "MMAF1", CANONICAL == "YES") %>% 
+  select(SYMBOL, `HGVSc, HGVSp`, Consequence) %>%  
+  distinct() %>%
+  kable(format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = caption) %>% 
+  add_header_above(c(" ", "Variant impact" = 2))
+
+```
+
+```{r tabmmaf2, cache=TRUE, dependson="dfrecapmmaf"}
+
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères P3 et P4 de la famille MMAF1"
+
+df_filter_fam %>% ungroup %>% mutate(`HGVSc, HGVSp` = paste0(na.replace(HGVSc, ".")," ; ", na.replace(HGVSp, "."))) %>% filter(FAM == "MMAF2", CANONICAL == "YES") %>% 
+  select(SYMBOL, `HGVSc, HGVSp`, Consequence) %>%  
+  distinct() %>%
+  kable(format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = caption) %>% 
+  add_header_above(c(" ", "Variant impact" = 2))
+
+```
+
+```{r tabmmaf3, cache=TRUE, dependson="dfrecapmmaf"}
+
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères P5 et P6 de la famille MMAF3"
+
+df_filter_fam %>% ungroup %>% mutate(`HGVSc, HGVSp` = paste0(na.replace(HGVSc, ".")," ; ", na.replace(HGVSp, "."))) %>% filter(FAM == "MMAF3", CANONICAL == "YES") %>% 
+  select(SYMBOL, `HGVSc, HGVSp`, Consequence) %>%  
+  distinct() %>%
+  kable(format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = caption) %>% 
+  add_header_above(c(" ", "Variant impact" = 2))
+
+```
+
+```{r tabmmaf4, cache=TRUE, dependson="dfrecapmmaf"}
+
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères P8 et P9 de la famille MMAF4"
+
+df_filter_fam %>% ungroup %>% mutate(`HGVSc, HGVSp` = paste0(na.replace(HGVSc, ".")," ; ", na.replace(HGVSp, "."))) %>% filter(FAM == "MMAF4", CANONICAL == "YES") %>% 
+  select(SYMBOL, `HGVSc, HGVSp`, Consequence) %>%  
+  distinct() %>% 
+  kable(format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = caption) %>% 
+  add_header_above(c(" ", "Variant impact" = 2))
+
+```
+
+\newpage
+
+```{r tabmmaf5, cache=TRUE, dependson="dfrecapmmaf"}
+
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour le patient P10 de la famille MMAF5"
+
+df_filter_fam %>% ungroup %>% mutate(`HGVSc, HGVSp` = paste0(na.replace(HGVSc, ".")," ; ", na.replace(HGVSp, "."))) %>% filter(FAM == "MMAF5", CANONICAL == "YES") %>% 
+  select(SYMBOL, `HGVSc, HGVSp`, Consequence) %>%  
+  distinct() %>% 
+  kable(format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = caption) %>% 
+  add_header_above(c(" ", "Variant impact" = 2))
+
+```
+
+# Table des variants retrouvés sur le gène *PATL2*
 
 
 ```{r tabpatl2, dependson="dfbigmmaffilter", cache=TRUE}

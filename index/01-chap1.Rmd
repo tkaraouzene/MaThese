@@ -1,4 +1,48 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Introduction {#introInf}
+
+```{r include.packages1, include=FALSE}
+# This chunk ensures that the thesisdown package is
+# installed and loaded. This thesisdown package includes
+# the template files for the thesis.
+
+if(!require(devtools))
+  install.packages("devtools", repos = "http://cran.rstudio.com")
+
+if(!require(bookdown))
+  devtools::install_github('rstudio/bookdown')
+
+if(!require(thesisdown))
+  devtools::install_github("ismayc/thesisdown")
+
+if(!require(kableExtra))
+devtools::install_github("haozhu233/kableExtra")
+
+library(thesisdown)
+library(pander)
+library(knitr)
+library(tidyr)
+library(dplyr)
+library(data.table)
+library(ggplot2)
+library(stringi)
+library(scales)
+library(cowplot)
+library(stringr)
+library(foreach) 
+library(viridis)
+library(kableExtra)
+
+opts_knit$set(eval.after = c("fig.cap","fig.scap"))
+
+knitr::opts_chunk$set(fig.align='center',echo=FALSE)
+
+knitr::opts_knit$set(kable.force.latex = TRUE)
+```
 
 ## La spermatogénèse  
 

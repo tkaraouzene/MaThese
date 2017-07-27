@@ -383,12 +383,6 @@ df_vep_csq <-  fread("data/vep_csq_modif.csv", sep = "\t", header = TRUE, showPr
          `VEP impact` = IMPACT,
          Description = `SO description`)
 
-# kable(df_vep_csq,
-#       format = "latex",
-#       longtable = TRUE) %>%
-#   column_spec(3, width = "11em" ) %>%
-#   landscape() 
-
 pander(df_vep_csq,
                justify = 'left',
                split.cells = c(.5,1,50),
@@ -475,6 +469,8 @@ nb_pheno <- df_fam %>% summarise(N_PHENO = n_distinct(PHENOTYPE)) %>% collect() 
 min_year <- df_fam$YEAR %>% min
 max_year <- df_fam$YEAR %>% max
 nb_fam_run <- run_fam_all %>% length
+
+nb_run_fam_mmaf <- run_fam_mmaf_all %>% length
 
 ```
 
@@ -637,6 +633,7 @@ if (!file.exists(annotate_file)) {
            HGVSp = sapply(strsplit(HGVSp, split=':', fixed=TRUE), function(x) (x[2])))
   
   df_annotate <- df_fam_call %>%
+    left_join(df_fam_run %>% select(RUN, FAM), by = "RUN") %>% 
     mutate(CHR = as.character(CHR)) %>%
     filter(grepl("zygous", CALL)) %>% 
     select(-STRAND) %>%
@@ -809,7 +806,8 @@ df_filter_fam <- ungroup(df_annotate) %>%
   group_by(FAM) %>%
   mutate(NB_FAM = n_distinct(RUN)) %>% 
   group_by(CHR, POSITION, REF, ALT, FAM, Feature) %>% 
-  filter(n() == mean(NB_FAM))
+  filter(n() == mean(NB_FAM),
+         SYMBOL != "JMJD7-PLA2G4B") # pseudogene pourri de MMAF1
 
 ```
 
@@ -1046,7 +1044,7 @@ df_remaining_gene <- df_filter_fam %>%
   mutate(CAUSAL = if_else(FAM == "AZ", "SPINK2", 
                           if_else(FAM == "FF","PLCZ1",
                                   if_else(FAM == "MMAF3","DNAH1", 
-                                          if_else(FAM == "MMAF4", "TGIF2?", "???")))),
+                                          if_else(FAM == "MMAF5", "SPEF2?", "???")))),
          FIND_CAUSAL = if_else(CAUSAL == "???","No",
                                if_else(grepl("[?]", perl = TRUE, CAUSAL),"Maybe","Yes"))) %>%
   rename(Family = FAM) %>% 
@@ -1055,6 +1053,10 @@ df_remaining_gene <- df_filter_fam %>%
   
   
   filter(!(SYMBOL %in% c("NBPF13P","HLA-DRB6","JMJD7-PLA2G4B"))) 
+
+
+df_causal <- group_by(df_remaining_gene, Family, FIND_CAUSAL, CAUSAL) %>%
+  summarise(N = n())
 
 n_gene_az <- df_remaining_gene %>% filter(Family == "AZ") %>% distinct(SYMBOL) %>% nrow
 n_gene_ff <- df_remaining_gene %>% filter(Family == "FF") %>% distinct(SYMBOL) %>% nrow
@@ -1308,7 +1310,8 @@ Les étapes précédentes nous ont permis de mettre en évidence pour chaque pat
 
 4. **Filtre 4 : Les transcrits "non pertinents" :** Cette étape de filtre permet de filtrer systématiquement entre `r min_tr` et `r max_tr` transcrits différents par patients. Cependant, un même variant pouvant impacter à la fois des transcrits "non pertinents" **et** des transcrits "pertinents", seuls ceux impactant **uniquement** des transcrits "non pertinents" sont filtrés, soit une moyenne de `r mean_variant` variants par individus (**Figure : **\@ref(fig:plotfilternonpertinanttr)).    
 
-```{r plotfilternonpertinanttr, fig.cap=fig_info,fig.scap=fig_name,fig.width=6.3, fig.height=3.5, cache=TRUE}
+\newpage 
+```{r plotfilternonpertinanttr, fig.cap=fig_info,fig.scap=fig_name,fig.width=6.3, fig.height=3.2, cache=TRUE}
 
 fig_name <- "Filtrage des transcrits jugés \"non pertinents\" et des variants les chevauchant"
 fig_description <- "Pour chaque patient nous avons filtrer les transcrits jugés \"non pertinents\" pour l'analyse, c'est à dire ceux ne codant pas pour une protéine et ceux annoté NMD. Dès lors, l'intégralité des variants chevauchant uniquement des transcrits non pertinents ont pu systématiquement être filtrés (boites rouges). Les autres furent conservés (boites vertes)"
@@ -1354,6 +1357,8 @@ Comme on pouvait s'y attendre, ces six filtres ont un pouvoir discriminant extr�
 
 Cependant, regarder uniquement le pourcentage de variants filtrés par chaque filtre révèle une information partielle. En effet, dans ce cas de figure, on observe la quantité de variant éliminé par chaque filtre indépendamment les uns des autres. Ainsi, un même variant peut donc être filtré par plusieurs filtres. Dès lors, il faut également analyser la quantité de variants filtrés **spécifiquement** par chaque filtre. Ainsi, on peut constater que le classement des filtres en fonctions de leur stringence reste quasiment identique. Il est tout de même intéressant de noter que désormais le filtre "Variant impact" apparait moins efficace que les filtres "Ctrl" et "Genotype" en filtrant spécifiquement une moyenne de `r mean_filter_spe_impact` variants par individu contre `r mean_filter_spe_geno` pour le filtre génotype et `r mean_filter_spe_ctrl` pour le filtre "Ctrl". Ainsi, ce dernier devient celui filtrant spécifiquement le plus de variants avec entre `r min_filter_spe_ctrl` et `r max_filter_spe_ctrl` variants spécifiquement filtrés par patients confirmant ainsi l'importance de ce filtre dans nos analyses. Aussi, les filtres "Transcript relevance", "Union" et "Frequency" apparaissent désormais comme étant anecdotiques en comparaison aux trois autres filtres puisqu'ils filtrent au maximum `r max_filter_spe_other` variants spécifiques (**Figure :** \@ref(fig:plotcomparefilter) - **B**).  
 
+Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants subsistent nous permettant d'obtenir une liste de gènes restreinte pour chaque famille et ainsi de tirer des conclusions quant au variant responsable du phénotype de chacune d'entre elles. Ces travaux ont ainsi pu mener à l'écriture de trois articles dont je suis co-auteur.   
+
 \newpage
 
 ```{r plotcomparefilter, fig.cap=fig_info,fig.scap=fig_name, fig.height=7, cache=TRUE}
@@ -1383,8 +1388,6 @@ pB <- ggplot(spe_all, aes(FILTER, N_FILTERED_SPE)) +
 plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
 
 ```
-
-Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants subsistent nous permettant d'obtenir une liste de gènes restreinte pour chaque famille et ainsi de tirer des conclusions quant au variant responsable du phénotype de chacune d'entre elles. Ces travaux ont ainsi pu mener à l'écriture de trois articles dont je suis co-auteur.   
 
 \newpage
 
@@ -1603,11 +1606,11 @@ Human Reproduction, Octobre 2016
 
 #### Contexte et objectifs  
 
-Dans une étude précédente non détaillée dans ce manuscrit , notre équipe a pu identifier le gène *DNAH1* comme le premier gène codant pour une dynéine axonèmale responsable uniquement d’infertilité masculine. Dans cette première étude, ... de nos ... patients (non apparentés), soit environs ... d'entre eux, étaient porteur d'une mutation homozygote sur le gène *DNAH1* responsable de leur phénotype MMAF. Ces résultats ont ainsi démontrés l'importance de l'implication de ce gène dans ce phénotype.  
+Dans une étude précédente non détaillée dans ce manuscrit, notre équipe a pu identifier le gène *DNAH1* comme le premier gène codant pour une dynéine axonèmale responsable uniquement d’infertilité masculine. Dans cette première étude, ... de nos ... patients (non apparentés), soit environs ... d'entre eux, étaient porteur d'une mutation homozygote sur le gène *DNAH1* responsable de leur phénotype MMAF. Ces résultats ont ainsi démontrés l'importance de l'implication de ce gène dans ce phénotype.  
 
-Dans cette nouvelle étude, nous nous concentrons sur l'analyses des données génétiques de 5 familles iraniène et d'une famille italienne pour un total de 12 individus. Parmis eux 10 sont nés d'un union consanguain. Pour des raisons techniques et materiels, seuls deux de ces individus ont, pour l'instant, été analysés sur notre pipeline décrite précédement (famille MMAF). Pour les autres les données familles séquencés en haut débit, les variants utilisés furent ceux fournit par les centres de séquençage auxquels nous avons ensuite appliqué les même critères de filtre.  
+Dans cette nouvelle étude, nous nous concentrons sur l'analyses des données génétiques de 5 familles iraniène et d'une famille italienne pour un total de 12 individus dont 10 ont été séquencés en WES. Cependant, pour des raisons techniques, seuls les données de `r nb_run_fam_mmaf` d'entre eux ont été analysés sur notre pipeline décrite précédement.  
 
-Dans ce contexte j'ai effectué les l'ensemble des analyses des deux patients patients de la familles MMAF décrites ci-dessus, mais également l'ensemble des analyses de filtrage appliqué aux données des 8 autres patients séquencés en WES.     
+Dans ce contexte j'ai effectué les l'ensemble des analyses bioinformatiques des patients patients des familles MMAF1-5 séquencés en WES.       
 
 \newpage
 
@@ -1621,7 +1624,7 @@ Dans ce contexte j'ai effectué les l'ensemble des analyses des deux patients pa
 
 df_remaining_variant_mmaf <- df_recap %>% 
   ungroup() %>% 
-  filter(Family == "MMAF") %>% 
+  filter(grepl("MMAF", Family)) %>% 
   mutate(HGVSc = na.replace(HGVSc, "."),
          HGVSp = na.replace(HGVSp, "."),
          `HGVSc, HGVSp` = paste0(HGVSc," ; ", HGVSp)) %>% 
@@ -1638,40 +1641,34 @@ gene_fam_mmaf <- df_remaining_variant_mmaf %>% collect() %>% .[["Gene"]]
 
 ```
 
-Dans cette étude nous avons séquencé un total de 12 patients provenant de  6 familles différentes. Tout ces patients souffrent d'un syndrome MMAF induisant une infertilité. Parmi ceux-ci 10 ont été séquençé en WES, cependant, seulement ... d'entre eux ont été analysé au sein de notre pipeline d'analyse. Après l'aplication de l'ensemble des filtres seul ... variants subsistaient impactant respectivement les gènes ... . 
+Après avoir été séquencés en WES, les données des ... patients (...)liste des patients ont été analysés au sein de notre pipeline. Compte tenu de l'historique de consanguinité de ces familles, l'ensemble des variants hétérozygotes ont été filtrés de même que l'ensemble des variants observés fréquement dans la population générale et ceux n'ayant aucun impacte sur la séquence codante. Aussi, dans les cas où les données de WES de plusieurs frères d'une même famille étaient disponibles, seuls les variants partagés par l'ensemble des frères furent gardés. À l'issus de cette étape de filtrage, seuls quelques variants subsitaient pour chacune des familles impactant entre ... et ... gènes différents en fonction de celles-ci. (**Tables :** ..., **Figure : **\@ref(fig:plotremaininggenes)).  
 
+Parmis cette liste de gènes, *DNAH1* fut retrouvé mutés chez les deux frères de la famille MMAF3 ainsi que chez les deux frères de la famille MMAF6 (non annalysés par notre pipeline). De même, un variant entrainant un décalage du cadre de lecture dans la séquence du gène *SPEF2* (codant pour la protéine *Sperm flagellar 2* (SPEF2)) a été retrouvé chez le patient P10 de la famille MMAF5. Aucun autre candidat évident n'a pu être identifié pour les individus composant les 3 autres familles. Ensuite, bien que le gène *SPEF2* ait déjà été caractérisé comme ayant un rôle dans la biogénèse du flagelle spermatique [@Lehti2017] nous nous sommes dans un premiers temps concentrés sur la caractérisation des deux variants retrouvés sur *DNAH1*.  
 
+1. **Famille MMAF3 :** Les deux frères P5 et P6 analysés en WES était tout deux porteur de la même mutation c.8626-1G > A qui fut par la suite confirmée en Sanger pour ces deux patients ainsi que pour leur troisième frère (P7) non analysé en WES. Cette mutation, absente des différentes bases de données, impacte le dernier nucléotide de l'intron 54 de *DNAH1* soit l'une des deux bases composant le site accepteur consensus d'épissage. Afin d'évaluer l'impact de cette mutation sur le transcrit de *DANH1*, nous avons étudiés par RT-PCR l'ARNm provenant de ces trois frères ainsi que de 2 individus contrôles. Cette étude a révélés qu'aucune amplification du transcrit de *DNAH1* n'était observée chez les trois frères contrairement aux deux contrôles tandis que l'amplification ciblant *GAPDH* était positif pour les 5 individus confirmant ainsi l'intégrité de l'ARNm de l'ensemble des individus testés. Ces résultats suggèrent donc que les transcrits produits par les trois frères mutés ont été soummis au mécanisme de dégradation spécifique par *mRNA decay*. Afin de validé la pathogénicité de ce variant, la protéine DNAH a ensuite été localisée par immunofluorescence à la fois chez les patients et les contrôles révélant que contrairement aux contrôles, la protéine DNAH1 était absente chez les trois frères, renforcant ainsi l'hypothèse d'une dégradation spécifique des ARNm.  
 
-**Famille MMAFXXX** : À l'issue des filtres, ` n_gene_mmaf3` gènes ressortaient chez ces deux frères : *MYH11* et *DNAH1*. Or, notre équipe ayant déjà établit le lien entre des mutations du gène *DNAH1* et le syndrome MMAF [@BenKhelifa2014] ce gène s'est révélé être un candidat idéal pour expliquer le phénotype de ces 2 frères. De plus, l'implication de *MYH11* dans le phénotype de dissection aortique [@Imai2015] l'ont écarté des candidats pour le phénotype MMAF.   
+2. **Famille MMAF6 :** Le variant c.3860 T > G (p.Val1287Gly) induisant une mutation faux sens dans la séquence de l'éxon 23 de *DNAH1* a été retrouvé dans les données WES des deux frères P11 et P12 (non analysés par notre pipeline) et a par la suite été confirmée en Sanger. Malheureusement, par manque de materiel, aucune étude portant sur l'ARNm de ces patients ou bien sur l'mmunofluorescence à partir de cellules spermatiques n'a pu être effectuée sur ces patients. Cependant, le fait que ce variant faux-sens soit absent des bases de données et qu'il soit prédit comme *probably dammaging* par PolyPhen et *deleterious* par SIFT renforce l'hypothèse de la pathogénicité de ce variant.   
 
-\newpage
-
-
-```{r tabrecapmmaf, cache=TRUE, dependson="dfrecapmmaf"}
-
-caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères P5 et P6 de la famille MMAF3"
-
-df_remaining_variant_mmaf %>%
-  kable(format = "latex",
-        booktabs = TRUE,
-        longtable = TRUE,
-        caption = caption) %>% 
-  add_header_above(c(" ", "Variant impact" = 2, "Variant frequency" = 3))
-
-```
+Ainsi, à l'issus de l'analyse de ces ... familles présentant un phénotye MMAF, le variant responsable a pu être déterminé pour ... d'entre elles grâce à l'dentification de 2 nouveaux variants impactant la séquence codante du gène *DNAH1* confirmant ainsi l'importance de l'implication de ce gèe dans le phénotype MMAF. De même un indel entrainant un décalage du cadre de lecture dans la séquence du gène *SPEF2* fait de ce gène, déja connu comme ayant un rôle dans la formation des flagelles, un excellent candidat pour expliquer le phénotype du patient P10, notre équipe travaillant à l'heure actuelle à la caractérisation de ce gène. Cependant, aucun candidat évident n'a pu être identifié pour les ... familles restante laissant supposé que le variant responsable de leur phénotype ait été éliminé par un de nos filtres. Afin d'identifier la cause génétique de leur phénotype, nous réanalysons actuellement les données de ces patients en appliquant des filtres moins stringents, par exemple, en conservant les gènes sur lesquels deux variants hétérozygotes sont retrouvés, ce qui pourrait être la signature d'une hétérozygotie composite.  
 
 \newpage
 
-```{r plotexpfammmaf, dependson="varrecapmmaf", fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
+```{r plotremaininggenes, fig.height=7, fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
 
-fig_name <- "Expression tissulaire des gènes DNAH1 et MYH11"
-fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
-fig_info <- paste0(fig_name, " : ", fig_description)
+fig_name <- "Nombre de gènes passant l'ensemble des filtres par famille"
+fig_description <- "Chaque barre représente une des familles analysées. La hauteur de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres vertes caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au-dessus de la barre). La barre orange caractérise la famille pour laquelle un candidat potentiel a été identifié (le symbole du gène est écrit au-dessus suivit d'un \"?\"). Les barres rouges indiquent qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit \"???\" au-dessus de la barre)"
+fig_info <- paste(fig_name, " : ", fig_description)
 
-plot_expression(gene_fam_mmaf,"percent", TRUE)+
-  xlab("") +
-  theme(legend.position = c(1, 0),
-        legend.justification = c(1,0))
+ggplot(df_causal %>% filter(grepl("MMAF", Family)), aes(Family, N)) +
+  geom_col(aes(fill = FIND_CAUSAL)) +
+   scale_y_continuous(limits = c(0,max(df_causal$N) + 1), breaks = seq(0, max(df_causal$N) + 1,2)) +
+  geom_text(aes(label = CAUSAL), position = position_dodge(width = .9), hjust = 1.1) +
+  ylab("Nb of remaining genes after all filtering") +
+  theme(axis.title.y=element_blank()) +
+  scale_fill_manual(name = "Is the causal variant found?", limits = c("Yes", "Maybe", "No"), values = c("chartreuse3", "#FF7F00", "#E41A1C")) + 
+  theme(legend.position = "bottom") + 
+  coord_flip()
+
 
 ```
 
