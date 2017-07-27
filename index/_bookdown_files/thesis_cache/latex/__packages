@@ -17,3 +17,5 @@ foreach
 viridisLite
 viridis
 bindrcpp
+magrittr
+ggpubr
