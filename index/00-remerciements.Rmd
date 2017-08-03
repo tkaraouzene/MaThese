@@ -11,7 +11,10 @@ Je remercie ...
  <!-- - Léquipe GETI   -->
  <!-- - La BGM   -->
 
- <!-- <!-- - Ridley Scott pour le film Gladiator --> -->
+ <!-- <!-- - Ridley Scott pour le film Gladiator --> 
+ 
+ <!-- Agnès pour avoir corrigé mes nombreuses fautes  -->
+ 
  <!-- - Mes amis   -->
  <!-- - Ma famille   -->
 

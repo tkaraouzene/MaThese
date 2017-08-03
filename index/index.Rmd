@@ -10,7 +10,7 @@ department: 'Ingénierie de la Santé, de la Cognition et Environnement (EDISCE)
 title: 'THÈSE'
 knit: "bookdown::render_book"
 site: bookdown::bookdown_site
-output: 
+output:
   function(){bookdown::pdf_book(
   toc = TRUE,
   toc_depth = 4,
@@ -18,10 +18,10 @@ output:
   highlight = "pygments",
   keep_tex = TRUE,
   pandoc_args = "--chapters")}
-  # pandoc_args = "--top-level-division=chapter")}
-  # thesisdown::thesis_gitbook: default
-  #  thesis_pdf_updt: default
-  #  thesisdown::thesis_gitbook: default
+# pandoc_args = "--top-level-division=chapter")}
+# thesisdown::thesis_gitbook: default
+#  thesis_pdf_updt: default
+#  thesisdown::thesis_gitbook: default
   # thesisdown::thesis_word: default
   #  thesisdown::thesis_epub: default
   # If you are creating a PDF you'll need to write your preliminary content here or
