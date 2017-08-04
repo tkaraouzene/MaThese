@@ -2,14 +2,24 @@
 
 `r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'` 
 
-#  : Article DNAH1
+#  Mutations in DNAH1, which Encodes an Inner Arm Heavy Chain Dynein, Lead to Male Infertility from Multiple Morphological Abnormalities of the Sperm Flagella  {#dnah12014}
 
-Article DNAH1 2014
+Ben Khelifa M^\*^, Coutton C^\*^, Zouari Raoudha, **Karaouzène T**, Rendu J, Bidart M, Yassine S, Pierre V, Delaroche J, Hennebicq S, Grunwald D, Escalier D, Pernet-Gallay K, Jouk PS, Thierry-Mieg N, Touré A, Arnoult C, Ray PF
+
+American Journal of Human Genetics, Janvier 2014  
+
+^\*^ Co-premiers auteurs
+
+\newpage
+
+\includepdf[pages=-]{bib/DNAH1_2014.pdf}
+
+\newpage
 
 
 \newpage
 
-# Tables des variants restant après application des filtres pour les cas familliaux
+# Tables des variants restant après application des filtres pour les cas familliaux 
 
 ```{r tabmmaf1, cache=TRUE, dependson="dfrecapmmaf"}
 

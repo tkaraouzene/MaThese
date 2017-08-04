@@ -196,9 +196,6 @@ class (for LaTeX) and the R bookdown package, in general.
   \mainmatter % here the regular arabic numbering starts
   \pagestyle{fancyplain} % turns page numbering back on
 
-  \chapter{Delete line 6 if you only have one
-  advisor}\label{delete-line-6-if-you-only-have-one-advisor}
-  
   \chapter{Mise en place d'une stratégie pour l'analyse des données
   exomiques -- application en recherche
   clinique}\label{mise-en-place-dune-strategie-pour-lanalyse-des-donnees-exomiques-application-en-recherche-clinique}
@@ -1042,14 +1039,14 @@ class (for LaTeX) and the R bookdown package, in general.
     des variants retrouvés à l'état homozygote chez au moins un des
     individus de la cohorte contrôle sera filtré de notre liste de
     variants. On peut cependant noter que les variants retrouvés chez les
-    patients Ghs44 et Ghs45 de la famille AZ n'ont pas été confrontés à
-    ceux observés dans notre cohorte de \ldots{} femmes présentant des
-    anomalies de développement ovocitaire. En effet, ces deux phénotypes
-    peuvent être causés par un même gène impliqué dans la division
-    cellulaire méiotique (\textbf{Figure :} \ref{fig:plotsamplectrl}).
+    patients \emph{Ghs44} et \emph{Ghs45} de la famille AZ n'ont pas été
+    confrontés à ceux observés dans notre cohorte de 15 femmes présentant
+    des anomalies de développement ovocitaire. En effet, ces deux
+    phénotypes peuvent être causés par un même gène impliqué dans la
+    division cellulaire méiotique (\textbf{Figure :}
+    \ref{fig:plotsamplectrl}).\\
+    \newpage
   \end{enumerate}
-  
-  \newpage
   
   \begin{figure}
   
@@ -1057,7 +1054,7 @@ class (for LaTeX) and the R bookdown package, in general.
   
   }
   
-  \caption[Nombre d'individus et leur phénotypes composant la cohorte contrôle de chaque famille]{Nombre d'individus et leur phénotypes composant la cohorte contrôle de chaque famille : Ici, chaque barre représente une famille et sa hauteur est déterminée par le nombre d'individus composant la cohorte contrôle à laquelle elle a été confronté. Les couleurs déterminent les phénotypes des individus de la cohorte contrôle. Chaque individu de cette cohorte a été séquencés en WES par notre équipe. Afin d'être considéré comme "contrôle" et intégrer cette cohorte, un individu doit être sain ou présenter un phénotype d'infertilité suffisamment différent de la famille étudiée. Par exemple, un individus MMAF pourra servir de contrôle aux familles AZ et FF mais pas aux familles MMAF1-5}\label{fig:plotsamplectrl}
+  \caption[Nombre d'individus et leur phénotypes composant la cohorte contrôle de chaque famille]{Nombre d'individus et leur phénotypes composant la cohorte contrôle de chaque famille : Ici, chaque barre représente une famille et sa hauteur est déterminée par le nombre d'individus composant la cohorte contrôle à laquelle elle a été confronté. Le nombre total de contrôle utilisés par famille est inscrit au dessus de chaque barre. Les couleurs déterminent les phénotypes des individus de la cohorte contrôle. Chaque individu de cette cohorte a été séquencés en WES par notre équipe. Afin d'être considéré comme "contrôle" et intégrer cette cohorte, un individu doit être sain ou présenter un phénotype d'infertilité suffisamment différent de la famille étudiée. Par exemple, un individus MMAF pourra servir de contrôle aux familles AZ et FF mais pas aux familles MMAF1-5}\label{fig:plotsamplectrl}
   \end{figure}
   
   \newpage
@@ -1078,10 +1075,10 @@ class (for LaTeX) and the R bookdown package, in general.
   
   Cependant, regarder uniquement le pourcentage de variants filtrés par
   chaque filtre révèle une information partielle. En effet, dans ce cas de
-  figure, on observe la quantité de variant éliminé par chaque filtre
+  figure, on observe la quantité de variant éliminée par chaque filtre
   indépendamment les uns des autres. Ainsi, un même variant peut donc être
   filtré par plusieurs filtres. Dès lors, il faut également analyser la
-  quantité de variants filtrés \textbf{spécifiquement} par chaque filtre.
+  quantité de variants filtrée \textbf{spécifiquement} par chaque filtre.
   Ainsi, on peut constater que le classement des filtres en fonctions de
   leur stringence reste quasiment identique. Il est tout de même
   intéressant de noter que désormais le filtre ``Variant impact'' apparait
@@ -1154,12 +1151,11 @@ class (for LaTeX) and the R bookdown package, in general.
   deux frères étant marriés à des femmes non-apparentées la piste de
   l'implication d'une cause féminine fut exclu et les recherches
   concentrées sur l'analyse des deux frères. Après analyse de leur
-  éjaculât, (et de l'épydidime) \ldots{} tout deux présentèrent de sévères
-  défauts de production de spermatozoïdes. Au vu de la similarité du
-  phénotype et du lien de parenté les liant, l'hypothèse d'une cause
-  génétique commune fut émmise. L'analyse de leur karyotype et du locus
-  AZF du chromosome Y ne révélant aucune anomalie, la procédure d'un
-  séquençage WES fut décidé.
+  éjaculat, tout deux présentèrent de sévères défauts de production de
+  spermatozoïdes. Au vu de la similarité du phénotype et du lien de
+  parenté les liant, l'hypothèse d'une cause génétique commune fut émmise.
+  L'analyse de leur karyotype et du locus AZF du chromosome Y ne révélant
+  aucune anomalie, la procédure d'un séquençage WES fut décidé.
   
   Dans ce contexte, l'objectif de mon travail sur l'analyse phénotype de
   ces deux frères a été d'effectuer l'ensemble des analyses des données
@@ -1384,24 +1380,23 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-2}
   
-  Dans une étude précédente non détaillée dans ce manuscrit, notre équipe
-  a pu identifier le gène \emph{DNAH1} comme le premier gène codant pour
-  une dynéine axonèmale responsable uniquement d'infertilité masculine.
-  Dans cette première étude, \ldots{} de nos \ldots{} patients (non
-  apparentés), soit environs \ldots{} d'entre eux, étaient porteur d'une
-  mutation homozygote sur le gène \emph{DNAH1} responsable de leur
-  phénotype MMAF. Ces résultats ont ainsi démontrés l'importance de
-  l'implication de ce gène dans ce phénotype.
+  Dans une étude précédente non détaillée dans ce manuscrit (en
+  \protect\hyperlink{dnah12014}{annexe}), notre équipe a pu identifier
+  \emph{DNAH1} comme le premier gène codant pour une dynéine axonèmale
+  responsable uniquement d'infertilité masculine. Dans cette première
+  étude, 5 de nos 18 patients non-apparentés, soit environs 28\% d'entre
+  eux, étaient porteur d'une mutation homozygote sur le gène \emph{DNAH1}
+  responsable de leur phénotype MMAF. Ces résultats ont ainsi démontrés
+  l'importance de l'implication de ce gène dans ce phénotype.
   
   Dans cette nouvelle étude, nous nous concentrons sur l'analyses des
-  données génétiques de 5 familles iraniène et d'une famille italienne
-  pour un total de 12 individus dont 10 ont été séquencés en WES.
-  Cependant, pour des raisons techniques, seuls les données de 9 d'entre
-  eux ont été analysés sur notre pipeline décrite précédement.
+  données génétiques de 5 familles iraniènes et d'une famille italienne
+  soit un total de 12 individus parmi lesquels 10 ont été séquencés en
+  WES. Cependant, pour des raisons techniques, seuls les données de 9
+  d'entre eux ont été analysés sur notre pipeline décrite précédement.
   
   Dans ce contexte j'ai effectué les l'ensemble des analyses
-  bioinformatiques des patients patients des familles MMAF1-5 séquencés en
-  WES.
+  bioinformatiques de ces patients.
   
   \newpage
   
@@ -1411,18 +1406,21 @@ class (for LaTeX) and the R bookdown package, in general.
   
   \subsubsection{Principaux résultats}\label{principaux-resultats-2}
   
-  Après avoir été séquencés en WES, les données des \ldots{} patients
-  (\ldots{})liste des patients ont été analysés au sein de notre pipeline.
-  Compte tenu de l'historique de consanguinité de ces familles, l'ensemble
-  des variants hétérozygotes ont été filtrés de même que l'ensemble des
-  variants observés fréquement dans la population générale et ceux n'ayant
-  aucun impacte sur la séquence codante. Aussi, dans les cas où les
-  données de WES de plusieurs frères d'une même famille étaient
-  disponibles, seuls les variants partagés par l'ensemble des frères
-  furent gardés. À l'issus de cette étape de filtrage, seuls quelques
-  variants subsitaient pour chacune des familles impactant entre \ldots{}
-  et \ldots{} gènes différents en fonction de celles-ci. (\textbf{Tables
-  :} \ldots{}, \textbf{Figure : }\ref{fig:plotremaininggenes}).
+  Après avoir été séquencés en WES, les données des 9 patients
+  \emph{Ghs119}, \emph{Ghs130}, \emph{Ghs131}, \emph{Ghs56}, \emph{Ghs58},
+  \emph{Ghs59}, \emph{Ghs60}, \emph{Ghs62} et \emph{Ghs63} ont été
+  analysés au sein de notre pipeline. Compte tenu de l'historique de
+  consanguinité de ces familles, l'ensemble des variants hétérozygotes ont
+  été filtrés de même que l'ensemble des variants observés fréquement dans
+  la population générale et ceux n'ayant aucun impacte sur la séquence
+  codante. Aussi, dans les cas où les données de WES de plusieurs frères
+  d'une même famille étaient disponibles, seuls les variants partagés par
+  l'ensemble des frères furent gardés. À l'issus de cette étape de
+  filtrage, seuls quelques variants subsitaient pour chacune des familles
+  impactant entre \ldots{} et \ldots{} gènes différents en fonction de
+  celles-ci (\textbf{Tables :} \ref{tab:tabmmaf1}, \ref{tab:tabmmaf2},
+  \ref{tab:tabmmaf3}, \ref{tab:tabmmaf4}, \ref{tab:tabmmaf5},
+  \textbf{Figure : }\ref{fig:plotremaininggenes}).
   
   Parmis cette liste de gènes, \emph{DNAH1} fut retrouvé mutés chez les
   deux frères de la famille MMAF3 ainsi que chez les deux frères de la
@@ -1592,12 +1590,6 @@ class (for LaTeX) and the R bookdown package, in general.
   implication de \emph{Patl2} dans la transcription ovocytaire des gènes
   murins.
   
-  \begin{verbatim}
-  ##           used (Mb) gc trigger  (Mb) max used  (Mb)
-  ## Ncells  866981 46.4    1770749  94.6  1770749  94.6
-  ## Vcells 5172267 39.5   17144651 130.9 14921769 113.9
-  \end{verbatim}
-  
   \newpage  
   
   \section{Résultats 3 : Étude d'une large cohorte de patients
@@ -1764,8 +1756,308 @@ class (for LaTeX) and the R bookdown package, in general.
   \caption[Listes des gènes sur lesquels un variants tronquant à l'état homozygote a été retrouvé chez au moins deux de nos patients]{Listes des gènes sur lesquels un variants tronquant à l'état homozygote a été retrouvé chez au moins deux de nos patients : La couleur des barres indiquent le type de variants portés par chaque patient. Vert : variant homozygote tronquant, Orange variant homozygote non tronquant et rouge au moins deux variants hétérozygotes. Les gènes sont classés dans l'ordre décroissant en fonction du nombre de variants homozygotes tronquant retrouvés parmi nos patients.}\label{fig:plottwohomohigh}
   \end{figure}
   
+  \appendix
+  
+  \hypertarget{dnah12014}{\chapter{Mutations in DNAH1, which Encodes an
+  Inner Arm Heavy Chain Dynein, Lead to Male Infertility from Multiple
+  Morphological Abnormalities of the Sperm Flagella}\label{dnah12014}}
+  
+  Ben Khelifa M\textsuperscript{*}, Coutton C\textsuperscript{*}, Zouari
+  Raoudha, \textbf{Karaouzène T}, Rendu J, Bidart M, Yassine S, Pierre V,
+  Delaroche J, Hennebicq S, Grunwald D, Escalier D, Pernet-Gallay K, Jouk
+  PS, Thierry-Mieg N, Touré A, Arnoult C, Ray PF
+  
+  American Journal of Human Genetics, Janvier 2014
+  
+  \textsuperscript{*} Co-premiers auteurs
+  
+  \newpage
+  
+  \includepdf[pages=-]{bib/DNAH1_2014.pdf}
+  
+  \newpage
+  
+  \newpage
+  
+  \chapter{Tables des variants restant après application des filtres pour
+  les cas
+  familliaux}\label{tables-des-variants-restant-apres-application-des-filtres-pour-les-cas-familliaux}
+  
+  \begin{longtable}[t]{lll}
+  \caption{\label{tab:tabmmaf1}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P1 et P2 de la famille MMAF1}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+  \cmidrule(l{2pt}r{2pt}){2-3}
+  SYMBOL & HGVSc, HGVSp & Consequence\\
+  \midrule
+  PLA2G4B & c.1710-6delA ; . & splice region\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{longtable}[t]{lll}
+  \caption{\label{tab:tabmmaf2}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P3 et P4 de la famille MMAF1}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+  \cmidrule(l{2pt}r{2pt}){2-3}
+  SYMBOL & HGVSc, HGVSp & Consequence\\
+  \midrule
+  MMP9 & c.820G>A ; p.Glu274Lys & missense\\
+  TGIF2 & c.496C>A ; p.Leu166Met & missense\\
+  ZNF469 & . ; p.Arg1864Lys & missense\\
+  CCDC37 & c.1234\_1236delTGG ; p.Glu412del & inframe deletion\\
+  SEMA5B & c.658C>A ; p.Glu220Lys & missense\\
+  \addlinespace
+  HYDIN & c.14857>T ; p.Arg4953Trp & missense\\
+  MTSS1L & . ; p.Arg609Trp & missense\\
+  TMEM231 & . ; p.Ala71Val & missense\\
+  DAPK1 & c.2431T>A ; p.Val811Met & missense\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{longtable}[t]{lll}
+  \caption{\label{tab:tabmmaf3}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P5 et P6 de la famille MMAF3}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+  \cmidrule(l{2pt}r{2pt}){2-3}
+  SYMBOL & HGVSc, HGVSp & Consequence\\
+  \midrule
+  MYH11 & c.4625G>A ; p.Arg1542Gln & missense\\
+  DNAH1 & . ; . & splice acceptor\\
+  \bottomrule
+  \end{longtable}
+  
+  \begin{longtable}[t]{lll}
+  \caption{\label{tab:tabmmaf4}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P8 et P9 de la famille MMAF4}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+  \cmidrule(l{2pt}r{2pt}){2-3}
+  SYMBOL & HGVSc, HGVSp & Consequence\\
+  \midrule
+  GBP2 & c.412T>A ; p.Ala138Thr & missense\\
+  WEE2 & . ; p.Pro92Leu & missense\\
+  ZFYVE28 & c.1729C>A ; p.Val577Met & missense\\
+  FCGR3A & c.133T>C ; p.Ala45Pro & missense\\
+  \bottomrule
+  \end{longtable}
+  
+  \newpage
+  
+  \begin{longtable}[t]{lll}
+  \caption{\label{tab:tabmmaf5}Liste des variants ayant passé l'ensemble des filtres pour le patient P10 de la famille MMAF5}\\
+  \toprule
+  \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+  \cmidrule(l{2pt}r{2pt}){2-3}
+  SYMBOL & HGVSc, HGVSp & Consequence\\
+  \midrule
+  DNAH2 & . ; p.Arg2538Gln & missense\\
+  ACAP1 & c.1597A>T ; p.Arg533Trp & missense\\
+  ALOX15 & c.268T>C ; p.Asp90His & missense\\
+  NKX2-1 & c.843G>T ; p.Gln281His & missense\\
+  NFATC4 & . ; p.Glu577Gly & missense\\
+  \addlinespace
+  MYH7 & c.77G>T ; p.Ala26Val & missense\\
+  LDHAL6A & c.334A>T ; p.Arg112Ter & stop gained\\
+  PDZD7 & . ; p.Ser324Asn & missense\\
+  COL27A1 & c.5063G>A ; p.Arg1688Gln & missense\\
+  TRBV6-6 & c.5A>T ; p.Ser2Ile & missense\\
+  \addlinespace
+  MROH2A & . ; p.Ile180Thr & missense\\
+  CASP8 & c.74A>G ; p.Pro25Arg & missense\\
+  FSIP2 & . ; p.Ala86Val & missense\\
+  SPEF2 & c.3240delG ; p.Phe1080LeufsTer2 & frameshift\\
+  CPZ & c.1236A>T ; p.Lys412Asn & missense\\
+  \addlinespace
+  OR6S1 & . ; p.Leu116Met & missense\\
+  GBF1 & c.1588G>T ; p.Arg530Cys & missense\\
+  SLIT1 & . ; . & splice region\\
+  ARHGAP19-SLIT1 & c.*1721-7A>T ; . & splice region\\
+  NXPE2 & c.1595>T ; p.Thr532Met & missense\\
+  \addlinespace
+  CCDC73 & c.851A>C ; p.Phe284Ser & missense\\
+  C6 & c.2312C>A ; p.Gly771Asp & missense\\
+  ZSWIM2 & c.676G>A ; p.Leu226Met & missense\\
+  \bottomrule
+  \end{longtable}
+  
+  \chapter{\texorpdfstring{Table des variants retrouvés sur le gène
+  \emph{PATL2}}{Table des variants retrouvés sur le gène PATL2}}\label{table-des-variants-retrouves-sur-le-gene-patl2}
+  
+  \begin{longtable}[t]{llll}
+  \caption{\label{tab:tabpatl2}Table des variants retrouvés sur le gène *PATL2*}\\
+  \toprule
+  \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+  \cmidrule(l{2pt}r{2pt}){3-4}
+  Patient & Geno & HGVSc, HGVSp & Consequence\\
+  \midrule
+  Ghs103 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+  Ghs104 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+  Ghs114 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+  Ghs5 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+  Ghs98 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+  \bottomrule
+  \end{longtable}
+  
+  \newpage
+  
+  \chapter{\texorpdfstring{Table des variants retrouvés sur le gène
+  \emph{DNAH1}}{Table des variants retrouvés sur le gène DNAH1}}\label{table-des-variants-retrouves-sur-le-gene-dnah1}
+  
+  \begin{landscape}
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabdnah1}Table des variants retrouvés sur le gène *DNAH1*}\\
+  \toprule
+  \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-5}
+  Patient & Geno & HGVSc, HGVSp & Consequence & ExAC ; ESP ; 1KG\\
+  \midrule
+  Ghs122 & Homo & c.7533delC ; p.Gln2511HisfsTer27 & frameshift & . ; . ; .\\
+  Ghs178 & Homo & c.4734\_4742delGATGGGTAG ; p.Pro1582\_Gly1584del & inframe deletion & . ; . ; .\\
+  Ghs90 & Homo & c.2122G>C ; p.Ile708Leu & missense & . ; . ; .\\
+  Ghs90 & Homo & c.2123A>C ; p.Ile708Thr & missense & . ; . ; .\\
+  Ghs90 & Homo & c.2125A>C ; p.Phe709Leu & missense & . ; . ; .\\
+  \addlinespace
+  Ghs90 & Homo & c.4504C>A ; p.Val1502Met & missense & 0.00733 ; . ; .\\
+  Ghs95 & Homo & c.9278C>G ; p.Ala3093Gly & missense & . ; . ; .\\
+  Ghs126 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; . ; .\\
+  Ghs126 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; 0.008 ; 0.0023\\
+  Ghs127 & Hete & . ; p.Ser1763Leu & missense & 0.0058 ; . ; .\\
+  \addlinespace
+  Ghs127 & Hete & c.9121C>T ; p.Arg3041Cys & missense & 0.00527 ; . ; .\\
+  Ghs129 & Hete & . ; p.Arg3169Gly & missense & 8.26e-06 ; . ; .\\
+  Ghs129 & Hete & c.7153G>A ; p.Trp2385Arg & missense & . ; . ; .\\
+  Ghs155 & Hete & c.3877T>A ; p.Asp1293Asn & missense & 0.000149 ; . ; .\\
+  Ghs155 & Hete & c.3877T>A ; p.Asp1293Asn & missense & 0.000149 ; 1e-04 ; 0.0019\\
+  \addlinespace
+  Ghs167 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; . ; .\\
+  Ghs167 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; 0.008 ; 0.0023\\
+  Ghs172 & Hete & . ; p.Ser1763Leu & missense & 0.0058 ; . ; .\\
+  Ghs172 & Hete & c.9121C>T ; p.Arg3041Cys & missense & 0.00527 ; . ; .\\
+  Ghs175 & Hete & . ; p.Asp3440Asn & missense & 9.91e-05 ; . ; .\\
+  \addlinespace
+  Ghs175 & Hete & . ; p.Asp3440Asn & missense & 9.91e-05 ; 2e-04 ; .\\
+  Ghs177 & Hete & c.1351A>G ; p.Lys451Glu & missense & 0.00103 ; . ; .\\
+  Ghs177 & Hete & c.4504C>A ; p.Val1502Met & missense & 0.00733 ; . ; .\\
+  Ghs26 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; . ; .\\
+  Ghs26 & Hete & . ; p.Ile2739Val & missense & 0.00219 ; 0.008 ; 0.0023\\
+  \addlinespace
+  Ghs27 & Hete & . ; p.Ser1763Leu & missense & 0.0058 ; . ; .\\
+  Ghs27 & Hete & c.9121C>T ; p.Arg3041Cys & missense & 0.00527 ; . ; .\\
+  Ghs28 & Hete & c.1172A>G ; p.Tyr391Cys & missense & 0.00233 ; 0.0027 ; 0.0019\\
+  Ghs28 & Hete & c.752C>G ; p.Glu251Gly & missense & 1.65e-05 ; 1e-04 ; .\\
+  Ghs36 & Hete & c.3931G>T ; p.Gln1311Ter & stop gained & 8.29e-06 ; . ; .\\
+  \addlinespace
+  Ghs36 & Hete & c.845A>G ; p.Leu282Trp & missense & . ; . ; .\\
+  Ghs39 & Hete & . ; p.Asp3440Asn & missense & 9.91e-05 ; . ; .\\
+  Ghs39 & Hete & . ; p.Asp3440Asn & missense & 9.91e-05 ; 2e-04 ; .\\
+  Ghs42 & Hete & . ; . & splice region & . ; . ; .\\
+  Ghs42 & Hete & . ; . & splice region & . ; . ; .\\
+  \addlinespace
+  Ghs42 & Hete & c.6916G>A ; p.Ala2306Thr & missense & . ; . ; .\\
+  Ghs42 & Hete & c.6916G>A ; p.Ala2306Thr & missense & . ; . ; .\\
+  Ghs87 & Hete & c.3431C>A ; p.Ser1144Asn & missense & 0.00024 ; . ; .\\
+  Ghs87 & Hete & c.8885G>C ; p.Lys2962Thr & missense & 0.000457 ; 7e-04 ; 5e-04\\
+  Ghs88 & Hete & c.2209C>A ; p.Val737Met & missense & 0.000115 ; 1e-04 ; .\\
+  \addlinespace
+  Ghs88 & Hete & c.3877T>A ; p.Asp1293Asn & missense & 0.000149 ; . ; .\\
+  Ghs88 & Hete & c.3877T>A ; p.Asp1293Asn & missense & 0.000149 ; 1e-04 ; 0.0019\\
+  \bottomrule
+  \end{longtable}
+  \end{landscape}
+  
+  \newpage
+  
+  \chapter{\texorpdfstring{Table des variants retrouvés sur le gène
+  \emph{CFAP43}}{Table des variants retrouvés sur le gène CFAP43}}\label{table-des-variants-retrouves-sur-le-gene-cfap43}
+  
+  \begin{landscape}
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabcfap43}Table des variants retrouvés sur le gène *CFAP43*}\\
+  \toprule
+  \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-5}
+  Patient & Geno & HGVSc, HGVSp & Consequence & ExAC ; ESP ; 1KG\\
+  \midrule
+  Ghs102 & Homo & c.3882delA ; p.Glu1294AspfsTer47 & frameshift & . ; . ; .\\
+  Ghs105 & Homo & c.3541-2A>C ; . & splice acceptor & . ; . ; .\\
+  Ghs105 & Homo & c.3541-2A>C ; . & splice acceptor & . ; . ; .\\
+  Ghs126 & Homo & c.3352C>T ; p.Arg1118Ter & stop gained & 3.29e-05 ; . ; .\\
+  Ghs160 & Homo & c.3541-2A>C ; . & splice acceptor & . ; . ; .\\
+  \addlinespace
+  Ghs160 & Homo & c.3541-2A>C ; . & splice acceptor & . ; . ; .\\
+  Ghs162 & Homo & c.1240\_1241delGC ; p.Val414LeufsTer46 & frameshift & . ; . ; .\\
+  Ghs164 & Homo & c.1240\_1241delGC ; p.Val414LeufsTer46 & frameshift & . ; . ; .\\
+  Ghs17 & Homo & c.2658G>A ; p.Trp886Ter & stop gained & 9.88e-05 ; . ; .\\
+  Ghs17 & Homo & c.2658G>A ; p.Trp886Ter & stop gained & 9.88e-05 ; 2e-04 ; .\\
+  \addlinespace
+  Ghs25 & Homo & c.2141+5T>A ; . & splice region & . ; . ; .\\
+  Ghs41 & Homo & c.2680C>T ; p.Arg894Ter & stop gained & 8.24e-06 ; . ; .\\
+  Ghs132 & Hete & c.1040G>C ; p.Val347Ala & missense & 7.41e-05 ; 2e-04 ; .\\
+  Ghs132 & Hete & c.1300\_1301insT ; p.Leu435SerfsTer26 & frameshift & . ; . ; .\\
+  Ghs154 & Hete & c.589C>A ; p.Val197Met & missense & 0.00385 ; . ; .\\
+  Ghs154 & Hete & c.589C>A ; p.Val197Met & missense & 0.00385 ; 0.0042 ; 0.0037\\
+  \bottomrule
+  \end{longtable}
+  \end{landscape}
+  
+  \newpage
+  
+  \chapter{\texorpdfstring{Table des variants retrouvés sur le gène
+  \emph{CFAP44}}{Table des variants retrouvés sur le gène CFAP44}}\label{table-des-variants-retrouves-sur-le-gene-cfap44}
+  
+  \begin{landscape}
+  \begin{longtable}[t]{lllll}
+  \caption{\label{tab:tabcfap44}Table des variants retrouvés sur le gène *CFAP44*}\\
+  \toprule
+  \multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+  \cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-5}
+  Patient & Geno & HGVSc, HGVSp & Consequence & ExAC ; ESP ; 1KG\\
+  \midrule
+  Ghs155 & Homo & . ; p.Glu463Ter & stop gained & . ; . ; .\\
+  Ghs168 & Homo & c.2818\_2819insG ; p.Glu940GlyfsTer19 & frameshift & 8.24e-06 ; . ; .\\
+  Ghs177 & Homo & . ; p.Glu463Ter & stop gained & . ; . ; .\\
+  Ghs181 & Homo & c.4767delC ; p.Ile1589MetfsTer6 & frameshift & . ; . ; .\\
+  Ghs22 & Homo & . ; p.Arg1059Ter & stop gained & . ; . ; .\\
+  \addlinespace
+  Ghs34 & Homo & . ; . & splice donor & . ; . ; .\\
+  Ghs89 & Homo & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; . ; .\\
+  Ghs89 & Homo & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; 0.0012 ; 0.0014\\
+  Ghs106 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; . ; .\\
+  Ghs106 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; 0.0015 ; 0.0014\\
+  \addlinespace
+  Ghs125 & Hete & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; . ; .\\
+  Ghs125 & Hete & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; 0.0012 ; 0.0014\\
+  Ghs126 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; . ; .\\
+  Ghs126 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; 0.0096 ; 0.007\\
+  Ghs160 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; . ; .\\
+  \addlinespace
+  Ghs160 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; 0.0096 ; 0.007\\
+  Ghs183 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; . ; .\\
+  Ghs183 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; 0.0096 ; 0.007\\
+  Ghs21 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; . ; .\\
+  Ghs21 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; 0.0015 ; 0.0014\\
+  \addlinespace
+  Ghs41 & Hete & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; . ; .\\
+  Ghs41 & Hete & c.1457A>T ; p.Ala486Val & missense & 0.000692 ; 0.0012 ; 0.0014\\
+  Ghs43 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; . ; .\\
+  Ghs43 & Hete & . ; p.Arg1495Trp & missense & 0.00459 ; 0.0096 ; 0.007\\
+  Ghs46 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; . ; .\\
+  \addlinespace
+  Ghs46 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; 0.0015 ; 0.0014\\
+  Ghs47 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; . ; .\\
+  Ghs47 & Hete & . ; p.Arg1651Trp & missense & 0.00146 ; 0.0015 ; 0.0014\\
+  \bottomrule
+  \end{longtable}
+  \end{landscape}
+  
+  \backmatter
+  
   \chapter*{References}\label{references}
   \addcontentsline{toc}{chapter}{References}
+  
+  \noindent
+  
+  \setlength{\parindent}{-0.20in} \setlength{\leftskip}{0.20in}
+  \setlength{\parskip}{8pt}
   
   \hypertarget{refs}{}
   \hypertarget{ref-Amberger2011}{}

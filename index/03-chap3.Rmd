@@ -721,7 +721,7 @@ df_impact <- df_annotate %>%
 
 ```
 
-```{r cleancall, include=FALSE, warning=FALSE}
+```{r cleancall, include=FALSE, message=FALSE, warning=FALSE}
 
 rm(df_fam_call)
 gc()
@@ -1467,7 +1467,7 @@ ggplot(df_filtered_tr_vr %>% filter(IS_FILTERED == TRUE), aes(TYPE, N)) +
 
 5. **Fréquence des variants :**  Filtrer systématiquement les variants retrouvés avec une fréquence $\ge$ `r maf_cutoff` dans l'une des trois bases de données que sont ExAC, 1KG et ESP6500 permet de filtrer entre `r nb_filter_freq_min` et `r nb_filter_freq_max` variants par patients.    
 
-6. **Présence des variants dans la cohorte contrôle :** L'ensemble des variants répertoriés au sein de ces `r nb_pheno` phénotypes a été confrontés à des listes de variants identifiés chez d'autres patients analysés par notre pipeline et présentant des phénotypes. Dès lors, l'ensemble des variants retrouvés à l'état homozygote chez au moins un des individus de la cohorte contrôle sera filtré de notre liste de variants. On peut cependant noter que les variants retrouvés chez les patients `r run_fam_az %>% paste_vector` de la famille AZ n'ont pas été confrontés à ceux observés dans notre cohorte de `r nb_ctrl_ovo` femmes présentant des anomalies de développement ovocitaire. En effet, ces deux phénotypes peuvent être causés par un même gène impliqué dans la division cellulaire méiotique (**Figure :** \@ref(fig:plotsamplectrl)).  
+6. **Présence des variants dans la cohorte contrôle :** L'ensemble des variants répertoriés au sein de ces `r nb_pheno` phénotypes a été confrontés à des listes de variants identifiés chez d'autres patients analysés par notre pipeline et présentant des phénotypes. Dès lors, l'ensemble des variants retrouvés à l'état homozygote chez au moins un des individus de la cohorte contrôle sera filtré de notre liste de variants. On peut cependant noter que les variants retrouvés chez les patients `r run_fam_az %>% paste_vector("itallic")` de la famille AZ n'ont pas été confrontés à ceux observés dans notre cohorte de `r nb_ctrl_ovo` femmes présentant des anomalies de développement ovocitaire. En effet, ces deux phénotypes peuvent être causés par un même gène impliqué dans la division cellulaire méiotique (**Figure :** \@ref(fig:plotsamplectrl)).  
 \newpage
 
 ```{r plotsamplectrl, fig.cap=fig_info,fig.scap=fig_name, fig.height=4, cache=TRUE}
@@ -1568,7 +1568,7 @@ EMBO Molecular Medicine, Mai 2017
 
 L'oligospermie, comme l'azoospermie sont des phénotypes d'infertilités masculines liées à la quantité de spermatozoïdes présent dans l'éjaculât. Les différentes études publiées ces dernières années montrent que les microdélétions du chromosome Y sont retrouvées chez 10% des hommes avec une azoospermie non-obstructives et chez 5% des patients avec une oligozoospermie sévères [@Hotaling2014]. Ces taux bien qu'élevé ne représente qu'une infime partie des cas d'azoospermie et d'oligospermie suggérant l'implication de nombreux autres gènes dans ce phénotype.  
 
-Entre 2005 et 2014 deux frères issus d'un union consanguin ont demandé des conseils médicaux auprès de différentes cliniques d'infertilité après deux ans de tentatives infructueuses de consevoir un enfant. Ces deux frères étant marriés à des femmes non-apparentées la piste de l'implication d'une cause féminine fut exclu et les recherches concentrées sur l'analyse des deux frères. Après analyse de leur éjaculât, (et de l'épydidime) ... tout deux présentèrent de sévères défauts de production de spermatozoïdes. Au vu de la similarité du phénotype et du lien de parenté les liant, l'hypothèse d'une cause génétique commune fut émmise. L'analyse de leur karyotype et du locus AZF du chromosome Y ne révélant aucune anomalie, la procédure d'un séquençage WES fut décidé.  
+Entre 2005 et 2014 deux frères issus d'un union consanguin ont demandé des conseils médicaux auprès de différentes cliniques d'infertilité après deux ans de tentatives infructueuses de consevoir un enfant. Ces deux frères étant marriés à des femmes non-apparentées la piste de l'implication d'une cause féminine fut exclu et les recherches concentrées sur l'analyse des deux frères. Après analyse de leur éjaculat, tout deux présentèrent de sévères défauts de production de spermatozoïdes. Au vu de la similarité du phénotype et du lien de parenté les liant, l'hypothèse d'une cause génétique commune fut émmise. L'analyse de leur karyotype et du locus AZF du chromosome Y ne révélant aucune anomalie, la procédure d'un séquençage WES fut décidé.  
 
 Dans ce contexte, l'objectif de mon travail sur l'analyse phénotype de ces deux frères a été d'effectuer l'ensemble des analyses des données WES obtenues après leur séquençage afin de mettre en évidence une mutation homozygote commune aux deux frères pouvant expliquer leur phénotype. Dans un second temps, j'ai pu mettre en place le protocole de génotypage des souris au locus du gène *Spink2* permettant d'identifier les souris sauvages *Spink2*^+/+^ des souris KO *Spink2*^-/-^. Pour finir, afin d'estimer l'importance des variants du gène *SPINK2* comme cause d'infertilité masculine chez l'humain, j'ai également contribué au séquençage Sanger de la séquence codante de *SPINK2* d'une partie des 611 patients séquencés dans cette étude.  
 
@@ -1746,11 +1746,11 @@ Human Reproduction, Octobre 2016
 
 #### Contexte et objectifs  
 
-Dans une étude précédente non détaillée dans ce manuscrit, notre équipe a pu identifier le gène *DNAH1* comme le premier gène codant pour une dynéine axonèmale responsable uniquement d’infertilité masculine. Dans cette première étude, ... de nos ... patients (non apparentés), soit environs ... d'entre eux, étaient porteur d'une mutation homozygote sur le gène *DNAH1* responsable de leur phénotype MMAF. Ces résultats ont ainsi démontrés l'importance de l'implication de ce gène dans ce phénotype.  
+Dans une étude précédente non détaillée dans ce manuscrit (en [annexe](#dnah12014)), notre équipe a pu identifier *DNAH1* comme le premier gène codant pour une dynéine axonèmale responsable uniquement d’infertilité masculine. Dans cette première étude, 5 de nos 18 patients non-apparentés, soit environs 28% d'entre eux, étaient porteur d'une mutation homozygote sur le gène *DNAH1* responsable de leur phénotype MMAF. Ces résultats ont ainsi démontrés l'importance de l'implication de ce gène dans ce phénotype.  
 
-Dans cette nouvelle étude, nous nous concentrons sur l'analyses des données génétiques de 5 familles iraniène et d'une famille italienne pour un total de 12 individus dont 10 ont été séquencés en WES. Cependant, pour des raisons techniques, seuls les données de `r nb_run_fam_mmaf` d'entre eux ont été analysés sur notre pipeline décrite précédement.  
+Dans cette nouvelle étude, nous nous concentrons sur l'analyses des données génétiques de 5 familles iraniènes et d'une famille italienne soit un total de 12 individus parmi lesquels 10 ont été séquencés en WES. Cependant, pour des raisons techniques, seuls les données de `r nb_run_fam_mmaf` d'entre eux ont été analysés sur notre pipeline décrite précédement.  
 
-Dans ce contexte j'ai effectué les l'ensemble des analyses bioinformatiques des patients patients des familles MMAF1-5 séquencés en WES.       
+Dans ce contexte j'ai effectué les l'ensemble des analyses bioinformatiques de ces patients.         
 
 \newpage
 
@@ -1768,20 +1768,24 @@ df_remaining_variant_mmaf <- df_recap %>%
   mutate(HGVSc = na.replace(HGVSc, "."),
          HGVSp = na.replace(HGVSp, "."),
          `HGVSc, HGVSp` = paste0(HGVSc," ; ", HGVSp)) %>% 
-  select(-Family, -SIFT, -PolyPhen, -CANONICAL, -HGVSc, -HGVSp)
-
-
+  select( -SIFT, -PolyPhen, -CANONICAL, -HGVSc, -HGVSp) %>% 
+  group_by(Family) %>%
+  mutate(N_GENE = n_distinct(Gene))
 
 ```
 
 ```{r varrecapmmaf, cache=TRUE, dependson="dfrecapmmaf"}
 
-nb_var_fam_mmaf <- df_remaining_variant_mmaf %>% nrow
+nb_var_fam_mmaf <- df_remaining_variant_mmaf %>% ungroup() %>% summarise(N = n_distinct(`HGVSc, HGVSp`)) %>% collect() %>% .[["N"]]
+nb_gene_fam_mmaf_min <- df_remaining_variant_mmaf %>% collect() %>% .[["N_GENE"]] %>% min
+nb_gene_fam_mmaf_max <- df_remaining_variant_mmaf %>% collect() %>% .[["N_GENE"]] %>% max
+
 gene_fam_mmaf <- df_remaining_variant_mmaf %>% collect() %>% .[["Gene"]]
 
 ```
 
-Après avoir été séquencés en WES, les données des ... patients (...)liste des patients ont été analysés au sein de notre pipeline. Compte tenu de l'historique de consanguinité de ces familles, l'ensemble des variants hétérozygotes ont été filtrés de même que l'ensemble des variants observés fréquement dans la population générale et ceux n'ayant aucun impacte sur la séquence codante. Aussi, dans les cas où les données de WES de plusieurs frères d'une même famille étaient disponibles, seuls les variants partagés par l'ensemble des frères furent gardés. À l'issus de cette étape de filtrage, seuls quelques variants subsitaient pour chacune des familles impactant entre ... et ... gènes différents en fonction de celles-ci. (**Tables :** ..., **Figure : **\@ref(fig:plotremaininggenes)).  
+Après avoir été séquencés en WES, les données des `r nb_run_fam_mmaf` patients `r run_fam_mmaf_all %>% paste_vector("itallic")` ont été analysés au sein de notre pipeline. Compte tenu de l'historique de consanguinité de ces familles, l'ensemble des variants hétérozygotes ont été filtrés de même que l'ensemble des variants observés fréquement dans la population générale et ceux n'ayant aucun impacte sur la séquence codante. Aussi, dans les cas où les données de WES de plusieurs frères d'une même famille étaient disponibles, seuls les variants partagés par l'ensemble des frères furent gardés. À l'issus de cette étape de filtrage, seuls quelques variants subsitaient pour chacune des familles impactant entre `r nb_gene_fam_mmaf_min` et `r nb_gene_fam_mmaf_min` gènes différents en fonction de celles-ci (**Tables :** \@ref(tab:tabmmaf1), \@ref(tab:tabmmaf2), \@ref(tab:tabmmaf3), \@ref(tab:tabmmaf4), \@ref(tab:tabmmaf5), **Figure : **\@ref(fig:plotremaininggenes)).  
+
 
 Parmis cette liste de gènes, *DNAH1* fut retrouvé mutés chez les deux frères de la famille MMAF3 ainsi que chez les deux frères de la famille MMAF6 (non annalysés par notre pipeline). De même, un variant entrainant un décalage du cadre de lecture dans la séquence du gène *SPEF2* (codant pour la protéine *Sperm flagellar 2* (SPEF2)) a été retrouvé chez le patient P10 de la famille MMAF5. Aucun autre candidat évident n'a pu être identifié pour les individus composant les 3 autres familles. Ensuite, bien que le gène *SPEF2* ait déjà été caractérisé comme ayant un rôle dans la biogénèse du flagelle spermatique [@Lehti2017] nous nous sommes dans un premiers temps concentrés sur la caractérisation des deux variants retrouvés sur *DNAH1*.  
 
@@ -1789,7 +1793,7 @@ Parmis cette liste de gènes, *DNAH1* fut retrouvé mutés chez les deux frères
 
 2. **Famille MMAF6 :** Le variant c.3860 T > G (p.Val1287Gly) induisant une mutation faux sens dans la séquence de l'éxon 23 de *DNAH1* a été retrouvé dans les données WES des deux frères P11 et P12 (non analysés par notre pipeline) et a par la suite été confirmée en Sanger. Malheureusement, par manque de materiel, aucune étude portant sur l'ARNm de ces patients ou bien sur l'mmunofluorescence à partir de cellules spermatiques n'a pu être effectuée sur ces patients. Cependant, le fait que ce variant faux-sens soit absent des bases de données et qu'il soit prédit comme *probably dammaging* par PolyPhen et *deleterious* par SIFT renforce l'hypothèse de la pathogénicité de ce variant.   
 
-Ainsi, à l'issus de l'analyse de ces ... familles présentant un phénotye MMAF, le variant responsable a pu être déterminé pour ... d'entre elles grâce à l'dentification de 2 nouveaux variants impactant la séquence codante du gène *DNAH1* confirmant ainsi l'importance de l'implication de ce gèe dans le phénotype MMAF. De même un indel entrainant un décalage du cadre de lecture dans la séquence du gène *SPEF2* fait de ce gène, déja connu comme ayant un rôle dans la formation des flagelles, un excellent candidat pour expliquer le phénotype du patient P10, notre équipe travaillant à l'heure actuelle à la caractérisation de ce gène. Cependant, aucun candidat évident n'a pu être identifié pour les ... familles restante laissant supposé que le variant responsable de leur phénotype ait été éliminé par un de nos filtres. Afin d'identifier la cause génétique de leur phénotype, nous réanalysons actuellement les données de ces patients en appliquant des filtres moins stringents, par exemple, en conservant les gènes sur lesquels deux variants hétérozygotes sont retrouvés, ce qui pourrait être la signature d'une hétérozygotie composite.  
+Ainsi, à l'issus de l'analyse de ces `r nb_mmaf_fam + 1` familles présentant un phénotye MMAF (dont seulement `r nb_mmaf_fam` ont été analysées sur notre pipeline), le variant responsable a pu être déterminé pour deux d'entre elles grâce à l'dentification de deux nouveaux variants impactant la séquence codante du gène *DNAH1* confirmant ainsi l'importance de l'implication de ce gèe dans le phénotype MMAF. De même un indel entrainant un décalage du cadre de lecture dans la séquence du gène *SPEF2* fait de ce gène, déja connu comme ayant un rôle dans la formation des flagelles, un excellent candidat pour expliquer le phénotype du patient P10, notre équipe travaillant à l'heure actuelle à la caractérisation de ce gène. Cependant, aucun candidat évident n'a pu être identifié pour les `r (nb_mmaf_fam + 1) - 3` familles restante laissant supposé que le variant responsable de leur phénotype ait été éliminé par un de nos filtres. Afin d'identifier la cause génétique de leur phénotype, nous réanalysons actuellement les données de ces patients en appliquant des filtres moins stringents, par exemple, en conservant les gènes sur lesquels deux variants hétérozygotes sont retrouvés, ce qui pourrait être la signature d'une hétérozygotie composite.  
 
 \newpage
 
@@ -2040,7 +2044,7 @@ Pour finir, *xpat1a*, l'orthologue de *PATL2* chez le xénope, ayant été décr
 
 <!-- CLEAN -->
 
-```{r cleanovo, warning=FALSE, message=FALSE}
+```{r cleanovo, include=FALSE, warning=FALSE, message=FALSE}
 
 rm(df_annotate, df_run_ovo, df_ovo_call, df_distinct_ovo_call, 
    df_ctrl_ovo, df_distinct_ovo_filter, df_ovo_filter_stat)
