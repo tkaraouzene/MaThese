@@ -16,4 +16,6 @@ stringr
 foreach
 viridisLite
 viridis
+magrittr
+ggpubr
 bindrcpp

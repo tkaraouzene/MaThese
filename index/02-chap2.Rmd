@@ -128,7 +128,7 @@ L'interval de confiance (IC) à 95% est ensuite calculé grâce à une loi binom
 
 Ainsi, de manière paradoxale, les délétion *de novo* apparaitraient, au cours de la méïose, deux fois plus fréquement que les dupliquation *de novo* tandis que l'allèle dupliqué est trois fois plus fréquent que l'allèle délété dans la population générale. Cet effet pourrait en partie être due aux effets de séléction naturelle. En effet, Bien qu'à notre connaissance, les femmes portant l'allèle délété à l'état homozygote ne soient caractérisées par aucun phénotype, les hommes, eux sont 100% infertiles tandis que l'allèle dupliqué ne subirait aucune séléction.   
 
-Cette étude a également été pour notre équipe l'occasion d'effectuer une étude plus approfondie des LCRs flanquant le locus de *DPY19L2*. Pour cela, nous avons génotypé 20 SNPs spécifiques des LCRs télomériques et centromériques. À partir de ces données, 5 points de cassures distincts (BP1-5) ont pu être identifiés sur les 185 allèles recombinés étudiés (108 délétés et 77 dupliqués). L'ensemble de ces points de cassures sont localisés dans une d=région d'environ 1150 pb. L'analyse bioinformatique de cette région a permi de mettre en évidence, au centre de cette région, 13 nucléotides (CCNCCNTNNCCNC) constituant un site de reconnaissance consensus de la protéine PRDM9. Cette protéine à doigts de zinc étant connue pour son rôle central dans l'activation de la transcription dans les premères phases de la prophase méiotique  ainsi que pour être à impliqué dans les mécanismes de recombinaisons chromosomique au cours de la méiose chez l'humain et la souris [@Parvanov2010; @Baudat2010].
+Cette étude a également été pour notre équipe l'occasion d'effectuer une étude plus approfondie des LCRs flanquant le locus de *DPY19L2*. Pour cela, nous avons génotypé 20 SNPs spécifiques des LCRs télomériques et centromériques. À partir de ces données, 5 points de cassures distincts (BP1-5) ont pu être identifiés sur les 185 allèles recombinés étudiés (108 délétés et 77 dupliqués). L'ensemble de ces points de cassures sont localisés dans une région d'environ 1150 pb. L'analyse bioinformatique de cette région a permi de mettre en évidence, au centre de cette région, 13 nucléotides (CCNCCNTNNCCNC) constituant un site de reconnaissance consensus de la protéine PRDM9. Cette protéine à doigts de zinc étant connue pour son rôle central dans l'activation de la transcription dans les premères phases de la prophase méiotique  ainsi que pour être à impliqué dans les mécanismes de recombinaisons chromosomique au cours de la méiose chez l'humain et la souris [@Parvanov2010; @Baudat2010].
 
 \newpage
 
@@ -288,6 +288,4 @@ pA <- ggplot(df_mol_function, aes(`Molecular functions`)) +
  plot_grid(pA,pB, ncol = 1, rel_heights = c(.3,.7), labels = c("A","B"))
 
 ```
-
-\newpage
 

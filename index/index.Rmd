@@ -1,10 +1,9 @@
 ---
 author: 'Thomas Karaouzene'
-date: ' 31 octobre 2017'
+date: '07 novembre 2017'
 division: ''
 advisor: 'Pierre Ray'
 altadvisor: 'Nicolas Thierry-Mieg'
-# Delete line 6 if you only have one advisor
 labo: ""
 department: 'Ingénierie de la Santé, de la Cognition et Environnement (EDISCE)' 
 title: 'THÈSE'
@@ -34,9 +33,10 @@ output:
   # needed on the line after the >.
   # acknowledgements: >
   #   `r if(knitr:::is_latex_output()) paste(readLines("00-remerciements.Rmd"), collapse = ' ')`
-preface: >
-  This is an example of a thesis setup to use the reed thesis document class
-  (for LaTeX) and the R bookdown package, in general.
+
+# preface: >
+#   This is an example of a thesis setup to use the reed thesis document class
+#   (for LaTeX) and the R bookdown package, in general.
   
 link-citations: true
 bibliography: bib/MaThese_bib.bib

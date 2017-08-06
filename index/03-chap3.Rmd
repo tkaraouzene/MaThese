@@ -2072,21 +2072,102 @@ EMBO Molecular Medicine, Mai 2017
 
 ```{r dfrunbigmmaf, cache=TRUE}
 
-run_mmaf_fam <- c("Ghs56","Ghs58","Ghs62","Ghs130","Ghs63","Ghs119","Ghs59","Ghs60","Ghs61")
+
+
+retained_run_bigmmaf <- 
+  c("08IF35",
+    "JED",
+    "09IF39",
+    "09IF53",
+    "16IF027",
+    "16IF054",
+    "DUZ.",
+    "14IF049",
+    "16IF047",
+    "CO",
+    "09IF24",
+    "11IF06",
+    "15IF067",
+    "16IF104",
+    "15IF060",
+    "15IF065",
+    "11IF02",
+    "14IF034",
+    "15IF061",
+    "09IF27",
+    "16IF053",
+    "FLO",
+    "09IF52",
+    "11IF001",
+    "11IF005",
+    "14IF032",
+    "14IF035",
+    "14IF040-2",
+    "14IF041",
+    "12",
+    "BO.F",
+    "09IF28",
+    "14IF037",
+    "09IF21",
+    "11IF042",
+    "16IF107",
+    "16IF036",
+    "08IF39",
+    "09IF26",
+    "DJA",
+    "16IF030",
+    "16IF102",
+    "14IF030",
+    "14IF033",
+    "10IF36-2",
+    "10IF21",
+    "16IF032",
+    "09IF57",
+    "ID.",
+    "14IF031",
+    "08IF36",
+    "08IF41",
+    "09IF30",
+    "09IF58",
+    "10IF017",
+    "10IF35",
+    "11IF16-1",
+    "14IF036",
+    "14IF038",
+    "14IF039",
+    "15IF059",
+    "15IF063",
+    "15IF064",
+    "15IF066",
+    "15IF068",
+    "16IF042",
+    "16IF055",
+    "16IF105",
+    "16IF106",
+    "16IF109",
+    "AY.",
+    "BLO",
+    "CHAF",
+    "CHAUV",
+    "CRO.",
+    "ELANW-I",
+    "MEN",
+    "DIE.")
+
+# Je ne retrouve pas DIE.
 
 df_run_bigmmaf <- fread("data/exome_runs_all.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(2,4,10:16), data.table = FALSE) %>% 
+  rename(PHENOTYPE = Pathologie, DATE = Date) %>%
+  mutate(Patient = toupper(Patient)) %>% 
+  filter((Patient %in% retained_run_bigmmaf)) %>%
   mutate(RUN = if_else(Project == "Integragen", Patient, 
                        if_else(Project == "Novogene", paste0("s", Patient), Magic_ID)),
          RUN2 = Magic_ID) %>%
   select(-Magic_ID, -Patient) %>%
-  rename(PHENOTYPE = Pathologie, DATE = Date) %>%
   mutate(PHENOTYPE = if_else(PHENOTYPE == "Flag", "MMAF", PHENOTYPE), 
          YEAR = as.numeric(str_sub(DATE, start= -4)),
          PROJECT = paste0(Project," (",YEAR,")")) %>%
-  filter(!(RUN %in% run_mmaf_fam),
-         PHENOTYPE == "MMAF") %>%
   select(-DATE, -PHENOTYPE)
-
 
 ```
 
@@ -2111,6 +2192,9 @@ n_center <- center %>% length
 
 nb_run_bigmmaf <- runs_bigmmaf %>% length
 nb_run_ctrl_bigmmaf <- runs_ctrl_bigmmaf %>% length
+
+
+nb_hiseq4000 <- df_run_bigmmaf %>% filter(Model == "HiSeq4000") %>% nrow
 
 ```
 
@@ -2328,7 +2412,7 @@ nb_run_cfap <- df_bigmmaf_filter %>% filter(SYMBOL == "CFAP44" | SYMBOL == "CFAP
 
 <!-- ### -->
 
-Après avoir mis en évidence l'implication du gène *DNAH1* dans le phénotype MMAF notre équipe s'est en partie spécialisé dans la caractérisation ce syndrome. Ainsi, entre `r min_year` et `r max_year`, notre équipe a effectué le séquençage de `r nb_run_bigmmaf` individus présentant tous ce phénotype afin d'en établir la cause génétique. Ces séquençages ont été effectué dans `r n_center` centres différents que sont `r center %>% paste_vector`. La plupart de ces séquençages ont été effectués sur des Illumina HiSeq2000 exceptés les ... plus récent qui ont été effectués sur un Illumina HiSeq4000 (**Table : **\@ref(tab:tabrunbigmmaf)).
+Après avoir mis en évidence l'implication du gène *DNAH1* dans le phénotype MMAF notre équipe s'est en partie spécialisé dans la caractérisation ce syndrome. Ainsi, entre `r min_year` et `r max_year`, notre équipe a effectué le séquençage de `r nb_run_bigmmaf` individus présentant tous ce phénotype afin d'en établir la cause génétique. Ces séquençages ont été effectué dans `r n_center` centres différents que sont `r center %>% paste_vector`. La plupart de ces séquençages ont été effectués sur des Illumina HiSeq2000 exceptés les `r nb_hiseq4000` plus récent qui ont été effectués sur un Illumina HiSeq4000 (**Table : **\@ref(tab:tabrunbigmmaf)).
 
 ```{r tabrunbigmmaf, cache=TRUE, dependson="dfrunbigmmaf"}
 
