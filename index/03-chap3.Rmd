@@ -514,8 +514,7 @@ kable(df_fam,
       col.names = c("Family", "Individuals","Phenotype","Year", "Place"),
       caption = tab.name,
       longtable = TRUE,
-      booktabs = TRUE)
-
+      booktabs = TRUE) 
 ```
 
 \newpage 

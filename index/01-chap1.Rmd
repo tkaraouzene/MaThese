@@ -70,11 +70,16 @@ kable(t,
 Les testicules sont les organes sexuels masculins. Ils possèdent deux fonctions principales plus ou moins exprimées selon les périodes de la vie de l'individu : une fonction endocrine caractérisée par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, le testicule présente une forme ovoïde ayant un volume moyen de 18 cm^3^. Chez l’homme, comme chez la plupart des mammifères terrestres, ils sont localisés sous le pénis dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps, nécessaire à la spermatogenèse.  
 L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)). C'est le long des parois du tube séminifère que se déroulera l'ensemble des étapes de la spermatogenèse.    
 
-```{r testicule, fig.cap=fig.info,out.extra="scale=0.65"}
+```{r captesticule}
 
 fig.name <- "Schéma anatomique du testicule humain"
-fig.description <- ""
-fig.info <- paste(fig.name,sep = " : ")
+fig.cap <- paste0("**_",fig.name,"_.**")
+
+```
+
+(ref:testicule) `r fig.cap`
+
+```{r testicule, fig.cap='(ref:testicule)', ,fig.scap=fig.name, out.extra="scale=0.65"}
 
 include_graphics(path = "figure/coupe_testicule2.jpg")
 
@@ -183,7 +188,7 @@ include_graphics(path = "figure/MeiosisII.png")
 ### La spermiogenèse  {#spermiogenese}
 
 La spermiogenèse est la phase finale de la spermatogenèse. Elle dure environ 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **\@ref(fig:spermiogenese)). La spermiogenèse définit la cytodifférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologiques et fonctionnelles du spermatozoïde seront déterminées [@YvesClermontRichardOko1993]. Elle est caractérisée par trois évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commencent au niveau des spermatides rondes [@Escalier1991]. Pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
-Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10  upmum) que l’on peut schématiquement diviser en trois classes :  
+Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10  $\upmu$m) que l’on peut schématiquement diviser en trois classes :  
 
 1. **Les spermatides rondes** (**Figure : **\@ref(fig:spermiogenese) - **1** et **2**) : l'identification de ces cellules représente une difficulté technique. Elles ont cependant pu être décrites en détail par différentes techniques de coloration sous microscope optique [@Clermont1963; @Papic; @Schenck; @Adelman1989; @WorldHealthOrganization1992]. Plusieurs études animales ont pu démontrer le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, [@Ogura1994; @Kimura1995; @Sasagawa], la même chose ayant été également observée plus récemment chez l'homme [@Tanaka2015] bien que le taux de fécondation et d'implantation soit extrêmement faible [@Asimakopoulos2003]. Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
 
@@ -195,7 +200,18 @@ Les spermatides sont situées dans le compartiment adluminal, à proximité de l
 
 Une fois ces étapes de différentiation finies, les spermatides sont relâchées en tant que spermatozoïdes dans la lumière du tube séminifère. Ce procédé est appelé spermiation.  
 
-(ref:spermiogenese) **Principales étapes et modifications structurales lors de la spermiogenèse, adapté d'après [@Toure2011] :  1.** La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. **2.** La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. **3-7.** Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome ; Ax, axonème ; CC, corps chromatoïdes ; CR, corps résiduel ; FD, fibres denses ; GF, gaine fibreuse ; M, mitochondrie ; Ma, manchette.
+
+```{r capspermiogenese}
+
+fig.name <- "Principales étapes et modifications structurales lors de la spermiogenèse"
+fig.from <- "[@Toure2011]"
+fig.description <- "**1.** La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. **2.** La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. **3-7.** Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome ; Ax, axonème ; CC, corps chromatoïdes ; CR, corps résiduel ; FD, fibres denses ; GF, gaine fibreuse ; M, mitochondrie ; Ma, manchette."
+
+fig.cap <- paste0("**_",fig.name,"_. Adapté d'après", fig.from, "** : ", fig.description)
+
+```
+
+(ref:spermiogenese) `r fig.cap`
 
 ```{r spermiogenese,fig.cap='(ref:spermiogenese)',fig.scap=fig.name,out.extra="scale=0.3"}
 
@@ -207,7 +223,7 @@ include_graphics(path = "figure/spermiogenese.png")
 
 ## Structure et fonction du spermatozoïde 
 
-Le spermatozoïde est une cellule hautement différenciée dont la taille, l'orientation et la symétrie sont déterminées. La morphologie générale du spermatozoïde éjaculé est similaire à celle du spermatozoïde testiculaire. Le spermatozoïde humain normal mature mesure environ 60 upmum de long et est essentiellement constitué de deux parties : la tête et le flagelle (**Figure : **\@ref(fig:spz)). En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène. La fécondation d'un ovocyte par un spermatozoïde formera un zygote diploïde qui pourra se développer ensuite en embryon dans l'uterus féminin.
+Le spermatozoïde est une cellule hautement différenciée dont la taille, l'orientation et la symétrie sont déterminées. La morphologie générale du spermatozoïde éjaculé est similaire à celle du spermatozoïde testiculaire. Le spermatozoïde humain normal mature mesure environ 60 $\upmu$m de long et est essentiellement constitué de deux parties : la tête et le flagelle (**Figure : **\@ref(fig:spz)). En plus d'être unique dans sa morphologie, le spermatozoïde l'est aussi dans sa fonction puisque c'est la seule cellule produite de manière endogène et dont l'action est exercée de manière exogène. La fécondation d'un ovocyte par un spermatozoïde formera un zygote diploïde qui pourra se développer ensuite en embryon dans l'uterus féminin.
 
 ```{r spz,fig.cap=fig.name,fig.scap=fig.name,out.extra="scale=.75"}
 
@@ -324,7 +340,7 @@ include_graphics(path = "figure/tab_sperm_defect.png")
 
 #### Anomalies liées à la mobilité  
 
-Le succès du passage du spermatozoïde le long du tractus génitale féminin dépend en grande partie de la mobilité et de la vitesse du spermatozoïde [@Lindholmer1974; @Bjorndahl2010]. La vitesse moyenne d'un spermatozoïde étant de 25 upmum/s. Une mauvaise mobilité observée dans plus de 50% des spermatozoïdes éjaculés se révèle être un prédicteur de l'échec de la fécondation [@Aitken1985]. 
+Le succès du passage du spermatozoïde le long du tractus génitale féminin dépend en grande partie de la mobilité et de la vitesse du spermatozoïde [@Lindholmer1974; @Bjorndahl2010]. La vitesse moyenne d'un spermatozoïde étant de 25 $\upmu$m/s. Une mauvaise mobilité observée dans plus de 50% des spermatozoïdes éjaculés se révèle être un prédicteur de l'échec de la fécondation [@Aitken1985]. 
 
 ### La génétique de l'infertilité  
 

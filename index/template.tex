@@ -34,9 +34,11 @@
 \usepackage[french]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb,amsthm}
+\usepackage[dvipsnames]{xcolor} % tk: for more color
 \usepackage{xcolor}
 \usepackage{eso-pic}
 \usepackage{longtable,booktabs,setspace}
+\usepackage{chemarr} %% Useful for one reaction arrow, useless if you're not a chem major
 \usepackage[hyphens]{url}
 \usepackage{pdfpages}
 \usepackage{tikz}
@@ -48,6 +50,12 @@
 \floatplacement{figure}{H}
 % End of CII addition
 \usepackage{rotating}
+\usepackage{upgreek} % tk : pour pouvoir utiliser le symbole µ droit (pas en itallic)
+\usepackage{pdfpages} % tk : pour pouvoir insérer des fichiers pdf dans le corp de texte
+\usepackage{lscape} % tk : pour pouvoir insérer des images au format paysage
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+\usepackage[utf8]{inputenc}
 
 % Next line commented out by CII
 %%% \usepackage{natbib}
