@@ -35,30 +35,38 @@ knitr::opts_knit$set(kable.force.latex = TRUE)
 
 ## Introduction sur la globozoospermie  
 
-Comme expliqué précédemment, La globozoospermie est un phénotype rare (< 0.1% des patients infertiles) mais néanmoins sévère [@Sen2009] de teratozoospermie menant à l'infertilité masculine. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh; @Pedersen1974] (**Figure : **\@ref(fig:globospz)). En plus des anomalies morphologiques, les spermatozoïdes globozoocéphales présentent également des désorganisations au niveau moléculaire. Par exemple, le facteur spermatique PLC$\zeta$ requit pour l'activation ovocytaire, est absent ou en quantité infime dans les spermatozoïdes globozoocéphales [@Heytens2009; @Taylor2010; @Yoon2008] compromettant ainsi l'activation ovocytaire et expliquant le faible taux de fécondation observés en fécondation *in vitro* (IVF) et en ICSI (intra cytoplasmic sperm injection) [@Dam2006]. On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultante de plusieurs facteurs, les premières études présentant des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphologiques très typiques des spermatozoïdes laissaient penser à une cause monogénique. En 2007, une étude portant sur une famille juive ashkénaze comprenant six frères dont trois atteins a pu lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysés, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gène n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients analysés [@Harbuz2011]. Les études effectuées ultérieurement sur ce phénotype ont ensuite pu montrer que les altérations du gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011; @ElInati2012].  
+Comme expliqué précédemment, La globozoospermie est un phénotype rare (< 0.1% des patients infertiles) mais néanmoins sévère [@Sen2009] de teratozoospermie menant à l'infertilité masculine. Cette anomalie est caractérisée par la présence de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et d'une pièce intermédiaire désorganisée dans l'éjaculat [@Singh; @Pedersen1974] (**Figure : **\@ref(fig:pictglobospz)). En plus des anomalies morphologiques, les spermatozoïdes globozoocéphales présentent également des désorganisations au niveau moléculaire. Par exemple, le facteur spermatique PLC$\zeta$ requit pour l'activation ovocytaire, est absent ou en quantité infime dans les spermatozoïdes globozoocéphales [@Heytens2009; @Taylor2010; @Yoon2008] compromettant ainsi l'activation ovocytaire et expliquant le faible taux de fécondation observés en fécondation *in vitro* (IVF) et en ICSI (intra cytoplasmic sperm injection) [@Dam2006]. On distingue la globozoospermie totale avec 100% des spermatozoïdes présentant le phénotype ou partielle en fonction du taux de spermatozoïdes atteints. Bien que l'infertilité masculine soit souvent la résultante de plusieurs facteurs, les premières études présentant des patients atteints par un phénotype complet [@Sen2009] suggéraient que la globozoospermie était une exception. De plus les caractéristiques morphologiques très typiques des spermatozoïdes laissaient penser à une cause monogénique. En 2007, une étude portant sur une famille juive ashkénaze comprenant six frères dont trois atteins a pu lier ce phénotype à une mutation homozygotes sur le gène *SPATA16* présente chez les trois frères atteint [@Dam2007]. Cependant, dans la même étude, 29 autres patients présentant le même phénotype ont été analysés, et pour ceux-ci, aucun variant du gène *SPATA16* n'a pu être lié au phénotype [@Dam2007] indiquant clairement que les mutations de ce gène n'étaient pas les seules responsables. En 2011, une autre étude portant sur une cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion homozygote de 200kb emportant la totalité du gène *DPY19L2* chez 15 des 20 patients analysés [@Harbuz2011]. Les études effectuées ultérieurement sur ce phénotype ont ensuite pu montrer que les altérations du gène *DPY19L2*, et notamment cette délétion, étaient responsables de la majorité des cas de globozoospermie [@Ray2011; @ElInati2012].  
 
-```{r globospz,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.50"}
+```{r pictglobospz, fig.cap='(ref:pictglobospz)', fig.scap=fig_name, out.extra="scale=0.6"}
 
-fig_name <- "Observation au microscope à balayage d'un spermatozoïde normal (**A**) et d'un spermatozoïde globozoocéphale (**B**) (changer les photos avec celles sur lesquelles on voit l'acrosome colorés)"
+fig_name <- "Observation au microscope à balayage de spermatozoïdes"
+fig_description_a <- "**A** : Spermatozoïde normal."
+fig_description_b <- "**B** : Spermatozoïde globozoocéphale. TODO :: changer les photos avec celles sur lesquelles on voit l'acrosome colorés)" 
+fig_description <- paste(fig_description_a, fig_description_b, sep = " ")
 fig.from <- "[@Harbuz2011]"
-fig_info <- paste0(fig_name," adapté d'après ",fig.from)
+fig_cap <- paste0("**_",fig_name,"_. Adapté d'après ", fig.from, "** : ", fig_description)
 
 include_graphics(path = "figure/globo_normal_spz.png")
 
 ```
 
-En 2012, le développement d'un modèle murin KO *Dpy19l2*$^{-/-}$ a permis de mieux comprendre les mécanismes moléculaires impliqués dans la globozoospermie causée par la délétion du gène *DPY19L2* chez l'humain [@Pierre2012]. Ce modèle de souris KO présentant les mêmes caractéristiques que les patients humains ; Tout d'abord, ces souris étaient infertiles et présentaient des spermatozoïdes globozoocéphales (**Figure : **\@ref(fig:mouseglobo)) mais aussi et surtout, l'ensembles des autres dysfonctionnements étaient retrouvés, c'est à dire : l'absence de l'acrosome, les défauts morphologiques du noyau, de l'enveloppe nucléaire et de l'acroplaxome ainsi que le mauvais positionnement de la manchette [@Pierre2012]. Ainsi il a pu être démontré que la protéine Dpy19l2 étaient principalement exprimée dans le spermatide et plus spécifiquement dans la membrane nucléaire interne faisant face à la vésicule acrosomale et que l'absence de cette protéine entrainait la déstabilisation à la fois de la lamine nucléaire, de la jonction entre l'acroplaxome et l'enveloppe nucléaire [@Pierre2012]. 
+(ref:pictglobospz) `r fig_cap`
 
-```{r mouseglobo,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.8"}
+En 2012, le développement d'un modèle murin KO *Dpy19l2*$^{-/-}$ a permis de mieux comprendre les mécanismes moléculaires impliqués dans la globozoospermie causée par la délétion du gène *DPY19L2* chez l'humain [@Pierre2012]. Ce modèle de souris KO présentant les mêmes caractéristiques que les patients humains ; Tout d'abord, ces souris étaient infertiles et présentaient des spermatozoïdes globozoocéphales (**Figure : **\@ref(fig:pictmouseglobo)) mais aussi et surtout, l'ensembles des autres dysfonctionnements étaient retrouvés, c'est à dire : l'absence de l'acrosome, les défauts morphologiques du noyau, de l'enveloppe nucléaire et de l'acroplaxome ainsi que le mauvais positionnement de la manchette [@Pierre2012]. Ainsi il a pu être démontré que la protéine Dpy19l2 étaient principalement exprimée dans le spermatide et plus spécifiquement dans la membrane nucléaire interne faisant face à la vésicule acrosomale et que l'absence de cette protéine entrainait la déstabilisation à la fois de la lamine nucléaire, de la jonction entre l'acroplaxome et l'enveloppe nucléaire [@Pierre2012]. 
+
+\newpage 
+
+```{r pictmouseglobo, fig.cap='(ref:pictmouseglobo)',fig.scap=fig_name, out.extra="scale=0.8"}
 
 fig_name <- "Comparaison entre les spermatozoïdes des souris *Dpy19l2*$^{-/-}$ (à gauche) et les souris sauvages *Dpy19l2*$^{+/+}$ (à droite)"
 fig.from <- "[@Pierre2012]"
-fig_info <- paste0(fig_name," d'après ",fig.from)
+fig_cap <- paste0("**_",fig_name,"_. D'après ", fig.from, "**.")
 
 include_graphics(path = "figure/mouse_globo_spz.png")
 
-
 ```
+
+(ref:pictmouseglobo) `r fig_cap`
 
 \newpage
 
@@ -80,7 +88,7 @@ PLOS GeneticS, Mars 2013
 
 Chez les mammifères il existe trois paralogues de *DPY19L2* de fonctions encore inconnues et un pseudogène présentant une très forte homologie de séquence (> 95%) [@Carson2006]. Chez l'Homme, ce gène est flanqué de deux séquences présentant une forte homologie (>95%) d'une taille de 28kb. Ces séquences appelées LCRs (*low copy repeats*) représentent une large portion du génome humain [@Cheung2003; @Bailey2002] et vont, de par leur homologie favoriser les duplications de gènes jouant ainsi un rôle important dans l'évolution des génomes des vertébrés [@Walsh2003; @Ohno1970]. Dans le cas de *DPY19L2*, ces LCRs vont, au cours de la méiose entrainer la venue de recombinaisons homologues non-allélique (NAHR) donnant lieu soit à une délétion du gène *DPY19L2* et la formation d'un ADN circulaire comprenant le gène soit à un allèle possédant deux copies du gène tandis que l'autre n'en possède aucune [@Harbuz2011a].  
 
-Ce mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèles délétés que d'allèles dupliqués puisque les cas présentés en figures \@ref(fig:nahr) - **2** et \@ref(fig:nahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:nahr) - **3** forme un allèle dupliqué [@Liu2012]. Cependant, les données mises à disposition par la base de données [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) (DGV) [@MacDonald2014] indiquent un excès de duplication puisque sur un total de 6575 individus analysés, 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*.  
+Ce mécanisme de NAHR devrait, en théorie, engendrer la formation de plus d'allèles délétés que d'allèles dupliqués puisque les cas présentés en figures \@ref(fig:pictnahr) - **2** et \@ref(fig:pictnahr) - **3** induisent la formation d'un allèle délété tandis que seul le cas \@ref(fig:pictnahr) - **3** forme un allèle dupliqué [@Liu2012]. Cependant, les données mises à disposition par la base de données [*Database of Genomic Variants*](http://dgv.tcag.ca/dgv/app/home) (DGV) [@MacDonald2014] indiquent un excès de duplication puisque sur un total de 6575 individus analysés, 83 duplications et de 26 délétions hétérozygotes ont été observées pour le locus de *DPY19L2*.  
 
 Ainsi, dans cette étude, notre équipe a cherchée à caractériser précisément le mécanisme génétique et les facteurs favorisant la survenue par NAHR de la délétion homozygote récurrente emportant totalement le gène DPY19L2. De même, nous avons tenté de résoudre le paradoxe observé entre le modèle théorique de NAHR et la fréquence des allèles observée dans la population générale afin de confirmer les données fournies dans les bases de données et ainsi écarter l'hypothèse d'un biais causé par la présence du pseudogène *DPY19L2P1* très homologue avec *DPY19L2* [@Carson2006].  
 
@@ -88,17 +96,19 @@ Dans ce contexte j'ai pu participer à diverses manipulations de biologie moléc
 
 \newpage 
 
-```{r nahr,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.5"}
+```{r pictnahr,fig.cap='(ref:pictnahr)', fig.scap=fig_name, out.extra="scale=0.5"}
 
 fig_name <- "Représentation schématique du mécanisme de NAHR"
 fig_from <- "[@Liu2012]"
-
 fig_description <- "Lors d'un NAHR interchromatidien, un allèle dupliqué et un allèle délété sont formés. Lors d'un NAHR intrachrmatidien, seule un allèle délété est produit, en même temps qu'un petit ADN circulaire qui sera éliminé par la suite."
-fig_info <- paste0(fig_name," adapté d'après ",fig_from," : ",fig_description)
+fig_cap <- paste0("**_",fig_name,"_. Adapté d'après ", fig.from, "** : ", fig_description)
 
 include_graphics(path = "figure/nahr_process.png")
 
 ```
+
+(ref:pictnahr) `r fig_cap`
+
 
 \newpage
 
@@ -128,7 +138,6 @@ Où :
 L'intervalle de confiance (IC) à 95% est ensuite calculé grâce à une loi binomiale de sorte à modéliser la dilution initiale pour obtenir l'ADN d'*entrée*. Le puit contenant le *pool* des trois ADN spermatique est donc celui ayant les résultats les plus robustes, l'IC étant le plus resserré et permet donc d'établir le taux de délétion *de novo* à 1.8 x 10$^{-5}$ (IC 95% : 1.4x 10$^{-6}$; 2.2x 10$^{-6}$) tandis que le taux de duplication *de novo* est estimé à 7.7 x 10$^{-6}$ (IC 95% : 6.1 x 10$^{-6}$; 9.7 x 10$^{-6}$) montrant un enrichissement environ deux fois supérieur des délétions par rapport aux duplications sur le site de *DPY19L2*.  
 
 Ainsi, de manière paradoxale, les délétions *de novo* apparaitraient, au cours de la méiose, deux fois plus fréquemment que les duplications *de novo* tandis que l'allèle dupliqué est trois fois plus fréquent que l'allèle délété dans la population générale. Cet effet pourrait en partie être due aux effets de sélection naturelle. En effet, Bien qu'à notre connaissance, les femmes portant l'allèle délété à l'état homozygote ne soient caractérisées par aucun phénotype, les hommes, eux sont 100% infertiles tandis que l'allèle dupliqué ne subirait aucune sélection.   
-
 Cette étude a également été pour notre équipe l'occasion d'effectuer une étude plus approfondie des LCRs flanquant le locus de *DPY19L2*. Pour cela, nous avons génotypé 20 SNPs spécifiques des LCRs télomériques et centromériques. À partir de ces données, 5 points de cassures distincts (BP1-5) ont pu être identifiés sur les 185 allèles recombinés étudiés (108 délétés et 77 dupliqués). L'ensemble de ces points de cassures sont localisés dans une région d'environ 1150 pb. L'analyse bioinformatique de cette région a permis de mettre en évidence, au centre de cette région, 13 nucléotides (CCNCCNTNNCCNC) constituant un site de reconnaissance consensus de la protéine PRDM9. Cette protéine à doigts de zinc étant connue pour son rôle central dans l'activation de la transcription dans les premières phases de la prophase méiotique  ainsi que pour être à impliqué dans les mécanismes de recombinaisons chromosomique au cours de la méiose chez l'humain et la souris [@Parvanov2010; @Baudat2010].
 
 \newpage
@@ -179,7 +188,10 @@ n_female_all <- df_born %>% ungroup %>% filter(Sex == "Fem") %>% summarise(Nb = 
 n_male_last <- df_born %>% ungroup %>% filter(Sex == "Mal", grepl("cage4", Birth_id)) %>% summarise(Nb = sum(Nb)) %>% collect() %>% .[["Nb"]]
 n_female_last <- df_born %>% ungroup %>% filter(Sex == "Fem", grepl("cage4", Birth_id)) %>% summarise(Nb = sum(Nb)) %>% collect() %>% .[["Nb"]]
 
-p_test_without_last <- prop.test(n_female_all - n_female_last, (n_female_all + n_male_all) - (n_male_last + n_female_last), alternative = "less")$p.value 
+
+n_birth_without_last <- df_born %>% distinct(Birth_id) %>% nrow - 1
+
+p_test_without_last <- prop.test(n_female_all - n_female_last, (n_female_all + n_male_all) - (n_male_last + n_female_last), alternative = "less")$p.value %>% round(7)
 p_test_all <- prop.test(n_female_all, n_female_all + n_male_all, alternative = "less")$p.value 
 
 ```
@@ -194,10 +206,11 @@ Dans cette étude j’ai pu effectuer l’intégralité des manipulations de bio
 
 \newpage
 
-```{r plotborn, fig.height=3.6, fig.cap=fig_info,fig.scap=fig_name, cache=TRUE, dependson="dfborn"}
+```{r plotborn, fig.height=3.6, fig.cap='(ref:plotborn)',fig.scap=fig_name, cache=TRUE, dependson="dfborn"}
 
-fig_name <- "Quantification des sexes des souris observées lors de chaque naissances issues d'un croisement de deux souris hétérozygotes *Dpy19l2* +/-"
-fig_info <- fig_name
+fig_name <- "Quantification des sexes des souris observées lors de chaque naissances issues d'un croisement de deux souris hétérozygotes *Dpy19l2*$^{+/-}$"
+fig_description <- paste0("Après ", n_birth_without_last, " naissances, ",  n_female_all - n_female_last, " souriceaux mâles sont nés pour seulement ", n_male_all - n_male_last, " femelles, ainsi le test du $\\chi^2$ comparant ces valeurs donne une p-valeur de ", p_test_without_last, ".")
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 ggplot(df_born %>% filter(!(grepl("cage4", Birth_id))),aes(Birth_id,Nb)) + 
   geom_bar(stat = "identity", position = position_dodge(), aes(fill = Sex)) +
@@ -207,6 +220,8 @@ ggplot(df_born %>% filter(!(grepl("cage4", Birth_id))),aes(Birth_id,Nb)) +
   ylab("Nb of mice")
 
 ```
+
+(ref:plotborn) `r fig_cap`
 
 \newpage
 
@@ -223,7 +238,6 @@ df_mol_function <- fread("data/data_globo_loecular_fuc.csv", sep = "\t", header 
                                          levels = names(sort(table(`Molecular functions`), 
                                                              decreasing = TRUE)))) %>%
   filter(!is.na(Target))
-
 
 df_mol_function_simple <- df_mol_function %>%
   group_by(`Molecular functions`) %>%
@@ -261,13 +275,13 @@ Ces résultats ne nous ont cependant pas permis d'expliquer l'absence de la prot
 
 \newpage 
 
-```{r plotmolfunction, cache=TRUE, dependson="dfmolfunction", warning=FALSE, message=FALSE, fig.height=8, fig.width=6.5, fig.cap=fig_info,fig.scap=fig_name}
+```{r plotmolfunction, cache=TRUE, dependson="dfmolfunction", warning=FALSE, message=FALSE, fig.height=8, fig.width=6.5, fig.cap='(ref:plotmolfunction)', fig.scap=fig_name}
 
 fig_name <- "Principales fonctions moléculaires affectées chez les souris *Dpy19l2* KO"
 fig_description_A <- "**A** : Liste des fonctions moléculaires affectées : Bndn = Binding, Ctly = Catalytic, Trnsc = Transcription, Strm = Structural molecule, Rcpt = Receptor"
 fig_description_B <- "**B** : Détails des fonctions moléculaires affectées par les gènes dérégulés"
 fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
-fig_info <- paste(fig_name," : ",fig_description)
+fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
 
 pA <- ggplot(df_mol_function, aes(`Molecular functions`)) +
   geom_bar(aes(fill = `Molecular functions` )) +
@@ -290,3 +304,4 @@ pA <- ggplot(df_mol_function, aes(`Molecular functions`)) +
 
 ```
 
+(ref:plotmolfunction) `r fig_cap`

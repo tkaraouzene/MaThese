@@ -95,24 +95,19 @@ Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la s
 
 \newpage
 
-```{r capspermatogenese}
+```{r spermatogenese,fig.cap='(ref:spermatogenese)', fig.scap=fig_name, out.extra="scale=0.35"}
+
 
 fig_name <- "Les différentes phases de la spermatogenèse"
 fig.from <- "[medizin-kompakt](http://www.medizin-kompakt.de/spermatogenese)"
 fig_description <- "TODO ::: description à écrire !!!"
 fig_cap <- paste0("**_",fig_name,"_. D'après ", fig.from, "** : ", fig_description)
 
-```
-
-(ref:spermatogenese) `r fig_cap`
-
-```{r spermatogenese,fig.cap='(ref:spermatogenese)', fig.scap=fig_name, out.extra="scale=0.35"}
-
-fig.info <- paste0(fig_name," d'après ",fig.from," : ",fig_description)
-
 include_graphics(path = "figure/spermatogenese2.jpg")
 
 ```
+
+(ref:spermatogenese) `r fig_cap`
 
 \newpage 
 
