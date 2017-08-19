@@ -2315,6 +2315,10 @@ n_distinct_snv <- df_bigmmaf_filter %>% ungroup() %>% filter(TYPE == "SNV") %>% 
 n_distinct_indel <- df_bigmmaf_filter %>% ungroup() %>% filter(TYPE == "Indel") %>% ungroup() %>% distinct(CHR, POSITION, REF, ALT) %>% nrow
 n_distinct_gene <- df_bigmmaf_filter %>% ungroup() %>% distinct(SYMBOL) %>% nrow
 
+
+n_distinct_gene_1_run <- df_bigmmaf_filter %>% filter(CANONICAL == "YES") %>% group_by(Feature) %>% 
+  filter(n_distinct(RUN) == 1) %>% ungroup() %>% distinct(SYMBOL) %>% nrow
+
 n_min_var <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_VAR_TOT"]] %>% min
 n_max_var <- df_bigmmaf_filter_stat %>% collect() %>% .[["N_VAR_TOT"]] %>% max
 
