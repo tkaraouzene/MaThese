@@ -329,7 +329,6 @@ Si l'alignement des séquences peut être comparé à la reconstruction d'un puz
 2. **V**$_+$ **et V**$_-$ : À l'inverse de R$_+$ et R$_-$, ces comptages correspondent au nombre de *reads* *forward* et *reverse* sur lesquels est observé un allèle **variant** (V) à une position donnée.  
 
 Ainsi, les sommes : $R_+ + V_+$ et $R_- + V_-$ indiqueront respectivement la couverture d'une position en ne tenant que des *reads forward* et *reverse*. En fonction de ces couvertures nos appels seront classés en trois catégories : 
-
 1. **Les appels *double strand* (DS) :**  Qualifient les positions ayant une couverture $\ge$ 10 sur **les deux** *strands*. Ces appels sont ceux sont ceux ayant la meilleure qualité.  
 2. **Les appels *single strand* (SS) :**  Ces appels définissent les positions pour lesquels **un des deux** *strands* présente une couverture $\le$ 10. Dans ce cas, ce *strand* est ignoré et l'appel est effectué uniquement en utilisant le second *strand*.   
 3. **Les appels *non strand* (NS) :** Les positions NS sont celles pour lesquelles la couverture est $\le$ 10 sur **les deux** *strands*. Aucun appel n'est effectué à ces positions qui **ne sont pas conservés dans la suite des analyses**.    
@@ -354,34 +353,35 @@ Pour les positions SS, l'appel final correspondra directement à l'appel effectu
 
 \newpage
 
-```{r picvarcall,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.5"}
+```{r picvarcall,fig.cap='(ref:picvarcall)', fig.scap=fig_name, out.extra="scale=0.5"}
 
 fig_name <- "Détail de l'appel général effectué pour les appels DS en fonction du pourcentage de *reads* variant sur chacun des deux *strands*"
-
 fig_description <- "Illustration de l'appel des génotypes effectués en fonction du pourcentage de *reads* variants observés sur chacun des deux *strand* de séquençage (*forward* et *reverse*). Le génotype général est appelé si les génotypes des deux brins sont les mêmes ou si l'un des deux est dans la zone ambiguë adjacente au premier. Les zones vertes correspondent aux appels homozygotes référencess, les zones orange, hétérozygotes et rouges homozygotes variants. Les zones grises sont les appels ambigus tandis que les noires sont les appels discordants. Ces deux derniers appels ne sont pas conservés dans la suite des analyses."
-
-fig_info <- paste0(fig_name," : ",fig_description)
+fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
 
 include_graphics(path = "figure/var_call.png")
 
 ```
 
+(ref:picvarcall) `r fig_cap`
+
 \newpage
 
 ### L'annotation  
 
-Chaque variant retenu sera ensuite annoté tout d'abord par le logiciel *variant effect predictor* (VEP) [@McLaren2016] qui nous indiquera pour chaque variant la conséquence que celui-ci aura sur la séquence codante de l'ensemble des transcrits Ensembl qu'il chevauche (**Figure : **\@ref(fig:figvepcsq), **Table : **\@ref(tab:tabvepcsq)). Dans le cas d'une substitution faux-sens, c'est à dire entrainant le changement d'un seul acide-aminé de la séquence protéique, nous utilisons les prédictions fournies par SIFT et PolyPhen afin d'estimer leur pathogénicité. Ensuite, nous ajoutons, pour chaque gène, son expression tissulaire en nous basant sur les données Ensembl [@Aken2017] générées par le projet Illumina BodyMap qui recense les données RNAseq des gènes humains pour 16 tissus différents. Suite à cela nous ajoutons, lorsque celle-ci est disponible, la fréquence du variant dans les bases de données ExAC [@Lek2016], ESP600 ([Exome Variant Server, NHLBI GO Exome Sequencing Project (ESP), Seattle, WA](http://evs.gs.washington.edu/EVS/)) et 1000Genomes [@1000GenomesProjectConsortium2015] donnant ainsi une estimation de sa fréquence dans la population générale. De même, la particularité de ce pipeline est que chaque variant qu'elle a identifié alimente une base de données interne pouvant par la suite servir de contrôle lors de l'analyse d'individus présentant un phénotype différent de ceux étudiés précédemment. L'intérêt d'une telle base, par rapport aux bases de données tel que ExAC, est qu'elle permet d'utiliser comme contrôle des individus ayant subi le même protocole de séquençage et la même analyse bioinformatique permettant ainsi de mieux identifier, et donc filtrer, les erreurs systématiques pouvant arriver à chacune des étapes.   
+Chaque variant retenu sera ensuite annoté tout d'abord par le logiciel *variant effect predictor* (VEP) [@McLaren2016] qui nous indiquera pour chaque variant la conséquence que celui-ci aura sur la séquence codante de l'ensemble des transcrits Ensembl qu'il chevauche (**Figure : **\@ref(fig:pictvepcsq), **Table : **\@ref(tab:tabvepcsq)). Dans le cas d'une substitution faux-sens, c'est à dire entrainant le changement d'un seul acide-aminé de la séquence protéique, nous utilisons les prédictions fournies par SIFT et PolyPhen afin d'estimer leur pathogénicité. Ensuite, nous ajoutons, pour chaque gène, son expression tissulaire en nous basant sur les données Ensembl [@Aken2017] générées par le projet Illumina BodyMap qui recense les données RNAseq des gènes humains pour 16 tissus différents. Suite à cela nous ajoutons, lorsque celle-ci est disponible, la fréquence du variant dans les bases de données ExAC [@Lek2016], ESP600 ([Exome Variant Server, NHLBI GO Exome Sequencing Project (ESP), Seattle, WA](http://evs.gs.washington.edu/EVS/)) et 1000Genomes [@1000GenomesProjectConsortium2015] donnant ainsi une estimation de sa fréquence dans la population générale. De même, la particularité de ce pipeline est que chaque variant qu'elle a identifié alimente une base de données interne pouvant par la suite servir de contrôle lors de l'analyse d'individus présentant un phénotype différent de ceux étudiés précédemment. L'intérêt d'une telle base, par rapport aux bases de données tel que ExAC, est qu'elle permet d'utiliser comme contrôle des individus ayant subi le même protocole de séquençage et la même analyse bioinformatique permettant ainsi de mieux identifier, et donc filtrer, les erreurs systématiques pouvant arriver à chacune des étapes.   
 
-```{r figvepcsq, fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=.9"}
+```{r pictvepcsq, fig.cap='(ref:pictvepcsq)',fig.scap=fig_name, out.extra="scale=.9"}
 
 fig_name <- "Listes des différentes conséquences prédites par VEP et leur positionnement sur le transcrit"
-fig_description <- ""
 fig_from <- "[VEP site](http://www.ensembl.org/info/genome/variation/consequences.jpg)"
-fig_info <- paste0(fig_name," d'après ",fig_from)
+fig_cap <- paste0("**_",fig_name,"_ d'après : ", fig_from, "**")
 
 include_graphics(path = "figure/vep_csq.jpg")
 
 ```
+
+(ref:pictvepcsq) `r fig_cap`
 
 \newpage
 \blandscape
@@ -408,7 +408,7 @@ pander(df_vep_csq,
 
 ### Le filtrage des variants  
 
-```{r}
+```{r mafcutoff}
 
 maf_cutoff <- .01
 
@@ -429,15 +429,17 @@ L'étape de filtrage est extrêmement importante si l'on souhaite analyser de ma
 
 6. **Filtre 6 : Présence des variants dans la cohorte contrôle :** Ce filtre utilise les variants composant la base de données interne du pipeline et permet de filtrer l'intégralité des variants homozygotes retrouvés chez les patients séquencés ne présentant **pas** le même phénotype que le patient analysé. Comme dit plus tôt, ce filtre se révèle particulièrement intéressant lorsque plusieurs patients porteurs de phénotypes différents ont subi le même protocole de séquençage ainsi l'ensemble des variants faux-positifs résultant d'artéfacts liés aux différentes étapes en amont de l'analyse bioinformatique pourront alors être filtrés. De même ce filtre permet de mettre en évidence les variants propres à une population lorsque des patients provenant de la même région géographique et ne présentant toujours pas le même phénotype sont comparés.    
 
-```{r piccompositehet,fig.cap=fig_info,fig.scap=fig_name, out.extra="scale=0.35"}
+```{r piccompositehet, fig.cap='(ref:piccompositehet)', fig.scap=fig_name, out.extra="scale=0.35"}
 
 fig_name <- "Représentation schématique des phasages de deux variants avec les génotypes associés"
 fig_description <- "Un variant est homozygote lorsque le **même** variant est présent sur les deux allèles d'un gène et hétérozygote lorsqu'il est présent sur **un seul** des deux allèles. On parlera d'hétérozygotes *cis* lorsque deux variants hétérozygotes différents seront positionnés sur **le même** allèle et d'hétérozygote *trans* (ou composite) lorsque ces deux variants hétérozygotes seront positionnés sur **deux allèles différents**. En WES et en WGS il est impossible de différentié les hétérozygotes *cis* des hétérozygotes *trans*"
-fig_info <- paste(fig_name, fig_description, sep = " : ")
+fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
 
 include_graphics("figure/hetero_composites.png")
 
 ```
+
+(ref:piccompositehet) `r fig_cap` 
 
 \newpage
 
@@ -1149,7 +1151,7 @@ Ainsi, à la fin de ces trois étapes de contrôles qualité des *reads*, enviro
 
 \newpage 
 
-```{r plotfammapping, dependson="varfammapping", fig.cap=fig_info,fig.scap=fig_name,fig.width=6.3, fig.height=6.9, cache=TRUE}
+```{r plotfammapping, dependson="varfammapping", fig.cap='(ref:plotfammapping)', fig.scap=fig_name,fig.width=6.3, fig.height=6.9, cache=TRUE}
 
 fig_name <- "Processus simplifié du contrôle qualité des *reads*"
 fig_description_all <- "Pour chacun des graphiques, les *reads* représentés en vert sont conservés tandis que ceux en rouge sont filtrés"
@@ -1159,7 +1161,7 @@ fig_description_C <- "**C** : Distribution pour chaque patient des *reads* compa
 fig_description_D <- "**D** : Présentation pour chaque *reads* du nombre de site auxquels ils s'alignent"
 fig_description <- paste(fig_description_all, fig_description_A,fig_description_B,fig_description_C, fig_description_D, sep = ". ")
 
-fig_info <- paste0(fig_name, " : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
 
 pA <- ggplot(df_reads_summary %>% filter(QUALITY == "Raw reads"), aes(RUN, NB_OF_READS)) + 
   geom_bar(stat = "identity", aes(fill = IS_RETAINED)) +
@@ -1225,12 +1227,14 @@ plot_grid(row1,row2, pD, ncol = 1, labels = c("","","D"), rel_heights = c(1,.7,.
 
 ```
 
+(ref:plotfammapping) `r fig_cap` 
+
 \newpage
 
 #### L'appel des variants  
 
 Une fois l'alignement effectué, il faut identifier les positions présentant des différences avec le génome de référence et leur assigner un génotype. Ce génotype étant dépendant du pourcentage de *reads* variants à une position donnée, il est nécéssaire, afin de calibrer les bornes de notre algorithme d'appel, de connaitre la répartition globale de ces proportions. Comme attendue, nous observons des pics à 0, 50 et 100% de *reads* variants pour une position donnée. Ces trois pourcentages correspondant respectivement aux appels "homozygote référence", "hétérozygote" et "homozygote variant". La démarcation séparant les appels hétérozygote et homozygote variant est relativement claire. distinguer ces deux génotypes ne pose donc pas de problème, la région d'ambiguité allant de 75 à 85% de *reads* variants ne concernant qu'une minorité de position. Ce n'est cependant pas le cas pour celle séparant les appels homozygote référence et hétérozygote. En effet, on peut constater que la zone d'ambiguité allant de 20 à 40% de *reads* variants concèrne une part non négligeable des positions couvertes. Les positions SS situées dans cette région seront systématiquement filtrées. Pour les positions DS, celles pour lesquels **un seul** des *strand* se situe dans cette région alors que l'autre se trouve dans une des régions adjacentes (homozygote référence ou hétérozygote) seront conservées. Les autres seront filtrées elles aussi (**Figure : **\@ref(fig:plotdensityvar)). 
-
+  
 Dans nos données, les appels SS sont majoritaires et représentent environ `r median_percent_ss` % de nos appels (contre `r median_percent_ds` % d'appels DS). Au vus de l'importance de ces appels, nous avons fait le choix de les conserver afin de ne pas filtrer une quantité trop importante de données. Ces appels seront cependant considérés comme étant de faible qualité, de fait, leurs analyses et interprétation seront plus précautionneuses. En revanche, au vus de la trop grande incertitude de l'appel des variants NS, ceux-ci sont systématiquement filtrés éliminant ainsi entre `r min_percent_ns` et `r max_percent_ns` % des positions appelées pour chaque patient (**Figure : **\@ref(fig:plotvarcall) - **A**).  
 
 De même, les appels discordant et ambigus sont filtrés, soit environ `r wrong_ds_median` % des variants DS. Il est intéressant de noter que bien que les variants *single strand* (SS) soient conservés, on peut s'attendre à ce qu'environ `r discordant_median`%, soit le pourcentage de DS discordant, de ceux-ci soient aberrants, ceux-ci n'ayant pu subir le même contrôle que les SS (**Figure : **\@ref(fig:plotvarcall) - **B**). 
@@ -1239,31 +1243,18 @@ Pour l'ensemble des variants ayant passé les filtres énoncés ci-dessus, c'est
 
 \newpage
 
-```{r picdensityvar,fig.cap=fig_info,fig.scap=fig_name}
-
-# fig_name <- "Densité de répartition du pourcentage de *reads* variant en fonction de différentes valeurs de couverture minimale"
-# 
-# fig_description <- ""
-# 
-# fig_info <- paste0(fig_name," : ",fig_description)
-# 
-# include_graphics(path = "figure/var_percent_density.png")
-
-```
-
-```{r plotdensityvar,fig.cap=fig_info,fig.scap=fig_name}
+```{r plotdensityvar,fig.cap='(ref:plotdensityvar)',fig.scap=fig_name}
 
 xmin <- .07
 ymax <- 7.2
 
-
-fig_name <- "Densité de répartition du pourcentage de *reads* variant pour chaque position couverte"
-
+fig_name <- "Densité de répartition du pourcentage de reads variant pour chaque position couverte"
 fig_description <- paste0("Les homozygotes références évidents ne nous intéressant pas, les position représentées sont restreinte à celles contenant un minimum de ", xmin *100, "\\% de *reads* variants. L'arrière plan montre les bornes utilisées par notre algorithme pour chaque appel. Les lignes pointillées séparent en deux les régions d'ambiguité basse et haute")
 
-fig_info <- paste0(fig_name," : ",fig_description)
+fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
 
-density_plot_file <- "figure/density_plot.jpg"
+density_plot_file <- "figure/density_plot.png"
+
 
 if (!file.exists(density_plot_file)) {
   
@@ -1289,18 +1280,19 @@ fread("zcat ~/countsForHisto_PR_all.csv.gz", sep = ",", header = TRUE, showProgr
   geom_vline(xintercept = c(.3,.8), linetype = "dashed") +
   xlab("% of variant reads")
 
-  ggsave(density_plot_file, dpi = 800)
+  ggsave(density_plot_file, dpi = 1000)
 
 }
 
 include_graphics(path = density_plot_file)
 
-
 ```
+
+(ref:plotdensityvar) `r fig_cap` 
 
 \newpage
 
-```{r plotvarcall, dependson="dfvarcall", fig.cap=fig_info,fig.scap=fig_name, fig.height=7.5, cache=TRUE}
+```{r plotvarcall, dependson="dfvarcall", fig.cap='(ref:plotvarcall)',fig.scap=fig_name, fig.height=7.5, cache=TRUE}
 
 fig_name <- "Contrôle qualité des variants appelés"
 fig_description_all <- "Pour chacun des graphiques, les variants représentés en vert et en orange sont conservés tandis que ceux en rouge sont filtrés"
@@ -1308,7 +1300,7 @@ fig_description_A <- "**A** : Distribution du *stranding* des appels pour chaque
 fig_description_B <- "**B** : Comparaison des appels entre les deux *ends* des variants appelés DS"
 fig_description_C <- "**C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre"
 fig_description <- paste(fig_description_all, fig_description_A,fig_description_B,fig_description_C, sep = ". ")
-fig_info <- paste0(fig_name, " : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
 
 pA <- ggplot(df_strand_all, aes(STRAND, P)) +
   geom_boxplot(outlier.size = -1, aes(fill = IS_RETAINED)) + 
@@ -1348,6 +1340,9 @@ plot_grid(row1, pC,labels = c("", "C"), rel_heights = c(.52,.48), ncol = 1)
 
 ```
 
+(ref:plotvarcall) `r fig_cap` 
+
+
 \newpage
 
 #### L'annotation des variants
@@ -1366,17 +1361,16 @@ Comme attendu, les variants ayant un impact tronquant se retrouvent être les mo
 
 \newpage
 
-```{r plotannotation, dependson=c("dfvarannotation","dffreqvar"), fig.cap=fig_info,fig.scap=fig_name,fig.width=6.5, fig.height=7, cache=TRUE}
+```{r plotannotation, dependson=c("dfvarannotation","dffreqvar"), fig.cap='(ref:plotannotation)',fig.scap=fig_name,fig.width=6.5, fig.height=7, cache=TRUE}
 
 fig_name <- "Annotation des variants"
 fig_description_A <- "**A** : Quantification du nombre de gènes (en bleu) / transcrits (en rose) impactés par au moins un variant pour chaque patient chacun représentés par une barre"
-fig_description_B <- "**B** : Distribution des impacts HIGH MODERATE LOW et MODIFIER en fonction des patients et du génotype du variant"
+fig_description_B <- "**B** : Distribution des impacts *HIGH MODERATE LOW* et *MODIFIER* en fonction des patients et du génotype du variant"
 fig_description_C <- "**C** : Pourcentage des variants retrouvés au sein des trois bases de données : ExAC, ESP et 1KG"
 fig_description_D <- "**D** : Distribution des fréquences de nos variants au sein des trois bases de données : ExAC, ESP et 1KG"
 
 fig_description <- paste(fig_description_A,fig_description_B, sep = ". ")
-fig_info <- paste0(fig_name, " : ", fig_description)
-
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 pA <- ggplot(df_nb_feature, aes(RUN, NB)) + 
   geom_bar(stat = "identity", position = position_nudge(),  aes(fill = FEATURE)) + 
@@ -1423,11 +1417,12 @@ plot_grid(pA, pB, labels = c("A","B"), ncol = 1)
 
 ```
 
+(ref:plotannotation) `r fig_cap` 
+
 ```{r cleanfreq, include=FALSE, warning=FALSE}
 
 rm(df_freq, df_freq2, df_freq_stat)
 gc()
-
 
 ```
 
@@ -1445,11 +1440,11 @@ Les étapes précédentes nous ont permis de mettre en évidence pour chaque pat
 
 \newpage 
 
-```{r plotfilternonpertinanttr, fig.cap=fig_info,fig.scap=fig_name,fig.width=6.3, fig.height=3.2, cache=TRUE}
+```{r plotfilternonpertinanttr, fig.cap='(ref:plotfilternonpertinanttr)',fig.scap=fig_name,fig.width=6.3, fig.height=3.2, cache=TRUE}
 
 fig_name <- "Filtrage des transcrits jugés \"non pertinents\" et des variants les chevauchant"
 fig_description <- "Pour chaque patient nous avons filtrer les transcrits jugés \"non pertinents\" pour l'analyse, c'est à dire ceux ne codant pas pour une protéine et ceux annoté NMD (boite rouge). Dès lors, l'intégralité des variants chevauchant **uniquement** des transcrits non pertinents sont systématiquement être filtrés (boites bleue). Les autres sont conservés."
-fig_info <- paste0(fig_name, " : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
 
 ggplot(df_filtered_tr_vr %>% filter(IS_FILTERED == TRUE), aes(TYPE, N)) +
   geom_boxplot(aes(fill = TYPE), alpha = .3, outlier.size = -1) +
@@ -1464,16 +1459,18 @@ ggplot(df_filtered_tr_vr %>% filter(IS_FILTERED == TRUE), aes(TYPE, N)) +
 
 ```
 
+(ref:plotfilternonpertinanttr) `r fig_cap` 
+
 5. **Fréquence des variants :**  Filtrer systématiquement les variants retrouvés avec une fréquence $\ge$ `r maf_cutoff` dans l'une des trois bases de données que sont ExAC, 1KG et ESP6500 permet de filtrer entre `r nb_filter_freq_min` et `r nb_filter_freq_max` variants par patients.    
 
 6. **Présence des variants dans la cohorte contrôle :** L'ensemble des variants répertoriés au sein de ces `r nb_pheno` phénotypes a été confrontés à des listes de variants identifiés chez d'autres patients analysés par notre pipeline et présentant des phénotypes. Dès lors, l'ensemble des variants retrouvés à l'état homozygote chez au moins un des individus de la cohorte contrôle sera filtré de notre liste de variants. On peut cependant noter que les variants retrouvés chez les patients `r run_fam_az %>% paste_vector("itallic")` de la famille AZ n'ont pas été confrontés à ceux observés dans notre cohorte de `r nb_ctrl_ovo` femmes présentant des anomalies de développement ovocitaire. En effet, ces deux phénotypes peuvent être causés par un même gène impliqué dans la division cellulaire méiotique (**Figure :** \@ref(fig:plotsamplectrl)).  
 \newpage
 
-```{r plotsamplectrl, fig.cap=fig_info,fig.scap=fig_name, fig.height=4, cache=TRUE}
+```{r plotsamplectrl, fig.cap='(ref:plotsamplectrl)',fig.scap=fig_name, fig.height=4, cache=TRUE}
      
 fig_name <- "Nombre d'individus et leur phénotypes composant la cohorte contrôle de chaque famille"
 fig_description <- "Ici, chaque barre représente une famille et sa hauteur est déterminée par le nombre d'individus composant la cohorte contrôle à laquelle elle a été confronté. Le nombre total de contrôle utilisés par famille est inscrit au dessus de chaque barre. Les couleurs déterminent les phénotypes des individus de la cohorte contrôle. Chaque individu de cette cohorte a été séquencés en WES par notre équipe. Afin d'être considéré comme \"contrôle\" et intégrer cette cohorte, un individu doit être sain ou présenter un phénotype d'infertilité suffisamment différent de la famille étudiée. Par exemple, un individus MMAF pourra servir de contrôle aux familles AZ et FF mais pas aux familles MMAF1-5"
-fig_info <- paste0(fig_name, " : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
                          
 ggplot(df_nb_ctrl, aes(SUB, N_PHENO)) + 
   geom_col(aes(fill = PHENOTYPE)) + 
@@ -1490,6 +1487,8 @@ ggplot(df_nb_ctrl, aes(SUB, N_PHENO)) +
 
 ```
 
+(ref:plotsamplectrl) `r fig_cap`
+
 \newpage
 
 Comme on pouvait s'y attendre, ces six filtres ont un pouvoir discriminant extrêmement différent. En effet, tandis que le filtre "Transcript relevance" (filtre n°4) élimine en moyenne `r mean_filter_tr`% des variants de chaque individu, le filtre "Variant impact" (filtre n° 3) élimine, lui, jusqu'à `r max_filter_impact`% de ces mêmes variants. Cette différence n'est pas surprenante. En effet, comme nous l'avions vu plus tôt, les variants de la catégorie *MODIFIER* de VEP qui regroupe entre autres les variants chevauchant les séquences UTRs et introniques (**Table :** \@ref(tab:tabvepcsq)) représentent en moyenne `r p_modifier_median`% des variants de nos patients, or, ceux-ci sont tous filtrés. On peut également constater l'importance de la cohorte contrôle puisque elle permet retirer entre `r min_filter_ctrl` et `r max_filter_ctrl`% des variants de chaque individus (**Figure :** \@ref(fig:plotcomparefilter) - **A**).      
@@ -1500,33 +1499,42 @@ Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants subsis
 
 \newpage
 
-```{r plotcomparefilter, fig.cap=fig_info,fig.scap=fig_name, fig.height=7, cache=TRUE}
+```{r plotcomparefilter, fig.cap='(ref:plotcomparefilter)',fig.scap=fig_name, fig.height=7, cache=TRUE}
 
 fig_name <- "Comparaison de l'efficacité de chacun des six filtres utilisés"
 fig_description_A <- "**A** : Comparaison du pourcentage de variants filtrés par chacun des six filtres indépendamment les uns des autres pour chaque patient (représenté par les points. Dès lors, un même variant peut-être filtré par plusieurs filtres"
 fig_description_B <- "**B** : Comparaison du nombre de variant filtrés spécifiquement par chacun des filtres. Ici, un variant ne peut-être filtré que par un seul filtre"
 fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
-fig_info <- paste0(fig_name, " : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
+
+filter_orders <- c("Transcript relevance","Union","Frequence","Genotype","Ctrl","Variant impact")
 
 pA <- ggplot(filter_stat, aes(FILTER, P)) + 
-  geom_boxplot(fill = "#E41A1C", outlier.size = -1) + 
-  scale_x_discrete(limits = c("Transcript relevance","Union","Frequence","Genotype","Ctrl","Variant impact")) + 
-  geom_jitter(position=position_jitter(0.3)) +
+  geom_boxplot(aes(fill = FILTER), alpha = .3, outlier.size = -1) + 
+  geom_jitter(aes(col = FILTER), position=position_jitter(0.3)) +
+  scale_fill_brewer(palette = "Set1", guide = "none") +
+  scale_color_brewer(palette = "Set1", guide = "none") +
+  scale_x_discrete(limits = filter_orders) +
   ylab("% of filtered variants") + 
   xlab("") +
   scale_y_continuous(labels = percent) 
 
 pB <- ggplot(spe_all, aes(FILTER, N_FILTERED_SPE)) + 
-  geom_boxplot(fill = "#E41A1C", outlier.size = -1) + 
-  geom_jitter(position=position_jitter(0.3)) +
+  geom_boxplot(aes(fill = FILTER), alpha = .3, outlier.size = -1) + 
+  geom_jitter(aes(col = FILTER), position=position_jitter(0.3)) +
+  scale_fill_brewer(palette = "Set1", guide = "none") +
+  scale_color_brewer(palette = "Set1", guide = "none") +
+  scale_x_discrete(limits = filter_orders) +
   ylab("Nb of filtered variants") + 
   xlab("") +
-  scale_x_discrete(limits = c("Transcript relevance","Union","Frequence","Genotype","Ctrl","Variant impact")) 
-  # facet_wrap(~factor(FILTER, levels = c("Transcript relevance","Union","Frequence","Genotype","Ctrl","Variant impact")), scales = "free")
+  theme(legend.position = "bottom")
+# facet_wrap(~factor(FILTER, levels = c("Transcript relevance","Union","Frequence","Genotype","Ctrl","Variant impact")), scales = "free")
 
 plot_grid(pA,pB, labels = c("A","B"), ncol = 1)
 
 ```
+
+(ref:plotcomparefilter) `r fig_cap`
 
 \newpage
 
@@ -1618,11 +1626,11 @@ df_remaining_variant_az %>%
 
 \newpage
 
-```{r plotexpfamaz, fig.cap=fig_info,fig.scap=fig_name, dependson="varrecapaz", cache=TRUE}
+```{r plotexpfamaz, fig.cap='(ref:plotexpfamaz)',fig.scap=fig_name, dependson="varrecapaz", cache=TRUE}
 
 fig_name <- "Expression tissulaire des gènes *SPINK2* et *GUF1*"
 fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
-fig_info <- paste0(fig_name, " : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 gene_fam_az <- df_recap %>% filter(Family == "AZ") %>% collect() %>% .[["Gene"]]
 
@@ -1631,8 +1639,10 @@ plot_expression(gene_fam_az,"percent", TRUE)+
   theme(legend.position = c(1, 0),
         legend.justification = c(1,0))
 
-
 ```
+
+(ref:plotexpfamaz) `r fig_cap`
+
 
 \newpage
 
@@ -1705,11 +1715,11 @@ df_remaining_variant_ff %>%
 
 \newpage
 
-```{r plotexpfamff, fig.cap=fig_info,fig.scap=fig_name, fig.asp=.65, cache=TRUE}
+```{r plotexpfamff, fig.cap='(ref:plotexpfamff)',fig.scap=fig_name, fig.asp=.65, cache=TRUE}
 
 fig_name <- "Expression tissulaire du gène PLCZ1*"
 fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
-fig_info <- paste0(fig_name, " : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 plot_expression(gene_fam_ff,"percent", TRUE)+
   xlab("") +
@@ -1719,15 +1729,18 @@ plot_expression(gene_fam_ff,"percent", TRUE)+
 
 ```
 
-```{r plotcovplcz, fig.cap=fig_info,fig.scap=fig_name, ,out.extra="scale=.4", cache=TRUE}
+(ref:plotexpfamff) `r fig_cap`
 
-fig_name <- "Couverture des 6 éxons de *WBP2NL* pour les deux frères de la famille FF"
-fig_info <- paste0(fig_name)
+```{r plotcovplcz, fig.cap='(ref:plotcovplcz)',fig.scap=fig_name, ,out.extra="scale=.4", cache=TRUE}
+
+fig_name <- "Couverture des 6 éxons de WBP2NL pour les deux frères de la famille FF"
+fig_cap <- paste0("**_",fig_name,"_.**")
 
 include_graphics(path = "figure/pawp_coverage.png")
 
 ```
 
+(ref:plotcovplcz) `r fig_cap`
 
 \newpage
 
@@ -1784,8 +1797,7 @@ gene_fam_mmaf <- df_remaining_variant_mmaf %>% collect() %>% .[["Gene"]]
 ```
 
 Après avoir été séquencés en WES, les données des `r nb_run_fam_mmaf` patients `r run_fam_mmaf_all %>% paste_vector("itallic")` ont été analysés au sein de notre pipeline. Compte tenu de l'historique de consanguinité de ces familles, l'ensemble des variants hétérozygotes ont été filtrés de même que l'ensemble des variants observés fréquement dans la population générale et ceux n'ayant aucun impacte sur la séquence codante. Aussi, dans les cas où les données de WES de plusieurs frères d'une même famille étaient disponibles, seuls les variants partagés par l'ensemble des frères furent gardés. À l'issus de cette étape de filtrage, seuls quelques variants subsitaient pour chacune des familles impactant entre `r nb_gene_fam_mmaf_min` et `r nb_gene_fam_mmaf_min` gènes différents en fonction de celles-ci (**Tables :** \@ref(tab:tabmmaf1), \@ref(tab:tabmmaf2), \@ref(tab:tabmmaf3), \@ref(tab:tabmmaf4), \@ref(tab:tabmmaf5), **Figure : **\@ref(fig:plotremaininggenes)).  
-
-
+  
 Parmis cette liste de gènes, *DNAH1* fut retrouvé mutés chez les deux frères de la famille MMAF3 ainsi que chez les deux frères de la famille MMAF6 (non annalysés par notre pipeline). De même, un variant entrainant un décalage du cadre de lecture dans la séquence du gène *SPEF2* (codant pour la protéine *Sperm flagellar 2* (SPEF2)) a été retrouvé chez le patient P10 de la famille MMAF5. Aucun autre candidat évident n'a pu être identifié pour les individus composant les 3 autres familles. Ensuite, bien que le gène *SPEF2* ait déjà été caractérisé comme ayant un rôle dans la biogénèse du flagelle spermatique [@Lehti2017] nous nous sommes dans un premiers temps concentrés sur la caractérisation des deux variants retrouvés sur *DNAH1*.  
 
 1. **Famille MMAF3 :** Les deux frères P5 et P6 analysés en WES était tout deux porteur de la même mutation c.8626-1G > A qui fut par la suite confirmée en Sanger pour ces deux patients ainsi que pour leur troisième frère (P7) non analysé en WES. Cette mutation, absente des différentes bases de données, impacte le dernier nucléotide de l'intron 54 de *DNAH1* soit l'une des deux bases composant le site accepteur consensus d'épissage. Afin d'évaluer l'impact de cette mutation sur le transcrit de *DANH1*, nous avons étudiés par RT-PCR l'ARNm provenant de ces trois frères ainsi que de 2 individus contrôles. Cette étude a révélés qu'aucune amplification du transcrit de *DNAH1* n'était observée chez les trois frères contrairement aux deux contrôles tandis que l'amplification ciblant *GAPDH* était positif pour les 5 individus confirmant ainsi l'intégrité de l'ARNm de l'ensemble des individus testés. Ces résultats suggèrent donc que les transcrits produits par les trois frères mutés ont été soummis au mécanisme de dégradation spécifique par *mRNA decay*. Afin de validé la pathogénicité de ce variant, la protéine DNAH a ensuite été localisée par immunofluorescence à la fois chez les patients et les contrôles révélant que contrairement aux contrôles, la protéine DNAH1 était absente chez les trois frères, renforcant ainsi l'hypothèse d'une dégradation spécifique des ARNm.  
@@ -1796,11 +1808,11 @@ Ainsi, à l'issus de l'analyse de ces `r nb_mmaf_fam + 1` familles présentant u
 
 \newpage
 
-```{r plotremaininggenes, fig.height=7, fig.cap=fig_info,fig.scap=fig_name, cache=TRUE}
+```{r plotremaininggenes, fig.height=7, fig.cap='(ref:plotremaininggenes)',fig.scap=fig_name, cache=TRUE}
 
 fig_name <- "Nombre de gènes passant l'ensemble des filtres par famille"
 fig_description <- "Chaque barre représente une des familles analysées. La hauteur de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres vertes caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au-dessus de la barre). La barre orange caractérise la famille pour laquelle un candidat potentiel a été identifié (le symbole du gène est écrit au-dessus suivit d'un \"?\"). Les barres rouges indiquent qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit \"???\" au-dessus de la barre)"
-fig_info <- paste(fig_name, " : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 ggplot(df_causal %>% filter(grepl("MMAF", Family)), aes(Family, N)) +
   geom_col(aes(fill = FIND_CAUSAL)) +
@@ -1814,6 +1826,8 @@ ggplot(df_causal %>% filter(grepl("MMAF", Family)), aes(Family, N)) +
 
 
 ```
+
+(ref:plotremaininggenes) `r fig_cap`
 
 \newpage
 
@@ -1988,7 +2002,7 @@ canonical_tr_patl2 <- df_ovo_filter %>% filter(SYMBOL == "PATL2", CANONICAL == "
 
 ```
 
-```{r cache=dfovotwohomohigh, cache=TRUE, dependson="dfovofilter"}
+```{r dfovotwohomohigh, cache=TRUE, dependson="dfovofilter"}
 
 df_ovo_filter_high <- df_ovo_filter %>%
   filter(IMPACT == "HIGH",
@@ -2070,8 +2084,6 @@ EMBO Molecular Medicine, Mai 2017
 <!-- RUN -->
 
 ```{r dfrunbigmmaf, cache=TRUE}
-
-
 
 retained_run_bigmmaf <- 
   c("08IF35",
@@ -2462,10 +2474,11 @@ Pour conclure, cette étude portant sur la caractérisation du phénotype MMAF d
 
 \newpage
 
-```{r plottwohomohigh, cache=FALSE, fig.cap=fig_info,fig.scap=fig_name, fig.height=6, dependson="dftwohomohigh"}
+```{r plottwohomohigh, cache=FALSE, fig.cap='(ref:plottwohomohigh)',fig.scap=fig_name, fig.height=6, dependson="dftwohomohigh"}
 
 fig_name <- "Listes des gènes sur lesquels un variants tronquant à l'état homozygote a été retrouvé chez au moins deux de nos patients"
-fig_info <- paste0(fig_name, " : La couleur des barres indiquent le type de variants portés par chaque patient. Vert : variant homozygote tronquant, Orange variant homozygote non tronquant et rouge au moins deux variants hétérozygotes. Les gènes sont classés dans l'ordre décroissant en fonction du nombre de variants homozygotes tronquant retrouvés parmi nos patients.")
+fig_description <- "La couleur des barres indiquent le type de variants portés par chaque patient. Vert : variant homozygote tronquant, Orange variant homozygote non tronquant et rouge au moins deux variants hétérozygotes. Les gènes sont classés dans l'ordre décroissant en fonction du nombre de variants homozygotes tronquant retrouvés parmi nos patients."
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 n_max <- df_bigmmaf_filter_reduce$N_TOT %>% max
 
@@ -2481,6 +2494,8 @@ ggplot(df_bigmmaf_filter_reduce, aes(reorder(reorder(reorder(SYMBOL,N_LOW), N_MO
   theme(legend.position = "bottom")
 
 ```
+
+(ref:plottwohomohigh) `r fig_cap`
 
 
 

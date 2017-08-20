@@ -208,7 +208,7 @@ Dans cette étude j’ai pu effectuer l’intégralité des manipulations de bio
 
 ```{r plotborn, fig.height=3.6, fig.cap='(ref:plotborn)',fig.scap=fig_name, cache=TRUE, dependson="dfborn"}
 
-fig_name <- "Quantification des sexes des souris observées lors de chaque naissances issues d'un croisement de deux souris hétérozygotes *Dpy19l2*$^{+/-}$"
+fig_name <- "Quantification des sexes des souris observées lors de chaque naissances issues d'un croisement de deux souris hétérozygotes Dpy19l2$^{+/-}$"
 fig_description <- paste0("Après ", n_birth_without_last, " naissances, ",  n_female_all - n_female_last, " souriceaux mâles sont nés pour seulement ", n_male_all - n_male_last, " femelles, ainsi le test du $\\chi^2$ comparant ces valeurs donne une p-valeur de ", p_test_without_last, ".")
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
