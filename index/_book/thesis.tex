@@ -85,7 +85,8 @@
 % To pass between YAML and LaTeX the dollar signs are added by CII
 \title{THÈSE}
 \author{Thomas Karaouzene}
-\lab{Techniques de l'Ingénierie Médicale et de la Complexité - Informatique,
+\lab{Génétique, Epigénétique et Thérapies de l'Infertilité (GETI) et
+Techniques de l'Ingénierie Médicale et de la Complexité - Informatique,
 Mathématiques et Applications de Grenoble (TIMC-IMAG)}
 \date{07 novembre 2017}
 \division{Mathematics and Natural Sciences}
@@ -330,19 +331,27 @@ pour chaque position suffisement couverte :
 Ainsi, les sommes : \(R_+ + V_+\) et \(R_- + V_-\) indiqueront
 respectivement la couverture d'une position en ne tenant que des
 \emph{reads forward} et \emph{reverse}. En fonction de ces couvertures
-nos appels seront classés en trois catégories : 1. \textbf{Les appels
-\emph{double strand} (DS) :} Qualifient les positions ayant une
-couverture \(\ge\) 10 sur \textbf{les deux} \emph{strands}. Ces appels
-sont ceux sont ceux ayant la meilleure qualité.\\
-2. \textbf{Les appels \emph{single strand} (SS) :} Ces appels
-définissent les positions pour lesquels \textbf{un des deux}
-\emph{strands} présente une couverture \(\le\) 10. Dans ce cas, ce
-\emph{strand} est ignoré et l'appel est effectué uniquement en utilisant
-le second \emph{strand}.\\
-3. \textbf{Les appels \emph{non strand} (NS) :} Les positions NS sont
-celles pour lesquelles la couverture est \(\le\) 10 sur \textbf{les
-deux} \emph{strands}. Aucun appel n'est effectué à ces positions qui
-\textbf{ne sont pas conservés dans la suite des analyses}.
+nos appels seront classés en trois catégories :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Les appels \emph{double strand} (DS) :} Qualifient les
+  positions ayant une couverture \(\ge\) 10 sur \textbf{les deux}
+  \emph{strands}. Ces appels sont ceux sont ceux ayant la meilleure
+  qualité.
+\item
+  \textbf{Les appels \emph{single strand} (SS) :} Ces appels définissent
+  les positions pour lesquels \textbf{un des deux} \emph{strands}
+  présente une couverture \(\le\) 10. Dans ce cas, ce \emph{strand} est
+  ignoré et l'appel est effectué uniquement en utilisant le second
+  \emph{strand}.\\
+\item
+  \textbf{Les appels \emph{non strand} (NS) :} Les positions NS sont
+  celles pour lesquelles la couverture est \(\le\) 10 sur \textbf{les
+  deux} \emph{strands}. Aucun appel n'est effectué à ces positions qui
+  \textbf{ne sont pas conservés dans la suite des analyses}.
+\end{enumerate}
 
 Ensuite, chaque position couverte, des appels indépendants seront
 effectués pour chaque \emph{strand} de telle sorte que, pour chacune de
@@ -424,10 +433,10 @@ discordants seront, eux, filtrés.
 
 \caption[Détail de l'appel général effectué pour les appels DS en fonction du pourcentage de *reads* variant sur chacun des deux *strands*]{\textbf{\emph{Détail de l'appel général effectué pour
 les appels DS en fonction du pourcentage de \emph{reads} variant sur
-chacun des deux \emph{strands}}.} : Illustration de l'appel des
-génotypes effectués en fonction du pourcentage de \emph{reads} variants
-observés sur chacun des deux \emph{strand} de séquençage (\emph{forward}
-et \emph{reverse}). Le génotype général est appelé si les génotypes des
+chacun des deux \emph{strands}}} : Illustration de l'appel des génotypes
+effectués en fonction du pourcentage de \emph{reads} variants observés
+sur chacun des deux \emph{strand} de séquençage (\emph{forward} et
+\emph{reverse}). Le génotype général est appelé si les génotypes des
 deux brins sont les mêmes ou si l'un des deux est dans la zone ambiguë
 adjacente au premier. Les zones vertes correspondent aux appels
 homozygotes référencess, les zones orange, hétérozygotes et rouges
@@ -740,8 +749,8 @@ contraire ne soit spécifié les filtres suivants seront appliqués :
 }
 
 \caption[Représentation schématique des phasages de deux variants avec les génotypes associés]{\textbf{\emph{Représentation schématique des
-phasages de deux variants avec les génotypes associés}.} : Un variant
-est homozygote lorsque le \textbf{même} variant est présent sur les deux
+phasages de deux variants avec les génotypes associés}} : Un variant est
+homozygote lorsque le \textbf{même} variant est présent sur les deux
 allèles d'un gène et hétérozygote lorsqu'il est présent sur \textbf{un
 seul} des deux allèles. On parlera d'hétérozygotes \emph{cis} lorsque
 deux variants hétérozygotes différents seront positionnés sur \textbf{le
@@ -879,7 +888,7 @@ d'environs 74409523 \emph{reads} par patients.
 }
 
 \caption[Processus simplifié du contrôle qualité des *reads*]{\textbf{\emph{Processus simplifié du contrôle
-qualité des \emph{reads}}.} : Pour chacun des graphiques, les
+qualité des \emph{reads}}} : Pour chacun des graphiques, les
 \emph{reads} représentés en vert sont conservés tandis que ceux en rouge
 sont filtrés. \textbf{A} : Quantité de \emph{reads} bruts générés pour
 chaque patient au cours de l'étape de séquençage. La médiane des
@@ -970,12 +979,12 @@ et 64994 variants homozygotes (32497 SNVs et 1793 indels)
 }
 
 \caption[Densité de répartition du pourcentage de reads variant pour chaque position couverte]{\textbf{\emph{Densité de répartition du pourcentage
-de reads variant pour chaque position couverte}.} : Les homozygotes
+de reads variant pour chaque position couverte}} : Les homozygotes
 références évidents ne nous intéressant pas, les position représentées
 sont restreinte à celles contenant un minimum de 7\% de \emph{reads}
 variants. L'arrière plan montre les bornes utilisées par notre
 algorithme pour chaque appel. Les lignes pointillées séparent en deux
-les régions d'ambiguité basse et haute}\label{fig:plotdensityvar}
+les régions d'ambiguité basse et haute.}\label{fig:plotdensityvar}
 \end{figure}
 
 
@@ -994,14 +1003,14 @@ les régions d'ambiguité basse et haute}\label{fig:plotdensityvar}
 
 }
 
-\caption[Contrôle qualité des variants appelés]{\textbf{\emph{Contrôle qualité des variants appelés}.}
+\caption[Contrôle qualité des variants appelés]{\textbf{\emph{Contrôle qualité des variants appelés}}
 : Pour chacun des graphiques, les variants représentés en vert et en
 orange sont conservés tandis que ceux en rouge sont filtrés. \textbf{A}
 : Distribution du \emph{stranding} des appels pour chaque patient.
 \textbf{B} : Comparaison des appels entre les deux \emph{ends} des
 variants appelés DS. \textbf{C} : Distribution des SNVs et indels en
 fonction de leur génotype pour chaque patients (représentés par une
-barre}\label{fig:plotvarcall}
+barre.}\label{fig:plotvarcall}
 \end{figure}
 
 
@@ -1056,7 +1065,7 @@ et 374 variants \emph{HIGH} homozygotes par patient) (\textbf{Figure :
 (en rose) impactés par au moins un variant pour chaque patient chacun
 représentés par une barre. \textbf{B} : Distribution des impacts
 \emph{HIGH MODERATE LOW} et \emph{MODIFIER} en fonction des patients et
-du génotype du variant}\label{fig:plotannotation}
+du génotype du variant. .}\label{fig:plotannotation}
 \end{figure}
 
 
@@ -1124,15 +1133,13 @@ précédemment décrits.
 }
 
 \caption[Filtrage des transcrits jugés "non pertinents" et des variants les chevauchant]{\textbf{\emph{Filtrage des transcrits
-jugés ``non pertinents'' et des variants les chevauchant}.} : Pour
-chaque patient nous avons filtrer les transcrits jugés ``non
-pertinents'' pour l'analyse, c'est à dire ceux ne codant pas pour une
-protéine et ceux annoté NMD (boite rouge). Dès lors, l'intégralité des
-variants chevauchant \textbf{uniquement} des transcrits non pertinents
-sont systématiquement être filtrés (boites bleue). Les autres sont
-conservés.}\label{fig:plotfilternonpertinanttr}
+jugés ``non pertinents'' et des variants les chevauchant}} : Pour chaque
+patient nous avons filtrer les transcrits jugés ``non pertinents'' pour
+l'analyse, c'est à dire ceux ne codant pas pour une protéine et ceux
+annoté NMD (boite rouge). Dès lors, l'intégralité des variants
+chevauchant \textbf{uniquement} des transcrits non pertinents sont
+systématiquement être filtrés (boites bleue). Les autres sont conservés.}\label{fig:plotfilternonpertinanttr}
 \end{figure}
-
 
 
 
@@ -1184,7 +1191,7 @@ séquencés en WES par notre équipe. Afin d'être considéré comme
 ``contrôle'' et intégrer cette cohorte, un individu doit être sain ou
 présenter un phénotype d'infertilité suffisamment différent de la
 famille étudiée. Par exemple, un individus MMAF pourra servir de
-contrôle aux familles AZ et FF mais pas aux familles MMAF1-5}\label{fig:plotsamplectrl}
+contrôle aux familles AZ et FF mais pas aux familles MMAF1-5.}\label{fig:plotsamplectrl}
 \end{figure}
 
 
@@ -1257,7 +1264,7 @@ indépendamment les uns des autres pour chaque patient (représenté par
 les points. Dès lors, un même variant peut-être filtré par plusieurs
 filtres. \textbf{B} : Comparaison du nombre de variant filtrés
 spécifiquement par chacun des filtres. Ici, un variant ne peut-être
-filtré que par un seul filtre}\label{fig:plotcomparefilter}
+filtré que par un seul filtre. .}\label{fig:plotcomparefilter}
 \end{figure}
 
 
@@ -1380,7 +1387,7 @@ rareté des mutations observées sur ce gènes.
 \begin{longtable}[t]{llllll}
 \caption{\label{tab:tabrecapaz}Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille AZ}\\
 \toprule
-\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{3}{c}{Variant frequency} \\
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Impact} & \multicolumn{3}{c}{Frequency} \\
 \cmidrule(l{2pt}r{2pt}){2-3} \cmidrule(l{2pt}r{2pt}){4-6}
 Gene & HGVSc, HGVSp & Consequence & ExAC & ESP & 1KG\\
 \midrule
@@ -1397,9 +1404,9 @@ GUF1 & c.443A>T ; p.Ser148Ile & missense & 0.00207 & 0.0028 & 9e-04\\
 
 }
 
-\caption[Expression tissulaire des gènes *SPINK2* et *GUF1*]{\textbf{\emph{Expression tissulaire des gènes
+\caption[Expression tissulaire des gènes SPINK2 et GUF1]{\textbf{\emph{Expression tissulaire des gènes
 \emph{SPINK2} et \emph{GUF1}}} : Données provenant du projet de
-transcriptome Illumina bodyMap}\label{fig:plotexpfamaz}
+transcriptome Illumina bodyMap.}\label{fig:plotexpfamaz}
 \end{figure}
 
 
@@ -1428,19 +1435,20 @@ Human Molecular Genetics, Décembre 2015
 \subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-1}
 
 L'activation ovocitaire regroupe une série de processus intervenant au
-cour de la fécondation d'un ovocyte par un spermatozoïde. en 1990,
+cour de la fécondation d'un ovocyte par un spermatozoïde. En 1990,
 plusieurs études démontrèrent que chez les mamifères ces processus
 reposent principalement sur le relargage par le spermatozoïde de
 ``facteurs spermatiques'' qui déclenchent un signal de calcium,
-constitué d'oscillations Ca\textsuperscript{2+} {[}ref{]}. Plus tard, la
-protéine PLC\(\zeta\) fu identifiée comme la molécule responsable de ces
-oscilations calciques. Cependant, en raison de l'incapacité àproduire
-des modèles animaux \emph{PLC}\(\zeta\) KO capable de produire des
-spermatozoïdes mature a empeché d'attribuer l'exclusivité de ce rôle à
-\emph{PLC}\(\zeta\) laissant ouverte la possibilité de la nécessité
-d'autres facteurs spermatiques. C'est ainsi qu'en 2014 fut proposé la
-protéine PAWP comme facteur spermatique alternatif ou complémentaire de
-PLC\(\zeta\) {[}\protect\hyperlink{ref-Aarabi2014}{22},
+constitué d'oscillations Ca\textsuperscript{2+} {[}todo : ref{]}. Plus
+tard, la protéine PLC\(\zeta\) fu identifiée comme la molécule
+responsable de ces oscilations calciques. Cependant, en raison de
+l'incapacité àproduire des modèles animaux \emph{PLC}\(\zeta\) KO
+capable de produire des spermatozoïdes mature a empeché d'attribuer
+l'exclusivité de ce rôle à \emph{PLC}\(\zeta\) laissant ouverte la
+possibilité de la nécessité d'autres facteurs spermatiques. C'est ainsi
+qu'en 2014 fut proposé la protéine PAWP comme facteur spermatique
+alternatif ou complémentaire de PLC\(\zeta\)
+{[}\protect\hyperlink{ref-Aarabi2014}{22},
 \protect\hyperlink{ref-Aarabi2014a}{23}{]}.
 
 Les travaux ci-dessous décrivent les analyses effectuées sur deux frères
@@ -1495,7 +1503,7 @@ de toute implication dans le phénotype de nos patients.
 \begin{longtable}[t]{llllll}
 \caption{\label{tab:tabrecapff}Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille FF}\\
 \toprule
-\multicolumn{1}{c}{ } & \multicolumn{4}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+\multicolumn{1}{c}{ } & \multicolumn{4}{c}{Impact} & \multicolumn{1}{c}{Frequency} \\
 \cmidrule(l{2pt}r{2pt}){2-5} \cmidrule(l{2pt}r{2pt}){6-6}
 Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC\\
 \midrule
@@ -1511,22 +1519,28 @@ PLCZ1 & c.1465G>T ; p.Ile489Phe & missense & deleterious & possib damaging & 8.2
 
 }
 
-\caption[Expression tissulaire du gène PLCZ1*]{**\_Expression tissulaire du gène PLCZ1*\_** :
-Données provenant du projet de transcriptome Illumina bodyMap}\label{fig:plotexpfamff}
+\caption[Expression tissulaire du gène PLCZ1]{\textbf{\emph{Expression tissulaire du gène
+\emph{PLCZ1}}} : Données provenant du projet de transcriptome Illumina
+bodyMap}\label{fig:plotexpfamff}
 \end{figure}
+
 
 
 
 
 \begin{figure}
 
-{\centering \includegraphics[scale=.4]{figure/pawp_coverage} 
+{\centering \includegraphics[scale=.37]{figure/pawp_coverage} 
 
 }
 
-\caption[Couverture des 6 éxons de WBP2NL pour les deux frères de la famille FF]{\textbf{\emph{Couverture des 6 éxons de WBP2NL pour
-les deux frères de la famille FF}.}}\label{fig:plotcovplcz}
+\caption[Couverture des 6 éxons de WBP2NL pour les deux frères de la famille FF]{\textbf{\emph{Couverture des 6 éxons de \emph{WBP2NL}
+pour les deux frères de la famille FF}} : Les barres rouges représentent
+la couverture moyenne de 10 nucléotides, les bleues représentent les
+bornes de chaque éxon.}\label{fig:plotcovplcz}
 \end{figure}
+
+
 
 
 

@@ -19,9 +19,7 @@ if(!require(bookdown))
 if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
 
-
-
-library(thesisdown)
+slibrary(thesisdown)
 library(pander)
 library(knitr)
 library(tidyr)
@@ -67,8 +65,7 @@ kable(t,
 
 ### Rappels sur le testicule  
 
-Les testicules sont les organes sexuels masculins. Ils possèdent deux fonctions principales plus ou moins exprimées selon les périodes de la vie de l'individu : une fonction endocrine caractérisée par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, le testicule présente une forme ovoïde ayant un volume moyen de 18 cm^3^. Chez l’homme, comme chez la plupart des mammifères terrestres, ils sont localisés sous le pénis dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps, nécessaire à la spermatogenèse.  
-L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)). C'est le long des parois du tube séminifère que se déroulera l'ensemble des étapes de la spermatogenèse.    
+Les testicules sont les organes sexuels masculins. Ils possèdent deux fonctions principales plus ou moins exprimées selon les périodes de la vie de l'individu : une fonction endocrine caractérisée par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, le testicule présente une forme ovoïde ayant un volume moyen de 18 cm^3^. Chez l’homme, comme chez la plupart des mammifères terrestres, ils sont localisés sous le pénis dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps, nécessaire à la spermatogenèse. L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)). C'est le long des parois du tube séminifère que se déroulera l'ensemble des étapes de la spermatogenèse.    
 
 ```{r captesticule}
 
@@ -100,8 +97,8 @@ Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la s
 
 fig_name <- "Les différentes phases de la spermatogenèse"
 fig.from <- "[medizin-kompakt](http://www.medizin-kompakt.de/spermatogenese)"
-fig_description <- "TODO ::: description à écrire !!!"
-fig_cap <- paste0("**_",fig_name,"_. D'après ", fig.from, "** : ", fig_description)
+fig_description <- "L'évolution de la spermatogenèse est strictement coordonnée, tant dans le sens transversal des tubules, que dans le sens longitudinal. Le sens transversal correspond au sens unique de la différenciation germinale, les cellules souches sont situées à la base du tube séminifère alors que les spermatozoïdes aboutissent à la lumière. Dans le sens longitudinal de ces tubules, on retrouve l'ensemble des cellules d'un même cycle donnant ainsi l'onde spermatique."
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
 
 include_graphics(path = "figure/spermatogenese2.jpg")
 
@@ -113,26 +110,22 @@ include_graphics(path = "figure/spermatogenese2.jpg")
 
 ### La méiose  {#meiose}
 
-La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaires (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:meiose)) appelées respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son nom *réductionnelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:pictcrossingover)).
+La méiose, ou phase de maturation, est l'étape au cours de laquelle, à partir de cellules diploïdes (les spermatogonies B) vont se former des cellules haploïdes, les spermatocytes secondaires (spermatocytes II). Ce résultat est le fruit de deux divisions successives (**Figure : **\@ref(fig:pictmeiose)) appelées respectivement méiose réductionnelle ou méiose I (MI) et méiose équationnelle ou méiose II (MII). La MI va séparer les chromosomes homologues, produisant deux cellules et réduisant la ploïdie de diploïde à haploïde (d'où son nom *réductionnelle*). En plus de son rôle de division vu précédemment, la méiose joue un rôle clef dans le brassage génétique (mélange des gènes) et ce, grâce à deux mécanismes de brassage : le brassage inter-chromosomique, lorsque les chromosomes sont séparés et le brassage intra-chromosomique impliquant notamment des enjambements chromosomiques (crossing-over) (**Figure : **\@ref(fig:pictcrossingover)).
 
-La méiose est initiée dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'elles vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 et 4 jours. Au cours de cette phase a lieu la réplication de l'ADN. Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliées entre elles par le centromère, le matériel génétique de chaque cellule ayant donc été multiplié par deux. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composée de quatre étapes distinctes (**Figure : **\@ref(fig:meiose)) : 
+La méiose est initiée dès la fin de la phase de multiplication à partir des spermatocytes primaires issus de la division des spermatogonies de type B. Ces cellules nouvellement formées se situent dans le compartiment basal du tube séminifère. C'est là qu'elles vont tout d'abord subir une interphase (stade préleptotène) durant entre 2 et 4 jours. Au cours de cette phase a lieu la réplication de l'ADN. Cette réplication se fait lorsque l'ADN est à l'état de chromatine, pendant la phase S (pour synthèse) de l’interphase. À l’issue de cette phase, chaque chromosome sera composé de deux chromatides reliées entre elles par le centromère, le matériel génétique de chaque cellule ayant donc été multiplié par deux. Par la suite, ces cellules vont subir deux divisions méiotiques, chacune composée de quatre étapes distinctes (**Figure : **\@ref(fig:pictmeiose)) : 
 
-```{r capmeiose}
+```{r pictmeiose,fig.cap='(ref:pictmeiose)',fig.scap=fig_name, out.extra="scale=0.33"}
 
 fig_name <- "Les différentes étapes de la méiose gamétique masculine"
 fig.from <- "[@Sasaki2008]"
-fig_description <- "TODO ::: description à écrire !!!"
-fig_cap <- paste0("**_",fig_name,"_. D'après ", fig.from, "** : ", fig_description)
-
-```
-
-(ref:meiose) `r fig_cap`
-
-```{r meiose,fig.cap='(ref:meiose)',fig.scap=fig_name, out.extra="scale=0.33"}
+fig_description <- "Les spermatogonies B servent de point d'initiation et se différentient en spermatocyte primaire. Les cinq étapes de la prophase I sont suivient d'une première division cellulaire, donnant deux cellules haploides au sein desquelles les chromosomes sont composés de deux chromatides. Celles-ci seront séparées au cours de la méiose II donnant ainsi quatre spermatides qui après plusieurs étapes de maturation donneront les spermatozoïdes."
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
 
 include_graphics(path = "figure/Meiosis_Stages.png")
 
 ```
+
+(ref:pictmeiose) `r fig_cap`
 
 \newpage
 
@@ -170,34 +163,35 @@ include_graphics(path = "figure/crossingover.jpg")
 
 \newpage 
 
-```{r meiosei,fig.cap=fig.info,fig.scap=fig_name, out.extra="scale=0.43"}
+```{r meiosei,fig.cap='(ref:meiosei)',fig.scap=fig_name, out.extra="scale=0.43"}
 
-fig_name <- "Les différentes étapes de la première division méiotique masculine adapté"
-fig_description <- "**TROUVER LA FIGURE D4ORIGINE ET CHANGER LE WIKI [TODO]**"
-fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
-fig.info <- paste0(fig_name," d'après ",fig.from)
+fig_name <- "Les différentes étapes de la première division méiotique masculine"
+fig.from <- "[@Reece2014]"
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après", fig.from, "**.")
 
 include_graphics(path = "figure/MeiosisI.png")
 
 ```
 
-```{r meioseii,fig.cap=fig.info,fig.scap=fig_name, out.extra="scale=0.43"}
+(ref:meiosei) `r fig_cap`
 
-fig_name <- "Les différentes étapes de la deuxième division méiotique masculine adapté"
-fig_description <- "**TROUVER LA FIGURE D4ORIGINE ET CHANGER LE WIKI [TODO]**"
-fig.from <- "[Wikipédia](https://en.wikipedia.org/wiki/Meiosis)"
-fig.info <- paste0(fig_name," d'après ",fig.from)
+```{r meioseii,fig.cap='(ref:meioseii)',fig.scap=fig_name, out.extra="scale=0.43"}
+
+fig_name <- "Les différentes étapes de la deuxième division méiotique masculine"
+fig.from <- "[@Reece2014]"
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après", fig.from, "**.")
 
 include_graphics(path = "figure/MeiosisII.png")
 
 ```
 
+(ref:meioseii) `r fig_cap`
+
 \newpage
 
 ### La spermiogenèse  {#spermiogenese}
 
-La spermiogenèse est la phase finale de la spermatogenèse. Elle dure environ 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **\@ref(fig:spermiogenese)). La spermiogenèse définit la cytodifférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologiques et fonctionnelles du spermatozoïde seront déterminées [@YvesClermontRichardOko1993]. Elle est caractérisée par trois évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commencent au niveau des spermatides rondes [@Escalier1991]. Pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987].  
-Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10  $\upmu$m) que l’on peut schématiquement diviser en trois classes :  
+La spermiogenèse est la phase finale de la spermatogenèse. Elle dure environ 23 jours chez l'humain et peut être subdivisée en sept étapes (**Figure : **\@ref(fig:spermiogenese)). La spermiogenèse définit la cytodifférentiation des spermatides en spermatozoïdes. C'est au cours de cette phase que les caractéristiques morphologiques et fonctionnelles du spermatozoïde seront déterminées [@YvesClermontRichardOko1993]. Elle est caractérisée par trois évènements majeurs : la formation de l'acrosome, la compaction de l’ADN nucléaire et la formation du flagelle. Le développement de l'acrosome et la formation du flagelle commencent au niveau des spermatides rondes [@Escalier1991]. Pendant l'élongation de la spermatide, le noyau se condense et devient hautement polarisé [@Hamilton1987]. Les spermatides sont situées dans le compartiment adluminal, à proximité de la lumière du tube séminifère. Ce sont de petites cellules (8 à 10  $\upmu$m) que l’on peut schématiquement diviser en trois classes :  
 
 1. **Les spermatides rondes** (**Figure : **\@ref(fig:spermiogenese) - **1** et **2**) : l'identification de ces cellules représente une difficulté technique. Elles ont cependant pu être décrites en détail par différentes techniques de coloration sous microscope optique [@Clermont1963; @Papic; @Schenck; @Adelman1989; @WorldHealthOrganization1992]. Plusieurs études animales ont pu démontrer le potentiel des spermatides rondes à donner la vie à des individus sains et fertiles, [@Ogura1994; @Kimura1995; @Sasagawa], la même chose ayant été également observée plus récemment chez l'homme [@Tanaka2015] bien que le taux de fécondation et d'implantation soit extrêmement faible [@Asimakopoulos2003]. Ils possèdent un noyau rond avec une chromatine pâle et homogène. C’est à partir de ces étapes que démarre la biogenèse de l’acrosome avec la production par l’appareil de Golgi des vésicules pro-acrosomales (phase de Golgi). Les deux centrioles contenus dans le cytoplasme vont se déplacer au futur pôle caudal. Le centriole proximal est inactif alors que le centriole distal donne naissance à un ensemble de microtubules à l'origine de l'axonème du futur flagelle.  
 
@@ -209,24 +203,19 @@ Les spermatides sont situées dans le compartiment adluminal, à proximité de l
 
 Une fois ces étapes de différentiation finies, les spermatides sont relâchées en tant que spermatozoïdes dans la lumière du tube séminifère. Ce procédé est appelé spermiation.  
 
-
-```{r capspermiogenese}
+```{r spermiogenese,fig.cap='(ref:spermiogenese)',fig.scap=fig_name,out.extra="scale=0.3"}
 
 fig_name <- "Principales étapes et modifications structurales lors de la spermiogenèse"
 fig.from <- "[@Toure2011]"
-fig_description <- "**1.** La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. **2.** La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. **3-7.** Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac, acrosome ; Ax, axonème ; CC, corps chromatoïdes ; CR, corps résiduel ; FD, fibres denses ; GF, gaine fibreuse ; M, mitochondrie ; Ma, manchette."
+fig_description <- "**1.** La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. **2.** La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. **3-7.** Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac = Acrosome, Ax = Axonème, CC = Corps Chromatoïdes, CR = Corps Résiduel, FD = Fibres Denses, GF = Gaine Fibreuse, M = Mitochondrie, Ma = Manchette."
 
-fig_cap <- paste0("**_",fig_name,"_. Adapté d'après", fig.from, "** : ", fig_description)
-
-```
-
-(ref:spermiogenese) `r fig_cap`
-
-```{r spermiogenese,fig.cap='(ref:spermiogenese)',fig.scap=fig_name,out.extra="scale=0.3"}
+fig_cap <- paste0("**_",fig_name,"_ d'après", fig.from, "** : ", fig_description)
 
 include_graphics(path = "figure/spermiogenese.png")
 
 ```
+
+(ref:spermiogenese) `r fig_cap`
 
 \newpage  
 
@@ -238,7 +227,7 @@ Le spermatozoïde est une cellule hautement différenciée dont la taille, l'ori
 
 fig_name <- "Anatomie simplifiée du spermatozoïde"
 fig.from <- "[medical-dictionary](http://medical-dictionary.thefreedictionary.com/Human+sperm)"
-fig_cap <- paste0("**_",fig_name,"_. D'après ", fig.from, "**.")
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "**.")
 
 ```
 
@@ -267,7 +256,8 @@ include_graphics(path = "figure/sperm_anatomy.png")
 
 fig_name <- "Schéma de la compaction de l’ADN dans les cellules somatiques et dans les spermatozoïdes"
 fig.from <- "[@Braun2001]"
-fig_description <- "TODO ::: description à écrire !!!"
+fig_description <- "Dans les cellules somatiques, l’ADN est enroulé sous forme de nucléosome. Les nucléosomes vont s’agencer entre eux pour former un solénoïde qui sera attaché à la matrice nucléaire par sa base. Dans le noyau spermatique les nucléosomes sont remplacés par des protamines qui vont compacter l’ADN sous forme de \"*doughnut*\". Le
+remplacement des histones est facilité par des acétylations, des ubiquitinations et des phosphorylations."
 fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
 
 ```
@@ -352,7 +342,7 @@ Ces anomalies sont observables en effectuant un spermocytogramme. Plusieurs clas
 
 ```{r anomaliemorphosperm, fig.cap='(ref:anomaliemorphosperm)',fig.scap=tab.name,out.extra="scale=.75"}
 
-tab.name <- "Classification morphologique de spermatozoïdes humains normaux et anormaux adapté"
+tab.name <- "Classification morphologique de spermatozoïdes humains normaux et anormaux"
 tab.from <- "[@Auger2001]"
 tab.cap <- paste0("**_",tab.name,"_ d'après ", tab.from, "**.")
 include_graphics(path = "figure/tab_sperm_defect.png")
@@ -485,7 +475,7 @@ Bien que leur utilité principale ait été d'analyser l'expression des gènes, 
 
 fig_name <- "Méthode de génotypage par discrimination allélique par hybridation"
 fig.from <- "[@Bumgarner2013]"
-fig_description <- "Des sondes complémentaires à chacun des allèles sont positionnées sur la puce. L'ADN génomique fragmenté et labélisé est mis en contact de la puce. Après nettoyage de la puce, l'analyse du signal émis par l'ADN génomique permettra de déterminer si l'individu est homozygote pour cette allèle (hybridation à une seule des deux sondes) ou bien hétérozygote pour cette allèle (hybridation aux deux sondes) ."
+fig_description <- "Des sondes complémentaires à chacun des allèles sont positionnées sur la puce. L'ADN génomique fragmenté et labélisé est mis en contact de la puce. Après nettoyage de la puce, l'analyse du signal émis par l'ADN génomique permettra de déterminer si l'individu est homozygote pour cette allèle (hybridation à une seule des deux sondes) ou bien hétérozygote pour cette allèle (hybridation aux deux sondes)."
 fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
 
 include_graphics(path = "figure/allelic_discrimination.png")
@@ -557,7 +547,7 @@ Dans la plupart des technologies, la phase de séquençage est précédée par u
 
 3. **Amplification par modèle mobile ou *walking-template* **(**Figure : **\@ref(fig:pictngsampli) - **c**) : L'ADN fragmenté est lié à un adaptateur et à une amorce complémentaire fixée sur un support solide. Le brin complémentaire du fragment sera synthétisé par PCR à partir de l'amorce fixée. La molécule double brin nouvellement formée sera ensuite partiellement dénaturée permettant à l'extrémité libre de se fixer à une séquence amorce voisine. Des amorces *reverse* sont ensuite utilisées pour resynthétiser un fragment d'ADN libre à partir des fragments fixés sur le support.    
 
-4. (**Figure : **\@ref(fig:pictngsampli) - **d**) :  **PAS DU TOUT COMPRIS LE MECANISME !!! **  
+4. **Amplification par génération de *nanoball* d'ADN** (**Figure : **\@ref(fig:pictngsampli) - **d**) :  **PAS DU TOUT COMPRIS LE MECANISME !!! **  
 
 \newpage 
 
@@ -565,7 +555,7 @@ Dans la plupart des technologies, la phase de séquençage est précédée par u
 
 fig_name <- "Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS"  
 fig.from <- "[@Goodwin2016]"
-fig_description <- "**a** : PCR en émulsion. **b** : amplification par pont. **c** : amplification par modèle mobile. **d** : "
+fig_description <- "**a** : PCR en émulsion. **b** : amplification par pont. **c** : amplification par modèle mobile. **d** : Amplification par génération de *nanoball* d'ADN."
 fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
 include_graphics(path = "figure/ngs_amplification.png")
 
@@ -624,7 +614,11 @@ include_graphics(path = "figure/SNA_seq_ionTorrent.png")
 
 fig_name <- "Séquençage SBL tel qu'il est effectué par SOLiD" 
 fig.from <- "[@Goodwin2016]"
-fig_description <- "TODOOOOOO !!!!!"
+fig_description <- "TODO :: je ne sais pas trop comment expliquer ce mécanisme"
+
+# SOLiD sequencing. Following cluster generation or bead deposition onto a slide, fragments are sequenced by ligation, in which a fluorophore-labelled two-base-encoded probe, which is composed of known nucleotides in the first and second positions (dark blue), followed by degenerate or universal bases (pink), is added to the DNA library. The two-base probe is ligated onto an anchor (light purple) that is complementary to an adapter (red), and the slide is imaged to identify the first two bases in each fragment. Unextended strands are capped by unlabelled probes or phosphatase to maintain cycle synchronization. Finally, the terminal degenerate bases and the fluorophore are cleaved off the probe, leaving a 5 bp extended fragment. The process is repeated ten times until two out of every five bases are identified. At this point, the entire strand is reset by removing all of the ligated probes and the process of probe binding, ligation, imaging and cleavage is repeated four times, each with an n + 1, n + 2, n + 3 or n + 4 offset anchor.
+
+# cf http://www.oezratty.net/wordpress/2012/technologies-sequencage-gnome-humain-4/
 
 fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
 
@@ -658,7 +652,7 @@ Le format FASTQ (**Figure : **\@ref(fig:pictfastqformat)) est actuellement le fo
 ```{r pictfastqformat,fig.cap='(ref:pictfastqformat)',fig.scap=fig_name,out.extra="scale=.36"}
 
 fig_name <- "Présentation d'un fichier FASTQ"
-fig_description <- "Chaque *read* présent au sein d'un fichier FASTQ est composé d'un label, d'une séquence et d'un score de qualité associé à chaque nucléotide de la séquence"
+fig_description <- "Chaque *read* présent au sein d'un fichier FASTQ est composé d'un label, d'une séquence et d'un score de qualité associé à chaque nucléotide de la séquence."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics(path = "figure/fastq.png")
@@ -677,7 +671,7 @@ L'alignement constitue la première étape de l'analyse des données de NGS lors
 
 ```{r picdnamapping, fig.cap='(ref:picdnamapping)', fig.scap=fig_name, out.extra="scale=0.35"}
 
-fig_name <- "Représentation schématique de l'alignement de *reads paired-end*"
+fig_name <- "Représentation schématique de l'alignement de reads paired-end"
 fig_description_A <- "**A** : représentation du génome de référence ainsi que de *reads paired-end* avant l'étape d'alignement. Les *reads paired-end* sont composés d'une extrémité *forward* (en vert) complémentaire du brin sens du génome de référence et d'une extrémité réverse (en jaune), complémentaire du brin anti-sens du génome de référence. Chacune de ces extrémités est séparée par un insert de taille connue mais de séquence inconnu"
 fig_description_B <- "**B** : après l'étape d'alignement, chaque *read* est repositioné sur la région du génome avec laquelle il présente la plus grande homologie de séquence. Le nombre de *reads* différents recouvrant une même position du génome de référence est appellé couverture."
 fig_description <- paste(fig_description_A,fig_description_B, sep = ". ")
@@ -719,7 +713,7 @@ De nombreux logiciels d'appels des variants, ou *caller*, basés sur des algorit
 
 ```{r pictsnperror,fig.cap='(ref:pictsnperror)', fig.scap=fig_name,out.extra="scale=.37"}
 
-fig_name <- "Représentation des erreurs d'appel de type IR et AR en fonction de la plateforme de séquençage et du logiciel d'appel"
+fig_name <- "Représentation des erreurs d'appel de type IR et AR en fonction de la plateforme de séquençage et du logiciel d'appel."
 fig.from <- "[@Hwang2015]"
 fig_description <- "Pour la plateforme Illumina, on peut voir que Freebayes favorise les appels variant-homozygote tandis que GATK-HC et Samtools favorisent les appels hétérozygotes. Pour la plateforme Ion Proton, les quatre logiciels entraînent des erreurs de type IR"
 fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
@@ -764,7 +758,7 @@ include_graphics(path = "figure/venn_Diag_patho_pred.png")
 
 \newpage
 
-2. **Au niveau du gène (ou transcrit)** : L'annotation au niveau du gène consiste à récupérer l'ensemble des informations disponibles non plus sur le variant uniquement mais sur le ou les gènes qu'il impacte. Ce "dézoom" permet d'ajouter des informations complémentaires particulièrement utiles notamment lorsque peu d'informations sont disponibles sur le variant lui-même. En pratique, la plupart des variants connus pour impliquer une pathologie sont des variants privés, c'est à dire spécifiques à une famille ou à un individu, limitant ainsi la quantité d'information disponible sur ce variant. Élargir l'annotation au niveau des gènes impactés par des variants permet d'augmenter considérablement la quantité d'information disponible et permet donc d'améliorer la capacité des algorithmes à filtrer et / ou prioriser les variants rendant donc les analyses plus efficaces. On peut relever certains logiciels tel que le *Protein ANalysis THrough Evolutionary Relationships* (PANTHER) [@Mi2017] qui permettent par exemple de classer une liste de gènes en fonction de leurs fonctions moléculaires, des processus biologiques et des voies de signalisation dans lesquelles ils sont impliqués. On peut également noter *the Human Phenotype Ontology project* (HPO) [@Kohler2014] qui fournit une classification (TODO :: À compléter). Plus récemment, on a pu voir émerger des "scores mutationnels" tel que RVIS [@Petrovski2013] ou encore le pLI [@Lek2016]. En se basant sur les bases de données telle que ESP ou encore ExAC, ces scores permettent de classer les gènes en fonction de leur tolérance (ou intolérance) aux variations avec l'idée sous-jacente que "les gènes impliqués dans des pathologies à transmission mendéliennes" devraient être moins tolérants aux variations que les autres.    
+2. **Au niveau du gène (ou transcrit)** : L'annotation au niveau du gène consiste à récupérer l'ensemble des informations disponibles non plus sur le variant uniquement mais sur le ou les gènes qu'il impacte. Ce "dézoom" permet d'ajouter des informations complémentaires particulièrement utiles notamment lorsque peu d'informations sont disponibles sur le variant lui-même. En pratique, la plupart des variants connus pour impliquer une pathologie sont des variants privés, c'est à dire spécifiques à une famille ou à un individu, limitant ainsi la quantité d'information disponible sur ce variant. Élargir l'annotation au niveau des gènes impactés par des variants permet d'augmenter considérablement la quantité d'information disponible et permet donc d'améliorer la capacité des algorithmes à filtrer et / ou prioriser les variants rendant donc les analyses plus efficaces. On peut relever certains logiciels tel que le *Protein ANalysis THrough Evolutionary Relationships* (PANTHER) [@Mi2017] qui permettent par exemple de classer une liste de gènes en fonction de leurs fonctions moléculaires, des processus biologiques et des voies de signalisation dans lesquelles ils sont impliqués. On peut également noter *the Human Phenotype Ontology project* (HPO) [@Kohler2014] qui fournit un vocabulaire standardisé pour les anomalies phénotypiques observées dans les pathologies humaines et une liste de gènes connus pour être associés à ces phénotypes. Plus récemment, on a pu voir émerger des "scores mutationnels" tel que RVIS [@Petrovski2013] ou encore le pLI [@Lek2016]. En se basant sur les bases de données telle que ESP ou encore ExAC, ces scores permettent de classer les gènes en fonction de leur tolérance (ou intolérance) aux variations avec l'idée sous-jacente que "les gènes impliqués dans des pathologies à transmission mendéliennes" devraient être moins tolérants aux variations que les autres.    
 
 ```{r pictannot,fig.cap='(ref:pictannot)',fig.scap=fig_name,out.extra="scale=.27"}
 
@@ -788,15 +782,18 @@ Comme nous l'avons vu, le développement d’outils permettant l’analyse et le
 
 \newpage
 
-```{r pictfilter,fig.cap=fig.info,fig.scap=fig_name,out.extra="scale=.3"}
+```{r pictfilter,fig.cap='(ref:pictfilter)',fig.scap=fig_name,out.extra="scale=.3"}
 
 fig_name <- "Représentation simplifié du processus de filtrage des variants"
 fig_description <- "L'ensemble des annotations ajoutées lors de l'étape précédente servent alors de support pour filtrer (ou non) les variants. Il est par exemple commun de filtrer les variants ayant une forte fréquence dans la population générale ou encore ceux ayant un impact faible sur la protéine. De même dans le cas d'étude sur des pathologies ayant un mode de transmission recessif, les variants hétérozygotes pourront être également filtrés."
-fig.info <- paste0(fig_name," : ",fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics(path = "figure/filtering_process.png")
 
 ```
+
+(ref:pictfilter) `r fig_cap`
+
 
 \newpage
 

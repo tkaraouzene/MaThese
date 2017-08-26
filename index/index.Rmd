@@ -4,7 +4,7 @@ date: ' 07 novembre 2017'
 division: 'Mathematics and Natural Sciences'
 advisor: 'Pierre Ray'
 altadvisor: 'Nicolas Thierry-Mieg'
-lab: "Techniques de l'Ingénierie Médicale et de la Complexité - Informatique, Mathématiques et Applications de Grenoble (TIMC-IMAG)"
+lab: "Génétique, Epigénétique et Thérapies de l’Infertilité (GETI) et Techniques de l'Ingénierie Médicale et de la Complexité - Informatique, Mathématiques et Applications de Grenoble (TIMC-IMAG)"
 department: 'Ingénierie de la Santé, de la Cognition et Environnement (EDISCE)' 
 title: 'THÈSE'
 knit: "bookdown::render_book"

@@ -153,7 +153,7 @@ tab_high <- function(df, caption = "", evidence = TRUE, landscape = FALSE) {
                       booktabs = TRUE,
                       longtable = TRUE,
                       caption = caption) %>%
-    add_header_above(c(rep(" ", ncol(df) - 5), "Variant impact" = 2, "Variant frequency" = 3))
+    add_header_above(c(rep(" ", ncol(df) - 5), "Iimpact" = 2, "Frequency" = 3))
 
   
     if (landscape == TRUE) kdf <- kdf %>% landscape(margin = NULL)
@@ -185,7 +185,7 @@ tab_modelow <- function(df, caption = "", landscape = FALSE) {
           booktabs = TRUE,
           longtable = TRUE,
           caption = caption) %>%
-    add_header_above(c(" ", " ", "Variant impact" = 4, "Variant frequency" = 3))
+    add_header_above(c(" ", " ", "Impact" = 4, "Frequency" = 3))
   
   if (landscape == TRUE) kdf <- kdf %>% landscape(margin = NULL)
 
@@ -328,8 +328,10 @@ Si l'alignement des séquences peut être comparé à la reconstruction d'un puz
 1. **R**$_+$ **et R**$_-$ : Ces deux comptages correspondent au nombre de *reads* *forward* (+) et *reverse* (-) sur lesquels est observé l'allèle de **référence** (R) à une position donnée.  
 2. **V**$_+$ **et V**$_-$ : À l'inverse de R$_+$ et R$_-$, ces comptages correspondent au nombre de *reads* *forward* et *reverse* sur lesquels est observé un allèle **variant** (V) à une position donnée.  
 
-Ainsi, les sommes : $R_+ + V_+$ et $R_- + V_-$ indiqueront respectivement la couverture d'une position en ne tenant que des *reads forward* et *reverse*. En fonction de ces couvertures nos appels seront classés en trois catégories : 
+Ainsi, les sommes : $R_+ + V_+$ et $R_- + V_-$ indiqueront respectivement la couverture d'une position en ne tenant que des *reads forward* et *reverse*. En fonction de ces couvertures nos appels seront classés en trois catégories :   
+
 1. **Les appels *double strand* (DS) :**  Qualifient les positions ayant une couverture $\ge$ 10 sur **les deux** *strands*. Ces appels sont ceux sont ceux ayant la meilleure qualité.  
+
 2. **Les appels *single strand* (SS) :**  Ces appels définissent les positions pour lesquels **un des deux** *strands* présente une couverture $\le$ 10. Dans ce cas, ce *strand* est ignoré et l'appel est effectué uniquement en utilisant le second *strand*.   
 3. **Les appels *non strand* (NS) :** Les positions NS sont celles pour lesquelles la couverture est $\le$ 10 sur **les deux** *strands*. Aucun appel n'est effectué à ces positions qui **ne sont pas conservés dans la suite des analyses**.    
 
@@ -357,7 +359,7 @@ Pour les positions SS, l'appel final correspondra directement à l'appel effectu
 
 fig_name <- "Détail de l'appel général effectué pour les appels DS en fonction du pourcentage de *reads* variant sur chacun des deux *strands*"
 fig_description <- "Illustration de l'appel des génotypes effectués en fonction du pourcentage de *reads* variants observés sur chacun des deux *strand* de séquençage (*forward* et *reverse*). Le génotype général est appelé si les génotypes des deux brins sont les mêmes ou si l'un des deux est dans la zone ambiguë adjacente au premier. Les zones vertes correspondent aux appels homozygotes référencess, les zones orange, hétérozygotes et rouges homozygotes variants. Les zones grises sont les appels ambigus tandis que les noires sont les appels discordants. Ces deux derniers appels ne sont pas conservés dans la suite des analyses."
-fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics(path = "figure/var_call.png")
 
@@ -433,7 +435,7 @@ L'étape de filtrage est extrêmement importante si l'on souhaite analyser de ma
 
 fig_name <- "Représentation schématique des phasages de deux variants avec les génotypes associés"
 fig_description <- "Un variant est homozygote lorsque le **même** variant est présent sur les deux allèles d'un gène et hétérozygote lorsqu'il est présent sur **un seul** des deux allèles. On parlera d'hétérozygotes *cis* lorsque deux variants hétérozygotes différents seront positionnés sur **le même** allèle et d'hétérozygote *trans* (ou composite) lorsque ces deux variants hétérozygotes seront positionnés sur **deux allèles différents**. En WES et en WGS il est impossible de différentié les hétérozygotes *cis* des hétérozygotes *trans*"
-fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics("figure/hetero_composites.png")
 
@@ -1161,7 +1163,7 @@ fig_description_C <- "**C** : Distribution pour chaque patient des *reads* compa
 fig_description_D <- "**D** : Présentation pour chaque *reads* du nombre de site auxquels ils s'alignent"
 fig_description <- paste(fig_description_all, fig_description_A,fig_description_B,fig_description_C, fig_description_D, sep = ". ")
 
-fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 pA <- ggplot(df_reads_summary %>% filter(QUALITY == "Raw reads"), aes(RUN, NB_OF_READS)) + 
   geom_bar(stat = "identity", aes(fill = IS_RETAINED)) +
@@ -1249,9 +1251,9 @@ xmin <- .07
 ymax <- 7.2
 
 fig_name <- "Densité de répartition du pourcentage de reads variant pour chaque position couverte"
-fig_description <- paste0("Les homozygotes références évidents ne nous intéressant pas, les position représentées sont restreinte à celles contenant un minimum de ", xmin *100, "\\% de *reads* variants. L'arrière plan montre les bornes utilisées par notre algorithme pour chaque appel. Les lignes pointillées séparent en deux les régions d'ambiguité basse et haute")
+fig_description <- paste0("Les homozygotes références évidents ne nous intéressant pas, les position représentées sont restreinte à celles contenant un minimum de ", xmin *100, "\\% de *reads* variants. L'arrière plan montre les bornes utilisées par notre algorithme pour chaque appel. Les lignes pointillées séparent en deux les régions d'ambiguité basse et haute.")
 
-fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 density_plot_file <- "figure/density_plot.png"
 
@@ -1298,9 +1300,9 @@ fig_name <- "Contrôle qualité des variants appelés"
 fig_description_all <- "Pour chacun des graphiques, les variants représentés en vert et en orange sont conservés tandis que ceux en rouge sont filtrés"
 fig_description_A <- "**A** : Distribution du *stranding* des appels pour chaque patient"
 fig_description_B <- "**B** : Comparaison des appels entre les deux *ends* des variants appelés DS"
-fig_description_C <- "**C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre"
+fig_description_C <- "**C** : Distribution des SNVs et indels en fonction de leur génotype pour chaque patients (représentés par une barre."
 fig_description <- paste(fig_description_all, fig_description_A,fig_description_B,fig_description_C, sep = ". ")
-fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 pA <- ggplot(df_strand_all, aes(STRAND, P)) +
   geom_boxplot(outlier.size = -1, aes(fill = IS_RETAINED)) + 
@@ -1369,7 +1371,7 @@ fig_description_B <- "**B** : Distribution des impacts *HIGH MODERATE LOW* et *M
 fig_description_C <- "**C** : Pourcentage des variants retrouvés au sein des trois bases de données : ExAC, ESP et 1KG"
 fig_description_D <- "**D** : Distribution des fréquences de nos variants au sein des trois bases de données : ExAC, ESP et 1KG"
 
-fig_description <- paste(fig_description_A,fig_description_B, sep = ". ")
+fig_description <- paste(fig_description_A,fig_description_B,".", sep = ". ")
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 pA <- ggplot(df_nb_feature, aes(RUN, NB)) + 
@@ -1444,7 +1446,7 @@ Les étapes précédentes nous ont permis de mettre en évidence pour chaque pat
 
 fig_name <- "Filtrage des transcrits jugés \"non pertinents\" et des variants les chevauchant"
 fig_description <- "Pour chaque patient nous avons filtrer les transcrits jugés \"non pertinents\" pour l'analyse, c'est à dire ceux ne codant pas pour une protéine et ceux annoté NMD (boite rouge). Dès lors, l'intégralité des variants chevauchant **uniquement** des transcrits non pertinents sont systématiquement être filtrés (boites bleue). Les autres sont conservés."
-fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 ggplot(df_filtered_tr_vr %>% filter(IS_FILTERED == TRUE), aes(TYPE, N)) +
   geom_boxplot(aes(fill = TYPE), alpha = .3, outlier.size = -1) +
@@ -1469,7 +1471,7 @@ ggplot(df_filtered_tr_vr %>% filter(IS_FILTERED == TRUE), aes(TYPE, N)) +
 ```{r plotsamplectrl, fig.cap='(ref:plotsamplectrl)',fig.scap=fig_name, fig.height=4, cache=TRUE}
      
 fig_name <- "Nombre d'individus et leur phénotypes composant la cohorte contrôle de chaque famille"
-fig_description <- "Ici, chaque barre représente une famille et sa hauteur est déterminée par le nombre d'individus composant la cohorte contrôle à laquelle elle a été confronté. Le nombre total de contrôle utilisés par famille est inscrit au dessus de chaque barre. Les couleurs déterminent les phénotypes des individus de la cohorte contrôle. Chaque individu de cette cohorte a été séquencés en WES par notre équipe. Afin d'être considéré comme \"contrôle\" et intégrer cette cohorte, un individu doit être sain ou présenter un phénotype d'infertilité suffisamment différent de la famille étudiée. Par exemple, un individus MMAF pourra servir de contrôle aux familles AZ et FF mais pas aux familles MMAF1-5"
+fig_description <- "Ici, chaque barre représente une famille et sa hauteur est déterminée par le nombre d'individus composant la cohorte contrôle à laquelle elle a été confronté. Le nombre total de contrôle utilisés par famille est inscrit au dessus de chaque barre. Les couleurs déterminent les phénotypes des individus de la cohorte contrôle. Chaque individu de cette cohorte a été séquencés en WES par notre équipe. Afin d'être considéré comme \"contrôle\" et intégrer cette cohorte, un individu doit être sain ou présenter un phénotype d'infertilité suffisamment différent de la famille étudiée. Par exemple, un individus MMAF pourra servir de contrôle aux familles AZ et FF mais pas aux familles MMAF1-5."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
                          
 ggplot(df_nb_ctrl, aes(SUB, N_PHENO)) + 
@@ -1504,7 +1506,7 @@ Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants subsis
 fig_name <- "Comparaison de l'efficacité de chacun des six filtres utilisés"
 fig_description_A <- "**A** : Comparaison du pourcentage de variants filtrés par chacun des six filtres indépendamment les uns des autres pour chaque patient (représenté par les points. Dès lors, un même variant peut-être filtré par plusieurs filtres"
 fig_description_B <- "**B** : Comparaison du nombre de variant filtrés spécifiquement par chacun des filtres. Ici, un variant ne peut-être filtré que par un seul filtre"
-fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
+fig_description <- paste(fig_description_A, fig_description_B,".", sep = ". ")
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 filter_orders <- c("Transcript relevance","Union","Frequence","Genotype","Ctrl","Variant impact")
@@ -1620,16 +1622,17 @@ df_remaining_variant_az %>%
         booktabs = TRUE,
         longtable = TRUE,
         caption = caption) %>%
-  add_header_above(c(" ", "Variant impact" = 2, "Variant frequency" = 3))
+  add_header_above(c(" ", "Impact" = 2, "Frequency" = 3))
 
 ```
 
 \newpage
 
-```{r plotexpfamaz, fig.cap='(ref:plotexpfamaz)',fig.scap=fig_name, dependson="varrecapaz", cache=TRUE}
+```{r plotexpfamaz, fig.cap='(ref:plotexpfamaz)',fig.scap=fig_name2, dependson="varrecapaz", cache=TRUE}
 
 fig_name <- "Expression tissulaire des gènes *SPINK2* et *GUF1*"
-fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
+fig_name2 <- "Expression tissulaire des gènes SPINK2 et GUF1"
+fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 gene_fam_az <- df_recap %>% filter(Family == "AZ") %>% collect() %>% .[["Gene"]]
@@ -1660,7 +1663,7 @@ Human Molecular Genetics, Décembre 2015
 
 #### Contexte et objectifs  
 
-L'activation ovocitaire regroupe une série de processus intervenant au cour de la fécondation d'un ovocyte par un spermatozoïde. en 1990, plusieurs études démontrèrent que chez les mamifères ces processus reposent principalement sur le relargage par le spermatozoïde de "facteurs spermatiques" qui déclenchent un signal de calcium, constitué d'oscillations Ca^2+^ [ref]. Plus tard, la protéine PLC$\zeta$ fu identifiée comme la molécule responsable de ces oscilations calciques. Cependant, en raison de l'incapacité àproduire des modèles animaux *PLC*$\zeta$ KO capable de produire des spermatozoïdes mature a empeché d'attribuer l'exclusivité de ce rôle à *PLC*$\zeta$ laissant ouverte la possibilité de la nécessité d'autres facteurs spermatiques. C'est ainsi qu'en 2014 fut proposé la protéine PAWP comme facteur spermatique alternatif ou complémentaire de PLC$\zeta$ [@Aarabi2014; @Aarabi2014a].   
+L'activation ovocitaire regroupe une série de processus intervenant au cour de la fécondation d'un ovocyte par un spermatozoïde. En 1990, plusieurs études démontrèrent que chez les mamifères ces processus reposent principalement sur le relargage par le spermatozoïde de "facteurs spermatiques" qui déclenchent un signal de calcium, constitué d'oscillations Ca^2+^ [todo : ref]. Plus tard, la protéine PLC$\zeta$ fu identifiée comme la molécule responsable de ces oscilations calciques. Cependant, en raison de l'incapacité àproduire des modèles animaux *PLC*$\zeta$ KO capable de produire des spermatozoïdes mature a empeché d'attribuer l'exclusivité de ce rôle à *PLC*$\zeta$ laissant ouverte la possibilité de la nécessité d'autres facteurs spermatiques. C'est ainsi qu'en 2014 fut proposé la protéine PAWP comme facteur spermatique alternatif ou complémentaire de PLC$\zeta$ [@Aarabi2014; @Aarabi2014a].   
 
 Les travaux ci-dessous décrivent les analyses effectuées sur deux frères issus d'un union consanguin ayant tout deux été dans l'incapacité de concevoir un enfant par voies naturelles et pour qui, malgré des paramètres spermatiques normaux, l'ensemble des procédures de reproduction assités effectuées se sont soldés par un échec d'activation ovocitaire.   
 
@@ -1709,15 +1712,17 @@ df_remaining_variant_ff %>%
         booktabs = TRUE,
         longtable = TRUE,
         caption = caption) %>%
-  add_header_above(c(" ", "Variant impact" = 4, "Variant frequency" = 1))
+  add_header_above(c(" ", "Impact" = 4, "Frequency" = 1))
 
 ```
 
 \newpage
 
-```{r plotexpfamff, fig.cap='(ref:plotexpfamff)',fig.scap=fig_name, fig.asp=.65, cache=TRUE}
+```{r plotexpfamff, fig.cap='(ref:plotexpfamff)',fig.scap=fig_name2, fig.asp=.63, cache=TRUE}
 
-fig_name <- "Expression tissulaire du gène PLCZ1*"
+fig_name <- "Expression tissulaire du gène *PLCZ1*"
+fig_name2 <- "Expression tissulaire du gène PLCZ1"
+
 fig_description <- "Données provenant du projet de transcriptome Illumina bodyMap"
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
@@ -1731,10 +1736,13 @@ plot_expression(gene_fam_ff,"percent", TRUE)+
 
 (ref:plotexpfamff) `r fig_cap`
 
-```{r plotcovplcz, fig.cap='(ref:plotcovplcz)',fig.scap=fig_name, ,out.extra="scale=.4", cache=TRUE}
+```{r plotcovplcz, fig.cap='(ref:plotcovplcz)',fig.scap=fig_name2, ,out.extra="scale=.37", cache=TRUE}
 
-fig_name <- "Couverture des 6 éxons de WBP2NL pour les deux frères de la famille FF"
-fig_cap <- paste0("**_",fig_name,"_.**")
+fig_name <- "Couverture des 6 éxons de *WBP2NL* pour les deux frères de la famille FF"
+fig_name2 <- "Couverture des 6 éxons de WBP2NL pour les deux frères de la famille FF"
+
+fig_description <- "Les barres rouges représentent la couverture moyenne de 10 nucléotides, les bleues représentent les bornes de chaque éxon."
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics(path = "figure/pawp_coverage.png")
 
@@ -1811,7 +1819,7 @@ Ainsi, à l'issus de l'analyse de ces `r nb_mmaf_fam + 1` familles présentant u
 ```{r plotremaininggenes, fig.height=7, fig.cap='(ref:plotremaininggenes)',fig.scap=fig_name, cache=TRUE}
 
 fig_name <- "Nombre de gènes passant l'ensemble des filtres par famille"
-fig_description <- "Chaque barre représente une des familles analysées. La hauteur de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres vertes caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au-dessus de la barre). La barre orange caractérise la famille pour laquelle un candidat potentiel a été identifié (le symbole du gène est écrit au-dessus suivit d'un \"?\"). Les barres rouges indiquent qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit \"???\" au-dessus de la barre)"
+fig_description <- "Chaque barre représente une des familles analysées. La hauteur de cette barre correspond au nombre de gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres vertes caractérisent les familles pour lesquelles le gène responsable de la pathologie a été identifié parmi la liste de gène (dans ce cas le symbole du gène est écrit au-dessus de la barre). La barre orange caractérise la famille pour laquelle un candidat potentiel a été identifié (le symbole du gène est écrit au-dessus suivit d'un \"?\"). Les barres rouges indiquent qu'aucun des gènes ayant passé les filtres pour ne semble expliquer le phénotype (dans ce cas il est écrit \"???\" au-dessus de la barre)."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 ggplot(df_causal %>% filter(grepl("MMAF", Family)), aes(Family, N)) +
