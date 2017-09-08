@@ -19,7 +19,7 @@ if(!require(bookdown))
 if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
 
-slibrary(thesisdown)
+library(thesisdown)
 library(pander)
 library(knitr)
 library(tidyr)
@@ -65,22 +65,20 @@ kable(t,
 
 ### Rappels sur le testicule  
 
-Les testicules sont les organes sexuels masculins. Ils possèdent deux fonctions principales plus ou moins exprimées selon les périodes de la vie de l'individu : une fonction endocrine caractérisée par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, le testicule présente une forme ovoïde ayant un volume moyen de 18 cm^3^. Chez l’homme, comme chez la plupart des mammifères terrestres, ils sont localisés sous le pénis dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps, nécessaire à la spermatogenèse. L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)). C'est le long des parois du tube séminifère que se déroulera l'ensemble des étapes de la spermatogenèse.    
+Les testicules sont les organes sexuels masculins. Ils possèdent deux fonctions principales plus ou moins exprimées selon les périodes de la vie de l'individu : une fonction endocrine caractérisée par la synthèse des hormones stéroïdes sexuelles masculines (la stéroïdogenèse) et une fonction exocrine au cours de laquelle seront produits les gamètes masculins. Chez un individu adulte en bonne santé, le testicule présente une forme ovoïde ayant un volume moyen de 18 cm^3^. Chez l’homme, comme chez la plupart des mammifères terrestres, ils sont localisés sous le pénis dans une poche de peau appelée scrotum et reliés à l'abdomen par le cordon spermatique (**Figure :** \@ref(fig:testicule)). Cette externalisation des testicules permet leur maintien à une température plus basse que celle du reste du corps, nécessaire à la spermatogenèse.  
 
-```{r captesticule}
+L’intérieur du testicule contient des tubes séminifères enroulés ainsi que du tissu entre les tubules appelé espace interstitiel. Les tubes séminifères sont de longs tubes compactés sous forme de boucles et dont les deux extrémités débouchent sur le *rete testis* (**Figure :** \@ref(fig:testicule)). C'est le long des parois du tube séminifère que se déroulera l'ensemble des étapes de la spermatogenèse.      
+
+```{r testicule, fig.cap='(ref:testicule)', fig.scap=fig_name, out.extra="scale=0.65"}
 
 fig_name <- "Schéma anatomique du testicule humain"
 fig_cap <- paste0("**_",fig_name,"_.**")
 
-```
-
-(ref:testicule) `r fig_cap`
-
-```{r testicule, fig.cap='(ref:testicule)', fig.scap=fig_name, out.extra="scale=0.65"}
-
 include_graphics(path = "figure/coupe_testicule2.jpg")
 
 ```
+
+(ref:testicule) `r fig_cap`
 
 \newpage
 
@@ -93,7 +91,6 @@ Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la s
 \newpage
 
 ```{r spermatogenese,fig.cap='(ref:spermatogenese)', fig.scap=fig_name, out.extra="scale=0.35"}
-
 
 fig_name <- "Les différentes phases de la spermatogenèse"
 fig.from <- "[medizin-kompakt](http://www.medizin-kompakt.de/spermatogenese)"
@@ -252,7 +249,7 @@ include_graphics(path = "figure/sperm_anatomy.png")
 
 \newpage
 
-```{r capnoyau}
+```{r noyau, fig.cap='(ref:noyau)',fig.scap=fig_name, out.extra="scale=.55"}
 
 fig_name <- "Schéma de la compaction de l’ADN dans les cellules somatiques et dans les spermatozoïdes"
 fig.from <- "[@Braun2001]"
@@ -260,15 +257,11 @@ fig_description <- "Dans les cellules somatiques, l’ADN est enroulé sous form
 remplacement des histones est facilité par des acétylations, des ubiquitinations et des phosphorylations."
 fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
 
-```
-
-(ref:noyau) `r fig_cap`
-
-```{r noyau, fig.cap='(ref:noyau)',fig.scap=fig_name, out.extra="scale=.55"}
-
 include_graphics(path = "figure/noyau.png")
 
 ```
+
+(ref:noyau) `r fig_cap`
 
 \newpage
 
@@ -799,7 +792,7 @@ include_graphics(path = "figure/filtering_process.png")
 
 ### Conclusion NGS  
 
-En moins de 10 ans, les technologies NGS sont passées du séquençage de panels de gènes (environ 100 Mb pour le Roche GS FLX system) au séquençage de génomes entiers (environs 1500 GB pour l'Illumina Hiseq 4000) et d'une utilisation exclusive à la recherche à l’analyse en routine dans un cadre de diagnostics cliniques. Le nombre croissant d'études utilisant le WGS ou le WES démontre le pouvoir de ces approches dans des analyses phénotype-génotype impliquant des pathologies à transmission mendélienne. De plus, la diminution constante des coûts par génomes / exomes séquencés laisse supposer que ces technologies deviendront d'ici peut le fer de lance de la génétique clinique moderne. Cependant, cette quantité de données produites crée de nouvelles problématiques pour les généticiens qui se retrouvent désormais face au "déluge de données génétiques" [@Schatz2013]. Le succès d'une étude n'étant plus lié aux capacités de séquençage mais aux compétences dans l'analyse et l'interprétation des données produites à chaque étape (**Figure :** \@ref(fig:pictrecapngssteps)). Bien que de nombreux efforts soient faits pour palier la contrainte instaurée par les *reads* courts dans le cadre d'analyse génomique, les solutions informatiques et bioinformatiques proposées jusqu'à présent restent en dessous des besoins créés par NGS [@McPherson2009]. Cette masse de données produite, à l'origine du succès du séquençage haut-débit dans le domaine de la génomique et de la post-génomique, se trouve désormais être un frein à la compréhension et à l'interprétation des réseaux de gènes et leurs implications dans des pathologies. La limitation de cette technologie n'est donc plus le séquençage d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et l'interprétation des données générées. Le processus allant de l'extraction de l'ADN à l'identification d'un variant responsable d'une pathologie comprend de nombreuses étapes apportant avec elles leurs lots d'erreurs. Bien que dans chacune de ces phases, de nombreux acteurs soient en concurrence et cherchent à atteindre une solution idéale, celle-ci n'a toujours pas été trouvée et la prolifération des logiciels et algorithmes d'analyses, bien que nécessaire, peut également parfois augmenter la confusion.  
+En moins de 10 ans, les technologies NGS sont passées du séquençage de panels de gènes (environ 100 Mb pour le Roche GS FLX system) au séquençage de génomes entiers (environs 1500 GB pour l'Illumina Hiseq 4000) et d'une utilisation exclusive à la recherche à l’analyse en routine dans un cadre de diagnostics cliniques. Le nombre croissant d'études utilisant le WGS ou le WES démontre le pouvoir de ces approches dans des analyses phénotype-génotype impliquant des pathologies à transmission mendélienne. De plus, la diminution constante des coûts par génomes / exomes séquencés laisse supposer que ces technologies deviendront d'ici peut le fer de lance de la génétique clinique moderne. Cependant, la quantité de données produites crée de nouvelles problématiques pour les généticiens qui se retrouvent désormais face au "déluge de données génétiques" [@Schatz2013]. Le succès d'une étude n'étant plus lié aux capacités de séquençage mais aux compétences dans l'analyse et l'interprétation des données produites à chaque étape (**Figure :** \@ref(fig:pictrecapngssteps)). Bien que de nombreux efforts soient faits pour palier la contrainte instaurée par les *reads* courts dans le cadre d'analyse génomique, les solutions informatiques et bioinformatiques proposées jusqu'à présent restent en dessous des besoins créés par NGS [@McPherson2009]. Cette masse de données produite, à l'origine du succès du séquençage haut-débit dans le domaine de la génomique et de la post-génomique, se trouve désormais être un frein à la compréhension et à l'interprétation des réseaux de gènes et leurs implications dans des pathologies. La limitation de cette technologie n'est donc plus le séquençage d'un, de plusieurs, ou de l'ensemble des gènes, mais plutôt l'analyse et l'interprétation des données générées. Le processus allant de l'extraction de l'ADN à l'identification d'un variant responsable d'une pathologie comprend de nombreuses étapes apportant avec elles leurs lots d'erreurs. Bien que dans chacune de ces phases, de nombreux acteurs soient en concurrence et cherchent à atteindre une solution idéale, celle-ci n'a toujours pas été trouvée et la prolifération des logiciels et algorithmes d'analyses, bien que nécessaire, peut également parfois augmenter la confusion.  
 
 Malgré les dizaines de milliers d'exomes et de génomes ayant été jusqu'à présent étudiés, notre compréhension des mécanismes moléculaires qui sous-tendent la variété génomique humaine reste limitée, et ce particulièrement dans le contexte de l'analyse de pathologies génétiques. En effet, à l'heure actuelle, plus de 3700 pathologies à transmission mendélienne ont été caractérisées mais un nombre similaire a toujours une cause inconnue [@Amberger2011]. L'élucidation de ces mystères passera probablement par une harmonisation des méthodes de production des données ainsi que par l'amélioration des techniques d'analyses.     
 
@@ -807,8 +800,8 @@ Malgré les dizaines de milliers d'exomes et de génomes ayant été jusqu'à pr
 
 ```{r pictrecapngssteps,fig.cap='(ref:pictrecapngssteps)',fig.scap=fig_name,out.extra="scale=.3"}
 
-fig_name <- "Récapitulatif des différentes étapes du séqueçage NGS dans le cadre d'une étude phénotype-génotype"
-fig_description <- "L'ADN est d'abord extrait, puis fragmenté. Les fragments sont liés à des adaptateurs puis amplifiés. Ces amplifiat sont alors isolés et soummis à une amplification clonale (schéma de l'amplification clonale est adapté d'après [@Goodwin2016]). Chacun des clones est ensuite séquencé. Les *reads* générés à l'issus du séquençage sont sotockés dans des fichiers FASTQ qui serviront de base pour l'étape d'alignement à la suite de laquelle, les variants et leur génotype seront apppellés puis annotés. Ces annotations serviront ensuite pour filtrer les variants jugés non pertinent dans le cadre de l'étude, les variants / gènes restant seront ensuite prioriser de sorte à déterminer celui responsable du phénotype."
+fig_name <- "Récapitulatif des différentes étapes du séquençage NGS dans le cadre d'une étude phénotype-génotype"
+fig_description <- "L'ADN est d'abord extrait, puis fragmenté. Les fragments sont liés à des adaptateurs puis amplifiés. Ces amplifiats sont alors isolés et soumis à une amplification clonale (schéma de l'amplification clonale est adapté d'après [@Goodwin2016]). Chacun des clones est ensuite séquencé. Les *reads* générés à l'issu du séquençage sont stockés dans des fichiers FASTQ qui serviront de base pour l'étape d'alignement à la suite de laquelle, les variants et leur génotype seront appelés puis annotés. Ces annotations serviront ensuite pour filtrer les variants jugés non pertinent dans le cadre de l'étude, les variants / gènes restant seront ensuite prioriser de sorte à identifier le/les variant(s) responsable(s) du phénotype."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics(path = "figure/bioinformatic_steps.png")
