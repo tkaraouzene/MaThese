@@ -57,7 +57,7 @@ space_between_paragraphs: true
 header-includes: \usepackage{tikz}
 ---
 
-```{r include.packages, include = FALSE}
+```{r include.packagesindex, include = FALSE}
 # This chunk ensures that the thesisdown package is
 # installed and loaded. This thesisdown package includes
 # the template files for the thesis.
@@ -68,8 +68,8 @@ if(!require(thesisdown))
 if(!require(stringi))
   install.packages(stringi)
 
-if(!require(kableExtra))
-devtools::install_github("haozhu233/kableExtra")
+# if(!require(kableExtra))
+# devtools::install_github("haozhu233/kableExtra")
 
 library(thesisdown)
 library(pander)
@@ -84,7 +84,7 @@ library(cowplot)
 library(stringr)
 library(foreach) 
 library(viridis)
-library(kableExtra)
+# library(kableExtra)
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 

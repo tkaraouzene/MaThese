@@ -20,9 +20,9 @@ if(!require(bookdown))
 
 if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
-
+# 
 if(!require(kableExtra))
-devtools::install_github("haozhu233/kableExtra")
+  devtools::install_github("haozhu233/kableExtra", ref = "f451dbb62cf72e16050fe39ea5ae99b3fd53a617")
 
 library(thesisdown)
 library(pander)
@@ -724,6 +724,7 @@ if (!file.exists(nb_impact_geno_file)) {
 
 
 df_impact <- df_annotate %>% 
+  filter(CANONICAL == "YES") %>% 
   group_by(RUN,CALL, IMPACT) %>%
   summarise(N = n()) %>%
   group_by(RUN) %>%
@@ -867,7 +868,7 @@ df_nb_ctrl <- bind_rows(df_runs_all %>%
 maf_cutoff <- .01
 
 df_filter_fam <- ungroup(df_annotate) %>% 
-  filter_genotype(het = FALSE) %>%
+  filter_genotype(het = FALSE) %>% 
   filter_frequence(cutoff = maf_cutoff) %>%
   variant_join(df_ctrl_all %>% mutate(CHR = as.character(CHR)), add_by = "PHENO", mode = "anti") %>% 
   filter(Consequence != "synonymous",
@@ -1255,7 +1256,7 @@ Dans nos données, les appels SS sont majoritaires et représentent environ `r m
 
 De même, les appels discordant et ambigus sont filtrés, soit environ `r wrong_ds_median` % des variants DS. Il est intéressant de noter que bien que les variants *single strand* (SS) soient conservés, on peut s'attendre à ce qu'environ `r discordant_median`%, soit le pourcentage de DS discordants, soient aberrants, ceux-ci n'ayant pu subir le même contrôle que les SS (**Figure : **\@ref(fig:plotvarcall) - **B**). 
 
-Pour l'ensemble des variants ayant passé les filtres énoncés ci-dessus, c'est à dire les variants SS et les variants DS avec appels concordants, le génotype est déterminé en fonction du pourcentage de *reads* portant le variant à cette position. Ainsi, pour chaque individu nous avons pu établir une liste de SNVs et d'indels avec leur génotype associé. Pour chacun de nos `r nb_fam_run` patients les ordres de grandeur du nombre de variants appelés sont identiques. Ainsi pour chaque patient nous avons appelés environ `r median_het_snv + median_het_indel` variants hétérozygotes (`r median_het_snv` SNVs et `r median_het_indel` indels) et `r median_homo_snv + median_homo_snv` variants homozygotes (`r median_homo_snv` SNVs et `r median_homo_indel` indels) (**Figure : **\@ref(fig:plotvarcall) - **C**).    
+Pour l'ensemble des variants ayant passé les filtres énoncés ci-dessus, c'est à dire les variants SS et les variants DS avec appels concordants, le génotype est déterminé en fonction du pourcentage de *reads* portant le variant à cette position. Ainsi, pour chaque individu nous avons pu établir une liste de SNVs et d'indels avec leur génotype associé. Pour chacun de nos `r nb_fam_run` patients les ordres de grandeur du nombre de variants appelés sont identiques. Ainsi pour chaque patient nous avons appelés environ `r median_het_snv + median_het_indel` variants hétérozygotes (`r median_het_snv` SNVs et `r median_het_indel` indels) et `r median_homo_snv + median_homo_indel` variants homozygotes (`r median_homo_snv` SNVs et `r median_homo_indel` indels) (**Figure : **\@ref(fig:plotvarcall) - **C**).    
 
 \newpage
 
@@ -1363,7 +1364,7 @@ plot_grid(row1, pC,labels = c("", "C"), rel_heights = c(.52,.48), ncol = 1)
 
 #### L'annotation des variants
 
-Après avoir annoté nos variants, nous avons pu constater que pour chaque patient `r mean_gene` gènes sont en moyenne affecté par au moins un variant homozygote pour en moyenne `r mean_transcript` transcrits (soit environ `r rate_tr_gene` transcrits par gènes). Il faut noter que parmi ces gènes se trouvent à la fois des gènes codant pour des protéine **et** d'autres non codant (**Figure : **\@ref(fig:plotannotation) - **A**).  
+Après avoir annoté nos variants, nous avons pu constater que pour chaque patient `r mean_gene` gènes sont en moyenne affecté par au moins un variant homozygote pour en moyenne `r mean_transcript` transcrits (soit environ `r rate_tr_gene` transcrits par gènes) (**Figure : **\@ref(fig:plotannotation) - **A**). Il faut noter que parmi ces gènes se trouvent à la fois des gènes codant pour des protéine **et** d'autres non codant.     
 
 Chaque variant affectera l'ensemble des transcrits qu'il chevauche, ainsi un même variant pourra impacter plusieurs transcrits. Ces impacts sont ensuite classés par VEP en quatre catégories qui sont, de la plus délétère à la moins délétère : *HIGH*, *MODERATE*, *LOW*, *MODIFIER* (**Table : **\@ref(tab:tabvepcsq)).  
 
