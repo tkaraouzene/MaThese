@@ -84,7 +84,7 @@ library(cowplot)
 library(stringr)
 library(foreach) 
 library(viridis)
-# library(kableExtra)
+library(kableExtra)
 
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
