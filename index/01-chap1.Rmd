@@ -809,6 +809,3 @@ include_graphics(path = "figure/bioinformatic_steps.png")
 ```
 
 (ref:pictrecapngssteps) `r fig_cap`
-
-
-<!-- cf Evaluation of next-generation sequencing software in mapping and assembly partie CHALLENGES AND PROSPECTS   -->

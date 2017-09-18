@@ -130,7 +130,8 @@ df_patl2 <- bind_rows(df_ovo_filter, df_ovo_filter_het) %>%
 \newpage
 
 
-# Table des variants retrouvés sur le gène *DNAH1*  
+
+# Variants retrouvés au sein de notre cohorte de patients MMAF
 
 ```{r tabdnah1, dependson="dfbigmmaffilter", cache=TRUE}
 
@@ -149,75 +150,102 @@ df_dnah1 <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
          `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
   select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`)
 
-   kable(df_dnah1  %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
-     format = "latex",
-          booktabs = TRUE,
-          longtable = TRUE,
-          caption = caption) %>%
-  landscape() %>%
-  add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
+  #  kable(df_dnah1  %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
+  #    format = "latex",
+  #         booktabs = TRUE,
+  #         longtable = TRUE,
+  #         caption = caption) %>%
+  # landscape() %>%
+  # add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
 
 ```
 
 \newpage
-
-# Table des variants retrouvés sur le gène *CFAP43*  
 
 ```{r tabcfap43, dependson="dfbigmmaffilter", cache=TRUE}
 
-caption <- "Table des variants retrouvés sur le gène *CFAP43*"
+caption <- "Variants homozygotes retrouvés sur le gène *CFAP43*"
 
-df_dnah1 <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
+df_cfap43 <- df_bigmmaf_filter %>%
   filter(SYMBOL == "CFAP43") %>%
   filter(CANONICAL == "YES") %>%
   mutate(CALL = substr(CALL, start=1, stop=4),
+         SIFT = na.replace(SIFT, "."),
+         PolyPhen = na.replace(PolyPhen, "."),
          HGVSc = na.replace(HGVSc, "."),
          HGVSp = na.replace(HGVSp, "."),
          ExAC_AF = na.replace(ExAC_AF, "."),
          ESP = na.replace(ESP, "."),
          `1KG` = na.replace(`1KG`, "."),
          `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
+         `SIFT ; PolyPhen` = paste(SIFT, PolyPhen, sep = " ; "),
          `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
-  select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`)
+  select(Patient = RUN, Geno = CALL, `HGVSc, HGVSp`, Consequence, `SIFT ; PolyPhen`, `ExAC ; ESP ; 1KG`) %>%
+  mutate(`ExAC ; ESP ; 1KG` = if_else(`HGVSc, HGVSp` == "c.2658G>A ; p.Trp886Ter", "9.88e-05 ; 2e-04 ; .", `ExAC ; ESP ; 1KG`)) %>%
+  arrange(`HGVSc, HGVSp`, Patient) %>% 
+  distinct()
 
-   kable(df_dnah1  %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
+df_cfap43_het <- df_bigmmaf_filter_het %>%
+  filter(SYMBOL == "CFAP43",
+         CANONICAL == "YES",
+         RUN == "Ghs132") %>%
+  mutate(CALL = substr(CALL, start=1, stop=4),
+         SIFT = na.replace(SIFT, "."),
+         PolyPhen = na.replace(PolyPhen, "."),
+         HGVSc = na.replace(HGVSc, "."),
+         HGVSp = na.replace(HGVSp, "."),
+         ExAC_AF = na.replace(ExAC_AF, "."),
+         ESP = na.replace(ESP, "."),
+         `1KG` = na.replace(`1KG`, "."),
+         `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
+         `SIFT ; PolyPhen` = paste(SIFT, PolyPhen, sep = " ; "),
+         `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
+  select(Patient = RUN, Geno = CALL, `HGVSc, HGVSp`, Consequence, `SIFT ; PolyPhen`, `ExAC ; ESP ; 1KG`) %>%
+  
+  mutate(`ExAC ; ESP ; 1KG` = if_else(`HGVSc, HGVSp` == "c.2658G>A ; p.Trp886Ter", "9.88e-05 ; 2e-04 ; .", `ExAC ; ESP ; 1KG`)) %>%
+  arrange(`HGVSc, HGVSp`, Patient) %>% 
+  distinct()
+
+   kable(bind_rows(df_cfap43, df_cfap43_het) %>% arrange(desc(Geno), `HGVSc, HGVSp`, Patient),
      format = "latex",
           booktabs = TRUE,
           longtable = TRUE,
           caption = caption) %>%
-  landscape() %>%
-  add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
+     landscape() %>%
+     add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency" = 1))
 
 ```
 
 \newpage
 
-# Table des variants retrouvés sur le gène *CFAP44*  
-
-
 ```{r tabcfap44, dependson="dfbigmmaffilter", cache=TRUE}
 
-caption <- "Table des variants retrouvés sur le gène *CFAP44*"
+caption <- "Variants homozygotes retrouvés sur le gène *CFAP44*"
 
-df_dnah1 <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
-  filter(SYMBOL == "CFAP44") %>%
-  filter(CANONICAL == "YES") %>%
+df_cfap44 <- df_bigmmaf_filter %>%
+  filter(SYMBOL == "CFAP44",
+         CANONICAL == "YES",
+         IMPACT == "HIGH") %>% 
   mutate(CALL = substr(CALL, start=1, stop=4),
+         SIFT = na.replace(SIFT, "."),
+         PolyPhen = na.replace(PolyPhen, "."),
          HGVSc = na.replace(HGVSc, "."),
          HGVSp = na.replace(HGVSp, "."),
          ExAC_AF = na.replace(ExAC_AF, "."),
          ESP = na.replace(ESP, "."),
          `1KG` = na.replace(`1KG`, "."),
          `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
-         `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; ")) %>%
-  select(Patient = RUN, Gene = SYMBOL, Geno = CALL, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`)
+         `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; "),
+         `SIFT ; PolyPhen` = paste(SIFT, PolyPhen, sep = " ; ")) %>%
+  select(Patient = RUN, `HGVSc, HGVSp`, Consequence, `ExAC ; ESP ; 1KG`) %>%
+  arrange(`HGVSc, HGVSp`, Patient) 
 
-   kable(df_dnah1  %>%  select(-Gene) %>% arrange(desc(Geno), Patient, `HGVSc, HGVSp`),
-     format = "latex",
-          booktabs = TRUE,
-          longtable = TRUE,
-          caption = caption) %>%
-  landscape() %>%
-  add_header_above(c(" " = 2, "Variant impact" = 2, "Variant frequency"))
+kable(df_cfap44,
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE,
+      caption = caption) %>%
+  # landscape() %>%
+  add_header_above(c(" " = 1, "Variant impact" = 2, "Variant frequency" = 1))
 
 ```

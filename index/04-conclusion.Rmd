@@ -1,17 +1,20 @@
 
-```{r include.packages, include = FALSE}
+```{r include.packages2, include=FALSE}
 # This chunk ensures that the thesisdown package is
 # installed and loaded. This thesisdown package includes
 # the template files for the thesis.
+
 if(!require(devtools))
   install.packages("devtools", repos = "http://cran.rstudio.com")
+
+if(!require(bookdown))
+  devtools::install_github('rstudio/bookdown')
+
 if(!require(thesisdown))
   devtools::install_github("ismayc/thesisdown")
-if(!require(stringi))
-  install.packages(stringi)
-
+# 
 if(!require(kableExtra))
-devtools::install_github("haozhu233/kableExtra")
+  devtools::install_github("haozhu233/kableExtra", ref = "f451dbb62cf72e16050fe39ea5ae99b3fd53a617")
 
 library(thesisdown)
 library(pander)
@@ -28,26 +31,278 @@ library(foreach)
 library(viridis)
 library(kableExtra)
 
+theme_set(theme_gray()) # otherwise use cowplot default theme
+
+source("script/manage_variants.R")
+source("script/variant_filtering.R")
+source("script/resume_data.R")
+source("script/plot_vep_results.R")
+source("script/gene_expression.R")
+
 opts_knit$set(eval.after = c("fig.cap","fig.scap"))
 
 knitr::opts_chunk$set(fig.align='center',echo=FALSE)
 
-knitr::opts_knit$set(kable.force.latex = TRUE)
+```
+
+```{r localfunction, cache=TRUE}
+
+open_ctrl <- function(file=NULL, pheno = "none", df=NULL) {
+  
+  if(is.null(df)) df <- fread(file, sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE)
+  
+  df %>%
+    gather(RUN, CALL, starts_with("Ghs")) %>% 
+    gather(RUN, CALL, starts_with("1")) %>% 
+    
+    filter(CALL %in% c(3, "c")) %>%
+    mutate(N_CTRL = n_distinct(RUN),
+           PHENO = pheno,
+           CHR = as.character(CHR))  %>%
+    select(-CALL) %>% 
+    distinct(CHR, POSITION, REF, ALT, N_CTRL, PHENO)
+}
+
+`%tin%` <- function(x, y) {
+    mapply(assign, as.character(substitute(x)[-1]), y,
+      MoreArgs = list(envir = parent.frame()))
+    invisible()
+}
+
+tab_gene <- function(df, gene) {
+  
+  tab_gene <- df %>% 
+    filter(SYMBOL == gene) %>% 
+    mutate(VARIANT = paste(CHR,POSITION,REF,ALT, sep = "-"),
+           Consequence = sapply(strsplit(Consequence, "_variant", fixed = TRUE),"[[",1),
+           Consequence = gsub("_", " ", Consequence)) %>%
+    distinct(RUN, VARIANT, CALL, Consequence, SYMBOL) %>% 
+    arrange(desc(CALL), RUN)
+  
+  run_homo <- tab_gene %>% filter(CALL == "Homozygous") %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+  run_het <- tab_gene %>% filter(CALL == "Heterozygous") %>% ungroup() %>% distinct(RUN) %>% collect() %>% .[["RUN"]]
+
+  n_run_homo <- run_homo %>% length
+  n_run_het <- run_het %>% length
+  list(tab_gene, run_homo, run_het, n_run_homo, n_run_het)
+}
+
+na.replace <- function (x, char = "") {
+    x[is.na(x)] <- char
+    return(x)
+}
+
+plot_resume_analysis <- function(df) {
+  
+  
+  levels <- c("High","Moderate","Low")
+  
+  df <- df %>% 
+    mutate(TRUST = factor(TRUST, levels = levels))
+  
+  n_distinct_gene <- df %>% ungroup() %>% distinct(SYMBOL) %>% nrow
+  
+  if (n_distinct_gene == 1) {
+  
+  break_max <- df$N_RUN %>% max
+  
+  p <- ggplot(df, aes(TRUST, N_RUN)) +
+    facet_wrap(~SYMBOL) 
+    
+  } else {
+    
+    break_max <- df$TOT %>% max
+  
+    p <- ggplot(df, aes(reorder(SYMBOL, -TOT), N_RUN)) 
+  
+    }
+  
+  p + geom_col(aes(fill = TRUST)) + 
+    scale_fill_manual(guide = "none", limits = c("High","Moderate","Low"), values = c("#4DAF4A","#FF7F00","#E41A1C")) + 
+    scale_y_continuous(breaks = c(0:break_max)) +
+    ylab("Nb of individuals") + 
+    xlab("")
+  
+}
+
+tab_high <- function(df, caption = "", evidence = TRUE, landscape = FALSE) {
+
+  df <- df %>% 
+    ungroup() %>% 
+    filter(CANONICAL == "YES") %>%
+    mutate(HGVSc = na.replace(HGVSc, "."),
+           HGVSp = na.replace(HGVSp, "."),
+           `HGVSc, HGVSp` = paste0(HGVSc," ; ", HGVSp)) %>%
+    select(Patient = RUN, Gene = SYMBOL, Evidence = EVIDENCE, `HGVSc, HGVSp`, Consequence, ESP, `1KG`, ExAC = ExAC_AF) %>%
+    arrange(Gene) %>% 
+    mutate(ESP = na.replace(ESP, "."),
+           `1KG` = na.replace(`1KG`, "."),
+           ExAC = na.replace(ExAC, "."))
+  
+  if(evidence == FALSE) df <- df %>% select(-Evidence)
+  
+  kdf <- df %>% kable(format = "latex",
+                      booktabs = TRUE,
+                      longtable = TRUE,
+                      caption = caption) %>%
+    add_header_above(c(rep(" ", ncol(df) - 5), "Iimpact" = 2, "Frequency" = 3))
+
+  
+    if (landscape == TRUE) kdf <- kdf %>% landscape(margin = NULL)
+
+  kdf
+  
+}
+
+tab_modelow <- function(df, caption = "", landscape = FALSE) {
+  
+  kdf <- df %>% 
+    ungroup() %>%
+    filter(CANONICAL == "YES") %>%
+    mutate(HGVSc = na.replace(HGVSc, "."),
+           HGVSp = na.replace(HGVSp, "."),
+           `HGVSc, HGVSp` = paste0(HGVSc," ; ", HGVSp)) %>%
+
+    select(Patient = RUN, Gene = SYMBOL, `HGVSc, HGVSp`, Consequence, SIFT, PolyPhen, ESP, `1KG`, ExAC = ExAC_AF) %>%
+    distinct() %>% 
+    mutate(ESP = na.replace(ESP, "."),
+           `1KG` = na.replace(`1KG`, "."),
+           ExAC = na.replace(ExAC, "."),
+           SIFT = na.replace(SIFT, "."),
+           SIFT = gsub(" low confidence", "", SIFT),
+           PolyPhen = na.replace(PolyPhen, "."),
+           PolyPhen = gsub("probably", "proba", PolyPhen),
+           PolyPhen = gsub("possibly", "possib", PolyPhen)) %>%
+    kable(format = "latex",
+          booktabs = TRUE,
+          longtable = TRUE,
+          caption = caption) %>%
+    add_header_above(c(" ", " ", "Impact" = 4, "Frequency" = 3)) 
+  
+  if (landscape == TRUE) kdf <- kdf %>% landscape(margin = NULL)
+
+  kdf
+
+}
+
+paste_vector <- function(v, style = "none", sep = ", ", last = " et ", sort = TRUE) {
+  
+  if (sort == TRUE) v <- v %>% sort
+  
+  if (style == "bold") v <- paste0("**",v,"**")
+  if (style == "itallic") v <- paste0("*",v,"*")
+  if (style == "both") v <- paste0("**_",v,"_**")
+
+  v_head <- v %>% head(-1) %>% paste(collapse = sep)
+  
+  v_tail <- v %>% tail(1)
+  
+  paste(v_head, last , v_tail)
+}
+
+gene_to_run <- function(df, genes) {
+  
+  df %>% 
+    ungroup() %>% 
+    filter(SYMBOL %in% genes) %>% 
+    distinct(RUN) %>% 
+    collect() %>%
+    .[["RUN"]]
+  
+}
+
+```
+
+```{r callfunction, cache=TRUE}
+
+call_to_strand <- function(call) {
+  
+  in_ds <- c(1:9)
+  in_ss <- letters
+  in_ns <- 0
+  
+  out_ds <- rep("DS", length(in_ds))
+  out_ss <- rep("SS", length(in_ss))
+  out_ns <- rep("NS", length(in_ns))
+  
+  ca <- c(1,3,4,5,0,"a","b")
+  
+  plyr::mapvalues(call, from = c(in_ds,in_ss,in_ns), to = c(out_ds, out_ss, out_ns), warn_missing = FALSE)
+  
+}
+
+call_to_geno <- function(call) {
+
+  in_ref <- c(1, "a")
+  in_homo <- c(3, "c")
+  in_het <- c(2, "b")
+  in_none <- 0
+  in_ambi <- c(4:7,"d","e","f","g","h","i")
+  in_disc <- c(8,9)
+  
+  out_ref <- rep("Reference", length(in_ref))
+  out_homo <- rep("Homozygous", length(in_homo))
+  out_het <- rep("Heterozygous", length(in_homo))
+  out_none <- rep("None", length(in_none))
+  out_ambi <- rep("Ambigous", length(in_ambi))
+  out_disc <- rep("Discordant", length(in_disc))
+  
+  plyr::mapvalues(call, 
+                  from = c(in_ref, in_homo, in_het, in_none, in_ambi, in_disc), 
+                  to = c(out_ref, out_homo, out_het, out_none, out_ambi, out_disc), 
+                  warn_missing = FALSE)
+
+}
+
+var_type <- function (ref, alt) {
+  
+  vapply(stri_length(ref) == stri_length(alt), function(x) if(isTRUE(x)) "SNV" else "Indel", character(1))
+  
+}
+
+var_call <- function(file) {
+  
+  fread(paste("zcat ", file), sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>% 
+    gather(RUN, CALL, starts_with("Ghs")) %>% 
+    filter(!(CALL %in% c("*", "a", 1))) %>%
+    mutate(TYPE = var_type(REF, ALT),
+           STRAND = call_to_strand(CALL),
+           CALL = call_to_geno(CALL))
+  
+}
+
+
+define_ctrl_var <- function(ctrls, removed_genotypes = "homo", file = "data/call_results/others_novogen_integragen_var_genotype.csv") {
+  
+  if (removed_genotypes == "homo") {
+    
+    removed_call <- c(3, "c")
+    
+  }
+  
+  fread(file, sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>% 
+  select(CHR, POSITION, REF, ALT, one_of(ctrls)) %>% 
+  gather(RUN, CALL, -(CHR:ALT)) %>% 
+  filter(CALL %in% removed_call,
+         !is.na(REF)) %>%
+    distinct(CHR, POSITION, REF, ALT)
+}
+
 
 ```
 
 
 # Conclusion et discussion {-}  
 
-L'infertilité est une problématique qui concerne entre 10 et 15% des couples [@Boivin2007a] faisant de cette pathologie un enjeu de santé publique. Bien que les causes de ce phénotype puissent être multifactorielles et acquises au cours de la vie de l'l'individu, notamment suite à des infections du système urogénitale ou encore à des perturbations du système endocrinien, la composante génétique est extrêmement importante. À ce jour, malgré les efforts de nombreuses équipes, incluant la notre, seulement une poignée de gènes a pu être reliée à ce phénotype. De plus, pour nombre d'entre eux, les bases moléculaires reliant une mutation au phénotype d'infertilité restent inconnues.  
+L'infertilité est une problématique qui concerne entre 10 et 15% des couples [@Boivin2007a] faisant de cette pathologie un enjeu de santé publique. Bien que les causes de ce phénotype puissent être multifactorielles et acquises au cours de la vie de l'l'individu, notamment suite à des infections du système urogénitale ou encore à des perturbations du système endocrinien, la composante génétique est extrêmement importante. À ce jour, malgré les efforts de nombreuses équipes, incluant la notre, seulement une poignée de gènes a pu être reliée à ce phénotype. De plus, pour nombre d'entre eux, les bases moléculaires reliant une mutation au phénotype d'infertilité restent inconnues. Ces quinze dernières années, les techniques d'investigation employées dans les analyses phénotypes-génotype, ont été boulversées par l'emmergence du séquençage haut-débit. En effet, ces technologies permettent aujourd'hui de séquencer l'ensemble du génome / exome d'un individu pour un coût et dans un temps raisonnable. Malheuresement, la masse de données générées par ces méthodes, bien qu'à l'origine du succès de celles-ci, deviennent aujourd'hui un frein dans l'analyse et la compréhension des processus biologiques étudiés.   
 
-Dès lors, la première partie de mon travail de thèse a consisté à contribuer à la caractérisation du phénotype de globozoospermie. Ce phénotype, entrainant la production de 100% de spermatozoïdes à têtes rondes et dépourvus d'acrosomes est principalement causé, chez l'humain, par une délétion homozygote récurrente entrainant la perte de la totalité de la séquence du gène *DPY19L2*.  Ainsi, dans deux études différentes, nous avons pu, dans un premier temps, mieux caractériser les mécanismes moléculaires responsables de cette délétion. Ainsi, nous avons pu mettre en évidence cinq points de cassures au niveau des LCRs flanquant la séquence de *DPY19L2* chez l'humain. Ceux-ci étant tous concentrés dans une région d'environ 1150 pb contenant en son centre un site de reconnaissance consensus de la protéine PRDM9 connue pour son implication dans la recombinaison chromosomique chez l'humain et la souris [@Parvanov2010; @Baudat2010]. Cette même étude a également permis de démontrer que les effets de la sélection naturelle étaient responsables du paradoxe consistant à observer plus fréquemment, dans la population générale, l'allèle dupliqué à ce locus que l'allèle délété tandis que *de novo* l'allèle délété est produit, en théorie et en pratique, plus fréquemment que l'allèle dupliqué. L'étude de ce phénotype nous a par la suite poussée à étudier le modèle murin KO *Dpy19l2*^-/-^ présentant le même phénotype que l'humain. Afin d'expliquer l'absence de la protéine PLCZ1 chez l'humain globozoosperme, nous avons effectué une analyse comparative des transcriptomes testiculaires de souris sauvages *Dpy19l2*^+/+^ et KO *Dpy19l2*^-/-^. Bien qu'aucun dérèglement transcriptionnel n'ait pu être observé pour le gène *Plcz1* cette étude nous a permis de mettre en évidence un total de 75 gènes présentant des dérégulations transcriptionnelles pouvant expliquer en partie les anomalies physiologiques et morphologiques des spermatozoïdes des souris*Dpy19l2*^-/-^.    
+Dans ce contexte, j'ai pu, au cours de ma thèse, mettre au point un pipeline permettant l'analyse des données issues de séquençage NGS. Ce pipeline a ainsi permis, entre 2012 et 2017, l'analyse des données de nombreux patients présentant tous un phénotype d'infertilité. Celle-ci ayant pour vocation première de mettre en évidence les variants responsables des phénotypes de ces patients. Contrairement à la plupart des pipelines d'analyse de données WES existant, celui-ci prend en charge l'ensemble des étapes de l'analyse allant de l'alignement des *short-reads* sur le génome de référence jusqu'à la priorisation des variants en passant par l'appel des variants et leur annotation. Les résultats de chacune de ces étapes pouvant être contrôlées et personnalisées grâce à des paramètres ajustables. L'alignement des *reads* est effectué par le logiciel MAGIC tandis que les variants et leur génotype sont appelés par un algorithme développé dans notre laboratoire spécifiquement conçu pour analyser les informations fournies par MAGIC et dont les paramètres sont ajustables en fonctions de la distribution des pourcentages de *reads* variants observés dans les données analysées. Pour l'annotation nous avons utilisé plusieurs ressources extérieures tel que le logiciel Variant Effect Predictor qui va nous informer de l'effet d'un variant sur l'ensemble des transcrits qu'il chevauche. De même, les bases de données ExAC ESP6500 ou encore 1KG nous donne une indication de la fréquence des variants dans la population générale. Une fois ces étapes effectuées, nous avons mis en place plusieurs filtres successifs afin d'éliminer de nos listes les variants ayant le moins de chances d'être responsables du phénotype des différents patients. Ceux-ci s'appuient à la fois sur les critères qualité des résultats de séquençage, le génotype des variants, leur fréquence ou encore leur impact sur la protéine.  
 
-Notre équipe ayant, entre 2012 et 2016, effectué le séquençage exomique de nombreux patients présentant tous un phénotype d'infertilité, la seconde partie de mon travail de thèse a été de mettre au point un pipeline permettant l'analyse des données générées lors du processus de séquençage exomique. Celui-ci ayant pour vocation première de mettre en évidence les variants responsables des phénotypes de ces patients. Contrairement à la plupart des pipelines d'analyse de données WES existant, celui-ci prend en charge l'ensemble des étapes de l'analyse allant de l'alignement des *short-reads* sur le génome de référence jusqu'à la priorisation des variants en passant par l'appel des variants et leur annotation. Les résultats de chacune de ces étapes pouvant être contrôlées et personnalisées grâce à des paramètres ajustables. L'alignement des *reads* est effectué par le logiciel MAGIC tandis que les variants et leur génotype sont appelés par un algorithme développé dans notre laboratoire spécifiquement conçu pour analyser les informations fournies par MAGIC et dont les paramètres sont ajustables en fonctions de la distribution des pourcentages de *reads* variants observés dans les données analysées. Pour l'annotation nous avons utilisé plusieurs ressources extérieures tel que le logiciel Variant Effect Predictor qui va nous informer de l'effet d'un variant sur l'ensemble des transcrits qu'il chevauche. De même, les bases de données ExAC ESP6500 ou encore 1KG nous donne une indication de la fréquence des variants dans la population générale. Une fois ces étapes effectuées, nous avons mis en place plusieurs filtres successifs afin d'éliminer de nos listes les variants ayant le moins de chances d'être responsables du phénotype des différents patients. Ceux-ci s'appuient à la fois sur les critères qualité des résultats de séquençage, le génotype des variants, leur fréquence ou encore leur impact sur la protéine.  
+L'efficacité de ce pipeline a pu être démontré grâce à son utilisation sur des cas familiaux mais aussi sur des cohortes d'individus non apparentés. Ainsi, nous avons pu dans un premier temps confirmer l'importance de l'implication du gène *DNAH1* dans le syndrome MMAF en le retrouvant muté chez `r 4 + 5` de nos patients (4 au sein d'études familiales et 5 parmi notre cohorte d'individus non apparentés). Ensuite, dans un second temps, ce pipeline nous a permis de mettre en évidence un total de 5 nouveaux gènes dans des phénotypes d'infertilité masculine et féminine. Ainsi les gènes *CFPA43*, *CFAP44*, retrouvés respectivement mutés à chez 10 (9 homozygotes et 1 hétérozygote composite) et 6 (tous homozygotes) de nos patients ont pu être liés à leur syndrome MMAF. Aussi, une même mutation impactant le gène *PATL2* a pu être reliée au phénotype de déficience méiotique ovocytaire de cinq femmes. Pour finir, des mutations sur les gènes *SPINK2* et *PLCZ1* ont, elles aussi, pu être liées aux phénotypes d'azoospermie et d'echec de fécondation dont étaient atteint deux fratries.
 
-L'efficacité de ce pipeline a pu être démontré grâce à son utilisation sur des cas familiaux mais aussi sur des cohortes d'individus non apparentés. Ainsi, nous avons pu dans un premier temps confirmer l'importance de l'implication du gène *DNAH1* dans le syndrome MMAF en le retrouvant muté chez `r 4 + 5` de nos patients (4 au sein d'études familiales et 5 parmi notre cohorte d'individus non apparentés). Ensuite, dans un second temps, ce pipeline nous a permis de mettre en évidence un total de 5 nouveaux gènes dans des phénotypes d'infertilité masculine et féminine. Ainsi les gènes *CFPA43*, *CFAP44*, retrouvés respectivement mutés à chez 10 (9 homozygotes et 1 hétérozygote composite) et 6 (tous homozygotes) de nos patients ont pu être liés à leur syndrome MMAF. Aussi, une même mutation impactant le gène PATL2 a pu être reliée au phénotype de déficience méiotique ovocytaire de cinq femmes. Pour finir, des mutations sur les gènes *SPINK2* et *PLCZ1* ont, elles aussi, pu être liées aux phénotypes d'azoospermie et d'echec de fécondation dont étaient atteint deux fratries.  
+Dans autre partie de mon travail de thèse j'ai pu prendre part à la caractérisation génétiques et moléculaires du gène *DPY19L2* impliqué dans le phénotype de globozoospermie. Ce phénotype, entrainant la production de 100% de spermatozoïdes à têtes rondes et dépourvus d'acrosomes est principalement causé, chez l'humain, par une délétion homozygote récurrente entrainant la perte de la totalité de la séquence du gène *DPY19L2*.  Ainsi, dans deux études différentes, nous avons pu, dans un premier temps, mieux caractériser les mécanismes moléculaires responsables de cette délétion. Ainsi, nous avons pu mettre en évidence cinq points de cassures au niveau des LCRs flanquant la séquence de *DPY19L2* chez l'humain. Ceux-ci étant tous concentrés dans une région d'environ 1150 pb contenant en son centre un site de reconnaissance consensus de la protéine PRDM9 connue pour son implication dans la recombinaison chromosomique chez l'humain et la souris [@Parvanov2010; @Baudat2010]. Cette même étude a également permis de démontrer que les effets de la sélection naturelle étaient responsables du paradoxe consistant à observer plus fréquemment, dans la population générale, l'allèle dupliqué à ce locus que l'allèle délété tandis que *de novo* l'allèle délété est produit, en théorie et en pratique, plus fréquemment que l'allèle dupliqué. L'étude de ce phénotype nous a par la suite poussée à étudier le modèle murin KO *Dpy19l2*^-/-^ présentant le même phénotype que l'humain. Afin d'expliquer l'absence de la protéine PLCZ1 chez l'humain globozoosperme, nous avons effectué une analyse comparative des transcriptomes testiculaires de souris sauvages *Dpy19l2*^+/+^ et KO *Dpy19l2*^-/-^. Bien qu'aucun dérèglement transcriptionnel n'ait pu être observé pour le gène *Plcz1* cette étude nous a permis de mettre en évidence un total de 75 gènes présentant des dérégulations transcriptionnelles pouvant expliquer en partie les anomalies physiologiques et morphologiques des spermatozoïdes des souris*Dpy19l2*^-/-^.    
 
-Ces résultats sont cependant à relativiser puisque pour plusieurs de nos patients, aucun candidat n'a pu être identifié. Plusieurs raisons peuvent expliquer cela. Tout d'abord, au cours des analyses décrites dans ces manuscrits nous nous concentrons uniquement sur les SNPs et les indels. Cependant de nombreux logiciels tel que ExomeDepth [@Plagnol2012], CoNIFER [@Krumm2012] ou encore ExomeCNV [@Sathirapongsasuti2011] permettent de détecter des CNVs à partir de données WES et / ou WGS. Les stratégies de prédictions de ces logiciels pouvant être extrêmement différents (**Figure : **\@ref(fig:pictcnvdetection)), le profil des CNVs détectés ou non le sera aussi [@Zhao2013 ; @Guo2013]. Ainsi, dans des analyses non décrites dans ce manuscrit, j'ai pu chercher à identifier des CNVs à partir de nos données d'exome à l'aide du logiciel ExomeDepth [@Plagnol2012]. Cette approche a été extrêmement concluante puisqu'elle a permis d'identifier une délétion homozygote sur le gène *WDR66* chez 7 de nos patients pour lesquels aucun candidat n'avait été alors identifié. Ces délétions ont ensuite pu être confirmées par PCR et la caractérisation de ce gène est actuellement en cours au sein de notre équipe. Au vu de cette réussite, il est désormais prévu d'intégrer ce genre d'analyse de manière automatique et systématique au sein de notre pipeline. Pour les autres patients n'ayant eu aucun candidat identifié, il est possible que le choix de la stratégie du séquençage exomique plutôt que du génome entier ait masqué la cause génétique du phénotype de certains de nos patients. En effet, dans ces analyses, nous nous sommes concentrés sur l'analyse des variants situés dans les parties codantes **uniquement**. Ainsi les variants situés par exemple dans les microARN n'ont pu être observés. Or, les microARN jouent un rôle important dans la régulation génique principalement en influant sur la stabilité d'ARNm cibles et sont présent en grande quantité au sein des cellules germinales et leur importance dans la spermatogenèse a déjà été démontrée chez la souris [@Comazzetto2014] ainsi que plus récemment chez d'autres mammifères dont l'humain [@Chen2017] laissant penser que des défauts altérants ces microARN pourraient entrainer des dysfonctionnements de la spermatogenèse. Aussi, il faut noter que les analyses WES **et** WGS ne permettent pas d'observer les défauts épigénétiques, or, ceux-ci représentent une part croissante des causes impliquées dans les cas d'infertilité masculine [@Carrell2011; @Dada2011; @Dada2012]. Aussi, au vus du grand nombre de gène impliqué dans la spermatogénèse il est très possible que les causes génétiques responsables d'un même phénotype puissent être très hétérogène. Par exemple, dans le cas de l'analyse de la cohorte de patients MMAF, 3630 variants subsistaient après avoir appliqué l'ensemble des filtres. Ces variants impactaient 2780 gènes différents parmi lesquels 1684 étaient retrouvés mutés chez uniquement un seul des 78 patients de la cohorte. Au vu de ce nombre important de gènes, il est très compliqué d'effectué des analyses poussées sur l'ensemble d'entre eux. Dès lors, il est possible que la cause génétique responsable du phénotype d'un patient soit "noyé" parmi les nombreux variants restant mettant ainsi en évidence la nécessité de créer de nouveaux filtres afin de pouvoir réduire encore cette liste.  
+Au cours des différents travaux réalisés au cours de ma thèse, nous avons pu constater la puissance des technologies de séquençage haut-débit. En effet, en seulement ... [TODO] ans, celles-ci ont permis l'identification de 5 nouveaux gènes impliqués dans des phénotypes d'infertilité au sein de notre laboratoire. Ces résultats sont cependant à relativiser puisque pour plusieurs de nos patients, aucun candidat n'a pu être identifié. Plusieurs raisons peuvent expliquer cela. Tout d'abord, au cours des analyses décrites dans ces manuscrits nous nous concentrons uniquement sur les SNPs et les indels. Cependant de nombreux logiciels tel que ExomeDepth [@Plagnol2012], CoNIFER [@Krumm2012] ou encore ExomeCNV [@Sathirapongsasuti2011] permettent de détecter des CNVs à partir de données WES et / ou WGS. Les stratégies de prédictions de ces logiciels pouvant être extrêmement différents (**Figure : **\@ref(fig:pictcnvdetection)), le profil des CNVs détectés ou non le sera aussi [@Zhao2013 ; @Guo2013]. Ainsi, dans des analyses non décrites dans ce manuscrit, j'ai pu chercher à identifier des CNVs à partir de nos données d'exome à l'aide du logiciel ExomeDepth [@Plagnol2012]. Cette approche a été extrêmement concluante puisqu'elle a permis d'identifier une délétion homozygote sur le gène *WDR66* chez 7 de nos patients pour lesquels aucun candidat n'avait été alors identifié. Ces délétions ont ensuite pu être confirmées par PCR et la caractérisation de ce gène est actuellement en cours au sein de notre équipe. Au vu de cette réussite, il est désormais prévu d'intégrer ce genre d'analyse de manière automatique et systématique au sein de notre pipeline.  
 
 \newpage
 
@@ -68,7 +323,249 @@ include_graphics(path = "figure/cvn_detection_strategies.png")
 
 \newpage
 
+Pour les autres patients n'ayant eu aucun candidat identifié, il est possible que le choix de la stratégie du séquençage exomique plutôt que du génome entier ait masqué la cause génétique du phénotype de certains de nos patients. En effet, dans ces analyses, nous nous sommes concentrés sur l'analyse des variants situés dans les parties codantes **uniquement**. Ainsi les variants situés par exemple dans les microARN n'ont pu être observés. Or, les microARN jouent un rôle important dans la régulation génique principalement en influant sur la stabilité d'ARNm cibles et sont présent en grande quantité au sein des cellules germinales et leur importance dans la spermatogenèse a déjà été démontrée chez la souris [@Comazzetto2014] ainsi que plus récemment chez d'autres mammifères dont l'humain [@Chen2017] laissant penser que des défauts altérants ces microARN pourraient entrainer des dysfonctionnements de la spermatogenèse. Aussi, il faut noter que les analyses WES **et** WGS ne permettent pas d'observer les défauts épigénétiques, or, ceux-ci représentent une part croissante des causes impliquées dans les cas d'infertilité masculine [@Carrell2011; @Dada2011; @Dada2012]. Aussi, au vus du grand nombre de gène impliqué dans la spermatogénèse il est très possible que les causes génétiques responsables d'un même phénotype puissent être très hétérogène. Par exemple, dans le cas de l'analyse de la cohorte de patients MMAF, 3630 variants subsistaient après avoir appliqué l'ensemble des filtres. Ces variants impactaient 2780 gènes différents parmi lesquels 1684 étaient retrouvés mutés chez uniquement un seul des 78 patients de la cohorte. Au vu de ce nombre important de gènes, il est très compliqué d'effectué des analyses poussées sur l'ensemble d'entre eux. Dès lors, il est possible que la cause génétique responsable du phénotype d'un patient soit "noyé" parmi les nombreux variants restant mettant ainsi en évidence la nécessité de créer de nouveaux filtres afin de pouvoir réduire encore cette liste.  
+
 C'est dans ce but que notre équipe travaille actuellement au développement du score MutaScript. Ce score a pour but de classer l'ensemble des transcrit codant en fonction de leur charge mutationnelle avec l'idée sous-jacente que les transcrits les plus mutés dans la population générale ne sont probablement pas impliqués dans des pathologies sévères à transmission Mendélienne, et *a contrario* ceux retrouvés comme n'étant pas / peu mutés le sont probablement. Pour ce faire, le score MutaScript repose sur trois informations principales. La première étant le jeu de transcrits fournit par Ensembl [@Aken2017]. Afin de connaitre la charge mutationnelle de ces transcrits, nous nous sommes basées sur les variants mis à disposition par ExAC [@Lek2016] qui réunit les données d'exome de 60.706 individus non apparentés que nous avons ensuite annoté grâce au logiciel *variant effect predictor* (VEP) [@McLaren2016] afin de prédire l'impact de chaque variant sur l'ensemble des transcrits qu'ils chevauchent de sorte à ce que les variants ayant un impact prédit comme étant délétère aient une plus grosse contribution au score MutaScript que ceux ayant un impact faible. Ces dernières années, des scores tel que le *residual variance intolerance score* (RVIS) [@Petrovski2013] ou encore *the the Probability of loss-of-function Incoherency* (pLI) [@Lek2016] ont vu le jour. MutaScript se présente comme une alternative à ces derniers scores et, bien que sa fonction soit similaire, il diffère de ceux-ci sur de nombreux points. Tout d'abord, MutaScript donne un score à l'ensemble des transcrits codant pour une protéine là où pLI donne un score seulement au transcrit consensus de chaque gène et RVIS qui agrège les séquences codantes de l'ensemble des transcrits d'un même gène créant ainsi un transcrit "chimérique". Ce procédé facilite l'interprétation du score mais engendre une perte d'information puisque l'on se retrouve avec un seul score par gène et non par transcrits. De plus, dans la conception de leur score, RVIS et pLI ne considère que les variants dit *loss-of-function* (LoF), c'est à dire les variants impactant l'épissage, engendrant un codon stop ou un décalage du cadre de lecture. Cependant, ces variants ne représentent qu'une faible proportion des variants fournit par la base de données ExAC. C'est pourquoi, MutaScript prend en compte l'ensemble des variants, peu importe leur impact sur les différents transcrits qu'ils chevauchent, et leur attribue un poids en fonction de cet impact de sorte à ce que les variants considérés comme étant les plus délétères contribuent plus au score d'un transcrits que les autres. Aussi, l'étude des scores RVIS et pLI nous a permis de mettre en évidence une corrélation forte entre le score qu'ils attribuent à un gène et la taille de la séquence codante (CDS) de ce même gène. Cette corrélation étant due à un biais causé par leur manière de calculer leur score et non à une réalité biologique, MutaScript fut construit de sorte à éviter cette corrélation qui peut mener à des erreurs d'interprétations. Le développement de ce score étant en cours de finalisation.
+
+```{r dfrunconclu, cache=TRUE}
+
+retained_run_conclu <- 
+  c("08IF35",
+    "JED",
+    "09IF39",
+    "09IF53",
+    "16IF027",
+    "16IF054",
+    "DUZ.",
+    "14IF049",
+    "16IF047",
+    "CO",
+    "09IF24",
+    "11IF06",
+    "15IF067",
+    "16IF104",
+    "15IF060",
+    "15IF065",
+    "11IF02",
+    "14IF034",
+    "15IF061",
+    "09IF27",
+    "16IF053",
+    "FLO",
+    "09IF52",
+    "11IF001",
+    "11IF005",
+    "14IF032",
+    "14IF035",
+    "14IF040-2",
+    "14IF041",
+    "12",
+    "BO.F",
+    "09IF28",
+    "14IF037",
+    "09IF21",
+    "11IF042",
+    "16IF107",
+    "16IF036",
+    "08IF39",
+    "09IF26",
+    "DJA",
+    "16IF030",
+    "16IF102",
+    "14IF030",
+    "14IF033",
+    "10IF36-2",
+    "10IF21",
+    "16IF032",
+    "09IF57",
+    "ID.",
+    "14IF031",
+    "08IF36",
+    "08IF41",
+    "09IF30",
+    "09IF58",
+    "10IF017",
+    "10IF35",
+    "11IF16-1",
+    "14IF036",
+    "14IF038",
+    "14IF039",
+    "15IF059",
+    "15IF063",
+    "15IF064",
+    "15IF066",
+    "15IF068",
+    "16IF042",
+    "16IF055",
+    "16IF105",
+    "16IF106",
+    "16IF109",
+    "AY.",
+    "BLO",
+    "CHAF",
+    "CHAUV",
+    "CRO.",
+    "ELANW-I",
+    "MEN",
+    "DIE.")
+
+# Je ne retrouve pas DIE.
+
+df_run_conclu <- fread("data/exome_runs_all.csv", sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, drop = c(2,4,10:16), data.table = FALSE) %>% 
+  rename(PHENOTYPE = Pathologie, DATE = Date) %>%
+  mutate(Patient = toupper(Patient)) %>% 
+  filter((Patient %in% retained_run_conclu)) %>%
+  mutate(RUN = if_else(Project == "Integragen", Patient, 
+                       if_else(Project == "Novogene", paste0("s", Patient), Magic_ID)),
+         RUN2 = Magic_ID) %>%
+  select(-Magic_ID, -Patient) %>%
+  mutate(PHENOTYPE = if_else(PHENOTYPE == "Flag", "MMAF", PHENOTYPE), 
+         YEAR = as.numeric(str_sub(DATE, start= -4)),
+         PROJECT = paste0(Project," (",YEAR,")")) %>%
+  select(-DATE, -PHENOTYPE)
+
+```
+
+```{r varrunconclu, dependson="dfrunconclu", cache=TRUE}
+
+runs_conclu <- df_run_conclu %>% collect() %>% .[["RUN"]]
+nb_run_conclu <- retained_run_conclu %>% length
+
+```
+
+<!-- ANNOTATION -->
+
+```{r dfannotateconclu, cache=TRUE}
+ 
+df_annotate <- fread("zcat data/call_results/others_novogen_integragen_distinct_var_vep81_format_no_MODIFIER.csv.gz", 
+                     sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE)
+
+```
+
+<!-- CALL -->
+
+```{r dfcallconclu, cache=TRUE, dependson=c("dfannotateconclu","varrunconclu","dfrunconclu","callfunction")}
+
+df_conclu_call <- fread("data/call_results/others_novogen_integragen_var_genotype.csv", 
+                         sep = "\t", header = TRUE, showProgress = FALSE, verbose = FALSE, data.table = FALSE) %>% 
+  select(CHR, POSITION, REF, ALT, one_of(runs_conclu)) %>%
+  gather(RUN, CALL, -(CHR:ALT)) %>% 
+  filter(CALL %in% c(0, 2, 3, "b", "c"),
+         !is.na(REF)) %>%
+  mutate(STRAND = call_to_strand(CALL),
+         TYPE = var_type(REF, ALT),
+         CALL = call_to_geno(CALL)) %>%
+  left_join(df_run_conclu %>% select(RUN, RUN2), by = "RUN") %>%
+  mutate(RUN = RUN2) %>%
+  select(-RUN2)
+
+  df_distinct_call <- df_conclu_call %>%  
+    filter(grepl("zygous", CALL)) %>% 
+    distinct(CHR, POSITION, REF, ALT, TYPE) %>%
+    variant_join(df_annotate, mode = "inner") %>%
+    mutate(PolyPhen = gsub("_", " ", str_extract(PolyPhen, "\\w+")),
+           SIFT = gsub("_", " ", str_extract(SIFT, "\\w+")),
+           Consequence = sapply(strsplit(Consequence, "_variant", fixed = TRUE),"[[",1),
+           Consequence = gsub("_", " ", Consequence),
+           HGVSc = sapply(strsplit(HGVSc, split=':', fixed=TRUE), function(x) (x[2])),
+           HGVSp = sapply(strsplit(HGVSp, split=':', fixed=TRUE), function(x) (x[2])))
+
+```
+
+<!-- FILTER -->
+
+```{r dffilterconclu, cache=TRUE, dependson="dfcallconclu"}
+
+maf_cutoff <- .01
+
+df_distinct_filter <- df_distinct_call %>%
+  filter_frequence(cutoff = maf_cutoff) %>%
+  filter(Consequence != "synonymous",
+         IMPACT != "MODIFIER",
+         !(grepl("tolerated", SIFT) & grepl("benign", PolyPhen)),
+         !grepl("NMD transcript", Consequence),
+         !grepl("non coding transcript", Consequence))
+
+df_conclu_filter <- df_conclu_call %>% 
+  select(-STRAND) %>%
+  variant_join(df_distinct_filter, mode = "inner") %>% 
+  filter(CANONICAL == "YES") %>%
+  mutate(IMPACT = factor(IMPACT, levels = c("MODIFIER", "LOW", "MODERATE" ,"HIGH")))
+
+df_conclu_impact <- df_conclu_filter %>% 
+  group_by(RUN, IMPACT, CALL) %>%
+  summarise(N_PER_IMPACT_PER_CALL = n_distinct(CHR, POSITION, REF, ALT))
+
+
+more_than <- 10
+df_n_run <- df_conclu_filter %>% 
+  group_by(CHR, POSITION, REF, ALT, IMPACT) %>% 
+  summarise(N_RUN = n_distinct(RUN)) %>%
+  mutate(MORE = if_else(N_RUN >= more_than, more_than, as.double(N_RUN))) %>% 
+  group_by(MORE) %>% 
+  summarise(N_VAR = sum(N_RUN)) 
+
+```
+
+```{r varfilterconclu, cache=TRUE, dependson="dffilterconclu"}
+
+min_var_per_run <- df_conclu_impact %>% group_by(RUN) %>% summarise(SUM = sum(N_PER_IMPACT_PER_CALL)) %>% collect() %>% .[["SUM"]] %>% min 
+max_var_per_run <- df_conclu_impact %>% group_by(RUN) %>% summarise(SUM = sum(N_PER_IMPACT_PER_CALL)) %>% collect() %>% .[["SUM"]] %>% max 
+sd_var_per_run <- df_conclu_impact %>% group_by(RUN) %>% summarise(SUM = sum(N_PER_IMPACT_PER_CALL)) %>% collect() %>% .[["SUM"]] %>% sd
+mean_var_per_run <- df_conclu_impact %>% group_by(RUN) %>% summarise(SUM = sum(N_PER_IMPACT_PER_CALL)) %>% collect() %>% .[["SUM"]] %>% mean
+coef_variation <- ((sd_var_per_run / mean_var_per_run) *100) %>% round(0)
+
+median_high_per_run <- df_conclu_impact %>% filter(IMPACT == "HIGH") %>% group_by(RUN) %>% summarise(N_HIGH = sum(N_PER_IMPACT_PER_CALL)) %>% collect() %>% .[["N_HIGH"]] %>% median
+
+
+median_homo_high_per_run <- df_conclu_impact %>% filter(IMPACT == "HIGH", CALL == "Homozygous") %>% group_by(RUN) %>% summarise(N_HIGH = sum(N_PER_IMPACT_PER_CALL)) %>% collect() %>% .[["N_HIGH"]] %>% median
+
+
+median_het_high_per_run <- df_conclu_impact %>% filter(IMPACT == "HIGH", CALL == "Heterozygous") %>% group_by(RUN) %>% summarise(N_HIGH = sum(N_PER_IMPACT_PER_CALL)) %>% collect() %>% .[["N_HIGH"]] %>% median
+
+n_var_tot <- df_n_run %>% collect() %>% .[["N_VAR"]] %>% sum
+n_var_unique <- df_n_run %>% filter(MORE == 1) %>% collect() %>% .[["N_VAR"]]
+
+p_var_unique <- ((n_var_unique / n_var_tot) * 100) %>% round(0)
+
+```
+
+Après avoir fait ses preuves dans la recherche, le séquençage NGS cherche aujourd'hui à percer dans le domaine du diagnostique clinique. On peut alors prédire sans trop prendre de risques que ces technologies seront d'ici quelques années incontournables dans ce domaine. Il est néanmoins légitime de se demander dès aujourd'hui quelle sera son efficacité. En effet, en se basant sur les données de nos `r nb_run_conclu` patients non apparentés souffrant du syndrome MMAF on peut s'attendre, à obtenir entre `r min_var_per_run` et `r max_var_per_run` variants par patients avec un coefficient de variation de  `r coef_variation`% (avec $C_v = \frac{\sigma}{\mu}$ où $\sigma$ est l'écart-type et $\mu$ la moyenne). Ces chiffres sont obtenus en filtrant de notre ensemble de variants ceux ayant une fréquence $\ge$ `r maf_cutoff` dans les bases de données publiques ainsi qu'en retirant les variants introniques, synonymes et ceux impactant les séquences UTRs. On constate alors que parmi l'ensemble de ces variants `rn_var_unique` d'entre eux (`r p_var_unique`%) sont "individuels", c'est à dire porté uniquement par un seul des patients (**Figure : **\@ref(fig:plotvarperimpact) - **A**). De même on peut observer que chacun de nos patients est porteur d'environs `r median_high_per_run` variants tronquants parmi lesquels environs `r median_homo_high_per_run` le sont à l'état homozygote (**Figure : **\@ref(fig:plotvarperimpact) - **B**). La priorisation de certains gènes par des outils tel que MutaScript permettra alors d'orienter les analyses vers les gènes les plus prometteurs. De même la recherche de variants dans des panels de gène permettra égallement de cibler les recherches sur les gènes déjà connus comme étant lié au phénotype en question. Ainsi, au vu de nos réultats dans le cadre de patients atteins du syndrome MMAF, la recherche de variants dans les gènes *DNAH1*, *CFAP43*, *CFAP44* et *WDR66* permettrait d'obtenir un diagnostique positif dans environs `r (((5 + 10 + 6 + 7) / nb_run_conclu) * 100) %>% round(0)`% des cas. On peut dès lors s'attendre que les recherches futures vont permettre d'agrandir cette liste de gène cibles améliorant ainsi l'effeciacité du diagnostique.      
+
+\newpage
+
+```{r plotvarperimpact, fig.cap='(ref:plotvarperimpact)',fig.height=6.7, fig.scap=fig_name, cache=TRUE, dependson="dffilterconclu"}
+
+fig_name <- paste0("Analyse des variants restant sur chacun des ", nb_run_conclu, " patients après filtrage")
+fig_description_A <- paste0("**A** : Répartition du nombre de patients portant un même variant. Les variants portés par ", more_than, " patients ou plus sont regroupés sous l'étiquette ", more_than, "+. On voit ici clairement qu'une grande majorité des variants sont spécifiques à un seul patient")
+fig_description_B <- "**B** : Sur cette figure chaque point représente un patient. Les variants homozygote sont représentés en rouge, les variants hétérozygotes en bleu. L'impact *LOW* correspond aux variants ayant un impact peu délétère sur le gène tel que les intonique variants situés dans les zone d'épissage lointain . Les variants *MODERATE* tel que les faux-sens ont un impact modéré sur le gène. Les *HIGH* représentent les variant tronquants (décalage du cadre de lecture, codon stop...)."
+fig_description <- paste(fig_description_A,fig_description_B, sep = ". ")
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
+
+pA <-ggplot(df_n_run, aes(MORE, N_VAR)) + 
+  geom_col() +
+  ylab("Nb of variants") + 
+  xlab("Nb of runs") +
+  scale_x_continuous(breaks = seq(1,more_than,1), labels = c(1:(more_than-1), paste0(more_than, "+")))
+
+pB <- ggplot(df_conclu_impact, aes(RUN, N_PER_IMPACT_PER_CALL)) +
+  geom_point(aes(col = CALL), size = .5) + 
+  geom_line(aes(col = CALL, group = CALL)) +
+  facet_wrap(~IMPACT, scales = "free", ncol = 2) +
+  ylab("Nb of variants") +
+  xlab("") +
+  scale_color_brewer(palette = "Set1", direction = -1, name = "Genotype") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        legend.position = c(.6,.35))
+
+plot_grid(pA,pB, ncol = 1, labels = c("A","B"))
+
+```
+
+(ref:plotvarperimpact) `r fig_cap`  
+
+\newpage
 
 ***
 

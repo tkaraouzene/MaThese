@@ -1387,7 +1387,7 @@ fig_description_B <- "**B** : Distribution des impacts *HIGH MODERATE LOW* et *M
 fig_description_C <- "**C** : Pourcentage des variants retrouvés au sein des trois bases de données : ExAC, ESP et 1KG"
 fig_description_D <- "**D** : Distribution des fréquences de nos variants au sein des trois bases de données : ExAC, ESP et 1KG"
 
-fig_description <- paste(fig_description_A,fig_description_B,".", sep = ". ")
+fig_description <- paste(fig_description_A,fig_description_B, sep = ". ")
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 pA <- ggplot(df_nb_feature, aes(RUN, NB)) + 
@@ -2226,7 +2226,8 @@ max_year <- df_run_bigmmaf$YEAR %>% max
 center <- df_run_bigmmaf$Project %>% unique
 n_center <- center %>% length
 
-nb_run_bigmmaf <- runs_bigmmaf %>% length
+nb_run_bigmmaf <- retained_run_bigmmaf %>% length
+
 nb_run_ctrl_bigmmaf <- runs_ctrl_bigmmaf %>% length
 
 
@@ -2315,7 +2316,15 @@ df_bigmmaf_filter <- df_bigmmaf_call %>%
   variant_join(df_distinct_filter, mode = "inner") %>% 
   # select(-Allele) %>% 
   mutate(SYMBOL = if_else(SYMBOL == "WDR52", "CFAP44", 
-                          if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL))) %>%
+                          if_else(SYMBOL == "WDR96", "CFAP43", SYMBOL)),
+         
+         HGVSc = if_else(CHR == 3 & POSITION == 113063450 & REF == "G" & ALT == "A", "c.3175C>T",
+                         if_else(CHR == 3 & POSITION == 113119479 & REF == "C" & ALT == "A", "c.1387G>T", 
+                                 if_else(CHR == 3 & POSITION == 113114596 & REF == "C" & ALT == "T", "c.1890+1G>A", HGVSc))),
+         
+         HGVSp = if_else(CHR == 10 & POSITION == 105912486 & REF == "T" & ALT == "G", "p.Ser1181Lysfs*4", 
+                         if_else(CHR == 10 & POSITION == 105944769 & REF == "C" & ALT == "T", "p.Lys714Val*11",
+                                 if_else(CHR == 3 & POSITION == 113114596 & REF == "C" & ALT == "T", "p.Pro631Ile*22 ", HGVSp)))) %>%
   ungroup()
   
 df_bigmmaf_filter_het <- df_bigmmaf_call %>% 
@@ -2475,13 +2484,78 @@ kable(df_run_bigmmaf %>%
 
 \newpage
 
+```{r}
+# 
+# 
+# 
+# df_bigmmaf_filter %>%
+#   filter(SYMBOL == "DNAH1") %>%
+#     filter(POSITION == 52382924) %>%
+# 
+#   filter(CANONICAL == "YES") %>% View
+#   mutate(CALL = substr(CALL, start=1, stop=4),
+#          SIFT = na.replace(SIFT, "."),
+#          PolyPhen = na.replace(PolyPhen, "."),
+#          HGVSc = na.replace(HGVSc, "."),
+#          HGVSp = na.replace(HGVSp, "."),
+#          ExAC_AF = na.replace(ExAC_AF, "."),
+#          ESP = na.replace(ESP, "."),
+#          `1KG` = na.replace(`1KG`, "."),
+#          `ExAC ; ESP ; 1KG` = paste(ExAC_AF, ESP, `1KG`, sep = " ; "),
+#          `HGVSc, HGVSp` = paste(HGVSc, HGVSp, sep = " ; "),
+#          `SIFT ; PolyPhen` = paste(SIFT, PolyPhen, sep = " ; ")) %>%
+#   select(Patient = RUN, Geno = CALL, `HGVSc, HGVSp`, Consequence, `SIFT ; PolyPhen`, `ExAC ; ESP ; 1KG`) %>%
+#   distinct(Patient, Geno, `HGVSc, HGVSp`) %>% 
+#   arrange(desc(Geno), Patient, `HGVSc, HGVSp`) %>% 
+# # 
+#   
+#   
+#   filter(CANONICAL == "YES", grepl("CFAP44", SYMBOL)) %>% distinct(RUN, CHR, POSITION, REF, ALT, CALL, HGVSc, HGVSp) %>%  View
+
+```
+
+```{r}
+# 
+# x <- df_bigmmaf_filter %>% bind_rows(df_bigmmaf_filter_het) %>% filter(CANONICAL == "YES") %>%
+#   group_by(RUN, IMPACT, CALL) %>%
+#   summarise(N_PER_IMPACT_PER_CALL = n_distinct(CHR, POSITION, REF, ALT))
+#   
+#   
+#   group_by(RUN, CALL) %>% 
+#   
+#   mutate(N_PER_CALL =  sum(N_PER_IMPACT_PER_CALL)) %>% 
+#   filter(IMPACT == "HIGH") %>%
+#   arrange(RUN, CALL) %>% 
+#   select(-N_PER_CALL) %>%
+#   
+#   spread(CALL,N_PER_IMPACT_PER_CALL) %>% 
+#   mutate(Homozygous = na.replace(Homozygous, 0), 
+#          Heterozygous = na.replace(Heterozygous, 0)) %>%
+#   summarise(RATE = Heterozygous / Homozygous)
+# 
+# 
+# median(x$RATE)
+# 
+# ggplot(x %>% ungroup, aes(RUN, N_PER_IMPACT_PER_CALL)) +
+# geom_line(aes(col = CALL, group = CALL)) +
+#   facet_wrap(~IMPACT) + 
+#   ylab("Nb of variants") + 
+#   xlab("Runs") +
+#   ggtitle("Nb of variants per run per impact") +
+#   scale_color_brewer(palette = "Set1", direction = -1, name = "Genotype") + 
+#     theme(axis.text.x=element_blank(),
+#         axis.ticks.x=element_blank())
+```
+
+
+
 #### Principaux résultats
 
 L'application de de notre pipeline d'analyse sur les données de ces `r nb_run_bigmmaf` patients nous a permis d'obtenir une liste de `r n_distinct_var` variant distincts ayant passés l'ensemble de nos filtres (`r n_distinct_snv` SNPs et `r n_distinct_indel` indels), ceux-ci impactant un total de `r n_distinct_gene` gènes différents.  
 
 Le gène *DNAH1* étant le candidat évident, nous avons cherché en priorité l'ensemble des variants retrouvés sur ce gène. Ainsi, nous avons obtenus une liste de 5 patients portant tous soit au moins un variant homozygote sur le gène *DNAH1* soit deux variants hétérozygotes sur ce même gène.  
 
-Suite à cela, au vu du nombre important de gènes restant et afin d'étudier en priorité ceux pouvant expliquer le phénotype d'un maximum de patients nous avons, limité nos recherches aux gènes sur lesquels **au moins 3 patients portaient un variant homozygote tronquant**. Cela nous a ainsi permis de mettre en évidence les gènes *CFAP43* et *CFAP44* sur lesquels des variants homozygotes ont été retrouvés chez respectivement 9 et 6 patients auxquels viennent s'ajouter 1 patients portant deux variants hétérozygotes sur le gène *CFAP43*. Ces deux gènes CFAP (pour *Cilia and Flagella Associated Protein*) avaient déjà été répertoriés dans les bases de données publiques comme ayant une forte expression testiculaire, et comme étant probablement impliqués dans la structure et / ou fonction du flagelle spermatique [@Ivliev2012]. De plus, ces deux gènes codent tous deux pour des protéines appartenant à la famille des WDR et comportent tous deux neuf répétitions WD (tryptophane - acide aspartique) [@Smith2008]. Ainsi, en tenant compte du nombre important de patients portant des variants sur un de ces deux gènes et le fait qu'ils codent tous deux pour des protéines appartenant à la même famille, nous avons décidé de nous concentrer dans un premiers temps à la caractérisation de ces deux seuls gènes, ceux-ci étant les meilleurs candidats pour expliquer le phénotype d'infertilité de `r 10 + 6`  de nos patients.    
+Suite à cela, au vu du nombre important de gènes restant et afin d'étudier en priorité ceux pouvant expliquer le phénotype d'un maximum de patients nous avons, limité nos recherches aux gènes sur lesquels **au moins 3 patients portaient un variant homozygote tronquant**. Cela nous a ainsi permis de mettre en évidence les gènes *CFAP43* et *CFAP44* sur lesquels des variants homozygotes ont été retrouvés chez respectivement 9 et 6 patients auxquels viennent s'ajouter 1 patients portant deux variants hétérozygotes sur le gène *CFAP43* (**Tables : **\@ref(tab:tabcfap43) et \@ref(tab:tabcfap44)). Ces deux gènes CFAP (pour *Cilia and Flagella Associated Protein*) avaient déjà été répertoriés dans les bases de données publiques comme ayant une forte expression testiculaire, et comme étant probablement impliqués dans la structure et / ou fonction du flagelle spermatique [@Ivliev2012]. De plus, ces deux gènes codent tous deux pour des protéines appartenant à la famille des WDR et comportent tous deux neuf répétitions WD (tryptophane - acide aspartique) [@Smith2008]. Ainsi, en tenant compte du nombre important de patients portant des variants sur un de ces deux gènes et le fait qu'ils codent tous deux pour des protéines appartenant à la même famille, nous avons décidé de nous concentrer dans un premiers temps à la caractérisation de ces deux seuls gènes, ceux-ci étant les meilleurs candidats pour expliquer le phénotype d'infertilité de `r 10 + 6`  de nos patients.    
 
 Un total de 9 variants différents ont ainsi put être identifiés sur le gène *CFAP43* impactant 10 de nos patients n'ayant, à notre connaissance aucun lien de parenté. Huit de ces variants ont un effet tronquant évident et le dernier est un variants intronique localisé 5 nucléotides après l’exon 16, non listé dans ExAC et prédit par Human Splicing Finder ([http://www.umd.be/HSF3](http://www.umd.be/HSF3)) comme altérant l'épissage de l'exon 16 de CFAP43.  
 
