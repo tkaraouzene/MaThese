@@ -1753,7 +1753,7 @@ plot_expression(gene_fam_ff,"percent", TRUE)+
 (ref:plotexpfamfftitle) `r fig_name`
 (ref:plotexpfamff) `r fig_cap`
 
-```{r plotcovplcz, fig.cap='(ref:plotcovplcz)',fig.scap=fig.cap='(ref:plotcovplcztitle)', ,out.extra="scale=.37", cache=TRUE}
+```{r plotcovplcz, fig.cap='(ref:plotcovplcz)',fig.scap='(ref:plotcovplcztitle)', out.extra="scale=.37", cache=TRUE}
 
 fig_name <- "Couverture des 6 exons de *WBP2NL* pour les deux frères de la famille FF"
 fig_description <- "Les barres rouges représentent la couverture moyenne de 10 nucléotides, les bleues représentent les bornes de chaque exon."

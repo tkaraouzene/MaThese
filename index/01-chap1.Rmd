@@ -608,11 +608,7 @@ include_graphics(path = "figure/SNA_seq_ionTorrent.png")
 fig_name <- "Séquençage SBL tel qu'il est effectué par SOLiD" 
 fig.from <- "[@Goodwin2016]"
 fig_description <- "
-**a** : Une sonde composée de deux nucléotides connus suivis de bases dégénérées et de bases universelles est reliée en 5' à un fluorophore.
-**b** : après avoir été hybridé grâce à une ligase, aux modèle d'ADN à séquencé, les nucléotides spécifiques (les deux premiers) sont identifiées grâce au fluorophore.
-**c** : le fluorophore ainsi qu'une partie bases non spécifiques sont clivés. 
-**d** : les étapes 1 et 2 sont ensuite répétées 10 fois permettant ainsi d'identifier 2 bases tout les 5 nucléotides.
-**e** : les bases non spécifiques restantes sont ensuite retirées, un nouveau cycle reprend avec un décalage de deux nucléotides. Ainsi chaque base est séquencée deux fois."  
+**a** : dans cette phase d'initialisation, un ensemble de sondes composées de deux nucléotides connus suivis de bases dégénérées et de bases universelles est reliée en 5' à un fluorophore. De fait qu'il n'y ait que quatre fluorophores différents, un même fluorophore est utilisé pour quatre combinaisons de dinucléotides parmi les seize possibles. **b** : après avoir été hybridé grâce à une ligase, aux brin d'ADN à séquencé, le fluorophore est identifié permettant ainsi de déduire l'une des quatre combinaisons possibles à ce locus. **c** : le fluorophore ainsi qu'une partie des bases non spécifiques sont clivés. **d** : les étapes **b** et **c** sont ensuite répétées 10 fois permettant à chaque fois d'identifier de réduire la liste des dinucléotides possibles au locus en question. **e** : les étapes **b**, **c**, et **d** sont répétées sur le même brin avec un décalage d'un nucléotide jusqu'à ce que chaque position ait été séquencée deux fois. **f** : en recoupant les informations obtenues à chaque itération du cycle, la séquence nucléotidique est reconstituée."
 
 fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
 
