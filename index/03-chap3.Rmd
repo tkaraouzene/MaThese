@@ -71,7 +71,7 @@ include_graphics(path = "figure/mouse_globo_spz.png")
 
 \newpage
 
-## Résultats 1 : Les mécanismes mutationnels entrainant la délétion au locus de *DPY19L2* chez l'humain {#mecamut}  
+## Résultats 1 : Les mécanismes mutationnels entraînant la délétion au locus de *DPY19L2* chez l'humain {#mecamut}  
 
 ### Article n° 1: 
 
