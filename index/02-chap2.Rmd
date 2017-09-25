@@ -1262,7 +1262,7 @@ Pour l'ensemble des variants ayant passé les filtres énoncés ci-dessus, c'est
 
 \newpage
 
-```{r plotdensityvar,fig.cap='(ref:plotdensityvar)',fig.scap=fig_name}
+```{r plotdensityvar,fig.cap='(ref:plotdensityvar)',fig.scap='(ref:plotdensityvartitle)'}
 
 xmin <- .07
 ymax <- 7.2
@@ -1307,6 +1307,7 @@ include_graphics(path = density_plot_file)
 
 ```
 
+(ref:plotdensityvartitle) `r fig_name`   
 (ref:plotdensityvar) `r fig_cap` 
 
 \newpage
@@ -1578,7 +1579,7 @@ df_recap <- df_remaining_gene %>%
 
 \newpage  
 
-### Article n° 3
+### Article n°1
 
 **SPINK2 deficiency causes infertility by inducing sperm defects in heterozygotes and azoospermia in homozygotes** 
 
@@ -1668,7 +1669,7 @@ plot_expression(gene_fam_az,"percent", TRUE)+
 
 \newpage
 
-### Article n° 4
+### Article n°2
 
 **Homozygous mutation of PLCZ1 leads to defective human oocyte activation and infertility that is not rescued by the WW-binding protein PAWP**
 
@@ -1755,7 +1756,7 @@ plot_expression(gene_fam_ff,"percent", TRUE)+
 
 ```{r plotcovplcz, fig.cap='(ref:plotcovplcz)',fig.scap='(ref:plotcovplcztitle)', out.extra="scale=.37", cache=TRUE}
 
-fig_name <- "Couverture des 6 exons de *WBP2NL* pour les deux frères de la famille FF"
+fig_name <- "Couverture des six exons de *WBP2NL* pour les deux frères de la famille FF"
 fig_description <- "Les barres rouges représentent la couverture moyenne de 10 nucléotides, les bleues représentent les bornes de chaque exon."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
@@ -1763,14 +1764,14 @@ include_graphics(path = "figure/pawp_coverage.png")
 
 ```
 
-(ref:plotcovplcztitle) `r fig_name`
+(ref:plotcovplcztitle) `r fig_name`  
 (ref:plotcovplcz) `r fig_cap`
 
 \newpage
 
-### Article n° 5
+### Article n°3
 
-#### Whole-exome sequencing of familial cases of multiple morphological abnormalities of the sperm flagella (MMAF) reveals new DNAH1 mutations
+**Whole-exome sequencing of familial cases of multiple morphological abnormalities of the sperm flagella (MMAF) reveals new DNAH1 mutations**
   
 Amiri-Yekta A^\*^, Coutton C^\*^, Kherraf ZE, **Karaouzène T**, Le Tanno P, Sanati MH, Sabbaghian M, Almadani N, Sadighi Gilani MA, Seyedeh Hanieh Hosseini, Bahrami S, Daneshipour A, Bini M, Arnoult C, Colombo R, Gourabi H, Ray PF  
 
@@ -1856,7 +1857,7 @@ ggplot(df_causal %>% filter(grepl("MMAF", Family)), aes(Family, N)) +
 \newpage
 
 ## Résultats 2 : Étude d'une cohorte de femmes infertiles  
-### Article n° 6
+### Article n°4
 
 **PATL2 Gene Mutation Causes Oocyte Meiotic Deficiency and Female Infertility** 
 
@@ -2093,7 +2094,7 @@ gc()
 
 ## Résultats 3 : Étude d'une large cohorte de patients MMAF
 
-### Article n° 7
+### Article n°5
 
 **Whole exome cohort study and analysis of mouse and Trypanosoma models demonstrate the importance of WDR proteins in flagellogenesis and male fertility** 
 

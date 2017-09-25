@@ -10,23 +10,21 @@ title: 'THÈSE'
 knit: "bookdown::render_book"
 site: bookdown::bookdown_site
 output: 
+  # thesisdown::thesis_epub: default
   # thesisdown::thesis_pdf: default
   # thesisdown::thesis_gitbook: default
   #thesisdown::thesis_epub: default
-  # thesisdown::thesis_word: default
-  function(){bookdown::pdf_book(
-    toc = TRUE,
-    toc_depth = 4,
-    template = "template.tex",
-    highlight = "pygments",
-    keep_tex = TRUE,
-    pandoc_args = "--chapters")}
+  thesisdown::thesis_word: default
+  # function(){bookdown::pdf_book(
+  #   toc = TRUE,
+  #   toc_depth = 4,
+  #   template = "template.tex",
+  #   highlight = "pygments",
+  #   keep_tex = TRUE,
+  #   pandoc_args = "--chapters")}
   # pandoc_args = "--top-level-division=chapter")}
   # thesisdown::thesis_gitbook: default
   #  thesis_pdf_updt: default
-  #  thesisdown::thesis_gitbook: default
-  # thesisdown::thesis_word: default
-#  thesisdown::thesis_epub: default
 # If you are creating a PDF you'll need to write your preliminary content here or
 # use code similar to line 20 for the files.  If you are producing in a different
 # format than PDF, you can delete or ignore lines 20-31 in this YAML header.

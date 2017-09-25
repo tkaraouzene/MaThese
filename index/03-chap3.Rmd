@@ -44,8 +44,8 @@ fig_description_gen <- "Sur ces deux photos, le noyau des spermatozoïdes est mi
 fig_description_a <- "**A** : Spermatozoïde normal, l'acrosome forme une cloche entourant la tête du spermatozoïde."
 fig_description_b <- "**B** : Spermatozoïde globozoocéphale, l'acrosome est ici absent" 
 fig_description <- paste(fig_description_gen, fig_description_a, fig_description_b, sep = " ")
-fig.from <- "[@Harbuz2011]"
-fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig.from, "** : ", fig_description)
+fig_from <- "[@Harbuz2011]"
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/spermato_globo.png")
 
@@ -57,23 +57,26 @@ En 2012, le développement d'un modèle murin KO *Dpy19l2*$^{-/-}$ a permis de m
 
 \newpage 
 
-```{r pictmouseglobo, fig.cap='(ref:pictmouseglobo)',fig.scap=fig_name, out.extra="scale=0.8"}
+```{r pictmouseglobo, fig.cap='(ref:pictmouseglobo)',fig.scap='(ref:pictmouseglobotitle)', out.extra="scale=0.8"}
 
-fig_name <- "Comparaison entre les spermatozoïdes des souris *Dpy19l2*$^{-/-}$ (à gauche) et les souris sauvages *Dpy19l2*$^{+/+}$ (à droite)"
-fig.from <- "[@Pierre2012]"
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "**.")
+fig_name <- "Comparaison entre les spermatozoïdes des souris sauvages et globozoospermiques"
+fig_description <- "À gauche, le spermatozoïde d'une souris globozoospermique *Dpy19l2*^-/-^. À droite, celui d'une souris sauvage *Dpy19l2*^+/+^."
+fig_from <- "[@Pierre2012]"
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/mouse_globo_spz.png")
 
 ```
 
-(ref:pictmouseglobo) `r fig_cap`
+(ref:pictmouseglobo) `r fig_cap`  
+(ref:pictmouseglobotitle) `r fig_name`
+
 
 \newpage
 
 ## Résultats 1 : Les mécanismes mutationnels entraînant la délétion au locus de *DPY19L2* chez l'humain {#mecamut}  
 
-### Article n° 1: 
+### Article n°6: 
 
 **Fine Characterisation of a Recombination Hotspot at the _DPY19L2_ Locus and Resolution of the Paradoxical Excess of Duplications over Deletions in the General Population** 
 
@@ -102,7 +105,7 @@ Dans ce contexte j'ai pu participer à diverses manipulations de biologie moléc
 fig_name <- "Représentation schématique du mécanisme de NAHR"
 fig_from <- "[@Liu2012]"
 fig_description <- "Lors d'un NAHR interchromatidien, un allèle dupliqué et un allèle délété sont formés. Lors d'un NAHR intrachromatidien, seul un allèle délété est produit, en même temps qu'un petit ADN circulaire qui sera éliminé par la suite."
-fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/nahr_process.png")
 
@@ -146,7 +149,7 @@ Cette étude a également été pour notre équipe l'occasion d'effectuer une é
 
 ## Résultat 2 : La transcriptomique {#transcriptome}
 
-### Article n° 2: 
+### Article n°7: 
 
 **Comparative testicular transcriptome of wild type and globozoospermic Dpy19l2 knock out mice**
 
@@ -208,9 +211,9 @@ Dans cette étude j’ai pu effectuer l’intégralité des manipulations de bio
 
 \newpage
 
-```{r plotborn, fig.height=3.6, fig.cap='(ref:plotborn)',fig.scap=fig_name, cache=TRUE, dependson="dfborn"}
+```{r plotborn, fig.height=3.6, fig.cap='(ref:plotborn)',fig.scap='(ref:plotborntitle)', cache=TRUE, dependson="dfborn"}
 
-fig_name <- "Quantification des sexes des souris observés lors de chaque naissance issues d'un croisement de deux souris hétérozygotes Dpy19l2$^{+/-}$"
+fig_name <- "Quantification des sexes des souris observés lors de chaque naissance issues d'un croisement de deux souris hétérozygotes *Dpy19l2*^+/-^"
 fig_description <- paste0("Après ", n_birth_without_last, " naissances, ",  n_male_all - n_male_last, " souriceaux mâles sont nés pour seulement ", n_female_all - n_female_last, " femelles, ainsi le test du $\\chi^2$ comparant ces valeurs donne une p-valeur de ", p_test_without_last, ".")
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
@@ -223,7 +226,8 @@ ggplot(df_born %>% filter(!(grepl("cage4", Birth_id))),aes(Birth_id,Nb)) +
 
 ```
 
-(ref:plotborn) `r fig_cap`
+(ref:plotborntitle) `r fig_name`  
+(ref:plotborn) `r fig_cap`  
 
 \newpage
 
@@ -280,13 +284,13 @@ Ces résultats ne nous ont cependant pas permis d'expliquer l'absence de la prot
 
 \newpage 
 
-```{r plotmolfunction, cache=TRUE, dependson="dfmolfunction", warning=FALSE, message=FALSE, fig.height=8, fig.width=6.5, fig.cap='(ref:plotmolfunction)', fig.scap=fig_name}
+```{r plotmolfunction, cache=TRUE, dependson="dfmolfunction", warning=FALSE, message=FALSE, fig.height=8, fig.width=6.5, fig.cap='(ref:plotmolfunction)', fig.scap='(ref:plotmolfunctiontitle)'}
 
 fig_name <- "Principales fonctions moléculaires affectées chez les souris *Dpy19l2* KO"
 fig_description_A <- "**A** : Liste des fonctions moléculaires affectées : Bndn = Binding, Ctly = Catalytic, Trnsc = Transcription, Strm = Structural molecule, Rcpt = Receptor"
 fig_description_B <- "**B** : Détails des fonctions moléculaires affectées par les gènes dérégulés."
 fig_description <- paste(fig_description_A, fig_description_B, sep = ". ")
-fig_cap <- paste0("**_",fig_name,"_.** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 pA <- ggplot(df_mol_function, aes(`Molecular functions`)) +
   geom_bar(aes(fill = `Molecular functions` )) +
@@ -309,5 +313,5 @@ pA <- ggplot(df_mol_function, aes(`Molecular functions`)) +
 
 ```
 
+(ref:plotmolfunctiontitle) `r fig_name`  
 (ref:plotmolfunction) `r fig_cap`
-

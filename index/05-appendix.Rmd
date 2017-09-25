@@ -2,7 +2,9 @@
 
 `r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'` 
 
-#  Mutations in DNAH1, which Encodes an Inner Arm Heavy Chain Dynein, Lead to Male Infertility from Multiple Morphological Abnormalities of the Sperm Flagella  {#dnah12014}
+# Article annexe {#dnah12014}  
+
+**Mutations in DNAH1, which Encodes an Inner Arm Heavy Chain Dynein, Lead to Male Infertility from Multiple Morphological Abnormalities of the Sperm Flagella**
 
 Ben Khelifa M^\*^, Coutton C^\*^, Zouari Raoudha, **Karaouzène T**, Rendu J, Bidart M, Yassine S, Pierre V, Delaroche J, Hennebicq S, Grunwald D, Escalier D, Pernet-Gallay K, Jouk PS, Thierry-Mieg N, Touré A, Arnoult C, Ray PF
 
@@ -38,7 +40,7 @@ df_filter_fam %>% ungroup %>% mutate(`HGVSc, HGVSp` = paste0(na.replace(HGVSc, "
 
 ```{r tabmmaf2, cache=TRUE, dependson="dfrecapmmaf"}
 
-caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères P3 et P4 de la famille MMAF1"
+caption <- "Liste des variants ayant passé l'ensemble des filtres pour les deux fères P3 et P4 de la famille MMAF2"
 
 df_filter_fam %>% ungroup %>% mutate(`HGVSc, HGVSp` = paste0(na.replace(HGVSc, ".")," ; ", na.replace(HGVSp, "."))) %>% filter(FAM == "MMAF2", CANONICAL == "YES") %>% 
   select(SYMBOL, `HGVSc, HGVSp`, Consequence) %>%  
@@ -100,10 +102,9 @@ df_filter_fam %>% ungroup %>% mutate(`HGVSc, HGVSp` = paste0(na.replace(HGVSc, "
 
 # Table des variants retrouvés sur le gène *PATL2*
 
-
 ```{r tabpatl2, dependson="dfbigmmaffilter", cache=TRUE}
 
-caption <- "Table des variants retrouvés sur le gène *PATL2*"
+caption <- "Table des variants retrouvés sur le gène \\textit{PATL2}"
 
 df_patl2 <- bind_rows(df_ovo_filter, df_ovo_filter_het) %>%
   filter(SYMBOL == "PATL2") %>%
@@ -124,7 +125,7 @@ df_patl2 <- bind_rows(df_ovo_filter, df_ovo_filter_het) %>%
           longtable = TRUE,
           caption = caption) %>%
   add_header_above(c(" " = 2, "Variant impact" = 2))
-
+   
 ```
 
 \newpage
@@ -135,7 +136,7 @@ df_patl2 <- bind_rows(df_ovo_filter, df_ovo_filter_het) %>%
 
 ```{r tabdnah1, dependson="dfbigmmaffilter", cache=TRUE}
 
-caption <- "Table des variants retrouvés sur le gène *DNAH1*"
+caption <- "Table des variants retrouvés sur le gène \\textit{DNAH1}"
 
 df_dnah1 <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
   filter(SYMBOL == "DNAH1") %>%
@@ -164,7 +165,7 @@ df_dnah1 <- bind_rows(df_bigmmaf_filter, df_bigmmaf_filter_het) %>%
 
 ```{r tabcfap43, dependson="dfbigmmaffilter", cache=TRUE}
 
-caption <- "Variants homozygotes retrouvés sur le gène *CFAP43*"
+caption <- "Variants homozygotes retrouvés sur le gène \\textit{CFAP43}"
 
 df_cfap43 <- df_bigmmaf_filter %>%
   filter(SYMBOL == "CFAP43") %>%
@@ -220,7 +221,7 @@ df_cfap43_het <- df_bigmmaf_filter_het %>%
 
 ```{r tabcfap44, dependson="dfbigmmaffilter", cache=TRUE}
 
-caption <- "Variants homozygotes retrouvés sur le gène *CFAP44*"
+caption <- "Variants homozygotes retrouvés sur le gène \\textit{CFAP44}"
 
 df_cfap44 <- df_bigmmaf_filter %>%
   filter(SYMBOL == "CFAP44",

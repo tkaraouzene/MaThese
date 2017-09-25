@@ -1,9 +1,9 @@
 # Remerciements {-}  
 
-Je remercie ...  
+Je remercie Messieurs le Professeurs Jacques VAN HELDEN et le Docteur Michaël MITCHELL d’avoir accepté la charge d’être rapporteurs de ma thèse.  
 
- <!-- - Les rapporteurs -->
- <!-- - Les membres du jury   -->
+Je remercie Madame le Professeur Christel THAUVIN et Messieurs le Docteur Julien THÉVENON d’avoir accepté de participer à mon jury et juger ce travail.  
+
  <!-- - Pierre   -->
  <!-- - Nicolas   -->
  <!-- - L'équipe BCM   -->
@@ -11,20 +11,23 @@ Je remercie ...
  <!-- - Léquipe GETI   -->
  <!-- - La BGM   -->
 
- <!-- <!-- - Ridley Scott pour le film Gladiator --> 
- 
- <!-- Agnès pour avoir corrigé mes nombreuses fautes  -->
- 
- <!-- - Mes amis   -->
- <!-- - Ma famille   -->
+À Agnès et Gérard pour avoir pris le temps de relire mon manuscrit et corrigé mes nombreuses fautes.  
 
- <!-- - Dadette et Marco   -->
- <!-- - Simon   -->
- <!-- - Aurélien   -->
+À mes amis, toujours présents malgré la distance.  
 
- <!-- - Mes parents   -->
- <!-- - Ma soeur   -->
+À l'ensemble du Budo club de Malesherbes et plus particulièrement à Maître Hiram et Fanfan, qui m'ont vu grandir et qui, à travers leurs enseignements du Karaté, ont réussi à me transmettre des valeurs et un code de vie.  
 
- <!-- - Estelle   -->
- <!-- - Noham -->
+À ma famille pour son union et sa solidarité.  
+
+À Dadette et Marco pour m'avoir accueilli pendant ces cinq années, et tout les débats parfois endiablés que nous avons pu avoir ensemble. "*Hakuna Matata*".  
+
+À Aurélien pour tous ces moments de "luronage", les grecs, les parties de tarots, nos années *Bell & Barksdale*. N'oublie jamais, "*le lion ne pactise pas avec les hommes*".
+
+À mes parents, pour avoir toujours été à mes côtés quelques soit mes choix. Pour votre amour et votre dévouement indéfectible. Votre mission est désormais accomplie, profitez bien de votre vie de grands-parents.  
+
+À ma sœur pour toutes ces années de complicité. Bonne chance dans ta nouvelle vie qui commence.  
+
+À Estelle, mon garde fou. Tu as su pendant ces années me conseiller et me soutenir sans jamais faillir. Tu as toujours été là pour moi. Ta capacité à me supporter est la preuve de ton courage et ta force. Tu m'as donné le plus beau des cadeaux en me permettant de construire, avec toi, une famille. Tu es la clef de voute sur laquelle je me repose (trop souvent). J'espère sincèrement que ces dix années ne sont que les prémisses de notre Histoire et sache que tu pourras toujours compter sur moi comme je compte sur toi.  
+
+À Noham, mon fils, ma plus grande fierté et source de bonheur. Tu as bouleversé ma vie . Ton seul rire à le pouvoir de me rendre heureux et de me faire oublier tous mes tracas. Puisses-tu mener ta vie comme tu l'entends, faire tes propres choix, tes propres erreurs en sachant que je te soutiendrai toujours. Je t'aime.  
 
