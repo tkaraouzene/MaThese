@@ -93,9 +93,9 @@ Chez l'Homme, les spermatogonies Ad ont une activité mitotique au cours de la s
 ```{r spermatogenese,fig.cap='(ref:spermatogenese)', fig.scap=fig_name, out.extra="scale=0.35"}
 
 fig_name <- "Les différentes phases de la spermatogenèse"
-fig.from <- "[medizin-kompakt](http://www.medizin-kompakt.de/spermatogenese)"
+fig_from <- "[medizin-kompakt](http://www.medizin-kompakt.de/spermatogenese)"
 fig_description <- "L'évolution de la spermatogenèse est strictement coordonnée, tant dans le sens transversal des tubules, que dans le sens longitudinal. Le sens transversal correspond au sens unique de la différenciation germinale, les cellules souches sont situées à la base du tube séminifère alors que les spermatozoïdes aboutissent à la lumière. Dans le sens longitudinal de ces tubules, on retrouve l'ensemble des cellules d'un même cycle donnant ainsi l'onde spermatique."
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/spermatogenese2.jpg")
 
@@ -114,9 +114,9 @@ La méiose est initiée dès la fin de la phase de multiplication à partir des 
 ```{r pictmeiose,fig.cap='(ref:pictmeiose)',fig.scap=fig_name, out.extra="scale=0.33"}
 
 fig_name <- "Les différentes étapes de la méiose gamétique masculine"
-fig.from <- "[@Sasaki2008]"
+fig_from <- "[@Sasaki2008]"
 fig_description <- "Les spermatogonies B servent de point d'initiation et se différentient en spermatocyte primaire. Les cinq étapes de la prophase I sont suivies d'une première division cellulaire, donnant deux cellules haploïdes au sein desquelles les chromosomes sont composés de deux chromatides. Celles-ci seront séparées au cours de la méiose II donnant ainsi quatre spermatides qui après plusieurs étapes de maturation donneront les spermatozoïdes."
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/Meiosis_Stages.png")
 
@@ -163,8 +163,8 @@ include_graphics(path = "figure/crossingover.jpg")
 ```{r meiosei,fig.cap='(ref:meiosei)',fig.scap=fig_name, out.extra="scale=0.43"}
 
 fig_name <- "Les différentes étapes de la première division méiotique masculine"
-fig.from <- "[@Reece2014]"
-fig_cap <- paste0("**_",fig_name,"_ adapté d'après", fig.from, "**.")
+fig_from <- "[@Reece2014]"
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig_from, "**.")
 
 include_graphics(path = "figure/MeiosisI.png")
 
@@ -175,8 +175,8 @@ include_graphics(path = "figure/MeiosisI.png")
 ```{r meioseii,fig.cap='(ref:meioseii)',fig.scap=fig_name, out.extra="scale=0.43"}
 
 fig_name <- "Les différentes étapes de la deuxième division méiotique masculine"
-fig.from <- "[@Reece2014]"
-fig_cap <- paste0("**_",fig_name,"_ adapté d'après", fig.from, "**.")
+fig_from <- "[@Reece2014]"
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig_from, "**.")
 
 include_graphics(path = "figure/MeiosisII.png")
 
@@ -203,10 +203,10 @@ Une fois ces étapes de différentiation finies, les spermatides sont relâchée
 ```{r spermiogenese,fig.cap='(ref:spermiogenese)',fig.scap=fig_name,out.extra="scale=0.3"}
 
 fig_name <- "Principales étapes et modifications structurales lors de la spermiogenèse"
-fig.from <- "[@Toure2011]"
+fig_from <- "[@Toure2011]"
 fig_description <- "**1.** La spermatide immature avec un gros noyau arrondi. La vésicule acrosomale est attachée au noyau, l’ébauche du flagelle n’atteint pas le noyau. **2.** La vésicule acrosomale a augmenté de taille et apparaît aplatie au niveau du noyau. Le flagelle entre en contact avec le noyau. **3-7.** Formation de l’acrosome, condensation du noyau et développement des structures flagellaires. Ac = Acrosome, Ax = Axonème, CC = Corps Chromatoïdes, CR = Corps Résiduel, FD = Fibres Denses, GF = Gaine Fibreuse, M = Mitochondrie, Ma = Manchette."
 
-fig_cap <- paste0("**_",fig_name,"_ d'après", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/spermiogenese.png")
 
@@ -223,8 +223,8 @@ Le spermatozoïde est une cellule hautement différenciée dont la taille, l'ori
 ```{r capspz}
 
 fig_name <- "Anatomie simplifiée du spermatozoïde"
-fig.from <- "[medical-dictionary](http://medical-dictionary.thefreedictionary.com/Human+sperm)"
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "**.")
+fig_from <- "[medical-dictionary](http://medical-dictionary.thefreedictionary.com/Human+sperm)"
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "**.")
 
 ```
 
@@ -252,10 +252,9 @@ include_graphics(path = "figure/sperm_anatomy.png")
 ```{r noyau, fig.cap='(ref:noyau)',fig.scap=fig_name, out.extra="scale=.55"}
 
 fig_name <- "Schéma de la compaction de l’ADN dans les cellules somatiques et dans les spermatozoïdes"
-fig.from <- "[@Braun2001]"
-fig_description <- "Dans les cellules somatiques, l’ADN est enroulé sous forme de nucléosome. Les nucléosomes vont s’agencer entre eux pour former un solénoïde qui sera attaché à la matrice nucléaire par sa base. Dans le noyau spermatique les nucléosomes sont remplacés par des protamines qui vont compacter l’ADN sous forme de \"*doughnut*\". Le
-remplacement des histones est facilité par des acétylations, des ubiquitinations et des phosphorylations."
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_from <- "[@Braun2001]"
+fig_description <- "Dans les cellules somatiques, l’ADN est enroulé sous forme de nucléosome. Les nucléosomes vont s’agencer entre eux pour former un solénoïde qui sera attaché à la matrice nucléaire par sa base. Dans le noyau spermatique les nucléosomes sont remplacés par des protamines qui vont compacter l’ADN sous forme de \"*doughnut*\". Le remplacement des histones est facilité par des acétylations, des ubiquitinations et des phosphorylations."
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/noyau.png")
 
@@ -273,8 +272,8 @@ Le flagelle représente la queue du spermatozoïde. Celui-ci permet, par mouveme
 
 fig_name <- "Structure simplifiée de l'axonème"
 fig_description <- "L'axonème est constitué de neuf doublets de microtubules périphériques reliés entre eux par des liens de nexine et d'un doublet central relié aux doublets périphériques par des ponts radiaires."
-fig.from <- "[@Inaba2003]"
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_from <- "[@Inaba2003]"
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 ```
 
@@ -298,8 +297,8 @@ Le flagelle du spermatozoïde peut être divisé en trois parties distinctes (**
 
 fig_name <- "Structure du flagelle d’un spermatozoïde"
 fig_description <- "Coupes transversales en microscopie électronique. Le flagelle se compose de trois parties : la pièce intermédiaire, contenant les mitochondries, la pièce principale et la pièce terminale. L’axonème, en position centrale, parcours tout le flagelle. Des structures périaxonèmales sont observables : les fibres denses dans la pièce intermédiaire et principale, et la gaine fibreuse dans la pièce principale seulement."
-fig.from <- "[@Borg2010]"
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_from <- "[@Borg2010]"
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/sperm2.png")
 
@@ -329,7 +328,7 @@ Chez l'humain, l'arrêt de la spermatogenèse est défini comme l'incapacité de
 
 #### Anomalies liées à la morphologie  
 
-Ces anomalies sont observables en effectuant un spermocytogramme. Plusieurs classifications ont été établies. Cependant, c'est la classification de David modifiée (**Table :** \@ref(fig:anomaliemorphosperm)) qui est la plus repandue en France. Pour ce faire, on procède généralement à une observation de 100 spermatozoïdes au cours de laquelle l'ensemble des anomalies observées est relevé et quantifié permettant ainsi de définir un index d’anomalies multiples (nombre total d’anomalies/nombre de spermatozoïdes anormaux) révélant le nombre moyen d’anomalies par spermatozoïdes.
+Ces anomalies sont observables en effectuant un spermocytogramme. Plusieurs classifications ont été établies. Cependant, c'est la classification de David modifiée (**Table :** \@ref(fig:anomaliemorphosperm)) qui est la plus répandue en France. Pour ce faire, on procède généralement à une observation de 100 spermatozoïdes au cours de laquelle l'ensemble des anomalies observées est relevé et quantifié permettant ainsi de définir un index d’anomalies multiples (nombre total d’anomalies/nombre de spermatozoïdes anormaux) révélant le nombre moyen d’anomalies par spermatozoïdes.
 
 \newpage  
 
@@ -363,9 +362,9 @@ Comme il a déjà été dit, il est estimé que 10 à 15% des couples humains fo
 ```{r chry,fig.cap='(ref:chry)',,fig.scap=fig_name,out.extra="scale=.45"}
 
 fig_name <- "Représentation schématique du chromosome Y"
-fig.from <- "[@OFlynnOBrien2010]"
+fig_from <- "[@OFlynnOBrien2010]"
 fig_description <- "Visualisation la région AZF ainsi que des trois sous-régions AZF a, b, c et des principaux gènes compris dans chacune des sous-régions."
-fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/chromozomeY.png")
 
@@ -382,9 +381,9 @@ include_graphics(path = "figure/chromozomeY.png")
 ```{r captranslocation}
 
 fig_name <- "Les différents types de translocation"
-fig.from <- "[embryology.ch](http://www.embryology.ch/francais/kchromaber/abweichende03.html)"
+fig_from <- "[embryology.ch](http://www.embryology.ch/francais/kchromaber/abweichende03.html)"
 fig_description <- " **A** : La translocation réciproque. **B** : La translocation robertsonniènne"
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 ```
 
 (ref:figtranslocation) `r fig_cap`
@@ -408,7 +407,7 @@ Bien que la prévalence de ces anomalies génétiques varie en fonction du phén
 
 #### Les nouveaux gènes  
 
-1. **Les anomalies quantitatives** :  une analyse de trois familles par séquençage [haut-débit](#ngs) a permis d'identifier trois gènes *MEIOB*, *TEX14* et *DNAH6* impliqués dans un phénotype d'azoospermie ; de même une étude de 2016 démontre l'association de trois variants dans la séquence codante du gène *RAD21L* en se basant sur une étude statistique effectuée sur 38 japonais présentant un arrêt de la fertilité et 200 contrôles [@Minase2017]. De même, plusieurs variants dans le gène *TEX111* et *SYC1* on été décrits comme entrainant un arrêt de la méiose [@Yatsenko2015; @Yang2015; @Maor-Sagie2015].   
+1. **Les anomalies quantitatives** :  une analyse de trois familles par séquençage [haut-débit](#ngs) a permis d'identifier trois gènes *MEIOB*, *TEX14* et *DNAH6* impliqués dans un phénotype d'azoospermie ; de même une étude de 2016 démontre l'association de trois variants dans la séquence codante du gène *RAD21L* en se basant sur une étude statistique effectuée sur 38 japonais présentant un arrêt de la fertilité et 200 contrôles [@Minase2017]. De même, plusieurs variants dans le gène *TEX111* et *SYC1* ont été décrits comme entrainant un arrêt de la méiose [@Yatsenko2015; @Yang2015; @Maor-Sagie2015].   
   
 2. **Les anomalies morphologiques liées à la tête du spermatozoïde** :  
     a. **La macrozoospermie** :  Ce phénotype d'infertilité masculine rare est caractérisé par la présence de 100% des spermatozoïdes de l'éjaculat présentant une tête anormalement grosse ainsi que plusieurs flagelles. Il fut observé pour la première fois en 1978 [@Nistal], mais ce n'est qu'en 2007 qu'une explication génétique fut enfin trouvée. Une étude portant sur 14 patients nord-africains a permis d'identifier la délétion c144delC du gène *AURKC* (*Aurora kinase C*) comme responsable du phénotype de l'ensemble des individus de l'étude [@Dieterich2007]. Depuis, d'autres études ont permis d'associer d'autres variants sur ce même gène à ce phénotype [@BenKhelifa2011]. Des anomalies du gène *AURKC* seraient ainsi responsables d'environ 83.7% des cas macrozoospermie chez des patients non apparentés [INSERT REF]. Le gène AURKC, étant impliqué dans la méiose, conduit lorsqu'il est muté à un blocage de la première division méiotique, entraînant la production de spermatozoïdes tétraploïdes, c'est à dire, portant une quantité de matériel génétique quatre fois supérieure à la normale [@Dieterich2009].    
@@ -448,9 +447,9 @@ L'utilisation principale des puces à ADN a été de mesurer l'expression des g�
 ```{r pictexparray, fig.cap='(ref:pictexparray)',fig.scap=fig_name, out.extra="scale=.9"}
 
 fig_name <- "Représentation schématique des méthodes d'analyse d'expression génique par puce à ADN"
-fig.from <- "[@Trevino2007]"
+fig_from <- "[@Trevino2007]"
 fig_description <- "Présentation des méthodes à double et à simple colorant, respectivement à gauche et à droite. Pour les analyses à double colorant, une seule puce et nécessaire, les échantillons de la référence et du test sont mis en compétition sur la même puce, un signal de sortie vert indiquera une surexpression chez le test tandis qu'un signal rouge indiquera une sous-expression. Pour celles à simple colorant, deux puces sont nécessaires, une première pour la référence et une seconde pour le test. Les données des deux puces sont ensuite comparées pour déterminer quels sont les gènes différentiellement exprimés. Dans le cas de la CGH array, le principe est similaire, en remplaçant simplement l'ARNm par de l'ADNg."
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/expression_array.jpg")
 
@@ -467,9 +466,9 @@ Bien que leur utilité principale ait été d'analyser l'expression des gènes, 
 ```{r pictallelicdisc, fig.cap='(ref:pictallelicdisc)',fig.scap=fig_name, out.extra="scale=.7"}
 
 fig_name <- "Méthode de génotypage par discrimination allélique par hybridation"
-fig.from <- "[@Bumgarner2013]"
+fig_from <- "[@Bumgarner2013]"
 fig_description <- "Des sondes complémentaires à chacun des allèles sont positionnées sur la puce. L'ADN génomique fragmenté et labélisé est mis en contact de la puce. Après nettoyage de la puce, l'analyse du signal émis par l'ADN génomique permettra de déterminer si l'individu est homozygote pour cette allèle (hybridation à une seule des deux sondes) ou bien hétérozygote pour cette allèle (hybridation aux deux sondes)."
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/allelic_discrimination.png")
 
@@ -515,9 +514,9 @@ La taille des *reads* obtenus par séquençage NGS est, hormis dans le cas de la
 ```{r pictreadPerRun,fig.cap='(ref:pictreadPerRun)',fig.scap=fig_name,out.extra="scale=.55"}
 
 fig_name <- "Présentation de la taille des reads et du nombre de reads par run en fonction de la technologie de séquençage utilisée"
-fig.from <- "[@Hodkinson2015]"
+fig_from <- "[@Hodkinson2015]"
 fig_description <- "Chaque point représente une plateforme de séquençage, la couleur détermine la marque du séquenceur."
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/read_per_run.png")
 
@@ -545,9 +544,9 @@ Dans la plupart des technologies, la phase de séquençage est précédée par u
 ```{r pictngsampli,fig.cap='(ref:pictngsampli)',fig.scap=fig_name,out.extra="scale=.455"}
 
 fig_name <- "Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS"  
-fig.from <- "[@Goodwin2016]"
+fig_from <- "[@Goodwin2016]"
 fig_description <- "**a** : PCR en émulsion. **b** : amplification par pont. **c** : amplification par modèle mobile."
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 include_graphics(path = "figure/ngs_amplification.png")
 
 ```
@@ -558,7 +557,7 @@ include_graphics(path = "figure/ngs_amplification.png")
 
 #### La réaction de séquence  
 
-La réaction de séquence est l'étape suivant l'amplification. Ell consiste à déterminer l'ordre dans lequel se succèdent les nucléotides de l'ensemble des clones générés dans la phase d'amplification. Il existe deux technologies principales permettant le séquençage de *reads* courts :  
+La réaction de séquence est l'étape suivant l'amplification. Elle consiste à déterminer l'ordre dans lequel se succèdent les nucléotides de l'ensemble des clones générés dans la phase d'amplification. Il existe deux technologies principales permettant le séquençage de *reads* courts :  
 
 1. **Séquençage par synthèse** (SBS) : Ce type de séquençage regroupe l'ensemble des méthodes utilisant l'ADN polymérase pour synthétiser de l'ADN. En 2016, Sahra Goodwin et ses collègues ont différenciés deux catégories de séquençage par synthèse [@Goodwin2016] : 
     a. **Terminaison par cycle réversible**, *cyclic reversible termination* (CRT) (**Figure : **\@ref(fig:pictcrtSeq)) : Cette méthode est caractérisée par l'utilisation de molécule dites terminatrices auxquelles le groupement $\mathrm{3'-OH}$ est modifié de sorte à éviter l'élongation [@Guo2008], on parlera de groupement  $\mathrm{3'-bloqué}$. Une amorce liée au fragment d’ADN permettra l’initialisation du processus de polymérisation. À chaque cycle, un mix comprenant l'ensemble des quatre désoxynucléotides (dNTPs), préalablement labélisés par un fluorophore $\mathrm{3'-bloqué}$, est mis en contact du fragment. Après l'incorporation d'un unique dNTP au fragment, les dNTPs non liés sont éliminés et la nature du dNTP ajouté est identifiée grâce à son fluorophore. Le fluorophore et le groupement $\mathrm{3'-bloqué}$ sont retirés permettant ainsi à un nouveau cycle de commencer.  
@@ -566,9 +565,9 @@ La réaction de séquence est l'étape suivant l'amplification. Ell consiste à 
 ```{r pictcrtSeq,fig.cap='(ref:pictcrtSeq)',fig.scap=fig_name,out.extra="scale=.24"}
 
 fig_name <- "Séquençage CRT tel qu'il est effectué par Illumina" 
-fig.from <- "[@Goodwin2016]"
+fig_from <- "[@Goodwin2016]"
 fig_description <- "**a** : ajout d'un dNTP labellisé par un fluorophore 3'-bloqué. **b** : identification du dNTP ajouté grâce au fluorophore. **c** : le fluorophore est clivé du dNTP et le groupement 3'-OH est reformé à partir du groupement 3'-bloqué permettant ainsi l'élongation."
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/CRT_seq_illumina.png")
 
@@ -585,10 +584,10 @@ include_graphics(path = "figure/CRT_seq_illumina.png")
 ```{r pictsnaSeq,fig.cap='(ref:pictsnaSeq)', fig.scap=fig_name,out.extra="scale=.26"}
 
 fig_name <- "Séquençage SNA tel qu'il est effectué par Ion Torrent" 
-fig.from <- "[@Goodwin2016]"
+fig_from <- "[@Goodwin2016]"
 fig_description <- "**a** : mise en présence du patron d'ADN à séquencer avec un mix contenant un seul type de dNTP, si le dNTP est complémentaire au patron, il se fixe et libère un proton permettant d'identifier la liaison. **b** : dans le cas d'homopolymère, autant de protons sont relâchés que de bases constituant l'homopolymère, le signal émis est donc plus fort permettant d'identifier le nombre des dNTPs liés."
 
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/SNA_seq_ionTorrent.png")
 
@@ -604,11 +603,11 @@ include_graphics(path = "figure/SNA_seq_ionTorrent.png")
 ```{r pictsblSeq,fig.cap='(ref:pictsblSeq)',fig.scap=fig_name,out.extra="scale=.26"}
 
 fig_name <- "Séquençage SBL tel qu'il est effectué par SOLiD" 
-fig.from <- "[@Goodwin2016]"
+fig_from <- "[@Goodwin2016]"
 fig_description <- "
 **a** : dans cette phase d'initialisation, un ensemble de sondes composées de deux nucléotides connus suivis de bases dégénérées et de bases universelles est reliée en 5' à un fluorophore. De fait qu'il n'y ait que quatre fluorophores différents, un même fluorophore est utilisé pour quatre combinaisons de dinucléotides parmi les seize possibles. **b** : après avoir été hybridé grâce à une ligase, aux brin d'ADN à séquencé, le fluorophore est identifié permettant ainsi de déduire l'une des quatre combinaisons possibles à ce locus. **c** : le fluorophore ainsi qu'une partie des bases non spécifiques sont clivés. **d** : les étapes **b** et **c** sont ensuite répétées 10 fois permettant à chaque fois d'identifier de réduire la liste des dinucléotides possibles au locus en question. **e** : les étapes **b**, **c**, et **d** sont répétées sur le même brin avec un décalage d'un nucléotide jusqu'à ce que chaque position ait été séquencée deux fois. **f** : en recoupant les informations obtenues à chaque itération du cycle, la séquence nucléotidique est reconstituée."
 
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/SBL_seq_solid.png")
 
@@ -661,7 +660,7 @@ L'alignement constitue la première étape de l'analyse des données de NGS lors
 
 fig_name <- "Représentation schématique de l'alignement de reads paired-end"
 fig_description_A <- "**A** : représentation du génome de référence ainsi que de *reads paired-end* avant l'étape d'alignement. Les *reads paired-end* sont composés d'une extrémité *forward* (en vert) complémentaire du brin sens du génome de référence et d'une extrémité réverse (en jaune), complémentaire du brin anti-sens du génome de référence. Chacune de ces extrémités est séparée par un insert de taille connue mais de séquence inconnu"
-fig_description_B <- "**B** : après l'étape d'alignement, chaque *read* est repositioné sur la région du génome avec laquelle il présente la plus grande homologie de séquence. Le nombre de *reads* différents recouvrant une même position du génome de référence est appellé couverture."
+fig_description_B <- "**B** : après l'étape d'alignement, chaque *read* est repositionné sur la région du génome avec laquelle il présente la plus grande homologie de séquence. Le nombre de *reads* différents recouvrant une même position du génome de référence est appelé couverture."
 fig_description <- paste(fig_description_A,fig_description_B, sep = ". ")
 
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
@@ -682,7 +681,7 @@ L'appel des variants, ou *variant calling*, fait référence à l'ensemble des m
 ```{r picvarcallprocess, fig.cap='(ref:picvarcallprocess)', fig.scap=fig_name, out.extra="scale=0.33"}
 
 fig_name <- "Illustration schématique du processus d'appel des variants"
-fig_description <- "Pour chaque position couverte,le pourcentage de *read* portant un allèle variant est analysé. Lorsque l'on est ptoche des 100 pourcent l'appel est homozygote pour le variant, lorsque l'on est proche des 50 pourcent l'appel des hétérozygote. Lorsqu'à une position donnée, peu de *reads* portent un variant, la cause est souvent une erreur de séquençage."
+fig_description <- "Pour chaque position couverte, le pourcentage de *read* portant un allèle variant est analysé. Lorsque l'on est proche des 100\\% l'appel est homozygote pour le variant, lorsque l'on est proche des 50\\% l'appel des hétérozygote. Lorsqu'à une position donnée, peu de *reads* portent un variant, la cause est souvent une erreur de séquençage."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics(path = "figure/var_call_exemple.png")
@@ -701,10 +700,10 @@ De nombreux logiciels d'appels des variants, ou *caller*, basés sur des algorit
 
 ```{r pictsnperror,fig.cap='(ref:pictsnperror)', fig.scap=fig_name,out.extra="scale=.37"}
 
-fig_name <- "Représentation des erreurs d'appel de type IR et AR en fonction de la plateforme de séquençage et du logiciel d'appel."
-fig.from <- "[@Hwang2015]"
+fig_name <- "Représentation des erreurs d'appel de type IR et AR en fonction de la plateforme de séquençage et du logiciel d'appel"
+fig_from <- "[@Hwang2015]"
 fig_description <- "Pour la plateforme Illumina, on peut voir que Freebayes favorise les appels variant-homozygote tandis que GATK-HC et Samtools favorisent les appels hétérozygotes. Pour la plateforme Ion Proton, les quatre logiciels entraînent des erreurs de type IR"
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/snp_error_type.png")
 
@@ -733,10 +732,10 @@ Traditionnellement, les scientifiques et les laboratoires dans lesquels ils trav
 # Sequencing studies in human genetics: design and interpretation
 
 fig_name <- "Diagramme de Venn des prédictions de pathogénicité de variants de six logiciels"
-fig.from <- "[@Salgado2016]"
+fig_from <- "[@Salgado2016]"
 fig_description <- "Les six logiciels utilisés sont : CADD [@Kircher2014] (marron), SIFT [@Kumar2009] (vert), PolyPhen2 [@Adzhubei2010] (bleu), Provean [@Choi2012] (rouge) MutationTaster [@Schwarz2010] (violet) et UMD-Predictor [@Salgado2016a] (orange)."
-fig.info <- paste0(fig_name," d'après ",fig.from)
-fig_cap <- paste0("**_",fig_name,"_ d'après ", fig.from, "** : ", fig_description)
+fig.info <- paste0(fig_name," d'après ",fig_from)
+fig_cap <- paste0("**_",fig_name,"_ d'après ", fig_from, "** : ", fig_description)
 
 include_graphics(path = "figure/venn_Diag_patho_pred.png")
 
@@ -764,7 +763,7 @@ include_graphics(path = "figure/annotation_process.png")
 
 ### Le filtrage des variants 
 
-L'étape de filtrage a pour principal objectif de restreindre le nombre de variants obtenu à l'issus de l'appel afin que ceux-ci puissent être analysés par un être humain. Pour cela il utilise l'ensemble des information obtenues lors de l'étape d'annotation afin de filtrer les variants ayant le moins de risque d'être responsables du phénotype. Communément, les variant ayant une forte fréquence dans les bases de données ExAC, ESP6500 ou encore 1KG sont filtrés avec l'idée sous-jacente que des variants observés fréquement dans la population ne peuvent être responsables de phénotypes sévères.   
+L'étape de filtrage a pour principal objectif de restreindre le nombre de variants obtenu à l'issus de l'appel afin que ceux-ci puissent être analysés par un être humain. Pour cela il utilise l'ensemble des information obtenues lors de l'étape d'annotation afin de filtrer les variants ayant le moins de risque d'être responsables du phénotype. Communément, les variant ayant une forte fréquence dans les bases de données ExAC, ESP6500 ou encore 1KG sont filtrés avec l'idée sous-jacente que des variants observés fréquemment dans la population ne peuvent être responsables de phénotypes sévères.   
 
 Comme nous l'avons vu, le développement d’outils permettant l’analyse et le filtrage des données NGS est extrêmement important puisqu'il permet aux biologistes de faire face à la masse de données générée par le séquençage haut-débit l'aidant ainsi dans ses prises de décisions. Il est à noter que la plupart de ces données filtrées sont extrêmement dépendantes du jeu de transcrits utilisés. Les prédictions seront donc différentes si l'on se base sur les transcrits RefSeq, Ensembl ou UCSC [@McCarthy2014,@Zhao2015] bien que les transcrits du *Consensus Coding Sequence project* (CCDS) soient bien représentés par ces trois listes [@Pruitt2009]. De même, pour une même liste de gène, de nombreuses différences seront observées en fonction du ou des logiciels de prédiction utilisés [@McCarthy2014; @Salgado2016].  
 
@@ -773,7 +772,7 @@ Comme nous l'avons vu, le développement d’outils permettant l’analyse et le
 ```{r pictfilter,fig.cap='(ref:pictfilter)',fig.scap=fig_name,out.extra="scale=.3"}
 
 fig_name <- "Représentation simplifié du processus de filtrage des variants"
-fig_description <- "L'ensemble des annotations ajoutées lors de l'étape précédente servent alors de support pour filtrer (ou non) les variants. Il est par exemple commun de filtrer les variants ayant une forte fréquence dans la population générale ou encore ceux ayant un impact faible sur la protéine. De même dans le cas d'étude sur des pathologies ayant un mode de transmission recessif, les variants hétérozygotes pourront être également filtrés."
+fig_description <- "L'ensemble des annotations ajoutées lors de l'étape précédente servent alors de support pour filtrer (ou non) les variants. Il est par exemple commun de filtrer les variants ayant une forte fréquence dans la population générale ou encore ceux ayant un impact faible sur la protéine. De même dans le cas d'étude sur des pathologies ayant un mode de transmission récessif, les variants hétérozygotes pourront être également filtrés."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics(path = "figure/filtering_process.png")
