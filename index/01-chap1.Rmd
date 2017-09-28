@@ -5,6 +5,8 @@ output:
 ---
 # Introduction {#introInf}
 
+\newpage  
+
 ```{r include.packages1, include=FALSE}
 # This chunk ensures that the thesisdown package is
 # installed and loaded. This thesisdown package includes

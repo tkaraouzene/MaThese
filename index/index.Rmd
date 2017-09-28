@@ -1,6 +1,6 @@
 ---
 author: 'Thomas Karaouzene'
-date: ' 07 novembre 2017'
+date: ' 29 novembre 2017'
 division: 'Mathematics and Natural Sciences'
 advisor: 'Pierre Ray'
 altadvisor: 'Nicolas Thierry-Mieg'
@@ -14,14 +14,14 @@ output:
   # thesisdown::thesis_pdf: default
   # thesisdown::thesis_gitbook: default
   #thesisdown::thesis_epub: default
-  thesisdown::thesis_word: default
-  # function(){bookdown::pdf_book(
-  #   toc = TRUE,
-  #   toc_depth = 4,
-  #   template = "template.tex",
-  #   highlight = "pygments",
-  #   keep_tex = TRUE,
-  #   pandoc_args = "--chapters")}
+  # thesisdown::thesis_word: default
+  function(){bookdown::pdf_book(
+    toc = TRUE,
+    toc_depth = 4,
+    template = "template.tex",
+    highlight = "pygments",
+    keep_tex = TRUE,
+    pandoc_args = "--chapters")}
   # pandoc_args = "--top-level-division=chapter")}
   # thesisdown::thesis_gitbook: default
   #  thesis_pdf_updt: default

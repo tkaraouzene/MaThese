@@ -1,15 +1,19 @@
 # Remerciements {-}  
+\newpage
 
 Je remercie Messieurs le Professeurs Jacques VAN HELDEN et le Docteur Michaël MITCHELL d’avoir accepté la charge d’être rapporteurs de ma thèse.  
 
 Je remercie Madame le Professeur Christel THAUVIN et Messieurs le Docteur Julien THÉVENON d’avoir accepté de participer à mon jury et juger ce travail.  
 
- <!-- - Pierre   -->
- <!-- - Nicolas   -->
- <!-- - L'équipe BCM   -->
- <!--   - Kevin Keurcien Thomas Florient   -->
- <!-- - Léquipe GETI   -->
- <!-- - La BGM   -->
+À Pierre pour m'avoir fait confiance toutes ces années et pour m'avoir permis de réaliser cette thèse.  
+
+À Nicolas pour m'avoir inculqué, avec le temps, sa méthode et sa rigeur.  
+
+À l'ensemble des l'équipes GETI, en particulier Zine pour toutes nos discussions, les tacos et les bons moments.  
+
+À l'ensemble de l'équipe BCM, en particulier, Florient, Keurcien (mon fils adoptif), Kévin et Thomas, les fous du ![r logo](figure/r_logo.jpg){ width=5% } pour toutes les discussions (du coup déterminisme ou pas ?), les barbecues, le *Fight Club*... À quand la *start-up* de la *Data Team* ?    
+
+Carlos et johnny Cage pour tous les fous rires que nous avons eu ensemble pendant ces dernières années.  
 
 À Agnès et Gérard pour avoir pris le temps de relire mon manuscrit et corrigé mes nombreuses fautes.  
 

@@ -6,6 +6,8 @@ output:
 ---
 # Investigation génétique et physiologique de la globozoospermie {#globo}  
 
+\newpage 
+
 ```{r include.packages3, include = FALSE}
 # This chunk ensures that the thesisdown package is
 # installed and loaded. This thesisdown package includes
