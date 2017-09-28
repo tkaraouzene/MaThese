@@ -82,6 +82,27 @@
 % \usepackage{times} % other fonts are available like times, bookman, charter, palatino
 
 
+
+%%% Mise en page des titres (TK)
+\xdefinecolor{royalblue}{named}{RoyalBlue}
+\titleformat{\chapter}[display]
+{\vfill}
+{{%
+   \normalfont\fontsize{48pt}{48pt}\sffamily\color{royalblue}\MakeUppercase{\chaptername}
+   \fontsize{48pt}{48pt}\selectfont\thechapter%
+ }%
+}
+{5pt}
+{\Huge\normalfont
+ \parbox{\textwidth-\widthof{\LARGE\sffamily\MakeUppercase{\chaptername}}}%
+}[\vfill\clearpage]
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+%%%
+
+
+
+
+
 % To pass between YAML and LaTeX the dollar signs are added by CII
 \title{THÈSE}
 \author{Thomas Karaouzene}
@@ -193,18 +214,15 @@ Je remercie Messieurs le Professeurs Jacques VAN HELDEN et le Docteur
 Michaël MITCHELL d'avoir accepté la charge d'être rapporteurs de ma
 thèse.
 
-\begin{itemize}
-\tightlist
-\item
-  Je remercie Madame le Professeur Christel THAUVIN et Messieurs le
-  Docteur Julien THÉVENON d'avoir accepté de participer à mon jury et
-  juger ce travail.
-\end{itemize}
+Je remercie Madame le Professeur Christel THAUVIN et Messieurs le
+Docteur Julien THÉVENON d'avoir accepté de participer à mon jury et
+juger ce travail.
 
 À Pierre pour m'avoir fait confiance toutes ces années et pour m'avoir
 permis de réaliser cette thèse.
 
-À Nicolas pour m'avoir inculqué, avec le temps, sa méthode et sa rigeur.
+À Nicolas, qui as du s'arracher les yeux sur certains de mes codes, pour
+m'avoir inculqué, avec le temps, sa méthode et sa rigeur.
 
 À l'ensemble des l'équipes GETI, en particulier Zine pour toutes nos
 discussions, les tacos et les bons moments.
@@ -229,7 +247,7 @@ Maître Hiram et Fanfan, qui m'ont vu grandir et qui, à travers leurs
 enseignements du Karaté, ont réussi à me transmettre des valeurs et un
 code de vie.
 
-À ma famille pour son union et sa solidarité.
+À ma famille pour son unité et sa solidarité.
 
 À Dadette et Marco pour m'avoir accueilli pendant ces cinq années, et
 tous les débats parfois endiablés que nous avons pu avoir ensemble.

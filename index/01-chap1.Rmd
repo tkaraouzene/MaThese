@@ -543,7 +543,7 @@ Dans la plupart des technologies, la phase de séquençage est précédée par u
 
 \newpage 
 
-```{r pictngsampli,fig.cap='(ref:pictngsampli)',fig.scap=fig_name,out.extra="scale=.455"}
+```{r pictngsampli,fig.cap='(ref:pictngsampli)',fig.scap=fig_name,out.extra="scale=.5"}
 
 fig_name <- "Présentation des différentes stratégies d'amplification de l'ADN dans le cadre du NGS"  
 fig_from <- "[@Goodwin2016]"
@@ -749,7 +749,7 @@ include_graphics(path = "figure/venn_Diag_patho_pred.png")
 
 2. **Au niveau du gène (ou transcrit)** : L'annotation au niveau du gène consiste à récupérer l'ensemble des informations disponibles non plus sur le variant uniquement mais sur le ou les gènes qu'il impacte. Ce "dézoom" permet d'ajouter des informations complémentaires particulièrement utiles notamment lorsque peu d'informations sont disponibles sur le variant lui-même. En pratique, la plupart des variants connus pour impliquer une pathologie sont des variants privés, c'est à dire spécifiques à une famille ou à un individu, limitant ainsi la quantité d'information disponible sur ce variant. Élargir l'annotation au niveau des gènes impactés par des variants permet d'augmenter considérablement la quantité d'information disponible et permet donc d'améliorer la capacité des algorithmes à filtrer et / ou prioriser les variants rendant donc les analyses plus efficaces. On peut relever certains logiciels tel que le *Protein ANalysis THrough Evolutionary Relationships* (PANTHER) [@Mi2017] qui permettent par exemple de classer une liste de gènes en fonction de leurs fonctions moléculaires, des processus biologiques et des voies de signalisation dans lesquelles ils sont impliqués. On peut également noter *the Human Phenotype Ontology project* (HPO) [@Kohler2014] qui fournit un vocabulaire standardisé pour les anomalies phénotypiques observées dans les pathologies humaines et une liste de gènes connus pour être associés à ces phénotypes. Plus récemment, on a pu voir émerger des "scores mutationnels" tel que RVIS [@Petrovski2013] ou encore le pLI [@Lek2016]. En se basant sur les bases de données telle que ESP ou encore ExAC, ces scores permettent de classer les gènes en fonction de leur tolérance (ou intolérance) aux variations avec l'idée sous-jacente que "les gènes impliqués dans des pathologies à transmission mendéliennes" devraient être moins tolérants aux variations que les autres.    
 
-```{r pictannot,fig.cap='(ref:pictannot)',fig.scap=fig_name,out.extra="scale=.27"}
+```{r pictannot,fig.cap='(ref:pictannot)',fig.scap=fig_name,out.extra="scale=.25"}
 
 fig_name <- "Représentation simplifié du processus d'annotation"
 fig_description <- "On peut observer deux niveaux d'annotation, le premier est l'annotation des variants consistant à ajouter un maximum d'information sur un variant spécifique (sa fréquence, son impact...). La deuxième est au niveau du gène, consistant à récupérer pour les gènes impactés par les variants l'ensemble des informations disponibles tel que les processus biologiques dans lesquels il est impliqué, ou encore son expression tissulaire."
@@ -769,9 +769,8 @@ L'étape de filtrage a pour principal objectif de restreindre le nombre de varia
 
 Comme nous l'avons vu, le développement d’outils permettant l’analyse et le filtrage des données NGS est extrêmement important puisqu'il permet aux biologistes de faire face à la masse de données générée par le séquençage haut-débit l'aidant ainsi dans ses prises de décisions. Il est à noter que la plupart de ces données filtrées sont extrêmement dépendantes du jeu de transcrits utilisés. Les prédictions seront donc différentes si l'on se base sur les transcrits RefSeq, Ensembl ou UCSC [@McCarthy2014,@Zhao2015] bien que les transcrits du *Consensus Coding Sequence project* (CCDS) soient bien représentés par ces trois listes [@Pruitt2009]. De même, pour une même liste de gène, de nombreuses différences seront observées en fonction du ou des logiciels de prédiction utilisés [@McCarthy2014; @Salgado2016].  
 
-\newpage
 
-```{r pictfilter,fig.cap='(ref:pictfilter)',fig.scap=fig_name,out.extra="scale=.3"}
+```{r pictfilter,fig.cap='(ref:pictfilter)',fig.scap=fig_name,out.extra="scale=.25"}
 
 fig_name <- "Représentation simplifié du processus de filtrage des variants"
 fig_description <- "L'ensemble des annotations ajoutées lors de l'étape précédente servent alors de support pour filtrer (ou non) les variants. Il est par exemple commun de filtrer les variants ayant une forte fréquence dans la population générale ou encore ceux ayant un impact faible sur la protéine. De même dans le cas d'étude sur des pathologies ayant un mode de transmission récessif, les variants hétérozygotes pourront être également filtrés."

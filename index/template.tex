@@ -82,6 +82,27 @@
 % \usepackage{times} % other fonts are available like times, bookman, charter, palatino
 
 
+
+%%% Mise en page des titres (TK)
+\xdefinecolor{royalblue}{named}{RoyalBlue}
+\titleformat{\chapter}[display]
+{\vfill}
+{{%
+   \normalfont\fontsize{48pt}{48pt}\sffamily\color{royalblue}\MakeUppercase{\chaptername}
+   \fontsize{48pt}{48pt}\selectfont\thechapter%
+ }%
+}
+{5pt}
+{\Huge\normalfont
+ \parbox{\textwidth-\widthof{\LARGE\sffamily\MakeUppercase{\chaptername}}}%
+}[\vfill\clearpage]
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+%%%
+
+
+
+
+
 % To pass between YAML and LaTeX the dollar signs are added by CII
 \title{$title$}
 \author{$author$}
