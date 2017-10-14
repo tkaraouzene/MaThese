@@ -2480,7 +2480,7 @@ kable(df_run_bigmmaf %>%
 
 ```
 
-\includepdf[pages=-]{bib/CFAP_2017.pdf}
+\includepdf[pages=1-61]{bib/CFAP_2017.pdf}
 
 \newpage
 

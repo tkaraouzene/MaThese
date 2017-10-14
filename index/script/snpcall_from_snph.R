@@ -1,1 +1,1 @@
-../../../testr/R/snpcall_from_snph.R
+../../../exomer/R/snpcall_from_snph.R

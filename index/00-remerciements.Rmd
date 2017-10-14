@@ -7,13 +7,12 @@ Je remercie Madame le Professeur Christel THAUVIN et Messieurs le Docteur Julien
 
 À Pierre pour m'avoir fait confiance toutes ces années et pour m'avoir permis de réaliser cette thèse.  
 
-À Nicolas, qui as du s'arracher les yeux sur certains de mes codes, pour m'avoir inculqué, avec le temps, sa méthode et sa rigeur.  
-
+À Nicolas, qui as dû  s'arracher les yeux sur certains de mes codes, pour m'avoir inculqué, avec le temps, sa méthode et sa rigueur.  
 À l'ensemble des l'équipes GETI, en particulier Zine pour toutes nos discussions, les tacos et les bons moments.  
 
-À l'ensemble de l'équipe BCM, en particulier, Florient, Keurcien (mon fils adoptif), Kévin et Thomas, les fous du ![r logo](figure/r_logo.jpg){ width=5% } pour toutes les discussions (du coup déterminisme ou pas ?), les barbecues, le *Fight Club*... À quand la *start-up* de la *Data Team* ?    
+À l'ensemble de l'équipe BCM, en particulier, Florient le *BCM* ![r logo](figure/r_logo.jpg){ width=4% }*-Hero*, Keurcien (mon fils adoptif), Kévin et Thomas, les fous du  pour toutes les discussions (du coup déterminisme ou pas ?), les barbecues, le *Fight Club*... À quand la *start-up* de la *Data Team* ?    
 
-Carlos et johnny Cage pour tous les fous rires que nous avons eu ensemble pendant ces dernières années.  
+Carlos et Johnny Cage pour tous les fous rires que nous avons eu ensemble pendant ces dernières années.  
 
 À Agnès et Gérard pour avoir pris le temps de relire mon manuscrit et corriger mes nombreuses fautes.  
 

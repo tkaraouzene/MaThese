@@ -305,9 +305,7 @@ Dans autre partie de mon travail de thèse j'ai pu prendre part à la caractéri
 
 Au cours des différents travaux réalisés au cours de ma thèse, nous avons pu constater la puissance des technologies de séquençage haut-débit. En effet, en seulement 5 ans, celles-ci ont permis l'identification de 5 nouveaux gènes impliqués dans des phénotypes d'infertilité au sein de notre laboratoire. Ces résultats sont cependant à relativiser puisque qu’aucun candidat n'a pu être identifié pour 68% des patients analysés. Plusieurs raisons peuvent expliquer cela. Tout d'abord, au cours des analyses décrites dans ces manuscrits nous nous concentrons uniquement sur les SNPs et les indels. Cependant de nombreux logiciels tel que ExomeDepth [@Plagnol2012], CoNIFER [@Krumm2012] ou encore ExomeCNV [@Sathirapongsasuti2011] permettent de détecter des CNVs à partir de données WES et / ou WGS. Les stratégies de prédictions de ces logiciels pouvant être extrêmement différents (**Figure : **\@ref(fig:pictcnvdetection)), le profil des CNVs détectés ou non le sera aussi [@Zhao2013 ; @Guo2013]. Ainsi, dans des analyses non décrites dans ce manuscrit, j'ai pu chercher à identifier des CNVs à partir de nos données d'exome à l'aide du logiciel ExomeDepth [@Plagnol2012]. Cette approche a été extrêmement concluante puisqu'elle a permis d'identifier une délétion homozygote sur le gène *WDR66* chez 7 de nos patients pour lesquels aucun candidat n'avait été alors identifié. Ces délétions ont ensuite pu être confirmées par PCR et la caractérisation de ce gène est actuellement en cours au sein de notre équipe. Au vu de cette réussite, il est désormais prévu d'intégrer ce genre d'analyse de manière automatique et systématique au sein de notre pipeline.  
 
-\newpage
-
-```{r pictcnvdetection,fig.cap='(ref:pictcnvdetection)',fig.scap=fig_name, out.extra="scale=0.55"}
+```{r pictcnvdetection,fig.cap='(ref:pictcnvdetection)',fig.scap=fig_name, out.extra="scale=0.46"}
 
 fig_name <- "Présentation de cinq approches permettant la détection de CNVs à partir de données NGS"
 fig_from <- "[@Zhao2013]"

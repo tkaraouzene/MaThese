@@ -24,7 +24,7 @@
 %% Preamble
 %%
 % \documentclass{<something>} must begin each LaTeX document
-\documentclass[12pt,twoside]{ugathesis}
+\documentclass[12pt,a4paper,twoside]{ugathesis}
 % Packages are extensions to the basic LaTeX functions. Whatever you
 % want to typeset, there is probably a package out there for it.
 % Chemistry (chemtex), screenplays, you name it.
@@ -57,6 +57,7 @@
 \newcommand{\elandscape}{\end{landscape}}
 \usepackage[utf8]{inputenc}
 
+
 % Next line commented out by CII
 %%% \usepackage{natbib}
 % Comment out the natbib line above and uncomment the following two lines to use the new
@@ -84,7 +85,6 @@
 
 
 %%% Mise en page des titres (TK)
-\xdefinecolor{royalblue}{named}{RoyalBlue}
 \titleformat{\chapter}[display]
 {\vfill}
 {{%
@@ -217,7 +217,7 @@ $endif$
 $if(lof)$
   \listoffigures
 $endif$
-
+rm 
 $if(abstract)$
   \begin{abstract}
     $abstract$
