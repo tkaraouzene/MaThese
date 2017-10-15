@@ -3,18 +3,19 @@
 
 Je remercie Messieurs le Professeurs Jacques VAN HELDEN et le Docteur Michaël MITCHELL d’avoir accepté la charge d’être rapporteurs de ma thèse.  
 
-Je remercie Madame le Professeur Christel THAUVIN et Messieurs le Docteur Julien THÉVENON d’avoir accepté de participer à mon jury et juger ce travail.  
+Je remercie Madame le Professeur Christel THAUVIN et Monsieur le Docteur Julien THÉVENON d’avoir accepté de participer à mon jury et juger ce travail.  
 
 À Pierre pour m'avoir fait confiance toutes ces années et pour m'avoir permis de réaliser cette thèse.  
 
 À Nicolas, qui as dû  s'arracher les yeux sur certains de mes codes, pour m'avoir inculqué, avec le temps, sa méthode et sa rigueur.  
+  
 À l'ensemble des l'équipes GETI, en particulier Zine pour toutes nos discussions, les tacos et les bons moments.  
 
-À l'ensemble de l'équipe BCM, en particulier, Florient le *BCM* ![r logo](figure/r_logo.jpg){ width=4% }*-Hero*, Keurcien (mon fils adoptif), Kévin et Thomas, les fous du  pour toutes les discussions (du coup déterminisme ou pas ?), les barbecues, le *Fight Club*... À quand la *start-up* de la *Data Team* ?    
+À l'ensemble de l'équipe BCM, en particulier, Florient le *BCM* ![r logo](figure/r_logo.jpg){ width=4% }*-Hero*, Keurcien (mon fils adoptif), Kévin et Thomas, pour toutes les discussions (du coup déterminisme ou pas ?), les barbecues, le *Fight Club*... À quand la *start-up* de la *Data Team* ?    
 
-Carlos et Johnny Cage pour tous les fous rires que nous avons eu ensemble pendant ces dernières années.  
+À Carlos et Johnny Cage pour tous les fous rires que nous avons eu ensemble pendant ces dernières années.  
 
-À Agnès et Gérard pour avoir pris le temps de relire mon manuscrit et corriger mes nombreuses fautes.  
+À Agnès pour avoir pris le temps de relire mon manuscrit et corriger mes nombreuses fautes.  
 
 À mes amis, toujours présents malgré la distance.  
 
@@ -24,7 +25,7 @@ Carlos et Johnny Cage pour tous les fous rires que nous avons eu ensemble pendan
 
 À Dadette et Marco pour m'avoir accueilli pendant ces cinq années, et tous les débats parfois endiablés que nous avons pu avoir ensemble. "*Hakuna Matata*".  
 
-À Aurélien pour tous ces moments de "luronage", les grecs, les parties de tarots, nos années *Bell & Barksdale*. N'oublie jamais, "*le lion ne pactise pas avec les hommes*".
+À Aurélien pour tous ces moments de "luronage", les grecs, les parties de tarots, nos années *Bell & Barksdale*. N'oublie jamais, "*le lion ne pactise pas avec les Hommes*".
 
 À mes parents, pour avoir toujours été à mes côtés quelques soit mes choix. Pour votre amour et votre dévouement indéfectible. Votre mission est désormais accomplie, profitez bien de votre vie de grands-parents.  
 
