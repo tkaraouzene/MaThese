@@ -284,8 +284,6 @@ Cette étude a pour nous été l'occasion de mieux caractériser la protéine *D
 
 Ces résultats ne nous ont cependant pas permis d'expliquer l'absence de la protéine Plcz1 dans le spermatozoïde globozoocéphale murin l'expression du gène *Plcz1* n'ayant montré aucune dérégulation chez la souris *Dpy19l2*^-/-^. De même, aucun des gènes retrouvés comme dérégulés ne nous a permis d'expliquer le biais de sexe que nous avions observés. Cela n'a pas été une surprise pour nous puisque après avoir entamé notre étude, une dernière portée issues d'un croisement de souris *Dpy19l2*^+/-^ a vue le jours. Celle-ci état composée de `r n_male_last` souriceaux mâles et de `r n_female_last` souriceaux femelles. Ainsi, avec un total de `r n_male_all` souris mâles pour `r n_female_all` souris femelles, la p-valeur de notre test du $\chi^2$ à `r p_test_all` laissant cette fois-ci supposer la non-existence d'un biais de sexe dans les naissances issues d'un croisement de souris *Dpy19l2*^-/-^.
 
-\newpage 
-
 ```{r plotmolfunction, cache=TRUE, dependson="dfmolfunction", warning=FALSE, message=FALSE, fig.height=8, fig.width=6.5, fig.cap='(ref:plotmolfunction)', fig.scap='(ref:plotmolfunctiontitle)'}
 
 fig_name <- "Principales fonctions moléculaires affectées chez les souris *Dpy19l2* KO"

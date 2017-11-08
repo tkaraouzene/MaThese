@@ -223,11 +223,12 @@ gene_to_run <- function(df, genes) {
 
 ```{r callfunction, cache=TRUE}
 
+
 call_to_strand <- function(call) {
   
   in_ds <- c(1:9)
   in_ss <- letters
-  in_ns <- 0
+  in_ns <- c(0,"*")
   
   out_ds <- rep("DS", length(in_ds))
   out_ss <- rep("SS", length(in_ss))
@@ -244,7 +245,7 @@ call_to_geno <- function(call) {
   in_ref <- c(1, "a")
   in_homo <- c(3, "c")
   in_het <- c(2, "b")
-  in_none <- 0
+  in_none <- c(0,"*")
   in_ambi <- c(4:7,"d","e","f","g","h","i")
   in_disc <- c(8,9)
   
@@ -332,7 +333,7 @@ Comme nous l'avons vu plus [ci-dessus](#varcall), il est fortement conseillé d'
 
 Ainsi, les sommes : $R_+ + V_+$ et $R_- + V_-$ indiqueront respectivement la couverture d'une position en ne tenant que des *reads forward* et *reverse*. En fonction de ces couvertures, nos appels seront classés en trois catégories :   
 
-1. **Les appels *double strand* (DS)** :  ils qualifient les positions ayant une couverture $\ge$ 10 sur **les deux** *strands*. Ces appels sont ceux ayant la meilleure qualité.  
+1. **Les appels *double strand* (DS)** :  ils qualifient les positions ayant une couverture $\ge$ 10 sur **les deux** *strands*. Ces appels sont ceux ayant la meilleure qualité. Le choix de la valeur 10 comme critère de couverture minimum est basée sur l'analyse de nos données et sera explicité plus tard dans le manuscrit.    
 
 2. **Les appels *single strand* (SS)** :  ces appels définissent les positions pour lesquelles **un des deux** *strands* présente une couverture $\le$ 10. Dans ce cas, ce *strand* est ignoré et l'appel est effectué uniquement en utilisant le second *strand*.   
 
@@ -643,6 +644,32 @@ df_geno_all <- df_fam_call %>%
   bind_rows(data_frame(RUN = "Ghs113", CALL = "Heterozygous", TYPE = "Indel", N = 0, P = 0, IS_RETAINED = "No")) %>% # it permits to have the "no" field in the legend of the barplot
   bind_rows(data_frame(RUN = "Ghs113", CALL = "Heterozygous", TYPE = "Indel", N = 0, P = 0, IS_RETAINED = "Yes but low quality")) 
 
+
+df_count_geno <- fread("~/count_geno_all_chr.csv", data.table = FALSE, header = TRUE) %>% 
+  mutate(CALL = call_to_strand(CALL),
+         GENO = call_to_geno(CALL)) %>% 
+  group_by(MIN_COV, CALL, PATIENT) %>% 
+  
+  summarise(COUNT = sum(COUNT)) %>% 
+  group_by(MIN_COV, CALL) %>% 
+  summarise(COUNT = median(COUNT))
+
+df_count_concordant <- fread("~/count_geno_all_chr.csv", data.table = FALSE, header = TRUE) %>% 
+  mutate(GENO = call_to_geno(CALL),
+         GENO = if_else(GENO == "Discordant","Discordant",
+                        if_else(GENO == "Ambigous", "Ambigous", "Concordant")),
+         CALL = call_to_strand(CALL)) %>% 
+  filter(CALL == "DS") %>% 
+  group_by(MIN_COV, GENO, PATIENT) %>% 
+  summarise(COUNT = sum(COUNT)) %>%  
+  group_by(MIN_COV, GENO) %>% 
+  summarise(COUNT = median(COUNT)) %>%  
+  group_by(MIN_COV) %>% 
+  mutate(SUM = sum(COUNT)) %>%
+  group_by(MIN_COV, GENO) %>% 
+  summarise(PERCENT = COUNT / SUM)
+
+
 ```
 
 ```{r varvarcall, cache=TRUE, dependson="dfvarcall"}
@@ -664,6 +691,11 @@ median_het_indel <- df_geno_all %>% filter(TYPE == "Indel" & CALL == "Heterozygo
 
 median_homo_snv <- df_geno_all %>% filter(TYPE == "SNV" & CALL == "Homozygous") %>% collect() %>% .[["N"]] %>% median %>% as.integer
 median_homo_indel <- df_geno_all %>% filter(TYPE == "Indel" & CALL == "Homozygous") %>% collect() %>% .[["N"]] %>% median %>% as.integer
+
+p_concordant_1 <- df_count_concordant %>% filter(MIN_COV == 1, GENO == "Concordant") %>% collect() %>% .[["PERCENT"]] %>% round(3) *100  
+p_concordant_100 <- df_count_concordant %>% filter(MIN_COV == 100, GENO == "Concordant") %>% collect() %>% .[["PERCENT"]] %>% round(3) *100  
+                                                                                       
+
 
 ```
 
@@ -1252,7 +1284,13 @@ plot_grid(row1,row2, pD, ncol = 1, labels = c("","","D"), rel_heights = c(1,.7,.
 
 #### L'appel des variants  
 
-Une fois l'alignement effectué, il faut identifier les positions présentant des différences avec le génome de référence et leur assigner un génotype. Ce génotype étant dépendant du pourcentage de *reads* variants à une position donnée, il est nécessaire, afin de calibrer les bornes de notre algorithme d'appel, de connaître la répartition globale de ces proportions. Comme attendu, nous observons des pics à 0, 50 et 100% de *reads* variants pour une position donnée, ces trois pourcentages correspondant respectivement aux appels "homozygote référence", "hétérozygote" et "homozygote variant". La démarcation séparant les appels hétérozygote et homozygote variant est relativement claire. La distinction de ces deux génotypes ne pose donc pas de problème, la région d'ambiguïté allant de 75 à 85% de *reads* variants ne concernant qu'une minorité de positions. Ce n'est cependant pas le cas pour celle séparant les appels homozygote référence et hétérozygote. En effet, on peut constater que la zone d'ambiguïté allant de 20 à 40% de *reads* variants concerne une part non négligeable des positions couvertes. Les positions SS situées dans cette région seront systématiquement filtrées. Pour les positions DS, celles pour lesquelles **un seul** des *strand* se situe dans cette région alors que l'autre se trouve dans une des régions adjacentes (homozygote référence ou hétérozygote) seront conservées. Les autres seront filtrées elles aussi (**Figure : **\@ref(fig:plotdensityvar)). 
+Une fois l'alignement effectué, il faut identifier les positions présentant des différences avec le génome de référence et leur assigner un génotype. Tout d'abord, afin de conserver uniquement les positions auxquels il sera possible d'effectuer un appels de qualité, il est nécessaire de filtrer les positions ne présentant pas une couverture suffisante. Pour cela, nous avons fait varié notre critère de filtre de couverture minimum de 1 à 100 afin. Ainsi, nous avons pu quatifié, pour chacune des valeurs de filtre, la quantité d'appels DS, SS et NS  d'observerla quantité de position.  
+
+On peut ainsi constater qu'à partir de 10, la quantité d'appel NS augmente considérablement, tandis que le nombre d'appel DS et SS chute. Ainsi, au-delà ce cette valeur, un nombre important de positions ne respectent plus les critère qualité et sont ainsi filtrées (**Figure : **\@ref(fig:plotcountgeno) - **A**).  
+De même, on peut constater que parmis les appels DS, cette valeur n'influe que très peu sur le pourcentage d'appel concordant, ambigus et discordant. En effet, les appels concordant passent de `r p_concordant_1` avec une couverture minimum de 1 à `r p_concordant_100` avec une couverture minimum de 100 par *strand* (**Figure : **\@ref(fig:plotcountgeno) - **B**).  
+
+
+Ensuite, le génotype étant dépendant du pourcentage de *reads* variants à une position donnée, il est nécessaire, afin de calibrer les bornes de notre algorithme d'appel, de connaître la répartition globale de ces proportions. Comme attendu, nous observons des pics à 0, 50 et 100% de *reads* variants pour une position donnée, ces trois pourcentages correspondant respectivement aux appels "homozygote référence", "hétérozygote" et "homozygote variant". La démarcation séparant les appels hétérozygote et homozygote variant est relativement claire. La distinction de ces deux génotypes ne pose donc pas de problème, la région d'ambiguïté allant de 75 à 85% de *reads* variants ne concernant qu'une minorité de positions. Ce n'est cependant pas le cas pour celle séparant les appels homozygote référence et hétérozygote. En effet, on peut constater que la zone d'ambiguïté allant de 20 à 40% de *reads* variants concerne une part non négligeable des positions couvertes. Les positions SS situées dans cette région seront systématiquement filtrées. Pour les positions DS, celles pour lesquelles **un seul** des *strand* se situe dans cette région alors que l'autre se trouve dans une des régions adjacentes (homozygote référence ou hétérozygote) seront conservées. Les autres seront filtrées elles aussi (**Figure : **\@ref(fig:plotdensityvar)). 
   
 Dans nos données, les appels SS sont majoritaires et représentent environ `r median_percent_ss` % de nos appels (contre `r median_percent_ds` % d'appels DS). Au vu de l'importance de ces appels, nous avons fait le choix de les conserver afin de ne pas filtrer une quantité trop importante de données. Ces appels seront cependant considérés comme étant de faible qualité, de fait, leurs analyses et interprétation seront plus précautionneuses. En revanche, au vu de la trop grande incertitude de l'appel des variants NS, ceux-ci sont systématiquement filtrés éliminant ainsi entre `r min_percent_ns` et `r max_percent_ns` % des positions appelées pour chaque patient (**Figure : **\@ref(fig:plotvarcall) - **A**).  
 
@@ -1261,6 +1299,45 @@ De même, les appels discordant et ambigus sont filtrés, soit environ `r wrong_
 Pour l'ensemble des variants ayant passé les filtres énoncés ci-dessus, c'est à dire les variants SS et les variants DS avec appels concordants, le génotype est déterminé en fonction du pourcentage de *reads* portant le variant à cette position. Ainsi, pour chaque individu nous avons pu établir une liste de SNVs et d'indels avec leur génotype associé. Pour chacun de nos `r nb_fam_run` patients, les ordres de grandeur du nombre de variants appelés sont identiques. Ainsi pour chaque patient nous avons appelé environ `r median_het_snv + median_het_indel` variants hétérozygotes (`r median_het_snv` SNVs et `r median_het_indel` indels) et `r median_homo_snv + median_homo_indel` variants homozygotes (`r median_homo_snv` SNVs et `r median_homo_indel` indels) (**Figure : **\@ref(fig:plotvarcall) - **C**).    
 
 \newpage
+
+
+
+```{r plotcountgeno,dependson="dfvarcall", fig.cap='(ref:plotcountgeno)',fig.scap='(ref:plotcountgenotitle)', fig.height=8, warning=FALSE}
+
+fig_name <- "Détermination de la valeur de couverture minimale"
+fig_description_A <- "**A** : Quantification du nombre médian d'appels DS, SS et NS pour chaque valeur de couverture minimum testée. On note une augmentation du nombre d'appel NS à partir de 10 tandis qu'à partir de cette même valeur les appels DS et SS diminuent"
+fig_description_B <- "**B** : Quantification, parmi les appels DS, du pourcentage médian d'appel discordant et ambigu. Pour chaque valeur de couverture minimum, le pourcentage d'appel concordant (non représenté) peux être déterminé ainsi : 100 - (%Ambigu + %Discordant). Pour les deux graphique, la ligne verticale noire pointe la valeur de couverture minimale 10 séléctionnée pour la suite des analyses."
+fig_description <- paste(fig_description_A,fig_description_B, sep = ". ")
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
+
+pA <- ggplot(df_count_geno , aes(MIN_COV, COUNT, col = CALL)) + 
+  geom_point() +
+  geom_line() +
+  geom_vline(xintercept = 10) +
+  scale_color_manual(name = "Type of call", limits = c("DS", "SS","NS"), values = c("chartreuse3", "#FF7F00", "#E41A1C")) +
+  scale_x_continuous(breaks = seq(0,100,10)) +
+  xlab("Minimum coverage filter") +
+  ylab("Nb of position")
+
+pB <- ggplot(df_count_concordant %>% filter(GENO != "Concordant"), aes(MIN_COV, PERCENT, col = GENO)) + 
+  geom_point() +
+  geom_line() +
+  geom_vline(xintercept = 10) +
+  scale_color_manual(name = "Call match type", values = c("Darkgrey", "#E41A1C")) +
+  scale_x_continuous(breaks = seq(0,100,10)) +
+  scale_y_continuous(labels = scales::percent) +
+  ylab("Percent of call") + 
+  xlab("Minimum coverage filter")
+
+plot_grid(pA, pB,labels = c("A", "B"), ncol = 1)
+
+```
+
+(ref:plotcountgenotitle) `r fig_name`   
+(ref:plotcountgeno) `r fig_cap` 
+
+\newpage
+
 
 ```{r plotdensityvar,fig.cap='(ref:plotdensityvar)',fig.scap='(ref:plotdensityvartitle)'}
 
