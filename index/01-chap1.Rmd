@@ -43,6 +43,34 @@ knitr::opts_chunk$set(fig.align='center',echo=FALSE)
 knitr::opts_knit$set(kable.force.latex = TRUE)
 ```
 
+## L'ovogenèse  
+
+Les bases de l'ovogénèse (avec un petit schéma) 
+the egg completes the first meiosis and starts the second meiosis just prior to ovulation. Second meiosis is arrested in metaphase and only resumes in case of fertilization [@Tosti2016]
+
+résumé de l'inrto PATL2
+
+
+ 
+
+L'activation ovocytaire est produite chez l'ensemble des animaux par la fertilisation d'un spermatozoïde. Celle-ci entrainera une augmentation de la concentration cytosolique en Ca^2+^ [@Stricker]. Chez les mamifères, la fusion spermatozoïde-ovocyte est le déclencheur de séries distinctes d'oscillations du Ca^2+^ cytosolique nécessaires au développement normal de l'embryon [@Miyazaki1993; @Stricker]. Ces observations on rapidement permis l'emergence de l'hypothèse d'un facteur spermatique qui, lors de la fécondation, était relargé et générait ces oscillations Ca^2+^ [@Swann1990; @Stricker]. Cette hypothèse étant supportée par deux principales observations. Tout d'abord, le fait que la fusion des cytoplasmes du spermatozoïdes et de l'ovocytes était le prélude de ces oscillations Des expermimentations [@Sun1992; @Lawrence1997]. Ensuite, le fait que l'injection d'un spermatozoïde ou d'extrait soluble de spermatozoïdes entrainait des oscillations Ca^2+^ similaires à celles observées lors de la fécondation [@Swann1990; @Wu1997; @Wu1998; @Stricker1997; @Tang2000]. C'est en 2002 que la protéine PLC zeta ($\zeta$) fut pour la première fois reporté comme étant, chez la souris, responsable de ces oscillations déclachant ensuite une cascade de réactions dont découle éventuellement l'activation ovocytaire et le développement embryonnaire [@Saunders2002] (**Figure :** \@ref(fig:oocytefertilisation)).
+       
+```{r oocytefertilisation, fig.cap='(ref:oocytefert)', fig.scap=fig_name,out.extra="scale=.72"}
+
+fig_name <- "La fécondation, liaison spermatozoïde-ovocyte et sortie de la méiose"
+fig_from <- "[@Clift2013]"
+fig_description <- "Suite à la fusion spermatozoïde-ovocyte, la protéine PLCZ induit la production de nositol 1,4,5-trisphosphate (Ins(1,4,5)P$_3$) qui se lie à son recepteur causant ainsi le relargage de Ca^2+^ qui, entre autre, fera sortir l'ovocyte de son stade de méiose pour rentrer en mitose"
+
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig_from, "** : ", fig_description)
+
+
+include_graphics(path = "figure/oocyte_fertilization.png")
+
+```
+
+(ref:oocytefert) `r fig_cap`
+
+
 ## La spermatogenèse  
 
 La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés [@Gnessi1997; @Sharpe1994; @KIERSZENBAUM1994]. C'est au cours de celle-ci, qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : la phase de multiplication, la phase de division (appelée la [méiose](#meiose)) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continu dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et impliquent trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïdes s'élève environ à 45 millions par testicule [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes du cycle spermatogénétique a une durée fixe et constante selon les espèces (**Table : **\@ref(tab:spermatotime)).   
@@ -361,7 +389,7 @@ Comme il a déjà été dit, il est estimé que 10 à 15% des couples humains fo
 
 \newpage
 
-```{r chry,fig.cap='(ref:chry)',,fig.scap=fig_name,out.extra="scale=.45"}
+```{r chry,fig.cap='(ref:chry)', fig.scap=fig_name,out.extra="scale=.45"}
 
 fig_name <- "Représentation schématique du chromosome Y"
 fig_from <- "[@OFlynnOBrien2010]"
