@@ -745,6 +745,105 @@ p_concordant_100 <- df_count_concordant %>% filter(MIN_COV == 100, GENO == "Conc
 
 ```
 
+<!-- CALL COMPARAISON -->
+
+```{r dfcallcomp, dependson="callfunction", cache=TRUE}
+
+our_call_df <- fread("data/comparaison/all_call_our_pipeline.csv", data.table = FALSE, header = TRUE) %>% 
+  gather(RUN, OUR_GENO, starts_with("Ghs"))  %>%
+  mutate(OUR_GENO = call_to_geno(OUR_GENO)) %>% 
+  filter(!(OUR_GENO %in% c("Reference", "None")))
+
+evry_call_files <- list.files("data/comparaison/", pattern = "Ghs", full.names = TRUE)
+
+compare_df <- foreach(evry_file = evry_call_files, .combine='rbind') %do% {
+
+    tmp <- sub(".*//", "", evry_file) 
+    run <- sub("_.*", "", tmp)
+
+    fread(evry_file, data.table = FALSE, header = TRUE) %>% filter(CHR %in% c(1:22)) %>% mutate(REF = as.character(REF),
+                                                                                                ALT = as.character(ALT),
+                                                                                                CHR = as.integer(CHR)) %>% 
+      rename(EVRY_GENO = GENOTYPE) %>%
+      full_join(our_call_df %>% 
+                  filter(RUN == run), 
+                by = c("CHR", "POSITION", "REF", "ALT")) %>% 
+      replace_na(list(OUR_GENO = "Not called", 
+                      EVRY_GENO = "Not called")) %>%
+      group_by(OUR_GENO, EVRY_GENO) %>%
+      summarise(Run = run,
+                Count = n())
+} %>% group_by(OUR_GENO, EVRY_GENO) %>% 
+  summarise(Count = median(Count)) %>%
+  ungroup() %>% 
+  filter(EVRY_GENO != "Het comp.") %>%
+  mutate(Percent = Count / sum(Count),
+         OUR_GENO = if_else(OUR_GENO == "*", "NS", OUR_GENO))
+
+compare_count_df <- compare_df %>% 
+  rename(`Magic + in-house algo` = OUR_GENO, `BWA + GATK-HC` = EVRY_GENO) %>% 
+  gather(Who, Genotype, `Magic + in-house algo`:`BWA + GATK-HC`) %>% 
+  filter(grepl("zygous", Genotype)) %>% 
+  group_by(Who) %>%
+  summarise(Count = sum(Count))
+
+disc_amb_df <- compare_df %>% 
+  filter(OUR_GENO %in% c("Discordant", "Ambigous", "NS"), 
+         EVRY_GENO != "Not called")
+
+not_called_comp_df <- compare_df %>%
+  filter(OUR_GENO == "Not called" | EVRY_GENO == "Not called",
+         grepl("zygous|called", OUR_GENO)) %>% 
+  rename(`Magic + in-house algo` = OUR_GENO, `BWA + GATK-HC` = EVRY_GENO) %>% 
+  gather(Who, Genotype, `Magic + in-house algo`:`BWA + GATK-HC`) %>% 
+  filter(Genotype != "Not called") 
+
+called_comp <- compare_df %>% 
+  filter(grepl("zygous", OUR_GENO), EVRY_GENO != "Not called") %>% 
+  mutate(Percent = (Count / sum(Count) * 100) %>% round(2)) %>% arrange(desc(Count)) %>% 
+  rename(`Magic + in-house algo` = OUR_GENO, `BWA + GATK-HC` = EVRY_GENO)
+
+```
+
+```{r varcallcomp, dependson="dfcallcomp", cache=TRUE}
+
+percent_concordance <- called_comp %>% mutate(Concordant = `Magic + in-house algo` == `BWA + GATK-HC`) %>% 
+  group_by(Concordant) %>%
+  mutate(Percent_concordancy = sum(Percent)) %>% distinct(Percent_concordancy) %>%
+  filter(Concordant == TRUE) %>% collect() %>% .[["Percent_concordancy"]]
+
+nb_evry <- compare_count_df %>% 
+  filter(Who == "BWA + GATK-HC") %>%
+  collect() %>% .[["Count"]]
+
+nb_us <- compare_count_df %>% 
+  filter(Who == "Magic + in-house algo") %>%
+  collect() %>% .[["Count"]]
+
+nb_disc_evry <- disc_amb_df %>% 
+  group_by(OUR_GENO) %>% 
+  summarise(Count = sum(Count)) %>% 
+  filter(OUR_GENO == "Discordant") %>% 
+  collect() %>% .[["Count"]]
+
+nb_ambigous_evry <- disc_amb_df %>% 
+  group_by(OUR_GENO) %>% 
+  summarise(Count = sum(Count)) %>% 
+  filter(OUR_GENO == "Ambigous") %>% 
+  collect() %>% .[["Count"]]
+
+nb_ns_evry <- disc_amb_df %>% 
+  group_by(OUR_GENO) %>% 
+  summarise(Count = sum(Count)) %>% 
+  filter(OUR_GENO == "NS") %>% 
+  collect() %>% .[["Count"]]
+
+
+p_disc_amb_evry <- (((nb_disc_evry + nb_ambigous_evry + nb_ns_evry) / (nb_evry - nb_us)) * 100) %>% round(1)
+
+
+```
+
 <!-- ANNOTATION -->
 
 ```{r dfannotation, cache=TRUE} 
@@ -1434,9 +1533,6 @@ include_graphics(path = density_plot_file)
 (ref:plotdensityvartitle) `r fig_name`   
 (ref:plotdensityvar) `r fig_cap` 
 
-
-
-
 \newpage
 
 ```{r plotvarcall, dependson="dfvarcall", fig.cap='(ref:plotvarcall)',fig.scap=fig_name, fig.height=7.5, cache=TRUE}
@@ -1489,6 +1585,62 @@ plot_grid(row1, pC,labels = c("", "C"), rel_heights = c(.52,.48), ncol = 1)
 
 (ref:plotvarcall) `r fig_cap` 
 
+\newpage
+
+Nous avons ensuite cherché à comparer les résultats obtenus par notre pipeline avec ceux obtenus par des legiciels déjà existant. Pour cela nous avons aligné les données de nos `r nb_fam_run` patients avec le logiciel BWA [@Li2009a] et effectué l'appel à l'aide de GATK-HC [@McKenna2010]. Ainsi, nous avons pu constater que `r nb_us` variants étaient appelés par notre pipeline avec un génotype hétérozygote ou homozygote tandis que `r nb_evry` était appelés par BWA + GATK-HC parmis soit `r nb_evry - nb_us` de plus que par notre pipeline (**Figure : **\@ref(fig:plotcompar) - **A**).  
+
+Cette différence n'est pas surprenante puisque, afin de ne séléctionner que les variants de confiance nous avons appliqué des critères de filtre stringent. On peut ainsi noté que parmis ces `r nb_evry - nb_us` variants, `r nb_disc_evry` d'entre-eux sont retrouvés comme discordant par notre pipeline, `r nb_ambigous_evry` sont retrouvés comme ambigus et `r nb_ns_evry` comme NS. Ainsi, on peut estimer que `r p_disc_amb_evry`% des variants que nous n'avons pas appelés sont appelés par BWA + GATK-HC avec un génotype soit erroné soit de faible confiance (**Figure : **\@ref(fig:plotcompar) - **B**).  
+
+Néanmoins, en ce qui concèrne les variants retrouvés à la fois par le duo BWA + GATK-HC et notre pipeline, `r percent_concordance`% des appels sont identiques aux deux procédures. (**Table : **\@ref(tab:tabcallcomp)).  
+
+```{r tabcallcomp, cache=TRUE, dependson="dfcallcomp"}
+
+caption <- "Comparaison des génotypes des variants appelés par les deux procédures"
+
+kable(called_comp,
+      format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+        caption = caption)
+
+```
+
+\newpage
+
+```{r plotcompar, cache=TRUE, dependson="dfcallcomp", fig.cap='(ref:plotcompar)',fig.scap=fig_name, fig.width= 6.3, fig.height=7.5}
+
+fig_name <- "Comparaison des variants obtenus par MAGIC + notre algorithme d'appel et BWA + GATK-HC"
+fig_description_A <- "**A** : Nombre de variants hétérozygotes ou homozygotes observé par les deux méthodes"
+fig_description_B <- "**B** : Quantification du nombre de variant appelés discordants, ambigous ou NS par notre méthode retrouvés par BWA + GATK-HC"
+# fig_description_C <- "**C** : "
+fig_description <- paste(fig_description_A,fig_description_B, sep = ". ")
+fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
+
+pA <- ggplot(compare_count_df, aes(Who, Count)) + 
+  geom_col() +
+  ylab("Nb of variant") + 
+  xlab("")
+
+pB <- ggplot(disc_amb_df, aes(EVRY_GENO, Count, fill = EVRY_GENO)) +
+  geom_col() +
+  facet_wrap(~OUR_GENO) +
+  scale_fill_brewer(palette = "Set1", guide = "none") +
+  ylab("Nb of variant") + 
+  xlab("")
+
+# pC <- ggplot(not_called_comp_df, aes(Genotype, Count, fill = Genotype)) +
+#   geom_col() +
+#   facet_wrap(~Who) + 
+#   ylab("Nb of not called") +
+#   scale_fill_brewer(palette = "Set1", guide = "none")
+# 
+# 
+# pC
+plot_grid(pA, pB, ncol = 1, labels = c("A","B"))
+
+```
+
+(ref:plotcompar) `r fig_cap` 
 
 \newpage
 
