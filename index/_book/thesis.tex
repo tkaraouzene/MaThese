@@ -2315,7 +2315,7 @@ l'alignement d'un même \emph{read} à plusieurs régions du génome
 ont émergé afin de répondre au mieux à cette problématique tel que
 Bowtie {[}\protect\hyperlink{ref-Langmead2009}{155}{]}, Bowtie2
 {[}\protect\hyperlink{ref-Langmead2012}{153}{]}, BWA
-{[}\protect\hyperlink{ref-Li2009a}{156}{]}, NovoAlign, MAGIC
+{[}\protect\hyperlink{ref-Li2009b}{156}{]}, NovoAlign, MAGIC
 {[}\protect\hyperlink{ref-Su2014}{157}{]}. De nombreuses études ont
 cependant montré de grandes différences entre ces aligneurs, au niveau
 du temps de calcul, de leur coût en mémoire et de leur taux d'erreur
@@ -2358,7 +2358,7 @@ position du génome de référence est appelé couverture.}\label{fig:picdnamapp
 
 \newpage
 
-\subsection{L'appel des variants}\label{varcall}
+\hypertarget{varcall}{\subsection{L'appel des variants}\label{varcall}}
 
 L'appel des variants, ou \emph{variant calling}, fait référence à
 l'ensemble des méthodes permettant d'identifier des SNVs ou des indels à
@@ -2803,41 +2803,3077 @@ l'étude, les variants / gènes restant seront ensuite prioriser de sorte
 
 
 
-\chapter*{Objectifs de la thèse}\label{objectifs-de-la-these}
-\addcontentsline{toc}{chapter}{Objectifs de la thèse}
+\newpage
+
+\section{Problématique : Un patient, 50.000 variants, à la fin il ne
+peut en rester qu'un. Et après
+?}\label{problematique-un-patient-50.000-variants-a-la-fin-il-ne-peut-en-rester-quun.-et-apres}
 
 Malgré l'identification régulière de nouveaux gènes depuis plusieurs
-année, la très grande majorité des cas d'infertilité masculine reste
-encore inexpliquée et sans cause génétique connue. Ce faible taux de
-succès peut s'expliquer en partie par une grande hétérogénéité génétique
-pour de nombreux phénotypes. Cette hétérogénéité est consistante avec la
-complexité et le grand nombre de protéines impliquées dans la
-spermatogénèse{[}\protect\hyperlink{ref-wistuba2007mammalian}{191}{]}.
-Il est estimé qu'entre 1500 et 2000 gènes sont impliqués dans le
-contrôle de la spermatogénèse parmi lesquels 300 à 600 sont
-spécifiquement exprimés dans les cellules germinales masculines, on
-s'attend logiquement à ce que des anomalies génétiques portant sur ces
-gènes perturbent la fertilité masculine
-{[}\protect\hyperlink{ref-Matzuk2008}{192}{]}. Cette abondance de gènes
-potentiellement candidats rend l'identification des mutations
-responsables difficile et complexe. Malgré cela, la découverte de
-nouveaux gènes impliqués dans l'infertilité masculine demeure
-primordiale pour une meilleure compréhension de sa physiopathologie et
-l'identification des acteurs intervenant aux différentes étapes de la
-spermatogénèse.
+année, la très grande majorité des cas d'infertilité reste encore
+inexpliquée et sans cause génétique connue. Ce faible taux de succès
+peut s'expliquer en partie par une grande hétérogénéité génétique pour
+de nombreux phénotypes. Par exemple, il est estimé qu'entre 1500 et 2000
+gènes sont impliqués dans le contrôle de la spermatogénèse parmi
+lesquels 300 à 600 sont spécifiquement exprimés dans les cellules
+germinales masculines, on s'attend logiquement à ce que des anomalies
+génétiques portant sur ces gènes perturbent la fertilité masculine
+{[}\protect\hyperlink{ref-Matzuk2008}{191}{]}.
 
-Ces recherches ont été facilitées ces dernières années par l'emmergence
-des techniques de séquençage haut-débit
+L'objectif de ma thèse a ainsi été double. Ma première mission a été de
+mettre en place une stratégie permettant l'analyse des données de
+séquençage haut débit de patients et patientes souffrant d'infertilité
+afin de mettre en évidence le variant responsables de leur phénotype.
+J'ai pour cela développé un pipeline d'analyse des données NGS que j'ai
+pu tester sur sept cas familiaux d'individus infertiles. J'ai égallement
+utilisés ce pipeline sur une cohorte de 15 femmes souffrant d'un
+syndrome déficience méiotique ovocytaire ainsi que sur une dernière
+cohorte de 78 patients présentant des anomalies morphologiques multiples
+au niveau des flagelles spermatiques.
 
-C'est dans ce contexte que s'intègre mon travail de thèse dont les
-objectifs ont été à la fois de mettre en place une stratégie d'analyse
-des données de séquençage haut-débit ainsi que de développer le pipeline
-permettant d'appliquer cette stratégie, mais aussi d'approfondir les
-connaissances des mécanismes génétiques et moléculaires à l'origine de
-l'infertilité masculine et en particulier de la globozoospermie. Ce
-travail permettra, nous l'espérons, d'envisager de nouvelles
-perspectives pour l'amélioration de la prise en charge diagnostique et
-thérapeutique des patients infertiles.
+La seconde mission de ma thèse a été de contribuer à la caractérisation
+moléculaire du gène \emph{DPY19L2} dont la délétion homozygote est
+responsable du phénotype de globozoospermie, un phénotype rare mais
+sévère de teratozoospermie menant à l'infertilité masculine.
+
+Au cours de cette thèse j'ai donc eu l'occasion de participer à
+l'ensemble des analyses permettant l'identification d'un gène comme
+responsable d'un phénotype en commençant par l'analyse bioinformatique
+des données de séquençage haut débit en finissant par la caractérisation
+moléculaire d'un gène.
+
+L'ensemble de ce manuscrit a été rédigé sous l'environnement de
+developpement Rstudio {[}\protect\hyperlink{ref-RStudioTeam2015}{192}{]}
+en language Rmarkdown grâce au package thesisdown
+\url{https://github.com/ismayc/thesisdown}. L'ensemble du manuscrit, les
+codes des différents graphiques qui le composent ainsi que ceux des
+principaux script développés pendant ma thèse son consultables sur la
+page GitHub : \url{https://github.com/tkaraouzene/}.
+
+\chapter*{Problématique : Un patient, 50.000 variants, à la fin il ne
+peut en rester qu'un. Et après
+?}\label{problematique-un-patient-50.000-variants-a-la-fin-il-ne-peut-en-rester-quun.-et-apres-1}
+\addcontentsline{toc}{chapter}{Problématique : Un patient, 50.000
+variants, à la fin il ne peut en rester qu'un. Et après ?}
+
+Malgré l'identification régulière de nouveaux gènes depuis plusieurs
+année, la très grande majorité des cas d'infertilité reste encore
+inexpliquée et sans cause génétique connue. Ce faible taux de succès
+peut s'expliquer en partie par une grande hétérogénéité génétique pour
+de nombreux phénotypes. Par exemple, il est estimé qu'entre 1500 et 2000
+gènes sont impliqués dans le contrôle de la spermatogénèse parmi
+lesquels 300 à 600 sont spécifiquement exprimés dans les cellules
+germinales masculines, on s'attend logiquement à ce que des anomalies
+génétiques portant sur ces gènes perturbent la fertilité masculine
+{[}\protect\hyperlink{ref-Matzuk2008}{191}{]}.
+
+L'objectif de ma thèse a ainsi été double. Ma première mission a été de
+mettre en place une stratégie permettant l'analyse des données de
+séquençage haut débit de patients et patientes souffrant d'infertilité
+afin de mettre en évidence le variant responsables de leur phénotype.
+J'ai pour cela développé un pipeline d'analyse des données NGS que j'ai
+pu tester sur sept cas familiaux d'individus infertiles. J'ai égallement
+utilisés ce pipeline sur une cohorte de 15 femmes souffrant d'un
+syndrome déficience méiotique ovocytaire ainsi que sur une dernière
+cohorte de 78 patients présentant des anomalies morphologiques multiples
+au niveau des flagelles spermatiques.
+
+La seconde mission de ma thèse a été de contribuer à la caractérisation
+moléculaire du gène \emph{DPY19L2} dont la délétion homozygote est
+responsable du phénotype de globozoospermie, un phénotype rare mais
+sévère de teratozoospermie menant à l'infertilité masculine.
+
+Au cours de cette thèse j'ai donc eu l'occasion de participer à
+l'ensemble des analyses permettant l'identification d'un gène comme
+responsable d'un phénotype en commençant par l'analyse bioinformatique
+des données de séquençage haut débit en finissant par la caractérisation
+moléculaire d'un gène.
+
+L'ensemble de ce manuscrit a été rédigé sous l'environnement de
+developpement Rstudio {[}\protect\hyperlink{ref-RStudioTeam2015}{192}{]}
+en language Rmarkdown grâce au package thesisdown
+\url{https://github.com/ismayc/thesisdown}. L'ensemble du manuscrit, les
+codes des différents graphiques qui le composent ainsi que ceux des
+principaux script développés pendant ma thèse son consultables sur la
+page GitHub : \url{https://github.com/tkaraouzene/}.
+
+\chapter{Mise en place d'une stratégie pour l'analyse des données
+exomiques -- application en recherche
+clinique}\label{mise-en-place-dune-strategie-pour-lanalyse-des-donnees-exomiques-application-en-recherche-clinique}
+
+\newpage
+
+En 2011, les bases moléculaires d'environ 3700 pathologies à
+transmission mendélienne avaient été élucidées. Cependant, pour une
+quantité équivalente de pathologies Mendéliennes (ou suspectées de
+l'être) cette cause reste un mystère
+{[}\protect\hyperlink{ref-Amberger2011}{190}{]}. Avec plusieurs
+centaines de pathologies caractérisées depuis 2010
+{[}\protect\hyperlink{ref-Ng}{193}{]}, les séquençages WGS et WES ont,
+depuis leur émergence, révolutionné les méthodes de recherche dans le
+cadre d'étude phénotype-génotype en permettant de manière rapide et à
+moindre coût le séquençage de la quasi-totalité des gènes humains. Dès
+lors, le défi de ces analyses n'est plus le séquençage de l'ADN mais
+l'interprétation des données massives produites. En effet, l'un des plus
+grands challenges des analyses phénotype-génotype réalisées par WES
+réside dans l'analyse de l'importante quantité de variants portée par
+chaque individu s'élevant à plusieurs dizaines de milliers lorsque l'on
+compare avec le génome de référence. Même après avoir retiré les
+variants retrouvés fréquemment dans la population générale, des méthodes
+additionnelles sont nécessaires pour prédire, parmi les variants
+restant, lesquels induisent des conséquences fonctionnelles sérieuses
+afin de les prioriser {[}\protect\hyperlink{ref-Pelak2010}{194}{]}. De
+nombreux logiciels tel que Variant Effect Predictor
+{[}\protect\hyperlink{ref-McLaren2016}{172}{]}, SnpEff
+{[}\protect\hyperlink{ref-Cingolani2012}{173}{]} ou encore ANNOVAR
+{[}\protect\hyperlink{ref-Wang2010}{174}{]} permettent d'identifier
+quels sont les variants qui ont un effet tronquant sur la protéine.
+Cependant, avec en moyenne 165 variants homozygotes ayant un effet
+tronquant retrouvés dans chaque exome
+{[}\protect\hyperlink{ref-Pelak2010}{194}{]} ces méthodes, bien
+qu'efficaces sont souvent insuffisantes.
+
+D'autres logiciels tel que Exomiser
+{[}\protect\hyperlink{ref-Robinson2014}{195}{]} vont, à partir d'une
+liste de variants déjà appelés, effectuer les étapes d'annotation, de
+filtrage et de priorisation. Malgré l'efficacité de ces logiciels, aucun
+d'entre eux ne couvre l'ensemble des étapes allant de l'alignement des
+\emph{reads} à la priorisation des variants, la plupart ayant pour point
+de départ une liste de variants appelés en amont. Ils ne contrôlent donc
+en aucune manière les étapes d'alignement et d'appel des variants. Or,
+comme il a été dit plus tôt, ces deux étapes constituent la base de
+l'analyse. Ce chapitre décrit à la fois la constitution d'un pipeline
+d'analyse des données de séquençage exomique recouvrant l'ensemble des
+étapes allant de l'alignement des séquences à la priorisation des
+variants ainsi que son utilisation dans le cadre de la recherche de
+mutations entrainant différents phénotypes d'infertilité d'une part au
+sein de cas familiaux et, d'autre part, au sein d'une large cohorte
+d'individus non apparentés présentant tous un phénotype MMAF. L'ensemble
+des scripts de ce pipeline ont été écrits en \texttt{Perl\ v5.10.1} et
+sont récuperables à l'adresse suivante :
+\url{https://github.com/tkaraouzene/ExSQLibur}. Les graphiques ont été
+réalisés en \includegraphics[width=0.04000\textwidth]{figure/r_logo.jpg}
+\texttt{v3.4.1} {[}\protect\hyperlink{ref-RCoreTeam2017}{196}{]}
+notamment grâce aux packages ggplot2
+{[}\protect\hyperlink{ref-Wickham2009}{197}{]} et cowplot
+\url{https://CRAN.R-project.org/package=cowplot}.
+
+\newpage
+
+\section{Méthode : Description du
+pipeline}\label{methode-description-du-pipeline}
+
+\subsection{\texorpdfstring{L'alignement des
+\emph{reads}}{L'alignement des reads}}\label{lalignement-des-reads}
+
+Comme expliqué plus tôt, l'étape d'alignement a pour objectif de
+repositionner l'ensemble des \emph{reads} d'un individu le long d'un
+génome de référence. Cette étape peut ainsi être comparée à la
+reconstruction d'un puzzle dans lequel chaque \emph{read} peut être
+assimilé à l'une des pièces tandis que le génome de référence serait ici
+le modèle (\textbf{Figure : }\ref{fig:picdnamapping}).
+
+L'ensemble de nos exomes ayant été réalisé en \emph{paired-end}, les
+deux extrémités de chaque fragment sont séquencées. Chaque \emph{end}
+d'un même \emph{read} peut donc être considérée comme un \emph{read} à
+part entière qui est aligné \textbf{indépendamment} le long du génome de
+référence ; l'information fournie par le \emph{paired-end} n'étant
+utilisée qu'\emph{a posteriori} en tant que critère qualité. Au sein de
+notre pipeline, cette étape est effectuée par le logiciel MAGIC
+{[}\protect\hyperlink{ref-Su2014}{157}{]}, qui, dans le cadre de nos
+études, s'est basé sur la version hg19 / GHRC37 du génome de référence.
+Suite à cet alignement, plusieurs critères sont observés afin de filtrer
+les \emph{reads} présentant une faible qualité d'alignement.
+
+Ainsi, le premier de ces filtres consiste à tout d'abord filtrer
+l'ensemble des \emph{reads} dupliqués, c'est à dire les \emph{reads}
+ayant des séquences parfaitement identiques, ceux-ci étant souvent le
+résultat d'un excès d'amplification au moment des PCRs effectuées en
+amont. De la même manière, afin d'éviter toute ambiguïté au moment de
+l'interprétation des résultats, l'ensemble des \emph{reads} s'étant
+aligné sur plusieurs régions du génome est aussi filtré. Une fois cela
+fait, nous vérifions la ``compatibilité'' des deux \emph{ends} composant
+chacun des \emph{reads} restant. Un \emph{read} est dit compatible
+lorsque les deux \emph{ends} qui le composent s'alignent face à face
+(une sur le brin sens du génome de référence et l'autre sur le brin
+anti-sens) et couvrent une zone ne faisant pas plus de 3 fois la taille
+médiane de l'insert. Les \emph{reads} dont les deux \emph{ends} se sont
+alignées mais ne remplissant pas ces conditions seront dits ``non
+compatibles'', ceux dont une seule des deux \emph{ends} s'est alignée
+seront appelés ``orphelins'' et enfin ceux pour lesquels aucune des deux
+\emph{ends} ne se sont alignées sont appelés ``non-alignés''. L'ensemble
+des \emph{reads} ``non-compatibles'', ``orphelins'' et ``non-alignés''
+sont, en raison de leur faible qualité, filtrés et donc non considérés
+pour les analyses en aval. Les \emph{reads} ayant passé l'ensemble des
+critères qualité mentionnés précédemment seront, eux, utilisés pour
+effectuer l'appel des variants.
+
+\newpage
+
+\subsection{L'appel des variants}\label{lappel-des-variants}
+
+Si l'alignement des séquences peut être comparé à la reconstruction d'un
+puzzle, l'appel des variants pourrait lui être vu comme un jeu des sept
+erreurs, au cours duquel, pour chaque position couverte, les différences
+entre la séquence de l'individu séquencé et le génome de référence
+seront listées et appelées variants.
+
+Comme nous l'avons vu plus \protect\hyperlink{varcall}{ci-dessus}, il
+est fortement conseillé d'effectuer l'appel des variants en tenant
+compte de l'aligneur choisi {[}\protect\hyperlink{ref-Nielsen2011}{152},
+\protect\hyperlink{ref-DePristo2011}{161},
+\protect\hyperlink{ref-Lunter2011}{162}{]}. C'est pourquoi, nous avons
+développé notre propre algorithme d'appel des variants spécialement
+conçu pour l'analyse des données de MAGIC. Ainsi, l'appel des variants
+sera directement basé sur quatre comptages (R\(_+\), R\(_-\), V\(_+\) et
+V\(_-\)) fournis directement par MAGIC pour chaque position suffisamment
+couverte :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{R}\(_+\) \textbf{et R}\(_-\) : Ces deux comptages
+  correspondent au nombre de \emph{reads} \emph{forward} (+) et
+  \emph{reverse} (-) sur lesquels est observé l'allèle de
+  \textbf{référence} (R) à une position donnée.\\
+\item
+  \textbf{V}\(_+\) \textbf{et V}\(_-\) : À l'inverse de R\(_+\) et
+  R\(_-\), ces comptages correspondent au nombre de \emph{reads}
+  \emph{forward} et \emph{reverse} sur lesquels est observé un allèle
+  \textbf{variant} (V) à une position donnée.
+\end{enumerate}
+
+Ainsi, les sommes : \(R_+ + V_+\) et \(R_- + V_-\) indiqueront
+respectivement la couverture d'une position en ne tenant que des
+\emph{reads forward} et \emph{reverse}. En fonction de ces couvertures,
+nos appels seront classés en trois catégories :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Les appels \emph{double strand} (DS)} : ils qualifient les
+  positions ayant une couverture \(\ge\) 10 sur \textbf{les deux}
+  \emph{strands}. Ces appels sont ceux ayant la meilleure qualité. Le
+  choix de la valeur 10 comme critère de couverture minimum est basée
+  sur l'analyse de nos données et sera explicité plus tard dans le
+  manuscrit.
+\item
+  \textbf{Les appels \emph{single strand} (SS)} : ces appels définissent
+  les positions pour lesquelles \textbf{un des deux} \emph{strands}
+  présente une couverture \(\le\) 10. Dans ce cas, ce \emph{strand} est
+  ignoré et l'appel est effectué uniquement en utilisant le second
+  \emph{strand}.
+\item
+  \textbf{Les appels \emph{non strand} (NS)} : les positions NS sont
+  celles pour lesquelles la couverture est \(\le\) 10 sur \textbf{les
+  deux} \emph{strands}. Aucun appel n'est effectué à ces positions qui
+  \textbf{ne sont pas conservées dans la suite des analyses}.
+\end{enumerate}
+
+Ensuite, pour chaque position couverte, des appels indépendants seront
+effectués pour chaque \emph{strand} de telle sorte que, pour chacune de
+ces positions si :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  0 à 20\% des \emph{reads} portent un variant, la position est appelée
+  \textbf{homozygote référence}.
+\item
+  20 à 40\% des \emph{reads} portent un variant, l'appel sera considéré
+  comme \textbf{ambigu bas}. Cette région est elle-même subdivisée en
+  deux sous-région, 20 à 30\% et 30 à 40\%.
+\item
+  40 à 75\% des \emph{reads} portent un variant, la position est appelée
+  \textbf{hétérozygote}.
+\item
+  75 à 85\% des \emph{reads} portent un variant, l'appel sera considéré
+  comme \textbf{ambigu haut}. Cette région est elle-même subdivisée en
+  deux sous-région, 75 à 80\% et 80 à 85\%.
+\item
+  85 à 100\% des \emph{reads} portent un variant, la position est
+  appelée \textbf{homozygote variant}.
+\end{enumerate}
+
+Pour les positions DS, la concordance des appels fournis par chaque
+\emph{end} est ensuite vérifiée. Cette vérification de la concordance
+des appels entre les \emph{reads forward} et \emph{reverse} a pour
+principal intérêt de filtrer les erreurs systématiques pouvant survenir
+lors du processus de séquençage. Par exemple, les séquenceurs Illumina
+vont avoir tendance à ``se tromper'' à la position T des motifs GGT
+{[}\protect\hyperlink{ref-Robinson2011}{198}{]}. De fait, cette erreur
+devrait \emph{a priori} se produire uniquement lors du séquençage dans
+un seul des deux sens, celui contenant ce motif. Les \emph{reads}
+alignés sur le brin complémentaire contiendront dès lors la séquence
+correcte. C'est pourquoi, afin de limiter les erreurs d'appels au
+maximum, nous effectuons, pour chaque position DS, des appels
+indépendants sur les deux sens. Ainsi, un variant sera considéré
+(\textbf{Figure : }\ref{fig:picvarcall}) :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Homozygote référence}, si les deux appels sont homozygotes
+  références, ou, un des appels est homozygote référence et l'autre se
+  situe dans la sous-région 20-30\% de la région ambigu bas.
+\item
+  \textbf{Hétérozygote}, si les deux appels sont hétérozygotes, ou, si
+  l'un des appels est hétérozygote et l'autre se situe dans la
+  sous-région 30-40\% de la région ambigu bas ou bien dans la
+  sous-région 75-80\% de la région ambigu haut.
+\item
+  \textbf{Homozygote variant}, si les deux appels sont homozygotes
+  variants, ou, un des appels est homozygote variant et l'autre dans la
+  sous-région 75-85\% de la région ambigu haut
+\item
+  \textbf{Ambigu}, si les deux appels sont ambigus bas ou s'ils sont
+  tous les deux ambigus haut.
+\item
+  \textbf{Discordant}, pour toutes les combinaisons restantes.
+\end{enumerate}
+
+Pour les positions SS, l'appel final correspondra directement à l'appel
+effectué sur l'unique \emph{strand} suffisamment couvert. Ces variants,
+bien que conservés seront, en raison des erreurs dont ils peuvent être
+la source, considérés comme de faible qualité. Les appels ambigus et
+discordants seront, eux, filtrés.
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics[scale=0.5]{figure/var_call} 
+
+}
+
+\caption[Détail de l'appel général effectué pour les appels DS]{\textbf{\emph{Détail de l'appel général effectué pour
+les appels DS}} : Illustration de l'appel des génotypes effectué en
+fonction du pourcentage de \emph{reads} variants observés sur chacun des
+deux \emph{strands} de séquençage (\emph{forward} et \emph{reverse}). Le
+génotype général est appelé si les génotypes des deux brins sont les
+mêmes ou si l'un des deux est dans la zone ambiguë adjacente au premier.
+Les zones vertes correspondent aux appels homozygotes références, les
+zones orange, hétérozygotes et rouges homozygotes variants. Les zones
+grises sont les appels ambigus tandis que les noires sont les appels
+discordants. Ces deux derniers appels ne sont pas conservés dans la
+suite des analyses.}\label{fig:picvarcall}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\subsection{L'annotation}\label{lannotation}
+
+Chaque variant retenu sera ensuite annoté par le logiciel \emph{Variant
+Effect Predictor} (VEP) {[}\protect\hyperlink{ref-McLaren2016}{172}{]}
+qui nous indiquera pour chaque variant la conséquence que celui-ci aura
+sur la séquence codante de l'ensemble des transcrits Ensembl qu'il
+chevauche (\textbf{Figure : }\ref{fig:pictvepcsq}, \textbf{Table :
+}\ref{tab:tabvepcsq}). Dans le cas d'une substitution faux-sens, c'est à
+dire entrainant le changement d'un seul acide-aminé de la séquence
+protéique, nous utilisons les prédictions fournies par SIFT et PolyPhen
+afin d'estimer leur pathogénicité. Ensuite, nous ajoutons, pour chaque
+gène, son expression tissulaire en nous basant sur les données Ensembl
+{[}\protect\hyperlink{ref-Aken2017}{199}{]} générées par le projet
+Illumina BodyMap qui recense les données RNAseq des gènes humains pour
+16 tissus différents. Puis nous ajoutons, lorsque celle-ci est
+disponible, la fréquence du variant dans les bases de données ExAC
+{[}\protect\hyperlink{ref-Lek2016}{171}{]}, ESP600
+(\href{http://evs.gs.washington.edu/EVS/}{Exome Variant Server, NHLBI GO
+Exome Sequencing Project (ESP), Seattle, WA}) et 1000Genomes
+{[}\protect\hyperlink{ref-1000GenomesProjectConsortium2015}{170}{]}
+donnant ainsi une estimation de sa fréquence dans la population
+générale. De même, la particularité de ce pipeline est que chaque
+variant qu'elle a identifié alimente une base de données interne pouvant
+par la suite servir de contrôle lors de l'analyse d'individus présentant
+un phénotype différent de ceux étudiés précédemment. L'intérêt d'une
+telle base, par rapport aux bases de données tel que ExAC, est qu'elle
+permet d'utiliser, comme contrôle, des individus ayant subi le même
+protocole de séquençage et la même analyse bio-informatique, permettant
+ainsi de mieux identifier, et donc filtrer, les erreurs systématiques
+pouvant arriver à chacune des étapes.
+
+\begin{figure}
+
+{\centering \includegraphics[scale=.9]{figure/vep_csq} 
+
+}
+
+\caption[Listes des différentes conséquences prédites par VEP et leur positionnement sur le transcrit]{\textbf{\emph{Listes des différentes conséquences
+prédites par VEP et leur positionnement sur le transcrit} d'après :
+\href{http://www.ensembl.org/info/genome/variation/consequences.jpg}{\emph{Variant
+Effect Predictor web site}}}}\label{fig:pictvepcsq}
+\end{figure}
+
+
+
+
+
+
+\newpage
+
+\blandscape
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{\label{tab:tabvepcsq} Liste simplifiée des conséquences prédites
+par VEP avec leur description et impact associée}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.17\columnwidth}\raggedright\strut
+VEP consequence\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
+VEP impact\strut
+\end{minipage} & \begin{minipage}[b]{0.62\columnwidth}\raggedright\strut
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.17\columnwidth}\raggedright\strut
+VEP consequence\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
+VEP impact\strut
+\end{minipage} & \begin{minipage}[b]{0.62\columnwidth}\raggedright\strut
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Splice acceptor / donor\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+HIGH\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A splice variant that changes the 2 base region at the 3' / 5' end of an
+intron\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Stop gained\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+HIGH\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A sequence variant whereby at least one base of a codon is changed,
+resulting in a premature stop codon, leading to a shortened
+transcript\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Frameshift\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+HIGH\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A sequence variant which causes a disruption of the translational
+reading frame, because the number of nucleotides inserted or deleted is
+not a multiple of three\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Stop lost\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+HIGH\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A sequence variant where at least one base of the terminator codon
+(stop) is changed, resulting in an elongated transcript\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Start lost\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+HIGH\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A codon variant that changes at least one base of the canonical start
+codo\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Inframe insertion / deletion\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+MODERATE\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+An inframe non synonymous variant that inserts / deletes bases into in
+the coding sequenc\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Missense\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+MODERATE\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A sequence variant, that changes one or more bases, resulting in a
+different amino acid sequence but where the length is preserved\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Splice region\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+LOW\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A sequence variant in which a change has occurred within the region of
+the splice site, either within 1-3 bases of the exon or 3-8 bases of the
+intron\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Stop retained\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+LOW\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A sequence variant where at least one base in the terminator codon is
+changed, but the terminator remains\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Synonymous\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+LOW\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A sequence variant where there is no resulting change to the encoded
+amino acid\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+5 / 3 prime UTR\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+MODIFIER\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A UTR variant of the 5' / 3' UTR\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Intron\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+MODIFIER\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A transcript variant occurring within an intron\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+NMD transcript\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+MODIFIER\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A variant in a transcript that is the target of NMD\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Non coding transcript\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+MODIFIER\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
+A transcript variant of a non coding RNA gene\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\elandscape
+\newpage
+
+\subsection{Le filtrage des variants}\label{le-filtrage-des-variants-1}
+
+L'étape de filtrage est primordiale si l'on souhaite analyser de manière
+efficace les données provenant de WES. C'est pourquoi, elle occupe une
+place importante dans notre pipeline. L'intégralité des paramètres de
+cette étape peut être modifiée par l'utilisateur pour faire correspondre
+les critères de filtres aux besoins de l'étude. Afin de rendre son
+utilisation la plus efficace possible, nous avons souhaité définir des
+paramètres par défauts pertinents dans la plupart des études de
+séquençage exomique de sorte que, sauf si le contraire est spécifié, les
+filtres suivants seront appliqués :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Filtre 1 : L'union des variants} : quand des individus
+  présentent un lien de parenté et présentent le même phénotype, seuls
+  les variants observés chez l'ensemble des individus sont conservés.
+\item
+  \textbf{Filtre 2 : Génotype des variants} : ce pipeline d'analyse a
+  été développé, avant tout, pour la recherche de variants impliqués
+  dans des pathologies à transmission récessive. C'est pourquoi, dans le
+  cadre d'étude d'individus présentant un historique de consanguinité,
+  l'ensemble des variants hétérozygotes sont filtrés. En revanche, dans
+  le cas d'individus issus d'unions non consanguines nous procédons à la
+  recherche de variants hétérozygotes composites, c'est à dire
+  \textbf{au moins deux variants hétérozygotes différents situés sur
+  chacun des deux allèles du même gène d'un patient}. Dès lors, bien que
+  les variants soient différents, les deux allèles sont altérés rendant
+  possible l'apparition de phénotype récessif. Malheureusement, dans le
+  cadre des séquençages WES et WGS, il est impossible de connaître le
+  ``phasage'' de ces variants, c'est à dire que l'on ne peut déterminer
+  si deux variants hétérozygotes sont situés sur le même allèle ou sur
+  deux allèles différents (\textbf{Figure : }\ref{fig:piccompositehet}).
+  Pour cela, une analyse familiale permettant de suivre la ségrégation
+  des variants est nécessaire.
+\item
+  \textbf{Filtre 3 : Les transcrits ``non pertinents''} : au cours de
+  nos analyses, nous nous sommes concentrés uniquement sur les
+  transcrits codants pour une protéine. Ainsi, l'ensemble des transcrits
+  annotés comme étant non codants ont été filtrés tout comme ceux
+  annotés comme étant NMD (\emph{nonsense-mediated decay}). En effet, ce
+  mécanisme a pour but de contrôler la qualité des ARNm cellulaires chez
+  les eucaryotes {[}\protect\hyperlink{ref-Chang2007}{200}{]} en
+  éliminant les ARNm qui comportent un codon stop prématuré
+  {[}\protect\hyperlink{ref-Baker2004}{201}{]} pouvant être le résultat
+  d'une erreur de transcription, d'une mutation ou encore d'une erreur
+  d'épissage. Il est donc peu probable que les variants présents sur des
+  transcrits annotés NMD soient responsables du phénotype. Dès lors, ces
+  transcrits ont été également filtrés. Ainsi, l'ensemble des variants
+  impactant \textbf{uniquement} des transcrits non codants et / ou
+  annotés NMD sont filtrés.
+\item
+  \textbf{Filtre 4 : Impact du variant} : afin de ne conserver que les
+  variants ayant le plus de risque d'avoir un effet délétère sur la
+  protéine, seuls sont conservés ceux impactant la séquence codante d'un
+  transcrit. De plus, les variants synonymes ne sont pas conservés
+  (excepté ceux se trouvant proches des régions d'épissage) car ceux-ci
+  n'ont aucun effet sur la séquence protéique. Pour les variants
+  faux-sens (changement d'un seul acide-aminé de la séquence protéique)
+  il est plus difficile de trancher, dès lors, seuls ceux étant prédits
+  comme \emph{tolerated} par SIFT
+  {[}\protect\hyperlink{ref-Kumar2009}{175}{]} \textbf{et} comme
+  \emph{benign} par Polyphen
+  {[}\protect\hyperlink{ref-Adzhubei2010}{179}{]} sont filtrés.
+\item
+  \textbf{Filtre 5 : Fréquence des variants} : la fréquence d'un variant
+  dans la population générale est un moyen rapide d'avoir une prédiction
+  fiable de l'effet délétère ou non de celui-ci. En effet, il est peu
+  probable qu'un variant retrouvé fréquemment dans la population
+  générale soit causal d'une pathologie sévère. C'est pourquoi,
+  l'ensemble des variants ayant une fréquence \(\ge\) 1\% dans l'une des
+  trois bases de données que sont ExAC, ESP et 1KG est filtré.
+\item
+  \textbf{Filtre 6 : Présence des variants dans la cohorte contrôle} :
+  le filtre utilise les variants composant la base de données interne du
+  pipeline et permet de filtrer l'intégralité des variants homozygotes
+  retrouvés chez les patients séquencés ne présentant \textbf{pas} le
+  même phénotype que le patient analysé. Comme dit plus tôt, ce filtre
+  se révèle particulièrement intéressant lorsque plusieurs patients
+  porteurs de phénotypes différents ont subi le même protocole de
+  séquençage. Ainsi l'ensemble des variants faux-positifs résultant
+  d'artéfacts liés aux différentes étapes en amont de l'analyse
+  bio-informatique pourra alors être filtré. De même ce filtre permet de
+  mettre en évidence les variants propres à une population lorsque des
+  patients provenant de la même région géographique et ne présentant
+  toujours pas le même phénotype sont comparés.
+\end{enumerate}
+
+\begin{figure}
+
+{\centering \includegraphics[scale=0.35]{figure/hetero_composites} 
+
+}
+
+\caption[Représentation schématique des phasages de deux variants avec les génotypes associés]{\textbf{\emph{Représentation schématique des
+phasages de deux variants avec les génotypes associés}} : Un variant est
+homozygote lorsque le \textbf{même} variant est présent sur les deux
+allèles d'un gène et hétérozygote lorsqu'il est présent sur \textbf{un
+seul} des deux allèles. On parle d'hétérozygotes \emph{cis} lorsque deux
+variants hétérozygotes \textbf{différents} sont positionnés sur
+\textbf{le même allèle} et d'hétérozygote \emph{trans} (ou composite)
+lorsque ces deux variants hétérozygotes sont positionnés sur
+\textbf{deux allèles différents}. En WES et en WGS il est impossible de
+différencier les hétérozygotes \emph{cis} des hétérozygotes
+\emph{trans}.}\label{fig:piccompositehet}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\section{Résultats 1 : Analyse de 3 phénotypes par des cas
+familiaux}\label{resultats-1-analyse-de-3-phenotypes-par-des-cas-familiaux}
+
+Cette partie se concentre sur l'analyse bio-informatique des résultats
+des séquençages exomiques de 13 individus infertiles provenant de 7
+familles. Pour 6 familles, 2 frères atteints ont été analysés et pour la
+septième, un seul des frères atteint a été séquencé et l'ADN du deuxième
+frère a été disponible \emph{a posteriori} \ref{tab:tabfam}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Famille FAM} : cette famille est composée de 2 frères
+  azoospermes. Comme nous avons pu le voir, l'azoospermie est un
+  phénotype d'infertilité masculine caractérisé par l'absence de
+  spermatozoïdes dans l'éjaculat. Des 13 patients de cette étude, les
+  frères Ghs44 et Ghs45 sont les deux seuls à ne pas avoir été séquencés
+  au Génopole d'Évry.
+\item
+  \textbf{Famille FF} : les spermatozoïdes des 2 frères de cette famille
+  sont caractérisés par leur incapacité à féconder l'ovocyte malgré leur
+  morphologie et leur mobilité normales.
+\item
+  \textbf{Famille MMAF1-5} : ici nous avons 5 familles dont l'ensemble
+  des membres séquencés présentent un phénotype MMAF (\emph{multiple
+  morphological abnormalities of the sperm flagella}). Ce syndrome se
+  caractérise par la présence d'une majorité de spermatozoïdes
+  présentant une mosaïque d'anomalies morphologiques du flagelle.
+\end{enumerate}
+
+\begin{longtable}[t]{lllrl}
+\caption{\label{tab:tabfam}Tableau récapitulatif des familles séquencées et de leur phénotype}\\
+\toprule
+Family & Individuals & Phenotype & Year & Place\\
+\midrule
+AZ & Ghs44, Ghs45 & Azoospermia & 2012 & Mount Sinai Institut\\
+FF & Ghs113, Ghs117 & Fertilization failure & 2014 & Genoscope (Evry)\\
+MMAF1 & Ghs56, Ghs58 & MMAF & 2014 & Genoscope (Evry)\\
+MMAF2 & Ghs59, Ghs60 & MMAF & 2014 & Genoscope (Evry)\\
+MMAF3 & Ghs62, Ghs130 & MMAF & 2014 & Genoscope (Evry)\\
+\addlinespace
+MMAF4 & Ghs119, Ghs63 & MMAF & 2014 & Genoscope (Evry)\\
+MMAF5 & Ghs131 & MMAF & 2014 & Genoscope (Evry)\\
+\bottomrule
+\end{longtable}
+
+\newpage 
+
+\subsection{Résultats des différentes étapes de
+l'analyse}\label{resultats-des-differentes-etapes-de-lanalyse}
+
+\subsubsection{Résultat de l'alignement}\label{resultat-de-lalignement}
+
+Pour rappel, l'\protect\hyperlink{lalignement}{alignement} consiste à
+repositionner l'ensemble des \emph{reads} générés au cours de l'étape de
+séquençage le long d'un génome de référence.
+
+La quantité de \emph{reads} composant les exomes de chaque individu peut
+varier en fonction de plusieurs paramètres et n'est donc pas égale pour
+chaque patient bien que l'ordre de grandeur reste le même avec une
+médiane de 87747080 \emph{reads}. Seuls les deux frères \emph{Ghs44} et
+\emph{Ghs45} de la famille AZ se distinguent avec près de 3 fois plus de
+\emph{reads} que les autres patients. Cette différence peut être
+expliquée car ces deux patients sont les deux seuls à voir été séquencés
+au Mount Sinaï Institut. Or leur protocole d'amplification précédant le
+séquençage contient un nombre de cycles de PCR supérieur à ceux
+appliqués au Génopole d'Évry où ont été séquencés les autres patients.
+Il faut noter que ce nombre plus important de \emph{reads} n'est en rien
+le reflet d'une meilleure qualité. En effet, celui-ci est causé par une
+grande quantité de \emph{reads} dupliqués qui seront pour la plupart
+filtrés au cours des analyses ultérieures (\textbf{Table :}
+\ref{tab:tabfam}, \textbf{Figure : }\ref{fig:plotfammapping} -
+\textbf{A}).
+
+La première étape du contrôle qualité des \emph{reads} consiste à
+filtrer ceux ne s'étant pas alignés sur le génome. Ces \emph{reads} sont
+extrêmement minoritaires puisqu'ils ne représentent qu'entre 1.2 et 5.5
+\% des \emph{reads} de nos individus (\textbf{Figure :
+}\ref{fig:plotfammapping} - \textbf{B}).
+
+Parmi les \emph{reads} s'étant correctement alignés sur le génome, seuls
+les \emph{reads} présentant des \emph{ends} compatibles sont conservés
+Pour rappel, ces \emph{reads} représentent ceux pour lesquels une des
+deux \emph{ends} s'est alignée sur le \emph{strand forward} tandis que
+l'autre s'est alignée sur le \emph{strand reverse} et que la distance
+qui les sépare n'est pas supérieure à trois fois celle de l'insert. Dans
+nos données, les \emph{reads} remplissant ces conditions sont
+majoritaires puisqu'ils représentent environ 91.3 \% des \emph{reads}
+s'étant correctement alignés tandis que les \emph{reads} non-compatibles
+et orphelins représentent respectivement 6.2 et 2.8 \% de ces même
+\emph{reads} (\textbf{Figure : }\ref{fig:plotfammapping} - \textbf{C}).
+
+La dernière étape de ce contrôle-qualité consiste à analyser le nombre
+de sites sur lesquels se sont alignés les \emph{reads}. En effet,
+certaines zones du génome étant dupliquées, l'une des problématiques des
+\emph{short-reads} est qu'il est possible que ceux-ci s'alignent à
+plusieurs régions différentes du génome. Afin d'éviter toute ambiguïté,
+seuls ceux s'étant alignés sur un site unique sont conservés pour la
+suite des analyses. Ces \emph{reads} représentent entre 92.3 et 96.9 \%
+des \emph{reads} ayant passé les précédents filtres (\textbf{Figure :
+}\ref{fig:plotfammapping} - \textbf{D}).
+
+Ainsi, à la fin de ces trois étapes de contrôle qualité des
+\emph{reads}, environ 84.8 \% d'entre eux sont conservés soit un total
+d'environ 74409523 \emph{reads} par patients.
+
+\newpage 
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotfammapping-1} 
+
+}
+
+\caption[Processus simplifié du contrôle qualité des
+\emph{reads}\\]{\textbf{\emph{Processus simplifié du contrôle
+qualité des \emph{reads}}} : Pour chacun des graphiques, les
+\emph{reads} représentés en vert sont conservés tandis que ceux en rouge
+sont filtrés. \textbf{A} : Quantité de \emph{reads} bruts générés pour
+chaque patient au cours de l'étape de séquençage. La médiane des
+\emph{reads} est représentée en bleue. \textbf{B} : Pourcentage, pour
+chaque individu, de \emph{reads} s'étant alignés correctement et ne
+s'étant pas alignés sur le génome de référence. \textbf{C} :
+Distribution pour chaque patient des \emph{reads} compatibles (Comp),
+non compatibles (Non comp) et orphelins (Orphans). \textbf{D} :
+Présentation pour chaque \emph{reads} du nombre de sites auxquels ils
+s'alignent}\label{fig:plotfammapping}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\subsubsection{L'appel des variants}\label{lappel-des-variants-1}
+
+Une fois l'alignement effectué, il faut identifier les positions
+présentant des différences avec le génome de référence et leur assigner
+un génotype. Tout d'abord, afin de conserver uniquement les positions
+auxquels il sera possible d'effectuer un appels de qualité, il est
+nécessaire de filtrer les positions ne présentant pas une couverture
+suffisante.
+
+Pour cela, nous avons fait varier notre critère de filtre de couverture
+minimum de 1 à 100 afin. Ainsi, nous avons pu quantifier, pour chacune
+des valeurs de filtre, la quantité d'appels DS, SS et NS d'observer la
+quantité de position. On peut ainsi constater qu'à partir de 10, la
+quantité d'appel NS augmente considérablement, tandis que le nombre
+d'appel DS et SS chute. Ainsi, au-delà cette valeur, un nombre important
+de positions ne respectent plus les critère qualité et sont ainsi
+filtrées (\textbf{Figure : }\ref{fig:plotcountgeno}).\\
+
+Ensuite, le génotype étant dépendant du pourcentage de \emph{reads}
+variants à une position donnée, il est nécessaire, afin de calibrer les
+bornes de notre algorithme d'appel, de connaître la répartition globale
+de ces proportions. Comme attendu, nous observons des pics à 0, 50 et
+100\% de \emph{reads} variants pour une position donnée, ces trois
+pourcentages correspondant respectivement aux appels ``homozygote
+référence'', ``hétérozygote'' et ``homozygote variant''. La démarcation
+séparant les appels hétérozygote et homozygote variant est relativement
+claire. La distinction de ces deux génotypes ne pose donc pas de
+problème, la région d'ambiguïté allant de 75 à 85\% de \emph{reads}
+variants ne concernant qu'une minorité de positions. Ce n'est cependant
+pas le cas pour celle séparant les appels homozygote référence et
+hétérozygote. En effet, on peut constater que la zone d'ambiguïté allant
+de 20 à 40\% de \emph{reads} variants concerne une part non négligeable
+des positions couvertes. Les positions SS situées dans cette région
+seront systématiquement filtrées. Pour les positions DS, celles pour
+lesquelles \textbf{un seul} des \emph{strand} se situe dans cette région
+alors que l'autre se trouve dans une des régions adjacentes (homozygote
+référence ou hétérozygote) seront conservées. Les autres seront filtrées
+elles aussi (\textbf{Figure : }\ref{fig:plotdensityvar}).
+
+Dans nos données, les appels SS sont majoritaires et représentent
+environ 46.7 \% de nos appels (contre 37 \% d'appels DS). Au vu de
+l'importance de ces appels, nous avons fait le choix de les conserver
+afin de ne pas filtrer une quantité trop importante de données. Ces
+appels seront cependant considérés comme étant de faible qualité, de
+fait, leurs analyses et interprétation seront plus précautionneuses. En
+revanche, au vu de la trop grande incertitude de l'appel des variants
+NS, ceux-ci sont systématiquement filtrés éliminant ainsi entre 10.3 et
+23.7 \% des positions appelées pour chaque patient (\textbf{Figure :
+}\ref{fig:plotvarcall} - \textbf{A}).
+
+De même, les appels discordant et ambigus sont filtrés, soit environ
+13.9 \% des variants DS. Il est intéressant de noter que bien que les
+variants \emph{single strand} (SS) soient conservés, on peut s'attendre
+à ce qu'environ 8.8\%, soit le pourcentage de DS discordants, soient
+aberrants, ceux-ci n'ayant pu subir le même contrôle que les SS
+(\textbf{Figure : }\ref{fig:plotvarcall} - \textbf{B}).
+
+Pour l'ensemble des variants ayant passé les filtres énoncés ci-dessus,
+c'est à dire les variants SS et les variants DS avec appels concordants,
+le génotype est déterminé en fonction du pourcentage de \emph{reads}
+portant le variant à cette position. Ainsi, pour chaque individu nous
+avons pu établir une liste de SNVs et d'indels avec leur génotype
+associé. Pour chacun de nos 13 patients, les ordres de grandeur du
+nombre de variants appelés sont identiques. Ainsi pour chaque patient
+nous avons appelé environ 43246 variants hétérozygotes (40721 SNVs et
+2525 indels) et 34290 variants homozygotes (32497 SNVs et 1793 indels)
+(\textbf{Figure : }\ref{fig:plotvarcall} - \textbf{C}).\\
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotcountgeno-1} 
+
+}
+
+\caption[Détermination de la valeur de couverture
+minimale\\]{\textbf{\emph{Détermination de la valeur de
+couverture minimale}} : Quantification du nombre médian d'appels DS, SS
+et NS pour chaque valeur de couverture minimum testée. On note une
+augmentation du nombre d'appel NS à partir de 10 tandis qu'à partir de
+cette même valeur les appels DS et SS diminuent}\label{fig:plotcountgeno}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics[scale=0.95]{figure/density_plot} 
+
+}
+
+\caption[Densité de répartition du pourcentage de
+\emph{reads} variants pour chaque position couverte\\]{\textbf{\emph{Densité de répartition du pourcentage
+de \emph{reads} variants pour chaque position couverte}} :
+Quantification du nombre médian d'appels DS, SS et NS pour chaque valeur
+de couverture minimum testée. On note une augmentation du nombre d'appel
+NS à partir de 10 tandis qu'à partir de cette même valeur les appels DS
+et SS diminuent}\label{fig:plotdensityvar}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotvarcall-1} 
+
+}
+
+\caption[Contrôle qualité des variants appelés]{\textbf{\emph{Contrôle qualité des variants appelés}}
+: Pour chacun des graphiques, les variants représentés en vert et en
+orange sont conservés tandis que ceux en rouge sont filtrés. \textbf{A}
+: Distribution du \emph{stranding} des appels pour chaque patient.
+\textbf{B} : Comparaison des appels entre les deux \emph{ends} des
+variants appelés DS. \textbf{C} : Distribution des SNVs et indels en
+fonction de leur génotype pour chaque patient (représentés par une
+barre).}\label{fig:plotvarcall}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+Nous avons ensuite cherché à comparer les résultats obtenus par notre
+pipeline avec ceux obtenus par des logiciels déjà existant. Pour cela
+nous avons aligné les données de nos 13 patients avec le logiciel BWA
+{[}\protect\hyperlink{ref-Li2009b}{156}{]} et effectué l'appel à l'aide
+de GATK-HC {[}\protect\hyperlink{ref-McKenna2010}{164}{]}. Ainsi, nous
+avons pu constater que 78847 variants étaient appelés par notre pipeline
+avec un génotype hétérozygote ou homozygote tandis que 106701 était
+appelés par BWA + GATK-HC parmi soit 27854 de plus que par notre
+pipeline (\textbf{Figure : }\ref{fig:plotcompar} - \textbf{A}).
+
+Cette différence n'est pas surprenante puisque, afin de ne sélectionner
+que les variants de confiance nous avons appliqué des critères de filtre
+stringent. On peut ainsi noter que parmi ces 27854 variants, 1644
+d'entre-eux sont retrouvés comme discordant par notre pipeline, 6456
+sont retrouvés comme ambigus et 15508 comme NS. Ainsi, on peut estimer
+que 84.8\% des variants que nous n'avons pas appelés sont appelés par
+BWA + GATK-HC avec un génotype soit erroné soit de faible confiance
+(\textbf{Figure : }\ref{fig:plotcompar} - \textbf{B}).
+
+Néanmoins, en ce qui concerne les variants retrouvés à la fois par le
+duo BWA + GATK-HC et notre pipeline, 99.63\% des appels sont identiques
+aux deux procédures. (\textbf{Table : }\ref{tab:tabcallcomp}).
+
+\begin{longtable}[t]{llrr}
+\caption{\label{tab:tabcallcomp}Comparaison des génotypes des variants appelés par les deux procédures}\\
+\toprule
+Magic + in-house algo & BWA + GATK-HC & Count & Percent\\
+\midrule
+Heterozygous & Heterozygous & 36225 & 55.51\\
+Homozygous & Homozygous & 28793 & 44.12\\
+Homozygous & Heterozygous & 219 & 0.34\\
+Heterozygous & Homozygous & 18 & 0.03\\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotcompar-1} 
+
+}
+
+\caption[Comparaison des variants obtenus par MAGIC + notre algorithme d'appel et BWA + GATK-HC]{\textbf{\emph{Comparaison des variants obtenus par
+MAGIC + notre algorithme d'appel et BWA + GATK-HC}} : \textbf{A} :
+Nombre de variants hétérozygotes ou homozygotes observé par les deux
+méthodes. \textbf{B} : Quantification du nombre de variant appelés
+discordants, ambigous ou NS par notre méthode retrouvés par BWA +
+GATK-HC}\label{fig:plotcompar}
+\end{figure}
+
+
+
+
+
+
+
+
+\newpage
+
+\subsubsection{L'annotation des
+variants}\label{lannotation-des-variants-1}
+
+Après avoir annoté nos variants, nous avons pu constater que pour chaque
+patient 24794 gènes sont en moyenne affectés par au moins un variant
+homozygote pour en moyenne 121843 transcrits (soit environ 5 transcrits
+par gène) (\textbf{Figure : }\ref{fig:plotannotation} - \textbf{A}). Il
+faut noter que parmi ces gènes se trouvent à la fois des gènes codants
+pour des protéines \textbf{et} d'autres non codants.
+
+Chaque variant affectera l'ensemble des transcrits qu'il chevauche,
+ainsi un même variant pourra impacter plusieurs transcrits. Ces impacts
+sont ensuite classés par VEP en quatre catégories qui sont, de la plus
+délétère à la moins délétère : \emph{HIGH}, \emph{MODERATE}, \emph{LOW},
+\emph{MODIFIER} (\textbf{Table : }\ref{tab:tabvepcsq}).
+
+Comme attendu, les variants ayant un impact tronquant se retrouvent être
+les moins fréquents chez chacun de nos patients. Ceci est d'autant plus
+flagrant pour l'impact \emph{HIGH} qui regroupe, entre autres, les
+variants créant un codon stop ou causant un décalage du cadre de lecture
+(\textbf{Table : }\ref{tab:tabvepcsq}). Ceux-ci se retrouvent, par
+rapport aux autres impacts, en quantité extrêmement faible puisqu'ils ne
+représentent en moyenne que 0.23 \% des variants. Cependant, bien que ce
+pourcentage soit faible, cela représente tout de même une moyenne de 131
+variants \emph{HIGH} hétérozygotes par patients et 114 variants
+\emph{HIGH} homozygotes par patient (\textbf{Figure :
+}\ref{fig:plotannotation} - \textbf{B}).
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotannotation-1} 
+
+}
+
+\caption[Annotation des variants]{\textbf{\emph{Annotation des variants}} :
+\textbf{A} : Quantification du nombre de gènes (en bleu) / transcrits
+(en rose) impactés par au moins un variant pour chaque patient chacun
+représenté par une barre. \textbf{B} : Distribution des impacts
+\emph{HIGH MODERATE LOW} et \emph{MODIFIER} en fonction des patients et
+du statut du variant.}\label{fig:plotannotation}
+\end{figure}
+
+
+
+
+
+
+
+
+\subsubsection{Le filtrage des
+variants}\label{le-filtrage-des-variants-2}
+
+Les étapes précédentes nous ont permis de mettre en évidence pour chaque
+patient une liste de variants passant l'ensemble de nos critères
+qualité. Ces variants ont dès lors pu être annotés nous permettant
+notamment d'avoir connaissance de leurs impacts sur les différents
+transcrits qu'ils chevauchent ou encore leur fréquence dans la
+population générale. Désormais, afin de ne conserver que les variants
+ayant la plus forte probabilité d'être responsable du phénotype de ces
+patients, nous avons appliqué successivement les six filtres
+précédemment décrits.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Filtre 1 : L'union des variants} : dans cette étude nous
+  analysons les données génétiques de 7 familles composées de 1 à 2
+  frères. Nous avons donc émis l'hypothèse que \textbf{le phénotype de
+  chacun des frères d'une même famille était dû à une cause génétique
+  commune}. C'est pourquoi, seul les variants observés chez l'ensemble
+  des membres d'une même famille furent conservés. Ainsi ce filtre a
+  permis de filtrer entre 17703 et 41944 variants pour chacun des
+  patients (\textbf{Figure : }\ref{fig:plotcomparefilter} - \textbf{A}).
+\item
+  \textbf{Filtre 2 : Génotype des variants} : ici, nous avons émis
+  l'hypothèse d'une transmission récessive du phénotype. Ainsi, seuls
+  les variants homozygotes ont été conservés, filtrant en moyenne 45089
+  variant par individu soit une moyenne de 56.5\% de leurs variants
+  (\textbf{Figures : }\ref{fig:plotvarcall} - \textbf{C},
+  \ref{fig:plotcomparefilter} - \textbf{A}).
+\item
+  \textbf{Filtre 3 : Impact du variant} : ce filtre se basant à la fois
+  sur les prédictions VEP mais aussi, dans le cas de variants faux-sens,
+  sur les prédictions SIFT et PolyPhen permet de ne conserver que les
+  variants ayant les effets les plus délétères. Ce filtre est, de prime
+  abord, le plus efficace puisqu'il permet de filtrer à lui seul
+  environs 88.3\% des variants de chaque individu.
+\item
+  \textbf{Filtre 4 : Les transcrits ``non pertinents''} : cette étape de
+  filtre permet de filtrer systématiquement entre 13712 et 17992
+  transcrits différents par patients. Sont considérés comme
+  non-pertinents les transcrits ne codant pas pour une protéine et ceux
+  annotés étant dégradés (\emph{nonsense mediated decay} (NMD)).
+  Cependant, un même variant pouvant impacter à la fois des transcrits
+  ``non pertinents'' \textbf{et} des transcrits ``pertinents'', seuls
+  ceux impactant \textbf{uniquement} des transcrits ``non pertinents''
+  sont filtrés, soit une moyenne de 1797 variants par individu
+  (\textbf{Figure : }\ref{fig:plotfilternonpertinanttr}).
+\end{enumerate}
+
+\newpage 
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotfilternonpertinanttr-1} 
+
+}
+
+\caption[Filtrage des transcrits jugés "non pertinents" et des variants les chevauchant]{\textbf{\emph{Filtrage des transcrits
+jugés ``non pertinents'' et des variants les chevauchant}} : Pour chaque
+patient nous avons filtré les transcrits jugés ``non pertinents'' pour
+l'analyse, c'est à dire ceux ne codant pas pour une protéine et ceux
+annoté NMD (boite rouge). Dès lors, l'intégralité des variants
+chevauchant \textbf{uniquement} des transcrits non pertinents sont
+systématiquement filtrés (boites bleue). Les autres sont conservés.}\label{fig:plotfilternonpertinanttr}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\item
+  \textbf{Filtre 5 : Fréquence des variants :} filtrer systématiquement
+  les variants retrouvés avec une fréquence \(\ge\) 0.01 dans l'une des
+  trois bases de données que sont ExAC, 1KG et ESP6500 permet de filtrer
+  entre 25126 et 29797 variants par patient.
+\item
+  \textbf{Filtre 6 : Présence des variants dans la cohorte contrôle :}
+  L'ensemble des variants répertoriés au sein de ces 3 phénotypes a été
+  confronté à des listes de variants identifiés chez d'autres patients
+  analysés par notre pipeline et présentant des phénotypes différents.
+  Dès lors, l'ensemble des variants retrouvés à l'état homozygote chez
+  au moins un des individus de la cohorte contrôle sera filtré de notre
+  liste de variants. On peut cependant noter que les variants retrouvés
+  chez les patients \emph{Ghs44} et \emph{Ghs45} de la famille AZ n'ont
+  pas été confrontés à ceux observés dans notre cohorte de 15 femmes
+  présentant des anomalies de développement ovocytaire. En effet, ces
+  deux phénotypes peuvent être causés par un même gène impliqué dans la
+  division méiotique (\textbf{Figure :} \ref{fig:plotsamplectrl}).\\
+  \newpage
+\end{enumerate}
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotsamplectrl-1} 
+
+}
+
+\caption[Nombre d'individus et leur phénotypes composant la cohorte contrôle de chaque famille]{\textbf{\emph{Nombre d'individus et leur phénotypes
+composant la cohorte contrôle de chaque famille}} : Ici, chaque barre
+représente une famille et sa hauteur est déterminée par le nombre
+d'individus composant la cohorte contrôle à laquelle elle a été
+confrontée. Le nombre total de contrôles utilisés par famille est
+inscrit au-dessus de chaque barre. Les couleurs déterminent les
+phénotypes des individus de la cohorte contrôle. Chaque individu de
+cette cohorte a été séquencé en WES par notre équipe. Afin d'être
+considéré comme ``contrôle'' et intégrer cette cohorte, un individu doit
+être sain ou présenter un phénotype d'infertilité suffisamment différent
+de la famille étudiée. Par exemple, un individus MMAF pourra servir de
+contrôle aux familles AZ et FF mais pas aux familles MMAF1-5.}\label{fig:plotsamplectrl}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+Comme on pouvait s'y attendre, ces six filtres ont un pouvoir
+discriminant extrêmement différent. En effet, tandis que le filtre
+``\emph{Transcript relevance}'' (filtre n°4) élimine en moyenne 3.9\%
+des variants de chaque individu, le filtre ``Variant impact'' (filtre n°
+3) élimine, lui, jusqu'à 90.1\% de ces mêmes variants. Cette différence
+n'est pas surprenante. En effet, comme nous l'avions vu plus tôt, les
+variants considérés comme \emph{MODIFIER} par VEP qui regroupent entre
+autres les variants chevauchant les séquences UTRs et introniques
+(\textbf{Table :} \ref{tab:tabvepcsq}) représentent en moyenne 81\% des
+variants de nos patients, or, ceux-ci sont tous filtrés. On peut
+également constater l'importance de la cohorte contrôle puisqu'elle
+permet retirer entre 76.5 et 88.4\% des variants de chaque individu
+(\textbf{Figure :} \ref{fig:plotcomparefilter} - \textbf{A}).
+
+Cependant, regarder uniquement le pourcentage de variants filtrés par
+chaque filtre révèle une information partielle. En effet, dans ce cas de
+figure, on observe la quantité de variant éliminée par chaque filtre
+indépendamment les uns des autres. Ainsi, un même variant peut donc être
+filtré par plusieurs filtres. Dès lors, il faut également analyser la
+quantité de variants filtrée \textbf{spécifiquement} par chaque filtre.
+Ainsi, on peut constater que le classement des filtres en fonctions de
+leur stringence reste quasiment identique. Il est tout de même
+intéressant de noter que désormais le filtre ``Variant impact'' apparait
+moins efficace que les filtres ``Ctrl'' et ``Genotype'' en filtrant
+spécifiquement une moyenne de 253 variants par individu contre 423 pour
+le filtre génotype et 882 pour le filtre ``Ctrl''. Ainsi, ce dernier
+devient celui filtrant spécifiquement le plus de variants avec entre 364
+et 1060 variants spécifiquement filtrés par patients confirmant ainsi
+l'importance de ce filtre dans nos analyses. Aussi, les filtres
+``Transcript relevance'', ``Union'' et ``Frequency'' apparaissent
+désormais comme étant anecdotiques en comparaison des trois autres
+filtres puisqu'ils filtrent au maximum 43 variants spécifiques
+(\textbf{Figure :} \ref{fig:plotcomparefilter} - \textbf{B}).
+
+Après avoir appliqué l'ensemble de ces filtres, seuls quelques variants
+subsistent, nous permettant d'obtenir une liste de restreinte gènes pour
+chaque famille et ainsi de tirer des conclusions quant au(x) variant(s)
+responsable(s) du phénotype de chacune d'entre elles. Ces travaux ont
+ainsi pu mener à l'écriture de trois articles dont je suis co-auteur.
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotcomparefilter-1} 
+
+}
+
+\caption[Comparaison de l'efficacité de chacun des six filtres utilisés]{\textbf{\emph{Comparaison de l'efficacité de
+chacun des six filtres utilisés}} : \textbf{A} : Comparaison du
+pourcentage de variants filtrés par chacun des six filtres
+indépendamment les uns des autres pour chaque patient (représenté par
+les points). Dès lors, un même variant peut-être filtré par plusieurs
+filtres. \textbf{B} : Comparaison du nombre de variants filtrés
+spécifiquement par chacun des filtres. Ici, un variant ne peut-être
+filtré que par un seul filtre.}\label{fig:plotcomparefilter}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\newpage  
+
+\subsection{Article n°1}\label{article-n1}
+
+\textbf{SPINK2 deficiency causes infertility by inducing sperm defects
+in heterozygotes and azoospermia in homozygotes}
+
+Kherraf ZE\textsuperscript{*}, Christou-Kent M\textsuperscript{*},
+\textbf{Karaouzène T}, Amiri-Yekta A, Martinez G, Vargas AS, Lambert E,
+Borel C, Dorphin B, Aknin-Seifer I, Mitchell MJ, Metzler-Guillemain C,
+Escoffier J, Nef S, Grepillat M, Thierry-Mieg N, Satre V, Bailly M,
+Boitrelle F, Pernet-Gallay K, Hennebicq S, Fauré J, Bottari SP, Coutton
+C, Ray PF, Arnoult C
+
+\textsuperscript{*} Co-premiers auteurs
+
+EMBO Molecular Medicine, Mai 2017
+
+\newpage
+
+\subsubsection{Contexte et objectifs}\label{contexte-et-objectifs}
+
+L'oligospermie, comme l'azoospermie sont des phénotypes d'infertilité
+masculine liées à la quantité de spermatozoïdes présents dans
+l'éjaculat. Les différentes études publiées ces dernières années
+montrent que les microdélétions du chromosome Y sont retrouvées chez
+10\% des hommes avec une azoospermie non-obstructive et chez 5\% des
+patients avec une oligozoospermie sévère
+{[}\protect\hyperlink{ref-Hotaling2014}{74}{]}. Ces taux bien qu'élevés
+ne représentent qu'une infime partie des cas d'azoospermie et
+d'oligospermie, suggérant l'implication de nombreux autres gènes dans ce
+phénotype.
+
+Entre 2005 et 2014 deux frères issus d'une union consanguine ont demandé
+des conseils médicaux auprès de différentes cliniques d'infertilité
+après deux ans d'échec reproductif. Ces deux frères étant mariés à des
+femmes non-apparentées, une cause féminine fût exclue et les recherches
+ont été concentrées sur l'analyse des deux frères. Tous deux
+présentaient de sévères défauts de production de spermatozoïdes, l'un
+des frères présentant une azoospermie non-obstructive et l'autre une
+oligozoospermie extrême (\textless{}1 Million de spermatozoïde/ ml). Au
+vu de la similarité du phénotype et de leur lien de parenté, l'hypothèse
+d'une cause génétique commune fut émise. L'analyse de leur caryotype et
+du locus AZF du chromosome Y ne révélant aucune anomalie, la procédure
+d'un séquençage WES fut décidée.
+
+Dans ce contexte, l'objectif de mon travail a été d'effectuer l'ensemble
+des analyses des données WES obtenues après leur séquençage afin de
+mettre en évidence une mutation homozygote commune pouvant expliquer le
+déficit spermatique des deux frères. Dans un second temps, j'ai mis en
+place le protocole de génotypage des souris au locus du gène
+\emph{Spink2} permettant d'identifier les souris sauvages
+\emph{Spink2}\textsuperscript{+/+} des souris KO
+\emph{Spink2}\textsuperscript{-/-}. Pour finir, afin d'estimer
+l'importance des variants du gène \emph{SPINK2} comme cause
+d'infertilité masculine chez l'humain, j'ai également contribué au
+séquençage Sanger de la séquence codante de \emph{SPINK2} d'une partie
+des 611 patients séquencés dans cette étude.
+
+\newpage
+
+\includepdf[pages=-]{bib/SPINK2_2017.pdf}
+
+\newpage
+
+\subsubsection{Principaux résultats}\label{principaux-resultats}
+
+L'analyse et le filtrage des données de séquençage des deux frères par
+notre pipeline a permis de retenir seulement 2 variants répondant à tous
+les critères établis (\textbf{Table : }\ref{tab:tabrecapaz}). Le premier
+de ces variants chevauchait la séquence codante du gène \emph{GUF1} et
+entraînait la substitution d'une sérine par une isoleucine. Le second
+impactait le gène \emph{SPINK2} et se situait trois nucléotides en amont
+du deuxième exon pouvant ainsi entraîner des erreurs d'épissage pouvant
+par la suite soit engendrer un décalage du cadre de lecture menant à la
+formation d'un codon stop prématuré ou bien sauter complètement la
+transcription de cet exon créant un codon stop au début de l'exon 3.
+
+Parmi ces deux gènes, seul \emph{SPINK2} présentait une forte expression
+testiculaire dans les données Ensembl (\textbf{Figure :
+}\ref{fig:plotexpfamaz}) et nous avons confirmé cette surexpression par
+RT-PCR dans cette étude. De plus, un KO partiel de \emph{Spink2} chez la
+souris avait déjà été décrit comme induisant des défauts partiels de la
+spermatogenèse {[}\protect\hyperlink{ref-Lee2011}{202}{]}. Ces arguments
+ont ainsi fait de \emph{SPINK2} le candidat évident pour expliquer le
+phénotype de ces deux frères. Après avoir confirmé en séquençage Sanger
+la présence de la mutation de ce gène à l'état homozygote pour les deux
+frères et hétérozygotes pour les parents, nous avons, afin de continuer
+nos investigations, développé un modèle murin KO
+\emph{Spink2}\textsuperscript{-/-} confirmant une azoospermie complète
+pour les souris mâle causée par un arrêt de la spermatogenèse au stage
+des spermatides rondes. De plus, malgré une fertilité normale, nous
+avons pu noter un taux élevé d'anomalies morphologiques du spermatozoïde
+ainsi qu'une motilité spermatique réduite chez les souris mâles
+hétérozygotes \emph{Spink2}\textsuperscript{+/-}. Les femelles, elles,
+ne présentaient aucun phénotype apparent. L'étude de la localisation de
+la protéine Spink2 chez la souris et SPINK2 chez l'humain a révélé que
+ces deux protéines localisaient dans la vésicule acrosomale depuis le
+début de la biogénèse de l'acrosome jusqu'au spermatozoïde mature. Nous
+avons, par ailleurs, démontré que Spink2, une antiprotéase à sérine,
+permettait de neutraliser l'acrosine (Acr) pendant son transit par
+l'appareil de golgi, et qu'en son absence, Acr déstructurait le golgi,
+empêchait la formation acrosomale et entraînait le blocage au stade de
+spermatide ronde.
+
+Suite à cela, afin d'évaluer l'importance des variants du gène
+\emph{SPINK2} dans l'infertilité humaine, nous avons effectué le
+séquençage Sanger de 611 patients parmi lesquels 210 étaient
+azoospermes, 393 oligozoospermes et 8 dont la cause n'était pas
+spécifiée. Parmi ces patients, seul 1 s'est révélé porter un variant non
+répertorié dans ExAC sur le gène \emph{SPINK2}. Ce patient présentant un
+phénotype d'oligozoospermie porte à l'état hétérozygote un variant
+altérant le codon start du gène \emph{SPINK2}. Ces résultats indiquent
+donc que chez l'homme, comme chez la souris, la présence de mutations
+homozygotes sur le gène \emph{SPINK2} induit un phénotype d'azoospermie
+ou d'oligozoospermie sévère tandis que la présence d'une mutation
+hétérozygote pouvait entraîner un phénotype d'oligozoospermie avec un
+taux élevé d'anomalies morphologiques du spermatozoïde. Le fait que même
+les hétérozygotes puissent subir une pression de sélection négative
+pourrait expliquer la rareté observée des mutations \emph{SPINK2}.
+
+\begin{longtable}[t]{llllll}
+\caption{\label{tab:tabrecapaz}Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille AZ}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Impact} & \multicolumn{3}{c}{Frequency} \\
+\cmidrule(l{2pt}r{2pt}){2-3} \cmidrule(l{2pt}r{2pt}){4-6}
+Gene & HGVSc, HGVSp & Consequence & ExAC & ESP & 1KG\\
+\midrule
+GUF1 & c.443A>T ; p.Ser148Ile & missense & 0.00207 & 0.0028 & 9e-04\\
+SPINK2 & c.56-3C>G ; . & splice region & . & . & .\\
+\bottomrule
+\end{longtable}
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotexpfamaz-1} 
+
+}
+
+\caption[Expression tissulaire des gènes \emph{SPINK2} et
+\emph{GUF1}]{\textbf{\emph{Expression tissulaire des gènes
+\emph{SPINK2} et \emph{GUF1}}} : Données provenant du projet de
+transcriptome Illumina BodyMap. Contrairement au gène \emph{GUF1} (en
+rouge) qui a une expression relativement ubiquitaire, \emph{SPINK2} (en
+bleu) a une expression quasi spécifique au testicule.}\label{fig:plotexpfamaz}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\subsection{Article n°2}\label{article-n2}
+
+\textbf{Homozygous mutation of PLCZ1 leads to defective human oocyte
+activation and infertility that is not rescued by the WW-binding protein
+PAWP}
+
+Jessica Escoffier J\textsuperscript{*}, Lee HC\textsuperscript{*},
+Yassine S\textsuperscript{*}, Zouari R, Martinez G, \textbf{Karaouzène
+T}, Coutton C, Kherraf ZE, Halouani L, Triki C, Nef S, Thierry-Mieg N,
+Savinov SN, Fissore R, Ray PF, Arnoult C
+
+\textsuperscript{*} Co-premiers auteurs
+
+Human Molecular Genetics, Décembre 2015
+
+\newpage
+
+\subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-1}
+
+L'activation ovocytaire regroupe une série de processus intervenant lors
+de la fécondation de l'ovocyte par le spermatozoïde. En 1990, plusieurs
+études ont démontré que chez les mammifères ces processus reposent
+principalement sur le relargage par le spermatozoïde de ``facteurs
+spermatiques'' qui déclenchent un signal constitué d'oscillations
+Ca\textsuperscript{2+}. Plus tard, la protéine PLCZ1 fut identifiée
+comme la molécule responsable de l'induction de ces oscillations
+calciques. Cependant, l'incapacité à produire des modèles animaux
+\emph{PLCZ1} KO capables de produire des spermatozoïdes matures a
+empêché d'attribuer l'exclusivité de ce rôle à \emph{PLCZ1}, laissant
+ouverte la possibilité que l'activation ovocytaire puisse être
+tributaire d'autres facteurs spermatiques. C'est ainsi qu'en 2014 fut
+proposée la protéine PAWP comme facteur spermatique alternatif ou
+complémentaire à PLCZ1 {[}\protect\hyperlink{ref-Aarabi2014}{203},
+\protect\hyperlink{ref-Aarabi2014a}{204}{]}.
+
+Les travaux ci-dessous décrivent les analyses effectuées sur deux frères
+issus d'une union consanguine ayant tous deux été dans l'incapacité de
+concevoir un enfant spontanément. Des fécondations in vitro avec
+injection directe d'un spermatozoïde (ICSI) ont par la suite été
+réalisées et n'ont pas permis la fécondation ovocytaires.\\
+Comme dans l'étude précédente, en raison de l'historique de
+consanguinité de la famille des deux frères et du non-apparentement de
+leurs femmes respectives nous avons exclu l'hypothèse d'une cause
+féminine et nous avons recherché un variant homozygote commun aux deux
+frères par séquençage WES. Comme précédemment, j'ai été en charge de
+l'ensemble des analyses des données issues du séquençage des deux
+frères.
+
+\newpage
+
+\includepdf[pages=-]{bib/PLCZ1_2016}
+
+\newpage
+
+\subsubsection{Principaux résultats}\label{principaux-resultats-1}
+
+Suite à l'analyse bio-informatique de ces deux frères, un seul variant
+subsistait après l'application de l'ensemble des filtres. Celui-ci était
+recensé uniquement dans la base de données ExAC avec une fréquence de
+8.24e-06 et entrait un faux-sens prédit comme \emph{deleterious} par
+SIFT et \emph{possibly damaging} par PolyPhen sur la séquence du gène
+\emph{PLCZ1}. La forte expression testiculaire de ce gène
+(\textbf{Figure : }\ref{fig:plotexpfamff}) couplée à l'implication déjà
+connue de celui-ci dans l'activation ovocytaire, ont fait de ce variant
+le candidat évident pour expliquer le phénotype de ces deux frères. De
+plus, aucun variant n'a été retrouvé sur la séquence du gène
+\emph{WBP2NL} codant pour la protéine PAWP (l'autre gène candidat à la
+fonction d'activateur ovocytaire) bien que l'intégralité de la séquence
+codante de \emph{WBP2NL} ait une couverture \(\ge\) 40x (les zones moins
+couvertes du début de l'exon 1 et de la fin de l'exon 6 correspondant
+aux régions UTR) (\textbf{Figure : }\ref{fig:plotcovplcz}). Ces
+résultats suggérant une parfaite fonctionnalité de la protéine PAWP ont
+pu être confirmés par \emph{Western blot}, de même, la bonne
+localisation de la protéine PAWP a pu être observée chez les deux
+patients par Immunofluorescence alors que PLCZ1 était absent du sperme
+de nos patients.
+
+Cette étude confirme le rôle primordial de PLCZ1 dans l'activation
+ovocytaire et démontre que la présence de PAWP seul ne permet pas cette
+activation.
+
+\begin{longtable}[t]{llllll}
+\caption{\label{tab:tabrecapff}Liste des variants ayant passé l'ensemble des filtres pour les deux fères de la famille FF}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{4}{c}{Impact} & \multicolumn{1}{c}{Frequency} \\
+\cmidrule(l{2pt}r{2pt}){2-5} \cmidrule(l{2pt}r{2pt}){6-6}
+Gene & HGVSc, HGVSp & Consequence & SIFT & PolyPhen & ExAC\\
+\midrule
+PLCZ1 & c.1465G>T ; p.Ile489Phe & missense & deleterious & possib damaging & 8.24e-06\\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotexpfamff-1} 
+
+}
+
+\caption[Expression tissulaire du gène \emph{PLCZ1}]{\textbf{\emph{Expression tissulaire du gène
+\emph{PLCZ1}}} : Données provenant du projet de transcriptome Illumina
+BodyMap}\label{fig:plotexpfamff}
+\end{figure}
+
+
+
+
+
+
+\begin{figure}
+
+{\centering \includegraphics[scale=.37]{figure/pawp_coverage} 
+
+}
+
+\caption[Couverture des six exons de \emph{WBP2NL} pour
+les deux frères de la famille FF\\]{\textbf{\emph{Couverture des six exons de
+\emph{WBP2NL} pour les deux frères de la famille FF}} : Les barres
+rouges représentent la couverture moyenne de 10 nucléotides, les bleues
+représentent les bornes de chaque exon.}\label{fig:plotcovplcz}
+\end{figure}
+
+
+
+
+
+
+
+
+\newpage
+
+\subsection{Article n°3}\label{article-n3}
+
+\textbf{Whole-exome sequencing of familial cases of multiple
+morphological abnormalities of the sperm flagella (MMAF) reveals new
+DNAH1 mutations}
+
+Amiri-Yekta A\textsuperscript{*}, Coutton C\textsuperscript{*}, Kherraf
+ZE, \textbf{Karaouzène T}, Le Tanno P, Sanati MH, Sabbaghian M, Almadani
+N, Sadighi Gilani MA, Seyedeh Hanieh Hosseini, Bahrami S, Daneshipour A,
+Bini M, Arnoult C, Colombo R, Gourabi H, Ray PF
+
+\textsuperscript{*} Co-premiers auteurs
+
+Human Reproduction, Octobre 2016
+
+\newpage
+
+\subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-2}
+
+Dans une étude précédente non détaillée dans ce manuscrit (en
+\protect\hyperlink{dnah12014}{annexe}), notre équipe a pu identifier
+\emph{DNAH1} comme le premier gène codant pour une dynéine axonémale
+responsable uniquement d'infertilité masculine. Dans cette première
+étude, 5 de nos 18 patients non-apparentés, soit environ 28\% d'entre
+eux, étaient porteur d'une mutation homozygote sur le gène \emph{DNAH1}
+responsable de leur phénotype MMAF. Ces résultats ont ainsi démontré
+l'importance de l'implication de ce gène dans ce phénotype.
+
+Dans cette nouvelle étude, nous nous concentrons sur l'analyse des
+données génétiques de 5 familles iraniennes et d'une famille italienne
+soit un total de 12 individus parmi lesquels 10 ont été séquencés en
+WES. Cependant, pour des raisons techniques, seules les données de 9
+d'entre eux ont été analysées sur notre pipeline décrit précédemment.
+
+Dans ce contexte j'ai effectué l'ensemble des analyses bio-informatiques
+de ces patients.
+
+\newpage
+
+\includepdf[pages=-]{bib/Fam_DNAH1_2016.pdf}
+
+\newpage
+
+\subsubsection{Principaux résultats}\label{principaux-resultats-2}
+
+Après avoir été séquencés en WES, les données des 9 patients
+\emph{Ghs119}, \emph{Ghs130}, \emph{Ghs131}, \emph{Ghs56}, \emph{Ghs58},
+\emph{Ghs59}, \emph{Ghs60}, \emph{Ghs62} et \emph{Ghs63} ont été
+analysées au sein de notre pipeline. Compte tenu de l'historique de
+consanguinité de ces familles, l'ensemble des variants hétérozygotes ont
+été filtrés de même que l'ensemble des variants observés fréquemment
+dans la population générale et ceux n'ayant aucun impact sur la séquence
+codante. Aussi, dans les cas où les données de WES de plusieurs frères
+d'une même famille étaient disponibles, seuls les variants partagés par
+l'ensemble des frères ont été gardés. À l'issue de cette étape de
+filtrage, seuls quelques variants subsistaient pour chacune des familles
+impactant entre 1 et 23 gènes différents en fonction de celles-ci
+(\textbf{Tables :} \ref{tab:tabmmaf1}, \ref{tab:tabmmaf2},
+\ref{tab:tabmmaf3}, \ref{tab:tabmmaf4}, \ref{tab:tabmmaf5},
+\textbf{Figure : }\ref{fig:plotremaininggenes}).
+
+Parmi cette liste de gènes, \emph{DNAH1} fut retrouvé muté chez les deux
+frères de la famille MMAF3 ainsi que chez les deux frères de la famille
+MMAF6 (non analysée par notre pipeline). De même, un variant entraînant
+un décalage du cadre de lecture dans la séquence du gène \emph{SPEF2}
+(codant pour la protéine \emph{Sperm flagellar 2} (SPEF2)) a été
+retrouvé chez le patient P10 de la famille MMAF5. Aucun autre candidat
+évident n'a pu être identifié pour les individus composant les 3 autres
+familles. Ensuite, bien que le gène \emph{SPEF2} ait déjà été
+caractérisé comme ayant un rôle dans la biogénèse du flagelle
+spermatique {[}\protect\hyperlink{ref-Lehti2017}{205}{]} nous nous
+sommes dans un premiers temps concentrés sur la caractérisation des deux
+variants retrouvés sur \emph{DNAH1}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Famille MMAF3 :} Les deux frères P5 et P6 analysés en WES
+  étaient tous deux porteurs de la même mutation c.8626-1G
+  \textgreater{} A qui fut par la suite confirmée en Sanger pour ces
+  deux patients ainsi que pour leur troisième frère (P7) non analysé en
+  WES. Cette mutation, absente des différentes bases de données, impacte
+  le dernier nucléotide de l'intron 54 de \emph{DNAH1}, c'est-à-dire,
+  l'une des deux bases composant le site accepteur consensus d'épissage.
+  Afin d'évaluer l'impact de cette mutation sur le transcrit de
+  \emph{DANH1}, nous avons étudiés, par RT-PCR, l'ARNm provenant de ces
+  trois frères ainsi que de deux individus contrôle. Cette étude a
+  révélé qu'aucune amplification du transcrit de \emph{DNAH1} n'était
+  observée chez les trois frères contrairement aux deux contrôles tandis
+  que l'amplification ciblant \emph{GAPDH} était positif pour les cinq
+  individus confirmant ainsi l'intégrité de l'ARNm de l'ensemble des
+  individus testés. Ces résultats suggèrent donc que les transcrits
+  produits par les trois frères mutés ont été soumis au mécanisme de
+  dégradation spécifique par \emph{mRNA decay}. Afin de valider la
+  pathogénicité de ce variant, la protéine DNAH a ensuite été localisée
+  par immunofluorescence à la fois chez les patients et les contrôles,
+  révélant que contrairement aux contrôles, la protéine DNAH1 était
+  absente chez les trois frères, renforçant ainsi l'hypothèse d'une
+  dégradation spécifique des ARNm.
+\item
+  \textbf{Famille MMAF6 :} Le variant c.3860 T \textgreater{} G
+  (p.Val1287Gly) induisant une mutation faux sens dans la séquence de
+  l'exon 23 de \emph{DNAH1} a été retrouvé dans les données WES des deux
+  frères P11 et P12 (non analysés par notre pipeline) et a par la suite
+  été confirmé en Sanger. Malheureusement, par manque de matériel,
+  aucune étude par RT-PCR ou immunofluorescence n'a pu être effectuée
+  sur ces patients. Cependant, le fait que ce variant faux-sens soit
+  absent des bases de données et qu'il soit prédit comme \emph{probably
+  dammaging} par PolyPhen et \emph{deleterious} par SIFT renforce
+  l'hypothèse de la pathogénicité de ce variant.
+\end{enumerate}
+
+Ainsi, à l'issue de l'analyse de ces 6 familles présentant un phénotype
+MMAF (dont seulement 5 ont été analysées sur notre pipeline), le variant
+responsable a pu être déterminé pour deux d'entre elles grâce à
+l'identification de deux nouveaux variants impactant la séquence codante
+du gène \emph{DNAH1} confirmant ainsi l'importance de l'implication de
+ce gène dans le phénotype MMAF. De même un indel entraînant un décalage
+du cadre de lecture dans la séquence du gène \emph{SPEF2} fait de ce
+gène, déjà connu comme ayant un rôle dans la formation des flagelles, un
+excellent candidat pour expliquer le phénotype du patient P10. Notre
+équipe travaille à l'heure actuelle à la caractérisation de ce gène.
+Cependant, aucun candidat évident n'a pu être identifié pour les 3
+familles restantes laissant supposer que le variant responsable de leur
+phénotype ait été éliminé par un de nos filtres. Ainsi, la cause
+génétique de leur phénotype n'a soit pas été détectée soit a été
+éliminée par un de nos filtres. Afin d'identifier la cause génétique de
+leur phénotype, nous réanalysons actuellement les données de ces
+patients en appliquant des filtres moins stringents, en conservant les
+gènes sur lesquels deux variants hétérozygotes sont retrouvés, ce qui
+pourrait être la signature d'une hétérozygotie composite.
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotremaininggenes-1} 
+
+}
+
+\caption[Nombre de gènes passant l'ensemble des filtres par famille]{\textbf{\emph{Nombre de gènes passant
+l'ensemble des filtres par famille}} : Chaque barre représente une des
+familles analysées. La hauteur de cette barre correspond au nombre de
+gènes ayant passé l'ensemble des filtres pour chaque famille. Les barres
+vertes caractérisent les familles pour lesquelles le gène responsable de
+la pathologie a été identifié parmi la liste de gènes (dans ce cas le
+symbole du gène est écrit au-dessus de la barre). La barre orange
+caractérise la famille pour laquelle un candidat potentiel a été
+identifié (le symbole du gène est écrit au-dessus suivit d'un ``?'').
+Les barres rouges indiquent qu'aucun des gènes ayant passé les filtres
+ne semble expliquer le phénotype des individus de la famille (dans ce
+cas il est écrit ``???'' au-dessus de la barre).}\label{fig:plotremaininggenes}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\section{Résultats 2 : Étude d'une cohorte de femmes
+infertiles}\label{resultats-2-etude-dune-cohorte-de-femmes-infertiles}
+
+\subsection{Article n°4}\label{article-n4}
+
+\textbf{PATL2 Gene Mutation Causes Oocyte Meiotic Deficiency and Female
+Infertility}
+
+Christou-Kent M, Amiri-Yekta A, Kherraf ZE, \textbf{Karaouzène T},
+Escoffier J, Guttin A, Martinez G, Le Blévec E, Lambert E, Fourati Ben
+Mustapha S, Cedrin-Durnerin I, Halouani L, Marrakchi O, Makni M, Latrous
+H, Kharouf M, Bottari S, Thierry-Mieg N, Coutton C, Zouari R, Issartel
+JP, Ray PF, Arnoult C
+
+New England Journal of Medicine, 07 Juillet 2017 (soummis)
+
+\newpage
+
+\subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-3}
+
+Entre 2013 et 2014 notre équipe a pris en charge l'étude génétique de 23
+femmes nord africaines présentant toutes une déficience méiotique
+ovocytaire (DMO) caractérisée par un blocage de la méiose au stade M1 et
+entrainant une infertilité. À l'heure actuelle, seul le gène TUBB8
+retrouvé muté à l'état hétérozygote chez des patientes chinoises avait
+pu être lié à ce phénotype. Cette étude a donc pour objectif de
+caractériser la cause génétique responsable du phénotype DMO de ces 23
+femmes. Parmi celles-ci, 15 ont été analysées par séquençage haut-débit.
+Dans ce contexte, j'ai, au cours de ma thèse, été en charge de
+l'ensemble des analyses bio-informatiques de ces 15 femmes.
+
+\newpage
+
+\includepdf[pages=-]{bib/PATL2_2017.pdf}
+
+\newpage
+
+\subsubsection{Principaux résultats}\label{principaux-resultats-3}
+
+L'application de notre pipeline d'analyse sur les données de ces femmes
+nous a permis d'obtenir une liste de 316 variants impactant 299 gènes
+différents. Parmi ces variants, aucun n'impactait le gène \emph{TUBB8}.
+Afin de restreindre à nouveau la liste de gènes, nous nous sommes
+concentrés sur ceux retrouvés mutés à l'état homozygote chez au moins 2
+femmes. Seul 3 gènes ont passé ce nouveau critère : \emph{FAM58A},
+\emph{MGAM} et \emph{PATL2}. Aucune investigation n'a pour l'instant été
+effectuée sur les 296 autres. En raison de la fréquence élevée du
+variant retrouvé sur \emph{FAM58A} et de l'impact peu délétère du
+variant chevauchant \emph{MGAM}, ces deux gènes ont été considérés comme
+de mauvais candidats.
+
+Ainsi, nous nous sommes dans un premier temps concentrés sur la
+caractérisation de \emph{PATL2} dont l'orthologue \emph{xpat1a} chez le
+xénope a été décrit comme étant exprimé au cours du développement de
+l'ovocyte {[}\protect\hyperlink{ref-Marnef2010}{206},
+\protect\hyperlink{ref-Nakamura2010}{207}{]} faisant de ce gène un
+excellent candidat. Nous avons observé que 5 de nos patientes (33.3\%)
+étaient porteuses de la même mutation homozygote :
+c.478G\textgreater{}T, p.Arg160Ter induisant un codon stop prématuré
+dans la séquence codante du transcrit canonique \emph{PATL2}:
+ENST00000434130. Au vu de ces résultats un séquençage Sanger de la
+séquence codante de ce gène fut réalisé pour ces 5 femmes afin de
+confirmer cette mutation, ainsi que sur 8 femmes supplémentaires
+souffrant du même phénotype. Parmi ces dernières, une s'est révélée
+porter la même mutation à l'état homozygote. Au final six femmes sur 23
+(26\%) étaient homozygotes pour la mutation stop de \emph{PATL2}.
+
+Dans un second temps, l'étude du modèle murin KO
+\emph{Patl2}\textsuperscript{-/-} nous a permis de mettre en évidence
+une subfertilité importante chez les souris femelles tandis qu'aucun
+phénotype n'était observable chez les mâles.
+
+Pour finir, \emph{xpat1a}, l'orthologue de \emph{PATL2} chez le xénope,
+ayant été décrit comme réprimant la traduction de l'ARNm dans l'ovocyte,
+nous avons cherché à savoir si les souris femelles KO
+\emph{Patl2}\textsuperscript{-/-} présentaient des dérégulations de leur
+transcriptome ovocytaire. Pour cela, nous avons procédé à une étude
+comparative des transcriptome ovocytaires aux stades GC et MII murins
+sur puces Affymetrix mesurant les valeurs d'expression d'environ 66,000
+transcrits différents. Ainsi, nous avons pu mettre en évidence 134
+transcrits différentiellement exprimés au stade GV parmi lesquels 95
+étaient sous-exprimés tandis que 39 étaient sur-exprimés. Au stade MII,
+ces dérégulations se révélèrent être plus impressionnantes puisque 124
+étaient sous-exprimées et 122 sur-exprimées démontrant ainsi une forte
+implication de \emph{Patl2} dans la transcription ovocytaire des gènes
+murins.
+
+\newpage  
+
+\section{Résultats 3 : Étude d'une large cohorte de patients
+MMAF}\label{resultats-3-etude-dune-large-cohorte-de-patients-mmaf}
+
+\subsection{Article n°5}\label{article-n5}
+
+\textbf{Whole exome cohort study and analysis of mouse and Trypanosoma
+models demonstrate the importance of WDR proteins in flagellogenesis and
+male fertility}
+
+Coutton C, Vargas A, Amiri-Yekta A, Kherraf ZE, Fourati Ben Mustapha S,
+Le Tanno P, Wambergue-Legrand C, \textbf{Karaouzène T}, Martinez G,
+Daneshipour A, Hanieh Hosseini S, Mitchell V, Halouani L, Marrakchi O,
+Makni M, Latrous H, Kharouf M, Deleuze JF, Boland A, Hennebicq S, Satre
+V, Jouk PS, Bottari SP, Thierry-Mieg N, Conne B, Dacheux-Deschamps D,
+Schmitt A, Stouvenel L, Lorès P, El Khouri E, Fauré J, Wolf JP,
+Escoffier J, Gourabi H, Robinson DR, Nef S, Dulioust E, Zouari R,
+Bonhivers M, Touré A, Arnoult C, Ray PF
+
+Nature Communications. En révision
+
+\newpage
+
+\subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-4}
+
+Après avoir mis en évidence l'implication du gène \emph{DNAH1} dans le
+phénotype MMAF notre équipe s'est en partie spécialisée dans la
+caractérisation ce syndrome. Ainsi, entre 2012 et 2016, notre équipe a
+effectué le séquençage de 78 individus présentant tous ce phénotype afin
+d'en établir la cause génétique. Ces séquençages ont été effectués dans
+4 centres différents que sont le Genoscope, Integragen, Novogene et la
+plateforme de séquençage de l'IGBMC de Strasbourg. La plupart de ces
+séquençages ont été effectués sur des Illumina HiSeq2000 sauf les 25
+plus récents qui ont été effectués sur un Illumina HiSeq4000
+(\textbf{Table : }\ref{tab:tabrunbigmmaf}).
+
+\begin{longtable}[t]{lrlr}
+\caption{\label{tab:tabrunbigmmaf}Liste des différents individus présentant un phénotype MMAF séquencé en WES}\\
+\toprule
+Place & Year & Platform & Nb of individuals\\
+\midrule
+IGBMC & 2012 & Illumina HiSeq2000 & 12\\
+Genoscope & 2013 & Illumina HiSeq2000 & 12\\
+Genoscope & 2014 & Illumina HiSeq2000 & 25\\
+Genoscope & 2015 & Illumina HiSeq2000 & 3\\
+Integragen & 2016 & Illumina HiSeq4000 & 15\\
+Novogene & 2016 & Illumina HiSeq4000 & 10\\
+\bottomrule
+\end{longtable}
+
+\includepdf[pages=1-61]{bib/CFAP_2017.pdf}
+
+\newpage
+
+\subsubsection{Principaux résultats}\label{principaux-resultats-4}
+
+L'application de de notre pipeline d'analyse sur les données de ces 78
+patients nous a permis d'obtenir une liste de 3630 variants distincts
+ayant passé l'ensemble de nos filtres (2903 SNPs et 727 indels), ceux-ci
+impactant un total de 2780 gènes différents.
+
+Le gène \emph{DNAH1} étant le candidat évident, nous avons cherché en
+priorité l'ensemble des variants retrouvés sur ce gène. Ainsi, nous
+avons obtenu une liste de 5 patients portant tous, soit au moins un
+variant homozygote sur le gène \emph{DNAH1}, soit deux variants
+hétérozygotes sur ce même gène.
+
+Suite à cela, au vu du nombre important de gènes restant et afin
+d'étudier en priorité ceux pouvant expliquer le phénotype d'un maximum
+de patients nous avons limité nos recherches aux gènes sur lesquels
+\textbf{au moins 3 patients portaient un variant homozygote tronquant}.
+Cela nous a ainsi permis de mettre en évidence les gènes \emph{CFAP43}
+et \emph{CFAP44} sur lesquels des variants homozygotes ont été retrouvés
+chez respectivement 9 et 6 patients auxquels viennent s'ajouter 1
+patient portant deux variants hétérozygotes sur le gène \emph{CFAP43}
+(\textbf{Tables : }\ref{tab:tabcfap43} et \ref{tab:tabcfap44}). Ces deux
+gènes CFAP (pour \emph{Cilia and Flagella Associated Protein}) avaient
+déjà été répertoriés dans les bases de données publiques comme ayant une
+forte expression testiculaire, et comme étant probablement impliqués
+dans la structure et / ou fonction du flagelle spermatique
+{[}\protect\hyperlink{ref-Ivliev2012}{208}{]}. De plus, ces deux gènes
+codent tous deux pour des protéines appartenant à la famille des WDR et
+comportent tous deux neuf répétitions WD (tryptophane - acide
+aspartique) {[}\protect\hyperlink{ref-Smith2008}{209}{]}. Ainsi, en
+tenant compte du nombre important de patients portant des variants sur
+un de ces deux gènes et le fait qu'ils codent tous deux pour des
+protéines appartenant à la même famille, nous avons décidé de nous
+concentrer dans un premiers temps sur la caractérisation de ces deux
+seuls gènes, ceux-ci étant les meilleurs candidats pour expliquer le
+phénotype d'infertilité de 16 de nos patients.
+
+Un total de 9 a ainsi pu être identifié sur le gène \emph{CFAP43}
+impactant 10 de nos patients n'ayant, à notre connaissance, aucun lien
+de parenté. Huit de ces variants ont un effet tronquant évident et le
+dernier est un variant intronique localisé 5 nucléotides après l'exon
+16, non listé dans ExAC et prédit par Human Splicing Finder
+(\url{http://www.umd.be/HSF3}) comme altérant l'épissage de l'exon 16 de
+CFAP43.
+
+Pour \emph{CFAP44}, 6 de nos patients portaient des variants homozygotes
+ayant tous un effet tronquant.
+
+L'analyse au microscope électronique à transmission des cellules
+spermatiques d'un patient portant un variant sur \emph{CFAP43} et d'un
+autre portant un variant sur \emph{CFAP44} révéla des défauts au niveau
+de l'axonème ainsi qu'une gaine fibreuse désorganisée pour chacun des
+deux patients.
+
+Ensuite, afin de compenser l'absence d'anticorps anti-CFAP43 et
+anti-CFAP44 fiables chez l'humain comme chez la souris nous avons décidé
+de caractériser leur orthologues chez \emph{Trypanosoma brucei}
+(\emph{T. brucei}), un protozoaire flagellé utilisé comme organisme
+modèle dans l'étude des flagelles chez qui, les protéines
+\emph{Tb}CFAP43 et \emph{Tb}CFAP44 respectivement orthologues de CFAP43
+et CFAP44 avaient déjà été identifiées comme des protéines du flagelle
+{[}\protect\hyperlink{ref-Broadhead2006}{210},
+\protect\hyperlink{ref-Subota2014}{211}{]}. Ensuite, l'utilisation d'ARN
+interférence nous a permis de produire des organismes \emph{knock-down}
+pour ces deux gènes \emph{TbCFAP43}\textsuperscript{RAi} et
+\emph{TbCFAP44}\textsuperscript{RNAi} nous permettant ainsi d'évaluer la
+fonction de ces deux gènes au sein du flagelle du trypanosome. Cela nous
+a permis d'observer un arrêt de la prolifération cellulaire au bout de
+24h ainsi que de nombreux défauts au niveau des flagelles pour
+l'ensemble des lignées cellulaires \emph{TbCFAP43}\textsuperscript{RAi}
+et \emph{TbCFAP44}\textsuperscript{RNAi}. Cet arrêt de prolifération est
+typique des problèmes flagellaires chez le trypanosome qui dépend de son
+mouvement pour sa survie.
+
+Pour finir, l'impact de l'absence des protéines CFAP43 et 44 sur la
+spermatogénèse murine a été déterminé grâce à la génération de modèle KO
+utilisant la technologie CRISPR-Cas9 qui nous a permis d'obtenir des
+phénotypes reproductibles pour nos deux modèles de souris KO. Ces
+modèles nous ont permis d'observer que les mâles
+\emph{Cfap43}\textsuperscript{-/-} et \emph{Cfap44}\textsuperscript{-/-}
+présentaient tous deux de nombreuses anomalies au niveau des flagelles
+tandis que les femelles \emph{Cfap43}\textsuperscript{-/-} et
+\emph{Cfap44}\textsuperscript{-/-} étaient parfaitement fertiles.
+
+Pour conclure, cette étude portant sur la caractérisation du phénotype
+MMAF nous a permis d'd'identifier la cause génétique de 21 (26.9\%) de
+nos patients, ceci n'ayant aucun lien de parenté. L'utilisation de notre
+pipeline pour l'analyse des données NGS nous a permis à la fois de
+confirmer l'importance du gène \emph{DNAH1} dans la structure du
+flagelle et son implication dans ce phénotype, mais aussi d'identifier
+deux nouveaux gènes, \emph{CFAP43} et \emph{CFAP44} respectivement
+responsables du phénotype de 10 et 6 de nos patients soit 12.8 et 7.7\%
+de notre cohorte.
+
+\hypertarget{globo}{\chapter{Investigation génétique et physiologique de
+la globozoospermie}\label{globo}}
+
+\newpage 
+
+\section{Introduction sur la
+globozoospermie}\label{introduction-sur-la-globozoospermie}
+
+Comme expliqué précédemment, La globozoospermie est un phénotype rare
+(\textless{} 0.1\% des patients infertiles) mais sévère
+{[}\protect\hyperlink{ref-Sen2009}{92}{]} de teratozoospermie menant à
+l'infertilité masculine. Cette anomalie est caractérisée par la présence
+de spermatozoïdes présentant une tête ronde dépourvue d'acrosome et
+d'une pièce intermédiaire désorganisée dans l'éjaculat
+{[}\protect\hyperlink{ref-Singh}{212},
+\protect\hyperlink{ref-Pedersen1974}{213}{]} (\textbf{Figure :
+}\ref{fig:pictglobospz}). En plus des anomalies morphologiques, les
+spermatozoïdes globozoocéphales présentent également des
+désorganisations au niveau moléculaire. Par exemple, le facteur
+spermatique PLCZ1 requis pour l'activation ovocytaire, est absent ou
+présent en quantité infime dans les spermatozoïdes globozoocéphales
+{[}\protect\hyperlink{ref-Heytens2009}{108},
+\protect\hyperlink{ref-Taylor2010}{214},
+\protect\hyperlink{ref-Yoon2008}{215}{]} compromettant ainsi
+l'activation ovocytaire et expliquant le faible taux de fécondation
+observés en fécondation \emph{in vitro} (IVF) et en ICSI (\emph{intra
+cytoplasmic sperm injection}) {[}\protect\hyperlink{ref-Dam2006}{91}{]}.
+On distingue la globozoospermie totale avec 100\% des spermatozoïdes
+présentant le phénotype ou partielle en fonction du taux de
+spermatozoïdes atteints. La présence de cas familiaux dans les premières
+études présentant des patients atteints par un phénotype complet
+{[}\protect\hyperlink{ref-Sen2009}{92}{]} suggéraient que la
+globozoospermie avait une cause génétique. De plus les caractéristiques
+morphologiques très typiques des spermatozoïdes laissaient penser à une
+cause monogénique. En 2007, une étude portant sur une famille juive
+ashkénaze comprenant six frères dont trois atteins a pu lier ce
+phénotype à une mutation homozygotes sur le gène \emph{SPATA16} présente
+chez les trois frères atteint
+{[}\protect\hyperlink{ref-Dam2007}{216}{]}. Cependant, dans la même
+étude, 29 autres patients présentant le même phénotype ont été analysés,
+et pour ceux-ci, aucun variant du gène \emph{SPATA16} n'a pu être lié au
+phénotype {[}\protect\hyperlink{ref-Dam2007}{216}{]} indiquant
+clairement que les mutations de ce gène n'étaient pas les seules
+responsables de ce phénotype. En 2011, une autre étude portant sur une
+cohorte de 20 patients Tunisiens a pu mettre en évidence une délétion
+homozygote de 200kb emportant la totalité du gène \emph{DPY19L2} chez 15
+des 20 patients analysés {[}\protect\hyperlink{ref-Harbuz2011}{96}{]}.
+Les études effectuées ultérieurement sur ce phénotype ont ensuite
+confirmées que les altérations du gène \emph{DPY19L2}, et notamment
+délétion décrite initialement, étaient responsables de la majorité des
+cas de globozoospermie {[}\protect\hyperlink{ref-ElInati2012}{111},
+\protect\hyperlink{ref-Ray2011}{217}{]}.
+
+En 2012, le développement d'un modèle murin KO \emph{Dpy19l2}\(^{-/-}\)
+a permis de mieux comprendre les mécanismes moléculaires impliqués dans
+la globozoospermie causée par la délétion du gène \emph{DPY19L2} chez
+l'humain {[}\protect\hyperlink{ref-Pierre2012}{218}{]}. Ce modèle de
+souris KO présentait les mêmes caractéristiques que les patients
+humains. Ces souris étaient infertiles et présentaient des
+spermatozoïdes globozoocéphales (\textbf{Figure :
+}\ref{fig:pictmouseglobo}) ainsi que d'autre défauts secondaires
+retrouvés chez l'homme comme l'absence d'acrosome, des défauts
+morphologiques du noyau, de l'enveloppe nucléaire et de l'acroplaxome
+ainsi que le mauvais positionnement de la manchette
+{[}\protect\hyperlink{ref-Pierre2012}{218}{]}. Il a pu être démontré que
+la protéine Dpy19l2 étaient principalement exprimée dans au stade
+spermatide ronde et plus spécifiquement dans la membrane nucléaire
+interne faisant face à la vésicule acrosomale et que l'absence de cette
+protéine entrainait la déstabilisation de la jonction entre
+l'acroplaxome et l'enveloppe nucléaire
+{[}\protect\hyperlink{ref-Pierre2012}{218}{]}.
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics[scale=0.6]{figure/spermato_globo} 
+
+}
+
+\caption[Observation au microscope confocal de spermatozoïdes]{\textbf{\emph{Observation au microscope confocal de
+spermatozoïdes} adapté d'après
+{[}\protect\hyperlink{ref-Harbuz2011}{96}{]}} : Sur ces deux photos, le
+noyau des spermatozoïdes est mis en évidence à l'aide de TopRo3 (en
+bleu). L'acrosome est coloré par la conjugaison de lectine de pois et de
+isothiocyanate de fluorescéine (PSA-FITC, Sigma Aldrich, France) (en
+vert). \textbf{A} : Spermatozoïde normal, l'acrosome forme une cloche
+entourant la tête du spermatozoïde. \textbf{B} : Spermatozoïde
+globozoocéphale, l'acrosome est ici absent}\label{fig:pictglobospz}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}
+
+{\centering \includegraphics[scale=.9]{figure/mouse_globo_spz} 
+
+}
+
+\caption[Comparaison entre les spermatozoïdes des
+souris sauvages et globozoospermiques]{\textbf{\emph{Comparaison entre les spermatozoïdes
+des souris sauvages et globozoospermiques} d'après
+{[}\protect\hyperlink{ref-Pierre2012}{218}{]}} : À gauche, le
+spermatozoïde d'une souris globozoospermique
+\emph{Dpy19l2}\textsuperscript{-/-}. À droite, celui d'une souris
+sauvage \emph{Dpy19l2}\textsuperscript{+/+}.\\}\label{fig:pictmouseglobo}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\section{\texorpdfstring{Résultats 1 : Les mécanismes mutationnels
+entraînant la délétion au locus de \emph{DPY19L2} chez
+l'humain}{Résultats 1 : Les mécanismes mutationnels entraînant la délétion au locus de DPY19L2 chez l'humain}}\label{mecamut}
+
+\subsection{Article n°6:}\label{article-n6}
+
+\textbf{Fine Characterisation of a Recombination Hotspot at the
+\emph{DPY19L2} Locus and Resolution of the Paradoxical Excess of
+Duplications over Deletions in the General Population}
+
+Coutton C, Abada F, \textbf{Karaouzène T}, Sanlaville D, Satre V,
+Lunardi J, Jouk PS, Arnoult C, Thierry-Mieg N, Ray PF
+
+\textsuperscript{*} Co-premiers auteurs
+
+PLOS GeneticS, Mars 2013
+
+\newpage
+
+\subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-5}
+
+Chez les mammifères il existe trois paralogues de \emph{DPY19L2} de
+fonctions encore inconnues et un pseudogène présentant une très forte
+homologie de séquence (\textgreater{} 95\%)
+{[}\protect\hyperlink{ref-Carson2006}{219}{]}. Chez l'homme, ce gène est
+flanqué de deux séquences présentant une forte homologie
+(\textgreater{}95\%) d'une taille de 28kb. Ces séquences appelées LCRs
+(\emph{low copy repeats}) représentent une large portion du génome
+humain {[}\protect\hyperlink{ref-Cheung2003}{220},
+\protect\hyperlink{ref-Bailey2002}{221}{]} et vont, de par leur
+homologie favoriser les duplications de gènes jouant ainsi un rôle
+important dans l'évolution des génomes des vertébrés
+{[}\protect\hyperlink{ref-Walsh2003}{222},
+\protect\hyperlink{ref-Ohno1970}{223}{]}. Dans le cas de \emph{DPY19L2},
+ces LCRs vont, au cours de la méiose, entrainer la survenue de
+recombinaisons homologues non-allélique (NAHR) donnant lieu soit à une
+délétion du gène \emph{DPY19L2} et la formation d'un ADN circulaire
+comprenant le gène soit à un allèle possédant deux copies du gène tandis
+que l'autre n'en possède aucune
+{[}\protect\hyperlink{ref-Harbuz2011a}{224}{]}.
+
+Ce mécanisme de NAHR devrait, en théorie, engendrer la formation de plus
+d'allèles délétés que d'allèles dupliqués puisque seuls les remaniements
+interchromatidiens les induisent la formation d'un allèle dupliqué
+tandis que les délétions surviennent à la fois lors des remaniements
+interchromatidiens \textbf{et} intrachromatidiens
+{[}\protect\hyperlink{ref-Liu2012}{225}{]} (\textbf{Figure :
+}\ref{fig:pictnahr}). Cependant, les données mises à disposition par la
+base de données \href{http://dgv.tcag.ca/dgv/app/home}{\emph{Database of
+Genomic Variants}} (DGV)
+{[}\protect\hyperlink{ref-MacDonald2014}{226}{]} indiquent un excès de
+duplication puisque sur un total de 6575 individus analysés, 83
+duplications et de 26 délétions hétérozygotes ont été observées pour le
+locus de \emph{DPY19L2}.
+
+Ainsi, dans cette étude, notre équipe a cherchée à caractériser
+précisément le mécanisme génétique et les facteurs favorisant la
+survenue par NAHR de la délétion homozygote récurrente emportant
+totalement le gène DPY19L2. De même, nous avons tenté de résoudre le
+paradoxe observé entre le modèle théorique de NAHR et la fréquence des
+allèles observée dans la population générale afin de confirmer les
+données fournies dans les bases de données et ainsi écarter l'hypothèse
+d'un biais causé par la présence du pseudogène \emph{DPY19L2P1} très
+homologue avec \emph{DPY19L2}
+{[}\protect\hyperlink{ref-Carson2006}{219}{]}.
+
+Dans ce contexte j'ai pu participer à diverses manipulations de biologie
+moléculaire tel que l'extraction d'ADN spermatique, quantification des
+délétions / duplications \emph{de novo}. J'ai également contribué au
+diverses analyses statistiques.
+
+\newpage 
+
+\begin{figure}
+
+{\centering \includegraphics[scale=0.5]{figure/nahr_process} 
+
+}
+
+\caption[Représentation schématique du mécanisme de NAHR]{\textbf{\emph{Représentation schématique du mécanisme de
+NAHR} adapté d'après {[}\protect\hyperlink{ref-Liu2012}{225}{]}} : Lors
+d'un NAHR interchromatidien, un allèle dupliqué et un allèle délété sont
+formés. Lors d'un NAHR intrachromatidien, seul un allèle délété est
+produit, en même temps qu'un petit ADN circulaire qui sera éliminé par
+la suite.}\label{fig:pictnahr}
+\end{figure}
+
+
+
+
+
+
+
+
+\newpage
+
+\includepdf[pages=-]{bib/DPY19L2_2013}
+
+\newpage
+
+\subsubsection{Principaux résultats}\label{principaux-resultats-5}
+
+Contrairement à ce que prédit la théorie de formation des NAHRs, les
+résultats extraits des bases de données publiques indiquent un excès
+d'allèles dupliqués de \emph{DPY19L2} dans la population générale. Nous
+avons donc cherché à déterminer les fréquences des duplications et
+délétions \emph{de novo} de ce même locus. Ceci ayant pour but de
+déterminer si cet excès est dû à une sélection de l'allèle dupliqué ou
+au fait que celui-ci était effectivement produit plus fréquemment que
+l'allèle délété. Pour ce faire nous avons quantifié le taux d'apparition
+de ces événements génétiques à partir d'ADN spermatique. Les
+spermatozoïdes étant le produit direct de la méiose, ils sont donc les
+reflets d'haplotypes produits \emph{de novo}. Pour cela, nous avons
+analysé par PCR digitale l'ADN spermatique de trois donneurs ainsi que
+l'ADN spermatique constitué d'un mix provenant de ces trois donneurs.
+Leur ADN a tout d'abord été dilué en série afin qu'environ 25\% des 96
+puits de la PCR contiennent un événement (délétion ou duplication).
+Ainsi, en acceptant qu'un génome haploïde humain représente 3pg, 50ng
+d'ADN spermatique furent déposés dans chaque puit pour la PCR spécifique
+à la délétion, et 100ng dans chaque puit spécifique à a duplication.
+Chaque puit contient donc une partie de cette charge d'ADN initiale. La
+distribution de cette charge d'ADN au sein des 96 puits peut donc
+s'apparier à un tirage sans remise, la probabilité qu'un puit soit
+positif pour un événement chromosomique (duplication ou délétion) peut
+donc être modélisé par une loi hypergéométrique (\textbf{Équation} :
+\eqref{eq:hypergeo}). Nous permettant ainsi d'estimer la fréquence
+duplication / délétion \(\lambda\) pour chaque donneur
+(\textbf{Équation} : \eqref{eq:lambda}).
+
+\begin{equation} 
+\frac{\frac{(N - R)!}{W!(N-R-W)!}}{\frac{N!}{W!(N-W)!}} = \frac{(N-R)!(N-W)!}{N!(N-W-R)!} = \prod_{i=0}^{R-1}{\frac{N-W-i}{N-i}}
+\label{eq:hypergeo}
+\end{equation}
+
+\begin{equation} 
+\lambda = \frac{R}{N}
+\label{eq:lambda}
+\end{equation}
+
+Où :\\
+. \(N\) : représente le nombre de copie de chromosome 12 dans la charge
+d'ADN initiale (1.6x10\({^6}\) pour la PCR spécifique à la délétion,
+3.2x10\({^6}\) pour la PCR spécifique à la duplication)\\
+. \(W = \frac{N}{96}\) correspond au nombre de copiede chromosome 12 par
+puit\\
+. \(R\) représente le nombre total de recombinaison observées
+
+L'intervalle de confiance (IC) à 95\% est ensuite calculé grâce à une
+loi binomiale de sorte à modéliser la dilution initiale pour obtenir
+l'ADN d'\emph{entrée}. Le puit contenant le \emph{pool} des trois ADN
+spermatique est donc celui ayant les résultats les plus robustes, l'IC
+étant le plus resserré et permet donc d'établir le taux de délétion
+\emph{de novo} à 1.8 x 10\(^{-5}\) (IC 95\% : 1.4x 10\(^{-6}\); 2.2x
+10\(^{-6}\)) tandis que le taux de duplication \emph{de novo} est estimé
+à 7.7 x 10\(^{-6}\) (IC 95\% : 6.1 x 10\(^{-6}\); 9.7 x 10\(^{-6}\))
+montrant un enrichissement environ deux fois supérieur des délétions
+\emph{de novo} par rapport aux duplications sur le site de
+\emph{DPY19L2}.
+
+Ainsi nous avons observé qu'au locus \emph{DPY19L2} les délétions
+\emph{de novo} apparaissent, au cours de la méiose, deux fois plus
+fréquemment que les duplications alors que l'allèle dupliqué est trois
+fois plus fréquent que l'allèle délété dans la population générale. Cet
+effet pourrait en partie être dû aux effets de sélection naturelle. En
+effet, Bien qu'à notre connaissance, les femmes portant l'allèle délété
+à l'état homozygote ne soient caractérisées par aucun phénotype, les
+hommes, eux sont 100\% infertiles tandis que l'allèle dupliqué ne
+subirait aucune sélection.
+
+Cette étude a également été pour notre équipe l'occasion d'effectuer une
+étude plus approfondie des LCRs flanquant le locus de \emph{DPY19L2}.
+Pour cela, nous avons génotypé 20 SNPs spécifiques des LCRs télomériques
+et centromériques. À partir de ces données, 5 points de cassures
+distincts (BP1-5) ont pu être identifiés sur les 185 allèles recombinés
+étudiés (108 délétés et 77 dupliqués). L'ensemble de ces points de
+cassures sont localisés dans une région d'environ 1150 pb localisée au
+centre des 28kb du LCR. L'analyse bioinformatique de cette région a
+permis de mettre en évidence, au centre de la région minimale de
+recombinaison un site de reconnaissance consensus de la protéine PRDM9
+(CCNCCNTNNCCNC). Cette protéine à doigts de zinc est connue pour son
+rôle central dans les mécanismes de recombinaisons homologue au cours de
+la méiose chez l'humain et la souris en ciblant de manière spécifique la
+localisation des cassures doubles brins, préambule nécessaire à toute
+recombinaison {[}\protect\hyperlink{ref-Parvanov2010}{227},
+\protect\hyperlink{ref-Baudat2010}{228}{]}. On peut donc penser que la
+présence de cette séquence consensus de PRDM9 est la raison pour
+laquelle toute les points de cassures observés sont localisés dans cette
+région minimale de 1150 nucléotide.
+
+\newpage
+
+\section{Résultat 2 : La transcriptomique}\label{transcriptome}
+
+\subsection{Article n°7:}\label{article-n7}
+
+\textbf{Comparative testicular transcriptome of wild type and
+globozoospermic Dpy19l2 knock out mice}
+
+\textbf{Karaouzène T} , El Atifi M, Issartel JP, Grepillat M, Charles
+Coutton C, Martinez D, Arnoult C and Ray PF
+
+Basic and Clinical Andrology, 2013
+
+\newpage
+
+\subsubsection{Contexte et objectifs}\label{contexte-et-objectifs-6}
+
+Dans des études précédentes, notre équipe à réussit à démontrer que,
+chez la souris, la protéine Dpy19l2 était localisée dans la membrane
+interne des noyaux des spermatides pendant la spermatogenèse et qu'elle
+était nécessaire pour fixer l'acrosome au noyau
+{[}\protect\hyperlink{ref-Pierre2012}{218}{]}. Dans cette même étude,
+nous avons pu montrer cette protéine colocalisait avec la protéine Sun5
+et que \emph{Dpy19l2} pourrait être un partenaire de \emph{Sun5}
+{[}\protect\hyperlink{ref-Pierre2012}{218}{]}. Chez la souris, la
+protéine Sun1 est elle aussi nécessaire à la gamétogenèse et est connue
+pour permettre l'interaction entre le noyau et les télomères
+{[}\protect\hyperlink{ref-Ding2007}{229}{]}. Dans cette étude nous avons
+donc cherché à savoir si l'absence de la protéine Dpy19l2 pouvait
+entrainer des dérèglements transcriptionnels qui pourraient, entre
+autre, expliquer l'absence de la protéine Plcz1 dans les spermatozoïdes
+globozoocéphales murins.
+
+De plus, au cours de production des souris \emph{Dpy19l2} KO au sein de
+notre laboratoire nous avons pu observer un excès de naissance de souris
+mâle lorsque l'on croisait deux souris \emph{Dpy19l}\(^{+/-}\). Ainsi,
+en comparant les sexes des souris obtenues lors de 6 premières
+naissances (\emph{Birth 1-6}) on observe un total de 28 souris mâles
+pour 16 souris femelles. La p-valeur obtenue en effectuant un test de
+\(\chi^2\) comparant ces deux effectifs était égale à 0.0486272 laissant
+supposer l'existence d'un enrichissement réel, bien que faible, en
+souris mâles.
+
+C'est donc afin d'expliquer l'absence de la protéine \emph{Plcz1} dans
+les spermatozoïdes des souris \emph{Dpy19l2}\(^{-/-}\) ainsi que
+l'enrichissement en souris mâle dans les naissances issues
+d'accouplement de souris \emph{Dpy19l2}\(^{+/-}\) que nous avons
+effectué une analyse comparative du transcriptome testiculaire de deux
+souris \emph{Dpy19l2}\(^{+/+}\) (S1\textsuperscript{+} et
+S2\textsuperscript{+}) et deux souris \emph{Dpy19l2}\(^{-/-}\)
+(S1\textsuperscript{-} et S2\textsuperscript{-}) ayant pour but de
+mettre en évidence d'éventuels dérèglements transcriptionnels chez la
+souris KO.
+
+Dans cette étude j'ai pu effectuer l'intégralité des manipulations de
+biologie moléculaire telles que la mise en place du protocole de
+génotypage des souris, l'extraction de l'ARN testiculaire de souris et
+l'analyse sur puce, ainsi que l'intégralité de l'analyse bioinformatique
+des résultats.
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotborn-1} 
+
+}
+
+\caption[Quantification des sexes des souris observés lors de
+chaque naissance issues d'un croisement de deux souris hétérozygotes
+\emph{Dpy19l2}\textsuperscript{+/-}\\]{\textbf{\emph{Quantification des sexes des souris
+observés lors de chaque naissance issues d'un croisement de deux souris
+hétérozygotes \emph{Dpy19l2}\textsuperscript{+/-}}} : Après 6
+naissances, 28 souriceaux mâles sont nés pour seulement 16 femelles,
+ainsi le test du \(\chi^2\) comparant ces valeurs donne une p-valeur de
+0.0486272.}\label{fig:plotborn}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\includepdf[pages=-]{bib/12610_2013_Article_8.pdf}
+
+\newpage
+
+\subsubsection{Principaux résultats :}\label{principaux-resultats-6}
+
+Pour effectuer ces analyses, nous avons donc extrait l'ARN testiculaire
+des 4 souris que nous avons ensuite hybridé sur des puces à ADN
+Affymetrix GeneChip® Mouse Exon 1.0 contenant des sondes pour 35.557
+gènes murins. Cette étape nous a permis d'obtenir pour chacune des 4
+souris les valeurs d'expression testiculaire de l'ensemble de leurs
+gènes. Pour chacun de ces gènes, nous avons donc cherché à savoir s'ils
+étaient différentiellement exprimés chez les souris
+S1\textsuperscript{-} et S2\textsuperscript{-} lorsqu'on comparait leur
+expression avec celle des souris S1\textsuperscript{+} et
+S2\textsuperscript{+}. Pour cela, nous avons calculé quatre ratios (R1,
+R2, R3 et R4) (\textbf{Équation} : \eqref{eq:micerate}). Les gènes pour
+lesquels au moins 3 de leurs ratios étaient \(\ge\) 1,7 furent
+considérés comme sur-exprimés tandis que ceux pour lesquels 3 de leurs
+ratio étaient \(\le\) 0,58 (\(\frac{1}{1,7}\)) furent considérés comme
+sous-exprimés.
+
+\begin{equation} 
+\begin{split}
+\forall gene \in & \ \{genes\ in\ array\}: \\
+\\
+& R1_{gene} = \frac{exp_{gene}(S1^-)}{exp_{gene}(S1^+)} \ \ \ \ R2_{gene} = \frac{exp_{gene}(S2^-)}{exp_{gene}(S1^+)} \\
+& R3_{gene} = \frac{exp_{gene}(S1^-)}{exp_{gene}(S2^+)} \ \ \ \ R4_{gene} = \frac{exp_{gene}(S2^-)}{exp_{gene}(S2^+)} 
+\label{eq:micerate}
+\end{split}
+\end{equation}
+
+De cette manière cette étude a pu mettre en évidence la sous-expression
+de 6 gènes (incluant \emph{Dpy19l2}) et la sur-expression de 70 gènes
+chez les souris \emph{Dpy19l2}\(^{-/-}\). \emph{Plcz1} ne figurait pas
+parmi ces gènes indiquant que l'absence de cette protéine chez les
+spermatozoïdes globozoocéphales n'étaient pas due à un dysfonctionnement
+transcriptionnel.
+
+Afin de prédire les fonctions moléculaires dans lesquels étaient
+impliqués ces gènes, nous nous sommes servis du logiciel PANTHER
+{[}\protect\hyperlink{ref-Mi2017}{182}{]}. Ainsi, nous avons pu
+constater que 23 gènes codant pour des protéines de liaison étaient
+dérégulés (\textbf{Figure : }\ref{fig:plotmolfunction} - \textbf{A}),
+dont sont des protéines de liaison aux acides nucléiques (\textbf{Figure
+: }\ref{fig:plotmolfunction} - \textbf{B}) suggérant que \emph{Dpy19l2}
+pourrait effectivement interagir avec l'ADN. D'autres fonctions
+moléculaires telles que l'activité catalytique, la régulation de la
+transcription et des protéines ayant des fonctions structurelles étaient
+également dérégulées chez les souris KO. Ces fonctions sont
+particulièrement intéressantes lorsque l'on sait que les spermatozoïdes
+globozoocéphales sont caractérisés par plusieurs défauts structurels.
+
+Cette étude a pour nous été l'occasion de mieux caractériser la protéine
+\emph{Dpy19l2} chez la souris. Nous avons ainsi pu montrer que les
+souris \emph{Dpy19l2}\(^{-/-}\) présentaient des dérèglements
+transcriptionnels affectant plusieurs fonctions moléculaires pouvant
+potentiellement expliquer, du moins en partie, les nombreux défauts
+morphologiques caractérisant les spermatozoïdes globozoocéphales. De
+même, nous avons pu observer le dérèglement de nombreux gènes impliqués
+dans la liaison d'acide nucléique et de protéine pouvant ainsi expliquer
+les défauts d'ancrage de l'acrosome au noyau chez les spermatozoïdes
+globozoocéphales.
+
+Ces résultats ne nous ont cependant pas permis d'expliquer l'absence de
+la protéine Plcz1 dans le spermatozoïde globozoocéphale murin
+l'expression du gène \emph{Plcz1} n'ayant montré aucune dérégulation
+chez la souris \emph{Dpy19l2}\textsuperscript{-/-}. De même, aucun des
+gènes retrouvés comme dérégulés ne nous a permis d'expliquer le biais de
+sexe que nous avions observés. Cela n'a pas été une surprise pour nous
+puisque après avoir entamé notre étude, une dernière portée issues d'un
+croisement de souris \emph{Dpy19l2}\textsuperscript{+/-} a vue le jours.
+Celle-ci état composée de 4 souriceaux mâles et de 4 souriceaux
+femelles. Ainsi, avec un total de 32 souris mâles pour 20 souris
+femelles, la p-valeur de notre test du \(\chi^2\) à 0.0635765 laissant
+cette fois-ci supposer la non-existence d'un biais de sexe dans les
+naissances issues d'un croisement de souris
+\emph{Dpy19l2}\textsuperscript{-/-}.
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotmolfunction-1} 
+
+}
+
+\caption[Principales fonctions moléculaires affectées
+chez les souris \emph{Dpy19l2} KO\\]{\textbf{\emph{Principales fonctions moléculaires
+affectées chez les souris \emph{Dpy19l2} KO}} : \textbf{A} : Liste des
+fonctions moléculaires affectées : Bndn = Binding, Ctly = Catalytic,
+Trnsc = Transcription, Strm = Structural molecule, Rcpt = Receptor.
+\textbf{B} : Détails des fonctions moléculaires affectées par les gènes
+dérégulés.}\label{fig:plotmolfunction}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\chapter*{Conclusion et discussion}\label{conclusion-et-discussion}
+\addcontentsline{toc}{chapter}{Conclusion et discussion}
+
+\newpage 
+
+L'infertilité est une problématique qui concerne entre 10 et 15\% des
+couples {[}\protect\hyperlink{ref-Boivin2007a}{53}{]} faisant de cette
+pathologie un enjeu de santé publique. Bien que les causes de ce
+phénotype puissent être multifactorielles et acquises au cours de la vie
+de l'l'individu, notamment suite à des infections du système urogénitale
+ou encore à des perturbations du système endocrinien, la composante
+génétique est extrêmement importante. À ce jour, malgré les efforts de
+nombreuses équipes, incluant la nôtre, seulement une poignée de gènes a
+pu être reliée à ce phénotype. De plus, pour nombre d'entre eux, les
+bases moléculaires reliant une mutation au phénotype d'infertilité
+restent inconnues. Ces quinze dernières années, les techniques
+d'investigation employées dans les analyses phénotypes-génotype, ont été
+bouleversées par l'émergence du séquençage haut-débit. En effet, ces
+technologies permettent aujourd'hui de séquencer l'ensemble du génome /
+exome d'un individu pour un coût et dans un temps raisonnable.
+Malheureusement, la masse de données générées par ces méthodes, bien
+qu'à l'origine du succès de celles-ci, deviennent aujourd'hui un frein
+dans l'analyse et la compréhension des processus biologiques étudiés.
+
+Dans ce contexte, j'ai pu, au cours de ma thèse, mettre au point un
+pipeline permettant l'analyse des données issues de séquençage NGS. Ce
+pipeline a ainsi permis, entre 2012 et 2017, l'analyse des données de
+nombreux patients présentant tous un phénotype d'infertilité. Celle-ci
+ayant pour vocation première de mettre en évidence les variants
+responsables des phénotypes de ces patients. Contrairement à la plupart
+des pipelines d'analyse de données WES existant, celui-ci prend en
+charge l'ensemble des étapes de l'analyse allant de l'alignement des
+\emph{short-reads} sur le génome de référence jusqu'à la priorisation
+des variants en passant par l'appel des variants et leur annotation. Les
+résultats de chacune de ces étapes pouvant être contrôlées et
+personnalisées grâce à des paramètres ajustables. L'alignement des
+\emph{reads} est effectué par le logiciel MAGIC tandis que les variants
+et leur génotype sont appelés par un algorithme développé dans notre
+laboratoire spécifiquement conçu pour analyser les informations fournies
+par MAGIC et dont les paramètres sont ajustables en fonctions de la
+distribution des pourcentages de \emph{reads} variants observés dans les
+données analysées. Pour l'annotation nous avons utilisé plusieurs
+ressources extérieures tel que le logiciel \emph{Variant Effect
+Predictor} qui va nous informer de l'effet d'un variant sur l'ensemble
+des transcrits qu'il chevauche. De même, les bases de données ExAC
+ESP6500 ou encore 1KG nous donne une indication de la fréquence des
+variants dans la population générale. Une fois ces étapes effectuées,
+nous avons mis en place plusieurs filtres successifs afin d'éliminer de
+nos listes les variants ayant le moins de chances d'être responsables du
+phénotype des différents patients. Ceux-ci s'appuient à la fois sur les
+critères qualité des résultats de séquençage, le génotype des variants,
+leur fréquence ou encore leur impact sur la protéine.
+
+L'efficacité de ce pipeline a pu être démontré grâce à son utilisation
+sur des cas familiaux mais aussi sur des cohortes d'individus non
+apparentés. Ainsi, nous avons pu dans un premier temps confirmer
+l'importance de l'implication du gène \emph{DNAH1} dans le syndrome MMAF
+en le retrouvant muté chez 9 de nos patients (4 au sein d'études
+familiales et 5 parmi notre cohorte d'individus non apparentés).
+Ensuite, dans un second temps, ce pipeline nous a permis de mettre en
+évidence un total de 5 nouveaux gènes dans des phénotypes d'infertilité
+masculine et féminine. Ainsi les gènes \emph{CFPA43}, \emph{CFAP44},
+retrouvés respectivement mutés à chez 10 (9 homozygotes et 1
+hétérozygote composite) et 6 (tous homozygotes) de nos patients ont pu
+être liés à leur syndrome MMAF. Aussi, une même mutation impactant le
+gène \emph{PATL2} a pu être reliée au phénotype de déficience méiotique
+ovocytaire de cinq femmes. Pour finir, des mutations sur les gènes
+\emph{SPINK2} et \emph{PLCZ1} ont, elles aussi, pu être liées aux
+phénotypes d'azoospermie et d'échec de fécondation dont étaient atteint
+deux fratries.
+
+Dans autre partie de mon travail de thèse j'ai pu prendre part à la
+caractérisation génétiques et moléculaires du gène \emph{DPY19L2}
+impliqué dans le phénotype de globozoospermie. Ce phénotype, entrainant
+la production de 100\% de spermatozoïdes à têtes rondes et dépourvus
+d'acrosomes est principalement causé, chez l'humain, par une délétion
+homozygote récurrente entrainant la perte de la totalité de la séquence
+du gène \emph{DPY19L2}. Ainsi, dans deux études différentes, nous avons
+pu, dans un premier temps, mieux caractériser les mécanismes
+moléculaires responsables de cette délétion. Ainsi, nous avons pu mettre
+en évidence cinq points de cassures au niveau des LCRs flanquant la
+séquence de \emph{DPY19L2} chez l'humain. Ceux-ci étant tous concentrés
+dans une région d'environ 1150 pb contenant en son centre un site de
+reconnaissance consensus de la protéine PRDM9 connue pour son
+implication dans la recombinaison chromosomique chez l'humain et la
+souris {[}\protect\hyperlink{ref-Parvanov2010}{227},
+\protect\hyperlink{ref-Baudat2010}{228}{]}. Cette même étude a également
+permis de démontrer que les effets de la sélection naturelle étaient
+responsables du paradoxe observé dans la population générale : une
+fréquence plus élevée d'allèles dupliqués comparativement aux allèle
+délétés au locus DPY19L2 tandis que \emph{de novo}, l'allèle délété est
+produit, en théorie et en pratique, plus fréquemment que l'allèle
+dupliqué. L'étude de ce phénotype nous a par la suite poussée à étudier
+le modèle murin KO \emph{Dpy19l2}\textsuperscript{-/-} présentant le
+même phénotype que l'humain. Afin d'expliquer l'absence de la protéine
+PLCZ1 chez l'humain globozoosperme, nous avons effectué une analyse
+comparative des transcriptomes testiculaires de souris sauvages
+\emph{Dpy19l2}\textsuperscript{+/+} et KO
+\emph{Dpy19l2}\textsuperscript{-/-}. Bien qu'aucun dérèglement
+transcriptionnel n'ait pu être observé pour le gène \emph{Plcz1} cette
+étude nous a permis de mettre en évidence un total de 75 gènes
+présentant des dérégulations transcriptionnelles pouvant expliquer en
+partie les anomalies physiologiques et morphologiques des spermatozoïdes
+des souris\emph{Dpy19l2}\textsuperscript{-/-}.
+
+Au cours des différents travaux réalisés au cours de ma thèse, nous
+avons pu constater la puissance des technologies de séquençage
+haut-débit. En effet, en seulement 5 ans, celles-ci ont permis
+l'identification de 5 nouveaux gènes impliqués dans des phénotypes
+d'infertilité au sein de notre laboratoire. Ces résultats sont cependant
+à relativiser puisque qu'aucun candidat n'a pu être identifié pour 68\%
+des patients analysés. Plusieurs raisons peuvent expliquer cela. Tout
+d'abord, au cours des analyses décrites dans ces manuscrits nous nous
+concentrons uniquement sur les SNPs et les indels. Cependant de nombreux
+logiciels tel que ExomeDepth
+{[}\protect\hyperlink{ref-Plagnol2012}{230}{]}, CoNIFER
+{[}\protect\hyperlink{ref-Krumm2012}{231}{]} ou encore ExomeCNV
+{[}\protect\hyperlink{ref-Sathirapongsasuti2011}{232}{]} permettent de
+détecter des CNVs à partir de données WES et / ou WGS. Les stratégies de
+prédictions de ces logiciels pouvant être extrêmement différents
+(\textbf{Figure : }\ref{fig:pictcnvdetection}), le profil des CNVs
+détectés ou non le sera aussi {[}\protect\hyperlink{ref-Zhao2013}{233},
+\protect\hyperlink{ref-Guo2013}{234}{]}. Ainsi, dans des analyses non
+décrites dans ce manuscrit, j'ai pu chercher à identifier des CNVs à
+partir de nos données d'exome à l'aide du logiciel ExomeDepth
+{[}\protect\hyperlink{ref-Plagnol2012}{230}{]}. Cette approche a été
+extrêmement concluante puisqu'elle a permis d'identifier une délétion
+homozygote sur le gène \emph{WDR66} chez 7 de nos patients pour lesquels
+aucun candidat n'avait été alors identifié. Ces délétions ont ensuite pu
+être confirmées par PCR et la caractérisation de ce gène est
+actuellement en cours au sein de notre équipe. Au vu de cette réussite,
+il est désormais prévu d'intégrer ce genre d'analyse de manière
+automatique et systématique au sein de notre pipeline.
+
+\begin{figure}
+
+{\centering \includegraphics[scale=0.44]{figure/cvn_detection_strategies} 
+
+}
+
+\caption[Présentation de cinq approches permettant la détection de CNVs à partir de données NGS]{\textbf{\emph{Présentation de cinq approches
+permettant la détection de CNVs à partir de données NGS} d'après
+{[}\protect\hyperlink{ref-Zhao2013}{233}{]}} : \textbf{A} : Cette
+stratégie, permet de prédire des CNVs à partir des alignements
+discordants des deux \emph{ends} d'un même \emph{read}, c'est à dire en
+répertoriant les \emph{reads} pour lesquels la distance séparant les
+deux \emph{ends} après l'alignement est significativement supérieure à
+la taille moyenne de l'insert. \textbf{B} : La méthode \emph{split-read}
+se base sur les \emph{reads} s'alignant de manière partielle sur
+plusieurs régions génomiques. \textbf{C} : L'approche \emph{read depth}
+compare la couverture observée sur plusieurs régions génomiques pour
+prédire des CNVs. \textbf{D} : Cette méthode effectue un assemblage
+\emph{de novo} (sans utilisé de génome de référence) ; les résultats de
+l'assemblage appelés \emph{contigs} sont comparés au génome de référence
+a posteriori pour détecter les CNVs. \textbf{E} : Cette méthode combine
+les approches \textbf{A} et \textbf{C}.}\label{fig:pictcnvdetection}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+Pour les patients n'ayant eu aucun candidat identifié, il est possible
+que le choix de la stratégie du séquençage exomique plutôt que du génome
+entier ait masqué la cause génétique du phénotype de certains de nos
+patients. En effet, dans ces analyses, nous nous sommes concentrés sur
+l'analyse des variants situés dans les parties codantes
+\textbf{uniquement}. Ainsi les variants situés par exemple dans les
+microARN n'ont pu être observés. Or, les microARN jouent un rôle
+important dans la régulation génique principalement en influant sur la
+stabilité d'ARNm cibles et sont présent en grande quantité au sein des
+cellules germinales et leur importance dans la spermatogenèse a déjà été
+démontrée chez la souris
+{[}\protect\hyperlink{ref-Comazzetto2014}{235}{]} ainsi que plus
+récemment chez d'autres mammifères dont l'humain
+{[}\protect\hyperlink{ref-Chen2017}{236}{]} laissant penser que des
+défauts altérants ces microARN pourraient entrainer des
+dysfonctionnements de la spermatogenèse. Aussi, il faut noter que les
+analyses WES \textbf{et} WGS ne permettent pas d'observer les défauts
+épigénétiques, or, ceux-ci représentent une part croissante des causes
+impliquées dans les cas d'infertilité masculine
+{[}\protect\hyperlink{ref-Carrell2011}{237}--\protect\hyperlink{ref-Dada2012}{239}{]}.
+Aussi, au vu du grand nombre de gènes impliqués dans la spermatogénèse
+il est très possible que les causes génétiques responsables d'un même
+phénotype puissent être très hétérogènes. Par exemple, dans le cas de
+l'analyse de la cohorte de patients MMAF, 3630 variants subsistaient
+après avoir appliqué l'ensemble des filtres. Ces variants impactaient
+2780 gènes différents parmi lesquels 1684 étaient retrouvés mutés chez
+uniquement un seul des 78 patients de la cohorte. Au vu de ce nombre
+important de gènes, il est très compliqué d'effectuer des analyses
+poussées sur l'ensemble d'entre eux. Dès lors, il est possible que la
+cause génétique responsable du phénotype d'un patient soit ``noyée''
+parmi les nombreux variants restant mettant ainsi en évidence la
+nécessité de créer de nouveaux filtres afin de pouvoir réduire encore
+cette liste.
+
+C'est dans ce but que notre équipe travaille actuellement au
+développement du score MutaScript. Ce score a pour but de classer
+l'ensemble des transcrit codant en fonction de leur charge mutationnelle
+avec l'idée sous-jacente que les transcrits les plus mutés dans la
+population générale ne sont probablement pas impliqués dans des
+pathologies sévères à transmission Mendélienne, et \emph{a contrario}
+ceux retrouvés comme n'étant pas / peu mutés le sont probablement. Pour
+ce faire, le score MutaScript repose sur trois informations principales.
+La première étant le jeu de transcrits fournit par Ensembl
+{[}\protect\hyperlink{ref-Aken2017}{199}{]}. Afin de connaitre la charge
+mutationnelle de ces transcrits, nous nous sommes basées sur les
+variants mis à disposition par ExAC
+{[}\protect\hyperlink{ref-Lek2016}{171}{]} qui réunit les données
+d'exome de 60.706 individus non apparentés que nous avons ensuite annoté
+grâce au logiciel \emph{Variant Effect Predictor}
+{[}\protect\hyperlink{ref-McLaren2016}{172}{]} afin de prédire l'impact
+de chaque variant sur l'ensemble des transcrits qu'ils chevauchent de
+sorte à ce que les variants ayant un impact prédit comme étant délétère
+aient une plus grosse contribution au score MutaScript que ceux ayant un
+impact faible. Ces dernières années, des scores tel que le
+\emph{residual variance intolerance score} (RVIS)
+{[}\protect\hyperlink{ref-Petrovski2013}{184}{]} ou encore \emph{the the
+Probability of loss-of-function Incoherency} (pLI)
+{[}\protect\hyperlink{ref-Lek2016}{171}{]} ont vu le jour. MutaScript se
+présente comme une alternative à ces derniers scores et, bien que sa
+fonction soit similaire, il diffère de ceux-ci sur de nombreux points.
+Tout d'abord, MutaScript donne un score à l'ensemble des transcrits
+codant pour une protéine là où pLI donne un score seulement au transcrit
+consensus de chaque gène et RVIS qui agrège les séquences codantes de
+l'ensemble des transcrits d'un même gène créant ainsi un transcrit
+``chimérique''. Ce procédé facilite l'interprétation du score mais
+engendre une perte d'information puisque l'on se retrouve avec un seul
+score par gène et non par transcrits. De plus, dans la conception de
+leur score, RVIS et pLI ne considèrent que les variants dit
+\emph{loss-of-function} (LoF), c'est à dire les variants impactant
+l'épissage, engendrant un codon stop ou un décalage du cadre de lecture.
+Cependant, ces variants ne représentent qu'une faible proportion des
+variants fournis par la base de données ExAC. C'est pourquoi, MutaScript
+prend en compte l'ensemble des variants, quelque que soit leur impact
+sur les différents transcrits qu'ils chevauchent, et leur attribue un
+poids en fonction de cet impact de sorte à ce que les variants
+considérés comme étant les plus délétères contribuent plus au score d'un
+transcrits que les autres. Aussi, l'étude des scores RVIS et pLI nous a
+permis de mettre en évidence une corrélation forte entre le score qu'ils
+attribuent à un gène et la taille de la séquence codante (CDS) de ce
+même gène. Cette corrélation étant due à un biais causé par leur manière
+de calculer leur score et non à une réalité biologique, MutaScript est
+construit de sorte à éviter cette corrélation qui peut mener à des
+erreurs d'interprétations. Le développement de ce score est en cours de
+finalisation.
+
+Après avoir fait ses preuves dans la recherche, le séquençage NGS joue
+un rôle de plus en plus important dans le domaine du diagnostic clinique
+et on peut logiquement penser que ces technologies remplaceront bientôt
+la plupart des techniques diagnostiques actuelles. Il est néanmoins
+légitime de se demander dès aujourd'hui quelle sera son efficacité. En
+effet, en se basant sur les données de nos 78 patients non apparentés
+souffrant du syndrome MMAF on peut s'attendre, à obtenir entre 747 et
+2499 variants par patients avec un coefficient de variation de 29\%
+(avec \(C_v = \frac{\sigma}{\mu}\) où \(\sigma\) est l'écart-type et
+\(\mu\) la moyenne). Ces chiffres sont obtenus en filtrant de notre
+ensemble de variants ceux ayant une fréquence \(\ge\) 0.01 dans les
+bases de données publiques ainsi qu'en retirant les variants
+introniques, synonymes et ceux impactant les séquences UTRs. On constate
+alors que parmi l'ensemble de ces variants 26815 d'entre eux (26\%) sont
+``individuels'', c'est à dire porté uniquement par un seul des patients
+(\textbf{Figure : }\ref{fig:plotvarperimpact} - \textbf{A}). De même on
+peut observer que chacun de nos patients est porteur d'environ 153
+variants tronquants parmi lesquels 78 le sont à l'état homozygote
+(\textbf{Figure : }\ref{fig:plotvarperimpact} - \textbf{B}). La
+priorisation de certains gènes par des outils tel que MutaScript
+permettra alors d'orienter les analyses vers les gènes les plus
+prometteurs. De même la recherche de variants parmi des panels de gènes
+permettra également de cibler les recherches sur les gènes déjà connus
+comme étant lié au phénotype en question. Ainsi, au vu de nos résultats
+dans le cadre de patients atteins du syndrome MMAF, la recherche de
+variants dans les gènes \emph{DNAH1}, \emph{CFAP43}, \emph{CFAP44} et
+\emph{WDR66} permettrait d'obtenir un diagnostic positif dans environ
+36\% des cas. On peut dès lors s'attendre que les recherches futures
+vont permettre d'agrandir cette liste de gènes cibles améliorant ainsi
+l'efficacité du diagnostic.
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics{thesis_files/figure-latex/plotvarperimpact-1} 
+
+}
+
+\caption[Analyse des variants restant sur chacun des 78 patients après filtrage]{\textbf{\emph{Analyse des variants restant sur
+chacun des 78 patients après filtrage}} : \textbf{A} : Répartition du
+nombre de patients portant un même variant. Les variants portés par 10
+patients ou plus sont regroupés sous l'étiquette 10+. On voit ici
+clairement qu'une grande majorité des variants sont spécifiques à un
+seul patient. \textbf{B} : Sur cette figure chaque point représente un
+patient. Les variants homozygote sont représentés en rouge, les variants
+hétérozygotes en bleu. L'impact \emph{LOW} correspond aux variants ayant
+un impact peu délétère sur le gène tel que les variants introniques
+situés dans les zones d'épissage lointaines. Les variants
+\emph{MODERATE} tel que les faux-sens ont un impact modéré sur le gène.
+Les \emph{HIGH} représentent les variant tronquants (décalage du cadre
+de lecture, codon stop\ldots{}).}\label{fig:plotvarperimpact}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Pendant de nombreuses années, la Science et la Technique étaient
+considérées comme des disciplines distinctes. Elles étaient pratiquées,
+dans la grande majorité des cas, de manière indépendante l'une de
+l'autre et surtout par des personnes différentes n'entretenant que peu
+d'interactions. Bien que la distinction entre Science et Technique soit
+réelle, la première pouvant être définie comme la quête de la
+connaissance et de la compréhension du monde tandis que la seconde met
+en œuvre un ensemble de moyen afin de modifier celui-ci d'une manière
+déterminée à l'avance, l'interdépendance liant ces deux notions n'a
+jamais été aussi forte qu'à notre époque tant et si bien qu'elles sont
+souvent confondues. En effet, il est courant d'entendre parler de
+progrès scientifique pour présenter une innovation technologique et
+\emph{vice versa}. Ainsi, si la Science n'est pas la Technique, elle est
+dans de nombreux cas dépendante de celle-ci. En effet, comme nous avons
+pu le voir, l'étude et la connaissance du génome ont dû attendre les
+progrès techniques permettant notamment le séquençage de l'ADN. La
+Technique, elle, n'a pas nécessairement besoin de savoirs scientifiques
+pour être conçue : des savoirs empiriquement acquis suffisent à
+l'application d'une technique. Par exemple, bien qu'ils n'aient eu
+aucune conscience des mécanismes scientifiques sous-jacents, les
+premiers hommes ont su maitriser plusieurs techniques de production et
+d'entretien du feu. De la même manière les agriculteurs n'ont pas eu
+besoin d'attendre et de comprendre les travaux sur la génétique et
+l'hérédité pour observer que la mise en reproduction des bêtes les plus
+productives permettait de maximiser les chances que la descendance soit
+elle aussi très productive. Cependant la Technique utilise de plus en
+plus des connaissances scientifiques et a ainsi finit par beaucoup
+dépendre d'elle en utilisant et appliquant des savoirs scientifiques.
+Ainsi est née la Technologie. Les travaux décrits dans ce manuscrit
+illustrent parfaitement cette relation d'interdépendance entre la
+Science et le Technique / Technologie. En effet, la connaissance du
+génome a été permise par l'émergence des différentes technologies de
+séquençage qui s'appuient elles aussi sur de nombreuses connaissances
+scientifiques. On peut dès lors s'attendre à ce que Science et
+Techniques / Technologie continuent d'évoluer de manière concomitante en
+s'entre alimentant. Dès lors, on peut prédire que les prochains progrès
+technologiques seront à l'origine de découvertes scientifiques qui
+serviront elles même à la fois de socle mais aussi de guide aux
+évolutions technologiques futures.
+
+\appendix
+
+\hypertarget{dnah12014}{\chapter{Article annexe}\label{dnah12014}}
+
+\textbf{Mutations in DNAH1, which Encodes an Inner Arm Heavy Chain
+Dynein, Lead to Male Infertility from Multiple Morphological
+Abnormalities of the Sperm Flagella}
+
+Ben Khelifa M\textsuperscript{*}, Coutton C\textsuperscript{*}, Zouari
+Raoudha, \textbf{Karaouzène T}, Rendu J, Bidart M, Yassine S, Pierre V,
+Delaroche J, Hennebicq S, Grunwald D, Escalier D, Pernet-Gallay K, Jouk
+PS, Thierry-Mieg N, Touré A, Arnoult C, Ray PF
+
+American Journal of Human Genetics, Janvier 2014
+
+\textsuperscript{*} Co-premiers auteurs
+
+\newpage
+
+\includepdf[pages=-]{bib/DNAH1_2014.pdf}
+
+\newpage
+
+\newpage
+
+\chapter{Tables des variants restant après application des filtres pour
+les cas
+familliaux}\label{tables-des-variants-restant-apres-application-des-filtres-pour-les-cas-familliaux}
+
+\begin{longtable}[t]{lll}
+\caption{\label{tab:tabmmaf1}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P1 et P2 de la famille MMAF1}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+\cmidrule(l{2pt}r{2pt}){2-3}
+SYMBOL & HGVSc, HGVSp & Consequence\\
+\midrule
+PLA2G4B & c.1710-6delA ; . & splice region\\
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[t]{lll}
+\caption{\label{tab:tabmmaf2}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P3 et P4 de la famille MMAF2}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+\cmidrule(l{2pt}r{2pt}){2-3}
+SYMBOL & HGVSc, HGVSp & Consequence\\
+\midrule
+SEMA5B & c.658C>A ; p.Glu220Lys & missense\\
+CCDC37 & c.1234\_1236delTGG ; p.Glu412del & inframe deletion\\
+DAPK1 & c.2431T>A ; p.Val811Met & missense\\
+MTSS1L & . ; p.Arg609Trp & missense\\
+HYDIN & c.14857>T ; p.Arg4953Trp & missense\\
+\addlinespace
+TMEM231 & . ; p.Ala71Val & missense\\
+ZNF469 & . ; p.Arg1864Lys & missense\\
+TGIF2 & c.496C>A ; p.Leu166Met & missense\\
+MMP9 & c.820G>A ; p.Glu274Lys & missense\\
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[t]{lll}
+\caption{\label{tab:tabmmaf3}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P5 et P6 de la famille MMAF3}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+\cmidrule(l{2pt}r{2pt}){2-3}
+SYMBOL & HGVSc, HGVSp & Consequence\\
+\midrule
+MYH11 & c.4625G>A ; p.Arg1542Gln & missense\\
+DNAH1 & . ; . & splice acceptor\\
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[t]{lll}
+\caption{\label{tab:tabmmaf4}Liste des variants ayant passé l'ensemble des filtres pour les deux fères P8 et P9 de la famille MMAF4}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+\cmidrule(l{2pt}r{2pt}){2-3}
+SYMBOL & HGVSc, HGVSp & Consequence\\
+\midrule
+WEE2 & . ; p.Pro92Leu & missense\\
+GBP2 & c.412T>A ; p.Ala138Thr & missense\\
+ZFYVE28 & c.1729C>A ; p.Val577Met & missense\\
+FCGR3A & c.133T>C ; p.Ala45Pro & missense\\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\begin{longtable}[t]{lll}
+\caption{\label{tab:tabmmaf5}Liste des variants ayant passé l'ensemble des filtres pour le patient P10 de la famille MMAF5}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+\cmidrule(l{2pt}r{2pt}){2-3}
+SYMBOL & HGVSc, HGVSp & Consequence\\
+\midrule
+ALOX15 & c.268T>C ; p.Asp90His & missense\\
+NFATC4 & . ; p.Glu577Gly & missense\\
+MYH7 & c.77G>T ; p.Ala26Val & missense\\
+LDHAL6A & c.334A>T ; p.Arg112Ter & stop gained\\
+GBF1 & c.1588G>T ; p.Arg530Cys & missense\\
+\addlinespace
+TRBV6-6 & c.5A>T ; p.Ser2Ile & missense\\
+MROH2A & . ; p.Ile180Thr & missense\\
+FSIP2 & . ; p.Ala86Val & missense\\
+ZSWIM2 & c.676G>A ; p.Leu226Met & missense\\
+CPZ & c.1236A>T ; p.Lys412Asn & missense\\
+\addlinespace
+CCDC73 & c.851A>C ; p.Phe284Ser & missense\\
+NXPE2 & c.1595>T ; p.Thr532Met & missense\\
+NKX2-1 & c.843G>T ; p.Gln281His & missense\\
+CASP8 & c.74A>G ; p.Pro25Arg & missense\\
+OR6S1 & . ; p.Leu116Met & missense\\
+\addlinespace
+PDZD7 & . ; p.Ser324Asn & missense\\
+COL27A1 & c.5063G>A ; p.Arg1688Gln & missense\\
+SPEF2 & c.3240delG ; p.Phe1080LeufsTer2 & frameshift\\
+ACAP1 & c.1597A>T ; p.Arg533Trp & missense\\
+C6 & c.2312C>A ; p.Gly771Asp & missense\\
+\addlinespace
+SLIT1 & . ; . & splice region\\
+ARHGAP19-SLIT1 & c.*1721-7A>T ; . & splice region\\
+DNAH2 & . ; p.Arg2538Gln & missense\\
+\bottomrule
+\end{longtable}
+
+\chapter{\texorpdfstring{Table des variants retrouvés sur le gène
+\emph{PATL2}}{Table des variants retrouvés sur le gène PATL2}}\label{table-des-variants-retrouves-sur-le-gene-patl2}
+
+\begin{longtable}[t]{llll}
+\caption{\label{tab:tabpatl2}Table des variants retrouvés sur le gène \textit{PATL2}}\\
+\toprule
+\multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} \\
+\cmidrule(l{2pt}r{2pt}){3-4}
+Patient & Geno & HGVSc, HGVSp & Consequence\\
+\midrule
+Ghs103 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+Ghs104 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+Ghs114 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+Ghs5 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+Ghs98 & Homo & c.478G>T ; p.Arg160Ter & stop gained\\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\chapter{Variants retrouvés au sein de notre cohorte de patients
+MMAF}\label{variants-retrouves-au-sein-de-notre-cohorte-de-patients-mmaf}
+
+\newpage
+
+\begin{landscape}
+\begin{longtable}[t]{llllll}
+\caption{\label{tab:tabcfap43}Variants homozygotes retrouvés sur le gène \textit{CFAP43}}\\
+\toprule
+\multicolumn{2}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+\cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-5}
+Patient & Geno & HGVSc, HGVSp & Consequence & SIFT ; PolyPhen & ExAC ; ESP ; 1KG\\
+\midrule
+Ghs162 & Homo & c.1240\_1241delGC ; p.Val414LeufsTer46 & frameshift & . ; . & . ; . ; .\\
+Ghs164 & Homo & c.1240\_1241delGC ; p.Val414LeufsTer46 & frameshift & . ; . & . ; . ; .\\
+Ghs25 & Homo & c.2141+5T>A ; p.Lys714Val*11 & splice region & . ; . & . ; . ; .\\
+Ghs17 & Homo & c.2658G>A ; p.Trp886Ter & stop gained & . ; . & 9.88e-05 ; 2e-04 ; .\\
+Ghs41 & Homo & c.2680C>T ; p.Arg894Ter & stop gained & . ; . & 8.24e-06 ; . ; .\\
+\addlinespace
+Ghs126 & Homo & c.3352C>T ; p.Arg1118Ter & stop gained & . ; . & 3.29e-05 ; . ; .\\
+Ghs105 & Homo & c.3541-2A>C ; p.Ser1181Lysfs*4 & splice acceptor & . ; . & . ; . ; .\\
+Ghs160 & Homo & c.3541-2A>C ; p.Ser1181Lysfs*4 & splice acceptor & . ; . & . ; . ; .\\
+Ghs102 & Homo & c.3882delA ; p.Glu1294AspfsTer47 & frameshift & . ; . & . ; . ; .\\
+Ghs132 & Hete & c.1040G>C ; p.Val347Ala & missense & tolerated ; possibly damaging & 7.41e-05 ; 2e-04 ; .\\
+Ghs132 & Hete & c.1300\_1301insT ; p.Leu435SerfsTer26 & frameshift & . ; . & . ; . ; .\\
+\bottomrule
+\end{longtable}
+\end{landscape}
+
+\newpage
+
+\begin{longtable}[t]{llll}
+\caption{\label{tab:tabcfap44}Variants homozygotes retrouvés sur le gène \textit{CFAP44}}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Variant impact} & \multicolumn{1}{c}{Variant frequency} \\
+\cmidrule(l{2pt}r{2pt}){2-3} \cmidrule(l{2pt}r{2pt}){4-4}
+Patient & HGVSc, HGVSp & Consequence & ExAC ; ESP ; 1KG\\
+\midrule
+Ghs155 & c.1387G>T ; p.Glu463Ter & stop gained & . ; . ; .\\
+Ghs177 & c.1387G>T ; p.Glu463Ter & stop gained & . ; . ; .\\
+Ghs34 & c.1890+1G>A ; p.Pro631Ile*22 & splice donor & . ; . ; .\\
+Ghs168 & c.2818\_2819insG ; p.Glu940GlyfsTer19 & frameshift & 8.24e-06 ; . ; .\\
+Ghs22 & c.3175C>T ; p.Arg1059Ter & stop gained & . ; . ; .\\
+Ghs181 & c.4767delC ; p.Ile1589MetfsTer6 & frameshift & . ; . ; .\\
+\bottomrule
+\end{longtable}
+
+\backmatter
+
+\chapter*{References}\label{references}
+\addcontentsline{toc}{chapter}{References}
+
+\noindent
+
+\setlength{\parindent}{-0.20in} \setlength{\leftskip}{0.20in}
+\setlength{\parskip}{8pt}
 
 \hypertarget{refs}{}
 \hypertarget{ref-Tosti2016}{}
@@ -3787,7 +6823,7 @@ next-generation sequencing: computational challenges and solutions.''
 memory-efficient alignment of short DNA sequences to the human genome.''
 \emph{Genome biology}. vol. 10, no. 3, pp. R25, 2009.
 
-\hypertarget{ref-Li2009a}{}
+\hypertarget{ref-Li2009b}{}
 156. H. Li and R. Durbin: ``Fast and accurate short read alignment with
 Burrows-Wheeler transform.'' \emph{Bioinformatics}. vol. 25, no. 14, pp.
 1754--1760, 2009.
@@ -4064,15 +7100,313 @@ vol. 6, no. 11s, pp. S2--S5, 2009.
 challenges for Online Mendelian Inheritance in Man (OMIM).'' \emph{Human
 Mutation}. vol. 32, no. 5, pp. 564--567, 2011.
 
-\hypertarget{ref-wistuba2007mammalian}{}
-191. J. Wistuba, J.-B. Stukenborg, and C.M. Luetjens: ``Mammalian
-spermatogenesis.'' \emph{Functional development and embryology}. vol. 1,
-no. 2, pp. 99--117, 2007.
-
 \hypertarget{ref-Matzuk2008}{}
-192. M.M. Matzuk and D.J. Lamb: ``The biology of infertility: research
+191. M.M. Matzuk and D.J. Lamb: ``The biology of infertility: research
 advances and clinical challenges.'' \emph{Nature Medicine}. vol. 14, no.
 11, pp. 1197--1213, 2008.
+
+\hypertarget{ref-RStudioTeam2015}{}
+192. RStudio Team: ``RStudio: Integrated Development Environment for
+R.'' \emph{RStudio, Inc.}, Boston, MA, 2015.
+
+\hypertarget{ref-Ng}{}
+193. S.B. Ng, K.J. Buckingham, C. Lee, A.W. Bigham, H.K. Tabor, K.M.
+Dent, C.D. Huff, P.T. Shannon, E.W. Jabs, D.A. Nickerson, J. Shendure,
+and M.J. Bamshad: ``Exome sequencing identifies the cause of a Mendelian
+disorder.''
+
+\hypertarget{ref-Pelak2010}{}
+194. K. Pelak, K.V. Shianna, D. Ge, J.M. Maia, M. Zhu, J.P. Smith, E.T.
+Cirulli, J. Fellay, S.P. Dickson, C.E. Gumbs, E.L. Heinzen, A.C. Need,
+E.K. Ruzzo, A. Singh, C.R. Campbell, L.K. Hong, K.A. Lornsen, A.M.
+McKenzie, N.L.M. Sobreira, J.E. Hoover-Fong, J.D. Milner, R. Ottman,
+B.F. Haynes, J.J. Goedert, and D.B. Goldstein: ``The characterization of
+twenty sequenced human genomes.'' \emph{PLoS genetics}. vol. 6, no. 9,
+pp. e1001111, 2010.
+
+\hypertarget{ref-Robinson2014}{}
+195. P.N. Robinson, S. Köhler, A. Oellrich, S.M.G. Sanger Mouse Genetics
+Project, K. Wang, C.J. Mungall, S.E. Lewis, N. Washington, S. Bauer, D.
+Seelow, P. Krawitz, C. Gilissen, M. Haendel, and D. Smedley: ``Improved
+exome prioritization of disease genes through cross-species phenotype
+comparison.'' \emph{Genome research}. vol. 24, no. 2, pp. 340--8, 2014.
+
+\hypertarget{ref-RCoreTeam2017}{}
+196. R Core Team: ``R: A Language and Environment for Statistical
+Computing.'' \emph{R Foundation for Statistical Computing}, Vienna,
+Austria, 2017.
+
+\hypertarget{ref-Wickham2009}{}
+197. H. Wickham: ``ggplot2: Elegant Graphics for Data Analysis.''
+\emph{Springer-Verlag New York}, 2009.
+
+\hypertarget{ref-Robinson2011}{}
+198. J.T. Robinson, H. Thorvaldsdóttir, W. Winckler, M. Guttman, E.S.
+Lander, G. Getz, J.P. Mesirov, L. Pachter, J. Aach, E. Leproust, K.
+Eggan, G. Church, H. Li, Y. Lu, X. Fang, H. Liang, Z. Du, D. Li, Y.
+Zhao, Y. Hu, Z. Yang, H. Zheng, I. Hellmann, M. Inouye, J. Pool, X. Yi,
+J. Zhao, J. Duan, Y. Zhou, and J. Qin: ``Integrative genomics viewer.''
+\emph{Nature Biotechnology}. vol. 29, no. 1, pp. 24--26, 2011.
+
+\hypertarget{ref-Aken2017}{}
+199. B.L. Aken, P. Achuthan, W. Akanni, M.R. Amode, F. Bernsdorff, J.
+Bhai, K. Billis, D. Carvalho-Silva, C. Cummins, P. Clapham, L. Gil, C.G.
+Girón, L. Gordon, T. Hourlier, S.E. Hunt, S.H. Janacek, T. Juettemann,
+S. Keenan, M.R. Laird, I. Lavidas, T. Maurel, W. McLaren, B. Moore, D.N.
+Murphy, R. Nag, V. Newman, M. Nuhn, C.K. Ong, A. Parker, M. Patricio,
+H.S. Riat, D. Sheppard, H. Sparrow, K. Taylor, A. Thormann, A. Vullo, B.
+Walts, S.P. Wilder, A. Zadissa, M. Kostadima, F.J. Martin, M. Muffato,
+E. Perry, M. Ruffier, D.M. Staines, S.J. Trevanion, F. Cunningham, A.
+Yates, D.R. Zerbino, and P. Flicek: ``Ensembl 2017.'' \emph{Nucleic
+acids research}. vol. 45, no. D1, pp. D635--D642, 2017.
+
+\hypertarget{ref-Chang2007}{}
+200. Y.-F. Chang, J.S. Imam, and M.F. Wilkinson: ``The Nonsense-Mediated
+Decay RNA Surveillance Pathway.'' \emph{Annual Review of Biochemistry}.
+vol. 76, no. 1, pp. 51--74, 2007.
+
+\hypertarget{ref-Baker2004}{}
+201. K.E. Baker and R. Parker: ``Nonsense-mediated mRNA decay:
+terminating erroneous gene expression.'' \emph{Current opinion in cell
+biology}. vol. 16, no. 3, pp. 293--9, 2004.
+
+\hypertarget{ref-Lee2011}{}
+202. B. Lee, I. Park, S. Jin, H. Choi, J.T. Kwon, J. Kim, J. Jeong,
+B.-N. Cho, E.M. Eddy, and C. Cho: ``Impaired spermatogenesis and
+fertility in mice carrying a mutation in the Spink2 gene expressed
+predominantly in testes.'' \emph{The Journal of biological chemistry}.
+vol. 286, no. 33, pp. 29108--17, 2011.
+
+\hypertarget{ref-Aarabi2014}{}
+203. M. Aarabi, H. Balakier, S. Bashar, S.I. Moskovtsev, P. Sutovsky,
+C.L. Librach, and R. Oko: ``Sperm content of postacrosomal WW binding
+protein is related to fertilization outcomes in patients undergoing
+assisted reproductive technology.'' \emph{Fertility and Sterility}. vol.
+102, no. 2, pp. 440--447, 2014.
+
+\hypertarget{ref-Aarabi2014a}{}
+204. M. Aarabi, H. Balakier, S. Bashar, S.I. Moskovtsev, P. Sutovsky,
+C.L. Librach, and R. Oko: ``Sperm-derived WW domain-binding protein,
+PAWP, elicits calcium oscillations and oocyte activation in humans and
+mice.'' \emph{FASEB journal : official publication of the Federation of
+American Societies for Experimental Biology}. vol. 28, no. 10, pp.
+4434--40, 2014.
+
+\hypertarget{ref-Lehti2017}{}
+205. M.S. Lehti, F.-P. Zhang, N. Kotaja, and A. Sironen: ``SPEF2
+functions in microtubule-mediated transport in elongating spermatids to
+ensure proper male germ cell differentiation.'' \emph{Development}. vol.
+144, no. 14, 2017.
+
+\hypertarget{ref-Marnef2010}{}
+206. A. Marnef, M. Maldonado, A. Bugaut, S. Balasubramanian, M. Kress,
+D. Weil, and N. Standart: ``Distinct functions of maternal and somatic
+Pat1 protein paralogs.'' \emph{RNA}. vol. 16, no. 11, pp. 2094--2107,
+2010.
+
+\hypertarget{ref-Nakamura2010}{}
+207. Y. Nakamura, K.J. Tanaka, M. Miyauchi, L. Huang, M. Tsujimoto, and
+K. Matsumoto: ``Translational repression by the oocyte-specific protein
+P100 in Xenopus.'' \emph{Developmental biology}. vol. 344, no. 1, pp.
+272--83, 2010.
+
+\hypertarget{ref-Ivliev2012}{}
+208. A.E. Ivliev, P.A.C. 't Hoen, W.M.C. van Roon-Mom, D.J.M. Peters,
+and M.G. Sergeeva: ``Exploring the Transcriptome of Ciliated Cells Using
+In Silico Dissection of Human Tissues.'' \emph{PLoS ONE}. vol. 7, no. 4,
+pp. e35618, 2012.
+
+\hypertarget{ref-Smith2008}{}
+209. T.F. Smith: ``Diversity of WD-Repeat proteins.'' The coronin family
+of proteins. pp. 20--30. \emph{Springer New York}, New York, NY (2008).
+
+\hypertarget{ref-Broadhead2006}{}
+210. R. Broadhead, H.R. Dawe, H. Farr, S. Griffiths, S.R. Hart, N.
+Portman, M.K. Shaw, M.L. Ginger, S.J. Gaskell, P.G. McKean, and K. Gull:
+``Flagellar motility is required for the viability of the bloodstream
+trypanosome.'' \emph{Nature}. vol. 440, no. 7081, pp. 224--227, 2006.
+
+\hypertarget{ref-Subota2014}{}
+211. I. Subota, D. Julkowska, L. Vincensini, N. Reeg, J. Buisson, T.
+Blisnick, D. Huet, S. Perrot, J. Santi-Rocca, M. Duchateau, V. Hourdel,
+J.-C. Rousselle, N. Cayet, A. Namane, J. Chamot-Rooke, and P. Bastin:
+``Proteomic Analysis of Intact Flagella of Procyclic
+\textless{}i\textgreater{}Trypanosoma brucei\textless{}/i\textgreater{}
+Cells Identifies Novel Flagellar Proteins with Unique Sub-localization
+and Dynamics.'' \emph{Molecular \& Cellular Proteomics}. vol. 13, no. 7,
+pp. 1769--1786, 2014.
+
+\hypertarget{ref-Singh}{}
+212. G. Singh: ``Ultrastructural features of round-headed human
+spermatozoa.'' \emph{International journal of fertility}. vol. 37, no.
+2, pp. 99--102,
+
+\hypertarget{ref-Pedersen1974}{}
+213. H. Pedersen and H. Rebbe: ``Fine structure of round-headed human
+spermatozoa.'' \emph{Journal of reproduction and fertility}. vol. 37,
+no. 1, pp. 51--4, 1974.
+
+\hypertarget{ref-Taylor2010}{}
+214. S. Taylor, S. Yoon, M. Morshedi, D. Lacey, T. Jellerette, R.
+Fissore, and S. Oehninger: ``Complete globozoospermia associated with
+PLC\(\zeta\) deficiency treated with calcium ionophore and ICSI results
+in pregnancy.'' \emph{Reproductive BioMedicine Online}. vol. 20, no. 4,
+pp. 559--564, 2010.
+
+\hypertarget{ref-Yoon2008}{}
+215. S.-Y. Yoon, T. Jellerette, A.M. Salicioni, H.C. Lee, M.-S. Yoo, K.
+Coward, J. Parrington, D. Grow, J.B. Cibelli, P.E. Visconti, J. Mager,
+and R.A. Fissore: ``Human sperm devoid of PLC, zeta 1 fail to induce
+Ca(2+) release and are unable to initiate the first step of embryo
+development.'' \emph{The Journal of clinical investigation}. vol. 118,
+no. 11, pp. 3671--81, 2008.
+
+\hypertarget{ref-Dam2007}{}
+216. A.H.D.M. Dam, I. Koscinski, J.A.M. Kremer, C. Moutou, A.-S. Jaeger,
+A.R. Oudakker, H. Tournaye, N. Charlet, C. Lagier-Tourenne, H. van
+Bokhoven, and S. Viville: ``Homozygous mutation in SPATA16 is associated
+with male infertility in human globozoospermia.'' \emph{American journal
+of human genetics}. vol. 81, no. 4, pp. 813--20, 2007.
+
+\hypertarget{ref-Ray2011}{}
+217. P.F. Ray and C. Arnoult: ``La délétion homozygote du gène
+\textless{}i\textgreater{}DPY19L2\textless{}/i\textgreater{} est
+responsable de la majorité des cas de globozoospermie.''
+\emph{médecine/sciences}. vol. 27, no. 8-9, pp. 692--693, 2011.
+
+\hypertarget{ref-Pierre2012}{}
+218. V. Pierre, G. Martinez, C. Coutton, J. Delaroche, S. Yassine, C.
+Novella, K. Pernet-Gallay, S. Hennebicq, P.F. Ray, and C. Arnoult:
+``Absence of Dpy19l2, a new inner nuclear membrane protein, causes
+globozoospermia in mice by preventing the anchoring of the acrosome to
+the nucleus.'' \emph{Development}. vol. 139, no. 16, pp. 2955--2965,
+2012.
+
+\hypertarget{ref-Carson2006}{}
+219. A.R. Carson, J. Cheung, and S.W. Scherer: ``Duplication and
+relocation of the functional DPY19L2 gene within low copy repeats.''
+\emph{BMC genomics}. vol. 7, pp. 45, 2006.
+
+\hypertarget{ref-Cheung2003}{}
+220. J. Cheung, X. Estivill, R. Khaja, J.R. MacDonald, K. Lau, L.-C.
+Tsui, and S.W. Scherer: ``Genome-wide detection of segmental
+duplications and potential assembly errors in the human genome
+sequence.'' \emph{Genome biology}. vol. 4, no. 4, pp. R25, 2003.
+
+\hypertarget{ref-Bailey2002}{}
+221. J.A. Bailey, Z. Gu, R.A. Clark, K. Reinert, R.V. Samonte, S.
+Schwartz, M.D. Adams, E.W. Myers, P.W. Li, and E.E. Eichler: ``Recent
+Segmental Duplications in the Human Genome.'' \emph{Science}. vol. 297,
+no. 5583, pp. 1003--1007, 2002.
+
+\hypertarget{ref-Walsh2003}{}
+222. B. Walsh: ``Population-genetic models of the fates of duplicate
+genes.'' \emph{Genetica}. vol. 118, no. 2-3, pp. 279--94, 2003.
+
+\hypertarget{ref-Ohno1970}{}
+223. S. Ohno: ``Evolution by Gene Duplication.'' \emph{Springer Berlin
+Heidelberg}, Berlin, Heidelberg, 1970.
+
+\hypertarget{ref-Harbuz2011a}{}
+224. R. Harbuz, R. Zouari, V. Pierre, M. Ben Khelifa, M. Kharouf, C.
+Coutton, G. Merdassi, F. Abada, J. Escoffier, Y. Nikas, F. Vialard, I.
+Koscinski, C. Triki, N. Sermondade, T. Schweitzer, A. Zhioua, F. Zhioua,
+H. Latrous, L. Halouani, M. Ouafi, M. Makni, P.-S. Jouk, B. Sèle, S.
+Hennebicq, V. Satre, S. Viville, C. Arnoult, J. Lunardi, and P.F. Ray:
+``A recurrent deletion of DPY19L2 causes infertility in man by blocking
+sperm head elongation and acrosome formation.'' \emph{American journal
+of human genetics}. vol. 88, no. 3, pp. 351--61, 2011.
+
+\hypertarget{ref-Liu2012}{}
+225. P. Liu, C.M. Carvalho, P. Hastings, and J.R. Lupski: ``Mechanisms
+for recurrent and complex human genomic rearrangements.'' \emph{Current
+Opinion in Genetics \& Development}. vol. 22, no. 3, pp. 211--220, 2012.
+
+\hypertarget{ref-MacDonald2014}{}
+226. J.R. MacDonald, R. Ziman, R.K.C. Yuen, L. Feuk, and S.W. Scherer:
+``The Database of Genomic Variants: a curated collection of structural
+variation in the human genome.'' \emph{Nucleic acids research}. vol. 42,
+no. Database issue, pp. D986--92, 2014.
+
+\hypertarget{ref-Parvanov2010}{}
+227. E.D. Parvanov, P.M. Petkov, and K. Paigen: ``Prdm9 controls
+activation of mammalian recombination hotspots.'' \emph{Science (New
+York, N.Y.)}. vol. 327, no. 5967, pp. 835, 2010.
+
+\hypertarget{ref-Baudat2010}{}
+228. F. Baudat, J. Buard, C. Grey, A. Fledel-Alon, C. Ober, M.
+Przeworski, G. Coop, and B. de Massy: ``PRDM9 is a major determinant of
+meiotic recombination hotspots in humans and mice.'' \emph{Science (New
+York, N.Y.)}. vol. 327, no. 5967, pp. 836--40, 2010.
+
+\hypertarget{ref-Ding2007}{}
+229. X. Ding, R. Xu, J. Yu, T. Xu, Y. Zhuang, and M. Han: ``SUN1 Is
+Required for Telomere Attachment to Nuclear Envelope and Gametogenesis
+in Mice.'' \emph{Developmental Cell}. vol. 12, no. 6, pp. 863--872,
+2007.
+
+\hypertarget{ref-Plagnol2012}{}
+230. V. Plagnol, J. Curtis, M. Epstein, K.Y. Mok, E. Stebbings, S.
+Grigoriadou, N.W. Wood, S. Hambleton, S.O. Burns, A.J. Thrasher, D.
+Kumararatne, R. Doffinger, and S. Nejentsev: ``A robust model for read
+count data in exome sequencing experiments and implications for copy
+number variant calling.'' \emph{Bioinformatics (Oxford, England)}. vol.
+28, no. 21, pp. 2747--54, 2012.
+
+\hypertarget{ref-Krumm2012}{}
+231. N. Krumm, P.H. Sudmant, A. Ko, B.J. O'Roak, M. Malig, B.P. Coe,
+N.E.S. NHLBI Exome Sequencing Project, A.R. Quinlan, D.A. Nickerson, and
+E.E. Eichler: ``Copy number variation detection and genotyping from
+exome sequence data.'' \emph{Genome research}. vol. 22, no. 8, pp.
+1525--32, 2012.
+
+\hypertarget{ref-Sathirapongsasuti2011}{}
+232. J.F. Sathirapongsasuti, H. Lee, B.A.J. Horst, G. Brunner, A.J.
+Cochran, S. Binder, J. Quackenbush, and S.F. Nelson: ``Exome
+sequencing-based copy-number variation and loss of heterozygosity
+detection: ExomeCNV.'' \emph{Bioinformatics (Oxford, England)}. vol. 27,
+no. 19, pp. 2648--54, 2011.
+
+\hypertarget{ref-Zhao2013}{}
+233. M. Zhao, Q. Wang, Q. Wang, P. Jia, and Z. Zhao: ``Computational
+tools for copy number variation (CNV) detection using next-generation
+sequencing data: features and perspectives.'' \emph{BMC Bioinformatics}.
+vol. 14, pp. S1, 2013.
+
+\hypertarget{ref-Guo2013}{}
+234. Y. Guo, Q. Sheng, D.C. Samuels, B. Lehmann, J.A. Bauer, J.
+Pietenpol, and Y. Shyr: ``Comparative study of exome copy number
+variation estimation tools using array comparative genomic hybridization
+as control.'' \emph{BioMed research international}. vol. 2013, pp.
+915636, 2013.
+
+\hypertarget{ref-Comazzetto2014}{}
+235. S. Comazzetto, M. Di Giacomo, K.D. Rasmussen, C. Much, C. Azzi, E.
+Perlas, M. Morgan, and D. O'Carroll: ``Oligoasthenoteratozoospermia and
+Infertility in Mice Deficient for miR-34b/c and miR-449 Loci.''
+\emph{PLoS Genetics}. vol. 10, no. 10, pp. e1004597, 2014.
+
+\hypertarget{ref-Chen2017}{}
+236. X. Chen, X. Li, J. Guo, P. Zhang, and W. Zeng: ``The roles of
+microRNAs in regulation of mammalian spermatogenesis.'' \emph{Journal of
+animal science and biotechnology}. vol. 8, pp. 35, 2017.
+
+\hypertarget{ref-Carrell2011}{}
+237. D.T. Carrell and K.I. Aston: ``The search for SNPs, CNVs, and
+epigenetic variants associated with the complex disease of male
+infertility.'' \emph{Systems Biology in Reproductive Medicine}. vol. 57,
+no. 1-2, pp. 17--26, 2011.
+
+\hypertarget{ref-Dada2011}{}
+238. R. Dada, M. Shamsi, and K. Kumar: ``Genetic and epigenetic factors:
+Role in male infertility.'' \emph{Indian Journal of Urology}. vol. 27,
+no. 1, pp. 110, 2011.
+
+\hypertarget{ref-Dada2012}{}
+239. R. Dada, M. Kumar, R. Jesudasan, J.L. Fernández, J. Gosálvez, and
+A. Agarwal: ``Epigenetics and its role in male infertility.''
+\emph{Journal of Assisted Reproduction and Genetics}. vol. 29, no. 3,
+pp. 213--223, 2012.
 
 
 % Index?

@@ -46,7 +46,6 @@ knitr::opts_knit$set(kable.force.latex = TRUE)
 ## L'ovogenèse et l'ovocyte
 
 
-
 Chez l'humain, la production d'ovocyte est un processus long commençant dès le développement embryonnaire à ce stade, les ovocytes sont immatures et rentrent en phase de quiescence après avoir débuté la MI. Cette production est ensuite suivie d'une diapause de plusieurs dizaines d'années pour ensuite produire un ovocyte mature à chaque cycle menstruel. Les ovocytes vont dès lors compléter la MI et entammer la MII jusqu'au stade de la métaphase. La MII se porsuivra ensuite dans le cas d'une fécondation [@Tosti2016].   
 
 
@@ -688,7 +687,7 @@ include_graphics(path = "figure/fastq.png")
 
 ### L'alignement {#lalignement}
 
-L'alignement constitue la première étape de l'analyse des données de NGS lorsqu'un génome de référence est disponible. L'objectif de l'alignement est de déterminer la position correcte de chacun des *reads* séquencés le long du génome de référence. Cette référence est souvent construite à partir des données de séquençage de plusieurs donneurs et ne représente donc pas la séquence d'un individu en particulier mais est censée représenter la séquence consensus d'une espèce donnée. Par exemple, la séquence de référence humaine GRCh37 (*Genome Reference Consortium human build 37*) a été créée à partir de treize volontaires anonymes New-Yorkais. Dès lors, cette référence servira de patron aux aligneurs afin qu'ils replacent correctement les différents *reads* des individus séquencés. Cette étape peut être comparée à la reconstruction d'un puzzle dans lequel les *reads* seraient les pièces et le génome de référence le modèle (**Figure : **\@ref(fig:picdnamapping)). Elle constitue probablement l'étape la plus importante de l'analyse des données issues du séquençage haut débit [@Flicek2009] car elle est la base sur laquelle repose l'ensemble des étapes effectuées en aval, notamment l'appel des variants [@Nielsen2011]. Cependant, l'étape d'alignement est sujette à de nombreuses erreurs dont certaines proviennent directement des erreurs survenues lors de l'étape de séquençage. D'autres, sont dues aux caractéristiques des régions séquencées comme par exemple les séquences répétées [@Langmead2012] qui pourront entraîner l'alignement d'un même *read* à plusieurs régions du génome [@Treangen2013]. De nombreux aligneurs ont émergé afin de répondre au mieux à cette problématique tel que Bowtie [@Langmead2009], Bowtie2 [@Langmead2012], BWA [@Li2009a], NovoAlign, MAGIC [@Su2014]. De nombreuses études ont cependant montré de grandes différences entre ces aligneurs, au niveau du temps de calcul, de leur coût en mémoire et de leur taux d'erreur [@Ruffalo2011; @Thankaswamy-Kosalai2017; @Bao2011].   
+L'alignement constitue la première étape de l'analyse des données de NGS lorsqu'un génome de référence est disponible. L'objectif de l'alignement est de déterminer la position correcte de chacun des *reads* séquencés le long du génome de référence. Cette référence est souvent construite à partir des données de séquençage de plusieurs donneurs et ne représente donc pas la séquence d'un individu en particulier mais est censée représenter la séquence consensus d'une espèce donnée. Par exemple, la séquence de référence humaine GRCh37 (*Genome Reference Consortium human build 37*) a été créée à partir de treize volontaires anonymes New-Yorkais. Dès lors, cette référence servira de patron aux aligneurs afin qu'ils replacent correctement les différents *reads* des individus séquencés. Cette étape peut être comparée à la reconstruction d'un puzzle dans lequel les *reads* seraient les pièces et le génome de référence le modèle (**Figure : **\@ref(fig:picdnamapping)). Elle constitue probablement l'étape la plus importante de l'analyse des données issues du séquençage haut débit [@Flicek2009] car elle est la base sur laquelle repose l'ensemble des étapes effectuées en aval, notamment l'appel des variants [@Nielsen2011]. Cependant, l'étape d'alignement est sujette à de nombreuses erreurs dont certaines proviennent directement des erreurs survenues lors de l'étape de séquençage. D'autres, sont dues aux caractéristiques des régions séquencées comme par exemple les séquences répétées [@Langmead2012] qui pourront entraîner l'alignement d'un même *read* à plusieurs régions du génome [@Treangen2013]. De nombreux aligneurs ont émergé afin de répondre au mieux à cette problématique tel que Bowtie [@Langmead2009], Bowtie2 [@Langmead2012], BWA [@Li2009b], NovoAlign, MAGIC [@Su2014]. De nombreuses études ont cependant montré de grandes différences entre ces aligneurs, au niveau du temps de calcul, de leur coût en mémoire et de leur taux d'erreur [@Ruffalo2011; @Thankaswamy-Kosalai2017; @Bao2011].   
 
 \newpage
 
@@ -838,3 +837,19 @@ include_graphics(path = "figure/bioinformatic_steps.png")
 ```
 
 (ref:pictrecapngssteps) `r fig_cap`
+
+
+\newpage
+
+## Problématique : Un patient, 50.000 variants, à la fin il ne peut en rester qu'un. Et après ?  
+
+Malgré l’identification régulière de nouveaux gènes depuis plusieurs année, la très grande majorité des cas d’infertilité reste encore inexpliquée et sans cause génétique connue. Ce faible taux de succès peut s’expliquer en partie par une grande hétérogénéité génétique pour de nombreux phénotypes. Par exemple, il est estimé qu’entre 1500 et 2000 gènes sont impliqués dans le contrôle de la spermatogénèse parmi lesquels 300 à 600 sont spécifiquement exprimés dans les cellules germinales masculines, on s’attend logiquement à ce que des anomalies génétiques portant sur ces gènes perturbent la fertilité masculine [@Matzuk2008].  
+
+L'objectif de ma thèse a ainsi été double. Ma première mission a été de mettre en place une stratégie permettant l'analyse des données de séquençage haut débit de patients et patientes souffrant d'infertilité afin de mettre en évidence le variant responsables de leur phénotype. J'ai pour cela développé un pipeline d'analyse des données NGS que j'ai pu tester sur sept cas familiaux d'individus infertiles. J'ai égallement utilisés ce pipeline sur une cohorte de 15 femmes souffrant d'un syndrome déficience méiotique ovocytaire ainsi que sur une dernière cohorte de 78 patients présentant des anomalies morphologiques multiples au niveau des flagelles spermatiques.  
+
+La seconde mission de ma thèse a été de contribuer à la caractérisation moléculaire du gène *DPY19L2* dont la délétion homozygote est responsable du phénotype de globozoospermie, un phénotype rare mais sévère de teratozoospermie menant à l'infertilité masculine.  
+
+Au cours de cette thèse j'ai donc eu l'occasion de participer à l'ensemble des analyses permettant l'identification d'un gène comme responsable d'un phénotype en commençant par l'analyse bioinformatique des données de séquençage haut débit en finissant par la caractérisation moléculaire d'un gène.  
+
+L'ensemble de ce manuscrit a été rédigé sous l'environnement de developpement Rstudio [@RStudioTeam2015] en language Rmarkdown grâce au package thesisdown [https://github.com/ismayc/thesisdown](https://github.com/ismayc/thesisdown). L'ensemble du manuscrit, les codes des différents graphiques qui le composent ainsi que ceux des principaux script développés pendant ma thèse son consultables sur la page GitHub : [https://github.com/tkaraouzene/](https://github.com/tkaraouzene/).  
+
