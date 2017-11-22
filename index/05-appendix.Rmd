@@ -2,7 +2,7 @@
 
 `r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'` 
 
-# Article annexe {#dnah12014}  
+# Article annexe 1 {#dnah12014}  
 
 **Mutations in DNAH1, which Encodes an Inner Arm Heavy Chain Dynein, Lead to Male Infertility from Multiple Morphological Abnormalities of the Sperm Flagella**
 
@@ -15,9 +15,6 @@ American Journal of Human Genetics, Janvier 2014
 \newpage
 
 \includepdf[pages=-]{bib/DNAH1_2014.pdf}
-
-\newpage
-
 
 \newpage
 
@@ -250,3 +247,21 @@ kable(df_cfap44,
   add_header_above(c(" " = 1, "Variant impact" = 2, "Variant frequency" = 1))
 
 ```
+
+
+# Article annexe 2 {#dpy2015}  
+
+**Dpy19l2-deficient globozoospermic sperm display altered genome packaging and DNA damage that compromises the initiation of embryo development**
+
+
+Yassine S, Escoffier J, Martinez G, Coutton C, **Karaouzène T**, Zouari R, Ravanat JL, Metzler-Guillemain C, Chang Lee H, Fissore R, Hennebicq S, Ray PF, Arnoult C  
+
+Mol Hum Reprod, Février 2015
+
+\newpage
+
+\includepdf[pages=-]{bib/DPY19L2_2015}
+
+\newpage
+
+

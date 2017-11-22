@@ -43,39 +43,6 @@ knitr::opts_chunk$set(fig.align='center',echo=FALSE)
 knitr::opts_knit$set(kable.force.latex = TRUE)
 ```
 
-## L'ovogenèse et l'ovocyte
-
-
-Chez l'humain, la production d'ovocyte est un processus long commençant dès le développement embryonnaire à ce stade, les ovocytes sont immatures et rentrent en phase de quiescence après avoir débuté la MI. Cette production est ensuite suivie d'une diapause de plusieurs dizaines d'années pour ensuite produire un ovocyte mature à chaque cycle menstruel. Les ovocytes vont dès lors compléter la MI et entammer la MII jusqu'au stade de la métaphase. La MII se porsuivra ensuite dans le cas d'une fécondation [@Tosti2016].   
-
-
-The zona pellucida (ZP) is a specialized extracellular coat that surrounds the plasma membrane of mammalian eggs. Its presence is essential for successful completion of oogenesis, fertilization and preimplantation development. The ZP is composed of only a few glycoproteins which are organized into long crosslinked fibrils that constitute the extracellular coat. 
-résumé de l'inrto PATL2
-Several reports describe that some infertile women repetitively produce mostly immature oocytes, a poorly-defined syndrome known as "oocyte factor" or “bad eggs syndrome” [@Hartshorne1999; @Levran2002; @Beall2010; @Hourvitz2010]. Heterozygous mutations of TUBB8, an oocyte specific tubulin necessary for the meiotic spindle were recently identified in a cohort of Chinese patients with OMD [@Feng2016], establishing TUBB8 as the first human gene identified in the context of OMD.
-       
-       
-       
-
-La fécondation implique la fusion entre le spermatozoïde et l'ovocyte. Elle a été observée pour la permière fois en 1876 par Oscar Hertwig chez l'oursin [@hertwig1875beitrage]. La première étape de la fécondation consiste en la liaison du spermatozoïde à la zone pellucide de l'ovocyte [@Wassarman2008]. Cette liaison est permise chez l'humain grâce à quatre glycoprotéines :  *zona pellucida spermbinding protein 1-4* (ZP1-4). Cette phase est ensuite suivie de l'activation ovocytaire. Cette étape est produite chez l'ensemble des animaux par la fertilisation d'un spermatozoïde. Elle entraïne une augmentation de la concentration cytosolique en Ca^2+^ [@Stricker]. Chez les mamifères, la fusion spermatozoïde-ovocyte est le déclencheur de séries distinctes d'oscillations du Ca^2+^ cytosolique nécessaires au développement normal de l'embryon [@Miyazaki1993; @Stricker]. Ces observations on rapidement permis l'emergence de l'hypothèse d'un facteur spermatique qui, lors de la fécondation, était relargé et générait ces oscillations Ca^2+^ [@Swann1990; @Stricker]. Cette hypothèse étant supportée par deux principales observations. Tout d'abord, le fait que la fusion des cytoplasmes du spermatozoïdes et de l'ovocytes était le prélude de ces oscillations Des expermimentations [@Sun1992; @Lawrence1997]. Ensuite, le fait que l'injection d'un spermatozoïde ou d'extrait soluble de spermatozoïdes entrainait des oscillations Ca^2+^ similaires à celles observées lors de la fécondation [@Swann1990; @Wu1997; @Wu1998; @Stricker1997; @Tang2000]. C'est en 2002 que la protéine PLC zeta ($\zeta$) fut pour la première fois reporté comme étant, chez la souris, responsable de ces oscillations déclachant ensuite une cascade de réactions dont découle éventuellement l'activation ovocytaire et le développement embryonnaire [@Saunders2002] (**Figure :** \@ref(fig:oocytefertilisation)).
-       
-
-
-```{r oocytefertilisation, fig.cap='(ref:oocytefert)', fig.scap=fig_name,out.extra="scale=.72"}
-
-fig_name <- "La fécondation, liaison spermatozoïde-ovocyte et sortie de la méiose"
-fig_from <- "[@Clift2013]"
-fig_description <- "Suite à la fusion spermatozoïde-ovocyte, la protéine PLCZ induit la production de nositol 1,4,5-trisphosphate (Ins(1,4,5)P$_3$) qui se lie à son recepteur causant ainsi le relargage de Ca^2+^ qui, entre autre, fera sortir l'ovocyte de son stade de méiose pour rentrer en mitose"
-
-fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig_from, "** : ", fig_description)
-
-
-include_graphics(path = "figure/oocyte_fertilization.png")
-
-```
-
-(ref:oocytefert) `r fig_cap`
-
-
 ## La spermatogenèse  
 
 La spermatogenèse des mammifères est un processus long et complexe contrôlé par plusieurs mécanismes étroitement liés [@Gnessi1997; @Sharpe1994; @KIERSZENBAUM1994]. C'est au cours de celle-ci, qu’à partir de cellules germinales, seront produits les spermatozoïdes matures. Ce processus est divisé en trois phases principales : la phase de multiplication, la phase de division (appelée la [méiose](#meiose)) et la phase de maturation. Chez les hommes, ces étapes se déroulent en continu dans la paroi des tubes séminifères du testicule depuis la puberté jusqu'à la mort et impliquent trois types de cellules germinales : les spermatogonies, les spermatocytes et les spermatides. Le temps nécessaire pour obtenir un spermatozoïde mature à partir de cellules germinales est de 74 jours et la production quotidienne de spermatozoïdes s'élève environ à 45 millions par testicule [@Johnson1980]. Le cycle spermatogénétique est défini comme la succession chronologique des différents stades de différenciation d’une génération de cellules germinales (depuis la spermatogonie jusqu’au spermatozoïde). Chacune des étapes du cycle spermatogénétique a une durée fixe et constante selon les espèces (**Table : **\@ref(tab:spermatotime)).   
@@ -455,6 +422,34 @@ Bien que la prévalence de ces anomalies génétiques varie en fonction du phén
 
 \newpage  
 
+
+## Généralités sur l'ovogenèse et l'ovocyte
+
+Chez l'humain, la production d'ovocyte est un processus long commençant dès le développement embryonnaire. A ce stade, les ovocytes sont immatures et rentrent en phase de quiescence après avoir débuté l'étape de prophase I. Cette production est ensuite suivie d'une diapause de plusieurs dizaines d'années pour ensuite produire un ovocyte mature à chaque cycle menstruel. Les ovocytes vont dès lors compléter la MI et entamer la MII jusqu'au stade de la métaphase [@Eppig1996]. Cette phase est, chez la plupart des mammifères, la seule à laquelle l'ovocyte peut-être fécondé avec succès [@EPPIG2004]. La MII se poursuivra ensuite dans le cas d'une fécondation [@Tosti2016].   
+
+La fécondation implique la fusion entre le spermatozoïde et l'ovocyte. Elle a été observée pour la première fois en 1876 par Oscar Hertwig chez l'oursin [@hertwig1875beitrage]. La première étape de la fécondation consiste en la liaison du spermatozoïde à la zone pellucide de l'ovocyte [@Wassarman2008]. Cette liaison est permise chez l'humain grâce à quatre glycoprotéines :  *zona pellucida spermbinding protein 1-4* (ZP1-4). Cette phase est ensuite suivie de l'activation ovocytaire. Cette étape est produite chez l'ensemble des animaux par la fertilisation d'un spermatozoïde. Elle entraïne une augmentation de la concentration cytosolique en Ca^2+^ [@Stricker]. Chez les mamifères, la fusion spermatozoïde-ovocyte est le déclencheur de séries distinctes d'oscillations du Ca^2+^ cytosolique nécessaires au développement normal de l'embryon [@Miyazaki1993; @Stricker]. Ces observations ont rapidement permis l'émergence de l'hypothèse d'un facteur spermatique qui, lors de la fécondation, serait relargué et générerait ces oscillations Ca^2+^ [@Swann1990; @Stricker]. Cette hypothèse est supportée par deux principales observations. Tout d'abord, le fait que la fusion des cytoplasmes du spermatozoïde et de l'ovocyte est le prélude à oscillations [@Sun1992; @Lawrence1997]. Ensuite, le fait que l'injection d'un spermatozoïde ou d'extrait soluble de spermatozoïdes entrainait des oscillations Ca^2+^ similaires à celles observées lors de la fécondation [@Swann1990; @Wu1997; @Wu1998; @Stricker1997; @Tang2000]. C'est en 2002 que la protéine PLC zeta ($\zeta$) codée par le gène PLCZ1 fut pour la première fois reportée comme étant, chez la souris, responsable de ces oscillations déclenchant ensuite une cascade de réactions dont découlent éventuellement l'activation ovocytaire et le développement embryonnaire [@Saunders2002] (**Figure :** \@ref(fig:oocytefertilisation)).  
+
+Parmi les différents cas d'infertilité féminine, plusieurs études décrivent le cas de femmes produisant principalement des ovocytes non matures ou dégénérés. Ce phénotype peu décrit est connu sous le nom de *bad eggs syndrome* [@Hartshorne1999; @Levran2002; @Beall2010; @Hourvitz2010]. En 2016, une équipe a identifié des mutations hétérozygotes sur le gène *TUBB8*, une tubuline spécifique à l'ovocyte nécessaire à la création des fuseaux méiotiques, comme responsable du phénotype de déficience méiotique ovocytaire (*oocyte meiotic defect* (OMD)) dans une cohorte de femmes chinoises [@Feng2016], faisant de *TUBB8* le premier gène formellement identifié dans le cadre d'OMD.    
+
+\newpage
+
+```{r oocytefertilisation, fig.cap='(ref:oocytefert)', fig.scap=fig_name,out.extra="scale=.72"}
+
+fig_name <- "La fécondation, liaison spermatozoïde-ovocyte et sortie de la méiose"
+fig_from <- "[@Clift2013]"
+fig_description <- "Suite à la fusion spermatozoïde-ovocyte, la protéine PLCZ1 induit la production de nositol 1,4,5-trisphosphate (Ins(1,4,5)P$_3$) qui se lie à son recepteur causant ainsi le relargage de Ca^2+^ qui, entre autre, fera sortir l'ovocyte de son stade de méiose pour rentrer en mitose"
+
+fig_cap <- paste0("**_",fig_name,"_ adapté d'après ", fig_from, "** : ", fig_description)
+
+
+include_graphics(path = "figure/oocyte_fertilization.png")
+
+```
+
+(ref:oocytefert) `r fig_cap`
+
+\newpage
+
 ## Les techniques d'analyses génétiques
 
 L'acide désoxyribonucléique (ADN) a été identifié comme étant le porteur de l'information génétique par Oswald Theodore Avery en 1944. Sa structure en double hélice composée par quatre bases, la thymine (T), l'adénine (A), la guanine (G) et la cytosine (C) fut caractérisée en 1953 par James D. Watson et Francis Crick. Cependant, l'existence "d'entités d'information génétiques discrètes" que sont les gènes fut suggéré dès la deuxième moitié du XIX^ième^ siècle grâce aux travaux de Gregor Mendel portant sur l'hérédité de certains traits chez le pois. Depuis, de nombreuses méthodes permettant de lier le phénotype d'un individu à son génotype ont vu le jour au gré des améliorations technologiques.     
@@ -706,7 +701,6 @@ include_graphics(path = "figure/dna_mapping.png")
 
 (ref:picdnamapping) `r fig_cap`
 
-
 \newpage
 
 ### L'appel des variants  {#varcall}
@@ -716,7 +710,7 @@ L'appel des variants, ou *variant calling*, fait référence à l'ensemble des m
 ```{r picvarcallprocess, fig.cap='(ref:picvarcallprocess)', fig.scap=fig_name, out.extra="scale=0.33"}
 
 fig_name <- "Illustration schématique du processus d'appel des variants"
-fig_description <- "Pour chaque position couverte, le pourcentage de *read* portant un allèle variant est analysé. Lorsque l'on est proche des 100\\% l'appel est homozygote pour le variant, lorsque l'on est proche des 50\\% l'appel des hétérozygote. Lorsqu'à une position donnée, peu de *reads* portent un variant, la cause est souvent une erreur de séquençage."
+fig_description <- "Pour chaque position couverte, le pourcentage de *read* portant un allèle variant est analysé. Lorsque l'on est proche des 100\\% l'appel est homozygote pour le variant, lorsque l'on est proche des 50\\% l'appel est hétérozygote. Lorsqu'à une position donnée, peu de *reads* portent un variant, la cause est souvent une erreur de séquençage."
 fig_cap <- paste0("**_",fig_name,"_** : ", fig_description)
 
 include_graphics(path = "figure/var_call_exemple.png")
@@ -725,13 +719,21 @@ include_graphics(path = "figure/var_call_exemple.png")
 
 (ref:picvarcallprocess) `r fig_cap`
 
-De nombreux logiciels d'appels des variants, ou *caller*, basés sur des algorithmes différents ont émergé ces dernières années pour répondre à cette problématique. Parmi les plus connus on note SAMtools [@Li2009], Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) [@McKenna2010], Freebayes, SOAPindel et TVC. Les quatre premiers cités, peuvent être utilisés pour analyser des données provenant de tout type de plateforme de séquençage contrairement à TVC qui a été développé spécifiquement pour les données provenant de Ion Proton. Les données issues de NGS peuvent présenter un taux d'erreur important. Ce taux d'erreur est multifactoriel et inclut notamment les erreurs de l'alignement. L'un des éléments clef à prendre en compte pour pouvoir effectuer un appel de qualité est la couverture de la position appelée [@Sims2014]. Cependant, malgré la prise en compte de cet élément, l'appel de variants reste un processus difficile souvent lié à plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées à la plateforme de séquençage utilisée en amont, et les différents logiciels ne présentent pas les mêmes performances en fonction de ces différentes plateformes [@Hwang2015]. C'est pourquoi, il convient d'adapter le logiciel d'appel en fonction de la plateforme de séquençage utilisée préalablement. Les erreurs d'appel sont généralement classées en trois catégories et certains aligneurs auront tendance à être plus sujets à l'un de ces types d'erreur qu'à l'autre (**Figure : **\@ref(fig:pictsnperror)) :  
+De nombreux logiciels d'appels des variants, ou *caller*, basés sur des algorithmes différents ont émergé ces dernières années pour répondre à cette problématique. Parmi les plus connus on note SAMtools [@Li2009], Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) [@McKenna2010], Freebayes, SOAPindel et TVC. Les quatre premiers cités, peuvent être utilisés pour analyser des données provenant de tout type de plateforme de séquençage contrairement à TVC qui a été développé spécifiquement pour les données provenant de Ion Proton. La pluparts de ces *caller* se basent soit sur des méthodes heuristiques, soit sur des méthodes probabilistes :  
+
+1. **Les méthodes heuristiques** :  ces méthodes basent leurs appels sur plusieurs sources d'informations en prenant compte, notamment, de la structure et de la qualité des données. En raison de leur coût en temps de calcul, ces méthodes sont moins fréquemment utilisées que les approches probabilistes. Néanmoins, cette méthode est partiellement adoptée par VarScan2 [@Koboldt2012]. L'appel des variants est effectué en tenant compte de la couverture, de la qualité de séquençage à une base donnée ainsi que de la fréquence de l'allèle variant à cette position. Après cela, un test exact de Fisher est effectué sur le nombre de *reads* supportant chaque allèle.  
+
+2. **Les méthodes probabilistes** : ces méthodes utilisent le théorème de Bayes afin de calculer pour chaque position la vraisemblance de l'ensemble des génotypes possibles (homozygote référence, hétérozygote et homozygote variant). Le théorème de Bayes permet d'obtenir pour chaque génotype à une probabilité a posteriori. Le génotype ayant cette probabilité a posteriori la plus élevée est choisi. De plus, le ratio entre la plus forte probabilité et la seconde plus forte probabilité peut être utilisé pour mesurer la confiance dans le génotype appelé. De nombreux logiciels comme SAMtools [@Li2009], Genome Analysis Tool Kit - HaplotypeCaller (GATK-HC) [@McKenna2010] utilisent cette approche.  
+
+Les données issues de NGS peuvent présenter un taux d'erreur important. Ce taux d'erreur est multifactoriel et inclut notamment les erreurs de l'alignement. L'un des éléments clef à prendre en compte pour pouvoir effectuer un appel de qualité est la couverture de la position appelée [@Sims2014]. Cependant, malgré la prise en compte de cet élément, l'appel de variants reste un processus difficile souvent lié à plusieurs erreurs. Plusieurs de ces erreurs sont même directement liées à la plateforme de séquençage utilisée en amont, et les différents logiciels ne présentent pas les mêmes performances en fonction de ces différentes plateformes [@Hwang2015]. C'est pourquoi, il convient d'adapter le logiciel d'appel en fonction de la plateforme de séquençage utilisée préalablement. Les erreurs d'appel sont généralement classées en trois catégories et certains aligneurs auront tendance à être plus sujets à l'un de ces types d'erreur qu'à l'autre (**Figure : **\@ref(fig:pictsnperror)) :  
 
 1. Oubli de l'allèle  de référence (**IR**, *ignore the reference allele*) :  représente un variant appelé homozygote correspondant en réalité à un variant hétérozygote composé de l'allèle de référence et d'un allèle variant.      
 
 2. Ajout de l'allèle de référence (**AR**, *adding the reference allele*) : représente un variant appelé hétérozygote composé de l'allèle de référence et d'un allèle variant correspondant en réalité à un variant homozygote composé de deux allèles variants.    
 
 3. Autres : incluent l'ensemble des autres types d'appel erronés indépendamment de l'allèle de référence.  
+
+\newpage
 
 ```{r pictsnperror,fig.cap='(ref:pictsnperror)', fig.scap=fig_name,out.extra="scale=.37"}
 
@@ -841,15 +843,11 @@ include_graphics(path = "figure/bioinformatic_steps.png")
 
 \newpage
 
-## Problématique : Un patient, 50.000 variants, à la fin il ne peut en rester qu'un. Et après ?  
+## Problématique : Un patient, 50.000 variants. "*It can only be one*". Et après ?  
 
-Malgré l’identification régulière de nouveaux gènes depuis plusieurs année, la très grande majorité des cas d’infertilité reste encore inexpliquée et sans cause génétique connue. Ce faible taux de succès peut s’expliquer en partie par une grande hétérogénéité génétique pour de nombreux phénotypes. Par exemple, il est estimé qu’entre 1500 et 2000 gènes sont impliqués dans le contrôle de la spermatogénèse parmi lesquels 300 à 600 sont spécifiquement exprimés dans les cellules germinales masculines, on s’attend logiquement à ce que des anomalies génétiques portant sur ces gènes perturbent la fertilité masculine [@Matzuk2008].  
+Malgré l’identification régulière de nouveaux gènes depuis plusieurs années, la très grande majorité des cas d’infertilité reste encore inexpliquée et sans cause génétique connue. Ce faible taux de succès peut s’expliquer en partie par une grande hétérogénéité génétique pour de nombreux phénotypes. Par exemple, il est estimé qu’entre 1500 et 2000 gènes sont impliqués dans le contrôle de la spermatogénèse parmi lesquels 300 à 600 sont spécifiquement exprimés dans les cellules germinales masculines, on s’attend logiquement à ce que des anomalies génétiques portant sur ces gènes perturbent la fertilité masculine [@Matzuk2008].  
 
-L'objectif de ma thèse a ainsi été double. Ma première mission a été de mettre en place une stratégie permettant l'analyse des données de séquençage haut débit de patients et patientes souffrant d'infertilité afin de mettre en évidence le variant responsables de leur phénotype. J'ai pour cela développé un pipeline d'analyse des données NGS que j'ai pu tester sur sept cas familiaux d'individus infertiles. J'ai égallement utilisés ce pipeline sur une cohorte de 15 femmes souffrant d'un syndrome déficience méiotique ovocytaire ainsi que sur une dernière cohorte de 78 patients présentant des anomalies morphologiques multiples au niveau des flagelles spermatiques.  
+Dans ce contexte, l'objectif de ma thèse a été double. D'une part j'ai cherché à montrer que l'utilisation des nouvelles technologies de séquençage ainsi que l’utilisation d'une stratégie d’analyse des données adaptée pouvaient permettre d’identifier de nouvelles causes d'infertilité améliorant ainsi l’efficacité des diagnostiques génétiques pour ces pathologies. D'autre part, ma thèse a également eu pour but d'améliorer nos connaissances sur les mécanismes moléculaires impliqués dans la spermatogénèse.  
 
-La seconde mission de ma thèse a été de contribuer à la caractérisation moléculaire du gène *DPY19L2* dont la délétion homozygote est responsable du phénotype de globozoospermie, un phénotype rare mais sévère de teratozoospermie menant à l'infertilité masculine.  
-
-Au cours de cette thèse j'ai donc eu l'occasion de participer à l'ensemble des analyses permettant l'identification d'un gène comme responsable d'un phénotype en commençant par l'analyse bioinformatique des données de séquençage haut débit en finissant par la caractérisation moléculaire d'un gène.  
-
-L'ensemble de ce manuscrit a été rédigé sous l'environnement de developpement Rstudio [@RStudioTeam2015] en language Rmarkdown grâce au package thesisdown [https://github.com/ismayc/thesisdown](https://github.com/ismayc/thesisdown). L'ensemble du manuscrit, les codes des différents graphiques qui le composent ainsi que ceux des principaux script développés pendant ma thèse son consultables sur la page GitHub : [https://github.com/tkaraouzene/](https://github.com/tkaraouzene/).  
+L'ensemble de ce manuscrit a été rédigé sous l'environnement de developpement Rstudio [@RStudioTeam2015] en langage Rmarkdown grâce au package thesisdown [https://github.com/ismayc/thesisdown](https://github.com/ismayc/thesisdown). L'ensemble du manuscrit, les codes des différents graphiques qui le composent ainsi que ceux des principaux scripts développés pendant ma thèse sont consultables sur la page GitHub : [https://github.com/tkaraouzene/](https://github.com/tkaraouzene/).  
 
