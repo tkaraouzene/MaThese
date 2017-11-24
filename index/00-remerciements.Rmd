@@ -1,5 +1,4 @@
 # Remerciements {-}  
-\newpage
 
 Je remercie Messieurs le Professeurs Jacques VAN HELDEN et le Docteur Michaël MITCHELL d’avoir accepté la charge d’être rapporteurs de ma thèse.  
 
@@ -7,7 +6,7 @@ Je remercie Madame le Professeur Christel THAUVIN et Monsieur le Docteur Julien 
 
 À Pierre pour m'avoir fait confiance toutes ces années et pour m'avoir permis de réaliser cette thèse.  
 
-À Nicolas, qui as dû  s'arracher les yeux sur certains de mes codes, pour m'avoir inculqué, avec le temps, sa méthode et sa rigueur.  
+À Nicolas, qui a dû  s'arracher les yeux sur certains de mes codes, pour m'avoir inculqué, avec le temps, sa méthode et sa rigueur.  
   
 À l'ensemble des l'équipes GETI, en particulier Zine pour toutes nos discussions, les tacos et les bons moments.  
 

@@ -18,7 +18,7 @@ American Journal of Human Genetics, Janvier 2014
 
 \newpage
 
-# Tables des variants restant après application des filtres pour les cas familliaux 
+# Tables des variants restant après application des filtres pour les cas familiaux 
 
 ```{r tabmmaf1, cache=TRUE, dependson="dfrecapmmaf"}
 
